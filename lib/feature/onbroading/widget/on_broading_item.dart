@@ -1,3 +1,4 @@
+import 'package:civixapp/core/datesource/local/prefmanger.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../controller/onbroadingprovider.dart';
@@ -102,7 +103,7 @@ class customonbroadingitem extends StatelessWidget {
                 foregroundColor: const Color(0xffFFFFFF),
                 backgroundColor: const Color(0xff2A4D8B),
               ),
-              onPressed: () {
+              onPressed: () async {
                 final provider = context.read<Onbroadingprovider>();
 
                 if (!provider.isLastPage) {
@@ -110,7 +111,9 @@ class customonbroadingitem extends StatelessWidget {
                     duration: const Duration(milliseconds: 800),
                     curve: Curves.fastOutSlowIn,
                   );
-                } else {}
+                } else {
+                  await PrefrenceManager().setbool("is_show_on_board", true);
+                }
               },
               child: Text(
                 context.watch<Onbroadingprovider>().isLastPage
