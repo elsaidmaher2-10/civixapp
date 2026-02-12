@@ -1,12 +1,13 @@
-import 'package:civixapp/core/datesource/local/prefmanger.dart';
+import 'package:civixapp/core/database/local/prefmanger.dart';
+import 'package:civixapp/core/resource/constantmanger.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../controller/onbroadingprovider.dart';
 import '../model/onbroadingmodel.dart';
 import '../widget/indicator.dart';
 
-class customonbroadingitem extends StatelessWidget {
-  const customonbroadingitem({
+class Customonbroadingitem extends StatelessWidget {
+  const Customonbroadingitem({
     super.key,
     required this.x,
     required this.value,
@@ -44,7 +45,7 @@ class customonbroadingitem extends StatelessWidget {
                         controller.jumpToPage(pages.length - 1);
                       },
                       child: const Text(
-                        "Skip",
+                        "",
                         style: TextStyle(
                           color: Color(0xff2A4D8B),
                           fontSize: 20,
@@ -112,7 +113,10 @@ class customonbroadingitem extends StatelessWidget {
                     curve: Curves.fastOutSlowIn,
                   );
                 } else {
-                  await PrefrenceManager().setbool("is_show_on_board", true);
+                  await PrefrenceManager().setbool(
+                    Constantmanger.isOnboardingViewed,
+                    true,
+                  );
                 }
               },
               child: Text(

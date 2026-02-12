@@ -1,25 +1,7 @@
-import 'package:civixapp/feature/onbroading/model/onbroadingmodel.dart';
+import 'package:civixapp/core/resource/constantmanger.dart';
 import 'package:flutter/material.dart';
 
 class Onbroadingprovider extends ChangeNotifier {
-  final List<Onbroadingmodel> pages = [
-    Onbroadingmodel(
-      title: "Help Community",
-      subtitle: "Report your problem as soon as possible",
-      image: "assets/onbroadingimage/1.png",
-    ),
-    Onbroadingmodel(
-      title: "Officials Are Acting",
-      subtitle: "Work is underway to fix the problem",
-      image: "assets/onbroadingimage/2.png",
-    ),
-    Onbroadingmodel(
-      title: "Civilized City",
-      subtitle: "Stable city with no problems",
-      image: "assets/onbroadingimage/3.png",
-    ),
-  ];
-
   PageController controller = PageController();
 
   int value = 0;
@@ -29,5 +11,5 @@ class Onbroadingprovider extends ChangeNotifier {
     notifyListeners();
   }
 
-  bool get isLastPage => value == pages.length - 1;
+  bool get isLastPage => value == Constantmanger.pages.length - 1;
 }
