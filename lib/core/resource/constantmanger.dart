@@ -77,4 +77,6 @@ class Constantmanger {
   static const String camera = "Camera";
   static const String cancel = "Cancel";
   static String submit = "Submit";
+
+  static String nationalnumber = "National number";
 }

@@ -13,12 +13,13 @@ import 'package:civixapp/feature/Auth/register/presentation/views/widget/Email.d
 import 'package:civixapp/feature/Auth/register/presentation/views/widget/Lname.dart';
 import 'package:civixapp/feature/Auth/register/presentation/views/widget/Phone.dart';
 import 'package:civixapp/feature/Auth/register/presentation/views/widget/fname.dart';
+import 'package:civixapp/feature/Auth/register/presentation/views/widget/nationalnumber.dart';
 import 'package:civixapp/feature/Auth/register/presentation/views/widget/password.dart';
 import 'package:civixapp/feature/Auth/register/presentation/views/widget/password_rules.dart';
 import 'package:civixapp/feature/Auth/register/presentation/views/widget/showmodalbottomsheetimage.dart';
 import 'package:civixapp/feature/Auth/register/presentation/views/widget/signupbutton.dart';
 import 'package:civixapp/feature/Auth/register/presentation/views/widget/signuplogo.dart';
-import 'package:civixapp/feature/Auth/register/presentation/views/widget/uploadimage.dart';
+import 'package:country_picker/country_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -41,25 +42,26 @@ class _SingnupState extends State<Singnup> {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
-
+  final TextEditingController nationalnumbercontroller =
+      TextEditingController();
+  String name = "Select nationality";
   ValueNotifier<bool> isFormValid = ValueNotifier(false);
   StreamController<List> streamController = StreamController();
   File? image;
 
-  // Check if all password rules are met
-  @override
   @override
   void initState() {
     super.initState();
 
-    // إضافة listener للـ TextEditingControllers
     void listener() {
+      print(isFormValid.value);
       WidgetsBinding.instance.addPostFrameCallback((_) {
         isFormValid.value =
             fnameController.text.isNotEmpty &&
             lnameController.text.isNotEmpty &&
             emailController.text.isNotEmpty &&
-            passwordController.text.isNotEmpty;
+            passwordController.text.isNotEmpty &&
+            nationalnumbercontroller.text.isNotEmpty;
       });
     }
 
@@ -67,6 +69,7 @@ class _SingnupState extends State<Singnup> {
     lnameController.addListener(listener);
     emailController.addListener(listener);
     passwordController.addListener(listener);
+    nationalnumbercontroller.addListener(listener);
   }
 
   @override
@@ -112,18 +115,7 @@ class _SingnupState extends State<Singnup> {
               }
             },
 
-            // buildWhen: (previous, current) {
-            //   // return current is Signupcontrollerloading ||
-            //   //     current is Signupcontrollerfailure;
-            // },
             builder: (context, state) {
-              // log(state.toString());
-              // bool isasync = false;
-              // if (state is Signupcontrollerloading) {
-              //   isasync = true;
-              // } else {
-              //   isasync = false;
-              // }
               return ModalProgressHUD(
                 inAsyncCall: false,
 
@@ -147,7 +139,7 @@ class _SingnupState extends State<Singnup> {
                                 children: [
                                   SizedBox(height: screeutilsManager.h30),
                                   signuplogo(),
-                                  SizedBox(height: screeutilsManager.h30),
+                                  SizedBox(height: screeutilsManager.h20),
                                   Fname(
                                     controller: fnameController,
                                     validator: fnamevalidator,
@@ -164,8 +156,10 @@ class _SingnupState extends State<Singnup> {
                                     controller: phoneController,
                                     validator: phonevalidator,
                                   ),
-
-                                  /// Password
+                                  Nationalnumber(
+                                    controller: nationalnumbercontroller,
+                                    onChanged: (value) {},
+                                  ),
                                   Password(
                                     controller: passwordController,
                                     onChanged: (value) {
@@ -175,67 +169,20 @@ class _SingnupState extends State<Singnup> {
                                     },
                                   ),
 
-                                  /// Password Rules
                                   PasswordRules(
                                     streamController: streamController,
                                   ),
-
-                                  /// Confirm Password
-                                  // ConfirmPassword(
-                                  //   controller: confirmPasswordController,
-                                  //   validator: confvalidator,
-                                  // ),
-                                  Uploadimage(
-                                    onTap: () {
-                                      showSignupImageBottomSheet(context);
-                                    },
-                                  ),
+                                  Selectcountry(name: name),
 
                                   SizedBox(height: screeutilsManager.h30),
                                   ValueListenableBuilder<bool>(
                                     valueListenable: isFormValid,
                                     builder: (context, isValid, child) {
-                                      final cubit = context.read<SingupCubit>();
                                       return SignUPButton(
-                                        onPressed: isValid && cubit.hasImage
-                                            ? () async {
-                                                // if (image != null) {
-
-                                                //   final imageCubit = context
-                                                //       .read<SingupCubit>();
-                                                //   context
-                                                //       .read<
-                                                //         SignupcontrollerCubit
-                                                //       >()
-                                                //       .signupfunc(
-                                                //         Usermodel(
-                                                //           firstName:
-                                                //               fnameController
-                                                //                   .text,
-                                                //           lastName:
-                                                //               lnameController
-                                                //                   .text,
-                                                //           email: emailController
-                                                //               .text,
-                                                //           image:
-                                                //               imageCubit.image!,
-                                                //           password:
-                                                //               passwordController
-                                                //                   .text,
-                                                //           phone: phoneController
-                                                //               .text,
-                                                //         ),
-                                                //       );
-                                                // } else {
-                                                //   errorsnackbar(context);
-
-                                                // }
-                                              }
-                                            : null,
+                                        onPressed: isValid ? () async {} : null,
                                       );
                                     },
                                   ),
-
                                   HaveAccountORLogin(
                                     onPressed: () {
                                       Navigator.pop(context);
@@ -275,8 +222,89 @@ class _SingnupState extends State<Singnup> {
     lnameController.dispose();
     emailController.dispose();
     phoneController.dispose();
+    nationalnumbercontroller.dispose();
     passwordController.dispose();
     confirmPasswordController.dispose();
     super.dispose();
+  }
+}
+
+class Selectcountry extends StatefulWidget {
+  Selectcountry({super.key, required this.name});
+  String name;
+  @override
+  State<Selectcountry> createState() => _SelectcountryState();
+}
+
+class _SelectcountryState extends State<Selectcountry> {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text("Select nationality"),
+        SizedBox(height: 4),
+        Container(
+          decoration: BoxDecoration(
+            color: Color(0xffF6F6F6),
+            borderRadius: BorderRadius.circular(8),
+            border: BoxBorder.all(color: ColorManger.kprimary),
+          ),
+          height: 45,
+          width: double.infinity,
+          child: InkWell(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Align(
+                alignment: AlignmentGeometry.centerLeft,
+
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      widget.name,
+                      style: TextStyle(color: ColorManger.Lightgrey2),
+                    ),
+                    Icon(
+                      color: ColorManger.Lightgrey2,
+                      size: 30,
+                      Icons.keyboard_arrow_down,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            onTap: () {
+              showCountryPicker(
+                searchAutofocus: true,
+                useSafeArea: true,
+                countryListTheme: CountryListThemeData(
+                  inputDecoration: InputDecoration(
+                    isDense: true,
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        width: 2,
+
+                        color: ColorManger.kprimary,
+                      ),
+                    ),
+                  ),
+                  borderRadius: BorderRadius.circular(0),
+                  bottomSheetHeight: MediaQuery.of(context).size.height * 0.4,
+                ),
+
+                context: context,
+                showPhoneCode: false,
+                onSelect: (Country country) {
+                  widget.name =
+                      "${country.flagEmoji}  ${country.displayName.split(" ")[0]}";
+                  setState(() {});
+                },
+              );
+            },
+          ),
+        ),
+      ],
+    );
   }
 }

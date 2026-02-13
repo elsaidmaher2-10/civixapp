@@ -1,6 +1,7 @@
 import 'package:civixapp/core/resource/assetvaluemanger.dart';
 import 'package:civixapp/core/resource/colormanager.dart';
 import 'package:civixapp/core/resource/screenutilsmaanger.dart';
+import 'package:civixapp/core/routing/routes.dart';
 import 'package:civixapp/feature/Auth/otpverifcation/presentation/view/widget/otpappbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -13,7 +14,7 @@ class Otpvrificationcode extends StatefulWidget {
 }
 
 class _OtpvrificationcodeState extends State<Otpvrificationcode> {
-  final int otpLength = 4;
+  final int otpLength = 6;
 
   late List<TextEditingController> controllers;
   late List<FocusNode> focusNodes;
@@ -72,7 +73,16 @@ class _OtpvrificationcodeState extends State<Otpvrificationcode> {
                 fontFamily: FontFamily.Otama_ep,
               ),
             ),
-            SizedBox(height: 58.h),
+            SizedBox(height: 6.h),
+            Text(
+              "we have sent a 6-digit code to your registered  email address/phone number  ",
+              style: TextStyle(
+                color: ColorManger.Lightgrey2,
+                fontSize: 14.sp,
+                fontFamily: FontFamily.Otama_ep,
+              ),
+            ),
+            SizedBox(height: 48.h),
 
             Row(
               children: List.generate(otpLength, (index) {
@@ -111,7 +121,7 @@ class _OtpvrificationcodeState extends State<Otpvrificationcode> {
                 onPressed: () {
                   final otp = getOtpCode();
 
-                  // Navigator.of(context).pushNamed(RouteName.confirmPassword);
+                  Navigator.of(context).pushNamed(Routes.confirmPassword);
                   print("OTP Code: $otp");
                 },
                 child: const Text("Confirm"),

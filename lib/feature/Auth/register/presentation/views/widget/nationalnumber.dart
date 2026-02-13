@@ -4,18 +4,23 @@ import 'package:civixapp/core/resource/screenutilsmaanger.dart';
 import 'package:civixapp/core/widget/customtextfromfield.dart';
 import 'package:flutter/material.dart';
 
-class Lname extends StatelessWidget {
-  Lname({super.key, required this.controller, required this.validator});
+// ignore: must_be_immutable
+class Nationalnumber extends StatelessWidget {
+  Nationalnumber({
+    super.key,
+    required this.controller,
+    required this.onChanged,
+  });
+
   TextEditingController controller;
-  String? Function(String?)? validator;
-  @override
+  Function(String)? onChanged;
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          Constantmanger.lname,
+          Constantmanger.nationalnumber,
           style: TextStyle(
             color: ColorManger.Lightgrey,
             fontSize: screeutilsManager.s16,
@@ -23,10 +28,10 @@ class Lname extends StatelessWidget {
         ),
         SizedBox(height: screeutilsManager.h6),
         CustomTextfromfield(
+          onChanged: onChanged,
           controller: controller,
-
-          hinttext: Constantmanger.flnamehint,
-          validator: validator,
+          obstext: false,
+          hinttext: Constantmanger.nationalnumber,
         ),
         SizedBox(height: screeutilsManager.h16),
       ],

@@ -16,6 +16,7 @@ class screeutilsManager {
 
   static double h16 = 16.h;
   static double h30 = 30.h;
+  static double h20 = 20.h;
 
   //size
   static double s5 = 5.sp;
@@ -23,7 +24,9 @@ class screeutilsManager {
   static double s11 = 11.44.sp;
   static double s14 = 14.sp;
 
-  static double s38 = 38.21.sp;
+  static double s34 = 34.21.sp;
   static double s16 = 16.sp;
   static double s10 = 10.sp;
+
+  static double? get w100 => 100.w;
 }

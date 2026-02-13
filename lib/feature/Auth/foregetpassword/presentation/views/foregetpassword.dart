@@ -1,4 +1,3 @@
-
 import 'package:civixapp/core/resource/assetvaluemanger.dart';
 import 'package:civixapp/core/resource/colormanager.dart' show ColorManger;
 import 'package:civixapp/core/resource/screenutilsmaanger.dart';
@@ -61,7 +60,8 @@ class Foregetpassword extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {
-                  // Navigator.of(context).pushNamed(Routes.otpverficationc);
+                  print("object");
+                  Navigator.of(context).pushNamed(Routes.otpverficationc);
                 },
                 child: Text("Send  Code"),
               ),

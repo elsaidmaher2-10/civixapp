@@ -1,6 +1,10 @@
 import 'package:civixapp/core/database/local/prefmanger.dart';
+import 'package:civixapp/core/resource/assetvaluemanger.dart';
+import 'package:civixapp/core/resource/colormanager.dart';
 import 'package:civixapp/core/resource/constantmanger.dart';
+import 'package:civixapp/core/routing/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import '../controller/onbroadingprovider.dart';
 import '../model/onbroadingmodel.dart';
@@ -35,8 +39,8 @@ class Customonbroadingitem extends StatelessWidget {
                       style: TextButton.styleFrom(
                         shape: RoundedRectangleBorder(
                           side: const BorderSide(
-                            color: Color(0xff2A4D8B),
-                            width: 2,
+                            color: ColorManger.Lightgrey,
+                            width: 0.5,
                           ),
                           borderRadius: BorderRadius.all(Radius.circular(8)),
                         ),
@@ -44,9 +48,10 @@ class Customonbroadingitem extends StatelessWidget {
                       onPressed: () {
                         controller.jumpToPage(pages.length - 1);
                       },
-                      child: const Text(
-                        "",
+                      child: Text(
+                        "Skip",
                         style: TextStyle(
+                          fontFamily: FontFamily.Otama_ep,
                           color: Color(0xff2A4D8B),
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
@@ -62,14 +67,15 @@ class Customonbroadingitem extends StatelessWidget {
           Image.asset(
             pages[x].image,
             fit: BoxFit.fill,
-            height: MediaQuery.of(context).size.height * 0.45,
+            height: MediaQuery.of(context).size.height * 0.50,
           ),
 
           const SizedBox(height: 16),
 
           Text(
             pages[x].title,
-            style: const TextStyle(
+            style: TextStyle(
+              fontFamily: FontFamily.Otama_ep,
               fontSize: 32,
               color: Color(0xff003366),
               fontWeight: FontWeight.w700,
@@ -77,12 +83,11 @@ class Customonbroadingitem extends StatelessWidget {
           ),
 
           const SizedBox(height: 9),
-
           Text(
             pages[x].subtitle,
             style: const TextStyle(
               fontSize: 20,
-              color: Color(0xff003366),
+              color: ColorManger.Lightgrey2,
               fontWeight: FontWeight.w400,
             ),
           ),
@@ -91,7 +96,7 @@ class Customonbroadingitem extends StatelessWidget {
 
           customindicator(controller: controller),
 
-          const SizedBox(height: 42),
+          SizedBox(height: 68.h),
 
           SizedBox(
             width: double.infinity,
@@ -100,7 +105,7 @@ class Customonbroadingitem extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),
-                fixedSize: const Size(double.infinity, 70),
+                fixedSize: Size(double.infinity, 44.h),
                 foregroundColor: const Color(0xffFFFFFF),
                 backgroundColor: const Color(0xff2A4D8B),
               ),
@@ -117,6 +122,7 @@ class Customonbroadingitem extends StatelessWidget {
                     Constantmanger.isOnboardingViewed,
                     true,
                   );
+                  Navigator.pushNamed(context, Routes.login);
                 }
               },
               child: Text(

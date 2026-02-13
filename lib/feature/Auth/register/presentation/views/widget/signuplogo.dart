@@ -12,22 +12,22 @@ class signuplogo extends StatelessWidget {
     return Center(
       child: Column(
         children: [
-          Image.asset(AssetValueManager.Klog, width: screeutilsManager.w72),
-          Text(
-            Constantmanger.civix,
-            style: TextStyle(
-              fontFamily: FontFamily.OriginalSurfer,
-              fontSize: screeutilsManager.s11,
-              color: ColorManger.kprimary,
-            ),
-          ),
+          Image.asset(AssetValueManager.Klog, width: screeutilsManager.w100),
+          // Text(
+          //   Constantmanger.civix,
+          //   style: TextStyle(
+          //     fontFamily: FontFamily.OriginalSurfer,
+          //     fontSize: screeutilsManager.s16,
+          //     color: ColorManger.kprimary,
+          //   ),
+          // ),
           SizedBox(height: screeutilsManager.h9),
           Text(
             Constantmanger.sinup,
             style: TextStyle(
               fontWeight: FontWeight.w500,
               fontFamily: FontFamily.Otama_ep,
-              fontSize: screeutilsManager.s38,
+              fontSize: screeutilsManager.s34,
               color: ColorManger.kprimary,
             ),
           ),

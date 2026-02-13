@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       child: MaterialApp(
-        initialRoute: falg == false ? Routes.onbroading : Routes.signup,
+        initialRoute: falg == true ? Routes.onbroading : Routes.login,
         title: 'Flutter Demo',
         theme: ThemeData(),
         debugShowCheckedModeBanner: false,
