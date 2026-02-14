@@ -1,4 +1,3 @@
-import 'package:civixapp/core/resource/assetvaluemanger.dart';
 import 'package:civixapp/core/resource/colormanager.dart';
 import 'package:civixapp/core/resource/screenutilsmaanger.dart';
 import 'package:civixapp/core/routing/routes.dart';
@@ -65,21 +64,13 @@ class _OtpvrificationcodeState extends State<Otpvrificationcode> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              "OTP Verification",
-              style: TextStyle(
-                color: ColorManger.kprimary,
-                fontSize: 20.sp,
-                fontFamily: FontFamily.Otama_ep,
-              ),
-            ),
             SizedBox(height: 6.h),
             Text(
               "we have sent a 6-digit code to your registered  email address/phone number  ",
               style: TextStyle(
                 color: ColorManger.Lightgrey2,
                 fontSize: 14.sp,
-                fontFamily: FontFamily.Otama_ep,
+                // fontFamily: FontFamily.Otama_ep,
               ),
             ),
             SizedBox(height: 48.h),

@@ -1,4 +1,3 @@
-import 'package:civixapp/core/resource/colormanager.dart';
 import 'package:civixapp/core/resource/constantmanger.dart';
 import 'package:civixapp/core/resource/screenutilsmaanger.dart';
 import 'package:civixapp/core/widget/customtextfromfield.dart';
@@ -14,19 +13,20 @@ class Lname extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          Constantmanger.lname,
-          style: TextStyle(
-            color: ColorManger.Lightgrey,
-            fontSize: screeutilsManager.s16,
-          ),
-        ),
+        // Text(
+        //   Constantmanger.lname,
+        //   style: TextStyle(
+        //     color: ColorManger.Lightgrey,
+        //     fontSize: screeutilsManager.s16,
+        //   ),
+        // ),
         SizedBox(height: screeutilsManager.h6),
         CustomTextfromfield(
           controller: controller,
 
           hinttext: Constantmanger.flnamehint,
           validator: validator,
+          lable: Constantmanger.lname,
         ),
         SizedBox(height: screeutilsManager.h16),
       ],

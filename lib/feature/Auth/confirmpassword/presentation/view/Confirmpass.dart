@@ -5,6 +5,7 @@ import 'package:civixapp/core/resource/assetvaluemanger.dart';
 import 'package:civixapp/core/resource/colormanager.dart';
 import 'package:civixapp/core/resource/constantmanger.dart';
 import 'package:civixapp/core/resource/screenutilsmaanger.dart';
+import 'package:civixapp/feature/Auth/confirmpassword/presentation/view/widget/confirmpassappbar.dart';
 import 'package:civixapp/feature/Auth/otpverifcation/presentation/view/widget/otpappbar.dart';
 import 'package:civixapp/feature/Auth/register/presentation/views/widget/confirmpassword.dart';
 import 'package:civixapp/feature/Auth/register/presentation/views/widget/password.dart';
@@ -66,7 +67,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
       ),
       child: Scaffold(
         backgroundColor: Colors.white,
-        appBar: otpappbar(context, () {
+        appBar: confirmpassappbar(context, () {
           Navigator.pop(context);
         }),
         body: SafeArea(
@@ -76,15 +77,6 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    "Create New Password",
-                    style: TextStyle(
-                      fontFamily: FontFamily.Otama_ep,
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold,
-                      color: ColorManger.kprimary,
-                    ),
-                  ),
                   SizedBox(height: screeutilsManager.h16),
 
                   Password(

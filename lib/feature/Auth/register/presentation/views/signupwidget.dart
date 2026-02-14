@@ -12,17 +12,18 @@ import 'package:civixapp/feature/Auth/register/presentation/views/HaveAccountORL
 import 'package:civixapp/feature/Auth/register/presentation/views/widget/Email.dart';
 import 'package:civixapp/feature/Auth/register/presentation/views/widget/Lname.dart';
 import 'package:civixapp/feature/Auth/register/presentation/views/widget/Phone.dart';
+import 'package:civixapp/feature/Auth/register/presentation/views/widget/address.dart';
 import 'package:civixapp/feature/Auth/register/presentation/views/widget/fname.dart';
 import 'package:civixapp/feature/Auth/register/presentation/views/widget/nationalnumber.dart';
 import 'package:civixapp/feature/Auth/register/presentation/views/widget/password.dart';
 import 'package:civixapp/feature/Auth/register/presentation/views/widget/password_rules.dart';
-import 'package:civixapp/feature/Auth/register/presentation/views/widget/showmodalbottomsheetimage.dart';
 import 'package:civixapp/feature/Auth/register/presentation/views/widget/signupbutton.dart';
 import 'package:civixapp/feature/Auth/register/presentation/views/widget/signuplogo.dart';
-import 'package:country_picker/country_picker.dart';
+import 'package:csc_picker_plus/csc_picker_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class Singnup extends StatefulWidget {
@@ -46,8 +47,9 @@ class _SingnupState extends State<Singnup> {
       TextEditingController();
   String name = "Select nationality";
   ValueNotifier<bool> isFormValid = ValueNotifier(false);
-  StreamController<List> streamController = StreamController();
+  StreamController<List> streamController = StreamController.broadcast();
   File? image;
+  String? selectedRole; // متغير للحفظ
 
   @override
   void initState() {
@@ -160,6 +162,10 @@ class _SingnupState extends State<Singnup> {
                                     controller: nationalnumbercontroller,
                                     onChanged: (value) {},
                                   ),
+                                  Address(
+                                    controller: nationalnumbercontroller,
+                                    onChanged: (value) {},
+                                  ),
                                   Password(
                                     controller: passwordController,
                                     onChanged: (value) {
@@ -172,7 +178,75 @@ class _SingnupState extends State<Singnup> {
                                   PasswordRules(
                                     streamController: streamController,
                                   ),
-                                  Selectcountry(name: name),
+                                  SizedBox(height: screeutilsManager.h16),
+                                  SizedBox(
+                                    height: 46,
+                                    child: DropdownButtonFormField<String>(
+                                      isExpanded: false,
+                                      padding: EdgeInsets.zero,
+                                      autovalidateMode:
+                                          AutovalidateMode.onUserInteraction,
+                                      decoration: InputDecoration(
+                                        contentPadding: EdgeInsets.zero,
+                                        maintainHintHeight: true,
+                                        maintainHintSize: true,
+                                        filled: true,
+                                        fillColor: Color(0xffF6F6F6),
+                                        border: OutlineInputBorder(
+                                          borderRadius: BorderRadius.circular(
+                                            8,
+                                          ),
+                                          borderSide: BorderSide.none,
+                                        ),
+                                      ),
+                                      isDense: true,
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return "Please select a role"; // رسالة الخطأ
+                                        }
+                                        return null; // تمام
+                                      },
+
+                                      dropdownColor: Color(0xffF6F6F6),
+                                      hint: Text(
+                                        "Select a role",
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 14.sp,
+                                        ),
+                                      ),
+                                      items: [
+                                        DropdownMenuItem(
+                                          value: "User",
+                                          child: Text(
+                                            "User",
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 12.sp,
+                                            ),
+                                          ),
+                                        ),
+
+                                        DropdownMenuItem(
+                                          value: "Citizen",
+                                          child: Text(
+                                            "Citizen",
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 12.sp,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                      onChanged: (value) {
+                                        setState(() {
+                                          selectedRole = value;
+                                        });
+                                        print("Selected: $value");
+                                      },
+                                    ),
+                                  ),
+                                  SizedBox(height: screeutilsManager.h16),
 
                                   SizedBox(height: screeutilsManager.h30),
                                   ValueListenableBuilder<bool>(
@@ -183,6 +257,7 @@ class _SingnupState extends State<Singnup> {
                                       );
                                     },
                                   ),
+
                                   HaveAccountORLogin(
                                     onPressed: () {
                                       Navigator.pop(context);
@@ -228,83 +303,59 @@ class _SingnupState extends State<Singnup> {
     super.dispose();
   }
 }
+// }
 
-class Selectcountry extends StatefulWidget {
-  Selectcountry({super.key, required this.name});
-  String name;
-  @override
-  State<Selectcountry> createState() => _SelectcountryState();
-}
+// class Selectcountry extends StatefulWidget {
+//   Selectcountry({super.key, required this.name});
+//   String name;
+//   @override
+//   State<Selectcountry> createState() => _SelectcountryState();
+// }
 
-class _SelectcountryState extends State<Selectcountry> {
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text("Select nationality"),
-        SizedBox(height: 4),
-        Container(
-          decoration: BoxDecoration(
-            color: Color(0xffF6F6F6),
-            borderRadius: BorderRadius.circular(8),
-            border: BoxBorder.all(color: ColorManger.kprimary),
-          ),
-          height: 45,
-          width: double.infinity,
-          child: InkWell(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Align(
-                alignment: AlignmentGeometry.centerLeft,
+// class _SelectcountryState extends State<Selectcountry> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Column(
+//       crossAxisAlignment: CrossAxisAlignment.start,
+//       children: [
+//         Text("Select nationality"),
+//         SizedBox(height: 4),
+//         Container(
+//           decoration: BoxDecoration(
+//             color: Color(0xffF6F6F6),
+//             borderRadius: BorderRadius.circular(8),
+//             border: BoxBorder.all(color: ColorManger.kprimary),
+//           ),
+//           height: 45,
+//           width: double.infinity,
+//           child: InkWell(
+//             child: Padding(
+//               padding: const EdgeInsets.all(8.0),
+//               child: Align(
+//                 alignment: AlignmentGeometry.centerLeft,
 
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      widget.name,
-                      style: TextStyle(color: ColorManger.Lightgrey2),
-                    ),
-                    Icon(
-                      color: ColorManger.Lightgrey2,
-                      size: 30,
-                      Icons.keyboard_arrow_down,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            onTap: () {
-              showCountryPicker(
-                searchAutofocus: true,
-                useSafeArea: true,
-                countryListTheme: CountryListThemeData(
-                  inputDecoration: InputDecoration(
-                    isDense: true,
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        width: 2,
-
-                        color: ColorManger.kprimary,
-                      ),
-                    ),
-                  ),
-                  borderRadius: BorderRadius.circular(0),
-                  bottomSheetHeight: MediaQuery.of(context).size.height * 0.4,
-                ),
-
-                context: context,
-                showPhoneCode: false,
-                onSelect: (Country country) {
-                  widget.name =
-                      "${country.flagEmoji}  ${country.displayName.split(" ")[0]}";
-                  setState(() {});
-                },
-              );
-            },
-          ),
-        ),
-      ],
-    );
-  }
-}
+//                 child: Row(
+//                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                   children: [
+//                     Text(
+//                       widget.name,
+//                       style: TextStyle(color: ColorManger.Lightgrey2),
+//                     ),
+//                     Icon(
+//                       color: ColorManger.Lightgrey2,
+//                       size: 30,
+//                       Icons.keyboard_arrow_down,
+//                     ),
+//                   ],
+//                 ),
+//               ),
+//             ),
+//             onTap: () {
+//               setState(() {});
+//             },
+//           ),
+//         ),
+//       ],
+//     );
+//   }
+// }

@@ -1,8 +1,9 @@
-import 'package:civixapp/core/resource/assetvaluemanger.dart';
+import 'dart:developer';
+
 import 'package:civixapp/core/resource/colormanager.dart' show ColorManger;
 import 'package:civixapp/core/resource/screenutilsmaanger.dart';
-import 'package:civixapp/core/routing/routes.dart';
 import 'package:civixapp/feature/Auth/register/presentation/views/widget/Email.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -21,14 +22,6 @@ class Foregetpassword extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              "Forget Your Password ?",
-              style: TextStyle(
-                color: ColorManger.kprimary,
-                fontSize: 20.sp,
-                fontFamily: FontFamily.Otama_ep,
-              ),
-            ),
             SizedBox(height: 6.h),
             RichText(
               text: TextSpan(
@@ -59,9 +52,38 @@ class Foregetpassword extends StatelessWidget {
                     borderRadius: BorderRadius.circular(screeutilsManager.r10),
                   ),
                 ),
-                onPressed: () {
-                  print("object");
-                  Navigator.of(context).pushNamed(Routes.otpverficationc);
+                onPressed: () async {
+                  Dio dio = Dio();
+
+                  try {
+                    final response = await dio.post(
+                      "https://citifix.runasp.net/api/Account/confirm-email-login",
+                      // options: Options(
+                      //   // contentType: Headers.jsonContentType,
+                      //   // headers: {"Accept": "application/json"},
+                      // ),
+                      data: {
+                        // "nationalId": "30005281149567",
+                        // "fullName": " الحج محمود وليد",
+                        "email": "elsaidmaher@students.du.edu.eg",
+                        // "phoneNumber": "01234567890",
+                        // "password": "Aa123456#",
+                        // "address": "Cairo",
+                        // "dateOfBirth": "2000-05-10",
+                        // "role": "WORKER",
+                        "code": "111111111",
+                      },
+                    );
+
+                    print("response" + response.data.toString());
+                  } catch (e) {
+                    if (e is DioException) {
+                      print("STATUS = ${e.response?.statusCode}");
+                      print("DATA = ${e.response?.data}");
+                    } else {
+                      print(e.toString());
+                    }
+                  }
                 },
                 child: Text("Send  Code"),
               ),
@@ -76,11 +98,13 @@ class Foregetpassword extends StatelessWidget {
 PreferredSizeWidget foregetpasswordappbar(BuildContext context) {
   return AppBar(
     titleSpacing: 3.w,
+    centerTitle: true,
     title: Text(
-      "Back",
+      "Forget Password",
       style: TextStyle(
         color: ColorManger.kprimary,
-        fontFamily: FontFamily.Otama_ep,
+        fontSize: 20.sp,
+        // fontFamily: FontFamily.Otama_ep,
       ),
     ),
     backgroundColor: ColorManger.white,

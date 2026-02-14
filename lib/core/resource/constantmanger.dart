@@ -43,6 +43,7 @@ class Constantmanger {
   static const String hinytextpass = "********";
   static const String fnamehint = "Enter your First Name";
   static const String flnamehint = "Enter your Last Name";
+  static const String address = "Enter your address";
   static const String phonehint = "Enter your Phone";
 
   // ================== Required Errors ==================
@@ -79,4 +80,6 @@ class Constantmanger {
   static String submit = "Submit";
 
   static String nationalnumber = "National number";
+
+  static String Address = "address";
 }

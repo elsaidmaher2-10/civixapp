@@ -1,4 +1,3 @@
-
 import 'package:civixapp/core/resource/colormanager.dart';
 import 'package:civixapp/core/resource/constantmanger.dart';
 import 'package:civixapp/core/resource/screenutilsmaanger.dart';
@@ -23,13 +22,13 @@ class ConfirmPassword extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-       Constantmanger.confirmPassword,
-          style: TextStyle(
-            color: ColorManger.Lightgrey,
-            fontSize: screeutilsManager.s16,
-          ),
-        ),
+        // Text(
+        //   Constantmanger.confirmPassword,
+        //   style: TextStyle(
+        //     color: ColorManger.Lightgrey,
+        //     fontSize: screeutilsManager.s16,
+        //   ),
+        // ),
         SizedBox(height: screeutilsManager.h6),
         BlocProvider(
           create: (_) => VisibleeyeCubit(),
@@ -42,17 +41,14 @@ class ConfirmPassword extends StatelessWidget {
                 hinttext: Constantmanger.hinytextpass,
                 suffix: IconButton(
                   onPressed: () {
-                    context
-                        .read<VisibleeyeCubit>()
-                        .chanagevisbilitypassword();
+                    context.read<VisibleeyeCubit>().chanagevisbilitypassword();
                   },
                   icon: Icon(
-                    state
-                        ? Icons.remove_red_eye
-                        : Icons.visibility_off,
+                    state ? Icons.remove_red_eye : Icons.visibility_off,
                     color: ColorManger.Lightgrey2,
                   ),
                 ),
+                lable: Constantmanger.confirmPassword,
               );
             },
           ),

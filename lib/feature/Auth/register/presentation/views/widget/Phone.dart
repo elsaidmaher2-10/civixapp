@@ -1,5 +1,3 @@
-
-import 'package:civixapp/core/resource/colormanager.dart';
 import 'package:civixapp/core/resource/constantmanger.dart';
 import 'package:civixapp/core/resource/screenutilsmaanger.dart';
 import 'package:civixapp/core/widget/customtextfromfield.dart';
@@ -14,13 +12,13 @@ class Phone extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          Constantmanger.phone,
-          style: TextStyle(
-            color: ColorManger.Lightgrey,
-            fontSize: screeutilsManager.s16,
-          ),
-        ),
+        // Text(
+        //   Constantmanger.phone,
+        //   style: TextStyle(
+        //     color: ColorManger.Lightgrey,
+        //     fontSize: screeutilsManager.s16,
+        //   ),
+        // ),
         SizedBox(height: screeutilsManager.h6),
         CustomTextfromfield(
           controller: controller,
@@ -28,6 +26,7 @@ class Phone extends StatelessWidget {
 
           hinttext: Constantmanger.phonehint,
           validator: validator,
+          lable: Constantmanger.address,
         ),
         SizedBox(height: screeutilsManager.h16),
       ],

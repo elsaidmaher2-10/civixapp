@@ -1,3 +1,4 @@
+import 'package:civixapp/core/resource/colormanager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -6,12 +7,15 @@ class CustomTextfromfield extends StatelessWidget {
     super.key,
     required this.hinttext,
     this.suffix,
+    required this.lable,
     this.validator,
     this.obstext = false,
     required this.controller,
+
     this.onChanged,
     this.ktype = TextInputType.text,
   });
+
   String hinttext;
   IconButton? suffix;
   TextInputType ktype;
@@ -19,6 +23,8 @@ class CustomTextfromfield extends StatelessWidget {
   Function(String)? onChanged;
   TextEditingController controller;
   String? Function(String?)? validator;
+
+  String lable;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -29,8 +35,11 @@ class CustomTextfromfield extends StatelessWidget {
       validator: validator,
       obscureText: obstext,
       decoration: InputDecoration(
+        labelStyle: TextStyle(color: Colors.black, fontSize: 14.sp),
+        alignLabelWithHint: true,
+        labelText: lable,
         isDense: false,
-        floatingLabelAlignment: FloatingLabelAlignment.center,
+        floatingLabelAlignment: FloatingLabelAlignment.start,
         contentPadding: EdgeInsets.only(
           left: 2,
           bottom: 10,
@@ -51,7 +60,6 @@ class CustomTextfromfield extends StatelessWidget {
           borderSide: BorderSide(color: Color(0xff04332D), width: 1),
           borderRadius: BorderRadius.circular(10.r),
         ),
-
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10.r),
           borderSide: BorderSide(color: Color(0xffFC1B1A), width: 2),

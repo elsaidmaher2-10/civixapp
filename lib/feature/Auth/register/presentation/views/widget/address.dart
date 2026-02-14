@@ -1,16 +1,12 @@
-import 'package:civixapp/core/resource/colormanager.dart';
 import 'package:civixapp/core/resource/constantmanger.dart';
 import 'package:civixapp/core/resource/screenutilsmaanger.dart';
 import 'package:civixapp/core/widget/customtextfromfield.dart';
+import 'package:civixapp/feature/Auth/register/presentation/views/widget/address.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
-class Nationalnumber extends StatelessWidget {
-  Nationalnumber({
-    super.key,
-    required this.controller,
-    required this.onChanged,
-  });
+class Address extends StatelessWidget {
+  Address({super.key, required this.controller, required this.onChanged});
 
   TextEditingController controller;
   Function(String)? onChanged;
@@ -31,8 +27,8 @@ class Nationalnumber extends StatelessWidget {
           onChanged: onChanged,
           controller: controller,
           obstext: false,
-          hinttext: Constantmanger.nationalnumber,
-          lable: Constantmanger.nationalnumber,
+          hinttext: Constantmanger.address,
+          lable: Constantmanger.Address,
         ),
         SizedBox(height: screeutilsManager.h16),
       ],

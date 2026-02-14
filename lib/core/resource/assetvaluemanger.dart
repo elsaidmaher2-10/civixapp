@@ -1,6 +1,7 @@
 abstract class AssetValueManager {
   static String uploadimage = "assets/onbroadingimage/Subtract.png";
-  static const String Klog = "assets/splach.png";
+  static const String Klog = "assets/image 4.png";
+  static const String Klog2 = "assets/splach.png";
 }
 
 // class FontFamily {

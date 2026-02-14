@@ -10,6 +10,7 @@ import 'package:civixapp/core/widget/customtextfromfield.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class Loginpage extends StatefulWidget {
@@ -81,13 +82,13 @@ class _LoginpageState extends State<Loginpage> {
                         ),
                       ),
                     ),
-                    Text(
-                      Constantmanger.email,
-                      style: TextStyle(
-                        color: ColorManger.Lightgrey,
-                        fontSize: screeutilsManager.s16,
-                      ),
-                    ),
+                    // Text(
+                    //   Constantmanger.email,
+                    //   style: TextStyle(
+                    //     color: ColorManger.Lightgrey,
+                    //     fontSize: screeutilsManager.s16,
+                    //   ),
+                    // ),
                     SizedBox(height: screeutilsManager.h6),
                     CustomTextfromfield(
                       controller: email,
@@ -99,16 +100,17 @@ class _LoginpageState extends State<Loginpage> {
 
                         btnController.add(isvalidemail && isvalidpass);
                       },
+                      lable: Constantmanger.email,
                     ),
                     SizedBox(height: screeutilsManager.h16),
 
-                    Text(
-                      Constantmanger.pass,
-                      style: TextStyle(
-                        color: ColorManger.Lightgrey,
-                        fontSize: screeutilsManager.s16,
-                      ),
-                    ),
+                    // Text(
+                    //   Constantmanger.pass,
+                    //   style: TextStyle(
+                    //     color: ColorManger.Lightgrey,
+                    //     fontSize: screeutilsManager.s16,
+                    //   ),
+                    // ),
                     SizedBox(height: screeutilsManager.h6),
                     StreamBuilder<bool>(
                       stream: streamController.stream,
@@ -145,6 +147,7 @@ class _LoginpageState extends State<Loginpage> {
                                   color: ColorManger.Lightgrey3,
                                 ),
                               ),
+                              lable: Constantmanger.pass,
                             );
                           },
                     ),

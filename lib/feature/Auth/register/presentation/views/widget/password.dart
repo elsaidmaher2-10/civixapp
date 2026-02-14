@@ -16,13 +16,13 @@ class Password extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          Constantmanger.pass,
-          style: TextStyle(
-            color: ColorManger.Lightgrey,
-            fontSize: screeutilsManager.s16,
-          ),
-        ),
+        // Text(
+        //   Constantmanger.pass,
+        //   style: TextStyle(
+        //     color: ColorManger.Lightgrey,
+        //     fontSize: screeutilsManager.s16,
+        //   ),
+        // ),
         SizedBox(height: screeutilsManager.h6),
         BlocProvider(
           create: (BuildContext context) => VisibleeyeCubit(),
@@ -42,6 +42,7 @@ class Password extends StatelessWidget {
                     color: ColorManger.Lightgrey2,
                   ),
                 ),
+                lable: Constantmanger.pass,
               );
             },
           ),

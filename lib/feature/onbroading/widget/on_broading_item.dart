@@ -51,7 +51,7 @@ class Customonbroadingitem extends StatelessWidget {
                       child: Text(
                         "Skip",
                         style: TextStyle(
-                          fontFamily: FontFamily.Otama_ep,
+                          // fontFamily: FontFamily.Otama_ep,
                           color: Color(0xff2A4D8B),
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
@@ -75,7 +75,7 @@ class Customonbroadingitem extends StatelessWidget {
           Text(
             pages[x].title,
             style: TextStyle(
-              fontFamily: FontFamily.Otama_ep,
+              // fontFamily: FontFamily.Otama_ep,
               fontSize: 32,
               color: Color(0xff003366),
               fontWeight: FontWeight.w700,

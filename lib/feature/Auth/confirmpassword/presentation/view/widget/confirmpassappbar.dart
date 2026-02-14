@@ -4,16 +4,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-PreferredSizeWidget otpappbar(BuildContext context, Null Function() param1) {
+PreferredSizeWidget confirmpassappbar(
+  BuildContext context,
+  Null Function() param1,
+) {
   return AppBar(
     centerTitle: true,
     titleSpacing: 3.w,
     title: Text(
-      "OTP Verification",
+      "Create New Password",
       style: TextStyle(
-        color: ColorManger.kprimary,
-        fontSize: 20.sp,
         // fontFamily: FontFamily.Otama_ep,
+        fontSize: 20.sp,
+        color: ColorManger.kprimary,
       ),
     ),
     backgroundColor: ColorManger.white,
