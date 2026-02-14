@@ -1,4 +1,3 @@
-import 'package:civixapp/core/resource/colormanager.dart';
 import 'package:civixapp/core/resource/constantmanger.dart';
 import 'package:civixapp/core/resource/screenutilsmaanger.dart';
 import 'package:civixapp/core/widget/customtextfromfield.dart';
@@ -28,9 +27,23 @@ class Nationalnumber extends StatelessWidget {
         // ),
         SizedBox(height: screeutilsManager.h6),
         CustomTextfromfield(
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return Constantmanger.hintnationalnumber;
+            }
+            if (value.length != 14) {
+              return "National ID must be exactly 14 digits";
+            }
+            if (!RegExp(r'^\d{14}$').hasMatch(value)) {
+              return "National ID must contain only digits";
+            }
+            return null; // تمام
+          },
+
           onChanged: onChanged,
           controller: controller,
           obstext: false,
+          ktype: TextInputType.number,
           hinttext: Constantmanger.nationalnumber,
           lable: Constantmanger.nationalnumber,
         ),

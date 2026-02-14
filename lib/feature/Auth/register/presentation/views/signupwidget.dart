@@ -4,7 +4,9 @@ import 'package:civixapp/core/database/remote/api/ApiService.dart';
 import 'package:civixapp/core/function/passvlidatorrules.dart';
 import 'package:civixapp/core/function/sinupvalidator.dart';
 import 'package:civixapp/core/resource/colormanager.dart';
+import 'package:civixapp/core/resource/constantmanger.dart';
 import 'package:civixapp/core/resource/screenutilsmaanger.dart';
+import 'package:civixapp/core/routing/routes.dart';
 import 'package:civixapp/feature/Auth/register/data/models/usermodel.dart';
 import 'package:civixapp/feature/Auth/register/data/repo/SignupRepo.dart';
 import 'package:civixapp/feature/Auth/register/presentation/manager/ValidatebuttonCubit/validatebutton_cubit.dart';
@@ -27,7 +29,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class Singnup extends StatefulWidget {
@@ -51,7 +52,6 @@ class _SingnupState extends State<Singnup> {
       TextEditingController();
   final TextEditingController nationalnumbercontroller =
       TextEditingController();
-  String name = "Select nationality";
   ValueNotifier<bool> isFormValid = ValueNotifier(false);
   StreamController<List> streamController = StreamController.broadcast();
   File? image;
@@ -109,7 +109,7 @@ class _SingnupState extends State<Singnup> {
                         topRight: Radius.circular(8),
                       ),
                     ),
-                    backgroundColor: const Color.fromARGB(255, 232, 63, 63),
+                    backgroundColor: ColorManger.kprimary,
                     dismissDirection: DismissDirection.endToStart,
                     content: Text(
                       state.message,
@@ -120,14 +120,47 @@ class _SingnupState extends State<Singnup> {
                     ),
                   ),
                 );
+              } else if (state is Signupcontrollersucess) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    duration: Duration(seconds: 2),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadiusGeometry.only(
+                        topLeft: Radius.circular(8),
+                        topRight: Radius.circular(8),
+                      ),
+                    ),
+                    backgroundColor: ColorManger.green,
+                    dismissDirection: DismissDirection.endToStart,
+                    content: Text(
+                      state.message,
+                      style: TextStyle(
+                        color: ColorManger.white,
+                        fontSize: screeutilsManager.h16,
+                      ),
+                    ),
+                  ),
+                );
+
+                Navigator.pushNamed(
+                  context,
+                  Routes.otpverficationc,
+                  arguments: {Constantmanger.email: emailController.text},
+                );
               }
             },
 
             builder: (context, state) {
+              bool inAsyncCall = false;
+              if (state is Signupcontrollerloading) {
+                inAsyncCall = true;
+              } else {
+                inAsyncCall = false;
+              }
               return ModalProgressHUD(
-                inAsyncCall: false,
+                inAsyncCall: inAsyncCall,
 
-                blur: 15,
+                blur: 7,
                 progressIndicator: CupertinoActivityIndicator(
                   radius: 15,
                   color: ColorManger.kprimary,
@@ -180,14 +213,18 @@ class _SingnupState extends State<Singnup> {
                                       );
                                     },
                                   ),
-
                                   PasswordRules(
                                     streamController: streamController,
                                   ),
                                   SizedBox(height: screeutilsManager.h16),
-                                  selectRole(selectole),
+                                  selectRole(
+                                    selectole,
+                                    onchanged: (value) {
+                                      selectole.add(value ?? "");
+                                      selectedRole = value?.toLowerCase() ?? "";
+                                    },
+                                  ),
                                   SizedBox(height: screeutilsManager.h16),
-
                                   SizedBox(height: screeutilsManager.h30),
                                   ValueListenableBuilder<bool>(
                                     valueListenable: isFormValid,
@@ -195,33 +232,34 @@ class _SingnupState extends State<Singnup> {
                                       return SignUPButton(
                                         onPressed: isValid
                                             ? () async {
-                                                Usermodel user = Usermodel(
-                                                  nationalId:
-                                                      nationalnumbercontroller
-                                                          .text,
-                                                  address:
-                                                      addresscontroller.text,
-                                                  dateOfBirth: "2024-06-22",
-                                                  role: selectedRole,
-                                                  firstName:
-                                                      fnameController.text,
-                                                  lastName:
-                                                      lnameController.text,
-                                                  email: emailController.text,
-                                                  password:
-                                                      passwordController.text,
-                                                  phone: phoneController.text,
-                                                );
-                                                Signuprepo(
-                                                  Apiservice(Dio()),
-                                                ).signup(user).then((value) {
-                                                  value.fold(
-                                                    (l) => print(
-                                                      l.errors.join("-"),
-                                                    ),
-                                                    (r) => print(r),
+                                                print(selectole);
+                                                if (_formKey.currentState
+                                                        ?.validate() ??
+                                                    false) {
+                                                  Usermodel user = Usermodel(
+                                                    nationalId:
+                                                        nationalnumbercontroller
+                                                            .text,
+                                                    address:
+                                                        addresscontroller.text,
+                                                    dateOfBirth: "2024-06-22",
+                                                    role: selectedRole,
+                                                    firstName:
+                                                        fnameController.text,
+                                                    lastName:
+                                                        lnameController.text,
+                                                    email: emailController.text,
+                                                    password:
+                                                        passwordController.text,
+                                                    phone: phoneController.text,
                                                   );
-                                                });
+
+                                                  context
+                                                      .read<
+                                                        SignupcontrollerCubit
+                                                      >()
+                                                      .signupfunc(user);
+                                                }
                                               }
                                             : null,
                                       );

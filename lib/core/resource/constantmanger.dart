@@ -3,7 +3,7 @@ import 'package:civixapp/feature/onbroading/model/onbroadingmodel.dart';
 class Constantmanger {
   static const String isOnboardingViewed = "is_show_on_board";
   static const String skip = "Skip";
-
+  Constantmanger._();
   static final List<Onbroadingmodel> pages = [
     Onbroadingmodel(
       title: "Help Community",
@@ -80,6 +80,7 @@ class Constantmanger {
   static String submit = "Submit";
 
   static String nationalnumber = "National number";
+  static String hintnationalnumber = "Enter National number";
 
   static String Address = "address";
 }

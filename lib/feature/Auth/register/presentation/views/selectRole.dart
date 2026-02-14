@@ -1,19 +1,18 @@
 import 'dart:async';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-StreamBuilder<String> selectRole(StreamController<String> stream) {
+StreamBuilder<String> selectRole(StreamController<String> stream ,{void Function(String?)? onchanged}) {
   return StreamBuilder<String>(
     stream: stream.stream,
     builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
       return SizedBox(
         height: 46,
         child: DropdownButtonFormField<String>(
-          value: snapshot.data, // ده عشان يظهر القيمة المحددة
+          initialValue: snapshot.data, // ده عشان يظهر القيمة المحددة
           isExpanded: false,
           padding: EdgeInsets.zero,
+
           autovalidateMode: AutovalidateMode.onUserInteraction,
           decoration: InputDecoration(
             contentPadding: EdgeInsets.zero,
@@ -26,6 +25,7 @@ StreamBuilder<String> selectRole(StreamController<String> stream) {
               borderSide: BorderSide.none,
             ),
           ),
+
           isDense: true,
           validator: (value) {
             if (value == null || value.isEmpty) {
@@ -54,9 +54,7 @@ StreamBuilder<String> selectRole(StreamController<String> stream) {
               ),
             ),
           ],
-          onChanged: (value) {
-            stream.add(value ?? "");
-          },
+          onChanged: onchanged
         ),
       );
     },

@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:civixapp/core/resource/colormanager.dart' show ColorManger;
 import 'package:civixapp/core/resource/screenutilsmaanger.dart';
+import 'package:civixapp/core/routing/routes.dart';
 import 'package:civixapp/feature/Auth/register/presentation/views/widget/Email.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
@@ -53,37 +54,38 @@ class Foregetpassword extends StatelessWidget {
                   ),
                 ),
                 onPressed: () async {
-                  Dio dio = Dio();
+                  Navigator.pushNamed(context, Routes.otpverficationc);
+                  // Dio dio = Dio();
 
-                  try {
-                    final response = await dio.post(
-                      "https://citifix.runasp.net/api/Account/confirm-email-login",
-                      // options: Options(
-                      //   // contentType: Headers.jsonContentType,
-                      //   // headers: {"Accept": "application/json"},
-                      // ),
-                      data: {
-                        // "nationalId": "30005281149567",
-                        // "fullName": " الحج محمود وليد",
-                        "email": "elsaidmaher@students.du.edu.eg",
-                        // "phoneNumber": "01234567890",
-                        // "password": "Aa123456#",
-                        // "address": "Cairo",
-                        // "dateOfBirth": "2000-05-10",
-                        // "role": "WORKER",
-                        "code": "111111111",
-                      },
-                    );
+                  // try {
+                  //   final response = await dio.post(
+                  //     "https://citifix.runasp.net/api/Account/confirm-email-login",
+                  //     // options: Options(
+                  //     //   // contentType: Headers.jsonContentType,
+                  //     //   // headers: {"Accept": "application/json"},
+                  //     // ),
+                  //     data: {
+                  //       // "nationalId": "30005281149567",
+                  //       // "fullName": " الحج محمود وليد",
+                  //       "email": "elsaidmaher@students.du.edu.eg",
+                  //       // "phoneNumber": "01234567890",
+                  //       // "password": "Aa123456#",
+                  //       // "address": "Cairo",
+                  //       // "dateOfBirth": "2000-05-10",
+                  //       // "role": "WORKER",
+                  //       "code": "111111111",
+                  //     },
+                  //   );
 
-                    print("response" + response.data.toString());
-                  } catch (e) {
-                    if (e is DioException) {
-                      print("STATUS = ${e.response?.statusCode}");
-                      print("DATA = ${e.response?.data}");
-                    } else {
-                      print(e.toString());
-                    }
-                  }
+                  //   print("response" + response.data.toString());
+                  // } catch (e) {
+                  //   if (e is DioException) {
+                  //     print("STATUS = ${e.response?.statusCode}");
+                  //     print("DATA = ${e.response?.data}");
+                  //   } else {
+                  //     print(e.toString());
+                  //   }
+                  // }
                 },
                 child: Text("Send  Code"),
               ),

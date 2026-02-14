@@ -2,6 +2,7 @@ import 'package:civixapp/core/resource/colormanager.dart';
 import 'package:civixapp/core/resource/screenutilsmaanger.dart';
 import 'package:civixapp/core/routing/routes.dart';
 import 'package:civixapp/feature/Auth/otpverifcation/presentation/view/widget/otpappbar.dart';
+import 'package:civixapp/feature/Auth/otpverifcation/presentation/view/widget/resendCodeOpt.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -118,6 +119,8 @@ class _OtpvrificationcodeState extends State<Otpvrificationcode> {
                 child: const Text("Confirm"),
               ),
             ),
+
+            ResendCodeOpt(),
           ],
         ),
       ),
