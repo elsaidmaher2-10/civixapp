@@ -3,30 +3,37 @@ import 'dart:io';
 class Usermodel {
   String firstName;
   String lastName;
+  String nationalId;
   String email;
   String phone;
+  String address;
+  String dateOfBirth;
   String password;
-  File image;
+  String role;
+  // File? image;
 
   Usermodel({
+    required this.nationalId,
+    required this.address,
+    required this.dateOfBirth,
+    required this.role,
     required this.firstName,
     required this.lastName,
     required this.email,
-    required this.image,
     required this.password,
     required this.phone,
+    // this.image,
   });
 }
 
-  // "firstName": fnameController.text,
-  //                                         "lastName": lnameController.text,
-  //                                         "email": emailController.text,
-  //                                         "phone": phoneController.text,
-  //                                         "password": passwordController.text,
-  //                                         "image": await MultipartFile.fromFile(
-  //                                           image!.path,
-  //                                           filename: image!.path
-  //                                               .split("/")
-  //                                               .last,
-  //                                         ),
-  //                                       }),
+
+// {
+//   "nationalId": "string",
+//   "fullName": "string",
+//   "email": "user@example.com",
+//   "phoneNumber": "string",
+//   "password": "r\\ArZpn&UgU*L,T>&!x4a^xMD/[A4JxV1n[S|ha'\\xAt+Y:[,VC<fC(Y[r**W6cupu*a gb`E%*2W'{LkN_FYn",
+//   "address": "string",
+//   "dateOfBirth": "2026-02-14",
+//   "role": "string"
+// }
