@@ -26,7 +26,7 @@ class Phone extends StatelessWidget {
 
           hinttext: Constantmanger.phonehint,
           validator: validator,
-          lable: Constantmanger.address,
+          lable: Constantmanger.phonehint,
         ),
         SizedBox(height: screeutilsManager.h16),
       ],

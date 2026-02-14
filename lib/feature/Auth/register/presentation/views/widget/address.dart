@@ -1,7 +1,6 @@
 import 'package:civixapp/core/resource/constantmanger.dart';
 import 'package:civixapp/core/resource/screenutilsmaanger.dart';
 import 'package:civixapp/core/widget/customtextfromfield.dart';
-import 'package:civixapp/feature/Auth/register/presentation/views/widget/address.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable

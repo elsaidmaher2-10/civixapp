@@ -4,9 +4,9 @@ import 'package:civixapp/core/database/remote/api/ApihanderDioExcp.dart';
 import 'package:dio/dio.dart';
 
 class Apiservice extends Apiconsumer {
-  late Dio dio;
+   Dio dio;
 
-  Apiservice() {
+  Apiservice(this.dio) {
     dio = Dio(
       BaseOptions(
         baseUrl: Apiconstant.baseurl,

@@ -1,14 +1,18 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:civixapp/core/database/remote/api/ApiService.dart';
 import 'package:civixapp/core/function/passvlidatorrules.dart';
 import 'package:civixapp/core/function/sinupvalidator.dart';
 import 'package:civixapp/core/resource/colormanager.dart';
 import 'package:civixapp/core/resource/screenutilsmaanger.dart';
+import 'package:civixapp/feature/Auth/register/data/models/usermodel.dart';
+import 'package:civixapp/feature/Auth/register/data/repo/SignupRepo.dart';
 import 'package:civixapp/feature/Auth/register/presentation/manager/ValidatebuttonCubit/validatebutton_cubit.dart';
 import 'package:civixapp/feature/Auth/register/presentation/manager/cubit/signupcontroller_cubit.dart';
 import 'package:civixapp/feature/Auth/register/presentation/manager/cubit/signupcontroller_state.dart';
 import 'package:civixapp/feature/Auth/register/presentation/manager/imagepickercubit/singup_cubit.dart';
 import 'package:civixapp/feature/Auth/register/presentation/views/HaveAccountORLogin.dart';
+import 'package:civixapp/feature/Auth/register/presentation/views/selectRole.dart';
 import 'package:civixapp/feature/Auth/register/presentation/views/widget/Email.dart';
 import 'package:civixapp/feature/Auth/register/presentation/views/widget/Lname.dart';
 import 'package:civixapp/feature/Auth/register/presentation/views/widget/Phone.dart';
@@ -19,7 +23,7 @@ import 'package:civixapp/feature/Auth/register/presentation/views/widget/passwor
 import 'package:civixapp/feature/Auth/register/presentation/views/widget/password_rules.dart';
 import 'package:civixapp/feature/Auth/register/presentation/views/widget/signupbutton.dart';
 import 'package:civixapp/feature/Auth/register/presentation/views/widget/signuplogo.dart';
-import 'package:csc_picker_plus/csc_picker_plus.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -40,6 +44,8 @@ class _SingnupState extends State<Singnup> {
   final TextEditingController lnameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
+  final TextEditingController addresscontroller = TextEditingController();
+  StreamController<String> selectole = StreamController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
@@ -49,7 +55,7 @@ class _SingnupState extends State<Singnup> {
   ValueNotifier<bool> isFormValid = ValueNotifier(false);
   StreamController<List> streamController = StreamController.broadcast();
   File? image;
-  String? selectedRole; // متغير للحفظ
+  String selectedRole = "";
 
   @override
   void initState() {
@@ -163,7 +169,7 @@ class _SingnupState extends State<Singnup> {
                                     onChanged: (value) {},
                                   ),
                                   Address(
-                                    controller: nationalnumbercontroller,
+                                    controller: addresscontroller,
                                     onChanged: (value) {},
                                   ),
                                   Password(
@@ -179,73 +185,7 @@ class _SingnupState extends State<Singnup> {
                                     streamController: streamController,
                                   ),
                                   SizedBox(height: screeutilsManager.h16),
-                                  SizedBox(
-                                    height: 46,
-                                    child: DropdownButtonFormField<String>(
-                                      isExpanded: false,
-                                      padding: EdgeInsets.zero,
-                                      autovalidateMode:
-                                          AutovalidateMode.onUserInteraction,
-                                      decoration: InputDecoration(
-                                        contentPadding: EdgeInsets.zero,
-                                        maintainHintHeight: true,
-                                        maintainHintSize: true,
-                                        filled: true,
-                                        fillColor: Color(0xffF6F6F6),
-                                        border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(
-                                            8,
-                                          ),
-                                          borderSide: BorderSide.none,
-                                        ),
-                                      ),
-                                      isDense: true,
-                                      validator: (value) {
-                                        if (value == null || value.isEmpty) {
-                                          return "Please select a role"; // رسالة الخطأ
-                                        }
-                                        return null; // تمام
-                                      },
-
-                                      dropdownColor: Color(0xffF6F6F6),
-                                      hint: Text(
-                                        "Select a role",
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 14.sp,
-                                        ),
-                                      ),
-                                      items: [
-                                        DropdownMenuItem(
-                                          value: "User",
-                                          child: Text(
-                                            "User",
-                                            style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 12.sp,
-                                            ),
-                                          ),
-                                        ),
-
-                                        DropdownMenuItem(
-                                          value: "Citizen",
-                                          child: Text(
-                                            "Citizen",
-                                            style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 12.sp,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                      onChanged: (value) {
-                                        setState(() {
-                                          selectedRole = value;
-                                        });
-                                        print("Selected: $value");
-                                      },
-                                    ),
-                                  ),
+                                  selectRole(selectole),
                                   SizedBox(height: screeutilsManager.h16),
 
                                   SizedBox(height: screeutilsManager.h30),
@@ -253,7 +193,37 @@ class _SingnupState extends State<Singnup> {
                                     valueListenable: isFormValid,
                                     builder: (context, isValid, child) {
                                       return SignUPButton(
-                                        onPressed: isValid ? () async {} : null,
+                                        onPressed: isValid
+                                            ? () async {
+                                                Usermodel user = Usermodel(
+                                                  nationalId:
+                                                      nationalnumbercontroller
+                                                          .text,
+                                                  address:
+                                                      addresscontroller.text,
+                                                  dateOfBirth: "2024-06-22",
+                                                  role: selectedRole,
+                                                  firstName:
+                                                      fnameController.text,
+                                                  lastName:
+                                                      lnameController.text,
+                                                  email: emailController.text,
+                                                  password:
+                                                      passwordController.text,
+                                                  phone: phoneController.text,
+                                                );
+                                                Signuprepo(
+                                                  Apiservice(Dio()),
+                                                ).signup(user).then((value) {
+                                                  value.fold(
+                                                    (l) => print(
+                                                      l.errors.join("-"),
+                                                    ),
+                                                    (r) => print(r),
+                                                  );
+                                                });
+                                              }
+                                            : null,
                                       );
                                     },
                                   ),
