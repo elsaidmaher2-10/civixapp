@@ -1,3 +1,4 @@
+import 'package:civixapp/core/resource/colormanager.dart';
 import 'package:civixapp/core/resource/constantmanger.dart';
 import 'package:civixapp/core/resource/screenutilsmaanger.dart';
 import 'package:civixapp/core/widget/customtextfromfield.dart';
@@ -23,6 +24,7 @@ class Address extends StatelessWidget {
         // ),
         SizedBox(height: screeutilsManager.h6),
         CustomTextfromfield(
+          prefix: Icon(Icons.location_city, color: ColorManger.Lightgrey2),
           onChanged: onChanged,
           controller: controller,
           obstext: false,

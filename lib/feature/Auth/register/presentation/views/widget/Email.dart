@@ -21,6 +21,7 @@ class Email extends StatelessWidget {
         // ),
         SizedBox(height: screeutilsManager.h6),
         CustomTextfromfield(
+          prefix: Icon(Icons.email, color: ColorManger.Lightgrey2),
           ktype: TextInputType.emailAddress,
           controller: controller,
           hinttext: Constantmanger.hinytextemail,

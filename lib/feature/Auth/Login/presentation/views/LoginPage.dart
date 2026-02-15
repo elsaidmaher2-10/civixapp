@@ -92,6 +92,8 @@ class _LoginpageState extends State<Loginpage> {
                     SizedBox(height: screeutilsManager.h6),
                     CustomTextfromfield(
                       controller: email,
+                      prefix: Icon(Icons.email, color: ColorManger.Lightgrey2),
+
                       hinttext: Constantmanger.hinytextemail,
                       validator: (value) {
                         isvalidemail = emailvalidator(value) == null
@@ -117,6 +119,11 @@ class _LoginpageState extends State<Loginpage> {
                       builder:
                           (BuildContext context, AsyncSnapshot<bool> snapshot) {
                             return CustomTextfromfield(
+                              prefix: Icon(
+                                Icons.password_outlined,
+                                color: ColorManger.Lightgrey2,
+                              ),
+
                               controller: password,
                               validator: (value) {
                                 if (value == null || value.trim().isEmpty) {
@@ -152,7 +159,7 @@ class _LoginpageState extends State<Loginpage> {
                           },
                     ),
 
-                    Padding(padding: EdgeInsets.all(2.h)),
+                    Padding(padding: EdgeInsets.all(6.h)),
                     Row(
                       children: [
                         Row(

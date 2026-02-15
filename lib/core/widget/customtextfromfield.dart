@@ -1,4 +1,3 @@
-import 'package:civixapp/core/resource/colormanager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -11,7 +10,7 @@ class CustomTextfromfield extends StatelessWidget {
     this.validator,
     this.obstext = false,
     required this.controller,
-
+    this.prefix,
     this.onChanged,
     this.ktype = TextInputType.text,
   });
@@ -23,7 +22,7 @@ class CustomTextfromfield extends StatelessWidget {
   Function(String)? onChanged;
   TextEditingController controller;
   String? Function(String?)? validator;
-
+  Widget? prefix;
   String lable;
   @override
   Widget build(BuildContext context) {
@@ -35,6 +34,7 @@ class CustomTextfromfield extends StatelessWidget {
       validator: validator,
       obscureText: obstext,
       decoration: InputDecoration(
+        prefixIcon: prefix,
         labelStyle: TextStyle(color: Colors.black, fontSize: 14.sp),
         alignLabelWithHint: true,
         labelText: lable,

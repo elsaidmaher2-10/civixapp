@@ -1,3 +1,4 @@
+import 'package:civixapp/core/resource/colormanager.dart';
 import 'package:civixapp/core/resource/constantmanger.dart';
 import 'package:civixapp/core/resource/screenutilsmaanger.dart';
 import 'package:civixapp/core/widget/customtextfromfield.dart';
@@ -23,7 +24,7 @@ class Phone extends StatelessWidget {
         CustomTextfromfield(
           controller: controller,
           ktype: TextInputType.number,
-
+          prefix: Icon(Icons.phone, color: ColorManger.Lightgrey2),
           hinttext: Constantmanger.phonehint,
           validator: validator,
           lable: Constantmanger.phonehint,

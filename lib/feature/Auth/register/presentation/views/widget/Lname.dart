@@ -1,3 +1,4 @@
+import 'package:civixapp/core/resource/assetvaluemanger.dart';
 import 'package:civixapp/core/resource/constantmanger.dart';
 import 'package:civixapp/core/resource/screenutilsmaanger.dart';
 import 'package:civixapp/core/widget/customtextfromfield.dart';
@@ -23,7 +24,10 @@ class Lname extends StatelessWidget {
         SizedBox(height: screeutilsManager.h6),
         CustomTextfromfield(
           controller: controller,
-
+          prefix: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Image.asset(AssetValueManager.name, height: 2, width: 2),
+          ),
           hinttext: Constantmanger.flnamehint,
           validator: validator,
           lable: Constantmanger.lname,
