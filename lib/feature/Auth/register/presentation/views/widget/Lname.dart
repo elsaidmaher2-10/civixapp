@@ -5,9 +5,9 @@ import 'package:civixapp/core/widget/customtextfromfield.dart';
 import 'package:flutter/material.dart';
 
 class Lname extends StatelessWidget {
-  Lname({super.key, required this.controller, required this.validator});
-  TextEditingController controller;
-  String? Function(String?)? validator;
+  const Lname({super.key, required this.controller, required this.validator});
+  final TextEditingController controller;
+  final String? Function(String?)? validator;
   @override
   @override
   Widget build(BuildContext context) {

@@ -102,6 +102,7 @@ class _SingnupState extends State<Singnup> {
               if (state is Signupcontrollerfailure) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
+                    padding: EdgeInsets.only(top: 8, left: 8),
                     duration: Duration(seconds: 5),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadiusGeometry.only(
@@ -109,11 +110,13 @@ class _SingnupState extends State<Singnup> {
                         topRight: Radius.circular(8),
                       ),
                     ),
-                    backgroundColor: ColorManger.kprimary,
+                    behavior: SnackBarBehavior.fixed,
+                    backgroundColor: ColorManger.red,
                     dismissDirection: DismissDirection.endToStart,
                     content: Text(
                       state.message,
                       style: TextStyle(
+                        fontWeight: FontWeight.w700,
                         color: ColorManger.white,
                         fontSize: screeutilsManager.h16,
                       ),
@@ -123,6 +126,8 @@ class _SingnupState extends State<Singnup> {
               } else if (state is Signupcontrollersucess) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
+                    padding: EdgeInsets.only(top: 8, left: 8),
+
                     duration: Duration(seconds: 2),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadiusGeometry.only(
@@ -135,6 +140,7 @@ class _SingnupState extends State<Singnup> {
                     content: Text(
                       state.message,
                       style: TextStyle(
+                        fontWeight: FontWeight.w700,
                         color: ColorManger.white,
                         fontSize: screeutilsManager.h16,
                       ),

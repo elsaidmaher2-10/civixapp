@@ -1,14 +1,13 @@
 import 'package:civixapp/core/resource/assetvaluemanger.dart';
-import 'package:civixapp/core/resource/colormanager.dart';
 import 'package:civixapp/core/resource/constantmanger.dart';
 import 'package:civixapp/core/resource/screenutilsmaanger.dart';
 import 'package:civixapp/core/widget/customtextfromfield.dart';
 import 'package:flutter/material.dart';
 
 class Fname extends StatelessWidget {
-  Fname({super.key, required this.controller, required this.validator});
-  TextEditingController controller;
-  String? Function(String?)? validator;
+  const Fname({super.key, required this.controller, required this.validator});
+  final TextEditingController controller;
+  final String? Function(String?)? validator;
   @override
   Widget build(BuildContext context) {
     return Column(
