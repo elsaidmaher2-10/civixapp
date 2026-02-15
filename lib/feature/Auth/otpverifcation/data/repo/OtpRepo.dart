@@ -15,7 +15,7 @@ class OtpRepo {
   ) async {
     try {
       final response = await service.post(
-        path: Apiconstant.confirmemaillogin,
+        path: Apiconstant.loginendpoint,
         body: {"email": otp.Email, "code": otp.code},
       );
 

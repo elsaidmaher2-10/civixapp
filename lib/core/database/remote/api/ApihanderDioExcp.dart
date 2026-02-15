@@ -1,4 +1,3 @@
-
 import 'package:civixapp/core/database/remote/error/ServerExciptionmodel.dart';
 import 'package:dio/dio.dart';
 

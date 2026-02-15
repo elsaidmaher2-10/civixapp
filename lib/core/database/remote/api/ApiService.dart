@@ -4,8 +4,7 @@ import 'package:civixapp/core/database/remote/api/ApihanderDioExcp.dart';
 import 'package:dio/dio.dart';
 
 class Apiservice extends Apiconsumer {
-   Dio dio;
-
+  Dio dio;
   Apiservice(this.dio) {
     dio = Dio(
       BaseOptions(
@@ -13,10 +12,20 @@ class Apiservice extends Apiconsumer {
         connectTimeout: const Duration(seconds: 15),
         receiveTimeout: const Duration(seconds: 15),
         sendTimeout: const Duration(seconds: 15),
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
+
+        // headers: {
+        //   'Content-Type': 'application/json',
+        //   'Accept': 'application/json',
+        // },
+      ),
+    );
+    dio.interceptors.add(
+      LogInterceptor(
+        request: true,
+        requestBody: true,
+        responseBody: true,
+        responseHeader: false,
+        error: true,
       ),
     );
   }
@@ -40,6 +49,8 @@ class Apiservice extends Apiconsumer {
       );
       return response.data;
     } on DioException catch (e) {
+      print(e.response);
+      print(e.message);
       throw handleDioException(e);
     }
   }

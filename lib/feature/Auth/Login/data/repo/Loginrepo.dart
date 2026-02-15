@@ -1,37 +1,48 @@
+import 'package:civixapp/core/database/remote/api/ApiConstant.dart';
+import 'package:civixapp/core/database/remote/api/ApiService.dart';
+import 'package:civixapp/core/database/remote/error/ServerExciptionmodel.dart';
+import 'package:civixapp/core/database/remote/error/failureResponse.dart';
+import 'package:civixapp/feature/Auth/Login/data/models/loginsuccesresponse.dart';
+import 'package:dartz/dartz.dart';
 
-// import 'package:civixapp/core/service/networkchecker.dart';
-// import 'package:civixapp/feature/Auth/Login/data/models/loginsuccesresponse.dart';
-// import 'package:dartz/dartz.dart';
+class Loginrepo {
+  Apiservice apiservice;
 
-// class Loginrepo {
-//   // Apiservice apiservice;
+  Loginrepo(this.apiservice);
 
-//   Loginrepo(this.apiservice);
+  Future<Either<FailureResponse, Loginsuccesresponse>> login({
+    required email,
+    required password,
+  }) async {
+    // if (!await Networkchecker.c()) {
+    //   return left(
+    //     Failuerresponse(error: ["No internet connection"], statusCode: 1),
+    //   );
+    // }
+    try {
+      final response = await apiservice.post(
+        path: Apiconstant.loginendpoint,
+        body: {"email": email, "password": password},
+      );
 
-//   Future<Either<Failuerresponse, Loginsuccesresponse>> login({
-//     required email,
-//     required password,
-//   }) async {
-//     if (!await Networkchecker.checkinternet()) {
-//       return left(
-//         Failuerresponse(error: ["No internet connection"], statusCode: 1),
-//       );
-//     }
-//     try {
-//       final response = await apiservice.get(
-//         path: Apiconstant.loginendpoint,
-//         queryparam: {"email": email, "password": password},
-//       );
+      print(response);
+      return right(Loginsuccesresponse.fromjosn(response));
+    } on Serverexciptionmodel catch (e) {
+      print(e.errors);
 
-//       return right(Loginsuccesresponse.fromjosn(response));
-//     } on Serverexpctionmodel catch (e) {
-//       final d = Failuerresponse.fromjson(e.message as Map);
-//       return left(Failuerresponse(error: d.error, statusCode: e.statuscode));
-//     } catch (e) {
-//       return left(Failuerresponse(error: [e.toString()], statusCode: 500));
-//     }
-//   }
-// }
-
-// class Failuerresponse {
-// }
+      if (e.errors is Map?) {
+        final d = FailureResponse.fromJson(e.errors);
+        return left(d);
+      } else {
+        return left(
+          FailureResponse(
+            errors: [e.errors.toString()],
+            statusCode: e.statuscode,
+          ),
+        );
+      }
+    } catch (e) {
+      return left(FailureResponse(errors: [e.toString()], statusCode: 500));
+    }
+  }
+}

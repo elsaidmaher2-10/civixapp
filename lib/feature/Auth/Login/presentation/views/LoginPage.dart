@@ -1,8 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:async';
 
+import 'package:civixapp/feature/Auth/Login/presentation/manager/cubit/loginmanger_cubit.dart';
+import 'package:civixapp/feature/Auth/Login/presentation/manager/cubit/loginmanger_state.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -41,225 +44,319 @@ class _LoginpageState extends State<Loginpage> {
   StreamController<bool> btnController = StreamController();
   @override
   Widget build(BuildContext context) {
-    return Builder(
-      builder: (context) {
-        return ModalProgressHUD(
-          inAsyncCall: false,
-          blur: 15,
-          progressIndicator: CupertinoActivityIndicator(
-            radius: 15,
-            color: ColorManger.kprimary,
-          ),
-          child: Scaffold(
-            backgroundColor: Colors.white,
-            body: SafeArea(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 18.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      width: double.infinity,
-                      child: Form(
-                        key: key,
-                        child: Column(
-                          children: [
-                            Image.asset(
-                              AssetValueManager.Klog,
-                              width: screeutilsManager.w100,
-                            ),
-
-                            SizedBox(height: screeutilsManager.h9),
-
-                            Text(
-                              Constantmanger.logIn,
-                              style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                // fontFamily: FontFamily.Otama_ep,
-                                fontSize: screeutilsManager.s34,
-                                color: ColorManger.kprimary,
-                              ),
-                            ),
-                          ],
-                        ),
+    return BlocProvider(
+      create: (context) => LoginmangerCubit(),
+      child: Builder(
+        builder: (context) {
+          return BlocConsumer<LoginmangerCubit, LogincontrollerState>(
+            listener: (context, state) {
+              if (state is LogincontrollerFailure) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    padding: EdgeInsets.only(top: 8, left: 8, bottom: 20),
+                    duration: Duration(seconds: 5),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadiusGeometry.only(
+                        topLeft: Radius.circular(8),
+                        topRight: Radius.circular(8),
                       ),
                     ),
-                    // Text(
-                    //   Constantmanger.email,
-                    //   style: TextStyle(
-                    //     color: ColorManger.Lightgrey,
-                    //     fontSize: screeutilsManager.s16,
-                    //   ),
-                    // ),
-                    SizedBox(height: screeutilsManager.h6),
-                    CustomTextfromfield(
-                      controller: email,
-                      prefix: Icon(Icons.email, color: ColorManger.Lightgrey2),
-
-                      hinttext: Constantmanger.hinytextemail,
-                      validator: (value) {
-                        isvalidemail = emailvalidator(value) == null
-                            ? true
-                            : false;
-
-                        btnController.add(isvalidemail && isvalidpass);
-                      },
-                      lable: Constantmanger.email,
+                    behavior: SnackBarBehavior.fixed,
+                    backgroundColor: ColorManger.red,
+                    dismissDirection: DismissDirection.endToStart,
+                    content: Text(
+                      state.message,
+                      style: TextStyle(
+                        fontWeight: FontWeight.w700,
+                        color: ColorManger.white,
+                        fontSize: screeutilsManager.h16,
+                      ),
                     ),
-                    SizedBox(height: screeutilsManager.h16),
+                  ),
+                );
+              } else if (state is LogincontrollerSuccess) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    padding: EdgeInsets.only(top: 8, left: 8, bottom: 20),
 
-                    // Text(
-                    //   Constantmanger.pass,
-                    //   style: TextStyle(
-                    //     color: ColorManger.Lightgrey,
-                    //     fontSize: screeutilsManager.s16,
-                    //   ),
-                    // ),
-                    SizedBox(height: screeutilsManager.h6),
-                    StreamBuilder<bool>(
-                      stream: streamController.stream,
-                      builder:
-                          (BuildContext context, AsyncSnapshot<bool> snapshot) {
-                            return CustomTextfromfield(
-                              prefix: Icon(
-                                Icons.password_outlined,
-                                color: ColorManger.Lightgrey2,
-                              ),
-
-                              controller: password,
-                              validator: (value) {
-                                if (value == null || value.trim().isEmpty) {
-                                  isvalidpass = false;
-
-                                  btnController.add(
-                                    isvalidemail && isvalidpass,
-                                  );
-                                  return "Please Enter password";
-                                } else {
-                                  isvalidpass = true;
-                                  btnController.add(
-                                    isvalidemail && isvalidpass,
-                                  );
-                                  return null;
-                                }
-                              },
-                              obstext: snapshot.data ?? false,
-                              hinttext: Constantmanger.hinytextpass,
-                              suffix: IconButton(
-                                onPressed: () {
-                                  isvisible();
-                                },
-                                icon: Icon(
-                                  snapshot.data == true
-                                      ? Icons.remove_red_eye
-                                      : Icons.visibility_off,
-                                  color: ColorManger.Lightgrey3,
-                                ),
-                              ),
-                              lable: Constantmanger.pass,
-                            );
-                          },
+                    duration: Duration(seconds: 2),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadiusGeometry.only(
+                        topLeft: Radius.circular(8),
+                        topRight: Radius.circular(8),
+                      ),
                     ),
+                    backgroundColor: ColorManger.green,
+                    dismissDirection: DismissDirection.endToStart,
+                    content: Text(
+                      state.response.message,
+                      style: TextStyle(
+                        fontWeight: FontWeight.w700,
+                        color: ColorManger.white,
+                        fontSize: screeutilsManager.h16,
+                      ),
+                    ),
+                  ),
+                );
 
-                    Padding(padding: EdgeInsets.all(6.h)),
-                    Row(
-                      children: [
-                        Row(
-                          children: [
-                            ConstrainedBox(
-                              constraints: BoxConstraints.tight(Size(30, 30)),
-                              child: Checkbox(
-                                activeColor: ColorManger.kprimary,
-                                value: ischeck,
-                                onChanged: (onChanged) async {
-                                  setState(() {});
-                                  ischeck = onChanged ?? false;
-                                  // setState(() {});
-                                  // await SharedPrefManager().setBool(
-                                  //   "ischeck",
-                                  //   ischeck,
-                                  // );
-                                },
+                Navigator.pushNamed(
+                  context,
+                  Routes.otpverficationc,
+                  arguments: {
+                    Constantmanger.email: email.text,
+                    "screen": Constantmanger.Signup,
+                  },
+                );
+              }
+            },
+
+            builder: (context, state) {
+              bool inAsyncCall = false;
+              if (state is LogincontrollerLoading) {
+                inAsyncCall = true;
+              } else {
+                inAsyncCall = false;
+              }
+
+              return ModalProgressHUD(
+                inAsyncCall: inAsyncCall,
+                blur: 7,
+                progressIndicator: CupertinoActivityIndicator(
+                  radius: 15,
+                  color: ColorManger.kprimary,
+                ),
+                child: Scaffold(
+                  extendBody: true,
+                  backgroundColor: Colors.white,
+                  body: SafeArea(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 18.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            width: double.infinity,
+                            child: Form(
+                              key: key,
+                              child: Column(
+                                children: [
+                                  Image.asset(
+                                    AssetValueManager.Klog,
+                                    width: screeutilsManager.w100,
+                                  ),
+
+                                  SizedBox(height: screeutilsManager.h9),
+
+                                  Text(
+                                    Constantmanger.logIn,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w500,
+                                      // fontFamily: FontFamily.Otama_ep,
+                                      fontSize: screeutilsManager.s34,
+                                      color: ColorManger.kprimary,
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ),
-                            Text("remember me view"),
-                          ],
-                        ),
-                        Spacer(),
-                        InkWell(
-                          onTap: () {
-                            Navigator.pushNamed(
-                              context,
-                              Routes.foregetpassword,
-                            );
-                          },
-                          child: Text(
-                            Constantmanger.forgetPassword,
-                            style: TextStyle(
-                              color: ColorManger.kprimary,
-                              fontSize: screeutilsManager.s10,
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: screeutilsManager.h30),
-                    SizedBox(
-                      width: double.infinity,
-                      child: StreamBuilder<bool>(
-                        initialData: false,
-                        stream: btnController.stream,
-                        builder:
-                            (
-                              BuildContext context,
-                              AsyncSnapshot<bool> snapshot,
-                            ) => ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: ColorManger.kprimary,
-                                foregroundColor: ColorManger.white,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(
-                                    screeutilsManager.r10,
+                          // Text(
+                          //   Constantmanger.email,
+                          //   style: TextStyle(
+                          //     color: ColorManger.Lightgrey,
+                          //     fontSize: screeutilsManager.s16,
+                          //   ),
+                          // ),
+                          SizedBox(height: screeutilsManager.h6),
+                          CustomTextfromfield(
+                            controller: email,
+                            prefix: Icon(
+                              Icons.email,
+                              color: ColorManger.Lightgrey2,
+                            ),
+
+                            hinttext: Constantmanger.hinytextemail,
+                            validator: (value) {
+                              isvalidemail = emailvalidator(value) == null
+                                  ? true
+                                  : false;
+
+                              btnController.add(isvalidemail && isvalidpass);
+                            },
+                            lable: Constantmanger.email,
+                          ),
+                          SizedBox(height: screeutilsManager.h16),
+
+                          // Text(
+                          //   Constantmanger.pass,
+                          //   style: TextStyle(
+                          //     color: ColorManger.Lightgrey,
+                          //     fontSize: screeutilsManager.s16,
+                          //   ),
+                          // ),
+                          SizedBox(height: screeutilsManager.h6),
+                          StreamBuilder<bool>(
+                            stream: streamController.stream,
+                            builder:
+                                (
+                                  BuildContext context,
+                                  AsyncSnapshot<bool> snapshot,
+                                ) {
+                                  return CustomTextfromfield(
+                                    prefix: Icon(
+                                      Icons.password_outlined,
+                                      color: ColorManger.Lightgrey2,
+                                    ),
+
+                                    controller: password,
+                                    validator: (value) {
+                                      if (value == null ||
+                                          value.trim().isEmpty) {
+                                        isvalidpass = false;
+
+                                        btnController.add(
+                                          isvalidemail && isvalidpass,
+                                        );
+                                        return "Please Enter password";
+                                      } else {
+                                        isvalidpass = true;
+                                        btnController.add(
+                                          isvalidemail && isvalidpass,
+                                        );
+                                        return null;
+                                      }
+                                    },
+                                    obstext: snapshot.data ?? false,
+                                    hinttext: Constantmanger.hinytextpass,
+                                    suffix: IconButton(
+                                      onPressed: () {
+                                        isvisible();
+                                      },
+                                      icon: Icon(
+                                        snapshot.data == true
+                                            ? Icons.remove_red_eye
+                                            : Icons.visibility_off,
+                                        color: ColorManger.Lightgrey3,
+                                      ),
+                                    ),
+                                    lable: Constantmanger.pass,
+                                  );
+                                },
+                          ),
+
+                          Padding(padding: EdgeInsets.all(6.h)),
+                          Row(
+                            children: [
+                              Row(
+                                children: [
+                                  ConstrainedBox(
+                                    constraints: BoxConstraints.tight(
+                                      Size(30, 30),
+                                    ),
+                                    child: Checkbox(
+                                      activeColor: ColorManger.kprimary,
+                                      value: ischeck,
+                                      onChanged: (onChanged) async {
+                                        setState(() {});
+                                        ischeck = onChanged ?? false;
+                                        // setState(() {});
+                                        // await SharedPrefManager().setBool(
+                                        //   "ischeck",
+                                        //   ischeck,
+                                        // );
+                                      },
+                                    ),
+                                  ),
+                                  Text("remember me view"),
+                                ],
+                              ),
+                              Spacer(),
+                              InkWell(
+                                onTap: () {
+                                  Navigator.pushNamed(
+                                    context,
+                                    Routes.foregetpassword,
+                                  );
+                                },
+                                child: Text(
+                                  Constantmanger.forgetPassword,
+                                  style: TextStyle(
+                                    color: ColorManger.kprimary,
+                                    fontSize: screeutilsManager.s10,
                                   ),
                                 ),
                               ),
-                              onPressed: snapshot.data == true ? () {} : null,
-                              child: Text(Constantmanger.logIn),
+                            ],
+                          ),
+                          SizedBox(height: screeutilsManager.h30),
+                          SizedBox(
+                            width: double.infinity,
+                            child: StreamBuilder<bool>(
+                              initialData: false,
+                              stream: btnController.stream,
+                              builder:
+                                  (
+                                    BuildContext context,
+                                    AsyncSnapshot<bool> snapshot,
+                                  ) => ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: ColorManger.kprimary,
+                                      foregroundColor: ColorManger.white,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                          screeutilsManager.r10,
+                                        ),
+                                      ),
+                                    ),
+                                    onPressed: snapshot.data == true
+                                        ? () {
+                                            context
+                                                .read<LoginmangerCubit>()
+                                                .login(
+                                                  email: email.text,
+                                                  password: password.text,
+                                                );
+                                          }
+                                        : null,
+                                    child: Text(Constantmanger.logIn),
+                                  ),
                             ),
+                          ),
+                        ],
                       ),
                     ),
-                  ],
-                ),
-              ),
-            ),
-            bottomNavigationBar: Padding(
-              padding: EdgeInsets.symmetric(vertical: 20.h),
-              child: RichText(
-                textAlign: TextAlign.center,
-                text: TextSpan(
-                  children: [
-                    TextSpan(
-                      text: "${Constantmanger.donthaveaccount} ",
-                      style: TextStyle(color: ColorManger.Lightgrey2),
-                    ),
-                    WidgetSpan(
-                      child: InkWell(
-                        onTap: () {
-                          Navigator.of(context).pushNamed(Routes.signup);
-                        },
-                        child: Text(
-                          Constantmanger.Signup,
-                          style: TextStyle(color: ColorManger.kprimary),
-                        ),
+                  ),
+                  bottomNavigationBar: Padding(
+                    padding: EdgeInsets.symmetric(vertical: 20.h),
+                    child: RichText(
+                      textAlign: TextAlign.center,
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: "${Constantmanger.donthaveaccount} ",
+                            style: TextStyle(color: ColorManger.Lightgrey2),
+                          ),
+                          WidgetSpan(
+                            child: InkWell(
+                              onTap: () {
+                                Navigator.of(context).pushNamed(Routes.signup);
+                              },
+                              child: Text(
+                                Constantmanger.Signup,
+                                style: TextStyle(color: ColorManger.kprimary),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  ],
+                  ),
                 ),
-              ),
-            ),
-          ),
-        );
-      },
+              );
+            },
+          );
+        },
+      ),
     );
   }
 }
