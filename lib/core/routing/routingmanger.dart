@@ -35,7 +35,10 @@ class Routingmanger {
         return MaterialPageRoute(builder: (_) => Foregetpassword());
 
       case Routes.otpverficationc:
-        return MaterialPageRoute(builder: (_) => const Otpvrificationcode());
+        return MaterialPageRoute(
+          settings: route,
+          builder: (_) => const Otpvrificationcode(),
+        );
 
       case Routes.confirmPassword:
         return MaterialPageRoute(builder: (_) => CreatePasswordScreen());

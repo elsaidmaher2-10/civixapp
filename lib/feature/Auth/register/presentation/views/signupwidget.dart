@@ -151,7 +151,10 @@ class _SingnupState extends State<Singnup> {
                 Navigator.pushNamed(
                   context,
                   Routes.otpverficationc,
-                  arguments: {Constantmanger.email: emailController.text},
+                  arguments: {
+                    Constantmanger.email: emailController.text,
+                    "screen": Constantmanger.Signup,
+                  },
                 );
               }
             },

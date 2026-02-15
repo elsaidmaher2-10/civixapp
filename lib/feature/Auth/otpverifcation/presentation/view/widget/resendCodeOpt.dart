@@ -3,8 +3,8 @@ import 'package:civixapp/core/resource/colormanager.dart';
 import 'package:flutter/material.dart';
 
 class ResendCodeOpt extends StatefulWidget {
-  const ResendCodeOpt({super.key});
-
+  ResendCodeOpt({super.key, required this.resend});
+  Function() resend;
   @override
   State<ResendCodeOpt> createState() => _ResendCodeOptState();
 }
@@ -24,7 +24,7 @@ class _ResendCodeOptState extends State<ResendCodeOpt> {
   void startTimer() {
     counter = 60;
     streamController.add(counter);
-    timer = Timer.periodic(Duration(seconds: 1), (timer) {
+    timer = Timer.periodic(Duration(milliseconds: 800), (timer) {
       if (counter > 0) {
         counter--;
         streamController.add(counter);
@@ -57,6 +57,7 @@ class _ResendCodeOptState extends State<ResendCodeOpt> {
               onPressed: snapshot.data == 60 || snapshot.data == 0
                   ? () {
                       startTimer();
+                      widget.resend();
                     }
                   : null,
               child: Text(
