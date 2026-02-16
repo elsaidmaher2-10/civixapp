@@ -2,6 +2,7 @@ import 'package:civixapp/core/database/remote/api/ApiConstant.dart';
 import 'package:civixapp/core/database/remote/api/ApiService.dart';
 import 'package:civixapp/core/database/remote/error/ServerExciptionmodel.dart';
 import 'package:civixapp/core/database/remote/error/failureResponse.dart';
+import 'package:civixapp/core/resource/constantmanger.dart';
 import 'package:civixapp/core/service/networkchecker.dart';
 import 'package:civixapp/feature/Auth/Login/data/models/loginsuccesresponse.dart';
 import 'package:dartz/dartz.dart';
@@ -17,7 +18,7 @@ class Loginrepo {
   }) async {
     if (!await internetChecker.checkInternet()) {
       return left(
-        FailureResponse(errors: ["No internet connection"], statusCode: 1),
+        FailureResponse(errors: [Constantmanger.nointernet], statusCode: 1),
       );
     }
     try {

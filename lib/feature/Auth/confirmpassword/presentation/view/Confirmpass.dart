@@ -31,8 +31,8 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
   bool isvalid = false;
   @override
   void initState() {
+    streamController.add(Constantmanger.passwordRules);
     super.initState();
-
     _confirmPasswordController.addListener(matchpassword);
     _passwordController.addListener(matchpassword);
   }

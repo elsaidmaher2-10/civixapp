@@ -1,4 +1,3 @@
-
 import 'dart:async' show StreamController;
 
 import 'package:civixapp/core/resource/colormanager.dart';
@@ -10,12 +9,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class PasswordRules extends StatefulWidget {
   PasswordRules({super.key, required this.streamController});
   StreamController<List> streamController;
-  @override
   State<PasswordRules> createState() => _PasswordRulesState();
 }
 
 class _PasswordRulesState extends State<PasswordRules> {
-  @override
   Widget build(BuildContext context) {
     return StreamBuilder(
       initialData: Constantmanger.passwordRules,
@@ -24,7 +21,7 @@ class _PasswordRulesState extends State<PasswordRules> {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            snapshot.data.any((e) => e["status"] == false) == true
+            snapshot.data.any((e) => e["status"] == false)
                 ? Text(
                     Constantmanger.passwordRulestitle,
                     style: TextStyle(

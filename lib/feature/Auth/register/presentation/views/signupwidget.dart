@@ -153,7 +153,7 @@ class _SingnupState extends State<Singnup> {
                   Routes.otpverficationc,
                   arguments: {
                     Constantmanger.email: emailController.text,
-                    "screen": Constantmanger.Signup,
+                    Constantmanger.screen: Constantmanger.Signup,
                   },
                 );
               }

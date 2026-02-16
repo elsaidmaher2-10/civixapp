@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:developer';
 
 import 'package:civixapp/core/resource/colormanager.dart';
@@ -100,19 +102,19 @@ class _OtpvrificationcodeState extends State<Otpvrificationcode> {
               } else if (state is OtpVericationSucces) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
-                    padding: EdgeInsets.only(top: 8, left: 8),
-
+                    padding: EdgeInsets.all(16),
                     duration: Duration(seconds: 2),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadiusGeometry.only(
-                        topLeft: Radius.circular(8),
-                        topRight: Radius.circular(8),
-                      ),
+                      borderRadius: BorderRadiusGeometry.circular(16.w),
                     ),
                     backgroundColor: ColorManger.green,
+                    behavior: SnackBarBehavior.floating,
                     dismissDirection: DismissDirection.endToStart,
                     content: Text(
-                      state.otpsuccessmodel.message,
+                      args[Constantmanger.screen] ==
+                              Constantmanger.forgetPassword
+                          ? Constantmanger.msgresetingpass
+                          : state.otpsuccessmodel.message,
                       style: TextStyle(
                         fontWeight: FontWeight.w700,
                         color: ColorManger.white,
@@ -121,10 +123,16 @@ class _OtpvrificationcodeState extends State<Otpvrificationcode> {
                     ),
                   ),
                 );
-                await Future.delayed(
-                  Duration(seconds: 2),
-                  () => Navigator.pushNamed(context, Routes.login),
-                );
+
+                if (Constantmanger.forgetPassword ==
+                    args[Constantmanger.screen]) {
+                  Navigator.pushNamed(context, Routes.confirmPassword);
+                } else {
+                  await Future.delayed(
+                    Duration(seconds: 2),
+                    () async => Navigator.pushNamed(context, Routes.login),
+                  );
+                }
               }
             },
 
@@ -156,7 +164,10 @@ class _OtpvrificationcodeState extends State<Otpvrificationcode> {
                       children: [
                         SizedBox(height: 6.h),
                         Text(
-                          "we have sent a 6-digit code to your registered  email address/phone number  ",
+                          args[Constantmanger.screen] ==
+                                  Constantmanger.forgetPassword
+                              ? Constantmanger.msgforResetpassword
+                              : Constantmanger.msgforregister,
                           style: TextStyle(
                             color: ColorManger.Lightgrey2,
                             fontSize: 14.sp,
@@ -220,10 +231,8 @@ class _OtpvrificationcodeState extends State<Otpvrificationcode> {
 
                         ResendCodeOpt(
                           resend: () {
-                            print("object");
                             context.read<OtpVericationCubit>().SendOtP(
-                              args[Constantmanger.email] ??
-                                  "elsaidmaher@students.du.edu.eg",
+                              args[Constantmanger.email],
                             );
                           },
                         ),

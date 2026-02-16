@@ -22,6 +22,7 @@ class Constantmanger {
     ),
   ];
   static const String civix = "Civix";
+  static String nointernet = "No internet connection";
 
   // ================== Auth ==================
   static const String logIn = "Log In";
@@ -81,6 +82,16 @@ class Constantmanger {
 
   static String nationalnumber = "National number";
   static String hintnationalnumber = "Enter National number";
-
   static String Address = "address";
+
+  static String msgforResetpassword =
+      "We’ve sent you a code to reset your password. Please check your email.";
+
+  static String msgforregister =
+      "we have sent a 6-digit code to your registered  email address/phone number";
+
+  static String screen = "screen";
+
+  static String msgresetingpass =
+      "Code verified successfully. Please set your new password.";
 }
