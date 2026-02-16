@@ -21,6 +21,7 @@ class Apiservice extends Apiconsumer {
     );
     dio.interceptors.add(
       LogInterceptor(
+        requestUrl: true,
         request: true,
         requestBody: true,
         responseBody: true,
