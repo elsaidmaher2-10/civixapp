@@ -75,13 +75,11 @@ class Customonbroadingitem extends StatelessWidget {
           Text(
             pages[x].title,
             style: TextStyle(
-              // fontFamily: FontFamily.Otama_ep,
               fontSize: 32,
               color: Color(0xff003366),
               fontWeight: FontWeight.w700,
             ),
           ),
-
           const SizedBox(height: 9),
           Text(
             pages[x].subtitle,
@@ -122,7 +120,10 @@ class Customonbroadingitem extends StatelessWidget {
                     Constantmanger.isOnboardingViewed,
                     true,
                   );
-                  Navigator.pushNamed(context, Routes.login);
+                  Navigator.pushReplacementNamed(
+                    context,
+                    Routes.login,
+                  );
                 }
               },
               child: Text(

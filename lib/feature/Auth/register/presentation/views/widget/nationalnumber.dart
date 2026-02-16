@@ -7,16 +7,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-// ignore: must_be_immutable
 class Nationalnumber extends StatelessWidget {
-  Nationalnumber({
-    super.key,
-    required this.controller,
-    required this.onChanged,
-  });
+  Nationalnumber({super.key, required this.controller});
 
   TextEditingController controller;
-  Function(String)? onChanged;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -59,7 +53,7 @@ class Nationalnumber extends StatelessWidget {
             return null; // تمام
           },
 
-          onChanged: onChanged,
+          // onChanged: onChanged,
           controller: controller,
           obstext: false,
           ktype: TextInputType.number,

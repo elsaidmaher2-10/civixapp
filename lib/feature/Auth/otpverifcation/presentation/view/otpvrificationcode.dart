@@ -6,8 +6,10 @@ import 'package:civixapp/core/resource/colormanager.dart';
 import 'package:civixapp/core/resource/constantmanger.dart';
 import 'package:civixapp/core/resource/screenutilsmaanger.dart';
 import 'package:civixapp/core/routing/routes.dart';
+import 'package:civixapp/core/widget/CustomSnackBar.dart';
 import 'package:civixapp/feature/Auth/otpverifcation/data/models/otpmodel.dart';
 import 'package:civixapp/feature/Auth/otpverifcation/presentation/manager/cubit/otp_verication_cubit.dart';
+import 'package:civixapp/feature/Auth/otpverifcation/presentation/manager/cubit/otp_verication_state.dart';
 import 'package:civixapp/feature/Auth/otpverifcation/presentation/view/widget/otpappbar.dart';
 import 'package:civixapp/feature/Auth/otpverifcation/presentation/view/widget/resendCodeOpt.dart';
 import 'package:civixapp/feature/Auth/register/presentation/views/widget/Email.dart';
@@ -76,65 +78,34 @@ class _OtpvrificationcodeState extends State<Otpvrificationcode> {
           return BlocConsumer<OtpVericationCubit, OtpVericationState>(
             listener: (context, state) async {
               if (state is OtpVericationFailure) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    padding: EdgeInsets.only(top: 8, left: 8),
-                    duration: Duration(seconds: 5),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadiusGeometry.only(
-                        topLeft: Radius.circular(8),
-                        topRight: Radius.circular(8),
-                      ),
-                    ),
-                    behavior: SnackBarBehavior.fixed,
-                    backgroundColor: ColorManger.red,
-                    dismissDirection: DismissDirection.endToStart,
-                    content: Text(
-                      state.failureResponse.errors.join("-"),
-                      style: TextStyle(
-                        fontWeight: FontWeight.w700,
-                        color: ColorManger.white,
-                        fontSize: screeutilsManager.h16,
-                      ),
-                    ),
-                  ),
+                Customsnackbar.show(
+                  context: context,
+                  backgroundColor: ColorManger.red,
+                  message: state.failureResponse.errors.join("-"),
                 );
               } else if (state is OtpVericationSucces) {
-                log(state.otpsuccessmodel.accessToken);
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    padding: EdgeInsets.all(16),
-                    duration: Duration(seconds: 2),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadiusGeometry.circular(16.w),
-                    ),
-                    backgroundColor: ColorManger.green,
-                    behavior: SnackBarBehavior.floating,
-                    dismissDirection: DismissDirection.endToStart,
-                    content: Text(
+                Customsnackbar.show(
+                  context: context,
+                  backgroundColor: ColorManger.green,
+                  message:
                       args[Constantmanger.screen] ==
-                              Constantmanger.forgetPassword
-                          ? Constantmanger.msgresetingpass
-                          : state.otpsuccessmodel.message,
-                      style: TextStyle(
-                        fontWeight: FontWeight.w700,
-                        color: ColorManger.white,
-                        fontSize: screeutilsManager.h16,
-                      ),
-                    ),
-                  ),
+                          Constantmanger.forgetPassword
+                      ? Constantmanger.msgresetingpass
+                      : state.otpsuccessmodel.message,
                 );
 
                 if (Constantmanger.forgetPassword ==
                     args[Constantmanger.screen]) {
-                  Navigator.pushNamed(
-                    context,
-                    Routes.confirmPassword,
-                    arguments: {
-                      Constantmanger.email: args[Constantmanger.email],
-                      Constantmanger.token: state.otpsuccessmodel.accessToken,
-                      Constantmanger.otp: getOtpCode(),
-                    },
+                  await Future.delayed(
+                    Duration(seconds: 2),
+                    () async => Navigator.pushNamed(
+                      context,
+                      Routes.confirmPassword,
+                      arguments: {
+                        Constantmanger.email: args[Constantmanger.email],
+                        Constantmanger.otp: getOtpCode(),
+                      },
+                    ),
                   );
                 } else {
                   await Future.delayed(
@@ -225,16 +196,16 @@ class _OtpvrificationcodeState extends State<Otpvrificationcode> {
                             onPressed: () {
                               final otp = getOtpCode();
                               print(args[Constantmanger.email]);
-                              context.read<OtpVericationCubit>().OtpVerication(
-                                isreset:
-                                    args[Constantmanger.screen] ==
-                                        Constantmanger.forgetPassword
-                                    ? true
-                                    : false,
+                              context.read<OtpVericationCubit>().verifyOtp(
                                 OtpModel(
                                   Email: args[Constantmanger.email],
                                   code: otp,
                                 ),
+                                isReset:
+                                    args[Constantmanger.screen] ==
+                                        Constantmanger.forgetPassword
+                                    ? true
+                                    : false,
                               );
                             },
                             child: const Text("Confirm"),
@@ -243,7 +214,7 @@ class _OtpvrificationcodeState extends State<Otpvrificationcode> {
 
                         ResendCodeOpt(
                           resend: () {
-                            context.read<OtpVericationCubit>().SendOtP(
+                            context.read<OtpVericationCubit>().sendOtp(
                               args[Constantmanger.email],
                             );
                           },

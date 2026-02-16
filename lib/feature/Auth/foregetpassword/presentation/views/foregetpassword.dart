@@ -5,6 +5,7 @@ import 'package:civixapp/core/resource/colormanager.dart' show ColorManger;
 import 'package:civixapp/core/resource/constantmanger.dart';
 import 'package:civixapp/core/resource/screenutilsmaanger.dart';
 import 'package:civixapp/core/routing/routes.dart';
+import 'package:civixapp/core/widget/CustomSnackBar.dart';
 import 'package:civixapp/feature/Auth/foregetpassword/presentation/manager/ForgetpasswordState.dart';
 import 'package:civixapp/feature/Auth/foregetpassword/presentation/manager/forgetpasswordcubit.dart';
 import 'package:civixapp/feature/Auth/register/presentation/views/widget/Email.dart';
@@ -37,60 +38,29 @@ class _ForegetpasswordState extends State<Foregetpassword> {
       child: Builder(
         builder: (context) {
           return BlocConsumer<Forgetpasswordcubit, Forgetpasswordstate>(
-            listener: (context, state) {
+            listener: (context, state) async {
               if (state is ForgetpasswordstatecontrollerFailure) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    padding: EdgeInsets.all(16.w),
-                    duration: Duration(seconds: 5),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadiusGeometry.circular(8),
-                    ),
-                    behavior: SnackBarBehavior.floating,
-                    backgroundColor: ColorManger.red,
-                    dismissDirection: DismissDirection.down,
-                    content: Text(
-                      state.message,
-                      style: TextStyle(
-                        fontWeight: FontWeight.w700,
-                        color: ColorManger.white,
-                        fontSize: screeutilsManager.h16,
-                      ),
-                    ),
-                  ),
+                Customsnackbar.show(
+                  context: context,
+                  backgroundColor: ColorManger.red,
+                  message: state.message,
                 );
               } else if (state is ForgetpasswordstatecontrollerSuccess) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    padding: EdgeInsets.all(16.w),
-                    duration: Duration(seconds: 4),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadiusGeometry.only(
-                        topLeft: Radius.circular(8),
-                        topRight: Radius.circular(8),
-                      ),
-                    ),
-                    behavior: SnackBarBehavior.floating,
-                    backgroundColor: ColorManger.green,
-                    dismissDirection: DismissDirection.endToStart,
-                    content: Text(
-                      state.response,
-                      style: TextStyle(
-                        fontWeight: FontWeight.w700,
-                        color: ColorManger.white,
-                        fontSize: screeutilsManager.h16,
-                      ),
-                    ),
-                  ),
+                Customsnackbar.show(
+                  context: context,
+                  backgroundColor: ColorManger.green,
+                  message: state.response,
                 );
-
-                Navigator.pushNamed(
-                  context,
-                  Routes.otpverficationc,
-                  arguments: {
-                    Constantmanger.email: emailController.text,
-                    Constantmanger.screen: Constantmanger.forgetPassword,
-                  },
+                Future.delayed(
+                  Duration(seconds: 3),
+                  () => Navigator.pushNamed(
+                    context,
+                    Routes.otpverficationc,
+                    arguments: {
+                      Constantmanger.email: emailController.text,
+                      Constantmanger.screen: Constantmanger.forgetPassword,
+                    },
+                  ),
                 );
               }
             },

@@ -7,6 +7,8 @@ import 'package:civixapp/core/resource/colormanager.dart';
 import 'package:civixapp/core/resource/constantmanger.dart';
 import 'package:civixapp/core/resource/screenutilsmaanger.dart';
 import 'package:civixapp/core/routing/routes.dart';
+import 'package:civixapp/core/widget/CustomSnackBar.dart';
+import 'package:civixapp/core/widget/customtextfromfield.dart';
 import 'package:civixapp/feature/Auth/register/data/models/usermodel.dart';
 import 'package:civixapp/feature/Auth/register/data/repo/SignupRepo.dart';
 import 'package:civixapp/feature/Auth/register/presentation/manager/ValidatebuttonCubit/validatebutton_cubit.dart';
@@ -25,7 +27,6 @@ import 'package:civixapp/feature/Auth/register/presentation/views/widget/passwor
 import 'package:civixapp/feature/Auth/register/presentation/views/widget/password_rules.dart';
 import 'package:civixapp/feature/Auth/register/presentation/views/widget/signupbutton.dart';
 import 'package:civixapp/feature/Auth/register/presentation/views/widget/signuplogo.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -46,6 +47,7 @@ class _SingnupState extends State<Singnup> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController addresscontroller = TextEditingController();
+  final TextEditingController datecontroller = TextEditingController();
   StreamController<String> selectole = StreamController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
@@ -98,60 +100,29 @@ class _SingnupState extends State<Singnup> {
       child: Builder(
         builder: (context) {
           return BlocConsumer<SignupcontrollerCubit, SignupcontrollerState>(
-            listener: (context, state) {
+            listener: (context, state) async {
               if (state is Signupcontrollerfailure) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    padding: EdgeInsets.all(16),
-                    duration: Duration(seconds: 5),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadiusGeometry.circular(16),
-                    ),
-                    behavior: SnackBarBehavior.floating,
-                    backgroundColor: ColorManger.red,
-                    dismissDirection: DismissDirection.endToStart,
-                    content: Text(
-                      state.message,
-                      style: TextStyle(
-                        fontWeight: FontWeight.w700,
-                        color: ColorManger.white,
-                        fontSize: screeutilsManager.h16,
-                      ),
-                    ),
-                  ),
+                Customsnackbar.show(
+                  context: context,
+                  backgroundColor: ColorManger.red,
+                  message: state.message,
                 );
               } else if (state is Signupcontrollersucess) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    padding: EdgeInsets.only(top: 8, left: 8),
-
-                    duration: Duration(seconds: 2),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadiusGeometry.only(
-                        topLeft: Radius.circular(8),
-                        topRight: Radius.circular(8),
-                      ),
-                    ),
-                    backgroundColor: ColorManger.green,
-                    dismissDirection: DismissDirection.endToStart,
-                    content: Text(
-                      state.message,
-                      style: TextStyle(
-                        fontWeight: FontWeight.w700,
-                        color: ColorManger.white,
-                        fontSize: screeutilsManager.h16,
-                      ),
-                    ),
-                  ),
+                Customsnackbar.show(
+                  context: context,
+                  backgroundColor: ColorManger.green,
+                  message: state.message,
                 );
-
-                Navigator.pushNamed(
-                  context,
-                  Routes.otpverficationc,
-                  arguments: {
-                    Constantmanger.email: emailController.text,
-                    Constantmanger.screen: Constantmanger.Signup,
-                  },
+                await Future.delayed(
+                  Duration(seconds: 2),
+                  () async => Navigator.pushNamed(
+                    context,
+                    Routes.otpverficationc,
+                    arguments: {
+                      Constantmanger.email: emailController.text,
+                      Constantmanger.screen: Constantmanger.Signup,
+                    },
+                  ),
                 );
               }
             },
@@ -205,8 +176,60 @@ class _SingnupState extends State<Singnup> {
                                   ),
                                   Nationalnumber(
                                     controller: nationalnumbercontroller,
-                                    onChanged: (value) {},
                                   ),
+
+                                  CustomTextfromfield(
+                                    onTap: () async {
+                                      DateTime?
+                                      pickedDate = await showDatePicker(
+                                        context: context,
+                                        initialDate: DateTime.now(),
+                                        firstDate: DateTime(1950),
+                                        lastDate: DateTime(
+                                          DateTime.now().year + 1,
+                                        ),
+                                        builder: (context, child) {
+                                          return Theme(
+                                            data: Theme.of(context).copyWith(
+                                              colorScheme: ColorScheme.light(
+                                                primary: ColorManger.kprimary,
+                                                onPrimary: Colors.white,
+                                                onSurface: Colors.black,
+                                              ),
+                                              textButtonTheme:
+                                                  TextButtonThemeData(
+                                                    style: TextButton.styleFrom(
+                                                      foregroundColor:
+                                                          ColorManger.kprimary,
+                                                    ),
+                                                  ),
+                                            ),
+                                            child: child!,
+                                          );
+                                        },
+                                      );
+
+                                      if (pickedDate != null) {
+                                        datecontroller.text =
+                                            "${pickedDate.year}-${pickedDate.month.toString().padLeft(2,"0")}-${pickedDate.day.toString().padLeft(2,"0")}";
+                                      }
+                                    },
+                                    onChanged: (value) {
+                                      value = datecontroller.text;
+                                      if (value.isEmpty) {
+                                        return "choose date birth";
+                                      }
+                                    },
+
+                                    controller: datecontroller,
+                                    readonly: true,
+                                    prefix: Icon(Icons.date_range_outlined),
+                                    hinttext: datecontroller.text,
+                                    lable: 'date birth',
+                                  ),
+
+                                  SizedBox(height: 20),
+
                                   Address(
                                     controller: addresscontroller,
                                     onChanged: (value) {},
@@ -238,7 +261,6 @@ class _SingnupState extends State<Singnup> {
                                       return SignUPButton(
                                         onPressed: isValid
                                             ? () async {
-                                                print(selectole);
                                                 if (_formKey.currentState
                                                         ?.validate() ??
                                                     false) {
@@ -248,7 +270,9 @@ class _SingnupState extends State<Singnup> {
                                                             .text,
                                                     address:
                                                         addresscontroller.text,
-                                                    dateOfBirth: "2024-06-22",
+                                                    dateOfBirth: datecontroller.text,
+                                                      
+
                                                     role: selectedRole,
                                                     firstName:
                                                         fnameController.text,

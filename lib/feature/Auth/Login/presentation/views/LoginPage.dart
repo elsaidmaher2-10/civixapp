@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:async';
 
+import 'package:civixapp/core/widget/CustomSnackBar.dart';
 import 'package:civixapp/feature/Auth/Login/presentation/manager/cubit/loginmanger_cubit.dart';
 import 'package:civixapp/feature/Auth/Login/presentation/manager/cubit/loginmanger_state.dart';
 import 'package:flutter/cupertino.dart';
@@ -29,6 +30,7 @@ class _LoginpageState extends State<Loginpage> {
   StreamController<bool> streamController = StreamController.broadcast();
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
+
   isvisible() {
     _isVisible = !_isVisible;
     streamController.add(_isVisible);
@@ -39,6 +41,7 @@ class _LoginpageState extends State<Loginpage> {
   bool ischeck = false;
 
   StreamController<bool> btnController = StreamController.broadcast();
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -48,59 +51,28 @@ class _LoginpageState extends State<Loginpage> {
           return BlocConsumer<LoginmangerCubit, LogincontrollerState>(
             listener: (context, state) {
               if (state is LogincontrollerFailure) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    padding: EdgeInsets.all(16.w),
-                    duration: Duration(seconds: 3),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadiusGeometry.circular(8),
-                    ),
-                    behavior: SnackBarBehavior.floating,
-                    backgroundColor: ColorManger.red,
-                    dismissDirection: DismissDirection.down,
-                    content: Text(
-                      state.message,
-                      style: TextStyle(
-                        fontWeight: FontWeight.w700,
-                        color: ColorManger.white,
-                        fontSize: screeutilsManager.h16,
-                      ),
-                    ),
-                  ),
+                Customsnackbar.show(
+                  context: context,
+                  backgroundColor: ColorManger.red,
+                  message: state.message,
                 );
               } else if (state is LogincontrollerSuccess) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    padding: EdgeInsets.only(top: 8, left: 8, bottom: 20),
-
-                    duration: Duration(seconds: 2),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadiusGeometry.only(
-                        topLeft: Radius.circular(8),
-                        topRight: Radius.circular(8),
-                      ),
-                    ),
-                    backgroundColor: ColorManger.green,
-                    dismissDirection: DismissDirection.endToStart,
-                    content: Text(
-                      state.response.message,
-                      style: TextStyle(
-                        fontWeight: FontWeight.w700,
-                        color: ColorManger.white,
-                        fontSize: screeutilsManager.h16,
-                      ),
-                    ),
-                  ),
+                Customsnackbar.show(
+                  context: context,
+                  backgroundColor: ColorManger.green,
+                  message: state.response.message,
                 );
-
-                Navigator.pushNamed(
-                  context,
-                  Routes.otpverficationc,
-                  arguments: {
-                    Constantmanger.email: email.text,
-                    "screen": Constantmanger.Signup,
-                  },
-                );
+                // Future.delayed(
+                //   Duration(seconds: 3),
+                //   () => Navigator.pushNamed(
+                //     context,
+                //     Routes.otpverficationc,
+                //     arguments: {
+                //       Constantmanger.email: email.text,
+                //       "screen": Constantmanger.Signup,
+                //     },
+                //   ),
+                // );
               }
             },
 
@@ -131,7 +103,7 @@ class _LoginpageState extends State<Loginpage> {
                         child: ConstrainedBox(
                           constraints: BoxConstraints(
                             minHeight:
-                                MediaQuery.of(context).size.height * 0.96,
+                                MediaQuery.of(context).size.height * 0.947,
                           ),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -176,7 +148,6 @@ class _LoginpageState extends State<Loginpage> {
                                   // ),
                                   SizedBox(height: screeutilsManager.h6),
                                   CustomTextfromfield(
-                                    obstext: _isVisible,
                                     controller: email,
                                     prefix: Icon(
                                       Icons.email,
@@ -199,13 +170,6 @@ class _LoginpageState extends State<Loginpage> {
                                   ),
                                   SizedBox(height: screeutilsManager.h16),
 
-                                  // Text(
-                                  //   Constantmanger.pass,
-                                  //   style: TextStyle(
-                                  //     color: ColorManger.Lightgrey,
-                                  //     fontSize: screeutilsManager.s16,
-                                  //   ),
-                                  // ),
                                   SizedBox(height: screeutilsManager.h6),
                                   StreamBuilder<bool>(
                                     initialData: _isVisible,
@@ -285,7 +249,12 @@ class _LoginpageState extends State<Loginpage> {
                                               },
                                             ),
                                           ),
-                                          Text("remember me view"),
+                                          Text(
+                                            "Remember me view",
+                                            style: TextStyle(
+                                              fontSize: screeutilsManager.s14,
+                                            ),
+                                          ),
                                         ],
                                       ),
                                       InkWell(
@@ -355,7 +324,6 @@ class _LoginpageState extends State<Loginpage> {
                                     RichText(
                                       textAlign: TextAlign.center,
                                       text: TextSpan(
-                                        
                                         children: [
                                           TextSpan(
                                             text:

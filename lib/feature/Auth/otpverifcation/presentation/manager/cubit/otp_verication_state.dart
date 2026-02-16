@@ -1,4 +1,5 @@
-part of 'otp_verication_cubit.dart';
+
+import 'package:civixapp/core/database/remote/error/failureResponse.dart';
 
 sealed class OtpVericationState {}
 
@@ -12,6 +13,6 @@ final class OtpVericationFailure extends OtpVericationState {
 final class OtpVericationLoading extends OtpVericationState {}
 
 final class OtpVericationSucces extends OtpVericationState {
-  Otpsuccessmodel otpsuccessmodel;
+  dynamic otpsuccessmodel;
   OtpVericationSucces(this.otpsuccessmodel);
 }

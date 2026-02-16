@@ -10,17 +10,17 @@ import 'package:dartz/dartz.dart';
 class OtpRepo {
   OtpRepo(this.service);
   Apiservice service;
-  Future<Either<FailureResponse, Otpsuccessmodel>> OtPVerification(
+  Future<Either<FailureResponse, dynamic>> OtPVerification(
     OtpModel otp,
     bool isreset,
   ) async {
     try {
       final response = await service.post(
         path: isreset ? Apiconstant.verifyotp : Apiconstant.confirmemaillogin,
-        body: {"email": otp.Email, "code": otp.code},
+        body: {"email": otp.Email, isreset ? "otp" : "code": otp.code},
       );
 
-      return right(Otpsuccessmodel.fromjson(response));
+      return right(isreset ? response : Otpsuccessmodel.fromjson(response));
     } on Serverexciptionmodel catch (e) {
       if (e.errors is Map?) {
         final d = FailureResponse.fromJson(e.errors);

@@ -6,34 +6,36 @@ import 'package:civixapp/feature/Auth/otpverifcation/presentation/view/otpvrific
 import 'package:civixapp/feature/Auth/register/presentation/views/signupwidget.dart';
 import 'package:civixapp/feature/onbroading/onbroading.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class Routingmanger {
   static Route<dynamic> onGenerateRoute(RouteSettings route) {
     switch (route.name) {
-      // case Routes.home:
-      //   return MaterialPageRoute(
-      //     builder: (_) => const HomeView(),
-      //   );
-
-      // case Routes.login:
-      //   return MaterialPageRoute(
-      //     builder: (_) => Loginpage(),
-      //   );
-
       case Routes.onbroading:
-        return MaterialPageRoute(builder: (_) => Onbroading());
+        return MaterialPageRoute(
+          builder: (_) => PopScope(
+            canPop: false,
+            onPopInvoked: (didPop) {
+              SystemNavigator.pop();
+            },
+            child: Onbroading(),
+          ),
+        );
       case Routes.signup:
         return MaterialPageRoute(builder: (_) => Singnup());
       case Routes.login:
-        return MaterialPageRoute(builder: (_) => Loginpage());
-      // case Routes.register:
-      //   return MaterialPageRoute(
-      //     builder: (_) => const RegisterView(),
-      //   );
+        return MaterialPageRoute(
+          builder: (_) => PopScope(
+            canPop: false,
+            onPopInvoked: (didPop) {
+              SystemNavigator.pop();
+            },
+            child: Loginpage(),
+          ),
+        );
 
       case Routes.foregetpassword:
         return MaterialPageRoute(builder: (_) => Foregetpassword());
-
       case Routes.otpverficationc:
         return MaterialPageRoute(
           settings: route,

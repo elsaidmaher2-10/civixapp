@@ -1,4 +1,3 @@
-
 import 'package:civixapp/core/database/remote/api/ApiConstant.dart';
 import 'package:civixapp/core/database/remote/api/ApiService.dart';
 import 'package:civixapp/core/database/remote/error/ServerExciptionmodel.dart';
@@ -12,7 +11,6 @@ class Confirmpasswordrepo {
   Confirmpasswordrepo({required this.service, required this.networkChecker});
   Future<Either<FailureResponse, String>> createnewpassword({
     required String email,
-    required String token,
     required String confirmPassword,
     required String otp,
   }) async {
@@ -24,20 +22,14 @@ class Confirmpasswordrepo {
     }
 
     try {
-      final 
-       response = await service.post(
+      final response = await service.post(
         path: Apiconstant.createnewpassowrdAPIEndpoint,
-        body: {
-          "email": email,
-          "token": token,
-          "confirmPassword": confirmPassword,
-          "otp": otp,
-        },
+        body: {"email": email, "newPassword": confirmPassword, "otp": otp},
       );
 
       return right(response);
     } on Serverexciptionmodel catch (e) {
-        if (e.errors is Map?) {
+      if (e.errors is Map?) {
         final d = FailureResponse.fromJson(e.errors);
         return left(d);
       } else {
