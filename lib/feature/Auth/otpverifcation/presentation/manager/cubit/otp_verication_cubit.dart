@@ -11,9 +11,9 @@ part 'otp_verication_state.dart';
 class OtpVericationCubit extends Cubit<OtpVericationState> {
   OtpVericationCubit() : super(OtpVericationInitial());
   OtpRepo otpRepo = OtpRepo(Apiservice(Dio()));
-  OtpVerication(OtpModel otp) {
+  OtpVerication(OtpModel otp, {required isreset}) {
     emit(OtpVericationLoading());
-    otpRepo.OtPVerification(otp).then(
+    otpRepo.OtPVerification(otp, isreset).then(
       (onValue) => onValue.fold(
         (L) => emit(OtpVericationFailure(L)),
         (r) => emit(OtpVericationSucces(r)),

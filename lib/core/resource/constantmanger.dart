@@ -94,4 +94,8 @@ class Constantmanger {
 
   static String msgresetingpass =
       "Code verified successfully. Please set your new password.";
+
+  static String token = "token";
+
+  static var otp = "otp";
 }

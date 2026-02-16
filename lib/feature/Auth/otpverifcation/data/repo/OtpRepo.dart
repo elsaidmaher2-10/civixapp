@@ -12,10 +12,11 @@ class OtpRepo {
   Apiservice service;
   Future<Either<FailureResponse, Otpsuccessmodel>> OtPVerification(
     OtpModel otp,
+    bool isreset,
   ) async {
     try {
       final response = await service.post(
-        path: Apiconstant.confirmemaillogin,
+        path: isreset ? Apiconstant.verifyotp : Apiconstant.confirmemaillogin,
         body: {"email": otp.Email, "code": otp.code},
       );
 
@@ -43,7 +44,6 @@ class OtpRepo {
         path: Apiconstant.sendotp,
         body: {"email": email},
       );
-
       return right(response);
     } on Serverexciptionmodel catch (e) {
       if (e.errors is Map?) {

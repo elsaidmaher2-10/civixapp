@@ -89,7 +89,7 @@ class _ForegetpasswordState extends State<Foregetpassword> {
                   Routes.otpverficationc,
                   arguments: {
                     Constantmanger.email: emailController.text,
-                   Constantmanger.screen: Constantmanger.forgetPassword,
+                    Constantmanger.screen: Constantmanger.forgetPassword,
                   },
                 );
               }
@@ -170,7 +170,10 @@ class _ForegetpasswordState extends State<Foregetpassword> {
                                               context
                                                   .read<Forgetpasswordcubit>()
                                                   .forgetpassword(
+                                                    isreset: true,
                                                     email: emailController.text,
+                                                    purpose:
+                                                        "reset your password",
                                                   );
                                             }
                                           : null,

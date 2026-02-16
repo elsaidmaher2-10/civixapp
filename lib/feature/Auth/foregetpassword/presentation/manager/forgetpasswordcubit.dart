@@ -11,10 +11,14 @@ class Forgetpasswordcubit extends Cubit<Forgetpasswordstate> {
     Apiservice(Dio()),
     InternetChecker(),
   );
-  forgetpassword({required email}) async {
+  forgetpassword({required email, required purpose ,required bool isreset}) async {
     emit(ForgetpasswordstatecontrollerLoading());
-    await Future.delayed(Duration(seconds: 3));
-    final result = await forgetpasswordrepo.SendOtP(email: email);
+    await Future.delayed(Duration(seconds: 1));
+    final result = await forgetpasswordrepo.SendOtP(
+      
+      email: email,
+      purpose: purpose,
+    );
 
     result.fold(
       (e) => emit(

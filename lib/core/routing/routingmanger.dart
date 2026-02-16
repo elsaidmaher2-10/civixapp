@@ -41,7 +41,10 @@ class Routingmanger {
         );
 
       case Routes.confirmPassword:
-        return MaterialPageRoute(builder: (_) => CreatePasswordScreen());
+        return MaterialPageRoute(
+          builder: (_) => CreatePasswordScreen(),
+          settings: route,
+        );
 
       default:
         return MaterialPageRoute(

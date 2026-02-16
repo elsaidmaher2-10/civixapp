@@ -12,6 +12,7 @@ class Forgetpasswordrepo {
   InternetChecker internetChecker;
   Future<Either<FailureResponse, String>> SendOtP({
     required String email,
+    required String purpose,
   }) async {
     if (!await internetChecker.checkInternet()) {
       return left(
@@ -21,7 +22,7 @@ class Forgetpasswordrepo {
     try {
       final response = await service.post(
         path: Apiconstant.sendotp,
-        body: {"email": email},
+        body: {"email": email, "purpose": purpose},
       );
 
       return right(response);

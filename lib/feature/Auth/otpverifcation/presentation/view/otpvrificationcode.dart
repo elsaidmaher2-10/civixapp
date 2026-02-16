@@ -100,6 +100,7 @@ class _OtpvrificationcodeState extends State<Otpvrificationcode> {
                   ),
                 );
               } else if (state is OtpVericationSucces) {
+                log(state.otpsuccessmodel.accessToken);
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     padding: EdgeInsets.all(16),
@@ -126,7 +127,15 @@ class _OtpvrificationcodeState extends State<Otpvrificationcode> {
 
                 if (Constantmanger.forgetPassword ==
                     args[Constantmanger.screen]) {
-                  Navigator.pushNamed(context, Routes.confirmPassword);
+                  Navigator.pushNamed(
+                    context,
+                    Routes.confirmPassword,
+                    arguments: {
+                      Constantmanger.email: args[Constantmanger.email],
+                      Constantmanger.token: state.otpsuccessmodel.accessToken,
+                      Constantmanger.otp: getOtpCode(),
+                    },
+                  );
                 } else {
                   await Future.delayed(
                     Duration(seconds: 2),
@@ -217,10 +226,13 @@ class _OtpvrificationcodeState extends State<Otpvrificationcode> {
                               final otp = getOtpCode();
                               print(args[Constantmanger.email]);
                               context.read<OtpVericationCubit>().OtpVerication(
+                                isreset:
+                                    args[Constantmanger.screen] ==
+                                        Constantmanger.forgetPassword
+                                    ? true
+                                    : false,
                                 OtpModel(
-                                  Email:
-                                      args[Constantmanger.email] ??
-                                      "elsaidmaher@students.du.edu.eg",
+                                  Email: args[Constantmanger.email],
                                   code: otp,
                                 ),
                               );

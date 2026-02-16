@@ -102,15 +102,12 @@ class _SingnupState extends State<Singnup> {
               if (state is Signupcontrollerfailure) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
-                    padding: EdgeInsets.only(top: 8, left: 8),
+                    padding: EdgeInsets.all(16),
                     duration: Duration(seconds: 5),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadiusGeometry.only(
-                        topLeft: Radius.circular(8),
-                        topRight: Radius.circular(8),
-                      ),
+                      borderRadius: BorderRadiusGeometry.circular(16),
                     ),
-                    behavior: SnackBarBehavior.fixed,
+                    behavior: SnackBarBehavior.floating,
                     backgroundColor: ColorManger.red,
                     dismissDirection: DismissDirection.endToStart,
                     content: Text(

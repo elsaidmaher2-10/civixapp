@@ -30,7 +30,6 @@ class Loginrepo {
       print(response);
       return right(Loginsuccesresponse.fromjosn(response));
     } on Serverexciptionmodel catch (e) {
-      print(e.errors);
 
       if (e.errors is Map?) {
         final d = FailureResponse.fromJson(e.errors);
