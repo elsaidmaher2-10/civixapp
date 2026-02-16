@@ -2,23 +2,24 @@ import 'package:civixapp/core/database/remote/api/ApiConstant.dart';
 import 'package:civixapp/core/database/remote/api/ApiService.dart';
 import 'package:civixapp/core/database/remote/error/ServerExciptionmodel.dart';
 import 'package:civixapp/core/database/remote/error/failureResponse.dart';
+import 'package:civixapp/core/service/networkchecker.dart';
 import 'package:civixapp/feature/Auth/Login/data/models/loginsuccesresponse.dart';
 import 'package:dartz/dartz.dart';
 
 class Loginrepo {
   Apiservice apiservice;
-
-  Loginrepo(this.apiservice);
+  InternetChecker internetChecker;
+  Loginrepo(this.apiservice, this.internetChecker);
 
   Future<Either<FailureResponse, Loginsuccesresponse>> login({
     required email,
     required password,
   }) async {
-    // if (!await Networkchecker.c()) {
-    //   return left(
-    //     Failuerresponse(error: ["No internet connection"], statusCode: 1),
-    //   );
-    // }
+    if (!await internetChecker.checkInternet()) {
+      return left(
+        FailureResponse(errors: ["No internet connection"], statusCode: 1),
+      );
+    }
     try {
       final response = await apiservice.post(
         path: Apiconstant.loginendpoint,

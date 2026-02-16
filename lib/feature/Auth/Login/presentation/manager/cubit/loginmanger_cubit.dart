@@ -1,4 +1,5 @@
 import 'package:civixapp/core/database/remote/api/ApiService.dart';
+import 'package:civixapp/core/service/networkchecker.dart';
 import 'package:civixapp/feature/Auth/Login/data/models/loginsuccesresponse.dart';
 import 'package:civixapp/feature/Auth/Login/data/repo/Loginrepo.dart';
 import 'package:civixapp/feature/Auth/Login/presentation/manager/cubit/loginmanger_state.dart';
@@ -7,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginmangerCubit extends Cubit<LogincontrollerState> {
   LoginmangerCubit() : super(LogincontrollerInitial());
-  Loginrepo loginrepo = Loginrepo(Apiservice(Dio()));
+  Loginrepo loginrepo = Loginrepo(Apiservice(Dio()), InternetChecker());
 
   login({required email, required password}) async {
     emit(LogincontrollerLoading());

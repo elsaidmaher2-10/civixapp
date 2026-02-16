@@ -2,7 +2,7 @@ import 'package:civixapp/core/service/networkchecker.dart';
 
 class Confirmpasswordrepo {
   // final Apiservice service;
-  final Internetchecker networkChecker;
+  final InternetChecker networkChecker;
   Confirmpasswordrepo({required this.networkChecker});
   dynamic createnewpassword({
     required String email,

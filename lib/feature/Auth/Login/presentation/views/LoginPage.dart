@@ -7,9 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-
 import 'package:civixapp/core/function/sinupvalidator.dart';
 import 'package:civixapp/core/resource/assetvaluemanger.dart';
 import 'package:civixapp/core/resource/colormanager.dart';
@@ -53,17 +51,15 @@ class _LoginpageState extends State<Loginpage> {
               if (state is LogincontrollerFailure) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
-                    padding: EdgeInsets.only(top: 8, left: 8, bottom: 20),
-                    duration: Duration(seconds: 5),
+                    
+                    padding: EdgeInsets.all(16.w),
+                    duration: Duration(seconds: 3),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadiusGeometry.only(
-                        topLeft: Radius.circular(8),
-                        topRight: Radius.circular(8),
-                      ),
+                      borderRadius: BorderRadiusGeometry.circular(8),
                     ),
-                    behavior: SnackBarBehavior.fixed,
+                    behavior: SnackBarBehavior.floating,
                     backgroundColor: ColorManger.red,
-                    dismissDirection: DismissDirection.endToStart,
+                    dismissDirection: DismissDirection.down,
                     content: Text(
                       state.message,
                       style: TextStyle(
@@ -322,29 +318,42 @@ class _LoginpageState extends State<Loginpage> {
                                   ),
                             ),
                           ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  bottomNavigationBar: Padding(
-                    padding: EdgeInsets.symmetric(vertical: 20.h),
-                    child: RichText(
-                      textAlign: TextAlign.center,
-                      text: TextSpan(
-                        children: [
-                          TextSpan(
-                            text: "${Constantmanger.donthaveaccount} ",
-                            style: TextStyle(color: ColorManger.Lightgrey2),
-                          ),
-                          WidgetSpan(
-                            child: InkWell(
-                              onTap: () {
-                                Navigator.of(context).pushNamed(Routes.signup);
-                              },
-                              child: Text(
-                                Constantmanger.Signup,
-                                style: TextStyle(color: ColorManger.kprimary),
-                              ),
+                          Spacer(),
+                          Padding(
+                            padding: EdgeInsets.symmetric(vertical: 10.h),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                RichText(
+                                  textAlign: TextAlign.center,
+                                  text: TextSpan(
+                                    children: [
+                                      TextSpan(
+                                        text:
+                                            "${Constantmanger.donthaveaccount} ",
+                                        style: TextStyle(
+                                          color: ColorManger.Lightgrey2,
+                                        ),
+                                      ),
+                                      WidgetSpan(
+                                        child: InkWell(
+                                          onTap: () {
+                                            Navigator.of(
+                                              context,
+                                            ).pushNamed(Routes.signup);
+                                          },
+                                          child: Text(
+                                            Constantmanger.Signup,
+                                            style: TextStyle(
+                                              color: ColorManger.kprimary,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ],
