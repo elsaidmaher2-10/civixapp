@@ -1,11 +1,11 @@
-
-import 'package:civixapp/core/resource/assetvaluemanger.dart';
-import 'package:civixapp/core/resource/colormanager.dart';
-import 'package:civixapp/feature/Auth/register/presentation/manager/imagepickercubit/singup_cubit.dart';
+import 'package:citifix/core/resource/assetvaluemanger.dart';
+import 'package:citifix/core/resource/colormanager.dart';
+import 'package:citifix/feature/Auth/register/presentation/manager/imagepickercubit/singup_cubit.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 class Uploadimage extends StatelessWidget {
   const Uploadimage({super.key, required this.onTap});
 

@@ -1,7 +1,7 @@
-import 'package:civixapp/core/resource/colormanager.dart';
-import 'package:civixapp/core/resource/constantmanger.dart';
-import 'package:civixapp/core/resource/screenutilsmaanger.dart';
-import 'package:civixapp/core/widget/customtextfromfield.dart';
+import 'package:citifix/core/resource/colormanager.dart';
+import 'package:citifix/core/resource/constantmanger.dart';
+import 'package:citifix/core/resource/screenutilsmaanger.dart';
+import 'package:citifix/core/widget/customtextfromfield.dart';
 import 'package:flutter/material.dart';
 
 class Email extends StatelessWidget {
@@ -16,10 +16,10 @@ class Email extends StatelessWidget {
         //   Constantmanger.email,
         //   style: TextStyle(
         //     color: ColorManger.Lightgrey,
-        //     fontSize: screeutilsManager.s16,
+        //     fontSize: ScreenUtilsManager.s16,
         //   ),
         // ),
-        SizedBox(height: screeutilsManager.h6),
+        SizedBox(height: ScreenUtilsManager.h6),
         CustomTextfromfield(
           prefix: Icon(Icons.email, color: ColorManger.Lightgrey2),
           ktype: TextInputType.emailAddress,
@@ -28,7 +28,7 @@ class Email extends StatelessWidget {
           validator: validator,
           lable: Constantmanger.email,
         ),
-        SizedBox(height: screeutilsManager.h16),
+        SizedBox(height: ScreenUtilsManager.h16),
       ],
     );
   }

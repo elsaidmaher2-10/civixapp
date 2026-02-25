@@ -1,6 +1,6 @@
-import 'package:civixapp/core/resource/constantmanger.dart';
-import 'package:civixapp/feature/onbroading/controller/onbroadingprovider.dart';
-import 'package:civixapp/feature/onbroading/widget/on_broading_item.dart';
+import 'package:citifix/core/resource/constantmanger.dart';
+import 'package:citifix/feature/onbroading/controller/onbroadingprovider.dart';
+import 'package:citifix/feature/onbroading/widget/on_broading_item.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

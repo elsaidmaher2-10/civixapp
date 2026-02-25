@@ -1,4 +1,4 @@
-# civixapp
+# citifix
 
 A new Flutter project.
 

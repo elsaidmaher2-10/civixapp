@@ -1,32 +1,32 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:civixapp/core/database/remote/api/ApiService.dart';
-import 'package:civixapp/core/function/passvlidatorrules.dart';
-import 'package:civixapp/core/function/sinupvalidator.dart';
-import 'package:civixapp/core/resource/colormanager.dart';
-import 'package:civixapp/core/resource/constantmanger.dart';
-import 'package:civixapp/core/resource/screenutilsmaanger.dart';
-import 'package:civixapp/core/routing/routes.dart';
-import 'package:civixapp/core/widget/CustomSnackBar.dart';
-import 'package:civixapp/core/widget/customtextfromfield.dart';
-import 'package:civixapp/feature/Auth/register/data/models/usermodel.dart';
-import 'package:civixapp/feature/Auth/register/data/repo/SignupRepo.dart';
-import 'package:civixapp/feature/Auth/register/presentation/manager/ValidatebuttonCubit/validatebutton_cubit.dart';
-import 'package:civixapp/feature/Auth/register/presentation/manager/cubit/signupcontroller_cubit.dart';
-import 'package:civixapp/feature/Auth/register/presentation/manager/cubit/signupcontroller_state.dart';
-import 'package:civixapp/feature/Auth/register/presentation/manager/imagepickercubit/singup_cubit.dart';
-import 'package:civixapp/feature/Auth/register/presentation/views/HaveAccountORLogin.dart';
-import 'package:civixapp/feature/Auth/register/presentation/views/selectRole.dart';
-import 'package:civixapp/feature/Auth/register/presentation/views/widget/Email.dart';
-import 'package:civixapp/feature/Auth/register/presentation/views/widget/Lname.dart';
-import 'package:civixapp/feature/Auth/register/presentation/views/widget/Phone.dart';
-import 'package:civixapp/feature/Auth/register/presentation/views/widget/address.dart';
-import 'package:civixapp/feature/Auth/register/presentation/views/widget/fname.dart';
-import 'package:civixapp/feature/Auth/register/presentation/views/widget/nationalnumber.dart';
-import 'package:civixapp/feature/Auth/register/presentation/views/widget/password.dart';
-import 'package:civixapp/feature/Auth/register/presentation/views/widget/password_rules.dart';
-import 'package:civixapp/feature/Auth/register/presentation/views/widget/signupbutton.dart';
-import 'package:civixapp/feature/Auth/register/presentation/views/widget/signuplogo.dart';
+import 'package:citifix/core/database/remote/api/ApiService.dart';
+import 'package:citifix/core/function/passvlidatorrules.dart';
+import 'package:citifix/core/function/sinupvalidator.dart';
+import 'package:citifix/core/resource/colormanager.dart';
+import 'package:citifix/core/resource/constantmanger.dart';
+import 'package:citifix/core/resource/screenutilsmaanger.dart';
+import 'package:citifix/core/routing/routes.dart';
+import 'package:citifix/core/widget/CustomSnackBar.dart';
+import 'package:citifix/core/widget/customtextfromfield.dart';
+import 'package:citifix/feature/Auth/register/data/models/usermodel.dart';
+import 'package:citifix/feature/Auth/register/data/repo/SignupRepo.dart';
+import 'package:citifix/feature/Auth/register/presentation/manager/ValidatebuttonCubit/validatebutton_cubit.dart';
+import 'package:citifix/feature/Auth/register/presentation/manager/cubit/signupcontroller_cubit.dart';
+import 'package:citifix/feature/Auth/register/presentation/manager/cubit/signupcontroller_state.dart';
+import 'package:citifix/feature/Auth/register/presentation/manager/imagepickercubit/singup_cubit.dart';
+import 'package:citifix/feature/Auth/register/presentation/views/HaveAccountORLogin.dart';
+import 'package:citifix/feature/Auth/register/presentation/views/selectRole.dart';
+import 'package:citifix/feature/Auth/register/presentation/views/widget/Email.dart';
+import 'package:citifix/feature/Auth/register/presentation/views/widget/Lname.dart';
+import 'package:citifix/feature/Auth/register/presentation/views/widget/Phone.dart';
+import 'package:citifix/feature/Auth/register/presentation/views/widget/address.dart';
+import 'package:citifix/feature/Auth/register/presentation/views/widget/fname.dart';
+import 'package:citifix/feature/Auth/register/presentation/views/widget/nationalnumber.dart';
+import 'package:citifix/feature/Auth/register/presentation/views/widget/password.dart';
+import 'package:citifix/feature/Auth/register/presentation/views/widget/password_rules.dart';
+import 'package:citifix/feature/Auth/register/presentation/views/widget/signupbutton.dart';
+import 'package:citifix/feature/Auth/register/presentation/views/widget/signuplogo.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -155,9 +155,9 @@ class _SingnupState extends State<Singnup> {
                               return Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  SizedBox(height: screeutilsManager.h30),
+                                  SizedBox(height: ScreenUtilsManager.h20),
                                   signuplogo(),
-                                  SizedBox(height: screeutilsManager.h20),
+                                  SizedBox(height: ScreenUtilsManager.h20),
                                   Fname(
                                     controller: fnameController,
                                     validator: fnamevalidator,
@@ -211,7 +211,7 @@ class _SingnupState extends State<Singnup> {
 
                                       if (pickedDate != null) {
                                         datecontroller.text =
-                                            "${pickedDate.year}-${pickedDate.month.toString().padLeft(2,"0")}-${pickedDate.day.toString().padLeft(2,"0")}";
+                                            "${pickedDate.year}-${pickedDate.month.toString().padLeft(2, "0")}-${pickedDate.day.toString().padLeft(2, "0")}";
                                       }
                                     },
                                     onChanged: (value) {
@@ -245,7 +245,7 @@ class _SingnupState extends State<Singnup> {
                                   PasswordRules(
                                     streamController: streamController,
                                   ),
-                                  SizedBox(height: screeutilsManager.h16),
+                                  SizedBox(height: ScreenUtilsManager.h16),
                                   selectRole(
                                     selectole,
                                     onchanged: (value) {
@@ -253,8 +253,8 @@ class _SingnupState extends State<Singnup> {
                                       selectedRole = value?.toLowerCase() ?? "";
                                     },
                                   ),
-                                  SizedBox(height: screeutilsManager.h16),
-                                  SizedBox(height: screeutilsManager.h30),
+                                  SizedBox(height: ScreenUtilsManager.h16),
+                                  SizedBox(height: ScreenUtilsManager.h30),
                                   ValueListenableBuilder<bool>(
                                     valueListenable: isFormValid,
                                     builder: (context, isValid, child) {
@@ -270,8 +270,8 @@ class _SingnupState extends State<Singnup> {
                                                             .text,
                                                     address:
                                                         addresscontroller.text,
-                                                    dateOfBirth: datecontroller.text,
-                                                      
+                                                    dateOfBirth:
+                                                        datecontroller.text,
 
                                                     role: selectedRole,
                                                     firstName:
@@ -301,7 +301,7 @@ class _SingnupState extends State<Singnup> {
                                       Navigator.pop(context);
                                     },
                                   ),
-                                  SizedBox(height: screeutilsManager.h30),
+                                  SizedBox(height: ScreenUtilsManager.h30),
                                 ],
                               );
                             },

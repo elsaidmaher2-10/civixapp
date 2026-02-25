@@ -1,4 +1,4 @@
-import 'package:civixapp/core/resource/constantmanger.dart';
+import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:flutter/material.dart';
 
 class Onbroadingprovider extends ChangeNotifier {

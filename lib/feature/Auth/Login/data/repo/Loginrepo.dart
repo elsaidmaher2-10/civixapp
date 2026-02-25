@@ -1,10 +1,10 @@
-import 'package:civixapp/core/database/remote/api/ApiConstant.dart';
-import 'package:civixapp/core/database/remote/api/ApiService.dart';
-import 'package:civixapp/core/database/remote/error/ServerExciptionmodel.dart';
-import 'package:civixapp/core/database/remote/error/failureResponse.dart';
-import 'package:civixapp/core/resource/constantmanger.dart';
-import 'package:civixapp/core/service/networkchecker.dart';
-import 'package:civixapp/feature/Auth/Login/data/models/loginsuccesresponse.dart';
+import 'package:citifix/core/database/remote/api/ApiConstant.dart';
+import 'package:citifix/core/database/remote/api/ApiService.dart';
+import 'package:citifix/core/database/remote/error/ServerExciptionmodel.dart';
+import 'package:citifix/core/database/remote/error/failureResponse.dart';
+import 'package:citifix/core/resource/constantmanger.dart';
+import 'package:citifix/core/service/networkchecker.dart';
+import 'package:citifix/feature/Auth/Login/data/models/loginsuccesresponse.dart';
 import 'package:dartz/dartz.dart';
 
 class Loginrepo {
@@ -30,7 +30,6 @@ class Loginrepo {
       print(response);
       return right(Loginsuccesresponse.fromjosn(response));
     } on Serverexciptionmodel catch (e) {
-
       if (e.errors is Map?) {
         final d = FailureResponse.fromJson(e.errors);
         return left(d);

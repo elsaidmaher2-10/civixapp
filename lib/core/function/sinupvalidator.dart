@@ -1,6 +1,5 @@
-
-import 'package:civixapp/core/function/_isValidEmail.dart';
-import 'package:civixapp/core/function/_isValidPhone.dart';
+import 'package:citifix/core/function/_isValidEmail.dart';
+import 'package:citifix/core/function/_isValidPhone.dart';
 
 String? phonevalidator(value) {
   if (value == null || value.trim().isEmpty) {

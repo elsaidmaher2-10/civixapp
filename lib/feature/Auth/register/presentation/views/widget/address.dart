@@ -1,7 +1,7 @@
-import 'package:civixapp/core/resource/colormanager.dart';
-import 'package:civixapp/core/resource/constantmanger.dart';
-import 'package:civixapp/core/resource/screenutilsmaanger.dart';
-import 'package:civixapp/core/widget/customtextfromfield.dart';
+import 'package:citifix/core/resource/colormanager.dart';
+import 'package:citifix/core/resource/constantmanger.dart';
+import 'package:citifix/core/resource/screenutilsmaanger.dart';
+import 'package:citifix/core/widget/customtextfromfield.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
@@ -19,10 +19,10 @@ class Address extends StatelessWidget {
         //   Constantmanger.nationalnumber,
         //   style: TextStyle(
         //     color: ColorManger.Lightgrey,
-        //     fontSize: screeutilsManager.s16,
+        //     fontSize: ScreenUtilsManager.s16,
         //   ),
         // ),
-        SizedBox(height: screeutilsManager.h6),
+        SizedBox(height: ScreenUtilsManager.h6),
         CustomTextfromfield(
           prefix: Icon(Icons.location_city, color: ColorManger.Lightgrey2),
           onChanged: onChanged,
@@ -31,7 +31,7 @@ class Address extends StatelessWidget {
           hinttext: Constantmanger.address,
           lable: Constantmanger.Address,
         ),
-        SizedBox(height: screeutilsManager.h16),
+        SizedBox(height: ScreenUtilsManager.h16),
       ],
     );
   }

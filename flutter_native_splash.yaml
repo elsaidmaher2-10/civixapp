@@ -38,7 +38,7 @@ flutter_native_splash:
   # use the [required] background_image in the next section. the reverse is true.
   # select one, they cant work together.
   color: "#FFFFFF"  ##====================================[REQUIRED]==========
-  image: assets/splach.png
+  image: assets/Group 3.png
   #color_dark: "#042a49"
   # platform-specific color. will override general color if active:
   #color_android: "#42a5f5"
@@ -134,5 +134,5 @@ flutter_native_splash:
   #! ANDROID 12+ configuration:
   android_12:
     color: "#ffffff"
-    image: assets\Group 1.png
+    image: assets/Group 3.png
     

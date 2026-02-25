@@ -1,4 +1,4 @@
-import 'package:civixapp/core/database/remote/error/ServerExciptionmodel.dart';
+import 'package:citifix/core/database/remote/error/ServerExciptionmodel.dart';
 import 'package:dio/dio.dart';
 
 Serverexciptionmodel handleDioException(DioException e) {

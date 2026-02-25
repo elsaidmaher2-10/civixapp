@@ -1,11 +1,10 @@
-
 import 'dart:io';
 
-import 'package:civixapp/core/function/imagebutton.dart';
-import 'package:civixapp/core/resource/colormanager.dart';
-import 'package:civixapp/core/resource/constantmanger.dart';
-import 'package:civixapp/core/service/imagepickerservice.dart';
-import 'package:civixapp/feature/Auth/register/presentation/manager/imagepickercubit/singup_cubit.dart';
+import 'package:citifix/core/function/imagebutton.dart';
+import 'package:citifix/core/resource/colormanager.dart';
+import 'package:citifix/core/resource/constantmanger.dart';
+import 'package:citifix/core/service/imagepickerservice.dart';
+import 'package:citifix/feature/Auth/register/presentation/manager/imagepickercubit/singup_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

@@ -1,6 +1,6 @@
 {
-    "name": "civixapp",
-    "short_name": "civixapp",
+    "name": "citifix",
+    "short_name": "citifix",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#ffffff",

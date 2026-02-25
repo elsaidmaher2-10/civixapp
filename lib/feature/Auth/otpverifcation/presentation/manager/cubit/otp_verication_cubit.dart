@@ -1,7 +1,7 @@
-import 'package:civixapp/core/database/remote/api/ApiService.dart';
-import 'package:civixapp/feature/Auth/otpverifcation/data/models/otpmodel.dart';
-import 'package:civixapp/feature/Auth/otpverifcation/data/repo/OtpRepo.dart';
-import 'package:civixapp/feature/Auth/otpverifcation/presentation/manager/cubit/otp_verication_state.dart';
+import 'package:citifix/core/database/remote/api/ApiService.dart';
+import 'package:citifix/feature/Auth/otpverifcation/data/models/otpmodel.dart';
+import 'package:citifix/feature/Auth/otpverifcation/data/repo/OtpRepo.dart';
+import 'package:citifix/feature/Auth/otpverifcation/presentation/manager/cubit/otp_verication_state.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

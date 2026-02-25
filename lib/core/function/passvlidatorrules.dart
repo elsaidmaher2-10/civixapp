@@ -1,4 +1,4 @@
-import 'package:civixapp/core/resource/constantmanger.dart';
+import 'package:citifix/core/resource/constantmanger.dart';
 
 List passwordvalidatorrules(String value) {
   if (value.trim().length >= 12) {

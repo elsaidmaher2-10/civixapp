@@ -1,8 +1,8 @@
-import 'package:civixapp/core/resource/colormanager.dart';
-import 'package:civixapp/core/resource/constantmanger.dart';
-import 'package:civixapp/core/resource/screenutilsmaanger.dart';
-import 'package:civixapp/core/widget/customtextfromfield.dart';
-import 'package:civixapp/feature/Auth/register/presentation/manager/visblitypassword/visibleeye_cubit.dart';
+import 'package:citifix/core/resource/colormanager.dart';
+import 'package:citifix/core/resource/constantmanger.dart';
+import 'package:citifix/core/resource/screenutilsmaanger.dart';
+import 'package:citifix/core/widget/customtextfromfield.dart';
+import 'package:citifix/feature/Auth/register/presentation/manager/visblitypassword/visibleeye_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -26,10 +26,10 @@ class ConfirmPassword extends StatelessWidget {
         //   Constantmanger.confirmPassword,
         //   style: TextStyle(
         //     color: ColorManger.Lightgrey,
-        //     fontSize: screeutilsManager.s16,
+        //     fontSize: ScreenUtilsManager.s16,
         //   ),
         // ),
-        SizedBox(height: screeutilsManager.h6),
+        SizedBox(height: ScreenUtilsManager.h6),
         BlocProvider(
           create: (_) => VisibleeyeCubit(),
           child: BlocBuilder<VisibleeyeCubit, bool>(

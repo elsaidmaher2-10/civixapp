@@ -1,4 +1,4 @@
-import 'package:civixapp/core/resource/colormanager.dart';
+import 'package:citifix/core/resource/colormanager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -61,7 +61,6 @@ class CustomTextfromfield extends StatelessWidget {
         hintText: hinttext,
         hintStyle: TextStyle(color: Color(0xff6C6C6C), fontSize: 12.sp),
         border: OutlineInputBorder(
-
           borderSide: BorderSide.none,
           borderRadius: BorderRadius.circular(10.r),
         ),

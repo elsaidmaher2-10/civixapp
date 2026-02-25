@@ -1,5 +1,5 @@
-import 'package:civixapp/core/resource/colormanager.dart';
-import 'package:civixapp/core/resource/screenutilsmaanger.dart';
+import 'package:citifix/core/resource/colormanager.dart';
+import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -23,7 +23,7 @@ PreferredSizeWidget confirmpassappbar(
     leadingWidth: 36.w,
 
     leading: Padding(
-      padding: EdgeInsets.only(left: 10.w, bottom: screeutilsManager.h4),
+      padding: EdgeInsets.only(left: 10.w, bottom: ScreenUtilsManager.h4),
       child: IconButton(
         onPressed: () {
           Navigator.pop(context);

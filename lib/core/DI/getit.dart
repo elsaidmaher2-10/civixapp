@@ -1,4 +1,4 @@
-import 'package:civixapp/core/service/networkchecker.dart';
+import 'package:citifix/core/service/networkchecker.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
@@ -7,5 +7,3 @@ import 'package:get_it/get_it.dart';
 //   getIt.registerSingleton<Dio>(Dio());
 //   getIt.registerSingleton<Networkchecker>(Networkchecker());
 // }
-
-

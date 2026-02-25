@@ -1,7 +1,8 @@
-import 'package:civixapp/core/resource/colormanager.dart';
-import 'package:civixapp/core/resource/constantmanger.dart';
+import 'package:citifix/core/resource/colormanager.dart';
+import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 class HaveAccountORLogin extends StatelessWidget {
   const HaveAccountORLogin({super.key, required this.onPressed});
   final void Function()? onPressed;
@@ -10,6 +11,8 @@ class HaveAccountORLogin extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       child: RichText(
+        softWrap: true,
+
         textAlign: TextAlign.center,
         text: TextSpan(
           children: [
@@ -28,10 +31,7 @@ class HaveAccountORLogin extends StatelessWidget {
                 onPressed: onPressed,
                 child: Text(
                   Constantmanger.logIn,
-                  style: TextStyle(
-                    color: ColorManger.kprimary,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: TextStyle(color: ColorManger.kprimary),
                 ),
               ),
             ),

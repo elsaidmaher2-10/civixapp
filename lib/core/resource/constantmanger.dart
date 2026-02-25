@@ -1,4 +1,4 @@
-import 'package:civixapp/feature/onbroading/model/onbroadingmodel.dart';
+import 'package:citifix/feature/onbroading/model/onbroadingmodel.dart';
 
 class Constantmanger {
   static const String isOnboardingViewed = "is_show_on_board";
@@ -25,7 +25,7 @@ class Constantmanger {
   static String nointernet = "No internet connection";
 
   // ================== Auth ==================
-  static const String logIn = "Log In";
+  static const String logIn = "log in";
   static const String sinup = "Sign Up";
   static const String donthaveaccount = "Don’t have an account?";
   static const String Signup = "Sign up now";

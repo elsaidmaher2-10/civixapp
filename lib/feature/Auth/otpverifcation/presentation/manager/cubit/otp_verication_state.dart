@@ -1,5 +1,4 @@
-
-import 'package:civixapp/core/database/remote/error/failureResponse.dart';
+import 'package:citifix/core/database/remote/error/failureResponse.dart';
 
 sealed class OtpVericationState {}
 

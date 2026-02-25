@@ -1,8 +1,8 @@
-import 'package:civixapp/core/database/remote/api/ApiService.dart';
-import 'package:civixapp/core/service/networkchecker.dart';
-import 'package:civixapp/feature/Auth/Login/data/models/loginsuccesresponse.dart';
-import 'package:civixapp/feature/Auth/Login/data/repo/Loginrepo.dart';
-import 'package:civixapp/feature/Auth/Login/presentation/manager/cubit/loginmanger_state.dart';
+import 'package:citifix/core/database/remote/api/ApiService.dart';
+import 'package:citifix/core/service/networkchecker.dart';
+import 'package:citifix/feature/Auth/Login/data/models/loginsuccesresponse.dart';
+import 'package:citifix/feature/Auth/Login/data/repo/Loginrepo.dart';
+import 'package:citifix/feature/Auth/Login/presentation/manager/cubit/loginmanger_state.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

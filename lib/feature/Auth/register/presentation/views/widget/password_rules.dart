@@ -1,8 +1,8 @@
 import 'dart:async' show StreamController;
 
-import 'package:civixapp/core/resource/colormanager.dart';
-import 'package:civixapp/core/resource/constantmanger.dart';
-import 'package:civixapp/core/resource/screenutilsmaanger.dart';
+import 'package:citifix/core/resource/colormanager.dart';
+import 'package:citifix/core/resource/constantmanger.dart';
+import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -25,7 +25,7 @@ class _PasswordRulesState extends State<PasswordRules> {
                 ? Text(
                     Constantmanger.passwordRulestitle,
                     style: TextStyle(
-                      fontSize: screeutilsManager.s10,
+                      fontSize: ScreenUtilsManager.s10,
                       color: ColorManger.red,
                     ),
                   )
@@ -37,7 +37,7 @@ class _PasswordRulesState extends State<PasswordRules> {
                 children: [
                   Icon(
                     Icons.circle,
-                    size: screeutilsManager.s5,
+                    size: ScreenUtilsManager.s5,
                     color: e["status"] == true
                         ? ColorManger.green
                         : ColorManger.red,
@@ -50,7 +50,7 @@ class _PasswordRulesState extends State<PasswordRules> {
                       decoration: e["status"] == true
                           ? TextDecoration.lineThrough
                           : TextDecoration.none,
-                      fontSize: screeutilsManager.s9,
+                      fontSize: ScreenUtilsManager.s9,
                       color: e["status"] == true
                           ? ColorManger.green
                           : ColorManger.red,

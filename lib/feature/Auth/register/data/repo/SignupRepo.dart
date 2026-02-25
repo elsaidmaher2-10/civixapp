@@ -1,8 +1,8 @@
-import 'package:civixapp/core/database/remote/api/ApiConstant.dart';
-import 'package:civixapp/core/database/remote/api/ApiService.dart';
-import 'package:civixapp/core/database/remote/error/ServerExciptionmodel.dart';
-import 'package:civixapp/core/database/remote/error/failureResponse.dart';
-import 'package:civixapp/feature/Auth/register/data/models/usermodel.dart';
+import 'package:citifix/core/database/remote/api/ApiConstant.dart';
+import 'package:citifix/core/database/remote/api/ApiService.dart';
+import 'package:citifix/core/database/remote/error/ServerExciptionmodel.dart';
+import 'package:citifix/core/database/remote/error/failureResponse.dart';
+import 'package:citifix/feature/Auth/register/data/models/usermodel.dart';
 import 'package:dartz/dartz.dart';
 
 // /api/Account/signup

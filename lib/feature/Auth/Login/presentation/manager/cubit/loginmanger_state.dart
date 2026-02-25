@@ -1,5 +1,4 @@
-
-import 'package:civixapp/feature/Auth/Login/data/models/loginsuccesresponse.dart';
+import 'package:citifix/feature/Auth/Login/data/models/loginsuccesresponse.dart';
 
 class LogincontrollerState {}
 

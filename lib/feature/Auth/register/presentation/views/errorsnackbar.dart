@@ -1,8 +1,8 @@
-
-import 'package:civixapp/core/resource/colormanager.dart';
-import 'package:civixapp/core/resource/constantmanger.dart';
-import 'package:civixapp/core/resource/screenutilsmaanger.dart';
+import 'package:citifix/core/resource/colormanager.dart';
+import 'package:citifix/core/resource/constantmanger.dart';
+import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:flutter/material.dart';
+
 ScaffoldFeatureController<SnackBar, SnackBarClosedReason> errorsnackbar(
   BuildContext context,
 ) {
@@ -21,7 +21,7 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason> errorsnackbar(
         Constantmanger.imagerequired,
         style: TextStyle(
           color: ColorManger.white,
-          fontSize: screeutilsManager.h16,
+          fontSize: ScreenUtilsManager.h16,
         ),
       ),
     ),

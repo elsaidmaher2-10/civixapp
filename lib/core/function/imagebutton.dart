@@ -1,4 +1,4 @@
-import 'package:civixapp/core/resource/colormanager.dart';
+import 'package:citifix/core/resource/colormanager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

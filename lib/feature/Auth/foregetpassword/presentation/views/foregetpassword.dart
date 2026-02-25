@@ -1,14 +1,14 @@
 import 'dart:async';
 
-import 'package:civixapp/core/function/sinupvalidator.dart';
-import 'package:civixapp/core/resource/colormanager.dart' show ColorManger;
-import 'package:civixapp/core/resource/constantmanger.dart';
-import 'package:civixapp/core/resource/screenutilsmaanger.dart';
-import 'package:civixapp/core/routing/routes.dart';
-import 'package:civixapp/core/widget/CustomSnackBar.dart';
-import 'package:civixapp/feature/Auth/foregetpassword/presentation/manager/ForgetpasswordState.dart';
-import 'package:civixapp/feature/Auth/foregetpassword/presentation/manager/forgetpasswordcubit.dart';
-import 'package:civixapp/feature/Auth/register/presentation/views/widget/Email.dart';
+import 'package:citifix/core/function/sinupvalidator.dart';
+import 'package:citifix/core/resource/colormanager.dart' show ColorManger;
+import 'package:citifix/core/resource/constantmanger.dart';
+import 'package:citifix/core/resource/screenutilsmaanger.dart';
+import 'package:citifix/core/routing/routes.dart';
+import 'package:citifix/core/widget/CustomSnackBar.dart';
+import 'package:citifix/feature/Auth/foregetpassword/presentation/manager/ForgetpasswordState.dart';
+import 'package:citifix/feature/Auth/foregetpassword/presentation/manager/forgetpasswordcubit.dart';
+import 'package:citifix/feature/Auth/register/presentation/views/widget/Email.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -86,7 +86,7 @@ class _ForegetpasswordState extends State<Foregetpassword> {
 
                   body: Padding(
                     padding: EdgeInsets.symmetric(
-                      horizontal: screeutilsManager.w18,
+                      horizontal: ScreenUtilsManager.w18,
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -98,7 +98,7 @@ class _ForegetpasswordState extends State<Foregetpassword> {
                                 "Please enter the email address associated with your account, and we'll send you OTP to reset your password.",
                             style: TextStyle(
                               color: ColorManger.Lightgrey2,
-                              fontSize: screeutilsManager.s14,
+                              fontSize: ScreenUtilsManager.s14,
                             ),
                           ),
                         ),
@@ -131,7 +131,7 @@ class _ForegetpasswordState extends State<Foregetpassword> {
                                         foregroundColor: ColorManger.white,
                                         shape: RoundedRectangleBorder(
                                           borderRadius: BorderRadius.circular(
-                                            screeutilsManager.r10,
+                                            ScreenUtilsManager.r10,
                                           ),
                                         ),
                                       ),
@@ -180,7 +180,7 @@ PreferredSizeWidget foregetpasswordappbar(BuildContext context) {
     leadingWidth: 36.w,
 
     leading: Padding(
-      padding: EdgeInsets.only(left: 10.w, bottom: screeutilsManager.h4),
+      padding: EdgeInsets.only(left: 10.w, bottom: ScreenUtilsManager.h4),
       child: IconButton(
         onPressed: () {
           Navigator.pop(context);

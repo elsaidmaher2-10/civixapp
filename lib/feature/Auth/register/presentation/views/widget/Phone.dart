@@ -1,7 +1,7 @@
-import 'package:civixapp/core/resource/colormanager.dart';
-import 'package:civixapp/core/resource/constantmanger.dart';
-import 'package:civixapp/core/resource/screenutilsmaanger.dart';
-import 'package:civixapp/core/widget/customtextfromfield.dart';
+import 'package:citifix/core/resource/colormanager.dart';
+import 'package:citifix/core/resource/constantmanger.dart';
+import 'package:citifix/core/resource/screenutilsmaanger.dart';
+import 'package:citifix/core/widget/customtextfromfield.dart';
 import 'package:flutter/material.dart';
 
 class Phone extends StatelessWidget {
@@ -17,10 +17,10 @@ class Phone extends StatelessWidget {
         //   Constantmanger.phone,
         //   style: TextStyle(
         //     color: ColorManger.Lightgrey,
-        //     fontSize: screeutilsManager.s16,
+        //     fontSize: ScreenUtilsManager.s16,
         //   ),
         // ),
-        SizedBox(height: screeutilsManager.h6),
+        SizedBox(height: ScreenUtilsManager.h6),
         CustomTextfromfield(
           controller: controller,
           ktype: TextInputType.number,
@@ -29,7 +29,7 @@ class Phone extends StatelessWidget {
           validator: validator,
           lable: Constantmanger.phonehint,
         ),
-        SizedBox(height: screeutilsManager.h16),
+        SizedBox(height: ScreenUtilsManager.h16),
       ],
     );
   }

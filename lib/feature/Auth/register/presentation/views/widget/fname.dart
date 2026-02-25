@@ -1,7 +1,7 @@
-import 'package:civixapp/core/resource/assetvaluemanger.dart';
-import 'package:civixapp/core/resource/constantmanger.dart';
-import 'package:civixapp/core/resource/screenutilsmaanger.dart';
-import 'package:civixapp/core/widget/customtextfromfield.dart';
+import 'package:citifix/core/resource/assetvaluemanger.dart';
+import 'package:citifix/core/resource/constantmanger.dart';
+import 'package:citifix/core/resource/screenutilsmaanger.dart';
+import 'package:citifix/core/widget/customtextfromfield.dart';
 import 'package:flutter/material.dart';
 
 class Fname extends StatelessWidget {
@@ -17,10 +17,10 @@ class Fname extends StatelessWidget {
         //   Constantmanger.fname,
         //   style: TextStyle(
         //     color: ColorManger.Lightgrey,
-        //     fontSize: screeutilsManager.s16,
+        //     fontSize: ScreenUtilsManager.s16,
         //   ),
         // ),
-        SizedBox(height: screeutilsManager.h6),
+        SizedBox(height: ScreenUtilsManager.h6),
         CustomTextfromfield(
           prefix: Padding(
             padding: const EdgeInsets.all(12.0),
@@ -31,7 +31,7 @@ class Fname extends StatelessWidget {
           validator: validator,
           lable: Constantmanger.fname,
         ),
-        SizedBox(height: screeutilsManager.h16),
+        SizedBox(height: ScreenUtilsManager.h16),
       ],
     );
   }

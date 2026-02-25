@@ -1,8 +1,8 @@
-import 'package:civixapp/core/resource/assetvaluemanger.dart';
-import 'package:civixapp/core/resource/colormanager.dart';
-import 'package:civixapp/core/resource/constantmanger.dart';
-import 'package:civixapp/core/resource/screenutilsmaanger.dart';
-import 'package:civixapp/core/widget/customtextfromfield.dart';
+import 'package:citifix/core/resource/assetvaluemanger.dart';
+import 'package:citifix/core/resource/colormanager.dart';
+import 'package:citifix/core/resource/constantmanger.dart';
+import 'package:citifix/core/resource/screenutilsmaanger.dart';
+import 'package:citifix/core/widget/customtextfromfield.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -20,10 +20,10 @@ class Nationalnumber extends StatelessWidget {
         //   Constantmanger.nationalnumber,
         //   style: TextStyle(
         //     color: ColorManger.Lightgrey,
-        //     fontSize: screeutilsManager.s16,
+        //     fontSize: ScreenUtilsManager.s16,
         //   ),
         // ),
-        SizedBox(height: screeutilsManager.h6),
+        SizedBox(height: ScreenUtilsManager.h6),
         CustomTextfromfield(
           prefix: Padding(
             padding: const EdgeInsets.all(10.0),
@@ -60,7 +60,7 @@ class Nationalnumber extends StatelessWidget {
           hinttext: Constantmanger.nationalnumber,
           lable: Constantmanger.nationalnumber,
         ),
-        SizedBox(height: screeutilsManager.h16),
+        SizedBox(height: ScreenUtilsManager.h16),
       ],
     );
   }

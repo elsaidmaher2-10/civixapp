@@ -1,4 +1,4 @@
-package com.example.civixapp
+package com.example.citifix
 
 import io.flutter.embedding.android.FlutterActivity
 

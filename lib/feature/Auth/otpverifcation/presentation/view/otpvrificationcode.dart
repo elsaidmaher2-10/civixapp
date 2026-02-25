@@ -2,17 +2,17 @@
 
 import 'dart:developer';
 
-import 'package:civixapp/core/resource/colormanager.dart';
-import 'package:civixapp/core/resource/constantmanger.dart';
-import 'package:civixapp/core/resource/screenutilsmaanger.dart';
-import 'package:civixapp/core/routing/routes.dart';
-import 'package:civixapp/core/widget/CustomSnackBar.dart';
-import 'package:civixapp/feature/Auth/otpverifcation/data/models/otpmodel.dart';
-import 'package:civixapp/feature/Auth/otpverifcation/presentation/manager/cubit/otp_verication_cubit.dart';
-import 'package:civixapp/feature/Auth/otpverifcation/presentation/manager/cubit/otp_verication_state.dart';
-import 'package:civixapp/feature/Auth/otpverifcation/presentation/view/widget/otpappbar.dart';
-import 'package:civixapp/feature/Auth/otpverifcation/presentation/view/widget/resendCodeOpt.dart';
-import 'package:civixapp/feature/Auth/register/presentation/views/widget/Email.dart';
+import 'package:citifix/core/resource/colormanager.dart';
+import 'package:citifix/core/resource/constantmanger.dart';
+import 'package:citifix/core/resource/screenutilsmaanger.dart';
+import 'package:citifix/core/routing/routes.dart';
+import 'package:citifix/core/widget/CustomSnackBar.dart';
+import 'package:citifix/feature/Auth/otpverifcation/data/models/otpmodel.dart';
+import 'package:citifix/feature/Auth/otpverifcation/presentation/manager/cubit/otp_verication_cubit.dart';
+import 'package:citifix/feature/Auth/otpverifcation/presentation/manager/cubit/otp_verication_state.dart';
+import 'package:citifix/feature/Auth/otpverifcation/presentation/view/widget/otpappbar.dart';
+import 'package:citifix/feature/Auth/otpverifcation/presentation/view/widget/resendCodeOpt.dart';
+import 'package:citifix/feature/Auth/register/presentation/views/widget/Email.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -137,7 +137,7 @@ class _OtpvrificationcodeState extends State<Otpvrificationcode> {
                   appBar: otpappbar(context, () {}),
                   body: Padding(
                     padding: EdgeInsets.symmetric(
-                      horizontal: screeutilsManager.w18,
+                      horizontal: ScreenUtilsManager.w18,
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -189,7 +189,7 @@ class _OtpvrificationcodeState extends State<Otpvrificationcode> {
                               foregroundColor: ColorManger.white,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(
-                                  screeutilsManager.r10,
+                                  ScreenUtilsManager.r10,
                                 ),
                               ),
                             ),

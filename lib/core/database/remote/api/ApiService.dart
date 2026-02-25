@@ -1,6 +1,6 @@
-import 'package:civixapp/core/database/remote/api/ApiConstant.dart';
-import 'package:civixapp/core/database/remote/api/ApiConsumer.dart';
-import 'package:civixapp/core/database/remote/api/ApihanderDioExcp.dart';
+import 'package:citifix/core/database/remote/api/ApiConstant.dart';
+import 'package:citifix/core/database/remote/api/ApiConsumer.dart';
+import 'package:citifix/core/database/remote/api/ApihanderDioExcp.dart';
 import 'package:dio/dio.dart';
 
 class Apiservice extends Apiconsumer {

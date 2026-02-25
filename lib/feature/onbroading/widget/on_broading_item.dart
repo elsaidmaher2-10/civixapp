@@ -1,8 +1,8 @@
-import 'package:civixapp/core/database/local/prefmanger.dart';
-import 'package:civixapp/core/resource/assetvaluemanger.dart';
-import 'package:civixapp/core/resource/colormanager.dart';
-import 'package:civixapp/core/resource/constantmanger.dart';
-import 'package:civixapp/core/routing/routes.dart';
+import 'package:citifix/core/database/local/prefmanger.dart';
+import 'package:citifix/core/resource/assetvaluemanger.dart';
+import 'package:citifix/core/resource/colormanager.dart';
+import 'package:citifix/core/resource/constantmanger.dart';
+import 'package:citifix/core/routing/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -120,10 +120,7 @@ class Customonbroadingitem extends StatelessWidget {
                     Constantmanger.isOnboardingViewed,
                     true,
                   );
-                  Navigator.pushReplacementNamed(
-                    context,
-                    Routes.login,
-                  );
+                  Navigator.pushReplacementNamed(context, Routes.login);
                 }
               },
               child: Text(
