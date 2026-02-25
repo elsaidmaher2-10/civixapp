@@ -55,23 +55,23 @@ dev_dependencies:
 flutter_launcher_icons:
     android: true
     ios: true
-    image_path: "assets/Group2.png
+    image_path: "assets/citifixlogo.png"
     min_sdk_android: 21
     adaptive_icon_background: "#ffffff"
-    adaptive_icon_foreground: "assets/Group2.png"
+    adaptive_icon_foreground: "assets/citifixlogo.png"
     adaptive_icon_foreground_inset: 16
     web:
       generate: true
-      image_path: "assets/Group2.png"
+      image_path: "assets/citifixlogo.png"
       background_color: "#ffffff"
       theme_color: "#ffffff"
     windows:
       generate: true
-      image_path: "assets/Group2.png"
+      image_path: "assets/citifixlogo.png"
       icon_size: 48
     macos:
       generate: true
-      image_path: "assets/Group2.png"
+      image_path: "assets/citifixlogo.png"
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
