@@ -2,6 +2,10 @@ abstract class AssetValueManager {
   static String uploadimage = "assets/onbroadingimage/Subtract.png";
   static const String Klog = "assets/Group2.svg";
   static const String Klog2 = "assets/splach.png";
+  static const String pending = "assets/pending.svg";
+  static const String resolved = "assets/resolved.svg";
+  static const String active = "assets/active.svg";
+  static const String date = "assets/date.svg";
   static String id =
       "assets/id_card_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg";
   static String name = "assets/id-card.png";

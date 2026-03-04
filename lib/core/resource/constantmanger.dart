@@ -98,4 +98,9 @@ class Constantmanger {
   static String token = "token";
 
   static var otp = "otp";
+
+  static String apptitle = "CitiFix";
+  static String kActive = "Active";
+  static String kPending = "Pending";
+  static String kCompleted = "Resolved";
 }

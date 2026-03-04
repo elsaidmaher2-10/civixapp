@@ -20,12 +20,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: const Size(375, 812),
+      designSize: const Size(393, 852),
       minTextAdapt: true,
       splitScreenMode: true,
       child: MaterialApp(
-        initialRoute: falg == true ? Routes.login : Routes.onbroading,
-        title: 'Civix',
+        // falg == true ? Routes.login : Routes.onbroading
+        initialRoute: Routes.mainscreen,
+        title: 'citifix',
         themeMode: ThemeMode.light,
         theme: ThemeData(
           brightness: Brightness.light,

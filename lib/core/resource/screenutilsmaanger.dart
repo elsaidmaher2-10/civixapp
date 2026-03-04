@@ -1,8 +1,13 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ScreenUtilsManager {
+  static double h70 = 70.h;
+
+  static double? s12 = 12.sp;
+
   // width
   static double get w72 => 72.w;
+  static double get w24 => 24.w;
   static double get w18 => 18.w;
 
   // radius
@@ -25,8 +30,8 @@ class ScreenUtilsManager {
 
   static double get s34 => 34.sp;
   static double get s16 => 16.sp;
+  static double get s32 => 32.sp;
   static double get s10 => 10.sp;
-
   static double get w100 => 100.w;
   static double get w90 => 90.w;
 }

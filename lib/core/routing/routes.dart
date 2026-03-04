@@ -6,4 +6,5 @@ class Routes {
   static const String foregetpassword = "/foregetpassword";
   static const String otpverficationc = "/otpverficationc";
   static const String confirmPassword = "/confirmPassword";
+  static const String mainscreen = "/Mainscreen";
 }

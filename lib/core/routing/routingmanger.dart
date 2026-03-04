@@ -4,6 +4,7 @@ import 'package:citifix/feature/Auth/confirmpassword/presentation/view/Confirmpa
 import 'package:citifix/feature/Auth/foregetpassword/presentation/views/foregetpassword.dart';
 import 'package:citifix/feature/Auth/otpverifcation/presentation/view/otpvrificationcode.dart';
 import 'package:citifix/feature/Auth/register/presentation/views/signupwidget.dart';
+import 'package:citifix/feature/home/presentation/view/mainScreen.dart';
 import 'package:citifix/feature/onbroading/onbroading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -19,6 +20,17 @@ class Routingmanger {
               SystemNavigator.pop();
             },
             child: Onbroading(),
+          ),
+        );
+
+      case Routes.mainscreen:
+        return MaterialPageRoute(
+          builder: (_) => PopScope(
+            canPop: false,
+            onPopInvoked: (didPop) {
+              SystemNavigator.pop();
+            },
+            child: Mainscreen(),
           ),
         );
       case Routes.signup:

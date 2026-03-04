@@ -46,7 +46,7 @@ dependencies:
   provider: ^6.1.5+1
   csc_picker_plus: ^0.0.3
   shared_preferences: ^2.5.3
-
+  water_drop_nav_bar: ^2.2.2
 dev_dependencies:
   flutter_test:
     sdk: flutter
