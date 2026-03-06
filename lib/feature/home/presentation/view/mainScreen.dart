@@ -52,7 +52,6 @@ class _MainscreenState extends State<Mainscreen> {
 
                   body: cubit.CurScreen(),
                   bottomNavigationBar: const CustomWaternavbar(),
-                  appBar: const MainscreenAppbar(),
                 );
               },
             ),
