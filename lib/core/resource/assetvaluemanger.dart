@@ -12,7 +12,3 @@ abstract class AssetValueManager {
   static String name2 = "assets/icons8-name-tag-50.png";
 }
 
-// class FontFamily {
-//   static const String OriginalSurfer = "OriginalSurfer";
-//   static String Otama_ep = "Otama-ep";
-// }

@@ -1,4 +1,3 @@
-import 'package:citifix/core/resource/colormanager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -17,6 +16,7 @@ class CustomTextfromfield extends StatelessWidget {
     this.onChanged,
     this.ktype = TextInputType.text,
     this.onTap,
+    this.maxLines,
   });
   Function()? onTap;
   bool readonly;
@@ -30,9 +30,12 @@ class CustomTextfromfield extends StatelessWidget {
   Widget? prefix;
   String lable;
   String? initialValue;
+  int? maxLines;
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      maxLines: maxLines,
       initialValue: initialValue,
       onTap: onTap,
       readOnly: readonly,

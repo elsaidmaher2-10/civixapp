@@ -1,14 +1,11 @@
 import 'package:citifix/core/resource/colormanager.dart';
-import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/feature/home/presentation/manager/mangenavbar/mange_custom_bottomnav_bar_cubit.dart';
-import 'package:citifix/feature/home/presentation/view/ProfileScreen.dart';
-import 'package:citifix/feature/home/presentation/view/ReportScreen.dart';
+import 'package:citifix/feature/home/presentation/view/widget/AddReportScreen.dart';
 import 'package:citifix/feature/home/presentation/view/widget/Customnavarbar.dart';
-import 'package:citifix/feature/home/presentation/view/widget/Homeview.dart';
 import 'package:citifix/feature/home/presentation/view/widget/MainscreenAppbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Mainscreen extends StatefulWidget {
   const Mainscreen({super.key});
@@ -29,13 +26,33 @@ class _MainscreenState extends State<Mainscreen> {
               MangeCustomBottomnavBarState
             >(
               builder: (context, state) {
+                final cubit = context.read<MangeCustomBottomnavBarCubit>();
                 return Scaffold(
-                  body: context
-                      .read<MangeCustomBottomnavBarCubit>()
-                      .CurScreen(),
-                  bottomNavigationBar: CustomWaternavbar(),
-                  backgroundColor: Colors.white,
-                  appBar: MainscreenAppbar(),
+                  backgroundColor: ColorManger.white,
+                  floatingActionButtonLocation:
+                      FloatingActionButtonLocation.endFloat,
+                  floatingActionButton: cubit.curindex == 0
+                      ? SizedBox(
+                          height: 62.h,
+                          width: 62.w,
+                          child: FloatingActionButton(
+                            splashColor: ColorManger.Lightgrey3,
+                            onPressed: () {
+                              addReportScreen(context);
+                            },
+                            foregroundColor: ColorManger.white,
+                            backgroundColor: ColorManger.kprimary,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadiusGeometry.circular(50),
+                            ),
+                            child: Icon(Icons.add, size: 28.sp),
+                          ),
+                        )
+                      : null,
+
+                  body: cubit.CurScreen(),
+                  bottomNavigationBar: const CustomWaternavbar(),
+                  appBar: const MainscreenAppbar(),
                 );
               },
             ),

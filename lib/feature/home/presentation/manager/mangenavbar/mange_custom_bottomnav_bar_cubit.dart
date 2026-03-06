@@ -8,15 +8,15 @@ part 'mange_custom_bottomnav_bar_state.dart';
 
 class MangeCustomBottomnavBarCubit extends Cubit<MangeCustomBottomnavBarState> {
   MangeCustomBottomnavBarCubit() : super(MangeCustomBottomnavBarInitial());
-  int _curindex = 0;
+  int curindex = 0;
   final List<Widget> _screens = [HomeScreen(), ReportScreen(), ProfileScreen()];
 
   ontap(int newindex) {
-    _curindex = newindex;
-    emit(MangeCustomBottomnavBarChange(_curindex));
+    curindex = newindex;
+    emit(MangeCustomBottomnavBarChange(curindex));
   }
 
   Widget CurScreen() {
-    return _screens[_curindex];
+    return _screens[curindex];
   }
 }

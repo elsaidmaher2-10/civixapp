@@ -2,6 +2,7 @@ import 'package:citifix/core/database/local/prefmanger.dart';
 import 'package:citifix/core/resource/assetvaluemanger.dart';
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
+import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/core/routing/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -18,12 +19,10 @@ class Customonbroadingitem extends StatelessWidget {
     required this.pages,
     required this.controller,
   });
-
   final int value;
   final int x;
   final List<Onbroadingmodel> pages;
   final PageController controller;
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -38,78 +37,69 @@ class Customonbroadingitem extends StatelessWidget {
                   ? TextButton(
                       style: TextButton.styleFrom(
                         shape: RoundedRectangleBorder(
-                          side: const BorderSide(
+                          side: BorderSide(
                             color: ColorManger.Lightgrey,
-                            width: 0.5,
+                            width: 0.5.w,
                           ),
-                          borderRadius: BorderRadius.all(Radius.circular(8)),
+                          borderRadius: BorderRadius.all(Radius.circular(8.r)),
                         ),
                       ),
                       onPressed: () {
                         controller.jumpToPage(pages.length - 1);
                       },
                       child: Text(
-                        "Skip",
+                        Constantmanger.skip,
                         style: TextStyle(
-                          // fontFamily: FontFamily.Otama_ep,
                           color: Color(0xff2A4D8B),
-                          fontSize: 20,
+                          fontSize: ScreenUtilsManager.s20,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                     )
-                  : const SizedBox(height: 15),
+                  : SizedBox.shrink(),
             ],
           ),
-
-          const SizedBox(height: 9),
-
+          SizedBox(height: ScreenUtilsManager.h9),
           Image.asset(
             pages[x].image,
             fit: BoxFit.fill,
             height: MediaQuery.of(context).size.height * 0.50,
           ),
-
-          const SizedBox(height: 16),
-
+          SizedBox(height: ScreenUtilsManager.h16),
           Text(
             pages[x].title,
             style: TextStyle(
-              fontSize: 32,
-              color: Color(0xff003366),
+              fontSize: ScreenUtilsManager.s32,
+              color: ColorManger.kprimary,
               fontWeight: FontWeight.w700,
             ),
           ),
-          const SizedBox(height: 9),
+          SizedBox(height: ScreenUtilsManager.h9),
           Text(
             pages[x].subtitle,
-            style: const TextStyle(
-              fontSize: 20,
+            style: TextStyle(
+              fontSize: ScreenUtilsManager.s20,
               color: ColorManger.Lightgrey2,
               fontWeight: FontWeight.w400,
             ),
           ),
 
-          const SizedBox(height: 18),
-
+          SizedBox(height: ScreenUtilsManager.h18),
           customindicator(controller: controller),
-
-          SizedBox(height: 68.h),
-
+          SizedBox(height: ScreenUtilsManager.h68),
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(ScreenUtilsManager.r8),
                 ),
-                fixedSize: Size(double.infinity, 44.h),
-                foregroundColor: const Color(0xffFFFFFF),
-                backgroundColor: const Color(0xff2A4D8B),
+                fixedSize: Size(double.infinity, ScreenUtilsManager.h44),
+                foregroundColor: ColorManger.white,
+                backgroundColor: ColorManger.kprimary,
               ),
               onPressed: () async {
                 final provider = context.read<Onbroadingprovider>();
-
                 if (!provider.isLastPage) {
                   controller.nextPage(
                     duration: const Duration(milliseconds: 800),
@@ -125,10 +115,10 @@ class Customonbroadingitem extends StatelessWidget {
               },
               child: Text(
                 context.watch<Onbroadingprovider>().isLastPage
-                    ? "Finish"
-                    : "Next",
-                style: const TextStyle(
-                  fontSize: 20,
+                    ? Constantmanger.finish
+                    : Constantmanger.next,
+                style: TextStyle(
+                  fontSize: ScreenUtilsManager.s20,
                   fontWeight: FontWeight.bold,
                 ),
               ),

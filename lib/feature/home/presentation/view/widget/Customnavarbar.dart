@@ -1,7 +1,6 @@
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/feature/home/presentation/manager/mangenavbar/mange_custom_bottomnav_bar_cubit.dart';
-import 'package:citifix/feature/home/presentation/view/mainScreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,7 +17,7 @@ class CustomWaternavbar extends StatelessWidget {
       MangeCustomBottomnavBarState
     >(
       builder: (BuildContext context, state) => Padding(
-        padding: const EdgeInsets.only(bottom: 6, top: 65),
+        padding: EdgeInsets.only(bottom: 6.h, top: 0.h),
         child: Wrap(
           children: [
             Container(

@@ -103,4 +103,6 @@ class Constantmanger {
   static String kActive = "Active";
   static String kPending = "Pending";
   static String kCompleted = "Resolved";
+  static String finish = "Finish";
+  static String next = "Next";
 }
