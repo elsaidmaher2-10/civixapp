@@ -2,7 +2,6 @@ import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/feature/home/presentation/manager/mangenavbar/mange_custom_bottomnav_bar_cubit.dart';
 import 'package:citifix/feature/home/presentation/view/widget/AddReportScreen.dart';
 import 'package:citifix/feature/home/presentation/view/widget/Customnavarbar.dart';
-import 'package:citifix/feature/home/presentation/view/widget/MainscreenAppbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

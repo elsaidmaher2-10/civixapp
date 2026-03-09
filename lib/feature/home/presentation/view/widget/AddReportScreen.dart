@@ -7,6 +7,7 @@ import 'package:citifix/core/widget/uploadimage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 
 addReportScreen(context) {
@@ -44,6 +45,7 @@ addReportScreen(context) {
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 23),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(height: 40.h),
               CustomTextfromfield(
@@ -60,7 +62,7 @@ addReportScreen(context) {
               ),
               SizedBox(height: 34),
               SizedBox(
-                height: 140,
+                height: 140.h,
                 child: Row(
                   children: [
                     Uploadimage(
@@ -77,16 +79,48 @@ addReportScreen(context) {
                         initialData: [],
                         stream: streamController.stream,
                         builder: (BuildContext context, snapshot) =>
-                            ListView.builder(
+                            ListView.separated(
                               clipBehavior: Clip.hardEdge,
                               scrollDirection: Axis.horizontal,
-                              itemBuilder: (ctx, index) =>
-                                  Uploadimage(onTap: () {}),
+                              itemBuilder: (ctx, index) => ClipRRect(
+                                borderRadius: BorderRadiusGeometry.circular(
+                                  8.r,
+                                ),
+                                child: SizedBox(
+                                  height: 125.h,
+                                  width: 125.w,
+                                  child: Image.file(
+                                    fit: BoxFit.fill,
+                                    snapshot.data![index],
+                                  ),
+                                ),
+                              ),
                               itemCount: snapshot.data?.length ?? 0,
+                              separatorBuilder:
+                                  (BuildContext context, int index) =>
+                                      SizedBox(width: 5),
                             ),
                       ),
                     ),
                   ],
+                ),
+              ),
+              SizedBox(height: 24.h),
+              Text(
+                "Location",
+                style: TextStyle(
+                  color: ColorManger.kprimary,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+
+              SizedBox(
+                height: 140,
+                child: GoogleMap(
+                  initialCameraPosition: CameraPosition(
+                    target: LatLng(0, 0),
+                    zoom: 14,
+                  ),
                 ),
               ),
             ],
