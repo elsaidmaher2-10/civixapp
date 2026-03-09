@@ -113,13 +113,26 @@ addReportScreen(context) {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-
-              SizedBox(
-                height: 140,
-                child: GoogleMap(
-                  initialCameraPosition: CameraPosition(
-                    target: LatLng(0, 0),
-                    zoom: 14,
+              SizedBox(height: 10.h),
+              ClipRRect(
+                borderRadius: BorderRadiusGeometry.circular(8),
+                child: SizedBox(
+                  height: 200.h,
+                  child: GoogleMap(
+                    zoomControlsEnabled: false,
+                    cameraTargetBounds: CameraTargetBounds(
+                      LatLngBounds(
+                        northeast: LatLng(31.514753704876632, 31.8540269590942),
+                        southwest: LatLng(
+                          31.06302337450881,
+                          31.413623030991577,
+                        ),
+                      ),
+                    ),
+                    initialCameraPosition: CameraPosition(
+                      target: LatLng(31.410687579920204, 31.81590218785798),
+                      zoom: 8,
+                    ),
                   ),
                 ),
               ),
