@@ -1,3 +1,5 @@
+import 'dart:core';
+
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/core/service/LocationService.dart';
 import 'package:citifix/feature/home/presentation/view/widget/Animatedmarker.dart';
@@ -9,7 +11,9 @@ import 'package:location/location.dart';
 import 'package:latlong2/latlong.dart';
 
 class CustomMap extends StatefulWidget {
-  const CustomMap({super.key});
+  const CustomMap({super.key, required this.onmapCreated});
+  final Function(String street, LatLng latlang) onmapCreated;
+
   @override
   State<CustomMap> createState() => _CustomMapState();
 }
@@ -37,7 +41,6 @@ class _CustomMapState extends State<CustomMap> with TickerProviderStateMixin {
                 onMapReady: () async {
                   LocationData newLocation = await locationservice
                       .getLocationOce();
-
                   currentPosition = LatLng(
                     newLocation.latitude!,
                     newLocation.longitude!,
@@ -50,14 +53,11 @@ class _CustomMapState extends State<CustomMap> with TickerProviderStateMixin {
                     newLocation.longitude!,
                   );
 
-                  print(
-                    "Street: ${placemarks.map((e) => e.name).toList().last}",
-                  );
                   street =
-                      "${placemarks.map((e) => e.name).toList().last}  ${placemarks.map((e) => e.subAdministrativeArea).toList().last}";
-
+                      "${placemarks.map((e) => e.name).toList().first}  ${placemarks.map((e) => e.subAdministrativeArea).toList().last}";
+                  widget.onmapCreated(street, currentPosition);
                   setState(() {
-                    mapController.move(currentPosition, 16);
+                    mapController.move(currentPosition, 14);
                   });
                 },
               ),

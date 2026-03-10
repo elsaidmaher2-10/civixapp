@@ -3,6 +3,7 @@ import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Appbutton extends StatelessWidget {
   const Appbutton({
@@ -37,24 +38,42 @@ class Appbutton extends StatelessWidget {
   }
 }
 
-
 class CustomButton extends StatelessWidget {
-  const CustomButton({super.key, required this.onPressed});
+  const CustomButton({
+    required this.lable,
+    super.key,
+    required this.onPressed,
+    this.icon,
+    this.backgroundColor = ColorManger.kprimary,
+    this.foregroundColor = ColorManger.white,
+    this.raduis = 8,
+  });
+  final double raduis;
   final void Function()? onPressed;
+  final Widget? icon;
+  final Color? backgroundColor;
+  final Color? foregroundColor;
+  final String lable;
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
+      height: 40.h,
       width: double.infinity,
-      child: ElevatedButton(
+      child: ElevatedButton.icon(
         style: ElevatedButton.styleFrom(
-          backgroundColor: ColorManger.kprimary,
-          foregroundColor: ColorManger.white,
+          backgroundColor: backgroundColor,
+          foregroundColor: foregroundColor,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(ScreenUtilsManager.r10),
+            borderRadius: BorderRadius.circular(raduis),
           ),
         ),
-        onPressed: () {},
-        child: Text(Constantmanger.sendReport),
+        onPressed: onPressed,
+        icon: icon,
+        label: Text(
+          lable,
+          style: GoogleFonts.inter(fontWeight: FontWeight.bold),
+        ),
       ),
     );
   }

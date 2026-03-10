@@ -23,8 +23,3 @@ Future<File?> imagepickerservice(
   }
 }
 
-void pickImages(List<XFile>? images, StreamController stream) async {
-  ImagePicker imagePicker = ImagePicker();
-  images = await imagePicker.pickMultiImage();
-  stream.add(images.map((e) => File(e.path)).toList());
-}

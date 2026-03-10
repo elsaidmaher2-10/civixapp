@@ -123,4 +123,16 @@ class Constantmanger {
   static String ReportTitle1 = "Report title";
 
   static String addreport = "Add Report";
+
+  static String language = "Language";
+
+  static String identity = "Identity";
+
+  static String support = "Support";
+
+  static String accouninormation = "Account information";
+
+  static String settings = "SETTINGS";
+
+  static String proile = "Profile";
 }

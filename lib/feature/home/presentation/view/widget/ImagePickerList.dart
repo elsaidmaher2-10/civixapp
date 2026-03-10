@@ -21,7 +21,7 @@ class ImagePickerList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 100.h,
+      height: 105.h,
       child: Row(
         children: [
           Uploadimage(onTap: onAddImage),
@@ -31,7 +31,7 @@ class ImagePickerList extends StatelessWidget {
               initialData: images ?? [],
               stream: stream,
               builder: (context, snapshot) => ListView.separated(
-                clipBehavior: Clip.hardEdge,
+                clipBehavior: Clip.antiAliasWithSaveLayer,
                 scrollDirection: Axis.horizontal,
                 itemCount: snapshot.data?.length ?? 0,
                 separatorBuilder: (_, __) => SizedBox(width: 5.w),

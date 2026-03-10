@@ -23,6 +23,14 @@ class ScreenUtilsManager {
 
   static double p23 = 23.w;
 
+  static double? s24 = 24.sp;
+
+  static double w8 = 8;
+
+  static double w32 = 32.w;
+
+  static double? h32 = 32.h;
+
   // width
   static double get w72 => 72.w;
   static double get w24 => 24.w;
