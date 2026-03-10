@@ -37,7 +37,12 @@ class _MainscreenState extends State<Mainscreen> {
                           child: FloatingActionButton(
                             splashColor: ColorManger.Lightgrey3,
                             onPressed: () {
-                              addReportScreen(context);
+                              showModalBottomSheet(
+                                useSafeArea: true,
+                                context: context,
+                                isScrollControlled: true,
+                                builder: (context) => const AddReportScreen(),
+                              );
                             },
                             foregroundColor: ColorManger.white,
                             backgroundColor: ColorManger.kprimary,

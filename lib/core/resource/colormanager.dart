@@ -2,6 +2,7 @@ import 'package:flutter/painting.dart';
 
 class ColorManger {
   static const Color kprimary = Color(0xff003366);
+  static const Color kprimaryLight = Color.fromARGB(204, 112, 167, 222);
 
   static const Color Lightgrey = Color(0xff505050);
 

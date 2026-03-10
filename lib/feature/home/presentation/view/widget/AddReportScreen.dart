@@ -1,30 +1,52 @@
 import 'dart:async';
 import 'dart:io';
-
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/widget/customtextfromfield.dart';
 import 'package:citifix/core/widget/uploadimage.dart';
+import 'package:citifix/feature/home/presentation/view/widget/Animatedmarker.dart';
+import 'package:citifix/feature/home/presentation/view/widget/CustomMap.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 
-addReportScreen(context) {
-  showModalBottomSheet(
-    isScrollControlled: true,
-    useSafeArea: true,
-    isDismissible: true,
-    context: context,
-    builder: (BuildContext ctx) {
-      StreamController<List<File>> streamController = StreamController();
+class AddReportScreen extends StatefulWidget {
+  const AddReportScreen({super.key});
 
-      return Scaffold(
+  @override
+  State<AddReportScreen> createState() => _AddReportScreenState();
+}
+
+class _AddReportScreenState extends State<AddReportScreen> {
+  final StreamController<List<File>> streamController = StreamController();
+  final TextEditingController titleController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
+
+  @override
+  void dispose() {
+    streamController.close();
+    titleController.dispose();
+    descriptionController.dispose();
+    super.dispose();
+  }
+
+  Future<void> pickImages() async {
+    ImagePicker imagePicker = ImagePicker();
+    List<XFile>? images = await imagePicker.pickMultiImage();
+    if (images != null) {
+      streamController.add(images.map((e) => File(e.path)).toList());
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      top: true,
+      bottom: false,
+      child: Scaffold(
         appBar: AppBar(
           leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
+            onPressed: () => Navigator.pop(context),
             icon: Icon(
               CupertinoIcons.back,
               size: 25.h,
@@ -51,55 +73,42 @@ addReportScreen(context) {
               CustomTextfromfield(
                 hinttext: "Street hole",
                 lable: "Report title ",
-                controller: TextEditingController(),
+                controller: titleController,
               ),
               SizedBox(height: 25.h),
               CustomTextfromfield(
                 maxLines: 3,
                 hinttext: "Describe the details of the Report.",
                 lable: "Report Description",
-                controller: TextEditingController(),
+                controller: descriptionController,
               ),
               SizedBox(height: 34),
               SizedBox(
                 height: 140.h,
                 child: Row(
                   children: [
-                    Uploadimage(
-                      onTap: () async {
-                        ImagePicker imagePicker = ImagePicker();
-                        List<XFile> iamges = await imagePicker.pickMultiImage();
-                        streamController.add(
-                          iamges.map((e) => File(e.path)).toList(),
-                        );
-                      },
-                    ),
+                    Uploadimage(onTap: pickImages),
                     Expanded(
                       child: StreamBuilder<List<File>>(
                         initialData: [],
                         stream: streamController.stream,
-                        builder: (BuildContext context, snapshot) =>
-                            ListView.separated(
-                              clipBehavior: Clip.hardEdge,
-                              scrollDirection: Axis.horizontal,
-                              itemBuilder: (ctx, index) => ClipRRect(
-                                borderRadius: BorderRadiusGeometry.circular(
-                                  8.r,
-                                ),
-                                child: SizedBox(
-                                  height: 125.h,
-                                  width: 125.w,
-                                  child: Image.file(
-                                    fit: BoxFit.fill,
-                                    snapshot.data![index],
-                                  ),
-                                ),
+                        builder: (context, snapshot) => ListView.separated(
+                          clipBehavior: Clip.hardEdge,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (ctx, index) => ClipRRect(
+                            borderRadius: BorderRadius.circular(8.r),
+                            child: SizedBox(
+                              height: 125.h,
+                              width: 125.w,
+                              child: Image.file(
+                                fit: BoxFit.fill,
+                                snapshot.data![index],
                               ),
-                              itemCount: snapshot.data?.length ?? 0,
-                              separatorBuilder:
-                                  (BuildContext context, int index) =>
-                                      SizedBox(width: 5),
                             ),
+                          ),
+                          itemCount: snapshot.data?.length ?? 0,
+                          separatorBuilder: (_, __) => const SizedBox(width: 5),
+                        ),
                       ),
                     ),
                   ],
@@ -114,32 +123,13 @@ addReportScreen(context) {
                 ),
               ),
               SizedBox(height: 10.h),
-              ClipRRect(
-                borderRadius: BorderRadiusGeometry.circular(8),
-                child: SizedBox(
-                  height: 200.h,
-                  child: GoogleMap(
-                    zoomControlsEnabled: false,
-                    cameraTargetBounds: CameraTargetBounds(
-                      LatLngBounds(
-                        northeast: LatLng(31.514753704876632, 31.8540269590942),
-                        southwest: LatLng(
-                          31.06302337450881,
-                          31.413623030991577,
-                        ),
-                      ),
-                    ),
-                    initialCameraPosition: CameraPosition(
-                      target: LatLng(31.410687579920204, 31.81590218785798),
-                      zoom: 8,
-                    ),
-                  ),
-                ),
-              ),
+
+              const SizedBox(height: 10),
+              CustomMap(),
             ],
           ),
         ),
-      );
-    },
-  );
+      ),
+    );
+  }
 }
