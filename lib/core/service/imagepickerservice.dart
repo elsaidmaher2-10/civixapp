@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:citifix/feature/Auth/register/presentation/manager/imagepickercubit/singup_cubit.dart';
@@ -20,4 +21,10 @@ Future<File?> imagepickerservice(
       return null;
     }
   }
+}
+
+void pickImages(List<XFile>? images, StreamController stream) async {
+  ImagePicker imagePicker = ImagePicker();
+  images = await imagePicker.pickMultiImage();
+  stream.add(images.map((e) => File(e.path)).toList());
 }

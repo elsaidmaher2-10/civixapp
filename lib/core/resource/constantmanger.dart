@@ -105,4 +105,22 @@ class Constantmanger {
   static String kCompleted = "Resolved";
   static String finish = "Finish";
   static String next = "Next";
+
+  static String sendReport = "Submit Report";
+
+  static String location = "Location";
+
+  static String selectcategory = "Select Category";
+
+  static String hintReportDescription = "Describe the details of the Report";
+
+  static String labeldescription = "Report Description";
+
+  static String descriptionTitle = "Report Description";
+
+  static String ReportTitle = "Street hole";
+
+  static String ReportTitle1 = "Report title";
+
+  static String addreport = "Add Report";
 }

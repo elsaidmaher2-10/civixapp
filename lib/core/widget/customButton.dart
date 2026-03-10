@@ -1,4 +1,6 @@
 import 'package:citifix/core/resource/colormanager.dart';
+import 'package:citifix/core/resource/constantmanger.dart';
+import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -30,6 +32,29 @@ class Appbutton extends StatelessWidget {
           text,
           style: TextStyle(color: ColorManger.kprimary, fontSize: 18.sp),
         ),
+      ),
+    );
+  }
+}
+
+
+class CustomButton extends StatelessWidget {
+  const CustomButton({super.key, required this.onPressed});
+  final void Function()? onPressed;
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: ColorManger.kprimary,
+          foregroundColor: ColorManger.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(ScreenUtilsManager.r10),
+          ),
+        ),
+        onPressed: () {},
+        child: Text(Constantmanger.sendReport),
       ),
     );
   }

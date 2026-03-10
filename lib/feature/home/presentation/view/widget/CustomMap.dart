@@ -1,3 +1,4 @@
+import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/core/service/LocationService.dart';
 import 'package:citifix/feature/home/presentation/view/widget/Animatedmarker.dart';
 import 'package:flutter/material.dart';
@@ -16,53 +17,80 @@ class CustomMap extends StatefulWidget {
 class _CustomMapState extends State<CustomMap> with TickerProviderStateMixin {
   final MapController mapController = MapController();
   final Locationservice locationservice = Locationservice();
+  String street = "";
   LatLng currentPosition = LatLng(31.410687579920204, 31.81590218785798);
 
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(8),
-      child: SizedBox(
-        height: 200.h,
-        child: FlutterMap(
-          mapController: mapController,
-          options: MapOptions(
-            initialCenter: currentPosition,
-            initialZoom: 8,
-            onMapReady: () async {
-              LocationData newLocation = await locationservice.getLocationOce();
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            height: 200.h,
+            child: FlutterMap(
+              mapController: mapController,
+              options: MapOptions(
+                initialCenter: currentPosition,
+                initialZoom: 8,
+                onMapReady: () async {
+                  LocationData newLocation = await locationservice
+                      .getLocationOce();
 
-              currentPosition = LatLng(
-                newLocation.latitude!,
-                newLocation.longitude!,
-              );
+                  currentPosition = LatLng(
+                    newLocation.latitude!,
+                    newLocation.longitude!,
+                  );
 
-              print("Current position: $currentPosition");
+                  print("Current position: $currentPosition");
 
-              List<Placemark> placemarks = await placemarkFromCoordinates(
-                newLocation.latitude!,
-                newLocation.longitude!,
-              );
+                  List<Placemark> placemarks = await placemarkFromCoordinates(
+                    newLocation.latitude!,
+                    newLocation.longitude!,
+                  );
 
-              print("Street: ${placemarks.map((e) => e.street).toList()}");
+                  print(
+                    "Street: ${placemarks.map((e) => e.name).toList().last}",
+                  );
+                  street =
+                      "${placemarks.map((e) => e.name).toList().last}  ${placemarks.map((e) => e.subAdministrativeArea).toList().last}";
 
-              setState(() {
-                mapController.move(currentPosition, 16);
-              });
-            },
-          ),
-          children: [
-            TileLayer(
-              urlTemplate: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
-              userAgentPackageName: 'com.example.citifix',
-            ),
-            MarkerLayer(
-              markers: [
-                Marker(point: currentPosition, child: AnimatedMarker()),
+                  setState(() {
+                    mapController.move(currentPosition, 16);
+                  });
+                },
+              ),
+              children: [
+                TileLayer(
+                  urlTemplate: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                  userAgentPackageName: 'com.example.citifix',
+                ),
+                MarkerLayer(
+                  markers: [
+                    Marker(point: currentPosition, child: AnimatedMarker()),
+                  ],
+                ),
               ],
             ),
-          ],
-        ),
+          ),
+          SizedBox(height: 10.h),
+          street.isEmpty
+              ? SizedBox.shrink()
+              : Row(
+                  children: [
+                    Icon(Icons.place_outlined, color: Color(0xff475569)),
+                    SizedBox(width: 5),
+                    Text(
+                      street,
+                      style: TextStyle(
+                        color: Color(0xff475569),
+                        fontSize: ScreenUtilsManager.s14,
+                      ),
+                    ),
+                  ],
+                ),
+        ],
       ),
     );
   }

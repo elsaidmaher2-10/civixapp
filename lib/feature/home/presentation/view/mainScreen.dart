@@ -39,7 +39,10 @@ class _MainscreenState extends State<Mainscreen> {
                             onPressed: () {
                               showModalBottomSheet(
                                 useSafeArea: true,
+                                backgroundColor: Colors.white,
                                 context: context,
+                                elevation: 0,
+                                barrierColor: Colors.white,
                                 isScrollControlled: true,
                                 builder: (context) => const AddReportScreen(),
                               );
