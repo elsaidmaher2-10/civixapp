@@ -6,6 +6,8 @@ import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/core/routing/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../controller/onbroadingprovider.dart';
 import '../model/onbroadingmodel.dart';
@@ -49,8 +51,8 @@ class Customonbroadingitem extends StatelessWidget {
                       },
                       child: Text(
                         Constantmanger.skip,
-                        style: TextStyle(
-                          color: Color(0xff2A4D8B),
+                        style: GoogleFonts.publicSans(
+                          color: ColorManger.lightcolor,
                           fontSize: ScreenUtilsManager.s20,
                           fontWeight: FontWeight.bold,
                         ),
@@ -68,18 +70,18 @@ class Customonbroadingitem extends StatelessWidget {
           SizedBox(height: ScreenUtilsManager.h16),
           Text(
             pages[x].title,
-            style: TextStyle(
+            style: GoogleFonts.publicSans(
               fontSize: ScreenUtilsManager.s32,
-              color: ColorManger.kprimary,
+              color: ColorManger.kprimarydark,
               fontWeight: FontWeight.w700,
             ),
           ),
           SizedBox(height: ScreenUtilsManager.h9),
           Text(
             pages[x].subtitle,
-            style: TextStyle(
-              fontSize: ScreenUtilsManager.s20,
-              color: ColorManger.Lightgrey2,
+            style: GoogleFonts.publicSans(
+              fontSize: ScreenUtilsManager.s16,
+              color: ColorManger.Lightgrey6,
               fontWeight: FontWeight.w400,
             ),
           ),

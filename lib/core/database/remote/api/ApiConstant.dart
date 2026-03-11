@@ -7,6 +7,6 @@ class Apiconstant {
   static String createnewpassowrdAPIEndpoint = "Account/reset-password";
   static String verifyotp = "Account/verify-otp";
   static String getUserProfile = "Account/profile";
-
   static String newAccessToken = "Account/refresh-token";
+  static String updateiamge = "Account/update-image";
 }

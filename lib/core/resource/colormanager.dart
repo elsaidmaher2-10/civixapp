@@ -18,4 +18,5 @@ class ColorManger {
   static const Color redlight = Color(0xffFEE2E2);
   static const Color green = Color(0xff08A43A);
   static const Color orange = Color(0xffF59E0B);
+  static const Color lightcolor = Color(0xff2A4D8B);
 }

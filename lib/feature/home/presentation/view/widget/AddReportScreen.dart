@@ -111,7 +111,6 @@ class _AddReportScreenState extends State<AddReportScreen> {
                 SizedBox(height: ScreenUtilsManager.h16),
                 CustomMap(
                   onmapCreated: (String street, LatLng latlang) {
-                    print(latlang);
                   },
                 ),
                 SizedBox(height: ScreenUtilsManager.h16),

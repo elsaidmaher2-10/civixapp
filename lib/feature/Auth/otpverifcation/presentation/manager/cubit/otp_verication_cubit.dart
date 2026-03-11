@@ -26,10 +26,5 @@ class OtpVericationCubit extends Cubit<OtpVericationState> {
 
   Future<void> sendOtp(String email) async {
     final result = await otpRepo.SendOtP(email);
-
-    result.fold(
-      (failure) => print(failure.errors),
-      (success) => print(success),
-    );
   }
 }

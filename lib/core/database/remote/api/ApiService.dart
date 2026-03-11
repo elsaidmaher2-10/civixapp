@@ -40,7 +40,6 @@ class Apiservice extends Apiconsumer {
       ),
     ]);
   }
-
   @override
   get({required String path, Map<String, dynamic>? queryprams}) async {
     try {
@@ -50,7 +49,6 @@ class Apiservice extends Apiconsumer {
       throw handleDioException(e);
     }
   }
-
   @override
   post({
     required Object body,
@@ -65,8 +63,23 @@ class Apiservice extends Apiconsumer {
       );
       return response.data;
     } on DioException catch (e) {
-      print(e.response);
-      print(e.message);
+      throw handleDioException(e);
+    }
+  }
+  @override
+  patch({
+    required String path,
+    required Object body,
+    Map<String, dynamic>? queryprams,
+  }) async {
+    try {
+      Response response = await dio.patch(
+        path,
+        data: body,
+        queryParameters: queryprams,
+      );
+      return response.data;
+    } on DioException catch (e) {
       throw handleDioException(e);
     }
   }

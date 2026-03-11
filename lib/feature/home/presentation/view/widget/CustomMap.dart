@@ -46,7 +46,6 @@ class _CustomMapState extends State<CustomMap> with TickerProviderStateMixin {
                     newLocation.longitude!,
                   );
 
-                  print("Current position: $currentPosition");
 
                   List<Placemark> placemarks = await placemarkFromCoordinates(
                     newLocation.latitude!,

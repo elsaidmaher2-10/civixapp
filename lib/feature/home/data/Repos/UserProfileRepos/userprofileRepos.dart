@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:citifix/core/database/remote/api/ApiConstant.dart';
 import 'package:citifix/core/database/remote/api/ApiService.dart';
 import 'package:citifix/core/database/remote/error/ServerExciptionmodel.dart';
@@ -6,6 +8,7 @@ import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/service/networkchecker.dart';
 import 'package:citifix/feature/home/data/Models/UserProfileModel/userProfile.dart';
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 
 class Userprofilerepos {
   Userprofilerepos(this.service, this.internetChecker);
@@ -36,10 +39,41 @@ class Userprofilerepos {
       return left(FailureResponse(errors: [e.toString()], statusCode: 500));
     }
   }
+
+  Future<Either<FailureResponse, UserProfile>> updateuserImage(
+    File image,
+  ) async {
+    if (!await internetChecker.checkInternet()) {
+      return left(
+        FailureResponse(errors: [Constantmanger.nointernet], statusCode: 1),
+      );
+    }
+    try {
+      FormData formData = FormData.fromMap({
+        "File": await MultipartFile.fromFile(
+          image.path,
+          filename: image.path.split('/').last,
+        ),
+      });
+      final response = await service.patch(
+        path: Apiconstant.updateiamge,
+        body: formData,
+      );
+      return right(UserProfile.fromJson(response));
+    } on Serverexciptionmodel catch (e) {
+      if (e.errors is Map?) {
+        final d = FailureResponse.fromJson(e.errors);
+        return left(d);
+      } else {
+        return left(
+          FailureResponse(
+            errors: [e.errors.toString()],
+            statusCode: e.statuscode,
+          ),
+        );
+      }
+    } catch (e) {
+      return left(FailureResponse(errors: [e.toString()], statusCode: 500));
+    }
+  }
 }
-
- 
-
-
-
-//Elsaidmaher@@500 d45549048a@webxio.pro

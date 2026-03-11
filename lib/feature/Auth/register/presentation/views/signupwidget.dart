@@ -64,7 +64,6 @@ class _SingnupState extends State<Singnup> {
     super.initState();
 
     void listener() {
-      print(isFormValid.value);
       WidgetsBinding.instance.addPostFrameCallback((_) {
         isFormValid.value =
             fnameController.text.isNotEmpty &&

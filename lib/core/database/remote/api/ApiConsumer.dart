@@ -4,5 +4,10 @@ abstract class Apiconsumer {
     Map<String, dynamic>? queryprams,
     required String path,
   });
-  get({required String path , Map<String, dynamic>? queryprams});
+  get({required String path, Map<String, dynamic>? queryprams});
+  patch({
+    required String path,
+    Map<String, dynamic>? queryprams,
+    required Object body,
+  });
 }

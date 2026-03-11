@@ -27,7 +27,6 @@ class Loginrepo {
         body: {"email": email, "password": password},
       );
 
-      print(response);
       return right(Loginsuccesresponse.fromjosn(response));
     } on Serverexciptionmodel catch (e) {
       if (e.errors is Map?) {

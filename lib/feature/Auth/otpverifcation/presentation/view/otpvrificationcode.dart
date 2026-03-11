@@ -117,7 +117,6 @@ class _OtpvrificationcodeState extends State<Otpvrificationcode> {
             },
 
             builder: (context, state) {
-              log(state.toString());
               bool inAsyncCall = false;
               if (state is OtpVericationLoading) {
                 inAsyncCall = true;
@@ -195,7 +194,6 @@ class _OtpvrificationcodeState extends State<Otpvrificationcode> {
                             ),
                             onPressed: () {
                               final otp = getOtpCode();
-                              print(args[Constantmanger.email]);
                               context.read<OtpVericationCubit>().verifyOtp(
                                 OtpModel(
                                   Email: args[Constantmanger.email],

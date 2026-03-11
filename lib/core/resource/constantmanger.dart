@@ -6,8 +6,9 @@ class Constantmanger {
   Constantmanger._();
   static final List<Onbroadingmodel> pages = [
     Onbroadingmodel(
-      title: "Help Community",
-      subtitle: "Report your problem as soon as possible",
+      title: "Report Problems",
+      subtitle:
+          "Spot an issue in your neighborhood? Easily report it with a photo and a brief description to get it fixed quickly.",
       image: "assets/onbroadingimage/1.png",
     ),
     Onbroadingmodel(
@@ -16,8 +17,9 @@ class Constantmanger {
       image: "assets/onbroadingimage/2.png",
     ),
     Onbroadingmodel(
-      title: "Civilized City",
-      subtitle: "Stable city with no problems",
+      title: "Improve Your City",
+      subtitle:
+          "Join your community in making your city a better place for everyone. Every report counts! ",
       image: "assets/onbroadingimage/3.png",
     ),
   ];
@@ -103,7 +105,7 @@ class Constantmanger {
   static String kActive = "Active";
   static String kPending = "Pending";
   static String kCompleted = "Resolved";
-  static String finish = "Finish";
+  static String finish = " Get Started";
   static String next = "Next";
 
   static String sendReport = "Submit Report";
@@ -150,4 +152,8 @@ class Constantmanger {
   static var refreshToken = "refreshToken";
 
   static var refreshTokenExpiration = "refreshTokenExpiration";
+
+  static String updateImage = "Profile image updated successfully";
+
+  static String logout = "Log out";
 }

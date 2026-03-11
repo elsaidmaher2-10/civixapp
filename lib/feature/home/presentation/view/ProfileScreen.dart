@@ -23,17 +23,18 @@ class ProfileScreen extends StatefulWidget {
 }
 
 StreamController<File?> iamgePicker = StreamController.broadcast();
-File? _image;
 final ImagePicker _picker = ImagePicker();
-Future<void> _pickImage(ImageSource source) async {
+Future<File?> _pickImage(ImageSource source) async {
   final XFile? pickedFile = await _picker.pickImage(source: source);
   if (pickedFile != null) {
-    _image = File(pickedFile.path);
-    iamgePicker.add(_image);
+    File imageFile = File(pickedFile.path);
+    iamgePicker.add(imageFile);
+    return imageFile;
   }
+  return null;
 }
 
-void _showPickerMenu(BuildContext context) async {
+Future<File?> _showPickerMenu(BuildContext context) async {
   PopupMenuItem<String> _buildMenuItem({
     required String value,
     required String label,
@@ -94,11 +95,12 @@ void _showPickerMenu(BuildContext context) async {
   );
 
   if (selected == 'camera') {
-    _pickImage(ImageSource.camera);
+    return _pickImage(ImageSource.camera);
   }
   if (selected == 'gallery') {
-    _pickImage(ImageSource.gallery);
+    return _pickImage(ImageSource.gallery);
   }
+  return null;
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
@@ -125,10 +127,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
           body: SingleChildScrollView(
             child: Column(
               children: [
-                ProfileInfo(
-                  onTap: () {
-                    _showPickerMenu(context);
-                  },
+                Builder(
+                  builder: (BuildContext context) => ProfileInfo(
+                    onTap: () async {
+                      File? image = await _showPickerMenu(context);
+                      if (image != null && context.mounted) {
+                        context
+                            .read<UserProfileInfoCubit>()
+                            .updateUserProfleImage(image);
+                      }
+                    },
+                  ),
                 ),
                 ProfileSettings(),
                 SizedBox(height: ScreenUtilsManager.h16),
@@ -141,7 +150,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     icon: Icon(Icons.logout),
                     backgroundColor: ColorManger.redlight,
                     foregroundColor: ColorManger.red,
-                    lable: Constantmanger.sendReport,
+                    lable: Constantmanger.logout,
                   ),
                 ),
               ],
