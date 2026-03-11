@@ -22,19 +22,13 @@ class ConfirmPassword extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Text(
-        //   Constantmanger.confirmPassword,
-        //   style: TextStyle(
-        //     color: ColorManger.Lightgrey,
-        //     fontSize: ScreenUtilsManager.s16,
-        //   ),
-        // ),
         SizedBox(height: ScreenUtilsManager.h6),
         BlocProvider(
           create: (_) => VisibleeyeCubit(),
           child: BlocBuilder<VisibleeyeCubit, bool>(
             builder: (context, state) {
               return CustomTextfromfield(
+                maxLines: 1,
                 validator: validator,
                 controller: controller,
                 obstext: state,

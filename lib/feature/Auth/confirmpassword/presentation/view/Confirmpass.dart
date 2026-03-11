@@ -135,6 +135,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                           children: [
                             SizedBox(height: ScreenUtilsManager.h16),
                             Password(
+                            
                               controller: _passwordController,
                               onChanged: (String value) {
                                 streamController.add(

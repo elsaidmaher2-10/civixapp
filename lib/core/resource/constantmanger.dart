@@ -145,4 +145,9 @@ class Constantmanger {
   static String hsearch = 'Search my reports';
 
   static String search = "Search";
+  static String accessToken = "accessToken";
+
+  static var refreshToken = "refreshToken";
+
+  static var refreshTokenExpiration = "refreshTokenExpiration";
 }

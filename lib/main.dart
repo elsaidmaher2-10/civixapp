@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:citifix/core/database/local/prefmanger.dart';
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
@@ -11,6 +13,17 @@ void main() async {
   await PrefrenceManager().init();
   bool falg =
       PrefrenceManager().getbool(Constantmanger.isOnboardingViewed) ?? false;
+  String? refresh =
+      PrefrenceManager().getstring(Constantmanger.accessToken) ?? "";
+  String? access =
+      PrefrenceManager().getstring(Constantmanger.refreshToken) ?? "";
+  String? expire =
+      PrefrenceManager().getstring(Constantmanger.refreshTokenExpiration) ?? "";
+
+  log("refresh$refresh");
+  log("refresh$access");
+  log("refresh$refresh");
+  log("refresh$expire");
   runApp(MyApp(falg: falg));
 }
 

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:citifix/core/database/local/prefmanger.dart';
 import 'package:citifix/core/widget/CustomSnackBar.dart';
 import 'package:citifix/feature/Auth/Login/presentation/manager/cubit/loginmanger_cubit.dart';
 import 'package:citifix/feature/Auth/Login/presentation/manager/cubit/loginmanger_state.dart';
@@ -15,6 +16,7 @@ import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/core/routing/routes.dart';
 import 'package:citifix/core/widget/customtextfromfield.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Loginpage extends StatefulWidget {
   Loginpage({super.key});
@@ -41,6 +43,8 @@ class _LoginpageState extends State<Loginpage> {
 
   StreamController<bool> btnController = StreamController.broadcast();
 
+  var value;
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -48,7 +52,7 @@ class _LoginpageState extends State<Loginpage> {
       child: Builder(
         builder: (context) {
           return BlocConsumer<LoginmangerCubit, LogincontrollerState>(
-            listener: (context, state) {
+            listener: (context, state) async {
               if (state is LogincontrollerFailure) {
                 Customsnackbar.show(
                   context: context,
@@ -56,10 +60,26 @@ class _LoginpageState extends State<Loginpage> {
                   message: state.message,
                 );
               } else if (state is LogincontrollerSuccess) {
+                PrefrenceManager().setstring(
+                  Constantmanger.accessToken,
+                  state.response.accessToken,
+                );
+                PrefrenceManager().setstring(
+                  Constantmanger.refreshToken,
+                  state.response.refreshToken,
+                );
+                PrefrenceManager().setstring(
+                  Constantmanger.refreshTokenExpiration,
+                  state.response.refreshTokenExpiration,
+                );
                 Customsnackbar.show(
                   context: context,
                   backgroundColor: ColorManger.green,
                   message: state.response.message,
+                );
+                await Future.delayed(
+                  Duration(seconds: 3),
+                  () => Navigator.pushNamed(context, Routes.mainscreen),
                 );
               }
             },
@@ -114,7 +134,7 @@ class _LoginpageState extends State<Loginpage> {
                       ],
                     ),
                   ),
-                  resizeToAvoidBottomInset: true, // مهم للكيبود
+                  resizeToAvoidBottomInset: true,
                   extendBody: true,
                   backgroundColor: Colors.white,
                   body: SafeArea(

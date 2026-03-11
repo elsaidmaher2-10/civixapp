@@ -14,7 +14,7 @@ class Reportcard extends StatelessWidget {
     return Padding(
       padding: EdgeInsetsGeometry.symmetric(horizontal: 16),
       child: Container(
-        height: 106.h,
+        height: 108.h,
         decoration: BoxDecoration(
           color: ColorManger.white,
           borderRadius: BorderRadius.circular(10.r),

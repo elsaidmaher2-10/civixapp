@@ -29,6 +29,7 @@ class Password extends StatelessWidget {
           child: BlocBuilder<VisibleeyeCubit, bool>(
             builder: (BuildContext context, state) {
               return CustomTextfromfield(
+                maxLines: 1,
                 prefix: Icon(
                   Icons.password_sharp,
                   color: ColorManger.Lightgrey2,
