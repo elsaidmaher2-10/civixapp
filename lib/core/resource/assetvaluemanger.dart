@@ -20,4 +20,7 @@ abstract class AssetValueManager {
   static String accountinformation = "assets/profileicons/Frame 37.svg";
 
   static String defualtimage = "assets/Ellipse 2.png";
+  static String notifcationenabled = "assets/notifcationenabled.svg";
+  static String citifixicon = "assets/Background.svg";
+  static String overVeiw = "assets/profileicons/overVeiw.svg";
 }

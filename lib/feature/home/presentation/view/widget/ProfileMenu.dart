@@ -1,4 +1,3 @@
-
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:flutter/cupertino.dart';

@@ -4,6 +4,8 @@ import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:google_fonts/google_fonts.dart';
+
 class Reportcard extends StatelessWidget {
   const Reportcard({super.key});
 
@@ -12,9 +14,9 @@ class Reportcard extends StatelessWidget {
     return Padding(
       padding: EdgeInsetsGeometry.symmetric(horizontal: 16),
       child: Container(
-        height: 86.h,
+        height: 106.h,
         decoration: BoxDecoration(
-          color: ColorManger.Lightgrey4,
+          color: ColorManger.white,
           borderRadius: BorderRadius.circular(10.r),
         ),
         child: Padding(
@@ -26,8 +28,8 @@ class Reportcard extends StatelessWidget {
                 borderRadius: BorderRadiusGeometry.circular(5),
                 child: Image.network(
                   fit: BoxFit.fill,
-                  height: 54.h,
-                  width: 64.w,
+                  height: 80.h,
+                  width: 80.w,
                   "https://www.shutterstock.com/shutterstock/photos/298199573/display_1500/stock-vector-business-report-paper-on-blue-background-with-long-shadow-modern-vector-illustration-flat-style-298199573.jpg",
                 ),
               ),
@@ -38,33 +40,36 @@ class Reportcard extends StatelessWidget {
                 children: [
                   Text(
                     "Street Hole",
-                    style: TextStyle(
-                      color: ColorManger.kprimary,
-                      fontSize: ScreenUtilsManager.s14,
+                    style: GoogleFonts.publicSans(
+                      color: ColorManger.kprimarydark,
+                      fontSize: ScreenUtilsManager.s16,
                       fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  Text(
-                    "22-oraby street",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: ScreenUtilsManager.s10,
-                      fontWeight: FontWeight.w400,
                     ),
                   ),
                   Row(
                     children: [
-                      SvgPicture.asset(
-                        AssetValueManager.date,
-                        width: 11.w,
-                        height: 11.h,
+                      Icon(Icons.place_outlined, size: 12.h),
+                      SizedBox(width: 2.w),
+                      Text(
+                        "22-oraby street",
+                        style: TextStyle(
+                          color: ColorManger.Lightgrey6,
+                          fontSize: ScreenUtilsManager.s12,
+                          fontWeight: FontWeight.w400,
+                        ),
                       ),
+                    ],
+                  ),
+                  SizedBox(height: ScreenUtilsManager.h16),
+                  Row(
+                    children: [
+                      Icon(Icons.watch_later_outlined, size: 12.h),
                       SizedBox(width: 5.w),
                       Text(
                         "2 hours ago",
                         style: TextStyle(
-                          color: Colors.black,
-                          fontSize: ScreenUtilsManager.s10,
+                          color: ColorManger.Lightgrey6,
+                          fontSize: ScreenUtilsManager.s11,
                           fontWeight: FontWeight.w300,
                         ),
                       ),

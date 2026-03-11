@@ -24,8 +24,7 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       child: MaterialApp(
-        // falg == true ? Routes.login : Routes.onbroading
-        initialRoute: Routes.mainscreen,
+        initialRoute: falg == true ? Routes.login : Routes.onbroading,
         title: 'citifix',
         themeMode: ThemeMode.light,
         theme: ThemeData(

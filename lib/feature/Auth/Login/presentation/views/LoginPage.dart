@@ -180,7 +180,7 @@ class _LoginpageState extends State<Loginpage> {
                                         Icons.password_outlined,
                                         color: ColorManger.Lightgrey2,
                                       ),
-
+                                      maxLines: 1,
                                       controller: password,
                                       validator: (value) {
                                         if (value == null ||

@@ -135,4 +135,14 @@ class Constantmanger {
   static String settings = "SETTINGS";
 
   static String proile = "Profile";
+
+  static String overview = "Over View";
+
+  static String recenreport = "My Recent Reports";
+
+  static String seeall = "See all";
+
+  static String hsearch = 'Search my reports';
+
+  static String search = "Search";
 }

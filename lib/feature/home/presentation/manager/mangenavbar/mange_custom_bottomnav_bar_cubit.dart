@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:citifix/feature/home/presentation/view/ProfileScreen.dart';
 import 'package:citifix/feature/home/presentation/view/ReportScreen.dart';
-import 'package:citifix/feature/home/presentation/view/widget/Homeview.dart';
+import 'package:citifix/feature/home/presentation/view/Homeview.dart';
 import 'package:flutter/cupertino.dart';
 
 part 'mange_custom_bottomnav_bar_state.dart';

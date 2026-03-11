@@ -1,7 +1,7 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ScreenUtilsManager {
-  static double h70 = 65.h;
+  static double h61 = 61.h;
 
   static double? s12 = 12.sp;
 
@@ -30,6 +30,15 @@ class ScreenUtilsManager {
   static double w32 = 32.w;
 
   static double? h32 = 32.h;
+  static double? h36 = 36.h;
+
+  static double w16 = 16.w;
+
+  static double? h22 = 22.h;
+
+  static double? s18 = 18.sp;
+
+  static double h8 = 8.h;
 
   // width
   static double get w72 => 72.w;
