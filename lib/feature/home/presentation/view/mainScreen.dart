@@ -6,8 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+// ignore: library_private_types_in_public_api
+final GlobalKey<NavigatorState> mainscreenKey = GlobalKey<NavigatorState>();
+
 class Mainscreen extends StatefulWidget {
-  const Mainscreen({super.key});
+  const Mainscreen({mainscreenKey});
 
   @override
   State<Mainscreen> createState() => _MainscreenState();

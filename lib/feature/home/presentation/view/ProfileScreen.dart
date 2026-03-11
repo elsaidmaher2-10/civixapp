@@ -1,17 +1,17 @@
 import 'dart:async';
 import 'dart:io';
-
-import 'package:citifix/core/resource/assetvaluemanger.dart';
+import 'package:citifix/core/DI/getit.dart';
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/core/widget/customButton.dart';
+import 'package:citifix/feature/home/data/Repos/UserProfileRepos/userprofileRepos.dart';
+import 'package:citifix/feature/home/presentation/manager/cubit/user_profile_info_cubit.dart';
 import 'package:citifix/feature/home/presentation/view/widget/ProfileInfo.dart';
 import 'package:citifix/feature/home/presentation/view/widget/profileSettings.dart';
-import 'package:citifix/feature/home/presentation/view/widget/ProfileMenu.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -105,40 +105,48 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-        backgroundColor: ColorManger.white,
-        appBar: AppBar(
+      child: BlocProvider(
+        create: (context) => UserProfileInfoCubit(getIt<Userprofilerepos>()),
+
+        child: Scaffold(
           backgroundColor: ColorManger.white,
-          title: Text(
-            Constantmanger.proile,
-            style: GoogleFonts.inter(
-              color: ColorManger.kprimary,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          centerTitle: true,
-          automaticallyImplyLeading: false,
-        ),
-        body: Column(
-          children: [
-            ProfileInfo(
-              onTap: () {
-                _showPickerMenu(context);
-              },
-            ),
-            ProfileSettings(),
-            SizedBox(height: ScreenUtilsManager.h16),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: ScreenUtilsManager.w32),
-              child: CustomButton(
-                onPressed: () {},
-                icon: Icon(Icons.logout),
-                backgroundColor: ColorManger.redlight,
-                foregroundColor: ColorManger.red,
-                lable: Constantmanger.sendReport,
+          appBar: AppBar(
+            backgroundColor: ColorManger.white,
+            title: Text(
+              Constantmanger.proile,
+              style: GoogleFonts.inter(
+                color: ColorManger.kprimary,
+                fontWeight: FontWeight.bold,
               ),
             ),
-          ],
+            centerTitle: true,
+            automaticallyImplyLeading: false,
+          ),
+          body: SingleChildScrollView(
+            child: Column(
+              children: [
+                ProfileInfo(
+                  onTap: () {
+                    _showPickerMenu(context);
+                  },
+                ),
+                ProfileSettings(),
+                SizedBox(height: ScreenUtilsManager.h16),
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: ScreenUtilsManager.w32,
+                  ),
+                  child: CustomButton(
+                    onPressed: () {},
+                    icon: Icon(Icons.logout),
+                    backgroundColor: ColorManger.redlight,
+                    foregroundColor: ColorManger.red,
+                    lable: Constantmanger.sendReport,
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );

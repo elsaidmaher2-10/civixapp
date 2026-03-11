@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:citifix/core/DI/getit.dart';
 import 'package:citifix/core/database/local/prefmanger.dart';
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
@@ -10,26 +11,22 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  setupgetit();
   await PrefrenceManager().init();
   bool falg =
       PrefrenceManager().getbool(Constantmanger.isOnboardingViewed) ?? false;
-  String? refresh =
-      PrefrenceManager().getstring(Constantmanger.accessToken) ?? "";
-  String? access =
-      PrefrenceManager().getstring(Constantmanger.refreshToken) ?? "";
-  String? expire =
-      PrefrenceManager().getstring(Constantmanger.refreshTokenExpiration) ?? "";
 
-  log("refresh$refresh");
-  log("refresh$access");
-  log("refresh$refresh");
-  log("refresh$expire");
-  runApp(MyApp(falg: falg));
+  String? access = PrefrenceManager().getstring(Constantmanger.refreshToken);
+
+  bool isAuth = access == null ? false : true;
+
+  runApp(MyApp(falg: falg, isAuth: isAuth));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key, required this.falg});
+  const MyApp({super.key, required this.falg, required this.isAuth});
   final bool falg;
+  final bool isAuth;
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -37,7 +34,11 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       child: MaterialApp(
-        initialRoute: falg == true ? Routes.login : Routes.onbroading,
+        initialRoute: isAuth == true
+            ? Routes.mainscreen
+            : falg == true
+            ? Routes.login
+            : Routes.onbroading,
         title: 'citifix',
         themeMode: ThemeMode.light,
         theme: ThemeData(
