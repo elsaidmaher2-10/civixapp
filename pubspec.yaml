@@ -67,8 +67,8 @@ flutter_launcher_icons:
   image_path: "assets/citifixlogo.png"
   min_sdk_android: 21
   adaptive_icon_background: "#ffffff"
-  adaptive_icon_foreground: "assets/citifixlogo.png"
-  adaptive_icon_foreground_inset: 5
+  adaptive_icon_foreground: "assets/citifix.png"
+  adaptive_icon_foreground_inset: 20
   web:
     generate: true
     image_path: "assets/citifixlogo.png"
