@@ -1,5 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:animated_custom_dropdown/custom_dropdown.dart';
+import 'package:citifix/core/DI/getit.dart';
+import 'package:citifix/core/database/remote/api/ApiService.dart';
+import 'package:citifix/core/service/networkchecker.dart';
+import 'package:citifix/feature/home/data/Models/catogory/categorymodels.dart';
+import 'package:citifix/feature/home/data/Repos/categortrepos/categoryrepos.dart';
+import 'package:citifix/feature/home/presentation/manager/cubit/categoryCubit/category_cubit.dart';
+import 'package:citifix/feature/home/presentation/manager/cubit/categoryCubit/category_state.dart';
 import 'package:flutter/material.dart';
 
 import 'package:citifix/core/resource/colormanager.dart';
@@ -7,18 +14,18 @@ import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/core/widget/customtextfromfield.dart';
 import 'package:citifix/feature/home/presentation/view/widget/SimpleDropdown.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ReportFormFields extends StatelessWidget {
   final TextEditingController titleController;
   final TextEditingController descriptionController;
-  final List<String> categories;
+  List<CategoryItem> categories = [];
   final Function(dynamic) onCategoryChanged;
   final SingleSelectController<dynamic> controller;
-  const ReportFormFields({
+  ReportFormFields({
     Key? key,
     required this.titleController,
     required this.descriptionController,
-    required this.categories,
     required this.onCategoryChanged,
     required this.controller,
   }) : super(key: key);
@@ -86,11 +93,7 @@ class ReportFormFields extends StatelessWidget {
           ),
         ),
         SizedBox(height: ScreenUtilsManager.h16),
-        SimpleDropdown(
-          items: categories,
-          onChanged: onCategoryChanged,
-          controller: controller,
-        ),
+        CategoryDropdown(onChanged: onCategoryChanged, controller: controller),
       ],
     );
   }

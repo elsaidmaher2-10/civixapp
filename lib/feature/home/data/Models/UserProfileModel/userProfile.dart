@@ -1,5 +1,5 @@
 class UserProfile {
-  int? id;
+  String? id;
   String? username;
   String? email;
   String? role;

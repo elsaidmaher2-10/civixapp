@@ -1,11 +1,15 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:animated_custom_dropdown/custom_dropdown.dart';
+import 'package:citifix/core/DI/getit.dart';
+import 'package:citifix/core/database/remote/api/ApiService.dart';
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
-import 'package:citifix/core/service/imagepickerservice.dart';
+import 'package:citifix/core/service/networkchecker.dart';
 import 'package:citifix/core/widget/customButton.dart';
+import 'package:citifix/feature/home/data/Models/Report/CreateReportRequestModel.dart';
+import 'package:citifix/feature/home/data/Repos/reports/reports.dart';
 import 'package:citifix/feature/home/presentation/view/widget/CustomMap.dart';
 import 'package:citifix/feature/home/presentation/view/widget/ImagePickerList.dart';
 import 'package:citifix/feature/home/presentation/view/widget/ReportForms.dart';
@@ -37,7 +41,6 @@ class _AddReportScreenState extends State<AddReportScreen> {
     super.dispose();
   }
 
-  final List<String> _list = ['Developer', 'Designer', 'Consultant', 'Student'];
   void pickImages() async {
     ImagePicker imagePicker = ImagePicker();
     images = await imagePicker.pickMultiImage();
@@ -82,7 +85,6 @@ class _AddReportScreenState extends State<AddReportScreen> {
                 ReportFormFields(
                   titleController: titleController,
                   descriptionController: descriptionController,
-                  categories: _list,
                   onCategoryChanged: (p1) {},
                   controller: controller,
                 ),
@@ -109,10 +111,7 @@ class _AddReportScreenState extends State<AddReportScreen> {
                   ),
                 ),
                 SizedBox(height: ScreenUtilsManager.h16),
-                CustomMap(
-                  onmapCreated: (String street, LatLng latlang) {
-                  },
-                ),
+                CustomMap(onmapCreated: (String street, LatLng latlang) {}),
                 SizedBox(height: ScreenUtilsManager.h16),
                 StreamBuilder<bool>(
                   initialData: false,
@@ -120,7 +119,36 @@ class _AddReportScreenState extends State<AddReportScreen> {
                   builder:
                       (BuildContext context, AsyncSnapshot<bool> snapshot) =>
                           CustomButton(
-                            onPressed: snapshot.data == false ? null : () {},
+                            onPressed: snapshot.data == true
+                                ? null
+                                : () async {
+                                    final result =
+                                        await ReportRepository(
+                                          service: getIt<Apiservice>(),
+                                          internetChecker:
+                                              getIt<InternetChecker>(),
+                                        ).addReport(
+                                          request: CreateReportRequest(
+                                            title: 'Broken streetlight',
+                                            description:
+                                                'The streetlight is broken',
+                                            location: 'Main Street',
+                                            latitude: 30.0444,
+                                            longitude: 31.2357,
+                                            categoryId: 1,
+                                            images: images!
+                                                .map((e) => e.path)
+                                                .toList(),
+                                          ),
+                                        );
+
+                                    result.fold(
+                                      (failure) => print(failure.errors),
+                                      (report) => print(
+                                        'Report created: ${report.data?.id}',
+                                      ),
+                                    );
+                                  },
                             lable: Constantmanger.sendReport,
                           ),
                 ),
