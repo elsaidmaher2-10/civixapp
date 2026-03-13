@@ -1,6 +1,5 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'dart:developer';
 
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
@@ -12,7 +11,6 @@ import 'package:citifix/feature/Auth/otpverifcation/presentation/manager/cubit/o
 import 'package:citifix/feature/Auth/otpverifcation/presentation/manager/cubit/otp_verication_state.dart';
 import 'package:citifix/feature/Auth/otpverifcation/presentation/view/widget/otpappbar.dart';
 import 'package:citifix/feature/Auth/otpverifcation/presentation/view/widget/resendCodeOpt.dart';
-import 'package:citifix/feature/Auth/register/presentation/views/widget/Email.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

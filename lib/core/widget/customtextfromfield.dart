@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomTextfromfield extends StatelessWidget {
-  CustomTextfromfield({
+  const CustomTextfromfield({
     this.readonly = false,
     super.key,
     this.initialValue,
@@ -18,19 +18,19 @@ class CustomTextfromfield extends StatelessWidget {
     this.onTap,
     this.maxLines,
   });
-  Function()? onTap;
-  bool readonly;
-  String hinttext;
-  IconButton? suffix;
-  TextInputType ktype;
-  bool obstext;
-  Function(String)? onChanged;
-  TextEditingController controller;
-  String? Function(String?)? validator;
-  Widget? prefix;
-  String lable;
-  String? initialValue;
-  int? maxLines;
+  final Function()? onTap;
+  final bool readonly;
+  final String hinttext;
+  final IconButton? suffix;
+  final TextInputType ktype;
+  final bool obstext;
+  final Function(String)? onChanged;
+  final TextEditingController controller;
+  final String? Function(String?)? validator;
+  final Widget? prefix;
+  final String lable;
+  final String? initialValue;
+  final int? maxLines;
 
   @override
   Widget build(BuildContext context) {

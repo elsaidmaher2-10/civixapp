@@ -8,8 +8,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 class Uploadimage extends StatelessWidget {
-  Uploadimage({super.key, required this.onTap});
-  Function()? onTap;
+ const Uploadimage({super.key, required this.onTap});
+  final Function()? onTap;
   @override
   Widget build(BuildContext context) {
     return DottedBorder(
