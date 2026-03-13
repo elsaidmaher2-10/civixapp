@@ -5,9 +5,9 @@ import 'package:citifix/core/widget/customtextfromfield.dart';
 import 'package:flutter/material.dart';
 
 class Phone extends StatelessWidget {
-  Phone({super.key, required this.controller, required this.validator});
-  String? Function(String?)? validator;
-  TextEditingController controller;
+  const Phone({super.key, required this.controller, required this.validator});
+  final String? Function(String?)? validator;
+  final TextEditingController controller;
   @override
   Widget build(BuildContext context) {
     return Column(

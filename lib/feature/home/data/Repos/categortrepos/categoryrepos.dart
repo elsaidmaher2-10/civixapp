@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:citifix/core/database/remote/api/ApiService.dart';
 import 'package:citifix/core/database/remote/error/ServerExciptionmodel.dart';
 import 'package:citifix/core/database/remote/error/failureResponse.dart';

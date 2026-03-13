@@ -5,9 +5,9 @@ import 'package:citifix/core/widget/customtextfromfield.dart';
 import 'package:flutter/material.dart';
 
 class Email extends StatelessWidget {
-  Email({super.key, required this.controller, required this.validator});
-  TextEditingController controller;
-  String? Function(String?)? validator;
+  const Email({super.key, required this.controller, required this.validator});
+  final TextEditingController controller;
+  final String? Function(String?)? validator;
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

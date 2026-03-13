@@ -7,8 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class PasswordRules extends StatefulWidget {
-  PasswordRules({super.key, required this.streamController});
-  StreamController<List> streamController;
+  const PasswordRules({super.key, required this.streamController});
+  final StreamController<List> streamController;
   State<PasswordRules> createState() => _PasswordRulesState();
 }
 

@@ -1,4 +1,3 @@
-import 'dart:io';
 
 class Usermodel {
   String firstName;
@@ -10,7 +9,6 @@ class Usermodel {
   String dateOfBirth;
   String password;
   String role;
-  // File? image;
 
   Usermodel({
     required this.nationalId,

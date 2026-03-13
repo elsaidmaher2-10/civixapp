@@ -8,9 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class Nationalnumber extends StatelessWidget {
-  Nationalnumber({super.key, required this.controller});
+ const Nationalnumber({super.key, required this.controller});
 
-  TextEditingController controller;
+final  TextEditingController controller;
   @override
   Widget build(BuildContext context) {
     return Column(

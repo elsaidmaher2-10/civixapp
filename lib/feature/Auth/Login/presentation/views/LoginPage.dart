@@ -16,7 +16,6 @@ import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/core/routing/routes.dart';
 import 'package:citifix/core/widget/customtextfromfield.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class Loginpage extends StatefulWidget {
   Loginpage({super.key});

@@ -14,10 +14,10 @@ import 'package:citifix/feature/home/presentation/view/widget/SimpleDropdown.dar
 class ReportFormFields extends StatelessWidget {
   final TextEditingController titleController;
   final TextEditingController descriptionController;
-  List<CategoryItem> categories = [];
-  dynamic Function(CategoryItem?) onCategoryChanged;
-SingleSelectController<CategoryItem?>? controller;
-  ReportFormFields({
+  final List<CategoryItem> categories = const [];
+  final dynamic Function(CategoryItem?) onCategoryChanged;
+  final SingleSelectController<CategoryItem?>? controller;
+  const ReportFormFields({
     Key? key,
     required this.titleController,
     required this.descriptionController,
@@ -88,7 +88,7 @@ SingleSelectController<CategoryItem?>? controller;
           ),
         ),
         SizedBox(height: ScreenUtilsManager.h16),
-        CategoryDropdown(onChanged: onCategoryChanged ,controller: controller),
+        CategoryDropdown(onChanged: onCategoryChanged, controller: controller),
       ],
     );
   }

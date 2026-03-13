@@ -3,7 +3,6 @@ import 'dart:developer';
 
 import 'package:citifix/core/database/remote/api/ApiService.dart';
 import 'package:citifix/core/function/passvlidatorrules.dart';
-import 'package:citifix/core/resource/assetvaluemanger.dart';
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
@@ -14,8 +13,6 @@ import 'package:citifix/feature/Auth/confirmpassword/data/repo/confirmpasswordre
 import 'package:citifix/feature/Auth/confirmpassword/presentation/manager/ConfirmPasswordController.dart';
 import 'package:citifix/feature/Auth/confirmpassword/presentation/manager/ConfirmPasswordState.dart';
 import 'package:citifix/feature/Auth/confirmpassword/presentation/view/widget/confirmpassappbar.dart';
-import 'package:citifix/feature/Auth/otpverifcation/presentation/view/widget/otpappbar.dart';
-import 'package:citifix/feature/Auth/register/presentation/manager/cubit/signupcontroller_state.dart';
 import 'package:citifix/feature/Auth/register/presentation/views/widget/confirmpassword.dart';
 import 'package:citifix/feature/Auth/register/presentation/views/widget/password.dart';
 import 'package:citifix/feature/Auth/register/presentation/views/widget/password_rules.dart';

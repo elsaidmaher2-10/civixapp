@@ -1,4 +1,3 @@
-import 'package:citifix/core/database/remote/api/ApiConstant.dart';
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
@@ -8,7 +7,6 @@ import 'package:citifix/feature/home/presentation/manager/reportManger/cubit/rep
 import 'package:citifix/feature/home/presentation/manager/reportManger/cubit/report_manager_state.dart';
 import 'package:citifix/feature/home/presentation/view/GetReportCarditem.dart';
 import 'package:citifix/feature/home/presentation/view/GetreportFiltring.dart';
-import 'package:citifix/feature/home/presentation/view/widget/ReportCard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

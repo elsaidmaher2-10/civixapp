@@ -7,10 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Password extends StatelessWidget {
-  Password({super.key, required this.controller, required this.onChanged});
+ const Password({super.key, required this.controller, required this.onChanged});
 
-  TextEditingController controller;
-  Function(String)? onChanged;
+ final TextEditingController controller;
+final  Function(String)? onChanged;
   @override
   Widget build(BuildContext context) {
     return Column(

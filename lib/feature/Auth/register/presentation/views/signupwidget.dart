@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:citifix/core/database/remote/api/ApiService.dart';
 import 'package:citifix/core/function/passvlidatorrules.dart';
 import 'package:citifix/core/function/sinupvalidator.dart';
 import 'package:citifix/core/resource/colormanager.dart';
@@ -10,7 +9,6 @@ import 'package:citifix/core/routing/routes.dart';
 import 'package:citifix/core/widget/CustomSnackBar.dart';
 import 'package:citifix/core/widget/customtextfromfield.dart';
 import 'package:citifix/feature/Auth/register/data/models/usermodel.dart';
-import 'package:citifix/feature/Auth/register/data/repo/SignupRepo.dart';
 import 'package:citifix/feature/Auth/register/presentation/manager/ValidatebuttonCubit/validatebutton_cubit.dart';
 import 'package:citifix/feature/Auth/register/presentation/manager/cubit/signupcontroller_cubit.dart';
 import 'package:citifix/feature/Auth/register/presentation/manager/cubit/signupcontroller_state.dart';
