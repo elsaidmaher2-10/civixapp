@@ -7,6 +7,8 @@ import 'package:citifix/core/routing/routes.dart';
 import 'package:citifix/feature/home/presentation/view/mainScreen.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class Apiservice extends Apiconsumer {
   Dio dio;
@@ -15,7 +17,6 @@ class Apiservice extends Apiconsumer {
       baseUrl: Apiconstant.baseurl,
       connectTimeout: const Duration(seconds: 15),
       receiveTimeout: const Duration(seconds: 15),
-      sendTimeout: const Duration(seconds: 15),
     );
     dio.interceptors.addAll([
       InterceptorsWrapper(
@@ -31,12 +32,16 @@ class Apiservice extends Apiconsumer {
 
         onError: _onError,
       ),
-      LogInterceptor(
-        requestUrl: true,
-        request: true,
+
+      PrettyDioLogger(
+        requestHeader: true,
+        requestBody: true,
         responseBody: true,
         responseHeader: false,
         error: true,
+        compact: true,
+        maxWidth: 90,
+        enabled: kDebugMode,
       ),
     ]);
   }
@@ -49,6 +54,7 @@ class Apiservice extends Apiconsumer {
       throw handleDioException(e);
     }
   }
+
   @override
   post({
     required Object body,
@@ -66,6 +72,7 @@ class Apiservice extends Apiconsumer {
       throw handleDioException(e);
     }
   }
+
   @override
   patch({
     required String path,

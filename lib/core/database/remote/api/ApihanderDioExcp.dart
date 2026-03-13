@@ -25,7 +25,7 @@ Serverexciptionmodel handleDioException(DioException e) {
       );
     case DioExceptionType.badResponse:
       return Serverexciptionmodel(
-        errors: e.response?.data as Map? ?? "Bad Response",
+        errors: e.response?.data ?? "Bad Response",
         statuscode: e.response?.statusCode ?? 400,
       );
     case DioExceptionType.cancel:

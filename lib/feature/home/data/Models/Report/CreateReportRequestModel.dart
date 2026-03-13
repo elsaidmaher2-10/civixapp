@@ -17,15 +17,17 @@ class CreateReportRequest {
     this.images = const [],
   });
 
-  Map<String, String> toJson() {
+
+  
+  Map<String, dynamic> toJson() {
     return {
       'Title': title,
       'Description': description,
-      'Location': location,
-      'Latitude': latitude.toString(),
-      'Longitude': longitude.toString(),
-      'CategoryId': categoryId.toString(),
       'Images': images.join(','),
+      'Location': location,
+      'Latitude': latitude,
+      'Longitude': longitude,
+      'CategoryId': categoryId.toString(),
     };
   }
 }

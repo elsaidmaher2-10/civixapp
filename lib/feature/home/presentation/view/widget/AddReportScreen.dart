@@ -14,6 +14,7 @@ import 'package:citifix/feature/home/presentation/view/widget/CustomMap.dart';
 import 'package:citifix/feature/home/presentation/view/widget/ImagePickerList.dart';
 import 'package:citifix/feature/home/presentation/view/widget/ReportForms.dart';
 import 'package:citifix/feature/home/presentation/view/widget/addreportAppbar.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:latlong2/latlong.dart';
@@ -117,40 +118,40 @@ class _AddReportScreenState extends State<AddReportScreen> {
                   initialData: false,
                   stream: ButtonStatus.stream,
                   builder:
-                      (BuildContext context, AsyncSnapshot<bool> snapshot) =>
-                          CustomButton(
-                            onPressed: snapshot.data == true
-                                ? null
-                                : () async {
-                                    final result =
-                                        await ReportRepository(
-                                          service: getIt<Apiservice>(),
-                                          internetChecker:
-                                              getIt<InternetChecker>(),
-                                        ).addReport(
-                                          request: CreateReportRequest(
-                                            title: 'Broken streetlight',
-                                            description:
-                                                'The streetlight is broken',
-                                            location: 'Main Street',
-                                            latitude: 30.0444,
-                                            longitude: 31.2357,
-                                            categoryId: 1,
-                                            images: images!
-                                                .map((e) => e.path)
-                                                .toList(),
-                                          ),
-                                        );
-
-                                    result.fold(
-                                      (failure) => print(failure.errors),
-                                      (report) => print(
-                                        'Report created: ${report.data?.id}',
+                      (
+                        BuildContext context,
+                        AsyncSnapshot<bool> snapshot,
+                      ) => CustomButton(
+                        onPressed: snapshot.data == true
+                            ? null
+                            : () async {
+                                final result =
+                                    await ReportRepository(
+                                      service: getIt<Apiservice>(),
+                                      internetChecker: getIt<InternetChecker>(),
+                                    ).addReport(
+                                      request: CreateReportRequest(
+                                        title: 'جمبي واحد يدعي االحديدي',
+                                        description:
+                                            'هارب من استريم ارجو القبض عليه',
+                                        location: 'Main Street',
+                                        latitude: 30.0444,
+                                        longitude: 31.2357,
+                                        categoryId: 12,
+                                        images: images!
+                                            .map((e) => e.path)
+                                            .toList(),
                                       ),
                                     );
-                                  },
-                            lable: Constantmanger.sendReport,
-                          ),
+
+                                result.fold(
+                                  (failure) => print(failure.errors),
+                                  (report) =>
+                                      print('Report created: ${report}'),
+                                );
+                              },
+                        lable: Constantmanger.sendReport,
+                      ),
                 ),
                 SizedBox(height: ScreenUtilsManager.h16),
               ],

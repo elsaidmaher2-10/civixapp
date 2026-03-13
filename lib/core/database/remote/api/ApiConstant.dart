@@ -9,4 +9,5 @@ class Apiconstant {
   static String getUserProfile = "Account/profile";
   static String newAccessToken = "Account/refresh-token";
   static String updateiamge = "Account/update-image";
+  static String report = "/Reports";
 }

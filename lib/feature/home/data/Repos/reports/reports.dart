@@ -1,12 +1,12 @@
-import 'dart:io';
+import 'package:citifix/core/database/remote/api/ApiConstant.dart';
 import 'package:citifix/core/database/remote/api/ApiService.dart';
 import 'package:citifix/core/database/remote/error/ServerExciptionmodel.dart';
 import 'package:citifix/core/database/remote/error/failureResponse.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/service/networkchecker.dart';
 import 'package:citifix/feature/home/data/Models/Report/CreateReportRequestModel.dart';
-import 'package:citifix/feature/home/data/Models/Report/CreateReportResponseModel.dart';
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 
 class ReportRepository {
   final Apiservice service;
@@ -14,7 +14,7 @@ class ReportRepository {
 
   ReportRepository({required this.service, required this.internetChecker});
 
-  Future<Either<FailureResponse, ReportResponse>> addReport({
+  Future<Either<FailureResponse, String>> addReport({
     required CreateReportRequest request,
   }) async {
     if (!await internetChecker.checkInternet()) {
@@ -22,26 +22,53 @@ class ReportRepository {
         FailureResponse(errors: [Constantmanger.nointernet], statusCode: 1),
       );
     }
+
     try {
-      final response = await service.post(
-        body: request.toJson(),
-        path: "/Reports",
-      );
-      return right(ReportResponse.fromJson(response));
-    } on Serverexciptionmodel catch (e) {
-      if (e.errors is Map?) {
-        final d = FailureResponse.fromJson(e.errors);
-        return left(d);
-      } else {
-        return left(
-          FailureResponse(
-            errors: [e.errors.toString()],
-            statusCode: e.statuscode,
-          ),
-        );
+      List<MultipartFile> imageFiles = [];
+      for (var imgPath in request.images) {
+        if (imgPath.isNotEmpty) {
+          imageFiles.add(
+            await MultipartFile.fromFile(
+              imgPath,
+              filename: imgPath.split('/').last,
+            ),
+          );
+        }
       }
+
+      FormData formData = FormData.fromMap({
+        "Title": request.title,
+        "Description": request.description,
+        "Location": request.location,
+        "Latitude": request.latitude,
+        "Longitude": request.longitude,
+        "CategoryId": request.categoryId,
+        "Images": imageFiles,
+      });
+
+      final response = await service.post(
+        body: formData,
+        path: Apiconstant.report,
+      );
+      return right(response.toString());
+    } on Serverexciptionmodel catch (e) {
+      final dynamic errorData = e.errors;
+      if (errorData is Map<String, dynamic>) {
+        return left(FailureResponse.fromJson(errorData));
+      }
+      return left(
+        FailureResponse(
+          errors: [errorData?.toString() ?? "Unknown server error"],
+          statusCode: e.statuscode,
+        ),
+      );
     } catch (e) {
-      return left(FailureResponse(errors: [e.toString()], statusCode: 500));
+      return left(
+        FailureResponse(
+          errors: ["Unknown Error${e.toString()}"],
+          statusCode: 500,
+        ),
+      );
     }
   }
 }

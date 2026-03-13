@@ -57,15 +57,16 @@ class CategoryDropdown extends StatelessWidget {
                 .toList();
 
             return CustomDropdown<dynamic>.search(
+            
               items: categories,
               onChanged: onChanged,
               controller: controller,
               initialItem: initialItem,
               hintText: hintText ?? 'Select Category',
-              validator: validator,
+              validator: (validator),
               decoration: decoration,
               validateOnChange: true,
-              maxlines: 1,
+              maxlines: 1
             );
           } else {
             return const SizedBox();
