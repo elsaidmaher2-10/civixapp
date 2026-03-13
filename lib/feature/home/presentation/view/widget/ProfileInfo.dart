@@ -6,7 +6,7 @@ import 'package:citifix/core/resource/assetvaluemanger.dart';
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/core/widget/CustomSnackBar.dart';
-import 'package:citifix/feature/home/presentation/manager/cubit/user_profile_info_cubit.dart';
+import 'package:citifix/feature/home/presentation/manager/userinfoManger/user_profile_info_cubit.dart';
 import 'package:citifix/feature/home/presentation/view/ProfileScreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

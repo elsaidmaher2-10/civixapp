@@ -6,7 +6,7 @@ import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/core/widget/customButton.dart';
 import 'package:citifix/feature/home/data/Repos/UserProfileRepos/userprofileRepos.dart';
-import 'package:citifix/feature/home/presentation/manager/cubit/user_profile_info_cubit.dart';
+import 'package:citifix/feature/home/presentation/manager/userinfoManger/user_profile_info_cubit.dart';
 import 'package:citifix/feature/home/presentation/view/widget/ProfileInfo.dart';
 import 'package:citifix/feature/home/presentation/view/widget/profileSettings.dart';
 import 'package:flutter/cupertino.dart';

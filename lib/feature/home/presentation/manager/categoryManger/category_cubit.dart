@@ -1,6 +1,6 @@
 // category_cubit.dart
 import 'package:citifix/feature/home/data/Repos/categortrepos/categoryrepos.dart';
-import 'package:citifix/feature/home/presentation/manager/cubit/categoryCubit/category_state.dart';
+import 'package:citifix/feature/home/presentation/manager/categoryManger/category_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CategoryCubit extends Cubit<CategoryState> {

@@ -159,8 +159,8 @@ class Apiservice extends Apiconsumer {
     Dio dio = Dio(BaseOptions(baseUrl: Apiconstant.baseurl));
     try {
       final response = await dio.post(
-        options: Options(headers: {Constantmanger.refreshToken: refreshToken}),
-        Apiconstant.newAccessToken,
+        "${Apiconstant.baseurl}/Account/refresh-token",
+        data: {Apiconstant.newAccessToken: refreshToken},
       );
 
       final newAccessToken = response.data[Constantmanger.accessToken];

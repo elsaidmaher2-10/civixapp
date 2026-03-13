@@ -1,11 +1,12 @@
 import 'package:animated_custom_dropdown/custom_dropdown.dart';
 import 'package:citifix/core/DI/getit.dart';
 import 'package:citifix/core/database/remote/api/ApiService.dart';
+import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/service/networkchecker.dart';
 import 'package:citifix/feature/home/data/Models/catogory/categorymodels.dart';
 import 'package:citifix/feature/home/data/Repos/categortrepos/categoryrepos.dart';
-import 'package:citifix/feature/home/presentation/manager/cubit/categoryCubit/category_cubit.dart';
-import 'package:citifix/feature/home/presentation/manager/cubit/categoryCubit/category_state.dart';
+import 'package:citifix/feature/home/presentation/manager/categoryManger/category_cubit.dart';
+import 'package:citifix/feature/home/presentation/manager/categoryManger/category_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -20,11 +21,11 @@ class CategoryDropdown extends StatelessWidget {
     this.decoration,
   }) : super(key: key);
 
-  final Function(dynamic)? onChanged;
-  final SingleSelectController<dynamic>? controller;
-  final dynamic initialItem;
+  final Function(CategoryItem?) onChanged;
+  final SingleSelectController<CategoryItem?>? controller;
+  final CategoryItem? initialItem;
   final String? hintText;
-  final String? Function(dynamic)? validator;
+  final String? Function(CategoryItem?)? validator;
   final CustomDropdownDecoration? decoration;
 
   @override
@@ -36,37 +37,40 @@ class CategoryDropdown extends StatelessWidget {
           internetChecker: getIt<InternetChecker>(),
         ),
       )..fetchCategories(),
-
       child: BlocBuilder<CategoryCubit, CategoryState>(
         builder: (context, state) {
           if (state is CategoryLoading) {
-            return CustomDropdown<dynamic>.search(
-              items: [],
+            return CustomDropdown<CategoryItem?>.search(
+              items: const [],
+              onChanged: (_) {},
+              hintText: 'Loading Categories...',
+              decoration: decoration,
+            );
+          } else if (state is CategoryLoaded) {
+            return CustomDropdown<CategoryItem?>.search(
+              items: state.categories,
+              headerBuilder: (context, selectedItem, enabled) => Text(
+                selectedItem?.name ?? '',
+                style: const TextStyle(fontSize: 14),
+              ),
+              listItemBuilder: (context, item, isSelected, onItemSelect) =>
+                  Text(item?.name ?? '', style: const TextStyle(fontSize: 14)),
               onChanged: onChanged,
               controller: controller,
               initialItem: initialItem,
               hintText: hintText ?? 'Select Category',
               validator: validator,
-              decoration: decoration,
-              validateOnChange: true,
-              maxlines: 1,
+              decoration:
+                  decoration ??
+                  CustomDropdownDecoration(
+                    closedFillColor: const Color(0xffF6F6F6),
+                    closedBorder: Border.all(color: ColorManger.kprimary),
+                  ),
             );
-          } else if (state is CategoryLoaded) {
-            final categories = state.categories
-                .map((e) => e.name ?? '')
-                .toList();
-
-            return CustomDropdown<dynamic>.search(
-            
-              items: categories,
-              onChanged: onChanged,
-              controller: controller,
-              initialItem: initialItem,
-              hintText: hintText ?? 'Select Category',
-              validator: (validator),
-              decoration: decoration,
-              validateOnChange: true,
-              maxlines: 1
+          } else if (state is CategoryError) {
+            return const Text(
+              "Failed to load categories",
+              style: TextStyle(color: Colors.red),
             );
           } else {
             return const SizedBox();
