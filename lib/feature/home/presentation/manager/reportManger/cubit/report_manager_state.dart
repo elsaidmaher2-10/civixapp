@@ -1,15 +1,25 @@
-abstract class CreateReportState {}
+import 'package:citifix/feature/home/data/Models/Report/CreateReportResponseModel.dart';
 
-class CreateReportInitial extends CreateReportState {}
+abstract class ReportManagerState {}
 
-class CreateReportLoading extends CreateReportState {}
+class ReportManagerInitial extends ReportManagerState {}
 
-class CreateReportSuccess extends CreateReportState {
+class GetReportsLoading extends ReportManagerState {}
+class GetReportsSuccess extends ReportManagerState {
+  final List<ReportResponseModel> reports;
+  GetReportsSuccess(this.reports);
+}
+class GetReportsFailure extends ReportManagerState {
+  final String errMessage;
+  GetReportsFailure(this.errMessage);
+}
+
+class CreateReportLoading extends ReportManagerState {}
+class CreateReportSuccess extends ReportManagerState {
   final String message;
   CreateReportSuccess(this.message);
 }
-
-class CreateReportFailure extends CreateReportState {
+class CreateReportFailure extends ReportManagerState {
   final String errMessage;
   CreateReportFailure(this.errMessage);
 }

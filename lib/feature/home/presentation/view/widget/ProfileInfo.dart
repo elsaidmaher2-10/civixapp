@@ -2,8 +2,10 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:citifix/core/database/local/prefmanger.dart';
 import 'package:citifix/core/resource/assetvaluemanger.dart';
 import 'package:citifix/core/resource/colormanager.dart';
+import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/core/widget/CustomSnackBar.dart';
 import 'package:citifix/feature/home/presentation/manager/userinfoManger/user_profile_info_cubit.dart';
@@ -45,7 +47,7 @@ class ProfileInfo extends StatelessWidget {
       builder: (context, state) {
         if (state is UserProfileInfoSuccess) {
           final user = state.user;
-
+          PrefrenceManager().setstring(Constantmanger.userid, user.id);
           return Column(
             children: [
               SizedBox(height: ScreenUtilsManager.h32),

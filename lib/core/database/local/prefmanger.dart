@@ -14,7 +14,7 @@ class PrefrenceManager {
   }
 
   void setstring(key, value) async {
-    await _pref.setString(key, value);
+    await _pref.setString(key, value.toString());
   }
 
   String? getstring(key) {

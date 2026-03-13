@@ -1,3 +1,4 @@
+import 'dart:developer';
 
 import 'package:citifix/core/DI/getit.dart';
 import 'package:citifix/core/database/local/prefmanger.dart';
@@ -15,7 +16,10 @@ void main() async {
   bool falg =
       PrefrenceManager().getbool(Constantmanger.isOnboardingViewed) ?? false;
 
-  String? access = PrefrenceManager().getstring(Constantmanger.refreshToken);
+  String? access = PrefrenceManager().getstring(Constantmanger.accessToken);
+  String? userid = PrefrenceManager().getstring(Constantmanger.userid);
+
+  log(userid.toString());
 
   bool isAuth = access == null ? false : true;
 
@@ -54,6 +58,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-
-

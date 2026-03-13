@@ -1,5 +1,9 @@
+import 'package:citifix/core/DI/getit.dart';
+import 'package:citifix/core/database/remote/api/ApiService.dart';
 import 'package:citifix/core/resource/colormanager.dart';
+import 'package:citifix/feature/home/data/Repos/reports/reports.dart';
 import 'package:citifix/feature/home/presentation/manager/navbarManger/mange_custom_bottomnav_bar_cubit.dart';
+import 'package:citifix/feature/home/presentation/manager/reportManger/cubit/report_manager_cubit.dart';
 import 'package:citifix/feature/home/presentation/view/widget/AddReportScreen.dart';
 import 'package:citifix/feature/home/presentation/view/widget/Customnavarbar.dart';
 import 'package:flutter/material.dart';
@@ -19,8 +23,14 @@ class Mainscreen extends StatefulWidget {
 class _MainscreenState extends State<Mainscreen> {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => MangeCustomBottomnavBarCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => MangeCustomBottomnavBarCubit()),
+        BlocProvider(
+          create: (context) =>
+              ReportCubit(getIt<ReportRepository>())..fetchReports(),
+        ),
+      ],
       child: Builder(
         builder: (BuildContext context) =>
             BlocBuilder<

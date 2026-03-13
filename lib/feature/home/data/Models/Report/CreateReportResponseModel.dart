@@ -1,55 +1,37 @@
-class ReportResponse {
-  final bool success;
-  final String? message;
-  final ReportData? data;
-
-  ReportResponse({required this.success, this.message, this.data});
-
-  factory ReportResponse.fromJson(Map<String, dynamic> json) {
-    return ReportResponse(
-      success: json['success'] ?? false,
-      message: json['message'],
-      data: json['data'] != null ? ReportData.fromJson(json['data']) : null,
-    );
-  }
-}
-
-class ReportData {
+class ReportResponseModel {
   final int id;
   final String title;
   final String description;
+  final String categoryName;
+  final String status;
   final String location;
-  final double latitude;
-  final double longitude;
-  final int categoryId;
-  final List<String> images;
-  final DateTime? createdAt;
+  final String citizenName;
+  final DateTime createdAt;
+  final List<String> imagesUrls;
 
-  ReportData({
+  ReportResponseModel({
     required this.id,
     required this.title,
     required this.description,
+    required this.categoryName,
+    required this.status,
     required this.location,
-    required this.latitude,
-    required this.longitude,
-    required this.categoryId,
-    this.images = const [],
-    this.createdAt,
+    required this.citizenName,
+    required this.createdAt,
+    required this.imagesUrls,
   });
 
-  factory ReportData.fromJson(Map<String, dynamic> json) {
-    return ReportData(
-      id: json['id'],
+  factory ReportResponseModel.fromJson(Map<String, dynamic> json) {
+    return ReportResponseModel(
+      id: json['id'] ?? 0,
       title: json['title'] ?? '',
       description: json['description'] ?? '',
+      categoryName: json['categoryName'] ?? '',
+      status: json['status'] ?? '',
       location: json['location'] ?? '',
-      latitude: (json['latitude'] as num).toDouble(),
-      longitude: (json['longitude'] as num).toDouble(),
-      categoryId: json['categoryId'],
-      images: List<String>.from(json['images'] ?? []),
-      createdAt: json['createdAt'] != null
-          ? DateTime.parse(json['createdAt'])
-          : null,
+      citizenName: json['citizenName'] ?? '',
+      createdAt: DateTime.parse(json['createdAt']),
+      imagesUrls: List<String>.from(json['imagesUrls'] ?? []),
     );
   }
 }

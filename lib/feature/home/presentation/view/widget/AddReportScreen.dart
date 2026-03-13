@@ -68,7 +68,7 @@ class _AddReportScreenState extends State<AddReportScreen> {
       isValid =
           titleController.text.isNotEmpty &&
           descriptionController.text.isNotEmpty &&
-          controller?.value != -1;
+          categoryitem != -1;
     });
     buttonStatusController.add(isValid);
   }
@@ -84,8 +84,8 @@ class _AddReportScreenState extends State<AddReportScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => CreateReportCubit(getIt<ReportRepository>()),
-      child: BlocConsumer<CreateReportCubit, CreateReportState>(
+      create: (context) => ReportCubit(getIt<ReportRepository>()),
+      child: BlocConsumer<ReportCubit, ReportManagerState>(
         listener: (context, state) {
           if (state is CreateReportSuccess) {
             Customsnackbar.show(
@@ -124,6 +124,7 @@ class _AddReportScreenState extends State<AddReportScreen> {
                             onCategoryChanged: (p1) {
                               setState(() {
                                 categoryitem = p1?.id ?? -1;
+                                controller?.value = p1;
                                 updateButtonStatus();
                               });
                             },
@@ -163,27 +164,23 @@ class _AddReportScreenState extends State<AddReportScreen> {
                             onPressed:
                                 (isValid && state is! CreateReportLoading)
                                 ? () {
-                                    context
-                                        .read<CreateReportCubit>()
-                                        .createReport(
-                                          request: CreateReportRequest(
-                                            title: titleController.text,
-                                            description:
-                                                descriptionController.text,
-                                            location:
-                                                selectedStreet ??
-                                                'Unknown Location',
-                                            latitude:
-                                                selectedLatLng?.latitude ?? 0.0,
-                                            longitude:
-                                                selectedLatLng?.longitude ??
-                                                0.0,
-                                            categoryId: categoryitem,
-                                            images: images!
-                                                .map((e) => e.path)
-                                                .toList(),
-                                          ),
-                                        );
+                                    context.read<ReportCubit>().createReport(
+                                      request: CreateReportRequest(
+                                        title: titleController.text,
+                                        description: descriptionController.text,
+                                        location:
+                                            selectedStreet ??
+                                            'Unknown Location',
+                                        latitude:
+                                            selectedLatLng?.latitude ?? 0.0,
+                                        longitude:
+                                            selectedLatLng?.longitude ?? 0.0,
+                                        categoryId: categoryitem,
+                                        images: images!
+                                            .map((e) => e.path)
+                                            .toList(),
+                                      ),
+                                    );
                                   }
                                 : null,
                             lable: Constantmanger.sendReport,

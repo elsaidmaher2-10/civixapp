@@ -1,6 +1,7 @@
 class UserProfile {
-  String? id;
+  int? id;
   String? username;
+  String? userId;
   String? email;
   String? role;
   String? fullName;
@@ -24,12 +25,14 @@ class UserProfile {
     this.phoneNumber,
     this.address,
     this.verified,
+    this.userId,
     this.profileImage,
   });
 
   factory UserProfile.fromJson(Map<String, dynamic> json) {
     return UserProfile(
-      id: json['id'],
+      id: json['citizenId'],
+      userId: json['userId'],
       username: json['username'],
       email: json['email'],
       role: json['role'],
