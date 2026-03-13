@@ -3,8 +3,8 @@ import 'package:citifix/core/resource/colormanager.dart';
 import 'package:flutter/material.dart';
 
 class ResendCodeOpt extends StatefulWidget {
-  ResendCodeOpt({super.key, required this.resend});
-  Function() resend;
+ const ResendCodeOpt({super.key, required this.resend});
+ final Function() resend;
   @override
   State<ResendCodeOpt> createState() => _ResendCodeOptState();
 }
