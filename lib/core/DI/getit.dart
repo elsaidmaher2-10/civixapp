@@ -2,6 +2,7 @@ import 'package:citifix/core/database/remote/api/ApiService.dart';
 import 'package:citifix/core/service/networkchecker.dart';
 import 'package:citifix/feature/home/data/Repos/UserProfileRepos/userprofileRepos.dart';
 import 'package:citifix/feature/home/data/Repos/reports/reports.dart';
+import 'package:citifix/feature/home/presentation/manager/reportManger/cubit/report_manager_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
@@ -13,6 +14,9 @@ void setupgetit() {
 
   getIt.registerSingleton<Userprofilerepos>(
     Userprofilerepos(getIt<Apiservice>(), getIt<InternetChecker>()),
+  );
+  getIt.registerLazySingleton<ReportCubit>(
+    () => ReportCubit(getIt<ReportRepository>()),
   );
   getIt.registerSingleton<ReportRepository>(
     ReportRepository(

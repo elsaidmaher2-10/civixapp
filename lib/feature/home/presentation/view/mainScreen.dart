@@ -9,8 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-final GlobalKey<NavigatorState> mainscreenKey = GlobalKey<NavigatorState>();
-
 class Mainscreen extends StatefulWidget {
   const Mainscreen({mainscreenKey});
 
@@ -24,10 +22,6 @@ class _MainscreenState extends State<Mainscreen> {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => MangeCustomBottomnavBarCubit()),
-        BlocProvider(
-          create: (context) =>
-              ReportCubit(getIt<ReportRepository>())..fetchReports(),
-        ),
       ],
       child: Builder(
         builder: (BuildContext context) =>

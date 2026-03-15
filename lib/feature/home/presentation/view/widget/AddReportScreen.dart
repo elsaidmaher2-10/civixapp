@@ -83,152 +83,149 @@ class _AddReportScreenState extends State<AddReportScreen> {
   @override
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ReportCubit(getIt<ReportRepository>()),
-      child: BlocConsumer<ReportCubit, ReportManagerState>(
-        listener: (context, state) {
-          if (state is CreateReportSuccess) {
-            Customsnackbar.show(
-              context: context,
-              backgroundColor: ColorManger.green,
-              message: state.message,
-            );
-            Navigator.pop(context);
-          } else if (state is CreateReportFailure) {
-            Customsnackbar.show(
-              context: context,
-              backgroundColor: ColorManger.red,
-              message: state.errMessage,
-            );
-          }
-        },
-        builder: (context, state) {
-          return Scaffold(
-            backgroundColor: ColorManger.white,
-            appBar: AddReportAppbar(context),
-            body: Stack(
-              children: [
-                SafeArea(
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: ScreenUtilsManager.p23,
+    return BlocConsumer<ReportCubit, ReportManagerState>(
+      listener: (context, state) async {
+        if (state is CreateReportSuccess) {
+          Customsnackbar.show(
+            context: context,
+            backgroundColor: ColorManger.green,
+            message: state.message,
+          );
+          Navigator.pop(context);
+        } else if (state is CreateReportFailure) {
+          Customsnackbar.show(
+            context: context,
+            backgroundColor: ColorManger.red,
+            message: state.errMessage,
+          );
+        }
+      },
+      builder: (context, state) {
+        return Scaffold(
+          backgroundColor: ColorManger.white,
+          appBar: AddReportAppbar(context),
+          body: Stack(
+            children: [
+              SafeArea(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: ScreenUtilsManager.p23,
+                  ),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(height: ScreenUtilsManager.h40),
+                        ReportFormFields(
+                          titleController: titleController,
+                          descriptionController: descriptionController,
+                          onCategoryChanged: (p1) {
+                            setState(() {
+                              categoryitem = p1?.id ?? -1;
+                              controller?.value = p1;
+                              updateButtonStatus();
+                            });
+                          },
+                          controller: controller,
+                        ),
+                        SizedBox(height: ScreenUtilsManager.h16),
+                        ImagePickerList(
+                          images: images?.map((e) => File(e.path)).toList(),
+                          onAddImage: pickImages,
+                          stream: streamController.stream,
+                          onRemove: (int index) {
+                            setState(() {
+                              images?.removeAt(index);
+                            });
+                            streamController.add(
+                              images?.map((e) => File(e.path)).toList() ?? [],
+                            );
+                          },
+                        ),
+                        SizedBox(height: ScreenUtilsManager.h16),
+                        Text(
+                          Constantmanger.location,
+                          style: TextStyle(
+                            color: ColorManger.kprimary,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(height: ScreenUtilsManager.h16),
+                        CustomMap(
+                          onmapCreated: (String street, LatLng latlang) {
+                            selectedStreet = street;
+                            selectedLatLng = latlang;
+                          },
+                        ),
+                        SizedBox(height: ScreenUtilsManager.h16),
+                        CustomButton(
+                          onPressed:
+                              (isValid && state is! CreateReportLoading)
+                              ? () {
+                                  context.read<ReportCubit>().createReport(
+                                    request: CreateReportRequest(
+                                      title: titleController.text,
+                                      description: descriptionController.text,
+                                      location:
+                                          selectedStreet ??
+                                          'Unknown Location',
+                                      latitude:
+                                          selectedLatLng?.latitude ?? 0.0,
+                                      longitude:
+                                          selectedLatLng?.longitude ?? 0.0,
+                                      categoryId: categoryitem,
+                                      images: images!
+                                          .map((e) => e.path)
+                                          .toList(),
+                                    ),
+                                  );
+                                }
+                              : null,
+                          lable: Constantmanger.sendReport,
+                        ),
+                        SizedBox(height: ScreenUtilsManager.h16),
+                      ],
                     ),
-                    child: SingleChildScrollView(
+                  ),
+                ),
+              ),
+    
+              if (state is CreateReportLoading)
+                Container(
+                  width: double.infinity,
+                  height: double.infinity,
+                  color: Colors.black.withOpacity(0.5),
+                  child: Center(
+                    child: Container(
+                      padding: const EdgeInsets.all(30),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(15),
+                      ),
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
                         children: [
-                          SizedBox(height: ScreenUtilsManager.h40),
-                          ReportFormFields(
-                            titleController: titleController,
-                            descriptionController: descriptionController,
-                            onCategoryChanged: (p1) {
-                              setState(() {
-                                categoryitem = p1?.id ?? -1;
-                                controller?.value = p1;
-                                updateButtonStatus();
-                              });
-                            },
-                            controller: controller,
+                          const CupertinoActivityIndicator(
+                            radius: 20,
+                            color: ColorManger.kprimary,
                           ),
-                          SizedBox(height: ScreenUtilsManager.h16),
-                          ImagePickerList(
-                            images: images?.map((e) => File(e.path)).toList(),
-                            onAddImage: pickImages,
-                            stream: streamController.stream,
-                            onRemove: (int index) {
-                              setState(() {
-                                images?.removeAt(index);
-                              });
-                              streamController.add(
-                                images?.map((e) => File(e.path)).toList() ?? [],
-                              );
-                            },
-                          ),
-                          SizedBox(height: ScreenUtilsManager.h16),
-                          Text(
-                            Constantmanger.location,
+                          const SizedBox(height: 15),
+                          const Text(
+                            "Sending Report...",
                             style: TextStyle(
-                              color: ColorManger.kprimary,
                               fontWeight: FontWeight.bold,
+                              color: Colors.black,
                             ),
                           ),
-                          SizedBox(height: ScreenUtilsManager.h16),
-                          CustomMap(
-                            onmapCreated: (String street, LatLng latlang) {
-                              selectedStreet = street;
-                              selectedLatLng = latlang;
-                            },
-                          ),
-                          SizedBox(height: ScreenUtilsManager.h16),
-                          CustomButton(
-                            onPressed:
-                                (isValid && state is! CreateReportLoading)
-                                ? () {
-                                    context.read<ReportCubit>().createReport(
-                                      request: CreateReportRequest(
-                                        title: titleController.text,
-                                        description: descriptionController.text,
-                                        location:
-                                            selectedStreet ??
-                                            'Unknown Location',
-                                        latitude:
-                                            selectedLatLng?.latitude ?? 0.0,
-                                        longitude:
-                                            selectedLatLng?.longitude ?? 0.0,
-                                        categoryId: categoryitem,
-                                        images: images!
-                                            .map((e) => e.path)
-                                            .toList(),
-                                      ),
-                                    );
-                                  }
-                                : null,
-                            lable: Constantmanger.sendReport,
-                          ),
-                          SizedBox(height: ScreenUtilsManager.h16),
                         ],
                       ),
                     ),
                   ),
                 ),
-
-                if (state is CreateReportLoading)
-                  Container(
-                    width: double.infinity,
-                    height: double.infinity,
-                    color: Colors.black.withOpacity(0.5),
-                    child: Center(
-                      child: Container(
-                        padding: const EdgeInsets.all(30),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            const CupertinoActivityIndicator(
-                              radius: 20,
-                              color: ColorManger.kprimary,
-                            ),
-                            const SizedBox(height: 15),
-                            const Text(
-                              "Sending Report...",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-              ],
-            ),
-          );
-        },
-      ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

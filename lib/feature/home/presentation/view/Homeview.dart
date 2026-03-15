@@ -23,132 +23,154 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorManger.Lightgrey5,
-      appBar: const MainscreenAppbar(),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(height: ScreenUtilsManager.h24),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: ScreenUtilsManager.w16),
-            child: Row(
-              children: [
-                SvgPicture.asset(AssetValueManager.overVeiw),
-                SizedBox(width: ScreenUtilsManager.w8),
-                Text(
-                  Constantmanger.overview,
-                  style: GoogleFonts.publicSans(
-                    letterSpacing: -0.8,
-                    color: ColorManger.kprimarydark,
-                    fontWeight: FontWeight.w700,
-                    fontSize: ScreenUtilsManager.s20,
-                  ),
+      appBar: MainscreenAppbar(),
+      body: RefreshIndicator.adaptive(
+        backgroundColor: Colors.white,
+        color: ColorManger.Lightblue,
+
+        onRefresh: () async {
+          await context.read<ReportCubit>().fetchReports();
+        },
+        child: SingleChildScrollView(
+          physics: const AlwaysScrollableScrollPhysics(),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: ScreenUtilsManager.h24),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: ScreenUtilsManager.w16,
                 ),
-              ],
-            ),
-          ),
-          SizedBox(height: ScreenUtilsManager.h16),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: ScreenUtilsManager.w16),
-            child: Row(
-              children: [
-                Expanded(
-                  child: StatusCard(
-                    color: ColorManger.kprimary,
-                    number: 15, // Later: state.reports.length
-                    title: Constantmanger.kActive,
-                    iconPath: AssetValueManager.active,
-                    iconcolor: ColorManger.kprimary,
-                  ),
+                child: Row(
+                  children: [
+                    SvgPicture.asset(AssetValueManager.overVeiw),
+                    SizedBox(width: ScreenUtilsManager.w8),
+                    Text(
+                      Constantmanger.overview,
+                      style: GoogleFonts.publicSans(
+                        letterSpacing: -0.8,
+                        color: ColorManger.kprimarydark,
+                        fontWeight: FontWeight.w700,
+                        fontSize: ScreenUtilsManager.s20,
+                      ),
+                    ),
+                  ],
                 ),
-                SizedBox(width: 15.w),
-                Expanded(
-                  child: StatusCard(
-                    color: ColorManger.orange,
-                    number: 10,
-                    title: Constantmanger.kPending,
-                    iconPath: AssetValueManager.pending,
-                    iconcolor: ColorManger.orange,
-                  ),
+              ),
+              SizedBox(height: ScreenUtilsManager.h16),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: ScreenUtilsManager.w16,
                 ),
-                SizedBox(width: 15.w),
-                Expanded(
-                  child: StatusCard(
-                    number: 20,
-                    title: Constantmanger.kCompleted,
-                    iconPath: AssetValueManager.resolved,
-                    color: ColorManger.green,
-                    iconcolor: ColorManger.green,
-                  ),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: StatusCard(
+                        color: ColorManger.kprimary,
+                        number: 15,
+                        title: Constantmanger.kActive,
+                        iconPath: AssetValueManager.active,
+                        iconcolor: ColorManger.kprimary,
+                      ),
+                    ),
+                    SizedBox(width: 15.w),
+                    Expanded(
+                      child: StatusCard(
+                        color: ColorManger.orange,
+                        number: 10,
+                        title: Constantmanger.kPending,
+                        iconPath: AssetValueManager.pending,
+                        iconcolor: ColorManger.orange,
+                      ),
+                    ),
+                    SizedBox(width: 15.w),
+                    Expanded(
+                      child: StatusCard(
+                        number: 20,
+                        title: Constantmanger.kCompleted,
+                        iconPath: AssetValueManager.resolved,
+                        color: ColorManger.green,
+                        iconcolor: ColorManger.green,
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-          ),
-          SizedBox(height: ScreenUtilsManager.h22),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: ScreenUtilsManager.w16),
-            child: Row(
-              children: [
-                Text(
-                  Constantmanger.recenreport,
-                  style: GoogleFonts.publicSans(
-                    fontSize: ScreenUtilsManager.s18,
-                    fontWeight: FontWeight.bold,
-                    color: ColorManger.kprimarydark,
-                  ),
+              ),
+              SizedBox(height: ScreenUtilsManager.h22),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: ScreenUtilsManager.w16,
                 ),
-                const Spacer(),
-                TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (ctx) => BlocProvider.value(
-                          value: context.read<ReportCubit>(),
-                          child: ReportsPage(),
+                child: Row(
+                  children: [
+                    Text(
+                      Constantmanger.recenreport,
+                      style: GoogleFonts.publicSans(
+                        fontSize: ScreenUtilsManager.s18,
+                        fontWeight: FontWeight.bold,
+                        color: ColorManger.kprimarydark,
+                      ),
+                    ),
+                    const Spacer(),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (ctx) => ReportsPage()),
+                        );
+                      },
+                      child: Text(
+                        Constantmanger.seeall,
+                        style: GoogleFonts.publicSans(
+                          fontSize: ScreenUtilsManager.s14,
                         ),
                       ),
-                    );
-                  },
-                  child: Text(
-                    Constantmanger.seeall,
-                    style: GoogleFonts.publicSans(
-                      fontSize: ScreenUtilsManager.s14,
                     ),
-                  ),
+                  ],
                 ),
-              ],
-            ),
-          ),
-          SizedBox(height: ScreenUtilsManager.h22),
-          Expanded(
-            child: BlocBuilder<ReportCubit, ReportManagerState>(
-              builder: (context, state) {
-                if (state is GetReportsLoading) {
-                  return const Center(
-                    child: SpinKitWaveSpinner(color: ColorManger.lightcolor),
-                  );
-                } else if (state is GetReportsSuccess) {
-                  final recentReports = state.reports;
+              ),
+              SizedBox(height: ScreenUtilsManager.h22),
+              BlocBuilder<ReportCubit, ReportManagerState>(
+                builder: (context, state) {
+                  // 1. معالجة حالة التحميل لأول مرة فقط
+                  if (state is GetReportsLoading) {
+                    return const Center(
+                      child: SpinKitWaveSpinner(color: ColorManger.lightcolor),
+                    );
+                  }
+
+                  // 2. معالجة حالة الفشل
+                  if (state is GetReportsFailure) {
+                    return Center(child: Text(state.errMessage));
+                  }
+
+                  // 3. عرض البيانات (في حالة النجاح أو في حالة الإضافة)
+                  List reports = [];
+                  if (state is GetReportsSuccess) {
+                    reports = state.reports;
+                  } else if (state is CreateReportSuccess ||
+                      state is CreateReportLoading) {}
+
+                  if (reports.isEmpty && state is! CreateReportLoading) {
+                    return const Center(child: Text("No reports found"));
+                  }
 
                   return ListView.separated(
-                    reverse: false,
+                    key: ValueKey(reports.length),
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
                     padding: const EdgeInsets.only(bottom: 40),
-                    itemCount: recentReports.length > 3
-                        ? 3
-                        : recentReports.length,
+                    itemCount: reports.length > 3 ? 3 : reports.length,
                     itemBuilder: (context, index) =>
-                        Reportcard(report: recentReports[index]),
+                        Reportcard(report: reports[index]),
                     separatorBuilder: (context, index) =>
                         SizedBox(height: 10.h),
                   );
-                } else if (state is GetReportsFailure) {
-                  return Center(child: Text(state.errMessage));
-                }
-                return const Center(child: Text("Load your reports"));
-              },
-            ),
+                },
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

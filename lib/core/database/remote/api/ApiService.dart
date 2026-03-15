@@ -5,6 +5,7 @@ import 'package:citifix/core/database/remote/api/ApihanderDioExcp.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/routing/routes.dart';
 import 'package:citifix/feature/home/presentation/view/mainScreen.dart';
+import 'package:citifix/main.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -33,16 +34,16 @@ class Apiservice extends Apiconsumer {
         onError: _onError,
       ),
 
-      PrettyDioLogger(
-        requestHeader: true,
-        requestBody: true,
-        responseBody: true,
-        responseHeader: false,
-        error: true,
-        compact: true,
-        maxWidth: 90,
-        enabled: kDebugMode,
-      ),
+      // PrettyDioLogger(
+      //   requestHeader: true,
+      //   requestBody: true,
+      //   responseBody: true,
+      //   responseHeader: false,
+      //   error: true,
+      //   compact: true,
+      //   maxWidth: 90,
+      //   enabled: kDebugMode,
+      // ),
     ]);
   }
   @override
@@ -135,7 +136,7 @@ class Apiservice extends Apiconsumer {
       PrefrenceManager().remove(Constantmanger.accessToken);
       PrefrenceManager().remove(Constantmanger.refreshToken);
 
-      var context = mainscreenKey.currentContext;
+      var context = navigatorKey.currentContext;
       if (context != null) {
         Navigator.pushNamedAndRemoveUntil(
           context,
