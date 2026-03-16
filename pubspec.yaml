@@ -29,6 +29,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   animated_custom_dropdown: ^3.1.1
+  animated_hint_textfield: ^1.1.1
   cached_network_image: ^3.4.1
   connectivity_plus: ^7.0.0
   csc_picker_plus: ^0.0.3
@@ -59,6 +60,7 @@ dependencies:
   shared_preferences: ^2.5.3
   shimmer: ^3.0.0
   smooth_page_indicator: ^2.0.1
+  timeline_tile: ^2.0.0
   water_drop_nav_bar: ^2.2.2
 dev_dependencies:
   flutter_launcher_icons: "^0.14.4"

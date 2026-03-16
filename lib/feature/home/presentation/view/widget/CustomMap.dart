@@ -1,28 +1,88 @@
-import 'dart:core';
-
-import 'package:citifix/core/resource/screenutilsmaanger.dart';
-import 'package:citifix/core/service/LocationService.dart';
-import 'package:citifix/feature/home/presentation/view/widget/Animatedmarker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:geocoding/geocoding.dart';
-import 'package:location/location.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:location/location.dart';
+// Note: Ensure these imports match your actual file paths
+import 'package:citifix/core/service/LocationService.dart';
+import 'package:citifix/feature/home/presentation/view/widget/Animatedmarker.dart';
+import 'package:citifix/core/resource/screenutilsmaanger.dart';
 
 class CustomMap extends StatefulWidget {
-  const CustomMap({super.key, required this.onmapCreated});
-  final Function(String street, LatLng latlang) onmapCreated;
+  final Function(String street, LatLng latlng) onmapCreated;
+  final LatLng? initialPosition;
+  final String? initialStreet;
+  const CustomMap.fromDevice({super.key, required this.onmapCreated})
+    : initialPosition = null,
+      initialStreet = null;
+
+  const CustomMap.fromAPI({
+    super.key,
+    required this.onmapCreated,
+    required LatLng apiPosition,
+    required String location,
+  }) : initialPosition = apiPosition,
+       initialStreet = location;
 
   @override
   State<CustomMap> createState() => _CustomMapState();
 }
 
 class _CustomMapState extends State<CustomMap> with TickerProviderStateMixin {
-  final MapController mapController = MapController();
-  final Locationservice locationservice = Locationservice();
-  String street = "";
-  LatLng currentPosition = LatLng(31.410687579920204, 31.81590218785798);
+  final MapController _mapController = MapController();
+  final Locationservice _locationservice = Locationservice();
+
+  LatLng? _currentPosition;
+  String _street = "";
+
+  @override
+  void initState() {
+    super.initState();
+    _street = widget.initialStreet ?? "";
+    _initLocation();
+  }
+
+  Future<void> _initLocation() async {
+    try {
+      if (widget.initialPosition != null) {
+        _currentPosition = widget.initialPosition;
+      } else {
+        LocationData newLocation = await _locationservice.getLocationOce();
+        _currentPosition = LatLng(
+          newLocation.latitude!,
+          newLocation.longitude!,
+        );
+      }
+
+      if (_street.isEmpty && _currentPosition != null) {
+        await _updateStreet(_currentPosition!);
+      }
+
+      if (mounted) {
+        _mapController.move(_currentPosition!, 16);
+        widget.onmapCreated(_street, _currentPosition!);
+      }
+    } catch (e) {
+      debugPrint("Error initializing map: $e");
+    }
+  }
+
+  Future<void> _updateStreet(LatLng position) async {
+    try {
+      List<Placemark> placemarks = await placemarkFromCoordinates(
+        position.latitude,
+        position.longitude,
+      );
+
+      if (placemarks.isNotEmpty) {
+        final place = placemarks.first;
+        _street = "${place.street ?? ''} ${place.subAdministrativeArea ?? ''}"
+            .trim();
+      }
+    } catch (e) {
+      _street = "Unknown location";
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,63 +92,57 @@ class _CustomMapState extends State<CustomMap> with TickerProviderStateMixin {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            height: 200.h,
-            child: FlutterMap(
-              mapController: mapController,
-              options: MapOptions(
-                initialCenter: currentPosition,
-                initialZoom: 8,
-                onMapReady: () async {
-                  LocationData newLocation = await locationservice
-                      .getLocationOce();
-                  currentPosition = LatLng(
-                    newLocation.latitude!,
-                    newLocation.longitude!,
-                  );
-
-
-                  List<Placemark> placemarks = await placemarkFromCoordinates(
-                    newLocation.latitude!,
-                    newLocation.longitude!,
-                  );
-
-                  street =
-                      "${placemarks.map((e) => e.name).toList().first}  ${placemarks.map((e) => e.subAdministrativeArea).toList().last}";
-                  widget.onmapCreated(street, currentPosition);
-                  setState(() {
-                    mapController.move(currentPosition, 14);
-                  });
-                },
-              ),
+            height: ScreenUtilsManager.h200,
+            child: Stack(
               children: [
-                TileLayer(
-                  urlTemplate: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
-                  userAgentPackageName: 'com.example.citifix',
-                ),
-                MarkerLayer(
-                  markers: [
-                    Marker(point: currentPosition, child: AnimatedMarker()),
+                FlutterMap(
+                  mapController: _mapController,
+                  options: MapOptions(
+                    initialCenter:
+                        _currentPosition ?? const LatLng(31.4106, 31.8159),
+                    initialZoom: 14,
+                  ),
+                  children: [
+                    TileLayer(
+                      urlTemplate:
+                          "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                      userAgentPackageName: 'com.example.citifix',
+                    ),
+                    if (_currentPosition != null)
+                      MarkerLayer(
+                        markers: [
+                          Marker(
+                            point: _currentPosition!,
+                            width: 80,
+                            height: 80,
+                            child: const AnimatedMarker(),
+                          ),
+                        ],
+                      ),
                   ],
                 ),
               ],
             ),
           ),
-          SizedBox(height: 10.h),
-          street.isEmpty
-              ? SizedBox.shrink()
-              : Row(
-                  children: [
-                    Icon(Icons.place_outlined, color: Color(0xff475569)),
-                    SizedBox(width: 5),
-                    Text(
-                      street,
-                      style: TextStyle(
-                        color: Color(0xff475569),
-                        fontSize: ScreenUtilsManager.s14,
-                      ),
+          if (_street.isNotEmpty) ...[
+            SizedBox(height: ScreenUtilsManager.h10),
+            Row(
+              children: [
+                const Icon(Icons.place_outlined, color: Color(0xff475569)),
+                const SizedBox(width: 5),
+                Expanded(
+                  child: Text(
+                    _street,
+                    style: TextStyle(
+                      color: const Color(0xff475569),
+                      fontSize: ScreenUtilsManager.s14,
                     ),
-                  ],
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
+              ],
+            ),
+          ],
         ],
       ),
     );

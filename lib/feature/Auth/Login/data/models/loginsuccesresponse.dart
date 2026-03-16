@@ -1,8 +1,7 @@
-
-
 class Loginsuccesresponse {
   bool isAuthenticated;
   String message;
+  int id;
   String Email;
   String role;
   String fullName;
@@ -10,6 +9,7 @@ class Loginsuccesresponse {
   String refreshTokenExpiration;
   String refreshToken;
   Loginsuccesresponse({
+    required this.id,
     required this.fullName,
     required this.message,
     required this.refreshTokenExpiration,
@@ -21,6 +21,7 @@ class Loginsuccesresponse {
   });
   factory Loginsuccesresponse.fromjosn(json) {
     return Loginsuccesresponse(
+      id: json["id"],
       Email: json["email"],
       accessToken: json["accessToken"],
       isAuthenticated: json["isAuthenticated"],

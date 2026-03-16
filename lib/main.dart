@@ -7,9 +7,7 @@ import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/routing/routes.dart';
 import 'package:citifix/core/routing/routingmanger.dart';
 import 'package:citifix/core/service/observer.dart';
-import 'package:citifix/feature/home/data/Repos/reports/reports.dart';
-import 'package:citifix/feature/home/presentation/manager/reportManger/cubit/report_manager_cubit.dart';
-import 'package:citifix/feature/home/presentation/view/widget/ReportCard.dart';
+import 'package:citifix/feature/reports/presentation/manager/reportManger/cubit/report_manager_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -21,21 +19,10 @@ void main() async {
   await PrefrenceManager().init();
   bool falg =
       PrefrenceManager().getbool(Constantmanger.isOnboardingViewed) ?? false;
-
   String? access = PrefrenceManager().getstring(Constantmanger.accessToken);
-  String? userid = PrefrenceManager().getstring(Constantmanger.userid);
-
   log(access.toString());
-
   bool isAuth = access == null ? false : true;
-
-  runApp(
-    BlocProvider<ReportCubit>(
-      lazy: false,
-      create: (context) => getIt<ReportCubit>()..fetchReports(),
-      child: MyApp(falg: falg, isAuth: isAuth),
-    ),
-  );
+  runApp(MyApp(falg: falg, isAuth: isAuth));
 }
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -50,25 +37,30 @@ class MyApp extends StatelessWidget {
       designSize: const Size(393, 852),
       minTextAdapt: true,
       splitScreenMode: true,
-      child: MaterialApp(
-        navigatorKey: navigatorKey,
-        initialRoute: isAuth == true
-            ? Routes.mainscreen
-            : falg == true
-            ? Routes.login
-            : Routes.onbroading,
-        title: 'citifix',
-        themeMode: ThemeMode.light,
-        theme: ThemeData(
-          brightness: Brightness.light,
-          textSelectionTheme: TextSelectionThemeData(
-            selectionHandleColor: ColorManger.kprimary,
-            selectionColor: ColorManger.kprimary.withOpacity(0.2),
-            cursorColor: Colors.black,
+      child: BlocProvider<ReportCubit>(
+        lazy: false,
+        create: (context) => getIt<ReportCubit>(),
+
+        child: MaterialApp(
+          navigatorKey: navigatorKey,
+          initialRoute: isAuth == true
+              ? Routes.mainscreen
+              : falg == true
+              ? Routes.login
+              : Routes.onbroading,
+          title: 'citifix',
+          themeMode: ThemeMode.light,
+          theme: ThemeData(
+            brightness: Brightness.light,
+            textSelectionTheme: TextSelectionThemeData(
+              selectionHandleColor: ColorManger.kprimary,
+              selectionColor: ColorManger.kprimary.withOpacity(0.2),
+              cursorColor: Colors.black,
+            ),
           ),
+          debugShowCheckedModeBanner: false,
+          onGenerateRoute: Routingmanger.onGenerateRoute,
         ),
-        debugShowCheckedModeBanner: false,
-        onGenerateRoute: Routingmanger.onGenerateRoute,
       ),
     );
   }

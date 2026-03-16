@@ -1,8 +1,10 @@
 import 'dart:async';
+import 'package:citifix/core/DI/getit.dart';
 import 'package:citifix/core/database/local/prefmanger.dart';
 import 'package:citifix/core/widget/CustomSnackBar.dart';
 import 'package:citifix/feature/Auth/Login/presentation/manager/cubit/loginmanger_cubit.dart';
 import 'package:citifix/feature/Auth/Login/presentation/manager/cubit/loginmanger_state.dart';
+import 'package:citifix/feature/reports/presentation/manager/reportManger/cubit/report_manager_cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -71,13 +73,18 @@ class _LoginpageState extends State<Loginpage> {
                   Constantmanger.refreshTokenExpiration,
                   state.response.refreshTokenExpiration,
                 );
+                PrefrenceManager().setstring(
+                  Constantmanger.userid,
+                  state.response.id,
+                );
                 Customsnackbar.show(
                   context: context,
                   backgroundColor: ColorManger.green,
                   message: state.response.message,
                 );
+                await getIt<ReportCubit>().fetchReports();
                 await Future.delayed(
-                  Duration(seconds: 3),
+                  Duration(seconds: 1),
                   () => Navigator.pushNamed(context, Routes.mainscreen),
                 );
               }

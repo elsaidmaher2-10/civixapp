@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:citifix/feature/home/presentation/view/ProfileScreen.dart';
-import 'package:citifix/feature/home/presentation/view/ReportScreen.dart';
+import 'package:citifix/feature/Profile/presentation/view/ProfileScreen.dart';
+import 'package:citifix/feature/reports/presentation/views/ReportScreen.dart';
 import 'package:citifix/feature/home/presentation/view/Homeview.dart';
 import 'package:flutter/cupertino.dart';
 

@@ -34,11 +34,11 @@ class Apiservice extends Apiconsumer {
         onError: _onError,
       ),
 
-      // PrettyDioLogger(
+      // PrettyDioLogger(6
       //   requestHeader: true,
       //   requestBody: true,
       //   responseBody: true,
-      //   responseHeader: false,
+      //   responseHeader: false,6
       //   error: true,
       //   compact: true,
       //   maxWidth: 90,

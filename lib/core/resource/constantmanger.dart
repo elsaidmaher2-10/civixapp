@@ -1,3 +1,4 @@
+import 'package:citifix/feature/reports/data/Models/timelinestep/timelinestep.dart';
 import 'package:citifix/feature/onbroading/model/onbroadingmodel.dart';
 
 class Constantmanger {
@@ -165,4 +166,13 @@ class Constantmanger {
   static String reports = 'Reports';
 
   static String dateformate = 'dd MMM yyyy - hh:mm a';
+
+  static String reportDetails = "Report Details";
+
+  static List<TimelineStep> mySteps = [
+    TimelineStep(index: 0, title: "Report Received", isDone: true),
+    TimelineStep(index: 1, title: "Report Processed", isDone: false),
+    TimelineStep(index: 2, title: "Report Resolved", isDone: false),
+    TimelineStep(index: 3, title: "Report Rejected", isDone: false),
+  ];
 }
