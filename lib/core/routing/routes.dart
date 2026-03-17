@@ -7,4 +7,5 @@ class Routes {
   static const String confirmPassword = "/confirmPassword";
   static const String citizenMain = "/citizen-main";
   static const String workerMain = "/worker-main";
+  static const String editProfile = "/editProfile";
 }

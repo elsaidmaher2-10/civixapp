@@ -1,13 +1,22 @@
+import 'dart:convert';
+
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:citifix/core/database/local/prefmanger.dart';
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
+import 'package:citifix/feature/Profile/data/Models/UserProfileModel/userProfile.dart';
 import 'package:citifix/feature/Profile/presentation/view/widget/citzencardItem.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void showCitizenCard(context) async {
+  String? userinfoStr = PrefrenceManager().getstring("user_profile_data");
+  UserProfile? userProfile;
+  if (userinfoStr != null) {
+    userProfile = UserProfile.fromJson(jsonDecode(userinfoStr));
+  }
   await showCupertinoDialog(
     context: context,
     builder: (context) => Dialog(
@@ -22,7 +31,6 @@ void showCitizenCard(context) async {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              /// Header
               Container(
                 width: double.infinity,
                 color: ColorManger.kPrimary,
@@ -51,7 +59,6 @@ void showCitizenCard(context) async {
                 ),
               ),
 
-              /// Body
               Padding(
                 padding: EdgeInsets.symmetric(
                   horizontal: ScreenUtilsManager.h24,
@@ -66,7 +73,9 @@ void showCitizenCard(context) async {
                           fit: BoxFit.fill,
                           height: ScreenUtilsManager.w90,
                           width: ScreenUtilsManager.h120,
-                          imageUrl: Constantmanger.defualtImage,
+                          imageUrl:
+                              userProfile?.profileImage ??
+                              Constantmanger.defualtImage,
                         ),
                         SizedBox(width: ScreenUtilsManager.w12),
 
@@ -76,12 +85,12 @@ void showCitizenCard(context) async {
                             children: [
                               buildItem(
                                 Constantmanger.fullName,
-                                "Ahmed Mahmoud Hassan",
+                                userProfile?.fullName ?? "Ahmed Mahmoud Hassan",
                               ),
                               SizedBox(height: ScreenUtilsManager.h10),
                               buildItem(
                                 Constantmanger.nationalID,
-                                "29801011234567",
+                                userProfile?.nationalId ?? "29801011234567",
                               ),
                             ],
                           ),
@@ -97,9 +106,15 @@ void showCitizenCard(context) async {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              buildItem(Constantmanger.address, "Mansoura"),
+                              buildItem(
+                                Constantmanger.address,
+                                userProfile?.address ?? "Mansoura",
+                              ),
                               SizedBox(height: ScreenUtilsManager.h10),
-                              buildItem(Constantmanger.job, "Engineer"),
+                              buildItem(
+                                "DateBirth",
+                                userProfile?.dateOfBirth ?? "12-8-2004",
+                              ),
                             ],
                           ),
                         ),
@@ -110,7 +125,6 @@ void showCitizenCard(context) async {
                             children: [
                               buildItem(Constantmanger.gender, "Male"),
                               SizedBox(height: ScreenUtilsManager.h10),
-                              buildItem(Constantmanger.age, "25"),
                             ],
                           ),
                         ),

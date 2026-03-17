@@ -187,4 +187,6 @@ class Constantmanger {
   static const job = "Job";
   static const gender = "Gender";
   static const age = "Age";
+
+  static String editProfile = 'Edit Profile';
 }

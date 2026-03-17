@@ -38,6 +38,7 @@ class ScreenUtilsManager {
   static double get w18 => 18.w;
   static double get w24 => 24.w;
   static double get w32 => 32.w;
+  static double get w40 => 40.w;
   static double get w72 => 72.w;
   static double get w90 => 90.w;
   static double get w100 => 100.w;
@@ -67,4 +68,8 @@ class ScreenUtilsManager {
   static const double menuTop = 200;
   static const double menuRight = 0;
   static const double menuBottom = 0;
+
+  static double w128 = 128.w;
+
+  static double h128 = 128.h;
 }

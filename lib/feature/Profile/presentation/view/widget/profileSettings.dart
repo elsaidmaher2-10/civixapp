@@ -2,6 +2,7 @@ import 'package:citifix/core/resource/assetvaluemanger.dart';
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
+import 'package:citifix/core/routing/routes.dart';
 import 'package:citifix/feature/Profile/presentation/view/Function/ShowCitezenaCard.dart';
 import 'package:citifix/feature/Profile/presentation/view/Function/showLanguagePicker.dart';
 import 'package:citifix/feature/Profile/presentation/view/widget/ProfileMenu.dart';
@@ -52,6 +53,9 @@ class Profilesettings extends StatelessWidget {
                     title: Constantmanger.support,
                   ),
                   ProfileMenuItem(
+                    onTap: () {
+                      Navigator.pushNamed(context, Routes.editProfile);
+                    },
                     iconPath: AssetValueManager.accountinformation,
                     title: Constantmanger.accouninormation,
                   ),

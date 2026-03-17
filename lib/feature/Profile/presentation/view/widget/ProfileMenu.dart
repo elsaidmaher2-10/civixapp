@@ -23,8 +23,15 @@ class ProfileMenuItem extends StatelessWidget {
       children: [
         Container(
           decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Colors.white30,
+                offset: Offset(2, 10),
+                blurRadius: 15,
+              ),
+            ],
             borderRadius: BorderRadius.circular(ScreenUtilsManager.r8),
-            border: BoxBorder.all(color: ColorManger.lightGrey5, width: 2.w),
+            border: BoxBorder.all(color: ColorManger.lightGrey4, width: 2.w),
           ),
           child: ListTile(
             contentPadding: EdgeInsets.symmetric(

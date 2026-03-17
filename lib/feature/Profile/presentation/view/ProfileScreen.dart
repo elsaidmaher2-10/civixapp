@@ -2,9 +2,11 @@ import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/core/widget/customButton.dart';
+import 'package:citifix/feature/Profile/data/Models/UserProfileModel/userProfile.dart';
 import 'package:citifix/feature/Profile/presentation/manager/controller/imageController.dart';
 import 'package:citifix/feature/Profile/presentation/manager/userinfoManger/user_profile_info_cubit.dart';
 import 'package:citifix/feature/Profile/presentation/view/widget/ProfileInfo.dart';
+import 'package:citifix/feature/Profile/presentation/view/widget/customImagePicker.dart';
 import 'package:citifix/feature/Profile/presentation/view/widget/image_picker_menu.dart';
 import 'package:citifix/feature/Profile/presentation/view/widget/profileSettings.dart';
 import 'package:flutter/material.dart';
@@ -13,14 +15,13 @@ import 'package:google_fonts/google_fonts.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: ColorManger.white,
+        backgroundColor: ColorManger.bgLight,
         appBar: AppBar(
-          backgroundColor: ColorManger.white,
+          backgroundColor: ColorManger.bgLight,
           title: Text(
             Constantmanger.proile,
             style: GoogleFonts.inter(
@@ -34,9 +35,10 @@ class ProfileScreen extends StatelessWidget {
         body: BlocListener<UserProfileInfoCubit, UserProfileInfoState>(
           listener: (context, state) {
             if (state is UserProfileImageUpdatedSuccess ||
+
                 state is UserProfileInfoError) {
               ImagePickerController().reset();
-            }
+            }else{}
           },
           child: SingleChildScrollView(
             child: Column(

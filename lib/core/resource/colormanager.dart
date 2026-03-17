@@ -5,6 +5,7 @@ class ColorManger {
   static const Color kPrimary = Color(0xff003366);
   static const Color kPrimaryDark = Color(0xff0F172A);
   static const Color kPrimaryLight = Color.fromARGB(204, 112, 167, 222);
+  static const Color bgLight = Color(0xFFF8F6F6);
 
   static const Color lightGrey = Color(0xff505050);
   static const Color lightGrey2 = Color(0xff828282);

@@ -5,6 +5,7 @@ import 'package:citifix/feature/Auth/confirmpassword/presentation/view/Confirmpa
 import 'package:citifix/feature/Auth/foregetpassword/presentation/views/foregetpassword.dart';
 import 'package:citifix/feature/Auth/otpverifcation/presentation/view/otpvrificationcode.dart';
 import 'package:citifix/feature/Auth/register/presentation/views/signupwidget.dart';
+import 'package:citifix/feature/Profile/presentation/view/widget/editprofile.dart';
 import 'package:citifix/feature/home/presentation/view/mainScreen.dart';
 import 'package:citifix/feature/onbroading/onbroading.dart';
 import 'package:flutter/material.dart';
@@ -30,6 +31,11 @@ class Routingmanger {
         return MaterialPageRoute(
           settings: route,
           builder: (_) => CreatePasswordScreen(),
+        );
+      case Routes.editProfile:
+        return MaterialPageRoute(
+          settings: route,
+          builder: (_) => EditProfileScreen(),
         );
       case Routes.citizenMain:
         return _noPopRoute(child: CitizenMainScreen());

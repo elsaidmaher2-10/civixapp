@@ -14,6 +14,7 @@ class MainscreenAppbar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      elevation: 3,
       title: Row(
         children: [
           SvgPicture.asset(
@@ -42,7 +43,7 @@ class MainscreenAppbar extends StatelessWidget implements PreferredSizeWidget {
         SizedBox(width: ScreenUtilsManager.w18),
       ],
       toolbarHeight: ScreenUtilsManager.h61,
-      backgroundColor: Color(0xffE2E8F0),
+      backgroundColor: ColorManger.bgLight,
     );
   }
 

@@ -24,7 +24,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorManger.lightGrey2,
+      backgroundColor: ColorManger.bgLight,
       appBar: MainscreenAppbar(),
       body: BlocBuilder<ReportCubit, ReportManagerState>(
         builder: (context, state) {

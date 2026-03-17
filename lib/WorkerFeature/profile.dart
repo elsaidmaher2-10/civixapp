@@ -21,14 +21,12 @@ class _WorkerProfileScreenState extends State<WorkerProfileScreen> {
         child: Stack(
           children: [
 
-            // ── Main Content ───────────────────────────────────────────
             SingleChildScrollView(
               padding: const EdgeInsets.only(bottom: 100),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
 
-                  // ── Header ─────────────────────────────────────────────
                   Container(
                     color: Colors.white,
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
@@ -58,7 +56,6 @@ class _WorkerProfileScreenState extends State<WorkerProfileScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
 
-                        // ── Profile Info Card ────────────────────────────
                         Container(
                           width: double.infinity,
                           padding: const EdgeInsets.all(32),
@@ -75,7 +72,6 @@ class _WorkerProfileScreenState extends State<WorkerProfileScreen> {
                           ),
                           child: Column(
                             children: [
-                              // Avatar
                               const CircleAvatar(
                                 radius: 48,
                                 backgroundImage: NetworkImage(
@@ -84,7 +80,6 @@ class _WorkerProfileScreenState extends State<WorkerProfileScreen> {
                               ),
                               const SizedBox(height: 16),
 
-                              // Name + Badge
                               Text(
                                 'Johnathan Doe',
                                 style: GoogleFonts.outfit(

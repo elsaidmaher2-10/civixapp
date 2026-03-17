@@ -44,7 +44,7 @@ class _CitizenMainScreenState extends State<CitizenMainScreen> {
               builder: (context, state) {
                 final cubit = context.read<MangeCustomBottomnavBarCubit>();
                 return Scaffold(
-                  backgroundColor: ColorManger.white,
+                  backgroundColor: ColorManger.bgLight,
                   floatingActionButtonLocation:
                       FloatingActionButtonLocation.endFloat,
                   floatingActionButton: cubit.curindex == 0
@@ -57,7 +57,7 @@ class _CitizenMainScreenState extends State<CitizenMainScreen> {
                               final reportCubit = context.read<ReportCubit>();
                               showModalBottomSheet(
                                 useSafeArea: true,
-                                backgroundColor: Colors.white,
+                                backgroundColor: ColorManger.bgLight,
                                 context: context,
                                 elevation: 0,
                                 barrierColor: Colors.white,
