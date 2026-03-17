@@ -28,6 +28,23 @@ class UserProfile {
     this.userId,
     this.profileImage,
   });
+  Map<String, dynamic> toJson() {
+    return {
+      'citizenId': id,
+      'userId': userId,
+      'username': username,
+      'email': email,
+      'role': role,
+      'fullName': fullName,
+      'nationalId': nationalId,
+      'dateOfBirth': dateOfBirth,
+      'age': age,
+      'phoneNumber': phoneNumber,
+      'address': address,
+      'verified': verified,
+      'profileImage': profileImage,
+    };
+  }
 
   factory UserProfile.fromJson(Map<String, dynamic> json) {
     return UserProfile(

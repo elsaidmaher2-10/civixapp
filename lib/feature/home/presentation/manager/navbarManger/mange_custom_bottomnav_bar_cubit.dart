@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:citifix/core/database/local/prefmanger.dart';
 import 'package:citifix/feature/Profile/presentation/view/ProfileScreen.dart';
 import 'package:citifix/feature/reports/presentation/views/ReportScreen.dart';
 import 'package:citifix/feature/home/presentation/view/Homeview.dart';
@@ -13,6 +14,9 @@ class MangeCustomBottomnavBarCubit extends Cubit<MangeCustomBottomnavBarState> {
 
   ontap(int newindex) {
     curindex = newindex;
+    if (curindex == 2) {
+      PrefrenceManager().setbool("isvisit", true);
+    }
     emit(MangeCustomBottomnavBarChange(curindex));
   }
 

@@ -36,12 +36,7 @@ class PrefrenceManager {
   void clear() async {
     await _pref.clear();
   }
+
+ 
 }
 
-class Test {
-  static final instace = Test._();
-  Test._();
-  factory Test() {
-    return instace;
-  }
-}

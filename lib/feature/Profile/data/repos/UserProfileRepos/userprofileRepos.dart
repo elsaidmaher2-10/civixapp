@@ -1,5 +1,6 @@
+import 'dart:convert';
 import 'dart:io';
-
+import 'package:citifix/core/database/local/prefmanger.dart';
 import 'package:citifix/core/database/remote/api/ApiConstant.dart';
 import 'package:citifix/core/database/remote/api/ApiService.dart';
 import 'package:citifix/core/database/remote/error/ServerExciptionmodel.dart';
@@ -15,26 +16,29 @@ class Userprofilerepos {
   Apiservice service;
   InternetChecker internetChecker;
   Future<Either<FailureResponse, UserProfile>> getuserInfo() async {
-    if (!await internetChecker.checkInternet()) {
-      return left(
-        FailureResponse(errors: [Constantmanger.nointernet], statusCode: 1),
-      );
-    }
     try {
-      final response = await service.get(path: Apiconstant.getUserProfile);
-      return right(UserProfile.fromJson(response));
-    } on Serverexciptionmodel catch (e) {
-      if (e.errors is Map?) {
-        final d = FailureResponse.fromJson(e.errors);
-        return left(d);
-      } else {
+      String? cachedUser = PrefrenceManager().getstring("user_profile_data");
+      if (cachedUser != null) {
+        return Right(UserProfile.fromJson(jsonDecode(cachedUser)));
+      }
+
+      if (!await internetChecker.checkInternet()) {
         return left(
-          FailureResponse(
-            errors: [e.errors.toString()],
-            statusCode: e.statuscode,
-          ),
+          FailureResponse(errors: [Constantmanger.nointernet], statusCode: 1),
         );
       }
+
+      final response = await service.get(path: Apiconstant.getUserProfile);
+      final user = UserProfile.fromJson(response);
+
+      PrefrenceManager().setstring(
+        "user_profile_data",
+        jsonEncode(user.toJson()),
+      );
+
+      return right(user);
+    } on Serverexciptionmodel catch (e) {
+      return left(_handleServerException(e));
     } catch (e) {
       return left(FailureResponse(errors: [e.toString()], statusCode: 500));
     }
@@ -48,6 +52,7 @@ class Userprofilerepos {
         FailureResponse(errors: [Constantmanger.nointernet], statusCode: 1),
       );
     }
+
     try {
       FormData formData = FormData.fromMap({
         "File": await MultipartFile.fromFile(
@@ -55,25 +60,33 @@ class Userprofilerepos {
           filename: image.path.split('/').last,
         ),
       });
+
       final response = await service.patch(
         path: Apiconstant.updateiamge,
         body: formData,
       );
-      return right(UserProfile.fromJson(response));
+
+      final updatedUser = UserProfile.fromJson(response);
+
+      PrefrenceManager().setstring(
+        "user_profile_data",
+        jsonEncode(updatedUser.toJson()),
+      );
+      return right(updatedUser);
     } on Serverexciptionmodel catch (e) {
-      if (e.errors is Map?) {
-        final d = FailureResponse.fromJson(e.errors);
-        return left(d);
-      } else {
-        return left(
-          FailureResponse(
-            errors: [e.errors.toString()],
-            statusCode: e.statuscode,
-          ),
-        );
-      }
+      return left(_handleServerException(e));
     } catch (e) {
       return left(FailureResponse(errors: [e.toString()], statusCode: 500));
     }
+  }
+
+  FailureResponse _handleServerException(Serverexciptionmodel e) {
+    if (e.errors is Map?) {
+      return FailureResponse.fromJson(e.errors);
+    }
+    return FailureResponse(
+      errors: [e.errors.toString()],
+      statusCode: e.statuscode,
+    );
   }
 }
