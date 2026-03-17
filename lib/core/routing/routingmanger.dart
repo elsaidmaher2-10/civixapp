@@ -1,3 +1,4 @@
+import 'package:citifix/WorkerFeature/workerMainScreen.dart';
 import 'package:citifix/core/routing/routes.dart';
 import 'package:citifix/feature/Auth/Login/presentation/views/LoginPage.dart';
 import 'package:citifix/feature/Auth/confirmpassword/presentation/view/Confirmpass.dart';
@@ -13,39 +14,11 @@ class Routingmanger {
   static Route<dynamic> onGenerateRoute(RouteSettings route) {
     switch (route.name) {
       case Routes.onbroading:
-        return MaterialPageRoute(
-          builder: (_) => PopScope(
-            canPop: false,
-            onPopInvoked: (didPop) {
-              SystemNavigator.pop();
-            },
-            child: Onbroading(),
-          ),
-        );
-
-      case Routes.mainscreen:
-        return MaterialPageRoute(
-          builder: (_) => PopScope(
-            canPop: false,
-            onPopInvoked: (didPop) {
-              SystemNavigator.pop();
-            },
-            child: Mainscreen(),
-          ),
-        );
+        return _noPopRoute(child: Onbroading());
+      case Routes.login:
+        return _noPopRoute(child: Loginpage());
       case Routes.signup:
         return MaterialPageRoute(builder: (_) => Singnup());
-      case Routes.login:
-        return MaterialPageRoute(
-          builder: (_) => PopScope(
-            canPop: false,
-            onPopInvoked: (didPop) {
-              SystemNavigator.pop();
-            },
-            child: Loginpage(),
-          ),
-        );
-
       case Routes.foregetpassword:
         return MaterialPageRoute(builder: (_) => Foregetpassword());
       case Routes.otpverficationc:
@@ -53,18 +26,30 @@ class Routingmanger {
           settings: route,
           builder: (_) => const Otpvrificationcode(),
         );
-
       case Routes.confirmPassword:
         return MaterialPageRoute(
-          builder: (_) => CreatePasswordScreen(),
           settings: route,
+          builder: (_) => CreatePasswordScreen(),
         );
-
+      case Routes.citizenMain:
+        return _noPopRoute(child: CitizenMainScreen());
+      case Routes.workerMain:
+        return _noPopRoute(child: WorkerMainScreen());
       default:
         return MaterialPageRoute(
           builder: (_) =>
               const Scaffold(body: Center(child: Text("No Route Found"))),
         );
     }
+  }
+
+  static MaterialPageRoute _noPopRoute({required Widget child}) {
+    return MaterialPageRoute(
+      builder: (BuildContext context) => PopScope(
+        canPop: false,
+        onPopInvoked: (didPop) => SystemNavigator.pop(),
+        child: child,
+      ),
+    );
   }
 }

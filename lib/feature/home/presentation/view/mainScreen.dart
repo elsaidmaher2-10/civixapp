@@ -10,14 +10,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class Mainscreen extends StatefulWidget {
-  const Mainscreen({mainscreenKey});
+class CitizenMainScreen extends StatefulWidget {
+  const CitizenMainScreen({CitizenMainScreenKey});
 
   @override
-  State<Mainscreen> createState() => _MainscreenState();
+  State<CitizenMainScreen> createState() => _CitizenMainScreenState();
 }
 
-class _MainscreenState extends State<Mainscreen> {
+class _CitizenMainScreenState extends State<CitizenMainScreen> {
   @override
   @override
   void initState() {

@@ -175,4 +175,6 @@ class Constantmanger {
     TimelineStep(index: 2, title: "Report Resolved", isDone: false),
     TimelineStep(index: 3, title: "Report Rejected", isDone: false),
   ];
+
+  static var role = "role";
 }

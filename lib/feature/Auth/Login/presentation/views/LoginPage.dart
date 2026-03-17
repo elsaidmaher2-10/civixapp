@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:citifix/core/DI/getit.dart';
 import 'package:citifix/core/database/local/prefmanger.dart';
+import 'package:citifix/core/routing/appRoutingRole.dart';
 import 'package:citifix/core/widget/CustomSnackBar.dart';
 import 'package:citifix/feature/Auth/Login/presentation/manager/cubit/loginmanger_cubit.dart';
 import 'package:citifix/feature/Auth/Login/presentation/manager/cubit/loginmanger_state.dart';
@@ -74,6 +75,10 @@ class _LoginpageState extends State<Loginpage> {
                   state.response.refreshTokenExpiration,
                 );
                 PrefrenceManager().setstring(
+                  Constantmanger.role,
+                  state.response.role,
+                );
+                PrefrenceManager().setstring(
                   Constantmanger.userid,
                   state.response.id,
                 );
@@ -83,13 +88,18 @@ class _LoginpageState extends State<Loginpage> {
                   message: state.response.message,
                 );
                 await getIt<ReportCubit>().fetchReports();
-                await Future.delayed(
-                  Duration(seconds: 1),
-                  () => Navigator.pushNamed(context, Routes.mainscreen),
-                );
+                AppRole role = AppRole.fromString(state.response.role);
+                switch (role) {
+                  case AppRole.citizen:
+                    Navigator.pushNamed(context, Routes.citizenMain);
+                  case AppRole.worker:
+                    Navigator.pushNamed(context, Routes.workerMain);
+
+                  case AppRole.unknown:
+                    Navigator.pushNamed(context, Routes.login);
+                }
               }
             },
-
             builder: (context, state) {
               bool inAsyncCall = false;
               if (state is LogincontrollerLoading) {

@@ -1,9 +1,9 @@
 import 'dart:developer';
-
 import 'package:citifix/core/DI/getit.dart';
 import 'package:citifix/core/database/local/prefmanger.dart';
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
+import 'package:citifix/core/routing/appRoutingRole.dart';
 import 'package:citifix/core/routing/routes.dart';
 import 'package:citifix/core/routing/routingmanger.dart';
 import 'package:citifix/core/service/observer.dart';
@@ -17,20 +17,53 @@ void main() async {
   setupgetit();
   Bloc.observer = MyBlocObserver();
   await PrefrenceManager().init();
-  bool falg =
+  final bool isOnboardingViewed =
       PrefrenceManager().getbool(Constantmanger.isOnboardingViewed) ?? false;
-  String? access = PrefrenceManager().getstring(Constantmanger.accessToken);
-  log(access.toString());
-  bool isAuth = access == null ? false : true;
-  runApp(MyApp(falg: falg, isAuth: isAuth));
+
+  final String? accessToken = PrefrenceManager().getstring(
+    Constantmanger.accessToken,
+  );
+  final String? roleString = PrefrenceManager().getstring(Constantmanger.role);
+
+  log('Access Token: $accessToken');
+  log('Role: $roleString');
+
+  runApp(
+    MyApp(
+      isOnboardingViewed: isOnboardingViewed,
+      isAuth: accessToken != null,
+      role: AppRole.fromString("worker"),
+    ),
+  );
 }
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key, required this.falg, required this.isAuth});
-  final bool falg;
+  const MyApp({
+    super.key,
+    required this.isOnboardingViewed,
+    required this.isAuth,
+    required this.role,
+  });
+
+  final bool isOnboardingViewed;
   final bool isAuth;
+  final AppRole role;
+
+  String get _initialRoute {
+    if (!isOnboardingViewed) return Routes.onbroading;
+    if (!isAuth) return Routes.login;
+    switch (role) {
+      case AppRole.citizen:
+        return Routes.citizenMain;
+      case AppRole.worker:
+        return Routes.workerMain;
+      case AppRole.unknown:
+        return Routes.login;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -40,14 +73,9 @@ class MyApp extends StatelessWidget {
       child: BlocProvider<ReportCubit>(
         lazy: false,
         create: (context) => getIt<ReportCubit>(),
-
         child: MaterialApp(
           navigatorKey: navigatorKey,
-          initialRoute: isAuth == true
-              ? Routes.mainscreen
-              : falg == true
-              ? Routes.login
-              : Routes.onbroading,
+          initialRoute: _initialRoute,
           title: 'citifix',
           themeMode: ThemeMode.light,
           theme: ThemeData(
