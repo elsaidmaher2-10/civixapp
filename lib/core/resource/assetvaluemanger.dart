@@ -23,4 +23,5 @@ abstract class AssetValueManager {
   static String notifcationenabled = "assets/notifcationenabled.svg";
   static String citifixicon = "assets/Background.svg";
   static String overVeiw = "assets/profileicons/overVeiw.svg";
+  static String searchAnimation = "assets/animation/search imm.json";
 }

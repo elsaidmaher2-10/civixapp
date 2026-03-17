@@ -53,6 +53,7 @@ dependencies:
   image_picker: ^1.2.1
   intl: ^0.20.2
   location: ^8.0.1
+  lottie: ^3.3.2
   modal_progress_hud_nsn: ^0.5.1
   pretty_dio_logger: ^1.4.0
   provider: ^6.1.5+1
@@ -103,6 +104,7 @@ flutter:
     - assets/
     - assets/profileicons/
     - assets/camera.svg
+    - assets/animation/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
   # For details regarding adding assets from package dependencies, see

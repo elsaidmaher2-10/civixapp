@@ -23,38 +23,42 @@ class HomeScreen extends StatelessWidget {
   int active = 0;
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ReportCubit, ReportManagerState>(
-      builder: (context, state) {
-        if (state is GetReportsLoading) {
-          return const Center(
-            child: SpinKitWaveSpinner(color: ColorManger.lightcolor),
-          );
-        }
+    return Scaffold(
+      backgroundColor: ColorManger.Lightgrey5,
+      appBar: MainscreenAppbar(),
+      body: BlocBuilder<ReportCubit, ReportManagerState>(
+        builder: (context, state) {
+          if (state is GetReportsLoading) {
+            return const Center(
+              child: SpinKitWaveSpinner(color: ColorManger.lightcolor),
+            );
+          }
+          if (state is GetReportsFailure) {
+            return Center(child: Text(state.errMessage));
+          }
+          List<ReportResponseModel> reports = [];
+          if (state is GetReportsSuccess) {
+            reports = state.reports;
+            success = reports
+                .where((e) => e.status == "Resolved")
+                .toList()
+                .length;
+            pending = reports
+                .where((e) => e.status == "Pending")
+                .toList()
+                .length;
+            success = reports
+                .where((e) => e.status == "active")
+                .toList()
+                .length;
+          } else if (state is CreateReportSuccess ||
+              state is CreateReportLoading) {}
 
-        if (state is GetReportsFailure) {
-          return Center(child: Text(state.errMessage));
-        }
+          if (reports.isEmpty && state is! CreateReportLoading) {
+            return const Center(child: Text("No reports found"));
+          }
 
-        List<ReportResponseModel> reports = [];
-        if (state is GetReportsSuccess) {
-          reports = state.reports;
-          success = reports
-              .where((e) => e.status == "Resolved")
-              .toList()
-              .length;
-          pending = reports.where((e) => e.status == "Pending").toList().length;
-          success = reports.where((e) => e.status == "active").toList().length;
-        } else if (state is CreateReportSuccess ||
-            state is CreateReportLoading) {}
-
-        if (reports.isEmpty && state is! CreateReportLoading) {
-          return const Center(child: Text("No reports found"));
-        }
-
-        return Scaffold(
-          backgroundColor: ColorManger.Lightgrey5,
-          appBar: MainscreenAppbar(),
-          body: RefreshIndicator.adaptive(
+          return RefreshIndicator.adaptive(
             backgroundColor: Colors.white,
             color: ColorManger.Lightblue,
 
@@ -180,9 +184,9 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }
