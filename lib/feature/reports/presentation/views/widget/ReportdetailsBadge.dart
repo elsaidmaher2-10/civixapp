@@ -46,7 +46,7 @@ Widget iconStatus(StatusReport status) {
     case StatusReport.active:
       return SvgPicture.asset(
         AssetValueManager.active,
-        colorFilter: ColorFilter.mode(ColorManger.kprimary, BlendMode.srcATop),
+        colorFilter: ColorFilter.mode(ColorManger.kPrimary, BlendMode.srcATop),
       );
     case StatusReport.resolved:
       return SvgPicture.asset(

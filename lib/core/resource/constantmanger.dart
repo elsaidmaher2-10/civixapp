@@ -175,6 +175,16 @@ class Constantmanger {
     TimelineStep(index: 2, title: "Report Resolved", isDone: false),
     TimelineStep(index: 3, title: "Report Rejected", isDone: false),
   ];
-
+  static const selectLanguage = "Select Language";
+  static const choosePreferredLanguage = "Choose your preferred language";
+  static const english = "English";
+  static const arabic = "العربية";
   static var role = "role";
+  static const citizenIdentity = "Citizen Identity";
+  static const fullName = "Full Name";
+  static const nationalID = "National ID";
+  static const address2 = "Address";
+  static const job = "Job";
+  static const gender = "Gender";
+  static const age = "Age";
 }

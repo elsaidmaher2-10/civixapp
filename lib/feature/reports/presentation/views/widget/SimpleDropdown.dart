@@ -64,7 +64,7 @@ class CategoryDropdown extends StatelessWidget {
                   decoration ??
                   CustomDropdownDecoration(
                     closedFillColor: const Color(0xffF6F6F6),
-                    closedBorder: Border.all(color: ColorManger.kprimary),
+                    closedBorder: Border.all(color: ColorManger.kPrimary),
                   ),
             );
           } else if (state is CategoryError) {

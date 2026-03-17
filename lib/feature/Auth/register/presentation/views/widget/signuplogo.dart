@@ -25,7 +25,7 @@ class signuplogo extends StatelessWidget {
               fontWeight: FontWeight.w600,
               // fontFamily: FontFamily.Otama_ep,
               fontSize: ScreenUtilsManager.s34,
-              color: ColorManger.kprimary,
+              color: ColorManger.kPrimary,
             ),
           ),
         ],

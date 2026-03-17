@@ -1,4 +1,3 @@
-
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -31,7 +30,7 @@ class CustomTimelineTile extends StatelessWidget {
           color: isDone
               ? isLast
                     ? ColorManger.green
-                    : ColorManger.kprimary
+                    : ColorManger.kPrimary
               : Colors.grey.shade300,
           thickness: 3,
         ),
@@ -39,7 +38,7 @@ class CustomTimelineTile extends StatelessWidget {
           color: isDone
               ? isLast
                     ? ColorManger.green
-                    : ColorManger.kprimary
+                    : ColorManger.kPrimary
               : Colors.grey.shade300,
           thickness: 3,
         ),
@@ -48,7 +47,7 @@ class CustomTimelineTile extends StatelessWidget {
           color: isDone
               ? isLast
                     ? ColorManger.green
-                    : ColorManger.kprimary
+                    : ColorManger.kPrimary
               : Colors.grey.shade400,
           iconStyle: isDone
               ? IconStyle(

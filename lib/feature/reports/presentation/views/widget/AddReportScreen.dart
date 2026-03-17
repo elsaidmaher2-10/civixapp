@@ -144,7 +144,7 @@ class _AddReportScreenState extends State<AddReportScreen> {
                         Text(
                           Constantmanger.location,
                           style: TextStyle(
-                            color: ColorManger.kprimary,
+                            color: ColorManger.kPrimary,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -157,18 +157,15 @@ class _AddReportScreenState extends State<AddReportScreen> {
                         ),
                         SizedBox(height: ScreenUtilsManager.h16),
                         CustomButton(
-                          onPressed:
-                              (isValid && state is! CreateReportLoading)
+                          onPressed: (isValid && state is! CreateReportLoading)
                               ? () {
                                   context.read<ReportCubit>().createReport(
                                     request: CreateReportRequest(
                                       title: titleController.text,
                                       description: descriptionController.text,
                                       location:
-                                          selectedStreet ??
-                                          'Unknown Location',
-                                      latitude:
-                                          selectedLatLng?.latitude ?? 0.0,
+                                          selectedStreet ?? 'Unknown Location',
+                                      latitude: selectedLatLng?.latitude ?? 0.0,
                                       longitude:
                                           selectedLatLng?.longitude ?? 0.0,
                                       categoryId: categoryitem,
@@ -187,7 +184,7 @@ class _AddReportScreenState extends State<AddReportScreen> {
                   ),
                 ),
               ),
-    
+
               if (state is CreateReportLoading)
                 Container(
                   width: double.infinity,
@@ -205,7 +202,7 @@ class _AddReportScreenState extends State<AddReportScreen> {
                         children: [
                           const CupertinoActivityIndicator(
                             radius: 20,
-                            color: ColorManger.kprimary,
+                            color: ColorManger.kPrimary,
                           ),
                           const SizedBox(height: 15),
                           const Text(

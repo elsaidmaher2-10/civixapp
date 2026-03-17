@@ -30,7 +30,7 @@ class ReportFormFields extends StatelessWidget {
         Text(
           Constantmanger.ReportTitle1,
           style: TextStyle(
-            color: ColorManger.kprimary,
+            color: ColorManger.kPrimary,
             fontWeight: FontWeight.w600,
             fontSize: ScreenUtilsManager.s16,
           ),
@@ -54,7 +54,7 @@ class ReportFormFields extends StatelessWidget {
         Text(
           Constantmanger.descriptionTitle,
           style: TextStyle(
-            color: ColorManger.kprimary,
+            color: ColorManger.kPrimary,
             fontWeight: FontWeight.w600,
             fontSize: ScreenUtilsManager.s16,
           ),
@@ -79,7 +79,7 @@ class ReportFormFields extends StatelessWidget {
         Text(
           Constantmanger.selectcategory,
           style: TextStyle(
-            color: ColorManger.kprimary,
+            color: ColorManger.kPrimary,
             fontWeight: FontWeight.w600,
             fontSize: ScreenUtilsManager.s16,
           ),

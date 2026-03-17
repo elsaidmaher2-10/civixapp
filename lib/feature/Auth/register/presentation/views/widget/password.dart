@@ -7,10 +7,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Password extends StatelessWidget {
- const Password({super.key, required this.controller, required this.onChanged});
+  const Password({
+    super.key,
+    required this.controller,
+    required this.onChanged,
+  });
 
- final TextEditingController controller;
-final  Function(String)? onChanged;
+  final TextEditingController controller;
+  final Function(String)? onChanged;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -19,7 +23,7 @@ final  Function(String)? onChanged;
         // Text(
         //   Constantmanger.pass,
         //   style: TextStyle(
-        //     color: ColorManger.Lightgrey,
+        //     color: ColorManger.lightGrey,
         //     fontSize: ScreenUtilsManager.s16,
         //   ),
         // ),
@@ -32,7 +36,7 @@ final  Function(String)? onChanged;
                 maxLines: 1,
                 prefix: Icon(
                   Icons.password_sharp,
-                  color: ColorManger.Lightgrey2,
+                  color: ColorManger.lightGrey2,
                 ),
                 onChanged: onChanged,
                 controller: controller,
@@ -44,7 +48,7 @@ final  Function(String)? onChanged;
                   },
                   icon: Icon(
                     state == true ? Icons.remove_red_eye : Icons.visibility_off,
-                    color: ColorManger.Lightgrey2,
+                    color: ColorManger.lightGrey2,
                   ),
                 ),
                 lable: Constantmanger.pass,

@@ -1,18 +1,16 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ScreenUtilsManager {
+  static double p10 = 10.h;
+
+  static double get w1 => 1.w;
+  static double get h120 => 120.h;
   static double get h200 => 200.h;
-
   static double get r20 => 20.r;
-
   static double get w4 => 4.w;
-
   static double get h12 => 12.h;
-
   static double get w80 => 80.w;
-
   static double get w12 => 12.w;
-
   static double get h80 => 80;
 
   // Height
@@ -35,7 +33,7 @@ class ScreenUtilsManager {
   static double get h68 => 68.h;
 
   // Width
-  static double get w8 => 8.w; // يفضل استخدام .w هنا للاتساق
+  static double get w8 => 8.w;
   static double get w16 => 16.w;
   static double get w18 => 18.w;
   static double get w24 => 24.w;
@@ -48,6 +46,7 @@ class ScreenUtilsManager {
   // Radius
   static double get r8 => 8.r;
   static double get r10 => 10.r;
+  static double get r12 => 10.r;
 
   // Font Size (SP)
   static double get s5 => 5.sp;
@@ -62,4 +61,10 @@ class ScreenUtilsManager {
   static double get s24 => 24.sp;
   static double get s32 => 32.sp;
   static double get s34 => 34.sp;
+
+  // Popup Menu Position
+  static const double menuLeft = 100;
+  static const double menuTop = 200;
+  static const double menuRight = 0;
+  static const double menuBottom = 0;
 }

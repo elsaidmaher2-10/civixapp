@@ -62,12 +62,12 @@ class _ReportsPageState extends State<ReportsPage> {
             Navigator.pop(context);
           },
           icon: const Icon(Icons.arrow_back),
-          color: ColorManger.kprimary,
+          color: ColorManger.kPrimary,
         ),
         title: Text(
           Constantmanger.reports,
           style: TextStyle(
-            color: ColorManger.kprimary,
+            color: ColorManger.kPrimary,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -126,7 +126,7 @@ class _ReportsPageState extends State<ReportsPage> {
                 // 1. Handle Loading States
                 if (state is GetReportsLoading) {
                   return Center(
-                    child: SpinKitWaveSpinner(color: ColorManger.lightcolor),
+                    child: SpinKitWaveSpinner(color: ColorManger.lightColor),
                   );
                 }
 

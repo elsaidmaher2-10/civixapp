@@ -8,13 +8,13 @@ PreferredSizeWidget AddReportAppbar(context) => AppBar(
   elevation: 0,
   leading: IconButton(
     onPressed: () => Navigator.pop(context),
-    icon: Icon(CupertinoIcons.back, size: 25.h, color: ColorManger.kprimary),
+    icon: Icon(CupertinoIcons.back, size: 25.h, color: ColorManger.kPrimary),
   ),
   centerTitle: true,
   scrolledUnderElevation: 0,
   backgroundColor: Colors.white,
   title: Text(
     Constantmanger.addreport,
-    style: TextStyle(color: ColorManger.kprimary, fontWeight: FontWeight.w600),
+    style: TextStyle(color: ColorManger.kPrimary, fontWeight: FontWeight.w600),
   ),
 );

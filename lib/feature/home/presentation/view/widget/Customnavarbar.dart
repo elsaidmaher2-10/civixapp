@@ -24,12 +24,12 @@ class CustomWaternavbar extends StatelessWidget {
               height: 0.4,
               width: double.infinity,
               decoration: BoxDecoration(
-                boxShadow: [BoxShadow(color: ColorManger.Lightgrey2)],
+                boxShadow: [BoxShadow(color: ColorManger.lightGrey2)],
               ),
             ),
             WaterDropNavBar(
               bottomPadding: 0,
-              waterDropColor: ColorManger.kprimary,
+              waterDropColor: ColorManger.kPrimary,
               backgroundColor: ColorManger.white,
               onItemSelected: (index) {
                 context.read<MangeCustomBottomnavBarCubit>().ontap(index);
@@ -64,7 +64,7 @@ class CustomWaternavbar extends StatelessWidget {
 
                       color: state is MangeCustomBottomnavBarChange
                           ? state.index == 0
-                                ? ColorManger.kprimary
+                                ? ColorManger.kPrimary
                                 : Colors.black
                           : Colors.black,
                     ),
@@ -75,7 +75,7 @@ class CustomWaternavbar extends StatelessWidget {
                       fontSize: ScreenUtilsManager.s12,
                       color: state is MangeCustomBottomnavBarChange
                           ? state.index == 1
-                                ? ColorManger.kprimary
+                                ? ColorManger.kPrimary
                                 : Colors.black
                           : Colors.black,
                     ),
@@ -87,7 +87,7 @@ class CustomWaternavbar extends StatelessWidget {
 
                       color: state is MangeCustomBottomnavBarChange
                           ? state.index == 2
-                                ? ColorManger.kprimary
+                                ? ColorManger.kPrimary
                                 : Colors.black
                           : Colors.black,
                     ),

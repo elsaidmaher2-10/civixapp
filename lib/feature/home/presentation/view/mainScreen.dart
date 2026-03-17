@@ -52,7 +52,7 @@ class _CitizenMainScreenState extends State<CitizenMainScreen> {
                           height: 62.h,
                           width: 62.w,
                           child: FloatingActionButton(
-                            splashColor: ColorManger.Lightgrey3,
+                            splashColor: ColorManger.lightGrey3,
                             onPressed: () {
                               final reportCubit = context.read<ReportCubit>();
                               showModalBottomSheet(
@@ -69,7 +69,7 @@ class _CitizenMainScreenState extends State<CitizenMainScreen> {
                               );
                             },
                             foregroundColor: ColorManger.white,
-                            backgroundColor: ColorManger.kprimary,
+                            backgroundColor: ColorManger.kPrimary,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadiusGeometry.circular(50),
                             ),

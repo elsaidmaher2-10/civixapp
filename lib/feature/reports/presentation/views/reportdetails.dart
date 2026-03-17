@@ -40,7 +40,7 @@ class ReportDetailsScreen extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 26.sp,
                       fontWeight: FontWeight.w900,
-                      color: ColorManger.kprimary,
+                      color: ColorManger.kPrimary,
                     ),
                   ),
                   SizedBox(height: 12.h),
@@ -50,7 +50,7 @@ class ReportDetailsScreen extends StatelessWidget {
 
                     style: TextStyle(
                       fontSize: 16.sp,
-                      color: ColorManger.kprimary.withOpacity(0.8),
+                      color: ColorManger.kPrimary.withOpacity(0.8),
                       height: 1.5,
                     ),
                   ),
@@ -61,7 +61,7 @@ class ReportDetailsScreen extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 18.sp,
                       fontWeight: FontWeight.bold,
-                      color: ColorManger.kprimary,
+                      color: ColorManger.kPrimary,
                     ),
                   ),
                   SizedBox(height: 12.h),
@@ -80,7 +80,7 @@ class ReportDetailsScreen extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 18.sp,
                       fontWeight: FontWeight.bold,
-                      color: ColorManger.kprimary,
+                      color: ColorManger.kPrimary,
                     ),
                   ),
                   Column(

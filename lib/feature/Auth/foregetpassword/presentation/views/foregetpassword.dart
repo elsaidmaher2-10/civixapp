@@ -78,7 +78,7 @@ class _ForegetpasswordState extends State<Foregetpassword> {
                 blur: 7,
                 progressIndicator: CupertinoActivityIndicator(
                   radius: 15,
-                  color: ColorManger.kprimary,
+                  color: ColorManger.kPrimary,
                 ),
                 child: Scaffold(
                   backgroundColor: ColorManger.white,
@@ -97,7 +97,7 @@ class _ForegetpasswordState extends State<Foregetpassword> {
                             text:
                                 "Please enter the email address associated with your account, and we'll send you OTP to reset your password.",
                             style: TextStyle(
-                              color: ColorManger.Lightgrey2,
+                              color: ColorManger.lightGrey2,
                               fontSize: ScreenUtilsManager.s14,
                             ),
                           ),
@@ -127,7 +127,7 @@ class _ForegetpasswordState extends State<Foregetpassword> {
                                 (context, AsyncSnapshot<dynamic> snapshot) =>
                                     ElevatedButton(
                                       style: ElevatedButton.styleFrom(
-                                        backgroundColor: ColorManger.kprimary,
+                                        backgroundColor: ColorManger.kPrimary,
                                         foregroundColor: ColorManger.white,
                                         shape: RoundedRectangleBorder(
                                           borderRadius: BorderRadius.circular(
@@ -171,7 +171,7 @@ PreferredSizeWidget foregetpasswordappbar(BuildContext context) {
     title: Text(
       "Forget Password",
       style: TextStyle(
-        color: ColorManger.kprimary,
+        color: ColorManger.kPrimary,
         fontSize: 20.sp,
         // fontFamily: FontFamily.Otama_ep,
       ),
@@ -185,7 +185,7 @@ PreferredSizeWidget foregetpasswordappbar(BuildContext context) {
         onPressed: () {
           Navigator.pop(context);
         },
-        icon: Icon(CupertinoIcons.back, color: ColorManger.kprimary),
+        icon: Icon(CupertinoIcons.back, color: ColorManger.kPrimary),
       ),
     ),
   );

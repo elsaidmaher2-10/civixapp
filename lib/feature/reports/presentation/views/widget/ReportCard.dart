@@ -33,7 +33,7 @@ class Reportcard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(5.r),
                 child: CachedNetworkImage(
                   placeholder: (context, url) =>
-                      CupertinoActivityIndicator(color: ColorManger.Lightblue),
+                      CupertinoActivityIndicator(color: ColorManger.lightBlue),
                   fit: BoxFit.cover,
                   height: 80.h,
                   width: 80.w,
@@ -53,7 +53,7 @@ class Reportcard extends StatelessWidget {
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: GoogleFonts.publicSans(
-                        color: ColorManger.kprimarydark,
+                        color: ColorManger.kPrimaryDark,
                         fontSize: ScreenUtilsManager.s16,
                         fontWeight: FontWeight.w600,
                       ),
@@ -68,7 +68,7 @@ class Reportcard extends StatelessWidget {
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
-                              color: ColorManger.Lightgrey6,
+                              color: ColorManger.lightGrey6,
                               fontSize: ScreenUtilsManager.s12,
                               fontWeight: FontWeight.w400,
                             ),
@@ -83,7 +83,7 @@ class Reportcard extends StatelessWidget {
                         Text(
                           DateFormat.yMMMd().format(report.createdAt),
                           style: TextStyle(
-                            color: ColorManger.Lightgrey6,
+                            color: ColorManger.lightGrey6,
                             fontSize: ScreenUtilsManager.s11,
                             fontWeight: FontWeight.w300,
                           ),
@@ -136,7 +136,7 @@ class Reportcard extends StatelessWidget {
       case 'resolved':
         return Colors.green;
       default:
-        return ColorManger.kprimary;
+        return ColorManger.kPrimary;
     }
   }
 }

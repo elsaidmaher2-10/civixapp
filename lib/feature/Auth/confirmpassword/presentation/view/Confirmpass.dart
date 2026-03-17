@@ -116,7 +116,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                 blur: 7,
                 progressIndicator: CupertinoActivityIndicator(
                   radius: 15,
-                  color: ColorManger.kprimary,
+                  color: ColorManger.kPrimary,
                 ),
                 child: Scaffold(
                   backgroundColor: Colors.white,
@@ -132,7 +132,6 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                           children: [
                             SizedBox(height: ScreenUtilsManager.h16),
                             Password(
-                            
                               controller: _passwordController,
                               onChanged: (String value) {
                                 streamController.add(
@@ -176,7 +175,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                                       }
                                     : null,
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: ColorManger.kprimary,
+                                  backgroundColor: ColorManger.kPrimary,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(12),
                                   ),

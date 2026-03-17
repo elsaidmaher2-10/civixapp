@@ -1,33 +1,42 @@
 import 'dart:io';
+import 'package:citifix/core/resource/colormanager.dart';
+import 'package:citifix/core/resource/constantmanger.dart';
+import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/feature/Profile/presentation/manager/controller/imageController.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ImagePickerMenu {
   const ImagePickerMenu._();
+
   static Future<File?> show(BuildContext context) async {
     final selected = await showMenu<String>(
-      shadowColor: Colors.white,
-      color: Colors.white,
+      shadowColor: ColorManger.white,
+      color: ColorManger.white,
       context: context,
-      position: const RelativeRect.fromLTRB(100, 200, 0, 0),
+      position: const RelativeRect.fromLTRB(
+        ScreenUtilsManager.menuLeft,
+        ScreenUtilsManager.menuTop,
+        ScreenUtilsManager.menuRight,
+        ScreenUtilsManager.menuBottom,
+      ),
       surfaceTintColor: Colors.transparent,
       items: [
         _buildMenuItem(
           value: 'camera',
-          label: 'Camera',
+          label: Constantmanger.camera,
           icon: Icons.camera_alt,
         ),
         _buildMenuItem(
           value: 'gallery',
-          label: 'Gallery',
+          label: Constantmanger.photoGallery,
           icon: Icons.photo_library,
         ),
         _buildMenuItem(
           value: 'cancel',
-          label: 'Cancel',
+          label: Constantmanger.cancel,
           icon: Icons.close,
-          iconBgColor: Colors.grey,
+          iconBgColor: ColorManger.lightGrey2,
         ),
       ],
     );
@@ -52,22 +61,34 @@ class ImagePickerMenu {
       value: value,
       child: Container(
         decoration: BoxDecoration(
-          color: const Color(0xffF6F6F6),
-          borderRadius: BorderRadius.circular(8),
+          color: ColorManger.lightGrey5,
+          borderRadius: BorderRadius.circular(ScreenUtilsManager.r8),
         ),
-        margin: const EdgeInsets.all(4),
+        margin: EdgeInsets.all(ScreenUtilsManager.h4),
         child: ListTile(
-          horizontalTitleGap: 8,
-          contentPadding: const EdgeInsets.symmetric(horizontal: 4),
+          horizontalTitleGap: ScreenUtilsManager.w8,
+          contentPadding: EdgeInsets.symmetric(
+            horizontal: ScreenUtilsManager.w4,
+          ),
           leading: icon != null
               ? CircleAvatar(
-                  radius: 12,
+                  radius: ScreenUtilsManager.r12,
                   backgroundColor:
-                      iconBgColor ?? const Color(0xff1162D4).withOpacity(0.5),
-                  child: Icon(icon, color: iconColor ?? Colors.white, size: 12),
+                      iconBgColor ?? ColorManger.lightBlue.withOpacity(0.5),
+                  child: Icon(
+                    icon,
+                    color: iconColor ?? ColorManger.white,
+                    size: ScreenUtilsManager.s12,
+                  ),
                 )
               : null,
-          title: Text(label),
+          title: Text(
+            label,
+            style: TextStyle(
+              fontSize: ScreenUtilsManager.s14,
+              color: ColorManger.textBlack,
+            ),
+          ),
         ),
       ),
     );

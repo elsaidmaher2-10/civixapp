@@ -15,13 +15,13 @@ class Email extends StatelessWidget {
         // Text(
         //   Constantmanger.email,
         //   style: TextStyle(
-        //     color: ColorManger.Lightgrey,
+        //     color: ColorManger.lightGrey,
         //     fontSize: ScreenUtilsManager.s16,
         //   ),
         // ),
         SizedBox(height: ScreenUtilsManager.h6),
         CustomTextfromfield(
-          prefix: Icon(Icons.email, color: ColorManger.Lightgrey2),
+          prefix: Icon(Icons.email, color: ColorManger.lightGrey2),
           ktype: TextInputType.emailAddress,
           controller: controller,
           hinttext: Constantmanger.hinytextemail,

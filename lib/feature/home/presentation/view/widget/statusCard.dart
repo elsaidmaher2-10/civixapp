@@ -43,7 +43,7 @@ class StatusCard extends StatelessWidget {
               RichText(
                 text: TextSpan(
                   style: TextStyle(
-                    color: ColorManger.Lightgrey6,
+                    color: ColorManger.lightGrey6,
                     fontSize: 14.sp,
                     fontWeight: FontWeight.w600,
                   ),

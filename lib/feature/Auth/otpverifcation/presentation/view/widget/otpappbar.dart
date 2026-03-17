@@ -11,7 +11,7 @@ PreferredSizeWidget otpappbar(BuildContext context, Null Function() param1) {
     title: Text(
       "OTP Verification",
       style: TextStyle(
-        color: ColorManger.kprimary,
+        color: ColorManger.kPrimary,
         fontSize: 20.sp,
         // fontFamily: FontFamily.Otama_ep,
       ),
@@ -25,7 +25,7 @@ PreferredSizeWidget otpappbar(BuildContext context, Null Function() param1) {
         onPressed: () {
           Navigator.pop(context);
         },
-        icon: Icon(CupertinoIcons.back, color: ColorManger.kprimary),
+        icon: Icon(CupertinoIcons.back, color: ColorManger.kPrimary),
       ),
     ),
   );

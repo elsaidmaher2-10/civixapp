@@ -18,13 +18,13 @@ class Address extends StatelessWidget {
         // Text(
         //   Constantmanger.nationalnumber,
         //   style: TextStyle(
-        //     color: ColorManger.Lightgrey,
+        //     color: ColorManger.lightGrey,
         //     fontSize: ScreenUtilsManager.s16,
         //   ),
         // ),
         SizedBox(height: ScreenUtilsManager.h6),
         CustomTextfromfield(
-          prefix: Icon(Icons.location_city, color: ColorManger.Lightgrey2),
+          prefix: Icon(Icons.location_city, color: ColorManger.lightGrey2),
           onChanged: onChanged,
           controller: controller,
           obstext: false,

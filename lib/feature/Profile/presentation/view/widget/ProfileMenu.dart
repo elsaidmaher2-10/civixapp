@@ -24,7 +24,7 @@ class ProfileMenuItem extends StatelessWidget {
         Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(ScreenUtilsManager.r8),
-            border: BoxBorder.all(color: ColorManger.Lightgrey5, width: 2.w),
+            border: BoxBorder.all(color: ColorManger.lightGrey5, width: 2.w),
           ),
           child: ListTile(
             contentPadding: EdgeInsets.symmetric(
@@ -34,7 +34,7 @@ class ProfileMenuItem extends StatelessWidget {
             leading: SvgPicture.asset(
               iconPath,
               colorFilter: ColorFilter.mode(
-                ColorManger.Lightblue.withOpacity(0.1),
+                ColorManger.lightBlue.withOpacity(0.1),
                 BlendMode.srcATop,
               ),
             ),

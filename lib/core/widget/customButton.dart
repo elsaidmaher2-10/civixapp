@@ -29,7 +29,7 @@ class Appbutton extends StatelessWidget {
         onPressed: onPressed,
         child: Text(
           text,
-          style: TextStyle(color: ColorManger.kprimary, fontSize: 18.sp),
+          style: TextStyle(color: ColorManger.kPrimary, fontSize: 18.sp),
         ),
       ),
     );
@@ -42,7 +42,7 @@ class CustomButton extends StatelessWidget {
     super.key,
     required this.onPressed,
     this.icon,
-    this.backgroundColor = ColorManger.kprimary,
+    this.backgroundColor = ColorManger.kPrimary,
     this.foregroundColor = ColorManger.white,
     this.raduis = 8,
   });

@@ -24,7 +24,7 @@ class ProfileScreen extends StatelessWidget {
           title: Text(
             Constantmanger.proile,
             style: GoogleFonts.inter(
-              color: ColorManger.kprimary,
+              color: ColorManger.kPrimary,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -51,7 +51,7 @@ class ProfileScreen extends StatelessWidget {
                     }
                   },
                 ),
-                ProfileSettings(),
+                Profilesettings(),
                 SizedBox(height: ScreenUtilsManager.h16),
                 Padding(
                   padding: EdgeInsets.symmetric(
@@ -60,7 +60,7 @@ class ProfileScreen extends StatelessWidget {
                   child: CustomButton(
                     onPressed: () {},
                     icon: const Icon(Icons.logout),
-                    backgroundColor: ColorManger.redlight,
+                    backgroundColor: ColorManger.redLight,
                     foregroundColor: ColorManger.red,
                     lable: Constantmanger.logout,
                   ),

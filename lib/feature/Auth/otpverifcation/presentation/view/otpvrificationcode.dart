@@ -1,6 +1,5 @@
 // ignore_for_file: use_build_context_synchronously
 
-
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
@@ -127,7 +126,7 @@ class _OtpvrificationcodeState extends State<Otpvrificationcode> {
                 blur: 7,
                 progressIndicator: CupertinoActivityIndicator(
                   radius: 15,
-                  color: ColorManger.kprimary,
+                  color: ColorManger.kPrimary,
                 ),
                 child: Scaffold(
                   backgroundColor: ColorManger.white,
@@ -146,7 +145,7 @@ class _OtpvrificationcodeState extends State<Otpvrificationcode> {
                               ? Constantmanger.msgforResetpassword
                               : Constantmanger.msgforregister,
                           style: TextStyle(
-                            color: ColorManger.Lightgrey2,
+                            color: ColorManger.lightGrey2,
                             fontSize: 14.sp,
                             // fontFamily: FontFamily.Otama_ep,
                           ),
@@ -182,7 +181,7 @@ class _OtpvrificationcodeState extends State<Otpvrificationcode> {
                           width: double.infinity,
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: ColorManger.kprimary,
+                              backgroundColor: ColorManger.kPrimary,
                               foregroundColor: ColorManger.white,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(

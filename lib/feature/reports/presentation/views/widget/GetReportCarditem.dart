@@ -74,7 +74,7 @@ class ReportCardIem extends StatelessWidget {
                         style: GoogleFonts.publicSans(
                           fontSize: ScreenUtilsManager.s18,
                           fontWeight: FontWeight.bold,
-                          color: ColorManger.kprimary,
+                          color: ColorManger.kPrimary,
                         ),
                       ),
                       SizedBox(height: ScreenUtilsManager.h6),
@@ -114,7 +114,7 @@ class ReportCardIem extends StatelessWidget {
                   borderRadius: BorderRadius.circular(ScreenUtilsManager.r10),
                   child: CachedNetworkImage(
                     placeholder: (context, url) => CupertinoActivityIndicator(
-                      color: ColorManger.lightcolor,
+                      color: ColorManger.lightColor,
                     ),
                     width: ScreenUtilsManager.w80,
                     height: ScreenUtilsManager.h80,
@@ -146,11 +146,11 @@ class ReportCardIem extends StatelessWidget {
                   style: GoogleFonts.publicSans(
                     fontWeight: FontWeight.w600,
                     fontSize: 13,
-                    color: ColorManger.lightcolor,
+                    color: ColorManger.lightColor,
                   ),
                 ),
                 Material(
-                  color: ColorManger.lightcolor.withOpacity(0.1),
+                  color: ColorManger.lightColor.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(ScreenUtilsManager.r8),
                   child: InkWell(
                     onTap: () {
@@ -177,13 +177,13 @@ class ReportCardIem extends StatelessWidget {
                             style: GoogleFonts.publicSans(
                               fontWeight: FontWeight.bold,
                               fontSize: ScreenUtilsManager.s12,
-                              color: ColorManger.lightcolor,
+                              color: ColorManger.lightColor,
                             ),
                           ),
                           Icon(
                             Icons.chevron_right,
                             size: ScreenUtilsManager.h16,
-                            color: ColorManger.lightcolor,
+                            color: ColorManger.lightColor,
                           ),
                         ],
                       ),

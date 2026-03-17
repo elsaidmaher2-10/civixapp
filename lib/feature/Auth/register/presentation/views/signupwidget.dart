@@ -137,7 +137,7 @@ class _SingnupState extends State<Singnup> {
                 blur: 7,
                 progressIndicator: CupertinoActivityIndicator(
                   radius: 15,
-                  color: ColorManger.kprimary,
+                  color: ColorManger.kPrimary,
                 ),
                 child: Scaffold(
                   backgroundColor: Colors.white,
@@ -189,7 +189,7 @@ class _SingnupState extends State<Singnup> {
                                           return Theme(
                                             data: Theme.of(context).copyWith(
                                               colorScheme: ColorScheme.light(
-                                                primary: ColorManger.kprimary,
+                                                primary: ColorManger.kPrimary,
                                                 onPrimary: Colors.white,
                                                 onSurface: Colors.black,
                                               ),
@@ -197,7 +197,7 @@ class _SingnupState extends State<Singnup> {
                                                   TextButtonThemeData(
                                                     style: TextButton.styleFrom(
                                                       foregroundColor:
-                                                          ColorManger.kprimary,
+                                                          ColorManger.kPrimary,
                                                     ),
                                                   ),
                                             ),
@@ -359,7 +359,7 @@ class _SingnupState extends State<Singnup> {
 //           decoration: BoxDecoration(
 //             color: Color(0xffF6F6F6),
 //             borderRadius: BorderRadius.circular(8),
-//             border: BoxBorder.all(color: ColorManger.kprimary),
+//             border: BoxBorder.all(color: ColorManger.kPrimary),
 //           ),
 //           height: 45,
 //           width: double.infinity,
@@ -374,10 +374,10 @@ class _SingnupState extends State<Singnup> {
 //                   children: [
 //                     Text(
 //                       widget.name,
-//                       style: TextStyle(color: ColorManger.Lightgrey2),
+//                       style: TextStyle(color: ColorManger.lightGrey2),
 //                     ),
 //                     Icon(
-//                       color: ColorManger.Lightgrey2,
+//                       color: ColorManger.lightGrey2,
 //                       size: 30,
 //                       Icons.keyboard_arrow_down,
 //                     ),

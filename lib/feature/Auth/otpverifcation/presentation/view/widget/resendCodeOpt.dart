@@ -3,8 +3,8 @@ import 'package:citifix/core/resource/colormanager.dart';
 import 'package:flutter/material.dart';
 
 class ResendCodeOpt extends StatefulWidget {
- const ResendCodeOpt({super.key, required this.resend});
- final Function() resend;
+  const ResendCodeOpt({super.key, required this.resend});
+  final Function() resend;
   @override
   State<ResendCodeOpt> createState() => _ResendCodeOptState();
 }
@@ -61,7 +61,7 @@ class _ResendCodeOptState extends State<ResendCodeOpt> {
                     }
                   : null,
               child: Text(
-                style: TextStyle(color: ColorManger.Lightgrey),
+                style: TextStyle(color: ColorManger.lightGrey),
                 snapshot.data == 60 || snapshot.data == 0
                     ? "Resend Code"
                     : "Resend Code In 00:${snapshot.data.toString().padLeft(2, "0")}",

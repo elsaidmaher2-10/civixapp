@@ -17,7 +17,7 @@ class Lname extends StatelessWidget {
         // Text(
         //   Constantmanger.lname,
         //   style: TextStyle(
-        //     color: ColorManger.Lightgrey,
+        //     color: ColorManger.lightGrey,
         //     fontSize: ScreenUtilsManager.s16,
         //   ),
         // ),

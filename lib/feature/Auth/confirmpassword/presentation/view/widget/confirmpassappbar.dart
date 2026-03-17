@@ -16,7 +16,7 @@ PreferredSizeWidget confirmpassappbar(
       style: TextStyle(
         // fontFamily: FontFamily.Otama_ep,
         fontSize: 20.sp,
-        color: ColorManger.kprimary,
+        color: ColorManger.kPrimary,
       ),
     ),
     backgroundColor: ColorManger.white,
@@ -28,7 +28,7 @@ PreferredSizeWidget confirmpassappbar(
         onPressed: () {
           Navigator.pop(context);
         },
-        icon: Icon(CupertinoIcons.back, color: ColorManger.kprimary),
+        icon: Icon(CupertinoIcons.back, color: ColorManger.kPrimary),
       ),
     ),
   );

@@ -25,7 +25,7 @@ class MainscreenAppbar extends StatelessWidget implements PreferredSizeWidget {
           Text(
             Constantmanger.apptitle,
             style: GoogleFonts.publicSans(
-              color: ColorManger.kprimarydark,
+              color: ColorManger.kPrimaryDark,
               fontWeight: FontWeight.w700,
               fontSize: ScreenUtilsManager.s20,
             ),

@@ -58,7 +58,7 @@ class ProfileInfo extends StatelessWidget {
           return Padding(
             padding: EdgeInsets.symmetric(vertical: 50.h),
             child: SpinKitPouringHourGlassRefined(
-              color: ColorManger.kprimaryLight,
+              color: ColorManger.kPrimaryLight,
               size: 70.h,
             ),
           );
@@ -93,7 +93,7 @@ class ProfileInfo extends StatelessWidget {
                       children: [
                         CircleAvatar(
                           radius: 68.r,
-                          backgroundColor: ColorManger.Lightblue.withOpacity(
+                          backgroundColor: ColorManger.lightBlue.withOpacity(
                             0.5,
                           ),
                           child: CircleAvatar(
@@ -101,7 +101,7 @@ class ProfileInfo extends StatelessWidget {
                             backgroundColor: Colors.white,
                             child: CircleAvatar(
                               radius: 60.r,
-                              backgroundColor: ColorManger.Lightgrey,
+                              backgroundColor: ColorManger.lightGrey,
                               backgroundImage: imageProvider,
                             ),
                           ),
@@ -131,7 +131,7 @@ class ProfileInfo extends StatelessWidget {
                       backgroundColor: ColorManger.white,
                       child: CircleAvatar(
                         radius: 20.r,
-                        backgroundColor: ColorManger.Lightblue,
+                        backgroundColor: ColorManger.lightBlue,
                         child: const Icon(
                           Icons.edit,
                           color: Colors.white,
@@ -150,7 +150,7 @@ class ProfileInfo extends StatelessWidget {
                 letterSpacing: 1.1,
                 fontSize: ScreenUtilsManager.s24,
                 fontWeight: FontWeight.w700,
-                color: ColorManger.kprimarydark,
+                color: ColorManger.kPrimaryDark,
               ),
             ),
             Text(
@@ -158,7 +158,7 @@ class ProfileInfo extends StatelessWidget {
               style: GoogleFonts.inter(
                 fontSize: ScreenUtilsManager.s14,
                 fontWeight: FontWeight.w300,
-                color: ColorManger.Lightgrey2,
+                color: ColorManger.lightGrey2,
               ),
             ),
 

@@ -24,13 +24,13 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorManger.Lightgrey5,
+      backgroundColor: ColorManger.lightGrey2,
       appBar: MainscreenAppbar(),
       body: BlocBuilder<ReportCubit, ReportManagerState>(
         builder: (context, state) {
           if (state is GetReportsLoading) {
             return const Center(
-              child: SpinKitWaveSpinner(color: ColorManger.lightcolor),
+              child: SpinKitWaveSpinner(color: ColorManger.lightColor),
             );
           }
           if (state is GetReportsFailure) {
@@ -60,7 +60,7 @@ class HomeScreen extends StatelessWidget {
 
           return RefreshIndicator.adaptive(
             backgroundColor: Colors.white,
-            color: ColorManger.Lightblue,
+            color: ColorManger.lightBlue,
 
             onRefresh: () async {
               await context.read<ReportCubit>().fetchReports();
@@ -83,7 +83,7 @@ class HomeScreen extends StatelessWidget {
                           Constantmanger.overview,
                           style: GoogleFonts.publicSans(
                             letterSpacing: -0.8,
-                            color: ColorManger.kprimarydark,
+                            color: ColorManger.kPrimaryDark,
                             fontWeight: FontWeight.w700,
                             fontSize: ScreenUtilsManager.s20,
                           ),
@@ -100,11 +100,11 @@ class HomeScreen extends StatelessWidget {
                       children: [
                         Expanded(
                           child: StatusCard(
-                            color: ColorManger.kprimary,
+                            color: ColorManger.kPrimary,
                             number: active,
                             title: Constantmanger.kActive,
                             iconPath: AssetValueManager.active,
-                            iconcolor: ColorManger.kprimary,
+                            iconcolor: ColorManger.kPrimary,
                           ),
                         ),
                         SizedBox(width: 15.w),
@@ -142,7 +142,7 @@ class HomeScreen extends StatelessWidget {
                           style: GoogleFonts.publicSans(
                             fontSize: ScreenUtilsManager.s18,
                             fontWeight: FontWeight.bold,
-                            color: ColorManger.kprimarydark,
+                            color: ColorManger.kPrimaryDark,
                           ),
                         ),
                         const Spacer(),

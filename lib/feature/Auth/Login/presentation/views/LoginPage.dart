@@ -113,7 +113,7 @@ class _LoginpageState extends State<Loginpage> {
                 blur: 7,
                 progressIndicator: CupertinoActivityIndicator(
                   radius: 15,
-                  color: ColorManger.kprimary,
+                  color: ColorManger.kPrimary,
                 ),
                 child: Scaffold(
                   bottomNavigationBar: Padding(
@@ -127,7 +127,7 @@ class _LoginpageState extends State<Loginpage> {
                             children: [
                               TextSpan(
                                 text: "${Constantmanger.donthaveaccount} ",
-                                style: TextStyle(color: ColorManger.Lightgrey2),
+                                style: TextStyle(color: ColorManger.lightGrey2),
                               ),
                               WidgetSpan(
                                 child: InkWell(
@@ -139,7 +139,7 @@ class _LoginpageState extends State<Loginpage> {
                                   child: Text(
                                     Constantmanger.Signup,
                                     style: TextStyle(
-                                      color: ColorManger.kprimary,
+                                      color: ColorManger.kPrimary,
                                     ),
                                   ),
                                 ),
@@ -176,7 +176,7 @@ class _LoginpageState extends State<Loginpage> {
                                       style: TextStyle(
                                         fontWeight: FontWeight.w600,
                                         fontSize: ScreenUtilsManager.s34,
-                                        color: ColorManger.kprimary,
+                                        color: ColorManger.kPrimary,
                                       ),
                                     ),
                                   ],
@@ -188,7 +188,7 @@ class _LoginpageState extends State<Loginpage> {
                               controller: email,
                               prefix: Icon(
                                 Icons.email,
-                                color: ColorManger.Lightgrey2,
+                                color: ColorManger.lightGrey2,
                               ),
 
                               hinttext: Constantmanger.hinytextemail,
@@ -214,7 +214,7 @@ class _LoginpageState extends State<Loginpage> {
                                     return CustomTextfromfield(
                                       prefix: Icon(
                                         Icons.password_outlined,
-                                        color: ColorManger.Lightgrey2,
+                                        color: ColorManger.lightGrey2,
                                       ),
                                       maxLines: 1,
                                       controller: password,
@@ -245,7 +245,7 @@ class _LoginpageState extends State<Loginpage> {
                                           snapshot.data == true
                                               ? Icons.remove_red_eye
                                               : Icons.visibility_off,
-                                          color: ColorManger.Lightgrey3,
+                                          color: ColorManger.lightGrey3,
                                         ),
                                       ),
                                       lable: Constantmanger.pass,
@@ -265,7 +265,7 @@ class _LoginpageState extends State<Loginpage> {
                                         Size(30, 30),
                                       ),
                                       child: Checkbox(
-                                        activeColor: ColorManger.kprimary,
+                                        activeColor: ColorManger.kPrimary,
                                         value: ischeck,
                                         onChanged: (onChanged) async {
                                           setState(() {});
@@ -291,7 +291,7 @@ class _LoginpageState extends State<Loginpage> {
                                   child: Text(
                                     Constantmanger.forgetPassword,
                                     style: TextStyle(
-                                      color: ColorManger.kprimary,
+                                      color: ColorManger.kPrimary,
                                       fontSize: ScreenUtilsManager.s14,
                                     ),
                                   ),
@@ -310,7 +310,7 @@ class _LoginpageState extends State<Loginpage> {
                                       AsyncSnapshot<bool> snapshot,
                                     ) => ElevatedButton(
                                       style: ElevatedButton.styleFrom(
-                                        backgroundColor: ColorManger.kprimary,
+                                        backgroundColor: ColorManger.kPrimary,
                                         foregroundColor: ColorManger.white,
                                         shape: RoundedRectangleBorder(
                                           borderRadius: BorderRadius.circular(

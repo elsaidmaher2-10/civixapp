@@ -1,5 +1,3 @@
-
-
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:dotted_border/dotted_border.dart';
@@ -8,7 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 class Uploadimage extends StatelessWidget {
- const Uploadimage({super.key, required this.onTap});
+  const Uploadimage({super.key, required this.onTap});
   final Function()? onTap;
   @override
   Widget build(BuildContext context) {
@@ -33,7 +31,7 @@ class Uploadimage extends StatelessWidget {
                 "Add Photo",
                 style: TextStyle(
                   fontSize: ScreenUtilsManager.s12,
-                  color: ColorManger.Lightgrey,
+                  color: ColorManger.lightGrey,
                 ),
               ),
             ],

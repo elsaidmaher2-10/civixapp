@@ -38,7 +38,7 @@ class Customonbroadingitem extends StatelessWidget {
                       style: TextButton.styleFrom(
                         shape: RoundedRectangleBorder(
                           side: BorderSide(
-                            color: ColorManger.Lightgrey,
+                            color: ColorManger.lightGrey,
                             width: 0.5.w,
                           ),
                           borderRadius: BorderRadius.all(Radius.circular(8.r)),
@@ -50,7 +50,7 @@ class Customonbroadingitem extends StatelessWidget {
                       child: Text(
                         Constantmanger.skip,
                         style: GoogleFonts.publicSans(
-                          color: ColorManger.lightcolor,
+                          color: ColorManger.lightColor,
                           fontSize: ScreenUtilsManager.s20,
                           fontWeight: FontWeight.bold,
                         ),
@@ -70,7 +70,7 @@ class Customonbroadingitem extends StatelessWidget {
             pages[x].title,
             style: GoogleFonts.publicSans(
               fontSize: ScreenUtilsManager.s32,
-              color: ColorManger.kprimarydark,
+              color: ColorManger.kPrimaryDark,
               fontWeight: FontWeight.w700,
             ),
           ),
@@ -79,7 +79,7 @@ class Customonbroadingitem extends StatelessWidget {
             pages[x].subtitle,
             style: GoogleFonts.publicSans(
               fontSize: ScreenUtilsManager.s16,
-              color: ColorManger.Lightgrey6,
+              color: ColorManger.lightGrey6,
               fontWeight: FontWeight.w400,
             ),
           ),
@@ -96,7 +96,7 @@ class Customonbroadingitem extends StatelessWidget {
                 ),
                 fixedSize: Size(double.infinity, ScreenUtilsManager.h44),
                 foregroundColor: ColorManger.white,
-                backgroundColor: ColorManger.kprimary,
+                backgroundColor: ColorManger.kPrimary,
               ),
               onPressed: () async {
                 final provider = context.read<Onbroadingprovider>();

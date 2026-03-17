@@ -18,7 +18,7 @@ class HaveAccountORLogin extends StatelessWidget {
           children: [
             TextSpan(
               text: "Have an account already?",
-              style: TextStyle(color: ColorManger.Lightgrey2, fontSize: 14.sp),
+              style: TextStyle(color: ColorManger.lightGrey2, fontSize: 14.sp),
             ),
             WidgetSpan(
               alignment: PlaceholderAlignment.middle,
@@ -31,7 +31,7 @@ class HaveAccountORLogin extends StatelessWidget {
                 onPressed: onPressed,
                 child: Text(
                   Constantmanger.logIn,
-                  style: TextStyle(color: ColorManger.kprimary),
+                  style: TextStyle(color: ColorManger.kPrimary),
                 ),
               ),
             ),

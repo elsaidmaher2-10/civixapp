@@ -8,9 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class Nationalnumber extends StatelessWidget {
- const Nationalnumber({super.key, required this.controller});
+  const Nationalnumber({super.key, required this.controller});
 
-final  TextEditingController controller;
+  final TextEditingController controller;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -19,7 +19,7 @@ final  TextEditingController controller;
         // Text(
         //   Constantmanger.nationalnumber,
         //   style: TextStyle(
-        //     color: ColorManger.Lightgrey,
+        //     color: ColorManger.lightGrey,
         //     fontSize: ScreenUtilsManager.s16,
         //   ),
         // ),
@@ -34,7 +34,7 @@ final  TextEditingController controller;
                 fit: BoxFit.cover,
                 height: 1,
                 width: 1,
-                color: ColorManger.Lightgrey2,
+                color: ColorManger.lightGrey2,
                 AssetValueManager.id,
               ),
             ),

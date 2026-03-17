@@ -23,7 +23,7 @@ class customindicator extends StatelessWidget {
         paintStyle: PaintingStyle.stroke,
         strokeWidth: 1.5,
         dotColor: Colors.grey,
-        activeDotColor: ColorManger.kprimary,
+        activeDotColor: ColorManger.kPrimary,
       ),
     );
   }

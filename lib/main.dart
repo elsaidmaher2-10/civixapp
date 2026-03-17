@@ -32,7 +32,7 @@ void main() async {
     MyApp(
       isOnboardingViewed: isOnboardingViewed,
       isAuth: accessToken != null,
-      role: AppRole.fromString("worker"),
+      role: AppRole.fromString(roleString),
     ),
   );
 }
@@ -81,8 +81,8 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             brightness: Brightness.light,
             textSelectionTheme: TextSelectionThemeData(
-              selectionHandleColor: ColorManger.kprimary,
-              selectionColor: ColorManger.kprimary.withOpacity(0.2),
+              selectionHandleColor: ColorManger.kPrimary,
+              selectionColor: ColorManger.kPrimary.withOpacity(0.2),
               cursorColor: Colors.black,
             ),
           ),

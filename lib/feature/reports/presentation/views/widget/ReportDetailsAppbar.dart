@@ -13,13 +13,13 @@ class ReportDetailsAppbar extends StatelessWidget {
       expandedHeight: MediaQuery.of(context).size.height * 0.5,
       pinned: true,
       stretch: true,
-      backgroundColor: ColorManger.kprimary,
+      backgroundColor: ColorManger.kPrimary,
       leading: IconButton(
         icon: CircleAvatar(
           backgroundColor: Colors.white70,
           child: Icon(
             Icons.arrow_back_ios_new,
-            color: ColorManger.kprimary,
+            color: ColorManger.kPrimary,
             size: ScreenUtilsManager.s18,
           ),
         ),
