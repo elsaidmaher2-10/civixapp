@@ -6,19 +6,29 @@ import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/routing/appRoutingRole.dart';
 import 'package:citifix/core/routing/routes.dart';
 import 'package:citifix/core/routing/routingmanger.dart';
+import 'package:citifix/core/service/local_notification_service.dart';
+import 'package:citifix/core/service/notification_service.dart';
 import 'package:citifix/core/service/observer.dart';
 import 'package:citifix/feature/reports/presentation/manager/reportManger/cubit/report_manager_cubit.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'firebase_options.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   setupgetit();
-  Bloc.observer = MyBlocObserver();
-  await PrefrenceManager().init();
+  await Future.wait<void>([
+    LocalNotificationService.init(),
+    NotificationService.init(),
+    PrefrenceManager().init(),
+  ]);
   final bool isOnboardingViewed =
       PrefrenceManager().getbool(Constantmanger.isOnboardingViewed) ?? false;
+  Bloc.observer = MyBlocObserver();
 
   final String? accessToken = PrefrenceManager().getstring(
     Constantmanger.accessToken,

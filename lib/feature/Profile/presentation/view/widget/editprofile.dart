@@ -1,13 +1,9 @@
 import 'dart:convert';
-
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:citifix/core/database/local/prefmanger.dart';
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
-import 'package:citifix/core/routing/routes.dart';
 import 'package:citifix/feature/Profile/data/Models/UserProfileModel/userProfile.dart';
-import 'package:citifix/feature/Profile/presentation/manager/userinfoManger/user_profile_info_cubit.dart';
 import 'package:citifix/feature/Profile/presentation/view/widget/EditFromProfile.dart';
 import 'package:citifix/feature/Profile/presentation/view/widget/chanagePassword.dart';
 import 'package:citifix/feature/Profile/presentation/view/widget/customImagePicker.dart';
@@ -15,8 +11,6 @@ import 'package:citifix/feature/Profile/presentation/view/widget/image_picker_me
 import 'package:citifix/feature/Profile/presentation/view/widget/saveeditProfile.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:http/http.dart';
-import 'package:provider/provider.dart';
 
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({super.key});
