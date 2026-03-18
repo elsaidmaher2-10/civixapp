@@ -10,4 +10,9 @@ abstract class Apiconsumer {
     Map<String, dynamic>? queryprams,
     required Object body,
   });
+  put({
+    required String path,
+    Map<String, dynamic>? queryprams,
+    required Object body,
+  });
 }

@@ -13,7 +13,6 @@ PreferredSizeWidget otpappbar(BuildContext context, Null Function() param1) {
       style: TextStyle(
         color: ColorManger.kPrimary,
         fontSize: 20.sp,
-        // fontFamily: FontFamily.Otama_ep,
       ),
     ),
     backgroundColor: ColorManger.white,

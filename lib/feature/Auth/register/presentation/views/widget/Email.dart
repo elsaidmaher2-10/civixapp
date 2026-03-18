@@ -12,13 +12,13 @@ class Email extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Text(
-        //   Constantmanger.email,
-        //   style: TextStyle(
-        //     color: ColorManger.lightGrey,
-        //     fontSize: ScreenUtilsManager.s16,
-        //   ),
-        // ),
+        Text(
+          Constantmanger.email,
+          style: TextStyle(
+            color: ColorManger.lightGrey,
+            fontSize: ScreenUtilsManager.s16,
+          ),
+        ),
         SizedBox(height: ScreenUtilsManager.h6),
         CustomTextfromfield(
           prefix: Icon(Icons.email, color: ColorManger.lightGrey2),

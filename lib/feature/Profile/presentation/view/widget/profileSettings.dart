@@ -3,11 +3,13 @@ import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/core/routing/routes.dart';
+import 'package:citifix/feature/Profile/presentation/manager/userinfoManger/user_profile_info_cubit.dart';
 import 'package:citifix/feature/Profile/presentation/view/Function/ShowCitezenaCard.dart';
 import 'package:citifix/feature/Profile/presentation/view/Function/showLanguagePicker.dart';
 import 'package:citifix/feature/Profile/presentation/view/widget/ProfileMenu.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Profilesettings extends StatelessWidget {
@@ -52,12 +54,14 @@ class Profilesettings extends StatelessWidget {
                     iconPath: AssetValueManager.support,
                     title: Constantmanger.support,
                   ),
+
                   ProfileMenuItem(
-                    onTap: () {
-                      Navigator.pushNamed(context, Routes.editProfile);
-                    },
                     iconPath: AssetValueManager.accountinformation,
                     title: Constantmanger.accouninormation,
+                    onTap: () async {
+                      await Navigator.pushNamed(context, Routes.editProfile);
+                      context.read<UserProfileInfoCubit>().getUserProfleInfo();
+                    },
                   ),
                 ],
               ),

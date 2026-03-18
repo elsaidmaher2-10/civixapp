@@ -6,7 +6,6 @@ import 'package:citifix/feature/Auth/otpverifcation/data/models/otpSuccessModel.
 import 'package:citifix/feature/Auth/otpverifcation/data/models/otpmodel.dart';
 import 'package:dartz/dartz.dart';
 
-// /api/Account/OTPVerification
 class OtpRepo {
   OtpRepo(this.service);
   Apiservice service;

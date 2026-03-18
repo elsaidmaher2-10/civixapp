@@ -20,18 +20,7 @@ class Usermodel {
     required this.email,
     required this.password,
     required this.phone,
-    // this.image,
   });
 }
 
 
-// {
-//   "nationalId": "string",
-//   "fullName": "string",
-//   "email": "user@example.com",
-//   "phoneNumber": "string",
-//   "password": "r\\ArZpn&UgU*L,T>&!x4a^xMD/[A4JxV1n[S|ha'\\xAt+Y:[,VC<fC(Y[r**W6cupu*a gb`E%*2W'{LkN_FYn",
-//   "address": "string",
-//   "dateOfBirth": "2026-02-14",
-//   "role": "string"
-// }

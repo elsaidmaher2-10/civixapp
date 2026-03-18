@@ -13,13 +13,13 @@ class Phone extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Text(
-        //   Constantmanger.phone,
-        //   style: TextStyle(
-        //     color: ColorManger.lightGrey,
-        //     fontSize: ScreenUtilsManager.s16,
-        //   ),
-        // ),
+        Text(
+          Constantmanger.phone,
+          style: TextStyle(
+            color: ColorManger.lightGrey,
+            fontSize: ScreenUtilsManager.s16,
+          ),
+        ),
         SizedBox(height: ScreenUtilsManager.h6),
         CustomTextfromfield(
           controller: controller,

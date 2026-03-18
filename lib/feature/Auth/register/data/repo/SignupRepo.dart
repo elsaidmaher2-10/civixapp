@@ -5,7 +5,6 @@ import 'package:citifix/core/database/remote/error/failureResponse.dart';
 import 'package:citifix/feature/Auth/register/data/models/usermodel.dart';
 import 'package:dartz/dartz.dart';
 
-// /api/Account/signup
 class Signuprepo {
   Signuprepo(this.service);
   Apiservice service;

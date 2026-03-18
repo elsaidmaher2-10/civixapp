@@ -20,13 +20,13 @@ class Password extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Text(
-        //   Constantmanger.pass,
-        //   style: TextStyle(
-        //     color: ColorManger.lightGrey,
-        //     fontSize: ScreenUtilsManager.s16,
-        //   ),
-        // ),
+        Text(
+          Constantmanger.pass,
+          style: TextStyle(
+            color: ColorManger.lightGrey,
+            fontSize: ScreenUtilsManager.s16,
+          ),
+        ),
         SizedBox(height: ScreenUtilsManager.h6),
         BlocProvider(
           create: (BuildContext context) => VisibleeyeCubit(),

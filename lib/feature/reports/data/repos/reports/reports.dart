@@ -83,12 +83,11 @@ class ReportRepository {
     }
 
     try {
-      int userid =
-          int.tryParse(
-            PrefrenceManager().getstring(Constantmanger.userid) ?? "48",
-          ) ??
-          48;
-      final response = await service.get(path: "${Apiconstant.report}/citizen/$userid");
+      String? userid = PrefrenceManager().getstring(Constantmanger.userid);
+
+      final response = await service.get(
+        path: "${Apiconstant.report}/citizen/$userid",
+      );
 
       final List<dynamic> items = response['items'];
 

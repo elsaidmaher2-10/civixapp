@@ -1,3 +1,4 @@
+import 'package:citifix/core/database/local/prefmanger.dart';
 import 'package:citifix/core/database/remote/api/ApiConstant.dart';
 import 'package:citifix/core/database/remote/api/ApiService.dart';
 import 'package:citifix/core/database/remote/error/ServerExciptionmodel.dart';
@@ -26,8 +27,22 @@ class Loginrepo {
         path: Apiconstant.loginendpoint,
         body: {"email": email, "password": password},
       );
-
-      return right(Loginsuccesresponse.fromjosn(response));
+      final loginResponse = Loginsuccesresponse.fromjosn(response);
+      PrefrenceManager().setstring(Constantmanger.userid, loginResponse.id);
+      PrefrenceManager().setstring(
+        Constantmanger.accessToken,
+        loginResponse.accessToken,
+      );
+      PrefrenceManager().setstring(
+        Constantmanger.refreshToken,
+        loginResponse.refreshToken,
+      );
+      PrefrenceManager().setstring(
+        Constantmanger.refreshTokenExpiration,
+        loginResponse.refreshTokenExpiration,
+      );
+      PrefrenceManager().setstring(Constantmanger.role, loginResponse.role);
+      return right(loginResponse);
     } on Serverexciptionmodel catch (e) {
       if (e.errors is Map?) {
         final d = FailureResponse.fromJson(e.errors);

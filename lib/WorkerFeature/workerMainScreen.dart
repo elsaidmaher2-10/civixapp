@@ -30,7 +30,6 @@ class _WorkerMainScreenState extends State<WorkerMainScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // ── Header ───────────────────────────────────────────────
                   Padding(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 16,
@@ -92,7 +91,6 @@ class _WorkerMainScreenState extends State<WorkerMainScreen> {
                     ),
                   ),
 
-                  // ── Profile Card ─────────────────────────────────────────
                   Padding(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 16,
@@ -178,7 +176,6 @@ class _WorkerMainScreenState extends State<WorkerMainScreen> {
                     ),
                   ),
 
-                  // ── Weekly Overview ──────────────────────────────────────
                   Padding(
                     padding: const EdgeInsets.all(16),
                     child: Column(
@@ -194,10 +191,8 @@ class _WorkerMainScreenState extends State<WorkerMainScreen> {
                         ),
                         const SizedBox(height: 12),
 
-                        // stat cards row
                         Row(
                           children: [
-                            // Assigned Reports
                             Expanded(
                               child: Container(
                                 padding: const EdgeInsets.all(16),
@@ -276,7 +271,6 @@ class _WorkerMainScreenState extends State<WorkerMainScreen> {
                             ),
                             const SizedBox(width: 12),
 
-                            // In-Progress
                             Expanded(
                               child: Container(
                                 padding: const EdgeInsets.all(16),
@@ -355,7 +349,6 @@ class _WorkerMainScreenState extends State<WorkerMainScreen> {
                         ),
                         const SizedBox(height: 12),
 
-                        // Completed card
                         Container(
                           width: double.infinity,
                           padding: const EdgeInsets.all(20),
@@ -416,7 +409,6 @@ class _WorkerMainScreenState extends State<WorkerMainScreen> {
                     ),
                   ),
 
-                  // ── Current Assignment ───────────────────────────────────
                   Padding(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 16,
@@ -450,7 +442,6 @@ class _WorkerMainScreenState extends State<WorkerMainScreen> {
                           clipBehavior: Clip.antiAlias,
                           child: Column(
                             children: [
-                              // ✅ Flutter Map
                               SizedBox(
                                 height: 130,
                                 child: FlutterMap(
@@ -534,7 +525,6 @@ class _WorkerMainScreenState extends State<WorkerMainScreen> {
                     ),
                   ),
 
-                  // ── Recent Tasks ─────────────────────────────────────────
                   Padding(
                     padding: const EdgeInsets.all(16),
                     child: Column(
@@ -573,7 +563,7 @@ class _WorkerMainScreenState extends State<WorkerMainScreen> {
                         ),
                         const SizedBox(height: 12),
 
-                        // Task 1
+                         
                         Container(
                           padding: const EdgeInsets.all(16),
                           decoration: BoxDecoration(
@@ -636,7 +626,6 @@ class _WorkerMainScreenState extends State<WorkerMainScreen> {
                         ),
                         const SizedBox(height: 10),
 
-                        // Task 2
                         Container(
                           padding: const EdgeInsets.all(16),
                           decoration: BoxDecoration(
@@ -704,7 +693,6 @@ class _WorkerMainScreenState extends State<WorkerMainScreen> {
               ),
             ),
 
-            // ── Bottom Nav ───────────────────────────────────────────────
             Positioned(
               bottom: 0,
               left: 0,

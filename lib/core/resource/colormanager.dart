@@ -1,7 +1,6 @@
 import 'package:flutter/painting.dart';
 
 class ColorManger {
-  // Primary Colors
   static const Color kPrimary = Color(0xff003366);
   static const Color kPrimaryDark = Color(0xff0F172A);
   static const Color kPrimaryLight = Color.fromARGB(204, 112, 167, 222);
@@ -21,4 +20,9 @@ class ColorManger {
   static const Color lightColor = Color(0xff2A4D8B);
   static const Color textBlack = Color(0xff111827);
   static const Color white = Color(0xffFFFFFF);
+  static const Color reportsPageBackground = Color(0xFFF6F7F8);
+  static const Color searchFieldFill = Color(0xffF1F5F9);
+  static const Color searchIconColor = Color(0xff475569);
+  static const Color searchHintColor = Color(0xff94A3B8);
+  static const Color searchFocusBorder = Color(0xff475569);
 }

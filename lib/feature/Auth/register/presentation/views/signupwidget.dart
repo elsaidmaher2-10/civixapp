@@ -7,6 +7,7 @@ import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/core/routing/routes.dart';
 import 'package:citifix/core/widget/CustomSnackBar.dart';
+import 'package:citifix/core/widget/customloading.dart';
 import 'package:citifix/core/widget/customtextfromfield.dart';
 import 'package:citifix/feature/Auth/register/data/models/usermodel.dart';
 import 'package:citifix/feature/Auth/register/presentation/manager/ValidatebuttonCubit/validatebutton_cubit.dart';
@@ -135,10 +136,8 @@ class _SingnupState extends State<Singnup> {
                 inAsyncCall: inAsyncCall,
 
                 blur: 7,
-                progressIndicator: CupertinoActivityIndicator(
-                  radius: 15,
-                  color: ColorManger.kPrimary,
-                ),
+                progressIndicator: customloading(),
+
                 child: Scaffold(
                   backgroundColor: Colors.white,
                   body: SafeArea(
@@ -338,59 +337,58 @@ class _SingnupState extends State<Singnup> {
     super.dispose();
   }
 }
-// }
 
-// class Selectcountry extends StatefulWidget {
-//   Selectcountry({super.key, required this.name});
-//   String name;
-//   @override
-//   State<Selectcountry> createState() => _SelectcountryState();
-// }
+class Selectcountry extends StatefulWidget {
+  Selectcountry({super.key, required this.name});
+  String name;
+  @override
+  State<Selectcountry> createState() => _SelectcountryState();
+}
 
-// class _SelectcountryState extends State<Selectcountry> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Column(
-//       crossAxisAlignment: CrossAxisAlignment.start,
-//       children: [
-//         Text("Select nationality"),
-//         SizedBox(height: 4),
-//         Container(
-//           decoration: BoxDecoration(
-//             color: Color(0xffF6F6F6),
-//             borderRadius: BorderRadius.circular(8),
-//             border: BoxBorder.all(color: ColorManger.kPrimary),
-//           ),
-//           height: 45,
-//           width: double.infinity,
-//           child: InkWell(
-//             child: Padding(
-//               padding: const EdgeInsets.all(8.0),
-//               child: Align(
-//                 alignment: AlignmentGeometry.centerLeft,
+class _SelectcountryState extends State<Selectcountry> {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text("Select nationality"),
+        SizedBox(height: 4),
+        Container(
+          decoration: BoxDecoration(
+            color: Color(0xffF6F6F6),
+            borderRadius: BorderRadius.circular(8),
+            border: BoxBorder.all(color: ColorManger.kPrimary),
+          ),
+          height: 45,
+          width: double.infinity,
+          child: InkWell(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Align(
+                alignment: AlignmentGeometry.centerLeft,
 
-//                 child: Row(
-//                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                   children: [
-//                     Text(
-//                       widget.name,
-//                       style: TextStyle(color: ColorManger.lightGrey2),
-//                     ),
-//                     Icon(
-//                       color: ColorManger.lightGrey2,
-//                       size: 30,
-//                       Icons.keyboard_arrow_down,
-//                     ),
-//                   ],
-//                 ),
-//               ),
-//             ),
-//             onTap: () {
-//               setState(() {});
-//             },
-//           ),
-//         ),
-//       ],
-//     );
-//   }
-// }
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      widget.name,
+                      style: TextStyle(color: ColorManger.lightGrey2),
+                    ),
+                    Icon(
+                      color: ColorManger.lightGrey2,
+                      size: 30,
+                      Icons.keyboard_arrow_down,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            onTap: () {
+              setState(() {});
+            },
+          ),
+        ),
+      ],
+    );
+  }
+}

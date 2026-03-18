@@ -25,7 +25,6 @@ class ReportDetailsAppbar extends StatelessWidget {
         ),
         onPressed: () => Navigator.pop(context),
       ),
-      // todo is important
       flexibleSpace: FlexibleSpaceBar(
         stretchModes: const [
           StretchMode.zoomBackground,

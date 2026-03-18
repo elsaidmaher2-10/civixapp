@@ -43,7 +43,6 @@ Serverexciptionmodel handleDioException(DioException e) {
         errors: e.message ?? "Unknown Error",
         statuscode: e.response?.statusCode ?? 520,
       );
-    // ignore: unreachable_switch_default
     default:
       return Serverexciptionmodel(
         errors: "Unexpected Error",

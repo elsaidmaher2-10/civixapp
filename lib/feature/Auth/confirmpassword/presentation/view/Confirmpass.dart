@@ -9,6 +9,7 @@ import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/core/routing/routes.dart';
 import 'package:citifix/core/service/networkchecker.dart';
 import 'package:citifix/core/widget/CustomSnackBar.dart';
+import 'package:citifix/core/widget/customloading.dart';
 import 'package:citifix/feature/Auth/confirmpassword/data/repo/confirmpasswordrepo.dart';
 import 'package:citifix/feature/Auth/confirmpassword/presentation/manager/ConfirmPasswordController.dart';
 import 'package:citifix/feature/Auth/confirmpassword/presentation/manager/ConfirmPasswordState.dart';
@@ -114,10 +115,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
               return ModalProgressHUD(
                 inAsyncCall: inAsyncCall,
                 blur: 7,
-                progressIndicator: CupertinoActivityIndicator(
-                  radius: 15,
-                  color: ColorManger.kPrimary,
-                ),
+                progressIndicator:customloading(),
                 child: Scaffold(
                   backgroundColor: Colors.white,
                   appBar: confirmpassappbar(context, () {

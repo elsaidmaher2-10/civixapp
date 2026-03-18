@@ -94,7 +94,6 @@ class Reportcard extends StatelessWidget {
                 ),
               ),
 
-              // --- Dynamic Status Badge ---
               Container(
                 margin: EdgeInsets.only(right: 12.w),
                 padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 6.h),

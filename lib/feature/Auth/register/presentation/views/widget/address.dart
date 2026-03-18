@@ -4,7 +4,6 @@ import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/core/widget/customtextfromfield.dart';
 import 'package:flutter/material.dart';
 
-// ignore: must_be_immutable
 class Address extends StatelessWidget {
   Address({super.key, required this.controller, required this.onChanged});
 
@@ -15,13 +14,13 @@ class Address extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Text(
-        //   Constantmanger.nationalnumber,
-        //   style: TextStyle(
-        //     color: ColorManger.lightGrey,
-        //     fontSize: ScreenUtilsManager.s16,
-        //   ),
-        // ),
+        Text(
+          Constantmanger.nationalnumber,
+          style: TextStyle(
+            color: ColorManger.lightGrey,
+            fontSize: ScreenUtilsManager.s16,
+          ),
+        ),
         SizedBox(height: ScreenUtilsManager.h6),
         CustomTextfromfield(
           prefix: Icon(Icons.location_city, color: ColorManger.lightGrey2),

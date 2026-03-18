@@ -173,7 +173,6 @@ PreferredSizeWidget foregetpasswordappbar(BuildContext context) {
       style: TextStyle(
         color: ColorManger.kPrimary,
         fontSize: 20.sp,
-        // fontFamily: FontFamily.Otama_ep,
       ),
     ),
     backgroundColor: ColorManger.white,

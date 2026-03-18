@@ -5,11 +5,13 @@ import 'package:citifix/feature/Auth/confirmpassword/presentation/view/Confirmpa
 import 'package:citifix/feature/Auth/foregetpassword/presentation/views/foregetpassword.dart';
 import 'package:citifix/feature/Auth/otpverifcation/presentation/view/otpvrificationcode.dart';
 import 'package:citifix/feature/Auth/register/presentation/views/signupwidget.dart';
+import 'package:citifix/feature/Profile/presentation/manager/userinfoManger/user_profile_info_cubit.dart';
 import 'package:citifix/feature/Profile/presentation/view/widget/editprofile.dart';
 import 'package:citifix/feature/home/presentation/view/mainScreen.dart';
 import 'package:citifix/feature/onbroading/onbroading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Routingmanger {
   static Route<dynamic> onGenerateRoute(RouteSettings route) {
@@ -35,7 +37,10 @@ class Routingmanger {
       case Routes.editProfile:
         return MaterialPageRoute(
           settings: route,
-          builder: (_) => EditProfileScreen(),
+          builder: (_) => BlocProvider.value(
+            value: navigatorKey.currentContext!.read<UserProfileInfoCubit>(),
+            child: EditProfileScreen(),
+          ),
         );
       case Routes.citizenMain:
         return _noPopRoute(child: CitizenMainScreen());

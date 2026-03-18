@@ -6,7 +6,6 @@ sealed class MangeCustomBottomnavBarState {}
 final class MangeCustomBottomnavBarInitial
     extends MangeCustomBottomnavBarState {}
 
-// ignore: must_be_immutable
 final class MangeCustomBottomnavBarChange extends MangeCustomBottomnavBarState {
   int index;
   MangeCustomBottomnavBarChange(this.index);

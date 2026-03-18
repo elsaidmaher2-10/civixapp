@@ -3,6 +3,7 @@ import 'package:citifix/core/DI/getit.dart';
 import 'package:citifix/core/database/local/prefmanger.dart';
 import 'package:citifix/core/routing/appRoutingRole.dart';
 import 'package:citifix/core/widget/CustomSnackBar.dart';
+import 'package:citifix/core/widget/customloading.dart';
 import 'package:citifix/feature/Auth/Login/presentation/manager/cubit/loginmanger_cubit.dart';
 import 'package:citifix/feature/Auth/Login/presentation/manager/cubit/loginmanger_state.dart';
 import 'package:citifix/feature/reports/presentation/manager/reportManger/cubit/report_manager_cubit.dart';
@@ -62,26 +63,6 @@ class _LoginpageState extends State<Loginpage> {
                   message: state.message,
                 );
               } else if (state is LogincontrollerSuccess) {
-                PrefrenceManager().setstring(
-                  Constantmanger.accessToken,
-                  state.response.accessToken,
-                );
-                PrefrenceManager().setstring(
-                  Constantmanger.refreshToken,
-                  state.response.refreshToken,
-                );
-                PrefrenceManager().setstring(
-                  Constantmanger.refreshTokenExpiration,
-                  state.response.refreshTokenExpiration,
-                );
-                PrefrenceManager().setstring(
-                  Constantmanger.role,
-                  state.response.role,
-                );
-                PrefrenceManager().setstring(
-                  Constantmanger.userid,
-                  state.response.id,
-                );
                 Customsnackbar.show(
                   context: context,
                   backgroundColor: ColorManger.green,
@@ -94,7 +75,6 @@ class _LoginpageState extends State<Loginpage> {
                     Navigator.pushNamed(context, Routes.citizenMain);
                   case AppRole.worker:
                     Navigator.pushNamed(context, Routes.workerMain);
-
                   case AppRole.unknown:
                     Navigator.pushNamed(context, Routes.login);
                 }
@@ -111,10 +91,7 @@ class _LoginpageState extends State<Loginpage> {
               return ModalProgressHUD(
                 inAsyncCall: inAsyncCall,
                 blur: 7,
-                progressIndicator: CupertinoActivityIndicator(
-                  radius: 15,
-                  color: ColorManger.kPrimary,
-                ),
+                progressIndicator: customloading(),
                 child: Scaffold(
                   bottomNavigationBar: Padding(
                     padding: EdgeInsets.symmetric(vertical: 15.h),

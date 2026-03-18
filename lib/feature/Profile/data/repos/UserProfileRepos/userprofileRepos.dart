@@ -80,6 +80,34 @@ class Userprofilerepos {
     }
   }
 
+  Future<Either<FailureResponse, UserProfile>> updateProfile(
+    UserProfile userprofile,
+  ) async {
+    if (!await internetChecker.checkInternet()) {
+      return left(
+        FailureResponse(errors: [Constantmanger.nointernet], statusCode: 1),
+      );
+    }
+
+    try {
+      final response = await service.put(
+        path: Apiconstant.editUserProfile,
+        body: userprofile.toJson(),
+      );
+
+      final updatedUser = UserProfile.fromJson(response);
+      PrefrenceManager().setstring(
+        "user_profile_data",
+        jsonEncode(updatedUser.toJson()),
+      );
+      return right(updatedUser);
+    } on Serverexciptionmodel catch (e) {
+      return left(_handleServerException(e));
+    } catch (e) {
+      return left(FailureResponse(errors: [e.toString()], statusCode: 500));
+    }
+  }
+
   FailureResponse _handleServerException(Serverexciptionmodel e) {
     if (e.errors is Map?) {
       return FailureResponse.fromJson(e.errors);

@@ -19,14 +19,13 @@ List passwordvalidatorrules(String value) {
     Constantmanger.passwordRules[2]["status"] = false;
   }
 
-  // رقم
   if (value.contains(RegExp(r'[0-9]'))) {
     Constantmanger.passwordRules[4]["status"] = true;
   } else {
     Constantmanger.passwordRules[4]["status"] = false;
   }
 
-  // Special character
+
   if (value.contains(RegExp(r'[!@#\$%\^&\*\(\)_\+\-=\[\]{};:"\\|,.<>\/?]'))) {
     Constantmanger.passwordRules[3]["status"] = true;
   } else {

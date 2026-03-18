@@ -34,9 +34,11 @@ void main() async {
     Constantmanger.accessToken,
   );
   final String? roleString = PrefrenceManager().getstring(Constantmanger.role);
+  final String? id = PrefrenceManager().getstring(Constantmanger.userid);
 
   log('Access Token: $accessToken');
   log('Role: $roleString');
+  log('id: $id');
 
   runApp(
     MyApp(

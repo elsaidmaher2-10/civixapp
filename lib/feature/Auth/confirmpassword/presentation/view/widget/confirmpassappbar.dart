@@ -14,7 +14,6 @@ PreferredSizeWidget confirmpassappbar(
     title: Text(
       "Create New Password",
       style: TextStyle(
-        // fontFamily: FontFamily.Otama_ep,
         fontSize: 20.sp,
         color: ColorManger.kPrimary,
       ),

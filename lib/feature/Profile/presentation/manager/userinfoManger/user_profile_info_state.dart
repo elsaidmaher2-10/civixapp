@@ -15,6 +15,13 @@ final class UserProfileInfoSuccess extends UserProfileInfoState {
   final UserProfile user;
   UserProfileInfoSuccess(this.user);
 }
+final class EditUserProfileInfoLoading extends UserProfileInfoState {}
+
+
+final class EditUserProfileInfoSuccess extends UserProfileInfoState {
+  final UserProfile user;
+  EditUserProfileInfoSuccess(this.user);
+}
 
 final class UserProfileImageUpdatedSuccess extends UserProfileInfoState {
   final UserProfile user;
@@ -24,4 +31,8 @@ final class UserProfileImageUpdatedSuccess extends UserProfileInfoState {
 final class UserProfileInfoError extends UserProfileInfoState {
   final String message;
   UserProfileInfoError(this.message);
+}
+final class EditUserProfileInfoError extends UserProfileInfoState {
+  final String message;
+  EditUserProfileInfoError(this.message);
 }

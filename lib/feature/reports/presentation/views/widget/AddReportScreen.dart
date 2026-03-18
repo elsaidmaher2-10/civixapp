@@ -6,6 +6,7 @@ import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/core/widget/CustomSnackBar.dart';
 import 'package:citifix/core/widget/customButton.dart';
+import 'package:citifix/core/widget/customloading.dart';
 import 'package:citifix/feature/reports/presentation/manager/reportManger/cubit/report_manager_cubit.dart';
 import 'package:citifix/feature/reports/presentation/manager/reportManger/cubit/report_manager_state.dart';
 import 'package:citifix/feature/home/presentation/view/widget/CustomMap.dart';
@@ -19,6 +20,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class AddReportScreen extends StatefulWidget {
   const AddReportScreen({super.key});
@@ -99,125 +101,107 @@ class _AddReportScreenState extends State<AddReportScreen> {
         }
       },
       builder: (context, state) {
-        return Scaffold(
-          backgroundColor: ColorManger.white,
-          appBar: AddReportAppbar(context),
-          body: Stack(
-            children: [
-              SafeArea(
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: ScreenUtilsManager.p23,
-                  ),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(height: ScreenUtilsManager.h40),
-                        ReportFormFields(
-                          titleController: titleController,
-                          descriptionController: descriptionController,
-                          onCategoryChanged: (p1) {
-                            setState(() {
-                              categoryitem = p1?.id ?? -1;
-                              controller?.value = p1;
-                              updateButtonStatus();
-                            });
-                          },
-                          controller: controller,
-                        ),
-                        SizedBox(height: ScreenUtilsManager.h16),
-                        ImagePickerList(
-                          images: images?.map((e) => File(e.path)).toList(),
-                          onAddImage: pickImages,
-                          stream: streamController.stream,
-                          onRemove: (int index) {
-                            setState(() {
-                              images?.removeAt(index);
-                            });
-                            streamController.add(
-                              images?.map((e) => File(e.path)).toList() ?? [],
-                            );
-                          },
-                        ),
-                        SizedBox(height: ScreenUtilsManager.h16),
-                        Text(
-                          Constantmanger.location,
-                          style: TextStyle(
-                            color: ColorManger.kPrimary,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        SizedBox(height: ScreenUtilsManager.h16),
-                        CustomMap.fromDevice(
-                          onmapCreated: (String street, LatLng latlang) {
-                            selectedStreet = street;
-                            selectedLatLng = latlang;
-                          },
-                        ),
-                        SizedBox(height: ScreenUtilsManager.h16),
-                        CustomButton(
-                          onPressed: (isValid && state is! CreateReportLoading)
-                              ? () {
-                                  context.read<ReportCubit>().createReport(
-                                    request: CreateReportRequest(
-                                      title: titleController.text,
-                                      description: descriptionController.text,
-                                      location:
-                                          selectedStreet ?? 'Unknown Location',
-                                      latitude: selectedLatLng?.latitude ?? 0.0,
-                                      longitude:
-                                          selectedLatLng?.longitude ?? 0.0,
-                                      categoryId: categoryitem,
-                                      images: images!
-                                          .map((e) => e.path)
-                                          .toList(),
-                                    ),
-                                  );
-                                }
-                              : null,
-                          lable: Constantmanger.sendReport,
-                        ),
-                        SizedBox(height: ScreenUtilsManager.h16),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
+        bool inAsyncCall = false;
+        if (state is CreateReportLoading) {
+          inAsyncCall = true;
+        } else {
+          inAsyncCall = false;
+        }
 
-              if (state is CreateReportLoading)
-                Container(
-                  width: double.infinity,
-                  height: double.infinity,
-                  color: Colors.black.withOpacity(0.5),
-                  child: Center(
-                    child: Container(
-                      padding: const EdgeInsets.all(30),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(15),
-                      ),
+        return ModalProgressHUD(
+          inAsyncCall: inAsyncCall,
+          blur: 7,
+          progressIndicator: customloading(),
+          child: Scaffold(
+            backgroundColor: ColorManger.white,
+            appBar: AddReportAppbar(context),
+            body: Stack(
+              children: [
+                SafeArea(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: ScreenUtilsManager.p23,
+                    ),
+                    child: SingleChildScrollView(
                       child: Column(
-                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const CupertinoActivityIndicator(
-                            radius: 20,
-                            color: ColorManger.kPrimary,
+                          SizedBox(height: ScreenUtilsManager.h40),
+                          ReportFormFields(
+                            titleController: titleController,
+                            descriptionController: descriptionController,
+                            onCategoryChanged: (p1) {
+                              setState(() {
+                                categoryitem = p1?.id ?? -1;
+                                controller?.value = p1;
+                                updateButtonStatus();
+                              });
+                            },
+                            controller: controller,
                           ),
-                          const SizedBox(height: 15),
-                          const Text(
-                            "Sending Report...",
+                          SizedBox(height: ScreenUtilsManager.h16),
+                          ImagePickerList(
+                            images: images?.map((e) => File(e.path)).toList(),
+                            onAddImage: pickImages,
+                            stream: streamController.stream,
+                            onRemove: (int index) {
+                              setState(() {
+                                images?.removeAt(index);
+                              });
+                              streamController.add(
+                                images?.map((e) => File(e.path)).toList() ?? [],
+                              );
+                            },
+                          ),
+                          SizedBox(height: ScreenUtilsManager.h16),
+                          Text(
+                            Constantmanger.location,
                             style: TextStyle(
+                              color: ColorManger.kPrimary,
                               fontWeight: FontWeight.bold,
-                              color: Colors.black,
                             ),
                           ),
+                          SizedBox(height: ScreenUtilsManager.h16),
+                          CustomMap.fromDevice(
+                            onmapCreated: (String street, LatLng latlang) {
+                              selectedStreet = street;
+                              selectedLatLng = latlang;
+                            },
+                          ),
+                          SizedBox(height: ScreenUtilsManager.h16),
+                          CustomButton(
+                            onPressed:
+                                (isValid && state is! CreateReportLoading)
+                                ? () {
+                                    context.read<ReportCubit>().createReport(
+                                      request: CreateReportRequest(
+                                        title: titleController.text,
+                                        description: descriptionController.text,
+                                        location:
+                                            selectedStreet ??
+                                            'Unknown Location',
+                                        latitude:
+                                            selectedLatLng?.latitude ?? 0.0,
+                                        longitude:
+                                            selectedLatLng?.longitude ?? 0.0,
+                                        categoryId: categoryitem,
+                                        images: images!
+                                            .map((e) => e.path)
+                                            .toList(),
+                                      ),
+                                    );
+                                  }
+                                : null,
+                            lable: Constantmanger.sendReport,
+                          ),
+                          SizedBox(height: ScreenUtilsManager.h16),
                         ],
                       ),
                     ),
                   ),
                 ),
-            ],
+              ],
+            ),
           ),
         );
       },

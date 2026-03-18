@@ -13,24 +13,17 @@ class UserProfileInfoCubit extends Cubit<UserProfileInfoState> {
     : super(UserProfileInfoInitial()) {
     _loadInitialData();
   }
-
   final Userprofilerepos userprofilerepos;
-
+  static const String _cacheKey = "user_profile_data";
   void _loadInitialData() async {
-    String? cachedUser = PrefrenceManager().getstring("user_profile_data");
+    String? cachedUser = PrefrenceManager().getstring(_cacheKey);
     if (cachedUser != null) {
       emit(
         UserProfileInfoSuccess(UserProfile.fromJson(jsonDecode(cachedUser))),
       );
-      await _refreshFromNetwork();
     } else {
       await getUserProfleInfo();
     }
-  }
-
-  Future<void> _refreshFromNetwork() async {
-    final result = await userprofilerepos.getuserInfo();
-    result.fold((l) => null, (r) => emit(UserProfileInfoSuccess(r)));
   }
 
   Future<void> getUserProfleInfo() async {
@@ -57,8 +50,49 @@ class UserProfileInfoCubit extends Cubit<UserProfileInfoState> {
     final result = await userprofilerepos.updateuserImage(image);
     if (isClosed) return;
     result.fold((l) => emit(UserProfileInfoError(l.errors.join())), (r) {
-      PrefrenceManager().setstring(Constantmanger.userid, r.id);
       emit(UserProfileImageUpdatedSuccess(r));
     });
+  }
+
+  Future<void> updateUserProfile(UserProfile updatedProfile) async {
+    if (isClosed) return;
+    emit(EditUserProfileInfoLoading());
+    final result = await userprofilerepos.updateProfile(updatedProfile);
+    if (isClosed) return;
+    result.fold(
+      (failure) => emit(EditUserProfileInfoError(failure.errors.join())),
+      (response) {
+        UserProfile finalProfile;
+        String? cachedUser = PrefrenceManager().getstring(_cacheKey);
+
+        if (cachedUser != null) {
+          UserProfile oldProfile = UserProfile.fromJson(jsonDecode(cachedUser));
+          finalProfile = UserProfile(
+            id: response.id ?? oldProfile.id,
+            username: response.username ?? oldProfile.username,
+            email: response.email ?? oldProfile.email,
+            role: response.role ?? oldProfile.role,
+            fullName: response.fullName ?? oldProfile.fullName,
+            nationalId: response.nationalId ?? oldProfile.nationalId,
+            dateOfBirth: response.dateOfBirth ?? oldProfile.dateOfBirth,
+            age: response.age ?? oldProfile.age,
+            phoneNumber: response.phoneNumber ?? oldProfile.phoneNumber,
+            address: response.address ?? oldProfile.address,
+            verified: response.verified ?? oldProfile.verified,
+            userId: response.userId ?? oldProfile.userId,
+            profileImage: response.profileImage ?? oldProfile.profileImage,
+          );
+        } else {
+          finalProfile = response;
+        }
+
+        PrefrenceManager().setstring(
+          _cacheKey,
+          jsonEncode(finalProfile.toJson()),
+        );
+
+        emit(EditUserProfileInfoSuccess(finalProfile));
+      },
+    );
   }
 }

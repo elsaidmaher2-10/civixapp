@@ -1,4 +1,5 @@
 import 'package:citifix/core/resource/assetvaluemanger.dart';
+import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/core/widget/customtextfromfield.dart';
@@ -13,13 +14,13 @@ class Fname extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Text(
-        //   Constantmanger.fname,
-        //   style: TextStyle(
-        //     color: ColorManger.lightGrey,
-        //     fontSize: ScreenUtilsManager.s16,
-        //   ),
-        // ),
+        Text(
+          Constantmanger.fname,
+          style: TextStyle(
+            color: ColorManger.lightGrey,
+            fontSize: ScreenUtilsManager.s16,
+          ),
+        ),
         SizedBox(height: ScreenUtilsManager.h6),
         CustomTextfromfield(
           prefix: Padding(

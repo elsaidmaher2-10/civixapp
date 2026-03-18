@@ -64,7 +64,6 @@ class ProfileInfo extends StatelessWidget {
           );
         }
 
-        PrefrenceManager().setstring(Constantmanger.userid, user.id);
 
         return Column(
           children: [

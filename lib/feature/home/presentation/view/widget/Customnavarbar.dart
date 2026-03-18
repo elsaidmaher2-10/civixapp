@@ -30,7 +30,7 @@ class CustomWaternavbar extends StatelessWidget {
             WaterDropNavBar(
               bottomPadding: 0,
               waterDropColor: ColorManger.kPrimary,
-              backgroundColor: ColorManger.bgLight,
+              backgroundColor: ColorManger.reportsPageBackground,
               onItemSelected: (index) {
                 context.read<MangeCustomBottomnavBarCubit>().ontap(index);
               },

@@ -6,7 +6,6 @@ import 'package:citifix/core/widget/customtextfromfield.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
 class Nationalnumber extends StatelessWidget {
   const Nationalnumber({super.key, required this.controller});
 
@@ -16,13 +15,13 @@ class Nationalnumber extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Text(
-        //   Constantmanger.nationalnumber,
-        //   style: TextStyle(
-        //     color: ColorManger.lightGrey,
-        //     fontSize: ScreenUtilsManager.s16,
-        //   ),
-        // ),
+        Text(
+          Constantmanger.nationalnumber,
+          style: TextStyle(
+            color: ColorManger.lightGrey,
+            fontSize: ScreenUtilsManager.s16,
+          ),
+        ),
         SizedBox(height: ScreenUtilsManager.h6),
         CustomTextfromfield(
           prefix: Padding(
@@ -50,10 +49,9 @@ class Nationalnumber extends StatelessWidget {
             if (!RegExp(r'^\d{14}$').hasMatch(value)) {
               return "National ID must contain only digits";
             }
-            return null; // تمام
+            return null; 
           },
 
-          // onChanged: onChanged,
           controller: controller,
           obstext: false,
           ktype: TextInputType.number,

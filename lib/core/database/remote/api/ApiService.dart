@@ -78,4 +78,22 @@ class Apiservice extends Apiconsumer {
       throw handleDioException(e);
     }
   }
+
+  @override
+  put({
+    required String path,
+    Map<String, dynamic>? queryprams,
+    required Object body,
+  }) async {
+    try {
+      final response = await dio.put(
+        path,
+        data: body,
+        queryParameters: queryprams,
+      );
+      return response.data;
+    } on DioException catch (e) {
+      throw handleDioException(e);
+    }
+  }
 }

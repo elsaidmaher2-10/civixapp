@@ -21,6 +21,7 @@ class Customimagepicker extends StatelessWidget {
   final void Function()? onTap;
   @override
   Widget build(BuildContext context) {
+    print(userProfile.toJson());
     return Stack(
       clipBehavior: Clip.none,
       children: [

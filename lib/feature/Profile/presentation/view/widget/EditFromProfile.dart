@@ -1,5 +1,4 @@
 import 'package:citifix/core/resource/colormanager.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -8,11 +7,13 @@ class Editfromprofile extends StatelessWidget {
     super.key,
     required this.EmailCotroller,
     required this.nameCotroller,
+    required this.addressCotroller,
     required this.phoneCotroller,
   });
   final TextEditingController phoneCotroller;
   final TextEditingController EmailCotroller;
   final TextEditingController nameCotroller;
+  final TextEditingController addressCotroller;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -189,6 +190,73 @@ class Editfromprofile extends StatelessWidget {
                   size: 22,
                 ),
                 hintText: 'Enter phone number',
+                hintStyle: GoogleFonts.outfit(
+                  fontSize: 14,
+                  color: const Color(0xFF94A3B8),
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(14),
+                  borderSide: BorderSide.none,
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(14),
+                  borderSide: const BorderSide(
+                    color: Color(0xFFE2E8F0),
+                    width: 1,
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(14),
+                  borderSide: const BorderSide(
+                    color: ColorManger.kPrimary,
+                    width: 2,
+                  ),
+                ),
+                contentPadding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 16,
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 8),
+
+          Text(
+            'Address',
+            style: GoogleFonts.outfit(
+              fontSize: 13,
+              fontWeight: FontWeight.w600,
+              color: const Color(0xFF334155),
+            ),
+          ),
+          const SizedBox(height: 8),
+          Container(
+            decoration: BoxDecoration(
+              color: ColorManger.white,
+              borderRadius: BorderRadius.circular(14),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.04),
+                  blurRadius: 8,
+                  offset: const Offset(0, 2),
+                ),
+              ],
+            ),
+            child: TextField(
+              controller: addressCotroller,
+              keyboardType: TextInputType.phone,
+              style: GoogleFonts.outfit(
+                fontSize: 15,
+                fontWeight: FontWeight.w500,
+                color: const Color(0xFF0F172A),
+              ),
+              decoration: InputDecoration(
+                prefixIcon: const Icon(
+                  Icons.location_city,
+                  color: Color(0xFF94A3B8),
+                  size: 22,
+                ),
+                hintText: 'Enter Address',
                 hintStyle: GoogleFonts.outfit(
                   fontSize: 14,
                   color: const Color(0xFF94A3B8),

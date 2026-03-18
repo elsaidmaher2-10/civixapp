@@ -29,7 +29,7 @@ class _ResendCodeOptState extends State<ResendCodeOpt> {
         counter--;
         streamController.add(counter);
       } else {
-        timer.cancel(); // وقف التيمر لما يوصل صفر
+        timer.cancel();
       }
     });
   }

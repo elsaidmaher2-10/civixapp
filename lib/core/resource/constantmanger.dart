@@ -158,7 +158,7 @@ class Constantmanger {
 
   static String logout = "Log out";
 
-  static var userid = "userID";
+  static String userid = "userID";
 
   static String defualtImage =
       "https://www.shutterstock.com/shutterstock/photos/298199573/display_1500/stock-vector-business-report-paper-on-blue-background-with-long-shadow-modern-vector-illustration-flat-style-298199573.jpg";

@@ -23,7 +23,6 @@ class signuplogo extends StatelessWidget {
             Constantmanger.sinup,
             style: TextStyle(
               fontWeight: FontWeight.w600,
-              // fontFamily: FontFamily.Otama_ep,
               fontSize: ScreenUtilsManager.s34,
               color: ColorManger.kPrimary,
             ),
