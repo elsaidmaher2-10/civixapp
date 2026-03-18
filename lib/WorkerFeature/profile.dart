@@ -106,7 +106,7 @@ class _WorkerProfileScreenState extends State<WorkerProfileScreen> {
                               ),
                               const SizedBox(height: 16),
 
-                              // Email + Phone
+                              Email + Phone
                               Container(
                                 padding: const EdgeInsets.all(12),
                                 decoration: BoxDecoration(
@@ -115,7 +115,7 @@ class _WorkerProfileScreenState extends State<WorkerProfileScreen> {
                                 ),
                                 child: Row(
                                   children: [
-                                    // Email
+                                    Email
                                     Expanded(
                                       child: Column(
                                         children: [
@@ -133,10 +133,10 @@ class _WorkerProfileScreenState extends State<WorkerProfileScreen> {
                                       ),
                                     ),
 
-                                    // Divider
+                                    Divider
                                     Container(width: 1, height: 40, color: const Color(0xFFE2E8F0)),
 
-                                    // Phone
+                                    Phone
                                     Expanded(
                                       child: Column(
                                         children: [
@@ -161,7 +161,7 @@ class _WorkerProfileScreenState extends State<WorkerProfileScreen> {
                         ),
                         const SizedBox(height: 24),
 
-                        // ── Work Scope ───────────────────────────────────
+                        ── Work Scope ───────────────────────────────────
                         Text(
                           'WORK SCOPE',
                           style: GoogleFonts.outfit(
@@ -186,7 +186,7 @@ class _WorkerProfileScreenState extends State<WorkerProfileScreen> {
                           ),
                           child: Column(
                             children: [
-                              // Assigned Area
+                              Assigned Area
                               Padding(
                                 padding: const EdgeInsets.all(16),
                                 child: Row(
@@ -219,7 +219,7 @@ class _WorkerProfileScreenState extends State<WorkerProfileScreen> {
                               ),
                               const Divider(height: 1, color: Color(0xFFF8FAFC)),
 
-                              // Department
+                              Department
                               Padding(
                                 padding: const EdgeInsets.all(16),
                                 child: Row(
@@ -255,10 +255,10 @@ class _WorkerProfileScreenState extends State<WorkerProfileScreen> {
                         ),
                         const SizedBox(height: 24),
 
-                        // ── Settings Menu ────────────────────────────────
+                        ── Settings Menu ────────────────────────────────
                         Column(
                           children: [
-                            // Settings
+                            Settings
                             GestureDetector(
                               onTap: () {},
                               child: Container(
@@ -298,7 +298,7 @@ class _WorkerProfileScreenState extends State<WorkerProfileScreen> {
                             ),
                             const SizedBox(height: 8),
 
-                            // Logout
+                            Logout
                             GestureDetector(
                               onTap: () {},
                               child: Container(
@@ -345,7 +345,7 @@ class _WorkerProfileScreenState extends State<WorkerProfileScreen> {
               ),
             ),
 
-            // ── Bottom Nav ─────────────────────────────────────────────
+            ── Bottom Nav ─────────────────────────────────────────────
             Positioned(
               bottom: 0, left: 0, right: 0,
               child: Container(
