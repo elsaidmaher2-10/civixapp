@@ -27,7 +27,6 @@ class AuthInterceptor extends Interceptor {
     if (token != null) {
       options.headers['Authorization'] = 'Bearer $token';
     }
-    debugPrint('🚀 ${options.method} → ${options.path}');
     handler.next(options);
   }
 
@@ -118,7 +117,6 @@ class AuthInterceptor extends Interceptor {
         'Account/refresh-token',
         data: {'refreshToken': refreshToken},
       );
-      debugPrint('🔑 Refresh Response: ${response.data}');
       if (response.statusCode == 200 || response.statusCode == 201) {
         final newAccess =
             response.data['accessToken'] ??
@@ -139,7 +137,6 @@ class AuthInterceptor extends Interceptor {
       }
       return false;
     } catch (e) {
-      debugPrint('❌ Token refresh failed: $e');
       return false;
     }
   }

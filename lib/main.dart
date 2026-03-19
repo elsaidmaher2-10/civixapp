@@ -15,6 +15,7 @@ import 'package:citifix/feature/reports/data/repos/reports/reports.dart';
 import 'package:citifix/feature/reports/presentation/manager/reportManger/cubit/report_manager_cubit.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -24,6 +25,13 @@ final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      statusBarColor: Colors.white,
+      statusBarIconBrightness: Brightness.light,
+      statusBarBrightness: Brightness.dark,
+    ),
+  );
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   setupgetit();
   await Future.wait<void>([
@@ -31,19 +39,13 @@ void main() async {
     NotificationService.init(),
     PrefrenceManager().init(),
   ]);
-
   final bool isOnboardingViewed =
       PrefrenceManager().getbool(Constantmanger.isOnboardingViewed) ?? false;
   Bloc.observer = MyBlocObserver();
-
   final String? accessToken = PrefrenceManager().getstring(
     Constantmanger.accessToken,
   );
   final String? roleString = PrefrenceManager().getstring(Constantmanger.role);
-  final String? id = PrefrenceManager().getstring(Constantmanger.userid);
-  log('Access Token: $accessToken');
-  log('Role: $roleString');
-  log('id: $id');
 
   runApp(
     MultiBlocProvider(

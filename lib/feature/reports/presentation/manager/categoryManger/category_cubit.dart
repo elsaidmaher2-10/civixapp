@@ -10,7 +10,6 @@ class CategoryCubit extends Cubit<CategoryState> {
     emit(CategoryLoading());
     categoryRepository.getCategories().then(
       (onvalue) => onvalue.fold((ifLeft) {
-        print(ifLeft.errors.join());
         emit(CategoryError(ifLeft.errors.join()));
       }, (ifRight) => emit(CategoryLoaded(ifRight.items))),
     );

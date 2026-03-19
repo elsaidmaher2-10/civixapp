@@ -1,4 +1,4 @@
-
+import 'package:citifix/feature/reports/data/Models/Report/CreateReportResponseModel.dart';
 import 'package:citifix/feature/reports/data/Models/Report/GetReportModel.dart';
 
 abstract class ReportManagerState {}
@@ -15,6 +15,18 @@ class GetReportsSuccess extends ReportManagerState {
 class GetReportsFailure extends ReportManagerState {
   final String errMessage;
   GetReportsFailure(this.errMessage);
+}
+
+class GetReportsByidLoading extends ReportManagerState {}
+
+class GetReportsByidSuccess extends ReportManagerState {
+  final ReportResponseModelByid reports;
+  GetReportsByidSuccess(this.reports);
+}
+
+class GetReportsByidFailure extends ReportManagerState {
+  final String errMessage;
+  GetReportsByidFailure(this.errMessage);
 }
 
 class SearchLoading extends ReportManagerState {}

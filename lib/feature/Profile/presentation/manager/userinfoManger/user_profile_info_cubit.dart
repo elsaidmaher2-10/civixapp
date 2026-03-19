@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:citifix/core/database/local/prefmanger.dart';
-import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/feature/Profile/data/Models/UserProfileModel/userProfile.dart';
 import 'package:citifix/feature/Profile/data/repos/UserProfileRepos/userprofileRepos.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -75,7 +74,6 @@ class UserProfileInfoCubit extends Cubit<UserProfileInfoState> {
             fullName: response.fullName ?? oldProfile.fullName,
             nationalId: response.nationalId ?? oldProfile.nationalId,
             dateOfBirth: response.dateOfBirth ?? oldProfile.dateOfBirth,
-            age: response.age ?? oldProfile.age,
             phoneNumber: response.phoneNumber ?? oldProfile.phoneNumber,
             address: response.address ?? oldProfile.address,
             verified: response.verified ?? oldProfile.verified,

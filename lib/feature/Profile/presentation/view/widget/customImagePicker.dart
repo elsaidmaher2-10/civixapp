@@ -13,7 +13,6 @@ class Customimagepicker extends StatelessWidget {
   final isImageLoading = false;
   @override
   Widget build(BuildContext context) {
-    print(userProfile.toJson());
     return Stack(
       clipBehavior: Clip.none,
       children: [

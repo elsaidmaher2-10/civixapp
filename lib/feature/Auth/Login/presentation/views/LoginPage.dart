@@ -132,7 +132,9 @@ class _LoginpageState extends State<Loginpage> {
                   backgroundColor: Colors.white,
                   body: SafeArea(
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 18.0),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: ScreenUtilsManager.h18,
+                      ),
                       child: SingleChildScrollView(
                         child: Column(
                           children: [
@@ -167,14 +169,12 @@ class _LoginpageState extends State<Loginpage> {
                                 Icons.email,
                                 color: ColorManger.lightGrey2,
                               ),
-
                               hinttext: Constantmanger.hinytextemail,
                               validator: (value) {
                                 isvalidemail = emailvalidator(value) == null
                                     ? true
                                     : false;
                                 btnController.add(isvalidemail && isvalidpass);
-
                                 return emailvalidator(value);
                               },
                               lable: Constantmanger.email,

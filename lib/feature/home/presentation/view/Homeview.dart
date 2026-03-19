@@ -83,7 +83,7 @@ class HomeScreen extends StatelessWidget {
                         Text(
                           Constantmanger.overview,
                           style: GoogleFonts.publicSans(
-                            letterSpacing: -0.8,
+                            letterSpacing: -0.9,
                             color: ColorManger.kPrimaryDark,
                             fontWeight: FontWeight.w700,
                             fontSize: ScreenUtilsManager.s20,

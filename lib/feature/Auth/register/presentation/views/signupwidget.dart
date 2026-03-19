@@ -134,15 +134,15 @@ class _SingnupState extends State<Singnup> {
               }
               return ModalProgressHUD(
                 inAsyncCall: inAsyncCall,
-
                 blur: 7,
                 progressIndicator: customloading(),
-
                 child: Scaffold(
                   backgroundColor: Colors.white,
                   body: SafeArea(
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 18.0),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: ScreenUtilsManager.h18,
+                      ),
                       child: SingleChildScrollView(
                         child: Form(
                           key: _formKey,

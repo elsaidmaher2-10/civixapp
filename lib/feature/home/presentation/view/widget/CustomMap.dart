@@ -1,4 +1,5 @@
 import 'package:citifix/core/resource/assetvaluemanger.dart';
+import 'package:citifix/core/resource/colormanager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:geocoding/geocoding.dart';
@@ -36,7 +37,7 @@ class _CustomMapState extends State<CustomMap> with TickerProviderStateMixin {
 
   LatLng? _currentPosition;
   String _street = "";
-  bool _mapReady = false;
+  bool _isLoading = true;
 
   @override
   void initState() {
@@ -47,31 +48,34 @@ class _CustomMapState extends State<CustomMap> with TickerProviderStateMixin {
 
   Future<void> _initLocation() async {
     try {
+      LatLng? targetPosition;
+
       if (widget.initialPosition != null) {
-        _currentPosition = widget.initialPosition;
+        targetPosition = widget.initialPosition;
       } else {
         LocationData newLocation = await _locationservice.getLocationOce();
-        _currentPosition = LatLng(
-          newLocation.latitude!,
-          newLocation.longitude!,
-        );
-      }
-
-      if (_street.isEmpty && _currentPosition != null) {
-        await _updateStreet(_currentPosition!);
+        targetPosition = LatLng(newLocation.latitude!, newLocation.longitude!);
       }
 
       if (mounted) {
-        setState(() {});
+        setState(() {
+          _currentPosition = targetPosition;
+          _isLoading = false;
+        });
 
-        if (_mapReady) {
-          _mapController.move(_currentPosition!, 14);
+        // جلب اسم الشارع لو مش موجود
+        if (_street.isEmpty && targetPosition != null) {
+          await _updateStreet(targetPosition);
         }
+
+        _mapController.move(_currentPosition!, 14);
 
         widget.onmapCreated(_street, _currentPosition!);
       }
     } catch (e) {
-      debugPrint("Error initializing map: $e");
+      if (mounted) {
+        setState(() => _isLoading = false);
+      }
     }
   }
 
@@ -82,10 +86,12 @@ class _CustomMapState extends State<CustomMap> with TickerProviderStateMixin {
         position.longitude,
       );
 
-      if (placemarks.isNotEmpty) {
+      if (placemarks.isNotEmpty && mounted) {
         final place = placemarks.first;
-        _street = "${place.street ?? ''} ${place.subAdministrativeArea ?? ''}"
-            .trim();
+        setState(() {
+          _street = "${place.street ?? ''} ${place.subAdministrativeArea ?? ''}"
+              .trim();
+        });
       }
     } catch (e) {
       _street = "Unknown location";
@@ -101,55 +107,48 @@ class _CustomMapState extends State<CustomMap> with TickerProviderStateMixin {
         children: [
           SizedBox(
             height: ScreenUtilsManager.h250,
-            child: Stack(
-              children: [
-                FlutterMap(
-                  mapController: _mapController,
-                  options: MapOptions(
-                    initialCenter:
-                        _currentPosition ?? const LatLng(31.4106, 31.8159),
-                    initialZoom: 14,
-                    onMapReady: () {
-                      _mapReady = true;
-                      if (_currentPosition != null) {
-                        _mapController.move(_currentPosition!, 12);
-                      }
-                      setState(() {});
-                    },
-                  ),
-                  children: [
-                    TileLayer(
-                      urlTemplate:
-                          'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                      userAgentPackageName: 'com.citifix.app',
+            child: _isLoading
+                ? const Center(
+                    child: CircularProgressIndicator(
+                      color: ColorManger.kPrimaryDark,
                     ),
-
-                    TileLayer(
-                      urlTemplate:
-                          'https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png',
-                      subdomains: ['a', 'b', 'c', 'd'],
-                    ),
-
-                    TileLayer(
-                      urlTemplate:
-                          'https://{s}.basemaps.cartocdn.com/light_lines/{z}/{x}/{y}{r}.png',
-                      subdomains: ['a', 'b', 'c', 'd'],
-                    ),
-                    if (_currentPosition != null)
-                      MarkerLayer(
-                        markers: [
-                          Marker(
-                            point: _currentPosition!,
-                            width: 50,
-                            height: 50,
-                            child: CustomLocationMarker(),
+                  )
+                : Stack(
+                    children: [
+                      FlutterMap(
+                        mapController: _mapController,
+                        options: MapOptions(
+                          initialCenter:
+                              _currentPosition ??
+                              const LatLng(31.4106, 31.8159),
+                          initialZoom: 14,
+                          onMapReady: () {
+                            if (_currentPosition != null) {
+                              _mapController.move(_currentPosition!, 14);
+                            }
+                          },
+                        ),
+                        children: [
+                          TileLayer(
+                            urlTemplate:
+                                'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                            userAgentPackageName: 'com.citifix.app',
                           ),
+                          if (_currentPosition != null)
+                            MarkerLayer(
+                              markers: [
+                                Marker(
+                                  point: _currentPosition!,
+                                  width: 50,
+                                  height: 50,
+                                  child: CustomLocationMarker(),
+                                ),
+                              ],
+                            ),
                         ],
                       ),
-                  ],
-                ),
-              ],
-            ),
+                    ],
+                  ),
           ),
           if (_street.isNotEmpty) ...[
             SizedBox(height: ScreenUtilsManager.h10),

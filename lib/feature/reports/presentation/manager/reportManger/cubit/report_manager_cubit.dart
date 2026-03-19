@@ -34,6 +34,17 @@ class ReportCubit extends Cubit<ReportManagerState> {
     });
   }
 
+  Future<void> GetReportByID({required int ReportID}) async {
+    emit(GetReportsByidLoading());
+    final result = await reportRepository.getReportByid(ReportID: ReportID);
+    result.fold(
+      (failure) => emit(GetReportsByidFailure(failure.errors.first)),
+      (successMessage) async {
+        emit(GetReportsByidSuccess(successMessage));
+      },
+    );
+  }
+
   void searchReport({required String query}) async {
     if (query.isEmpty) {
       emit(GetReportsSuccess(List.from(_allReports)));

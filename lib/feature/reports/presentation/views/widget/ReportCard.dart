@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:citifix/core/extenstion/datetimeextension.dart';
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
@@ -22,24 +23,12 @@ class Reportcard extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 16.w),
 
       child: Slidable(
-        key: const ValueKey(0), // Assign a unique key for each item
         startActionPane: ActionPane(
           motion: const ScrollMotion(),
-          // This handles the "Full Swipe" action
-          dismissible: DismissiblePane(
-            confirmDismiss: () async {
-              // Returns true to delete, false to cancel
-              return await _showDeleteDialog(context);
-            },
-            onDismissed: () {
-              // TODO: Call your Cubit/API delete method here
-              print("Item deleted from list");
-            },
-          ),
+
           children: [
             SlidableAction(
               onPressed: (context) async {
-                // This handles the "Tap on Delete Button" action
                 final bool shouldDelete = await _showDeleteDialog(context);
                 if (shouldDelete) {
                   // TODO: Call your Cubit/API delete method here
@@ -83,14 +72,16 @@ class Reportcard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Text(
-                        report.title,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: GoogleFonts.publicSans(
-                          color: ColorManger.kPrimaryDark,
-                          fontSize: ScreenUtilsManager.s16,
-                          fontWeight: FontWeight.w600,
+                      SizedBox(
+                        child: Text(
+                          report.title,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: GoogleFonts.publicSans(
+                            color: ColorManger.kPrimaryDark,
+                            fontSize: ScreenUtilsManager.s16,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                       ),
                       Row(
@@ -99,7 +90,7 @@ class Reportcard extends StatelessWidget {
                           SizedBox(width: 2.w),
                           Expanded(
                             child: Text(
-                              "report.location",
+                              report.location,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
@@ -116,7 +107,7 @@ class Reportcard extends StatelessWidget {
                           Icon(Icons.watch_later_outlined, size: 12.h),
                           SizedBox(width: 5.w),
                           Text(
-                            DateFormat.yMMMd().format(report.createdAt),
+                            report.createdAt.timeAgo,
                             style: TextStyle(
                               color: ColorManger.lightGrey6,
                               fontSize: ScreenUtilsManager.s11,
@@ -176,10 +167,10 @@ class Reportcard extends StatelessWidget {
   }
 
   Future<bool> _showDeleteDialog(BuildContext context) async {
-    return await showDialog<bool>(
+    return await showCupertinoDialog<bool>(
           context: context,
           builder: (BuildContext context) {
-            return AlertDialog(
+            return CupertinoAlertDialog(
               title: const Text('Confirm Delete'),
               content: const Text(
                 'Are you sure you want to delete this report?',
@@ -187,7 +178,10 @@ class Reportcard extends StatelessWidget {
               actions: <Widget>[
                 TextButton(
                   onPressed: () => Navigator.of(context).pop(false),
-                  child: const Text('Cancel'),
+                  child: const Text(
+                    'Cancel',
+                    style: TextStyle(color: ColorManger.kPrimaryDark),
+                  ),
                 ),
                 TextButton(
                   onPressed: () => Navigator.of(context).pop(true),

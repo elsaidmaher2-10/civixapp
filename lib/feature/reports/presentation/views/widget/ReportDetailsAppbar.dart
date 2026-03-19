@@ -5,8 +5,9 @@ import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:flutter/material.dart';
 
 class ReportDetailsAppbar extends StatelessWidget {
-  const ReportDetailsAppbar({super.key, required this.image});
+  const ReportDetailsAppbar({super.key, required this.image,required this.ontap});
   final String image;
+ final Function () ontap;
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
@@ -23,7 +24,7 @@ class ReportDetailsAppbar extends StatelessWidget {
             size: ScreenUtilsManager.s18,
           ),
         ),
-        onPressed: () => Navigator.pop(context),
+        onPressed: ontap,
       ),
       flexibleSpace: FlexibleSpaceBar(
         stretchModes: const [

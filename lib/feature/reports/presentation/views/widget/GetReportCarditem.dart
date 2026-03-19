@@ -1,11 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:citifix/core/extenstion/datetimeextension.dart';
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/feature/reports/data/Models/Report/GetReportModel.dart';
+import 'package:citifix/feature/reports/presentation/manager/reportManger/cubit/report_manager_cubit.dart';
 import 'package:citifix/feature/reports/presentation/views/reportdetails.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -87,7 +90,7 @@ class ReportCardIem extends StatelessWidget {
                           SizedBox(width: ScreenUtilsManager.w4),
                           Expanded(
                             child: Text(
-                             " report.location",
+                              report.location,
                               style: GoogleFonts.publicSans(
                                 fontSize: ScreenUtilsManager.s12,
                                 color: Colors.black54,
@@ -99,7 +102,7 @@ class ReportCardIem extends StatelessWidget {
                       ),
                       SizedBox(height: ScreenUtilsManager.h12),
                       Text(
-                        'Submitted: ${report.createdAt}',
+                        'Submitted: ${report.createdAt.timeAgo}',
                         style: TextStyle(
                           fontSize: ScreenUtilsManager.s11,
                           color: Colors.black38,
@@ -152,16 +155,18 @@ class ReportCardIem extends StatelessWidget {
                   color: ColorManger.lightColor.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(ScreenUtilsManager.r8),
                   child: InkWell(
-                    onTap: () {
-                      Navigator.push(
+                    onTap: () async {
+                      final reportCubit = context.read<ReportCubit>();
+                      await Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              ReportDetailsScreen(
-                              
-                              ),
+                          builder: (context) =>
+                              ReportDetailsScreen(reportId: report.id),
                         ),
                       );
+                      if (context.mounted) {
+                        await reportCubit.fetchReports();
+                      }
                     },
                     borderRadius: BorderRadius.circular(ScreenUtilsManager.r8),
                     child: Padding(

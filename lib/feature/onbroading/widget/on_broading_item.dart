@@ -50,8 +50,8 @@ class Customonbroadingitem extends StatelessWidget {
                 final provider = context.read<Onbroadingprovider>();
                 if (!provider.isLastPage) {
                   controller.nextPage(
-                    duration: const Duration(milliseconds: 600),
-                    curve: Curves.easeInOut,
+                    duration: const Duration(milliseconds: 400),
+                    curve: Curves.fastOutSlowIn,
                   );
                 } else {
                   await PrefrenceManager().setbool(

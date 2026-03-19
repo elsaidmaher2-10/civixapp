@@ -1,13 +1,12 @@
 class UserProfile {
   int? id;
   String? username;
-  String? userId;
+  dynamic userId;
   String? email;
   String? role;
   String? fullName;
   String? nationalId;
   String? dateOfBirth;
-  int? age;
   String? phoneNumber;
   String? address;
   bool? verified;
@@ -21,7 +20,6 @@ class UserProfile {
     this.fullName,
     this.nationalId,
     this.dateOfBirth,
-    this.age,
     this.phoneNumber,
     this.address,
     this.verified,
@@ -38,7 +36,6 @@ class UserProfile {
       'fullName': fullName,
       'nationalId': nationalId,
       'dateOfBirth': dateOfBirth,
-      'age': age,
       'phoneNumber': phoneNumber,
       'address': address,
       'verified': verified,
@@ -56,7 +53,6 @@ class UserProfile {
       fullName: json['fullName'],
       nationalId: json['nationalId'],
       dateOfBirth: json['dateOfBirth'],
-      age: json['age'],
       phoneNumber: json['phoneNumber'],
       address: json['address'],
       verified: json['verified'],
