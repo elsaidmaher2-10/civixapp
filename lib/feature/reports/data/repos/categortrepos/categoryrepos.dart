@@ -20,8 +20,8 @@ class CategoryRepository {
     }
 
     try {
-      final response = await service.get(path: 'categories');
-      return right(CategoryResponse.fromJson(response));
+      final response = await service.get(path: 'categories/list');
+      return right(CategoryResponse.fromList(response));
     } on Serverexciptionmodel catch (e) {
       if (e.errors is Map?) {
         final d = FailureResponse.fromJson(e.errors);

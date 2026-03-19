@@ -1,9 +1,7 @@
 import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:citifix/core/database/local/prefmanger.dart';
 import 'package:citifix/core/resource/assetvaluemanger.dart';
 import 'package:citifix/core/resource/colormanager.dart';
-import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/core/widget/CustomSnackBar.dart';
 import 'package:citifix/feature/Profile/data/Models/UserProfileModel/userProfile.dart';

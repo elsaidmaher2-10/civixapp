@@ -1,42 +1,34 @@
 import 'dart:async';
-
+import 'package:flutter/material.dart';
 import 'package:citifix/core/function/passvlidatorrules.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
-import 'package:citifix/feature/home/presentation/view/mainScreen.dart';
-import 'package:flutter/material.dart';
 
 class ConfirmpasswordController {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
-
   final TextEditingController oldPasswordController = TextEditingController();
   final TextEditingController newPasswordController = TextEditingController();
   final TextEditingController confirmNewPasswordController =
       TextEditingController();
-
   final StreamController<List> forgotPasswordStreamController =
       StreamController.broadcast();
   final StreamController<List> changePasswordStreamController =
       StreamController.broadcast();
-  final StreamController<bool> btnController = StreamController.broadcast();
-
+  final StreamController<bool> btnController =
+      StreamController<bool>.broadcast();
   bool isValid = false;
+  late bool isProfileScreen;
 
-  bool get isProfileScreen {
-    final args =
-        ModalRoute.of(navigatorKey.currentContext!)?.settings.arguments
-            as Map? ??
-        {};
-    return args['screen'] == 'Profile';
-  }
+  void initState({required bool isProfileScreen}) {
+    this.isProfileScreen = isProfileScreen;
 
-  @override
-  void initState() {
     forgotPasswordStreamController.add(Constantmanger.passwordRules);
     changePasswordStreamController.add(Constantmanger.passwordRules);
+
     passwordController.addListener(matchPasswords);
     confirmPasswordController.addListener(matchPasswords);
+
     oldPasswordController.addListener(matchPasswords);
     newPasswordController.addListener(matchPasswords);
     confirmNewPasswordController.addListener(matchPasswords);
@@ -53,7 +45,9 @@ class ConfirmpasswordController {
       isValid =
           passwordController.text.isNotEmpty &&
           confirmPasswordController.text.isNotEmpty &&
+          passwordController.text == confirmPasswordController.text &&
           passwordvalidatorrulesListener(passwordController.text);
+
       btnController.add(isValid);
     }
   }
@@ -64,7 +58,9 @@ class ConfirmpasswordController {
     oldPasswordController.dispose();
     newPasswordController.dispose();
     confirmNewPasswordController.dispose();
+
     forgotPasswordStreamController.close();
     changePasswordStreamController.close();
+    btnController.close();
   }
 }

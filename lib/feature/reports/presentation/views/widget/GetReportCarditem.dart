@@ -1,9 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:citifix/core/extenstion/datetimeextension.dart';
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
-import 'package:citifix/feature/reports/data/Models/Report/CreateReportResponseModel.dart';
+import 'package:citifix/feature/reports/data/Models/Report/GetReportModel.dart';
 import 'package:citifix/feature/reports/presentation/views/reportdetails.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -11,12 +10,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ReportCardIem extends StatelessWidget {
-  final ReportResponseModel reportResponseModel;
+  final ReportItem report;
   final Color statusColor;
 
   const ReportCardIem({
     super.key,
-    required this.reportResponseModel,
+    required this.report,
     required this.statusColor,
   });
 
@@ -58,7 +57,7 @@ class ReportCardIem extends StatelessWidget {
                           ),
                           SizedBox(width: ScreenUtilsManager.h8),
                           Text(
-                            reportResponseModel.status.toUpperCase(),
+                            report.status.toUpperCase(),
                             style: TextStyle(
                               color: statusColor,
                               fontSize: ScreenUtilsManager.s10,
@@ -70,7 +69,7 @@ class ReportCardIem extends StatelessWidget {
                       ),
                       SizedBox(height: ScreenUtilsManager.h8),
                       Text(
-                        reportResponseModel.title,
+                        report.title,
                         style: GoogleFonts.publicSans(
                           fontSize: ScreenUtilsManager.s18,
                           fontWeight: FontWeight.bold,
@@ -88,7 +87,7 @@ class ReportCardIem extends StatelessWidget {
                           SizedBox(width: ScreenUtilsManager.w4),
                           Expanded(
                             child: Text(
-                              reportResponseModel.location,
+                             " report.location",
                               style: GoogleFonts.publicSans(
                                 fontSize: ScreenUtilsManager.s12,
                                 color: Colors.black54,
@@ -100,7 +99,7 @@ class ReportCardIem extends StatelessWidget {
                       ),
                       SizedBox(height: ScreenUtilsManager.h12),
                       Text(
-                        'Submitted: ${reportResponseModel.createdAt.setdate}',
+                        'Submitted: ${report.createdAt}',
                         style: TextStyle(
                           fontSize: ScreenUtilsManager.s11,
                           color: Colors.black38,
@@ -119,8 +118,8 @@ class ReportCardIem extends StatelessWidget {
                     width: ScreenUtilsManager.w80,
                     height: ScreenUtilsManager.h80,
                     fit: BoxFit.fill,
-                    imageUrl: reportResponseModel.imagesUrls.isNotEmpty
-                        ? reportResponseModel.imagesUrls.first
+                    imageUrl: report.imagesUrls.isNotEmpty
+                        ? report.imagesUrls.first
                         : Constantmanger.defualtImage,
                   ),
                 ),
@@ -142,7 +141,7 @@ class ReportCardIem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Reference: ${reportResponseModel.hashCode}',
+                  'Reference: ${report.hashCode}',
                   style: GoogleFonts.publicSans(
                     fontWeight: FontWeight.w600,
                     fontSize: 13,
@@ -159,7 +158,7 @@ class ReportCardIem extends StatelessWidget {
                         MaterialPageRoute(
                           builder: (BuildContext context) =>
                               ReportDetailsScreen(
-                                reportResponseModel: reportResponseModel,
+                              
                               ),
                         ),
                       );

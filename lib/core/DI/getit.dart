@@ -1,5 +1,6 @@
 import 'package:citifix/core/database/remote/api/ApiService.dart';
 import 'package:citifix/core/service/networkchecker.dart';
+import 'package:citifix/feature/Profile/data/repos/UserProfileRepos/LogOutRepos.dart';
 import 'package:citifix/feature/Profile/data/repos/UserProfileRepos/userprofileRepos.dart';
 import 'package:citifix/feature/reports/data/repos/reports/reports.dart';
 import 'package:citifix/feature/reports/presentation/manager/reportManger/cubit/report_manager_cubit.dart';
@@ -23,5 +24,8 @@ void setupgetit() {
       service: getIt<Apiservice>(),
       internetChecker: getIt<InternetChecker>(),
     ),
+  );
+  getIt.registerSingleton<LogOutRepository>(
+    LogOutRepository(getIt<Apiservice>()),
   );
 }

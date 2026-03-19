@@ -10,18 +10,18 @@ class Constantmanger {
       title: "Report Problems",
       subtitle:
           "Spot an issue in your neighborhood? Easily report it with a photo and a brief description to get it fixed quickly.",
-      image: "assets/onbroadingimage/1.png",
+      image: "assets/onbroadingimage/1.svg",
     ),
     Onbroadingmodel(
       title: "Officials Are Acting",
       subtitle: "Work is underway to fix the problem",
-      image: "assets/onbroadingimage/2.png",
+      image: "assets/onbroadingimage/2.svg",
     ),
     Onbroadingmodel(
       title: "Improve Your City",
       subtitle:
           "Join your community in making your city a better place for everyone. Every report counts! ",
-      image: "assets/onbroadingimage/3.png",
+      image: "assets/onbroadingimage/3.svg",
     ),
   ];
   static const String civix = "Civix";

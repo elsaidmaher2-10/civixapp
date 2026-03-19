@@ -39,7 +39,10 @@ class CustomWaternavbar extends StatelessWidget {
                   filledIcon: Icons.home,
                   outlinedIcon: CupertinoIcons.home,
                 ),
-                BarItem(filledIcon: Icons.menu, outlinedIcon: Icons.list),
+                BarItem(
+                  filledIcon: Icons.star,
+                  outlinedIcon: Icons.star_border_outlined,
+                ),
                 BarItem(
                   filledIcon: CupertinoIcons.person_fill,
                   outlinedIcon: CupertinoIcons.person,
@@ -70,7 +73,7 @@ class CustomWaternavbar extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "Reports",
+                    "Achievement",
                     style: TextStyle(
                       fontSize: ScreenUtilsManager.s12,
                       color: state is MangeCustomBottomnavBarChange
@@ -84,7 +87,6 @@ class CustomWaternavbar extends StatelessWidget {
                     "Profile",
                     style: TextStyle(
                       fontSize: ScreenUtilsManager.s12,
-
                       color: state is MangeCustomBottomnavBarChange
                           ? state.index == 2
                                 ? ColorManger.kPrimary

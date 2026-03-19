@@ -10,7 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 class CitizenMainScreen extends StatefulWidget {
   const CitizenMainScreen({CitizenMainScreenKey});
@@ -46,7 +45,6 @@ class _CitizenMainScreenState extends State<CitizenMainScreen> {
               builder: (context, state) {
                 final cubit = context.read<MangeCustomBottomnavBarCubit>();
                 return Scaffold(
-                  key: navigatorKey,
                   backgroundColor: ColorManger.reportsPageBackground,
                   floatingActionButtonLocation:
                       FloatingActionButtonLocation.endFloat,

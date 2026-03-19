@@ -9,6 +9,9 @@ import 'package:citifix/core/routing/routingmanger.dart';
 import 'package:citifix/core/service/local_notification_service.dart';
 import 'package:citifix/core/service/notification_service.dart';
 import 'package:citifix/core/service/observer.dart';
+import 'package:citifix/feature/Profile/presentation/manager/userinfoManger/user_profile_info_cubit.dart';
+import 'package:citifix/feature/home/presentation/manager/navbarManger/mange_custom_bottomnav_bar_cubit.dart';
+import 'package:citifix/feature/reports/data/repos/reports/reports.dart';
 import 'package:citifix/feature/reports/presentation/manager/reportManger/cubit/report_manager_cubit.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +19,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'firebase_options.dart';
+
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,20 +41,25 @@ void main() async {
   );
   final String? roleString = PrefrenceManager().getstring(Constantmanger.role);
   final String? id = PrefrenceManager().getstring(Constantmanger.userid);
-
   log('Access Token: $accessToken');
   log('Role: $roleString');
   log('id: $id');
+
   runApp(
-    MyApp(
-      isOnboardingViewed: isOnboardingViewed,
-      isAuth: accessToken != null,
-      role: AppRole.fromString(roleString),
+    MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => UserProfileInfoCubit(getIt())),
+        BlocProvider(create: (_) => ReportCubit(getIt<ReportRepository>())),
+        BlocProvider(create: (_) => MangeCustomBottomnavBarCubit()),
+      ],
+      child: MyApp(
+        isOnboardingViewed: isOnboardingViewed,
+        isAuth: accessToken != null,
+        role: AppRole.fromString(roleString),
+      ),
     ),
   );
 }
-
-final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 class MyApp extends StatelessWidget {
   const MyApp({
@@ -86,7 +96,7 @@ class MyApp extends StatelessWidget {
         lazy: false,
         create: (context) => getIt<ReportCubit>(),
         child: MaterialApp(
-          navigatorKey: navigatorKey,
+          key: navigatorKey,
           initialRoute: _initialRoute,
           title: 'citifix',
           themeMode: ThemeMode.light,

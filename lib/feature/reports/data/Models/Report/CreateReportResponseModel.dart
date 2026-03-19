@@ -1,4 +1,4 @@
-class ReportResponseModel {
+class ReportResponseModelByid {
   final int id;
   final String title;
   final String description;
@@ -10,7 +10,7 @@ class ReportResponseModel {
   final List<String> imagesUrls;
   final double latitude;
   final double longitude;
-  ReportResponseModel({
+  ReportResponseModelByid({
     required this.latitude,
     required this.longitude,
     required this.id,
@@ -24,8 +24,8 @@ class ReportResponseModel {
     required this.imagesUrls,
   });
 
-  factory ReportResponseModel.fromJson(Map<String, dynamic> json) {
-    return ReportResponseModel(
+  factory ReportResponseModelByid.fromJson(Map<String, dynamic> json) {
+    return ReportResponseModelByid(
       latitude: json['latitude'],
       longitude: json["longitude"],
       id: json['id'] ?? 0,

@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
@@ -9,7 +11,6 @@ import 'package:citifix/feature/Profile/presentation/manager/userinfoManger/user
 import 'package:citifix/feature/Profile/presentation/view/widget/EditFromProfile.dart';
 import 'package:citifix/feature/Profile/presentation/view/widget/chanagePassword.dart';
 import 'package:citifix/feature/Profile/presentation/view/widget/customImagePicker.dart';
-import 'package:citifix/feature/Profile/presentation/view/widget/image_picker_menu.dart';
 import 'package:citifix/feature/Profile/presentation/view/widget/saveeditProfile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -109,13 +110,6 @@ class _WorkerEditProfileScreenState extends State<EditProfileScreen> {
                                 Customimagepicker(
                                   userProfile:
                                       userprofilecontroller.userProfile,
-                                  onTap: () async {
-                                    final image = await ImagePickerMenu.show(
-                                      context,
-                                    );
-
-                                    print(image);
-                                  },
                                 ),
                               ],
                             ),
@@ -186,7 +180,7 @@ class _WorkerEditProfileScreenState extends State<EditProfileScreen> {
           ),
         );
       },
-      listener: (BuildContext context, UserProfileInfoState state) {
+      listener: (BuildContext context, UserProfileInfoState state) async {
         if (state is EditUserProfileInfoError) {
           Customsnackbar.show(
             context: context,
@@ -198,8 +192,10 @@ class _WorkerEditProfileScreenState extends State<EditProfileScreen> {
           Customsnackbar.show(
             context: context,
             backgroundColor: ColorManger.green,
-            message: state.user.username.toString(),
+            message: "Profile updated successfully",
           );
+          await Future.delayed(Duration(seconds: 1));
+          Navigator.of(context).pop();
         }
       },
     );

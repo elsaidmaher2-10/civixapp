@@ -6,7 +6,7 @@ import 'package:citifix/core/database/remote/error/failureResponse.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/service/networkchecker.dart';
 import 'package:citifix/feature/reports/data/Models/Report/CreateReportRequestModel.dart';
-import 'package:citifix/feature/reports/data/Models/Report/CreateReportResponseModel.dart';
+import 'package:citifix/feature/reports/data/Models/Report/GetReportModel.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
@@ -74,8 +74,7 @@ class ReportRepository {
     }
   }
 
-  Future<Either<FailureResponse, List<ReportResponseModel>>>
-  getReports() async {
+  Future<Either<FailureResponse, List<ReportItem>>> getReports() async {
     if (!await internetChecker.checkInternet()) {
       return left(
         FailureResponse(errors: [Constantmanger.nointernet], statusCode: 1),
@@ -91,8 +90,8 @@ class ReportRepository {
 
       final List<dynamic> items = response['items'];
 
-      final List<ReportResponseModel> reports = items
-          .map((e) => ReportResponseModel.fromJson(e))
+      final List<ReportItem> reports = items
+          .map((e) => ReportItem.fromJson(e))
           .toList();
 
       return right(reports);

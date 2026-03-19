@@ -1,5 +1,5 @@
 import 'package:citifix/feature/reports/data/Models/Report/CreateReportRequestModel.dart';
-import 'package:citifix/feature/reports/data/Models/Report/CreateReportResponseModel.dart';
+import 'package:citifix/feature/reports/data/Models/Report/GetReportModel.dart';
 import 'package:citifix/feature/reports/data/repos/reports/reports.dart';
 import 'package:citifix/feature/reports/presentation/manager/reportManger/cubit/report_manager_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class ReportCubit extends Cubit<ReportManagerState> {
   final ReportRepository reportRepository;
   ReportCubit(this.reportRepository) : super(ReportManagerInitial());
-  List<ReportResponseModel> _allReports = [];
+  List<ReportItem> _allReports = [];
   Future<void> fetchReports() async {
     if (isClosed) return;
     emit(GetReportsLoading());

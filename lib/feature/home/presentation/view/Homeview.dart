@@ -2,6 +2,7 @@ import 'package:citifix/core/resource/assetvaluemanger.dart';
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
+import 'package:citifix/feature/reports/data/Models/Report/GetReportModel.dart';
 import 'package:citifix/feature/reports/presentation/manager/reportManger/cubit/report_manager_cubit.dart';
 import 'package:citifix/feature/reports/presentation/manager/reportManger/cubit/report_manager_state.dart';
 import 'package:citifix/feature/reports/data/Models/Report/CreateReportResponseModel.dart';
@@ -36,7 +37,7 @@ class HomeScreen extends StatelessWidget {
           if (state is GetReportsFailure) {
             return Center(child: Text(state.errMessage));
           }
-          List<ReportResponseModel> reports = [];
+          List<ReportItem> reports = [];
           if (state is GetReportsSuccess) {
             reports = state.reports;
             success = reports

@@ -2,6 +2,7 @@ import 'package:citifix/core/resource/assetvaluemanger.dart';
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
+import 'package:citifix/feature/notication/notifaction.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -36,10 +37,18 @@ class MainscreenAppbar extends StatelessWidget implements PreferredSizeWidget {
       ),
       automaticallyImplyLeading: false,
       actions: [
-        SvgPicture.asset(
-          AssetValueManager.notifcationenabled,
-          width: ScreenUtilsManager.w32,
-          height: ScreenUtilsManager.h36,
+        InkWell(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => NotificationCenter()),
+            );
+          },
+          child: SvgPicture.asset(
+            AssetValueManager.notifcationenabled,
+            width: ScreenUtilsManager.w32,
+            height: ScreenUtilsManager.h36,
+          ),
         ),
         SizedBox(width: ScreenUtilsManager.w18),
       ],

@@ -1,24 +1,16 @@
 import 'dart:io';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:citifix/core/resource/assetvaluemanger.dart';
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/feature/Profile/data/Models/UserProfileModel/userProfile.dart';
 import 'package:citifix/feature/Profile/presentation/manager/controller/imageController.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-
 class Customimagepicker extends StatelessWidget {
-  const Customimagepicker({
-    super.key,
-    required this.userProfile,
-    required this.onTap,
-  });
+  const Customimagepicker({super.key, required this.userProfile});
   final UserProfile userProfile;
   final isImageLoading = false;
-  final void Function()? onTap;
   @override
   Widget build(BuildContext context) {
     print(userProfile.toJson());
@@ -67,24 +59,6 @@ class Customimagepicker extends StatelessWidget {
               ],
             );
           },
-        ),
-
-        Positioned(
-          bottom: -4,
-          right: -4,
-          child: InkWell(
-            onTap: onTap,
-            borderRadius: BorderRadius.circular(25.r),
-            child: CircleAvatar(
-              radius: 25.r,
-              backgroundColor: ColorManger.white,
-              child: CircleAvatar(
-                radius: 20.r,
-                backgroundColor: ColorManger.lightBlue,
-                child: const Icon(Icons.edit, color: Colors.white, size: 20),
-              ),
-            ),
-          ),
         ),
       ],
     );

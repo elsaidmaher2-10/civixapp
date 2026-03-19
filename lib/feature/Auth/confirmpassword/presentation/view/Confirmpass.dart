@@ -25,14 +25,24 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class CreatePasswordScreen extends StatefulWidget {
-  const CreatePasswordScreen({Key? key}) : super(key: key);
-
+  CreatePasswordScreen({Key? key}) : super(key: key);
   State<CreatePasswordScreen> createState() => _CreatePasswordScreenState();
 }
 
 class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
   ConfirmpasswordController confirmPasswordController =
       ConfirmpasswordController();
+  bool _isProfileScreen = false;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    final args = ModalRoute.of(context)?.settings.arguments as Map? ?? {};
+    _isProfileScreen = args['screen'] == 'profile';
+
+    confirmPasswordController.initState(isProfileScreen: _isProfileScreen);
+  }
 
   Widget _buildForgotPasswordFields() {
     return Column(
@@ -103,11 +113,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
     );
   }
 
-  @override
-  void initState() {
-    confirmPasswordController.initState();
-    super.initState();
-  }
+ 
 
   @override
   void dispose() {
@@ -194,7 +200,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            if (confirmPasswordController.isProfileScreen)
+                            if (args["screen"] == "profile")
                               _buildChangePasswordFields()
                             else
                               _buildForgotPasswordFields(),
@@ -214,8 +220,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                                     ) => ElevatedButton(
                                       onPressed: snapshot.data == true
                                           ? () {
-                                              if (confirmPasswordController
-                                                  .isProfileScreen) {
+                                              if (args["screen"] == "profile") {
                                                 context
                                                     .read<
                                                       ConfirmPasswordController

@@ -11,9 +11,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:latlong2/latlong.dart';
 
 class ReportDetailsScreen extends StatefulWidget {
-  final ReportResponseModel reportResponseModel;
+  late ReportResponseModelByid reportResponseModel;
 
-  ReportDetailsScreen({required this.reportResponseModel, super.key});
+  ReportDetailsScreen({super.key});
 
   @override
   State<ReportDetailsScreen> createState() => _ReportDetailsScreenState();

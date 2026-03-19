@@ -1,11 +1,10 @@
-import 'package:animated_hint_textfield/animated_hint_textfield.dart';
 import 'package:citifix/core/resource/assetvaluemanger.dart';
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/core/service/StatusReport.dart';
 import 'package:citifix/core/widget/CustomAnimatedSearch.dart';
-import 'package:citifix/feature/reports/data/Models/Report/CreateReportResponseModel.dart';
+import 'package:citifix/feature/reports/data/Models/Report/GetReportModel.dart';
 import 'package:citifix/feature/reports/presentation/manager/reportManger/cubit/report_manager_cubit.dart';
 import 'package:citifix/feature/reports/presentation/manager/reportManger/cubit/report_manager_state.dart';
 import 'package:citifix/feature/reports/presentation/views/widget/GetReportCarditem.dart';
@@ -104,7 +103,9 @@ class _ReportsPageState extends State<ReportsPage> {
               itemBuilder: (context, index) => InkWell(
                 onTap: () {
                   setState(() {
-                    for (var e in filters) e["selected"] = false;
+                    for (var e in filters) {
+                      e["selected"] = false;
+                    }
                     filters[index]["selected"] = true;
                     _selectedFilter = filters[index]["title"];
                   });
@@ -120,7 +121,7 @@ class _ReportsPageState extends State<ReportsPage> {
           Expanded(
             child: BlocBuilder<ReportCubit, ReportManagerState>(
               builder: (context, state) {
-                List<ReportResponseModel> displayList = [];
+                List<ReportItem> displayList = [];
 
                 if (state is GetReportsLoading) {
                   return Center(
@@ -173,13 +174,8 @@ class _ReportsPageState extends State<ReportsPage> {
                           .toList();
 
                 if (finalFiltered.isEmpty && _controller.text.isEmpty) {
-                  return Center(
-                    child: Column(
-                      children: [const Text("No reports available")],
-                    ),
-                  );
+                  return Center(child: const Text("No reports available"));
                 }
-
                 return RefreshIndicator(
                   color: ColorManger.kPrimary,
                   backgroundColor: ColorManger.bgLight,
@@ -194,7 +190,8 @@ class _ReportsPageState extends State<ReportsPage> {
                           statusColor: StatusReport.fromString(
                             finalFiltered[index].status,
                           ).color,
-                          reportResponseModel: finalFiltered[index],
+                          report: finalFiltered[index],
+                          // reportCardIem: finalFiltered[index],
                         ),
                       );
                     },
