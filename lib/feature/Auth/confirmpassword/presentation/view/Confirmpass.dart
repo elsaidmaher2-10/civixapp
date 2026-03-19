@@ -13,12 +13,12 @@ import 'package:citifix/core/widget/customloading.dart';
 import 'package:citifix/feature/Auth/confirmpassword/data/repo/confirmpasswordrepo.dart';
 import 'package:citifix/feature/Auth/confirmpassword/presentation/manager/ConfirmPasswordController.dart';
 import 'package:citifix/feature/Auth/confirmpassword/presentation/manager/ConfirmPasswordState.dart';
+import 'package:citifix/feature/Auth/confirmpassword/presentation/manager/controller/Confirmpassword.dart';
 import 'package:citifix/feature/Auth/confirmpassword/presentation/view/widget/confirmpassappbar.dart';
 import 'package:citifix/feature/Auth/register/presentation/views/widget/confirmpassword.dart';
 import 'package:citifix/feature/Auth/register/presentation/views/widget/password.dart';
 import 'package:citifix/feature/Auth/register/presentation/views/widget/password_rules.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -27,46 +27,96 @@ import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 class CreatePasswordScreen extends StatefulWidget {
   const CreatePasswordScreen({Key? key}) : super(key: key);
 
-  @override
   State<CreatePasswordScreen> createState() => _CreatePasswordScreenState();
 }
 
 class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
-  final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController =
-      TextEditingController();
+  ConfirmpasswordController confirmPasswordController =
+      ConfirmpasswordController();
 
-  StreamController<List> streamController = StreamController.broadcast();
-  bool isvalid = false;
-  @override
-  void initState() {
-    streamController.add(Constantmanger.passwordRules);
-    super.initState();
-    _confirmPasswordController.addListener(matchpassword);
-    _passwordController.addListener(matchpassword);
+  Widget _buildForgotPasswordFields() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(height: ScreenUtilsManager.h16),
+        Password(
+          isnew: false,
+          controller: confirmPasswordController.passwordController,
+          onChanged: (String value) {
+            confirmPasswordController.forgotPasswordStreamController.add(
+              passwordvalidatorrules(value),
+            );
+          },
+        ),
+        const SizedBox(height: 16),
+        PasswordRules(
+          streamController:
+              confirmPasswordController.forgotPasswordStreamController,
+        ),
+        const SizedBox(height: 8),
+        ConfirmPassword(
+          controller: confirmPasswordController.confirmPasswordController,
+          validator: (String? value) {
+            if (value == null || value.isEmpty) {
+              return 'Enter confirm password';
+            }
+            if (confirmPasswordController.passwordController.text !=
+                confirmPasswordController.passwordController.text) {
+              return 'Passwords do not match';
+            }
+            return null;
+          },
+        ),
+        const SizedBox(height: 32),
+      ],
+    );
   }
 
-  void matchpassword() {
-    setState(() {
-      isvalid =
-          _passwordController.text.isNotEmpty &&
-          _confirmPasswordController.text.isNotEmpty &&
-          _passwordController.text == _confirmPasswordController.text;
-    });
+  Widget _buildChangePasswordFields() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(height: ScreenUtilsManager.h8),
+        Password(
+          isnew: false,
+          controller: confirmPasswordController.oldPasswordController,
+          onChanged: (_) {},
+        ),
+        SizedBox(height: ScreenUtilsManager.h8),
+        Password(
+          isnew: true,
+          controller: confirmPasswordController.newPasswordController,
+          onChanged: (String value) {
+            confirmPasswordController.changePasswordStreamController.add(
+              passwordvalidatorrules(value),
+            );
+          },
+        ),
+        SizedBox(height: ScreenUtilsManager.h8),
+
+        PasswordRules(
+          streamController:
+              confirmPasswordController.changePasswordStreamController,
+        ),
+        const SizedBox(height: 32),
+      ],
+    );
+  }
+
+  @override
+  void initState() {
+    confirmPasswordController.initState();
+    super.initState();
   }
 
   @override
   void dispose() {
-    _passwordController.dispose();
-    _confirmPasswordController.dispose();
+    confirmPasswordController.dispose();
     super.dispose();
-    streamController.close();
   }
 
-  @override
   Widget build(BuildContext context) {
-    Map args = ModalRoute.of(context)?.settings.arguments as Map? ?? {};
-
+    final Map args = ModalRoute.of(context)?.settings.arguments as Map? ?? {};
     return BlocProvider(
       create: (BuildContext context) => ConfirmPasswordController(
         Confirmpasswordrepo(
@@ -87,6 +137,12 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                   backgroundColor: ColorManger.red,
                   message: state.message,
                 );
+              } else if (state is ChangePasswordFailure) {
+                Customsnackbar.show(
+                  context: context,
+                  backgroundColor: ColorManger.red,
+                  message: state.message,
+                );
               } else if (state is ConfirmPasswordControllerSuccess) {
                 Customsnackbar.show(
                   context: context,
@@ -94,28 +150,38 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                   message: state.message,
                 );
                 await Future.delayed(
-                  Duration(seconds: 3),
+                  const Duration(seconds: 3),
                   () => Navigator.pushNamedAndRemoveUntil(
                     context,
                     Routes.login,
-                    (Route routes) => false,
+                    (Route route) => false,
+                  ),
+                );
+              } else if (state is ChangePasswordSuccess) {
+                Customsnackbar.show(
+                  context: context,
+                  backgroundColor: ColorManger.green,
+                  message: state.message,
+                );
+                await Future.delayed(
+                  const Duration(seconds: 2),
+                  () => Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    Routes.citizenMain,
+                    (Route route) => false,
                   ),
                 );
               }
             },
-
             builder: (context, state) {
-              log(state.toString());
-              bool inAsyncCall = false;
-              if (state is ConfirmPasswordControllerLoading) {
-                inAsyncCall = true;
-              } else {
-                inAsyncCall = false;
-              }
+              final bool inAsyncCall =
+                  state is ConfirmPasswordControllerLoading ||
+                  state is ChangePasswordLoading;
+
               return ModalProgressHUD(
                 inAsyncCall: inAsyncCall,
                 blur: 7,
-                progressIndicator:customloading(),
+                progressIndicator: customloading(),
                 child: Scaffold(
                   backgroundColor: Colors.white,
                   appBar: confirmpassappbar(context, () {
@@ -128,65 +194,82 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            SizedBox(height: ScreenUtilsManager.h16),
-                            Password(
-                              controller: _passwordController,
-                              onChanged: (String value) {
-                                streamController.add(
-                                  passwordvalidatorrules(value),
-                                );
-                              },
-                            ),
-                            const SizedBox(height: 16),
-                            PasswordRules(streamController: streamController),
-                            const SizedBox(height: 8),
-                            ConfirmPassword(
-                              controller: _confirmPasswordController,
-                              validator: (String? p1) {
-                                if (p1 == null || p1.isEmpty) {
-                                  return "Enter confirm password";
-                                }
-                                if (_passwordController.text !=
-                                    _confirmPasswordController.text) {
-                                  return "Passwords do not match";
-                                }
+                            if (confirmPasswordController.isProfileScreen)
+                              _buildChangePasswordFields()
+                            else
+                              _buildForgotPasswordFields(),
 
-                                return null;
-                              },
-                            ),
-                            const SizedBox(height: 32),
                             SizedBox(
                               width: double.infinity,
                               height: 44.h,
-                              child: ElevatedButton(
-                                onPressed: isvalid
-                                    ? () {
-                                        context
-                                            .read<ConfirmPasswordController>()
-                                            .createnewpassword(
-                                              email: args[Constantmanger.email],
-                                              newPassword:
-                                                  _confirmPasswordController
-                                                      .text,
-                                              otp: args[Constantmanger.otp],
-                                            );
-                                      }
-                                    : null,
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: ColorManger.kPrimary,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
-                                  elevation: 0,
-                                ),
-                                child: Text(
-                                  Constantmanger.submit,
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.white,
-                                  ),
-                                ),
+                              child: StreamBuilder<bool>(
+                                initialData: false,
+                                stream: confirmPasswordController
+                                    .btnController
+                                    .stream,
+                                builder:
+                                    (
+                                      BuildContext context,
+                                      AsyncSnapshot<bool> snapshot,
+                                    ) => ElevatedButton(
+                                      onPressed: snapshot.data == true
+                                          ? () {
+                                              if (confirmPasswordController
+                                                  .isProfileScreen) {
+                                                context
+                                                    .read<
+                                                      ConfirmPasswordController
+                                                    >()
+                                                    .changePassword(
+                                                      newPassword:
+                                                          confirmPasswordController
+                                                              .newPasswordController
+                                                              .text,
+                                                      currentPassword:
+                                                          confirmPasswordController
+                                                              .oldPasswordController
+                                                              .text,
+                                                    );
+                                              } else {
+                                                context
+                                                    .read<
+                                                      ConfirmPasswordController
+                                                    >()
+                                                    .createnewpassword(
+                                                      email:
+                                                          args[Constantmanger
+                                                              .email],
+                                                      newPassword:
+                                                          confirmPasswordController
+                                                              .confirmPasswordController
+                                                              .text,
+                                                      otp:
+                                                          args[Constantmanger
+                                                              .otp],
+                                                    );
+                                              }
+                                            }
+                                          : null,
+
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: ColorManger.kPrimary,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(
+                                            12,
+                                          ),
+                                        ),
+                                        elevation: 0,
+                                      ),
+
+                                      child: Text(
+                                        Constantmanger.submit,
+                                        style: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
                               ),
                             ),
                           ],

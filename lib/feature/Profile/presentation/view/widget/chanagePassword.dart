@@ -1,6 +1,5 @@
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/routing/routes.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -11,7 +10,11 @@ class Chanagepassword extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, Routes.confirmPassword);
+        Navigator.pushNamed(
+          context,
+          Routes.confirmPassword,
+          arguments: {"screen": "profile"},
+        );
       },
       child: Container(
         padding: const EdgeInsets.all(16),

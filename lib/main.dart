@@ -26,6 +26,7 @@ void main() async {
     NotificationService.init(),
     PrefrenceManager().init(),
   ]);
+
   final bool isOnboardingViewed =
       PrefrenceManager().getbool(Constantmanger.isOnboardingViewed) ?? false;
   Bloc.observer = MyBlocObserver();
@@ -39,7 +40,6 @@ void main() async {
   log('Access Token: $accessToken');
   log('Role: $roleString');
   log('id: $id');
-
   runApp(
     MyApp(
       isOnboardingViewed: isOnboardingViewed,

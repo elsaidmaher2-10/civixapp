@@ -10,10 +10,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:latlong2/latlong.dart';
 
-class ReportDetailsScreen extends StatelessWidget {
+class ReportDetailsScreen extends StatefulWidget {
   final ReportResponseModel reportResponseModel;
 
   ReportDetailsScreen({required this.reportResponseModel, super.key});
+
+  @override
+  State<ReportDetailsScreen> createState() => _ReportDetailsScreenState();
+}
+
+class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,8 +28,8 @@ class ReportDetailsScreen extends StatelessWidget {
         physics: const BouncingScrollPhysics(),
         slivers: [
           ReportDetailsAppbar(
-            image: reportResponseModel.imagesUrls.isNotEmpty
-                ? reportResponseModel.imagesUrls.first
+            image: widget.reportResponseModel.imagesUrls.isNotEmpty
+                ? widget.reportResponseModel.imagesUrls.first
                 : Constantmanger.defualtImage,
           ),
 
@@ -33,10 +39,10 @@ class ReportDetailsScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  buildStatusBadge(reportResponseModel.status),
+                  buildStatusBadge(widget.reportResponseModel.status),
                   SizedBox(height: 12.h),
                   Text(
-                    reportResponseModel.title,
+                    widget.reportResponseModel.title,
                     style: TextStyle(
                       fontSize: 26.sp,
                       fontWeight: FontWeight.w900,
@@ -46,7 +52,7 @@ class ReportDetailsScreen extends StatelessWidget {
                   SizedBox(height: 12.h),
 
                   Text(
-                    reportResponseModel.description,
+                    widget.reportResponseModel.description,
 
                     style: TextStyle(
                       fontSize: 16.sp,
@@ -68,10 +74,10 @@ class ReportDetailsScreen extends StatelessWidget {
 
                   _buildMapSection(
                     LatLng(
-                      reportResponseModel.latitude,
-                      reportResponseModel.longitude,
+                      widget.reportResponseModel.latitude,
+                      widget.reportResponseModel.longitude,
                     ),
-                    reportResponseModel.location,
+                    widget.reportResponseModel.location,
                   ),
                   SizedBox(height: 24.h),
 
@@ -107,15 +113,12 @@ class ReportDetailsScreen extends StatelessWidget {
   }
 
   Widget _buildMapSection(LatLng apiPosition, String location) {
-    return SizedBox(
-      height: 250.h,
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(16.r),
-        child: CustomMap.fromAPI(
-          location: location,
-          onmapCreated: (d, latlang) {},
-          apiPosition: apiPosition,
-        ),
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(16.r),
+      child: CustomMap.fromAPI(
+        location: location,
+        onmapCreated: (d, latlang) {},
+        apiPosition: apiPosition,
       ),
     );
   }

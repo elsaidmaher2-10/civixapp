@@ -1,3 +1,4 @@
+import 'package:citifix/core/resource/assetvaluemanger.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:geocoding/geocoding.dart';
@@ -6,11 +7,13 @@ import 'package:location/location.dart';
 import 'package:citifix/core/service/LocationService.dart';
 import 'package:citifix/feature/home/presentation/view/widget/Animatedmarker.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
+import 'package:lottie/lottie.dart' hide Marker;
 
 class CustomMap extends StatefulWidget {
   final Function(String street, LatLng latlng) onmapCreated;
   final LatLng? initialPosition;
   final String? initialStreet;
+
   const CustomMap.fromDevice({super.key, required this.onmapCreated})
     : initialPosition = null,
       initialStreet = null;
@@ -33,6 +36,7 @@ class _CustomMapState extends State<CustomMap> with TickerProviderStateMixin {
 
   LatLng? _currentPosition;
   String _street = "";
+  bool _mapReady = false;
 
   @override
   void initState() {
@@ -58,7 +62,12 @@ class _CustomMapState extends State<CustomMap> with TickerProviderStateMixin {
       }
 
       if (mounted) {
-        _mapController.move(_currentPosition!, 16);
+        setState(() {});
+
+        if (_mapReady) {
+          _mapController.move(_currentPosition!, 14);
+        }
+
         widget.onmapCreated(_street, _currentPosition!);
       }
     } catch (e) {
@@ -91,7 +100,7 @@ class _CustomMapState extends State<CustomMap> with TickerProviderStateMixin {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            height: ScreenUtilsManager.h200,
+            height: ScreenUtilsManager.h250,
             child: Stack(
               children: [
                 FlutterMap(
@@ -100,21 +109,40 @@ class _CustomMapState extends State<CustomMap> with TickerProviderStateMixin {
                     initialCenter:
                         _currentPosition ?? const LatLng(31.4106, 31.8159),
                     initialZoom: 14,
+                    onMapReady: () {
+                      _mapReady = true;
+                      if (_currentPosition != null) {
+                        _mapController.move(_currentPosition!, 12);
+                      }
+                      setState(() {});
+                    },
                   ),
                   children: [
                     TileLayer(
                       urlTemplate:
-                          "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
-                      userAgentPackageName: 'com.example.citifix',
+                          'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                      userAgentPackageName: 'com.citifix.app',
+                    ),
+
+                    TileLayer(
+                      urlTemplate:
+                          'https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png',
+                      subdomains: ['a', 'b', 'c', 'd'],
+                    ),
+
+                    TileLayer(
+                      urlTemplate:
+                          'https://{s}.basemaps.cartocdn.com/light_lines/{z}/{x}/{y}{r}.png',
+                      subdomains: ['a', 'b', 'c', 'd'],
                     ),
                     if (_currentPosition != null)
                       MarkerLayer(
                         markers: [
                           Marker(
                             point: _currentPosition!,
-                            width: 80,
-                            height: 80,
-                            child: const AnimatedMarker(),
+                            width: 50,
+                            height: 50,
+                            child: CustomLocationMarker(),
                           ),
                         ],
                       ),
@@ -127,7 +155,11 @@ class _CustomMapState extends State<CustomMap> with TickerProviderStateMixin {
             SizedBox(height: ScreenUtilsManager.h10),
             Row(
               children: [
-                const Icon(Icons.place_outlined, color: Color(0xff475569)),
+                SizedBox(
+                  height: 40,
+                  width: 40,
+                  child: Lottie.asset(AssetValueManager.pinLocaation),
+                ),
                 const SizedBox(width: 5),
                 Expanded(
                   child: Text(

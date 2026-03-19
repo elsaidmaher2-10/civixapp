@@ -11,4 +11,5 @@ class Apiconstant {
   static String updateiamge = "Account/update-image";
   static String report = "/Reports";
   static String editUserProfile = "Account/edit";
+  static String changePasswordAPIEndpoint = "Account/change-password";
 }

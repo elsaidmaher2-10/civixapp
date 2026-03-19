@@ -231,6 +231,7 @@ class _SingnupState extends State<Singnup> {
                                     onChanged: (value) {},
                                   ),
                                   Password(
+                                    isnew: false,
                                     controller: passwordController,
                                     onChanged: (value) {
                                       streamController.add(

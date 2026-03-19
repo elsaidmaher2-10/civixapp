@@ -73,9 +73,11 @@ class ScreenUtilsManager {
 
   static double h128 = 128.h;
   // أضف دول
-static double get filterChipHeight => 80.h;
-static double get filterChipSpacing => 8.w;
-static double get reportCardSpacing => 16.h;
-static double get searchBorderRadius => 8.r;
-static double get searchBorderWidth => 1.5;
+  static double get filterChipHeight => 80.h;
+  static double get filterChipSpacing => 8.w;
+  static double get reportCardSpacing => 16.h;
+  static double get searchBorderRadius => 8.r;
+  static double get searchBorderWidth => 1.5;
+
+  static double get h250 => 250.h;
 }

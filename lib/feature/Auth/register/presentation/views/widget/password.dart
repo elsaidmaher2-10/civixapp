@@ -9,25 +9,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class Password extends StatelessWidget {
   const Password({
     super.key,
+    required this.isnew,
     required this.controller,
     required this.onChanged,
   });
 
   final TextEditingController controller;
   final Function(String)? onChanged;
+  final bool isnew;
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          Constantmanger.pass,
-          style: TextStyle(
-            color: ColorManger.lightGrey,
-            fontSize: ScreenUtilsManager.s16,
-          ),
-        ),
-        SizedBox(height: ScreenUtilsManager.h6),
+        SizedBox(height: ScreenUtilsManager.h12),
         BlocProvider(
           create: (BuildContext context) => VisibleeyeCubit(),
           child: BlocBuilder<VisibleeyeCubit, bool>(
@@ -35,13 +30,15 @@ class Password extends StatelessWidget {
               return CustomTextfromfield(
                 maxLines: 1,
                 prefix: Icon(
-                  Icons.password_sharp,
+                  isnew ? Icons.lock : Icons.password_sharp,
                   color: ColorManger.lightGrey2,
                 ),
                 onChanged: onChanged,
                 controller: controller,
                 obstext: state,
-                hinttext: Constantmanger.hinytextpass,
+                hinttext: isnew
+                    ? "Enter New Password"
+                    : Constantmanger.hinytextpass,
                 suffix: IconButton(
                   onPressed: () {
                     context.read<VisibleeyeCubit>().chanagevisbilitypassword();
@@ -51,7 +48,7 @@ class Password extends StatelessWidget {
                     color: ColorManger.lightGrey2,
                   ),
                 ),
-                lable: Constantmanger.pass,
+                lable: isnew ? "New Password" : Constantmanger.pass,
               );
             },
           ),

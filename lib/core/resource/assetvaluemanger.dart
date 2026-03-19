@@ -26,4 +26,6 @@ abstract class AssetValueManager {
   static String searchAnimation = "assets/animation/search imm.json";
   static String notFoundsearchAnimation = "assets/animation/Not Found(1).json";
   static String laoding = "assets/animation/Loading animation blue.json";
+  static String location = "assets/animation/location loading(1).json";
+  static String pinLocaation = "assets/animation/Location Pin(2).json";
 }

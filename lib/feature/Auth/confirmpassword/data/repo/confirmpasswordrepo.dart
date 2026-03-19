@@ -44,4 +44,37 @@ class Confirmpasswordrepo {
       return left(FailureResponse(errors: [e.toString()], statusCode: 500));
     }
   }
+
+  Future<Either<FailureResponse, String>> changePassword({
+    required String currentPassword,
+    required String newPassword,
+  }) async {
+    final hasInternet = await InternetChecker().checkInternet();
+    if (!hasInternet) {
+      return left(
+        FailureResponse(errors: ["No internet connection"], statusCode: 0),
+      );
+    }
+    try {
+      final response = await service.post(
+        path: Apiconstant.changePasswordAPIEndpoint,
+        body: {"currentPassword": currentPassword, "newPassword": newPassword},
+      );
+      return right(response);
+    } on Serverexciptionmodel catch (e) {
+      if (e.errors is Map?) {
+        final d = FailureResponse.fromJson(e.errors);
+        return left(d);
+      } else {
+        return left(
+          FailureResponse(
+            errors: [e.errors.toString()],
+            statusCode: e.statuscode,
+          ),
+        );
+      }
+    } catch (e) {
+      return left(FailureResponse(errors: [e.toString()], statusCode: 500));
+    }
+  }
 }

@@ -23,4 +23,19 @@ class ConfirmPasswordController extends Cubit<ConfirmPasswordControllerState> {
       (r) => emit(ConfirmPasswordControllerSuccess(r)),
     );
   }
+
+  Future<void> changePassword({
+    required String currentPassword,
+    required String newPassword,
+  }) async {
+    emit(ChangePasswordLoading());
+    final result = await confirmpasswordrepo.changePassword(
+      currentPassword: currentPassword,
+      newPassword: newPassword,
+    );
+    result.fold(
+      (failure) => emit(ChangePasswordFailure(message: failure.errors.join())),
+      (success) => emit(ChangePasswordSuccess(success)),
+    );
+  }
 }

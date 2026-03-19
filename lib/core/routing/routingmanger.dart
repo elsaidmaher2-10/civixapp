@@ -1,11 +1,14 @@
 import 'package:citifix/WorkerFeature/workerMainScreen.dart';
+import 'package:citifix/core/DI/getit.dart';
 import 'package:citifix/core/routing/routes.dart';
 import 'package:citifix/feature/Auth/Login/presentation/views/LoginPage.dart';
 import 'package:citifix/feature/Auth/confirmpassword/presentation/view/Confirmpass.dart';
 import 'package:citifix/feature/Auth/foregetpassword/presentation/views/foregetpassword.dart';
 import 'package:citifix/feature/Auth/otpverifcation/presentation/view/otpvrificationcode.dart';
 import 'package:citifix/feature/Auth/register/presentation/views/signupwidget.dart';
+import 'package:citifix/feature/Profile/data/repos/UserProfileRepos/userprofileRepos.dart';
 import 'package:citifix/feature/Profile/presentation/manager/userinfoManger/user_profile_info_cubit.dart';
+import 'package:citifix/feature/Profile/presentation/view/ProfileScreen.dart';
 import 'package:citifix/feature/Profile/presentation/view/widget/editprofile.dart';
 import 'package:citifix/feature/home/presentation/view/mainScreen.dart';
 import 'package:citifix/feature/onbroading/onbroading.dart';
@@ -22,6 +25,15 @@ class Routingmanger {
         return _noPopRoute(child: Loginpage());
       case Routes.signup:
         return MaterialPageRoute(builder: (_) => Singnup());
+      case Routes.profile:
+      case Routes.profile:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) =>
+                UserProfileInfoCubit(getIt<Userprofilerepos>()),
+            child: const ProfileScreen(),
+          ),
+        );
       case Routes.foregetpassword:
         return MaterialPageRoute(builder: (_) => Foregetpassword());
       case Routes.otpverficationc:
