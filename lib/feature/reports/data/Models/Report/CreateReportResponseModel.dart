@@ -26,8 +26,8 @@ class ReportResponseModelByid {
 
   factory ReportResponseModelByid.fromJson(Map<String, dynamic> json) {
     return ReportResponseModelByid(
-      latitude: json['latitude'],
-      longitude: json["longitude"],
+      latitude: (json['latitude'] as num).toDouble(),
+      longitude: (json['longitude'] as num).toDouble(),
       id: json['id'] ?? 0,
       title: json['title'] ?? '',
       description: json['description'] ?? '',

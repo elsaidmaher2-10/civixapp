@@ -1,3 +1,4 @@
+import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/feature/onbroading/controller/onbroadingprovider.dart';
 import 'package:citifix/feature/onbroading/widget/on_broading_item.dart';
@@ -18,7 +19,7 @@ class _OnbroadingState extends State<Onbroading> {
       child: Builder(
         builder: (context) {
           return Scaffold(
-            backgroundColor: Colors.white,
+            backgroundColor: ColorManger.reportsPageBackground,
             body: PageView(
               onPageChanged: (value) {
                 context.read<Onbroadingprovider>().updateIndex(value);

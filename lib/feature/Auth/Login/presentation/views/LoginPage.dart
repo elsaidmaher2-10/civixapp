@@ -147,7 +147,7 @@ class _LoginpageState extends State<Loginpage> {
                                   children: [
                                     SvgPicture.asset(
                                       AssetValueManager.Klog,
-                                      height: ScreenUtilsManager.w90,
+                                      height: ScreenUtilsManager.h120,
                                     ),
                                     SizedBox(height: ScreenUtilsManager.h9),
                                     Text(

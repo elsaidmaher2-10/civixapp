@@ -15,7 +15,7 @@ class signuplogo extends StatelessWidget {
         children: [
           SvgPicture.asset(
             AssetValueManager.Klog,
-            width: ScreenUtilsManager.w90,
+            height: ScreenUtilsManager.h120,
           ),
 
           SizedBox(height: ScreenUtilsManager.h9),

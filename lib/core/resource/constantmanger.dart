@@ -41,6 +41,7 @@ class Constantmanger {
   static const String fname = "First Name";
   static const String lname = "Last Name";
   static const String confirmPassword = "Confirm Password";
+  static const String addressT = "Address";
 
   // ================== Hints ==================
   static const String hinytextemail = "Enter your email address";

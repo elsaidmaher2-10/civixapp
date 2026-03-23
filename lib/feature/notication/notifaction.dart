@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-
-// ─── Color tokens ────────────────────────────────────────────────────────────
 class _C {
   static const surface = Color(0xFFF7F9FB);
   static const surfaceContainerLowest = Color(0xFFFFFFFF);
@@ -10,7 +8,6 @@ class _C {
   static const primaryFixed = Color(0xFFD7E2FF);
 }
 
-// ─── Data Model ──────────────────────────────────────────────────────────────
 class NotificationItem {
   final String id;
   final IconData icon;
@@ -27,8 +24,6 @@ class NotificationItem {
     required this.time,
     this.isRead = false,
   });
-
-  // This creates a NEW object with the updated boolean
   NotificationItem copyWith({bool? isRead}) {
     return NotificationItem(
       id: id,
@@ -41,16 +36,12 @@ class NotificationItem {
   }
 }
 
-// ─── Main Screen ─────────────────────────────────────────────────────────────
 class NotificationCenter extends StatefulWidget {
   const NotificationCenter({super.key});
-
   @override
   State<NotificationCenter> createState() => _NotificationCenterState();
 }
-
 class _NotificationCenterState extends State<NotificationCenter> {
-  // Initial list of notifications
   List<NotificationItem> _list = [
     NotificationItem(
       id: '1',
@@ -76,10 +67,9 @@ class _NotificationCenterState extends State<NotificationCenter> {
     ),
   ];
 
-  // Logic: Mark one as read
   void _handleTap(int index) {
     if (_list[index].isRead)
-      return; // Optimization: don't rebuild if already read
+      return; 
 
     setState(() {
       _list[index] = _list[index].copyWith(isRead: true);

@@ -10,51 +10,61 @@ class LocalNotificationService {
 
   static const _channelId = 'channelId';
   static const _channelName = 'Default Channel';
-  static const _notificationId = 1;
-  static const _notificationSound = 'mixkitlongpop2358';
+
   static final FlutterLocalNotificationsPlugin _plugin =
       FlutterLocalNotificationsPlugin();
+
   static Future<void> init() async {
     const androidSettings = AndroidInitializationSettings(
       '@mipmap/ic_launcher',
     );
+
     const settings = InitializationSettings(android: androidSettings);
+
     await _plugin.initialize(
-      settings: settings,
       onDidReceiveNotificationResponse: _onNotificationTap,
-      onDidReceiveBackgroundNotificationResponse: _onNotificationTap,
+      settings: settings,
     );
+    const channel = AndroidNotificationChannel(
+      _channelId,
+      _channelName,
+      importance: Importance.high,
+    );
+    await _plugin
+        .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin
+        >()
+        ?.createNotificationChannel(channel);
   }
 
-  @pragma('vm:entry-point')
   static void _onNotificationTap(NotificationResponse response) {
-    log('Notification tapped with payload: ${response.payload}');
+    log('Notification tapped: ${response.payload}');
   }
 
   static Future<void> show(RemoteMessage message) async {
-    final styleInformation = await _buildImageStyle(
-      message.notification?.android?.imageUrl,
-    );
+    final data = message.data;
 
+    final title =
+        message.notification?.title ?? data['title'] ?? 'Notification';
+    final body = message.notification?.body ?? data['body'] ?? '';
+    final imageUrl = data['image'];
+    final style = await _buildImageStyle(imageUrl);
     final androidDetails = AndroidNotificationDetails(
       _channelId,
       _channelName,
       importance: Importance.max,
       priority: Priority.high,
-      ticker: 'ticker',
-      colorized: true,
-      color: Colors.red,
+      color: const Color(0xffFF7A00),
       playSound: true,
-      sound: const RawResourceAndroidNotificationSound(_notificationSound),
-      styleInformation: styleInformation,
+      styleInformation: style,
     );
 
     await _plugin.show(
-      id: _notificationId,
-      title: message.notification?.title,
-      body: message.notification?.body,
+      id: DateTime.now().millisecondsSinceEpoch ~/ 1000,
+      title: title,
+      body: body,
       notificationDetails: NotificationDetails(android: androidDetails),
-      payload: message.data.isNotEmpty ? jsonEncode(message.data) : null,
+      payload: jsonEncode(data),
     );
   }
 
@@ -64,10 +74,7 @@ class LocalNotificationService {
     try {
       final response = await http.get(Uri.parse(imageUrl));
 
-      if (response.statusCode != 200) {
-        log('Failed to fetch notification image: ${response.statusCode}');
-        return null;
-      }
+      if (response.statusCode != 200) return null;
 
       return BigPictureStyleInformation(
         ByteArrayAndroidBitmap.fromBase64String(
@@ -75,7 +82,7 @@ class LocalNotificationService {
         ),
       );
     } catch (e) {
-      log('Error fetching notification image: $e');
+      log('Image error: $e');
       return null;
     }
   }

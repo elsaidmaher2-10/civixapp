@@ -6,6 +6,7 @@ import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/core/routing/routes.dart';
 import 'package:citifix/core/widget/CustomSnackBar.dart';
+import 'package:citifix/core/widget/customloading.dart';
 import 'package:citifix/feature/Auth/foregetpassword/presentation/manager/ForgetpasswordState.dart';
 import 'package:citifix/feature/Auth/foregetpassword/presentation/manager/forgetpasswordcubit.dart';
 import 'package:citifix/feature/Auth/register/presentation/views/widget/Email.dart';
@@ -76,10 +77,7 @@ class _ForegetpasswordState extends State<Foregetpassword> {
               return ModalProgressHUD(
                 inAsyncCall: inAsyncCall,
                 blur: 7,
-                progressIndicator: CupertinoActivityIndicator(
-                  radius: 15,
-                  color: ColorManger.kPrimary,
-                ),
+                progressIndicator: customloading(),
                 child: Scaffold(
                   backgroundColor: ColorManger.white,
                   appBar: foregetpasswordappbar(context),
@@ -170,10 +168,7 @@ PreferredSizeWidget foregetpasswordappbar(BuildContext context) {
     centerTitle: true,
     title: Text(
       "Forget Password",
-      style: TextStyle(
-        color: ColorManger.kPrimary,
-        fontSize: 20.sp,
-      ),
+      style: TextStyle(color: ColorManger.kPrimary, fontSize: 20.sp),
     ),
     backgroundColor: ColorManger.white,
     leadingWidth: 36.w,

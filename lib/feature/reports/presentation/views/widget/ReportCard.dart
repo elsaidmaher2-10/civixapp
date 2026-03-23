@@ -16,6 +16,34 @@ class Reportcard extends StatelessWidget {
   final ReportItem report;
 
   const Reportcard({super.key, required this.report});
+  Future<bool> _showDeleteDialog(BuildContext context) async {
+    return await showCupertinoDialog<bool>(
+          context: context,
+          builder: (BuildContext context) {
+            return CupertinoAlertDialog(
+              title: const Text('Confirm Delete'),
+              content: const Text(
+                'Are you sure you want to delete this report?',
+              ),
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(false),
+                  child: const Text(
+                    'Cancel',
+                    style: TextStyle(color: ColorManger.kPrimaryDark),
+                  ),
+                ),
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(true),
+                  style: TextButton.styleFrom(foregroundColor: Colors.red),
+                  child: const Text('Delete'),
+                ),
+              ],
+            );
+          },
+        ) ??
+        false;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -164,34 +192,5 @@ class Reportcard extends StatelessWidget {
       default:
         return ColorManger.kPrimary;
     }
-  }
-
-  Future<bool> _showDeleteDialog(BuildContext context) async {
-    return await showCupertinoDialog<bool>(
-          context: context,
-          builder: (BuildContext context) {
-            return CupertinoAlertDialog(
-              title: const Text('Confirm Delete'),
-              content: const Text(
-                'Are you sure you want to delete this report?',
-              ),
-              actions: <Widget>[
-                TextButton(
-                  onPressed: () => Navigator.of(context).pop(false),
-                  child: const Text(
-                    'Cancel',
-                    style: TextStyle(color: ColorManger.kPrimaryDark),
-                  ),
-                ),
-                TextButton(
-                  onPressed: () => Navigator.of(context).pop(true),
-                  style: TextButton.styleFrom(foregroundColor: Colors.red),
-                  child: const Text('Delete'),
-                ),
-              ],
-            );
-          },
-        ) ??
-        false;
   }
 }

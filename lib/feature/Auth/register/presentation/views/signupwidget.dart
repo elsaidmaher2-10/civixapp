@@ -173,7 +173,6 @@ class _SingnupState extends State<Singnup> {
                                   Nationalnumber(
                                     controller: nationalnumbercontroller,
                                   ),
-
                                   CustomTextfromfield(
                                     onTap: () async {
                                       DateTime?

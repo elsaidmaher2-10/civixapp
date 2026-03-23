@@ -19,26 +19,27 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'firebase_options.dart';
-
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
-      statusBarColor: Colors.white,
+      statusBarColor: ColorManger.reportsPageBackground,
       statusBarIconBrightness: Brightness.light,
       statusBarBrightness: Brightness.dark,
     ),
   );
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
   setupgetit();
-  await Future.wait<void>([
-    LocalNotificationService.init(),
-    NotificationService.init(),
-    PrefrenceManager().init(),
-  ]);
+  if (Firebase.apps.isEmpty) {
+    await Firebase.initializeApp();
+  }
+
+  await LocalNotificationService.init();
+  await NotificationService.init();
+  await PrefrenceManager().init();
+
   final bool isOnboardingViewed =
       PrefrenceManager().getbool(Constantmanger.isOnboardingViewed) ?? false;
   Bloc.observer = MyBlocObserver();
@@ -46,7 +47,6 @@ void main() async {
     Constantmanger.accessToken,
   );
   final String? roleString = PrefrenceManager().getstring(Constantmanger.role);
-
   runApp(
     MultiBlocProvider(
       providers: [
