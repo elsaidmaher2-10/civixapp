@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -38,7 +37,6 @@ class LocalNotificationService {
   }
 
   static void _onNotificationTap(NotificationResponse response) {
-    log('Notification tapped: ${response.payload}');
   }
 
   static Future<void> show(RemoteMessage message) async {
@@ -82,7 +80,6 @@ class LocalNotificationService {
         ),
       );
     } catch (e) {
-      log('Image error: $e');
       return null;
     }
   }

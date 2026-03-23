@@ -83,10 +83,28 @@ class Apiservice extends Apiconsumer {
   put({
     required String path,
     Map<String, dynamic>? queryprams,
-    required Object body,
+    Object? body,
   }) async {
     try {
       final response = await dio.put(
+        path,
+        data: body,
+        queryParameters: queryprams,
+      );
+      return response.data;
+    } on DioException catch (e) {
+      throw handleDioException(e);
+    }
+  }
+
+  @override
+  delete({
+    required String path,
+    Map<String, dynamic>? queryprams,
+    Object? body,
+  }) async {
+    try {
+      final response = await dio.delete(
         path,
         data: body,
         queryParameters: queryprams,

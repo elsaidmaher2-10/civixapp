@@ -15,4 +15,9 @@ abstract class Apiconsumer {
     Map<String, dynamic>? queryprams,
     required Object body,
   });
+  delete({
+    required String path,
+    Map<String, dynamic>? queryprams,
+    Object? body,
+  });
 }

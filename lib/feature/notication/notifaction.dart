@@ -1,244 +1,223 @@
+import 'package:citifix/core/resource/colormanager.dart';
+import 'package:citifix/feature/notication/presentation/views/widget/noticationtile.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-class _C {
-  static const surface = Color(0xFFF7F9FB);
-  static const surfaceContainerLowest = Color(0xFFFFFFFF);
-  static const onSurface = Color(0xFF191C1E);
-  static const onSurfaceVariant = Color(0xFF424751);
-  static const primary = Color(0xFF00346F);
-  static const primaryFixed = Color(0xFFD7E2FF);
-}
-
-class NotificationItem {
-  final String id;
-  final IconData icon;
-  final String title;
-  final String message;
-  final String time;
-  final bool isRead;
-
-  NotificationItem({
-    required this.id,
-    required this.icon,
-    required this.title,
-    required this.message,
-    required this.time,
-    this.isRead = false,
-  });
-  NotificationItem copyWith({bool? isRead}) {
-    return NotificationItem(
-      id: id,
-      icon: icon,
-      title: title,
-      message: message,
-      time: time,
-      isRead: isRead ?? this.isRead,
-    );
-  }
-}
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:citifix/feature/notication/presentation/manager/cubit/notifcation_cubit.dart';
+import 'package:citifix/feature/notication/presentation/manager/cubit/notifcation_state.dart';
 
 class NotificationCenter extends StatefulWidget {
   const NotificationCenter({super.key});
+
   @override
   State<NotificationCenter> createState() => _NotificationCenterState();
 }
+
 class _NotificationCenterState extends State<NotificationCenter> {
-  List<NotificationItem> _list = [
-    NotificationItem(
-      id: '1',
-      icon: Icons.construction_rounded,
-      title: 'Main Street Repair',
-      message: 'Crew dispatched to repair the pothole.',
-      time: '2m ago',
-    ),
-    NotificationItem(
-      id: '2',
-      icon: Icons.lightbulb_outline,
-      title: 'Light Fixed',
-      message: 'The street light on Oak Ave is now operational.',
-      time: '1h ago',
-    ),
-    NotificationItem(
-      id: '3',
-      icon: Icons.check_circle_outline,
-      title: 'Resolved',
-      message: 'Your previous report has been closed.',
-      time: 'Yesterday',
-      isRead: false, // Example of one already read
-    ),
-  ];
-
-  void _handleTap(int index) {
-    if (_list[index].isRead)
-      return; 
-
-    setState(() {
-      _list[index] = _list[index].copyWith(isRead: true);
-    });
-  }
-
-  // Logic: Mark everything as read
-  void _markAllRead() {
-    setState(() {
-      _list = _list.map((item) => item.copyWith(isRead: true)).toList();
-    });
+  @override
+  void initState() {
+    super.initState();
+    context.read<NotificationCubit>().getNotifications();
   }
 
   @override
   Widget build(BuildContext context) {
-    int unreadCount = _list.where((item) => !item.isRead).length;
-
     return Scaffold(
-      backgroundColor: _C.surface,
+      backgroundColor: ColorManger.surface,
       appBar: AppBar(
-        backgroundColor: _C.surface,
+        backgroundColor: ColorManger.surface,
         elevation: 0,
-        title: Text(
-          'Notifications ${unreadCount > 0 ? "($unreadCount)" : ""}',
-          style: const TextStyle(
-            color: _C.onSurface,
-            fontWeight: FontWeight.bold,
-          ),
+        centerTitle: false,
+        title: BlocBuilder<NotificationCubit, NotificationState>(
+          builder: (context, state) {
+            int unreadCount = 0;
+            if (state is NotificationLoaded) {
+              unreadCount = state.notifications.where((e) => !e.isRead).length;
+            }
+
+            return Row(
+              children: [
+                const Text(
+                  'Notifications',
+                  style: TextStyle(
+                    color: ColorManger.onSurface,
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: -0.5,
+                  ),
+                ),
+                if (unreadCount > 0) ...[
+                  const SizedBox(width: 8),
+                  Badge(
+                    backgroundColor: Colors.redAccent,
+                    label: Text(
+                      '$unreadCount',
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    child: const SizedBox(width: 8, height: 8),
+                  ),
+                ],
+              ],
+            );
+          },
         ),
         actions: [
-          if (unreadCount > 0)
-            TextButton(
-              onPressed: _markAllRead,
-              child: const Text('Mark all read'),
-            ),
+          BlocBuilder<NotificationCubit, NotificationState>(
+            builder: (context, state) {
+              if (state is NotificationLoaded &&
+                  state.notifications.any((e) => !e.isRead)) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: TextButton.icon(
+                    onPressed: () {
+                      context.read<NotificationCubit>().clearAllNotifications();
+                    },
+                    icon: const Icon(Icons.done_all_rounded, size: 20),
+                    label: const Text(
+                      'Mark all read',
+                      style: TextStyle(fontWeight: FontWeight.w600),
+                    ),
+                    style: TextButton.styleFrom(
+                      foregroundColor: ColorManger.primary,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                  ),
+                );
+              }
+              return const SizedBox();
+            },
+          ),
         ],
       ),
-      body: ListView.separated(
-        padding: const EdgeInsets.all(16),
-        itemCount: _list.length,
-        separatorBuilder: (context, index) => const SizedBox(height: 12),
-        itemBuilder: (context, index) {
-          final item = _list[index];
-          return _NotificationTile(item: item, onTap: () => _handleTap(index));
-        },
-      ),
-    );
-  }
-}
+      body: BlocBuilder<NotificationCubit, NotificationState>(
+        builder: (context, state) {
+          if (state is NotificationLoading) {
+            return const Center(
+              child: CupertinoActivityIndicator(
+                color: ColorManger.kPrimary,
+                radius: 15,
+              ),
+            );
+          }
 
-// ─── UI Tile Component ───────────────────────────────────────────────────────
-class _NotificationTile extends StatelessWidget {
-  final NotificationItem item;
-  final VoidCallback onTap;
-
-  const _NotificationTile({required this.item, required this.onTap});
-
-  @override
-  Widget build(BuildContext context) {
-    return AnimatedContainer(
-      duration: const Duration(milliseconds: 300),
-      decoration: BoxDecoration(
-        // Changes color and shadow based on read status
-        color: item.isRead ? Colors.transparent : _C.surfaceContainerLowest,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: item.isRead
-              ? Colors.grey.withOpacity(0.2)
-              : Colors.transparent,
-        ),
-        boxShadow: item.isRead
-            ? []
-            : [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.05),
-                  blurRadius: 10,
-                  offset: const Offset(0, 4),
+          if (state is NotificationError) {
+            return Center(
+              child: Padding(
+                padding: const EdgeInsets.all(24.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.error_outline_rounded,
+                      size: 64,
+                      color: Colors.red.shade300,
+                    ),
+                    const SizedBox(height: 16),
+                    Text(
+                      'Oops! Something went wrong.',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.grey.shade800,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      state.message,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Colors.grey.shade600),
+                    ),
+                    const SizedBox(height: 24),
+                    ElevatedButton.icon(
+                      onPressed: () =>
+                          context.read<NotificationCubit>().getNotifications(),
+                      icon: const Icon(Icons.refresh_rounded),
+                      label: const Text('Try Again'),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: ColorManger.primary,
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-      ),
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          borderRadius: BorderRadius.circular(16),
-          onTap: onTap,
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Icon + Unread Indicator
-                Stack(
+              ),
+            );
+          }
+
+          if (state is NotificationLoaded) {
+            final list = state.notifications;
+
+            if (list.isEmpty) {
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      padding: const EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(24),
                       decoration: BoxDecoration(
-                        color: item.isRead
-                            ? Colors.grey.shade200
-                            : _C.primaryFixed,
+                        color: Colors.grey.shade100,
                         shape: BoxShape.circle,
                       ),
                       child: Icon(
-                        item.icon,
-                        color: item.isRead ? Colors.grey : _C.primary,
-                        size: 20,
+                        Icons.notifications_paused_rounded,
+                        size: 64,
+                        color: Colors.grey.shade400,
                       ),
                     ),
-                    if (!item.isRead)
-                      Positioned(
-                        right: 0,
-                        top: 0,
-                        child: Container(
-                          width: 12,
-                          height: 12,
-                          decoration: BoxDecoration(
-                            color: Colors.redAccent,
-                            shape: BoxShape.circle,
-                            border: Border.all(color: Colors.white, width: 2),
-                          ),
-                        ),
+                    const SizedBox(height: 24),
+                    const Text(
+                      'No new notifications',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black87,
                       ),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      'You are all caught up! Check back later.',
+                      style: TextStyle(color: Colors.grey.shade500),
+                    ),
                   ],
                 ),
-                const SizedBox(width: 16),
-                // Text Content
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            item.title,
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: item.isRead
-                                  ? FontWeight.w500
-                                  : FontWeight.w800,
-                              color: item.isRead
-                                  ? _C.onSurfaceVariant
-                                  : _C.onSurface,
-                            ),
-                          ),
-                          Text(
-                            item.time,
-                            style: const TextStyle(
-                              fontSize: 11,
-                              color: _C.onSurfaceVariant,
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        item.message,
-                        style: TextStyle(
-                          fontSize: 13,
-                          color: _C.onSurfaceVariant.withOpacity(0.7),
-                          height: 1.4,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
+              );
+            }
+
+            // عرض الإشعارات
+            return RefreshIndicator(
+              color: ColorManger.primary,
+              backgroundColor: Colors.white,
+              onRefresh: () =>
+                  context.read<NotificationCubit>().refreshNotifications(),
+              child: ListView.builder(
+                padding: const EdgeInsets.only(top: 8, bottom: 24),
+                // إزالة separatorBuilder واستخدام Padding داخل الـ NotificationTile نفسه (حسب التعديل السابق)
+                itemCount: list.length,
+                itemBuilder: (context, index) {
+                  final item = list[index];
+                  return NotificationTile(
+                    item: item,
+                    onTap: () {
+                      context.read<NotificationCubit>().markAsRead(item.id);
+                    },
+                    onDelete: () {
+                      context.read<NotificationCubit>().deleteNotification(
+                        item.id,
+                      );
+                    },
+                  );
+                },
+              ),
+            );
+          }
+
+          return const SizedBox();
+        },
       ),
     );
   }

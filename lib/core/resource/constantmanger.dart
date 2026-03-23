@@ -190,4 +190,6 @@ class Constantmanger {
   static const age = "Age";
 
   static String editProfile = 'Edit Profile';
+
+  static String fcm = "FCM";
 }

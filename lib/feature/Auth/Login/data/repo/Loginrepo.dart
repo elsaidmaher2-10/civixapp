@@ -1,3 +1,4 @@
+import 'package:citifix/core/DI/getit.dart';
 import 'package:citifix/core/database/local/prefmanger.dart';
 import 'package:citifix/core/database/remote/api/ApiConstant.dart';
 import 'package:citifix/core/database/remote/api/ApiService.dart';
@@ -6,6 +7,7 @@ import 'package:citifix/core/database/remote/error/failureResponse.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/service/networkchecker.dart';
 import 'package:citifix/feature/Auth/Login/data/models/loginsuccesresponse.dart';
+import 'package:citifix/feature/notication/data/repo/noticationRepo.dart';
 import 'package:dartz/dartz.dart';
 
 class Loginrepo {
@@ -42,6 +44,16 @@ class Loginrepo {
         loginResponse.refreshTokenExpiration,
       );
       PrefrenceManager().setstring(Constantmanger.role, loginResponse.role);
+
+      final String? fcmtoken = PrefrenceManager().getstring(Constantmanger.fcm);
+
+      if (fcmtoken != null && fcmtoken.isNotEmpty) {
+        final result = await getIt<NotificationRepo>().registerDevice(
+          deviceToken: fcmtoken,
+          platform: "Android",
+        );
+      }
+
       return right(loginResponse);
     } on Serverexciptionmodel catch (e) {
       if (e.errors is Map?) {

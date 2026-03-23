@@ -5,7 +5,12 @@ class ColorManger {
   static const Color kPrimaryDark = Color(0xff0F172A);
   static const Color kPrimaryLight = Color.fromARGB(204, 112, 167, 222);
   static const Color bgLight = Color(0xFFF8F6F6);
-
+  static const surface = Color(0xFFF7F9FB);
+  static const surfaceContainerLowest = Color(0xFFFFFFFF);
+  static const onSurface = Color(0xFF191C1E);
+  static const onSurfaceVariant = Color(0xFF424751);
+  static const primary = Color(0xFF00346F);
+  static const primaryFixed = Color(0xFFD7E2FF);
   static const Color lightGrey = Color(0xff505050);
   static const Color lightGrey2 = Color(0xff828282);
   static const Color lightGrey3 = Color(0xff6C6C6C);

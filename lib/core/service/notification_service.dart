@@ -1,13 +1,12 @@
-import 'dart:developer';
+import 'package:citifix/core/database/local/prefmanger.dart';
+import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/service/local_notification_service.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 
 class NotificationService {
   NotificationService._();
-
   static final FirebaseMessaging _messaging = FirebaseMessaging.instance;
-
   static Future<void> init() async {
     await _requestPermission();
     await _logToken();
@@ -17,16 +16,16 @@ class NotificationService {
   }
 
   static Future<void> _requestPermission() async {
-    final settings = await _messaging.requestPermission();
-    log('Notification permission: ${settings.authorizationStatus}');
+    await _messaging.requestPermission();
   }
+
   static Future<void> _logToken() async {
     final token = await _messaging.getToken();
-    log('FCM Token: ${token ?? 'unavailable'}');
+    PrefrenceManager().setstring(Constantmanger.fcm, token);
   }
+
   static void _listenToForegroundMessages() {
     FirebaseMessaging.onMessage.listen((message) {
-      log('Foreground message: ${message.data}');
       LocalNotificationService.show(message);
     });
   }
@@ -35,12 +34,10 @@ class NotificationService {
   static Future<void> _onBackgroundMessage(RemoteMessage message) async {
     WidgetsFlutterBinding.ensureInitialized();
     await LocalNotificationService.init();
-    log('Background message: ${message.data}');
     await LocalNotificationService.show(message);
   }
+
   static void _listenToNotificationClick() {
-    FirebaseMessaging.onMessageOpenedApp.listen((message) {
-      log('Notification clicked: ${message.data}');
-    });
+    FirebaseMessaging.onMessageOpenedApp.listen((message) {});
   }
 }

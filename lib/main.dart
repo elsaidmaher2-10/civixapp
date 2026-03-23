@@ -11,6 +11,8 @@ import 'package:citifix/core/service/notification_service.dart';
 import 'package:citifix/core/service/observer.dart';
 import 'package:citifix/feature/Profile/presentation/manager/userinfoManger/user_profile_info_cubit.dart';
 import 'package:citifix/feature/home/presentation/manager/navbarManger/mange_custom_bottomnav_bar_cubit.dart';
+import 'package:citifix/feature/notication/data/repo/noticationRepo.dart';
+import 'package:citifix/feature/notication/presentation/manager/cubit/notifcation_cubit.dart';
 import 'package:citifix/feature/reports/data/repos/reports/reports.dart';
 import 'package:citifix/feature/reports/presentation/manager/reportManger/cubit/report_manager_cubit.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -35,10 +37,9 @@ void main() async {
   if (Firebase.apps.isEmpty) {
     await Firebase.initializeApp();
   }
-
+  await PrefrenceManager().init();
   await LocalNotificationService.init();
   await NotificationService.init();
-  await PrefrenceManager().init();
 
   final bool isOnboardingViewed =
       PrefrenceManager().getbool(Constantmanger.isOnboardingViewed) ?? false;
@@ -47,12 +48,18 @@ void main() async {
     Constantmanger.accessToken,
   );
   final String? roleString = PrefrenceManager().getstring(Constantmanger.role);
+
+  print(accessToken);
+
   runApp(
     MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => UserProfileInfoCubit(getIt())),
         BlocProvider(create: (_) => ReportCubit(getIt<ReportRepository>())),
         BlocProvider(create: (_) => MangeCustomBottomnavBarCubit()),
+        BlocProvider(
+          create: (_) => NotificationCubit(getIt<NotificationRepo>()),
+        ),
       ],
       child: MyApp(
         isOnboardingViewed: isOnboardingViewed,

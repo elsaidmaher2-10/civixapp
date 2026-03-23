@@ -12,4 +12,8 @@ class Apiconstant {
   static String report = "/Reports";
   static String editUserProfile = "Account/edit";
   static String changePasswordAPIEndpoint = "Account/change-password";
+  static String notificationRegister = "notifications/register-device";
+  static String notification = "notifications";
+
+  static String clearallnotification = "notifications/clear";
 }
