@@ -188,7 +188,6 @@ class _NotificationCenterState extends State<NotificationCenter> {
               );
             }
 
-            // عرض الإشعارات
             return RefreshIndicator(
               color: ColorManger.primary,
               backgroundColor: Colors.white,
@@ -196,7 +195,6 @@ class _NotificationCenterState extends State<NotificationCenter> {
                   context.read<NotificationCubit>().refreshNotifications(),
               child: ListView.builder(
                 padding: const EdgeInsets.only(top: 8, bottom: 24),
-                // إزالة separatorBuilder واستخدام Padding داخل الـ NotificationTile نفسه (حسب التعديل السابق)
                 itemCount: list.length,
                 itemBuilder: (context, index) {
                   final item = list[index];

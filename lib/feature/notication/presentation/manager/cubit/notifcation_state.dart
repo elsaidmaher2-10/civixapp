@@ -8,6 +8,11 @@ class NotificationInitial extends NotificationState {}
 
 class NotificationLoading extends NotificationState {}
 
+class NotificationBadge extends NotificationState {
+  int badge;
+  NotificationBadge(this.badge);
+}
+
 class NotificationLoaded extends NotificationState {
   final List<NotificationModel> notifications;
 

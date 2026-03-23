@@ -8,8 +8,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class NotificationCubit extends Cubit<NotificationState> {
   final NotificationRepo repo;
 
-  NotificationCubit(this.repo) : super(NotificationInitial());
-
+  NotificationCubit(this.repo) : super(NotificationInitial()) {
+    calcBage();
+  }
+  int numberbage = 0;
   Future<void> getNotifications() async {
     emit(NotificationLoading());
     final Either<FailureResponse, List<NotificationModel>> response = await repo
@@ -17,7 +19,10 @@ class NotificationCubit extends Cubit<NotificationState> {
 
     response.fold(
       (failure) => emit(NotificationError(failure.errors.join(", "))),
-      (notifications) => emit(NotificationLoaded(notifications)),
+      (notifications) {
+        numberbage = notifications.length;
+        emit(NotificationLoaded(notifications));
+      },
     );
   }
 
@@ -70,5 +75,9 @@ class NotificationCubit extends Cubit<NotificationState> {
 
   Future<void> refreshNotifications() async {
     await getNotifications();
+  }
+
+  void calcBage() {
+    emit(NotificationBadge(numberbage));
   }
 }
