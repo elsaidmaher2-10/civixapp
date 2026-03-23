@@ -63,6 +63,7 @@ class MainscreenAppbar extends StatelessWidget implements PreferredSizeWidget {
               padding: EdgeInsets.all(ScreenUtilsManager.w8),
               child: BlocBuilder<NotificationCubit, NotificationState>(
                 builder: (context, state) {
+                  
                   int unreadCount = 0;
                   if (state is NotificationLoaded) {
                     unreadCount = state.notifications

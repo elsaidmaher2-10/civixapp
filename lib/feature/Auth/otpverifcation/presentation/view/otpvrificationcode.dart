@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
@@ -24,9 +25,9 @@ class Otpvrificationcode extends StatefulWidget {
 
 class _OtpvrificationcodeState extends State<Otpvrificationcode> {
   final int otpLength = 6;
-
   late List<TextEditingController> controllers;
   late List<FocusNode> focusNodes;
+  final ValueNotifier<bool> isOtpComplete = ValueNotifier(false);
 
   @override
   void initState() {
@@ -43,6 +44,7 @@ class _OtpvrificationcodeState extends State<Otpvrificationcode> {
     for (final f in focusNodes) {
       f.dispose();
     }
+    isOtpComplete.dispose();
     super.dispose();
   }
 
@@ -58,6 +60,8 @@ class _OtpvrificationcodeState extends State<Otpvrificationcode> {
         FocusScope.of(context).requestFocus(focusNodes[index - 1]);
       }
     }
+
+    isOtpComplete.value = getOtpCode().length == otpLength;
   }
 
   String getOtpCode() {
@@ -66,7 +70,13 @@ class _OtpvrificationcodeState extends State<Otpvrificationcode> {
 
   @override
   Widget build(BuildContext context) {
-    Map args = ModalRoute.of(context)?.settings.arguments as Map? ?? {};
+    final args =
+        ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>? ??
+        {};
+    final String email = args[Constantmanger.email] ?? "";
+    final String currentScreen = args[Constantmanger.screen] ?? "";
+    final bool isResetPassword = currentScreen == Constantmanger.forgetPassword;
+
     return BlocProvider(
       create: (BuildContext context) => OtpVericationCubit(),
       child: Builder(
@@ -77,54 +87,46 @@ class _OtpvrificationcodeState extends State<Otpvrificationcode> {
                 Customsnackbar.show(
                   context: context,
                   backgroundColor: ColorManger.red,
-                  message: state.failureResponse.errors.join("-"),
+                  message: state.failureResponse.errors.join("\n"),
                 );
               } else if (state is OtpVericationSucces) {
                 Customsnackbar.show(
                   context: context,
                   backgroundColor: ColorManger.green,
-                  message:
-                      args[Constantmanger.screen] ==
-                          Constantmanger.forgetPassword
+                  message: isResetPassword
                       ? Constantmanger.msgresetingpass
                       : state.otpsuccessmodel.message,
                 );
 
-                if (Constantmanger.forgetPassword ==
-                    args[Constantmanger.screen]) {
+                if (isResetPassword) {
                   await Future.delayed(
-                    Duration(seconds: 2),
-                    () async => Navigator.pushNamed(
+                    const Duration(seconds: 2),
+
+                    () async => Navigator.pushReplacementNamed(
                       context,
                       Routes.confirmPassword,
                       arguments: {
-                        Constantmanger.email: args[Constantmanger.email],
+                        Constantmanger.email: email,
                         Constantmanger.otp: getOtpCode(),
                       },
                     ),
                   );
                 } else {
                   await Future.delayed(
-                    Duration(seconds: 2),
-                    () async => Navigator.pushNamed(context, Routes.login),
+                    const Duration(seconds: 2),
+                    () async =>
+                        Navigator.pushReplacementNamed(context, Routes.login),
                   );
                 }
               }
             },
-
             builder: (context, state) {
-              bool inAsyncCall = false;
-              if (state is OtpVericationLoading) {
-                inAsyncCall = true;
-              } else {
-                inAsyncCall = false;
-              }
+              bool inAsyncCall = state is OtpVericationLoading;
+
               return ModalProgressHUD(
                 inAsyncCall: inAsyncCall,
-
                 blur: 7,
                 progressIndicator: customloading(),
-
                 child: Scaffold(
                   backgroundColor: ColorManger.white,
                   appBar: otpappbar(context, () {}),
@@ -137,8 +139,7 @@ class _OtpvrificationcodeState extends State<Otpvrificationcode> {
                       children: [
                         SizedBox(height: 6.h),
                         Text(
-                          args[Constantmanger.screen] ==
-                                  Constantmanger.forgetPassword
+                          isResetPassword
                               ? Constantmanger.msgforResetpassword
                               : Constantmanger.msgforregister,
                           style: TextStyle(
@@ -149,21 +150,41 @@ class _OtpvrificationcodeState extends State<Otpvrificationcode> {
                         SizedBox(height: 48.h),
 
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: List.generate(otpLength, (index) {
-                            return Expanded(
-                              child: Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 5.w),
-                                child: TextFormField(
-                                  controller: controllers[index],
-                                  focusNode: focusNodes[index],
-                                  textAlign: TextAlign.center,
-                                  keyboardType: TextInputType.number,
-                                  maxLength: 1,
-                                  onChanged: (value) =>
-                                      onOtpChanged(value, index),
-                                  decoration: const InputDecoration(
-                                    counterText: "",
-                                    border: OutlineInputBorder(),
+                            return SizedBox(
+                              width: 45.w,
+                              child: TextFormField(
+                                controller: controllers[index],
+                                focusNode: focusNodes[index],
+                                textAlign: TextAlign.center,
+                                keyboardType: TextInputType.number,
+                                maxLength: 1,
+                                style: TextStyle(
+                                  fontSize: 18.sp,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                onChanged: (value) =>
+                                    onOtpChanged(value, index),
+                                decoration: InputDecoration(
+                                  counterText: "",
+                                  filled: true,
+                                  fillColor: const Color(0xffF6F6F6),
+                                  contentPadding: EdgeInsets.symmetric(
+                                    vertical: 14.h,
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8.r),
+                                    borderSide: const BorderSide(
+                                      color: Colors.transparent,
+                                    ),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8.r),
+                                    borderSide: BorderSide(
+                                      color: ColorManger.kPrimary,
+                                      width: 1.5,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -171,43 +192,60 @@ class _OtpvrificationcodeState extends State<Otpvrificationcode> {
                           }),
                         ),
 
-                        SizedBox(height: 21.h),
+                        SizedBox(height: 32.h),
 
-                        SizedBox(
-                          width: double.infinity,
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: ColorManger.kPrimary,
-                              foregroundColor: ColorManger.white,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(
-                                  ScreenUtilsManager.r10,
+                        ValueListenableBuilder<bool>(
+                          valueListenable: isOtpComplete,
+                          builder: (context, isComplete, child) {
+                            return SizedBox(
+                              width: double.infinity,
+                              height: 50.h,
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: ColorManger.kPrimary,
+                                  foregroundColor: ColorManger.white,
+                                  disabledBackgroundColor: Colors.grey.shade300,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(
+                                      ScreenUtilsManager.r10,
+                                    ),
+                                  ),
+                                ),
+                                onPressed: isComplete
+                                    ? () {
+                                        FocusScope.of(context).unfocus();
+                                        final otp = getOtpCode();
+                                        context
+                                            .read<OtpVericationCubit>()
+                                            .verifyOtp(
+                                              OtpModel(Email: email, code: otp),
+                                              isReset: isResetPassword,
+                                            );
+                                      }
+                                    : null,
+                                child: Text(
+                                  "Confirm",
+                                  style: TextStyle(
+                                    fontSize: 16.sp,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                               ),
-                            ),
-                            onPressed: () {
-                              final otp = getOtpCode();
-                              context.read<OtpVericationCubit>().verifyOtp(
-                                OtpModel(
-                                  Email: args[Constantmanger.email],
-                                  code: otp,
-                                ),
-                                isReset:
-                                    args[Constantmanger.screen] ==
-                                        Constantmanger.forgetPassword
-                                    ? true
-                                    : false,
-                              );
-                            },
-                            child: const Text("Confirm"),
-                          ),
+                            );
+                          },
                         ),
+
+                        SizedBox(height: 16.h),
 
                         ResendCodeOpt(
                           resend: () {
-                            context.read<OtpVericationCubit>().sendOtp(
-                              args[Constantmanger.email],
-                            );
+                            for (var controller in controllers) {
+                              controller.clear();
+                            }
+                            isOtpComplete.value = false;
+                            FocusScope.of(context).requestFocus(focusNodes[0]);
+
+                            context.read<OtpVericationCubit>().sendOtp(email);
                           },
                         ),
                       ],

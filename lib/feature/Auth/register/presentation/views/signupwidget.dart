@@ -47,14 +47,19 @@ class _SingnupState extends State<Singnup> {
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController addresscontroller = TextEditingController();
   final TextEditingController datecontroller = TextEditingController();
-  StreamController<String> selectole = StreamController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
   final TextEditingController nationalnumbercontroller =
       TextEditingController();
-  ValueNotifier<bool> isFormValid = ValueNotifier(false);
-  StreamController<List> streamController = StreamController.broadcast();
+
+  final ValueNotifier<bool> isFormValid = ValueNotifier(false);
+
+  final StreamController<String> selectRoleController =
+      StreamController<String>.broadcast();
+  final StreamController<List> streamController =
+      StreamController<List>.broadcast();
+
   File? image;
   String selectedRole = "";
 
@@ -62,22 +67,22 @@ class _SingnupState extends State<Singnup> {
   void initState() {
     super.initState();
 
-    void listener() {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        isFormValid.value =
-            fnameController.text.isNotEmpty &&
-            lnameController.text.isNotEmpty &&
-            emailController.text.isNotEmpty &&
-            passwordController.text.isNotEmpty &&
-            nationalnumbercontroller.text.isNotEmpty;
-      });
-    }
+    fnameController.addListener(_checkFormValidity);
+    lnameController.addListener(_checkFormValidity);
+    emailController.addListener(_checkFormValidity);
+    passwordController.addListener(_checkFormValidity);
+    nationalnumbercontroller.addListener(_checkFormValidity);
+  }
 
-    fnameController.addListener(listener);
-    lnameController.addListener(listener);
-    emailController.addListener(listener);
-    passwordController.addListener(listener);
-    nationalnumbercontroller.addListener(listener);
+  void _checkFormValidity() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      isFormValid.value =
+          fnameController.text.trim().isNotEmpty &&
+          lnameController.text.trim().isNotEmpty &&
+          emailController.text.trim().isNotEmpty &&
+          passwordController.text.isNotEmpty &&
+          nationalnumbercontroller.text.trim().isNotEmpty;
+    });
   }
 
   @override
@@ -90,7 +95,6 @@ class _SingnupState extends State<Singnup> {
         BlocProvider<SignupcontrollerCubit>(
           create: (BuildContext context) => SignupcontrollerCubit(),
         ),
-
         BlocProvider<ValidatebuttonCubit>(
           create: (BuildContext context) => ValidatebuttonCubit(),
         ),
@@ -112,26 +116,21 @@ class _SingnupState extends State<Singnup> {
                   message: state.message,
                 );
                 await Future.delayed(
-                  Duration(seconds: 2),
+                  const Duration(seconds: 2),
                   () async => Navigator.pushNamed(
                     context,
                     Routes.otpverficationc,
                     arguments: {
-                      Constantmanger.email: emailController.text,
+                      Constantmanger.email: emailController.text.trim(),
                       Constantmanger.screen: Constantmanger.Signup,
                     },
                   ),
                 );
               }
             },
-
             builder: (context, state) {
-              bool inAsyncCall = false;
-              if (state is Signupcontrollerloading) {
-                inAsyncCall = true;
-              } else {
-                inAsyncCall = false;
-              }
+              bool inAsyncCall = state is Signupcontrollerloading;
+
               return ModalProgressHUD(
                 inAsyncCall: inAsyncCall,
                 blur: 7,
@@ -141,166 +140,182 @@ class _SingnupState extends State<Singnup> {
                   body: SafeArea(
                     child: Padding(
                       padding: EdgeInsets.symmetric(
-                        horizontal: ScreenUtilsManager.h18,
+                        horizontal: ScreenUtilsManager.w18,
                       ),
                       child: SingleChildScrollView(
+                        physics: const BouncingScrollPhysics(),
                         child: Form(
                           key: _formKey,
-                          child: Builder(
-                            builder: (BuildContext context) {
-                              return Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  SizedBox(height: ScreenUtilsManager.h20),
-                                  signuplogo(),
-                                  SizedBox(height: ScreenUtilsManager.h20),
-                                  Fname(
-                                    controller: fnameController,
-                                    validator: fnamevalidator,
-                                  ),
-                                  Lname(
-                                    controller: lnameController,
-                                    validator: lnamevalidator,
-                                  ),
-                                  Email(
-                                    controller: emailController,
-                                    validator: emailvalidator,
-                                  ),
-                                  Phone(
-                                    controller: phoneController,
-                                    validator: phonevalidator,
-                                  ),
-                                  Nationalnumber(
-                                    controller: nationalnumbercontroller,
-                                  ),
-                                  CustomTextfromfield(
-                                    onTap: () async {
-                                      DateTime?
-                                      pickedDate = await showDatePicker(
-                                        context: context,
-                                        initialDate: DateTime.now(),
-                                        firstDate: DateTime(1950),
-                                        lastDate: DateTime(
-                                          DateTime.now().year + 1,
-                                        ),
-                                        builder: (context, child) {
-                                          return Theme(
-                                            data: Theme.of(context).copyWith(
-                                              colorScheme: ColorScheme.light(
-                                                primary: ColorManger.kPrimary,
-                                                onPrimary: Colors.white,
-                                                onSurface: Colors.black,
-                                              ),
-                                              textButtonTheme:
-                                                  TextButtonThemeData(
-                                                    style: TextButton.styleFrom(
-                                                      foregroundColor:
-                                                          ColorManger.kPrimary,
-                                                    ),
-                                                  ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(height: ScreenUtilsManager.h20),
+                              const signuplogo(),
+                              SizedBox(height: ScreenUtilsManager.h20),
+
+                              Fname(
+                                controller: fnameController,
+                                validator: fnamevalidator,
+                              ),
+                              Lname(
+                                controller: lnameController,
+                                validator: lnamevalidator,
+                              ),
+                              Email(
+                                controller: emailController,
+                                validator: emailvalidator,
+                              ),
+                              Phone(
+                                controller: phoneController,
+                                validator: phonevalidator,
+                              ),
+                              Nationalnumber(
+                                controller: nationalnumbercontroller,
+                              ),
+
+                              Text(
+                                Constantmanger.datebrith,
+                                style: TextStyle(
+                                  color: ColorManger.lightGrey,
+                                  fontSize: ScreenUtilsManager.s16,
+                                ),
+                              ),
+                              SizedBox(height: ScreenUtilsManager.h6),
+
+                              CustomTextfromfield(
+                                onTap: () async {
+                                  DateTime? pickedDate = await showDatePicker(
+                                    context: context,
+                                    initialDate: DateTime.now(),
+                                    firstDate: DateTime(1950),
+                                    lastDate: DateTime(DateTime.now().year + 1),
+                                    builder: (context, child) {
+                                      return Theme(
+                                        data: Theme.of(context).copyWith(
+                                          colorScheme: ColorScheme.light(
+                                            primary: ColorManger.kPrimary,
+                                            onPrimary: Colors.white,
+                                            onSurface: Colors.black,
+                                          ),
+                                          textButtonTheme: TextButtonThemeData(
+                                            style: TextButton.styleFrom(
+                                              foregroundColor:
+                                                  ColorManger.kPrimary,
                                             ),
-                                            child: child!,
-                                          );
-                                        },
-                                      );
-
-                                      if (pickedDate != null) {
-                                        datecontroller.text =
-                                            "${pickedDate.year}-${pickedDate.month.toString().padLeft(2, "0")}-${pickedDate.day.toString().padLeft(2, "0")}";
-                                      }
-                                    },
-                                    onChanged: (value) {
-                                      value = datecontroller.text;
-                                      if (value.isEmpty) {
-                                        return "choose date birth";
-                                      }
-                                    },
-
-                                    controller: datecontroller,
-                                    readonly: true,
-                                    prefix: Icon(Icons.date_range_outlined),
-                                    hinttext: datecontroller.text,
-                                    lable: 'date birth',
-                                  ),
-
-                                  SizedBox(height: 20),
-
-                                  Address(
-                                    controller: addresscontroller,
-                                    onChanged: (value) {},
-                                  ),
-                                  Password(
-                                    isnew: false,
-                                    controller: passwordController,
-                                    onChanged: (value) {
-                                      streamController.add(
-                                        passwordvalidatorrules(value),
+                                          ),
+                                        ),
+                                        child: child!,
                                       );
                                     },
-                                  ),
-                                  PasswordRules(
-                                    streamController: streamController,
-                                  ),
-                                  SizedBox(height: ScreenUtilsManager.h16),
-                                  selectRole(
-                                    selectole,
-                                    onchanged: (value) {
-                                      selectole.add(value ?? "");
-                                      selectedRole = value?.toLowerCase() ?? "";
-                                    },
-                                  ),
-                                  SizedBox(height: ScreenUtilsManager.h16),
-                                  SizedBox(height: ScreenUtilsManager.h30),
-                                  ValueListenableBuilder<bool>(
-                                    valueListenable: isFormValid,
-                                    builder: (context, isValid, child) {
-                                      return SignUPButton(
-                                        onPressed: isValid
-                                            ? () async {
-                                                if (_formKey.currentState
-                                                        ?.validate() ??
-                                                    false) {
-                                                  Usermodel user = Usermodel(
-                                                    nationalId:
-                                                        nationalnumbercontroller
-                                                            .text,
-                                                    address:
-                                                        addresscontroller.text,
-                                                    dateOfBirth:
-                                                        datecontroller.text,
+                                  );
 
-                                                    role: selectedRole,
-                                                    firstName:
-                                                        fnameController.text,
-                                                    lastName:
-                                                        lnameController.text,
-                                                    email: emailController.text,
-                                                    password:
-                                                        passwordController.text,
-                                                    phone: phoneController.text,
-                                                  );
+                                  if (pickedDate != null) {
+                                    datecontroller.text =
+                                        "${pickedDate.year}-${pickedDate.month.toString().padLeft(2, "0")}-${pickedDate.day.toString().padLeft(2, "0")}";
+                                  }
+                                },
+                                onChanged: (value) {
+                                  if (datecontroller.text.isEmpty) {
+                                    return "Please choose date of birth";
+                                  }
+                                  return null;
+                                },
+                                controller: datecontroller,
+                                readonly: true,
+                                prefix: const Icon(Icons.date_range_outlined),
+                                hinttext: datecontroller.text.isEmpty
+                                    ? 'Date of Birth'
+                                    : datecontroller.text,
+                                lable: 'Date of Birth',
+                              ),
 
-                                                  context
-                                                      .read<
-                                                        SignupcontrollerCubit
-                                                      >()
-                                                      .signupfunc(user);
-                                                }
-                                              }
-                                            : null,
-                                      );
-                                    },
-                                  ),
+                              SizedBox(height: ScreenUtilsManager.h20),
 
-                                  HaveAccountORLogin(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                  ),
-                                  SizedBox(height: ScreenUtilsManager.h30),
-                                ],
-                              );
-                            },
+                              Address(
+                                controller: addresscontroller,
+                                onChanged: (value) {},
+                              ),
+                              Text(
+                                Constantmanger.pass,
+                                style: TextStyle(
+                                  color: ColorManger.lightGrey,
+                                  fontSize: ScreenUtilsManager.s16,
+                                ),
+                              ),
+                              Password(
+                                isnew: false,
+                                controller: passwordController,
+                                onChanged: (value) {
+                                  streamController.add(
+                                    passwordvalidatorrules(value),
+                                  );
+                                },
+                              ),
+
+                              PasswordRules(streamController: streamController),
+
+                              SizedBox(height: ScreenUtilsManager.h16),
+
+                              SelectRoleDropdown(
+                                onChanged: (value) {
+                                  selectRoleController.add(value ?? "");
+                                  selectedRole = value?.toLowerCase() ?? "";
+                                },
+                                streamController: selectRoleController,
+                              ),
+
+                              SizedBox(height: ScreenUtilsManager.h30),
+
+                              ValueListenableBuilder<bool>(
+                                valueListenable: isFormValid,
+                                builder: (context, isValid, child) {
+                                  return SignUPButton(
+                                    onPressed: isValid
+                                        ? () async {
+                                            if (_formKey.currentState
+                                                    ?.validate() ??
+                                                false) {
+                                              FocusScope.of(context).unfocus();
+
+                                              Usermodel user = Usermodel(
+                                                nationalId:
+                                                    nationalnumbercontroller
+                                                        .text
+                                                        .trim(),
+                                                address: addresscontroller.text
+                                                    .trim(),
+                                                dateOfBirth: datecontroller.text
+                                                    .trim(),
+                                                role: selectedRole,
+                                                firstName: fnameController.text
+                                                    .trim(),
+                                                lastName: lnameController.text
+                                                    .trim(),
+                                                email: emailController.text
+                                                    .trim(),
+                                                password:
+                                                    passwordController.text,
+                                                phone: phoneController.text
+                                                    .trim(),
+                                              );
+
+                                              context
+                                                  .read<SignupcontrollerCubit>()
+                                                  .signupfunc(user);
+                                            }
+                                          }
+                                        : null,
+                                  );
+                                },
+                              ),
+
+                              HaveAccountORLogin(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                              ),
+                              SizedBox(height: ScreenUtilsManager.h30),
+                            ],
                           ),
                         ),
                       ),
@@ -315,7 +330,7 @@ class _SingnupState extends State<Singnup> {
     );
   }
 
-  String? confvalidator(value) {
+  String? confvalidator(String? value) {
     if (value == null || value.isEmpty) {
       return "Please confirm your password";
     }
@@ -334,61 +349,13 @@ class _SingnupState extends State<Singnup> {
     nationalnumbercontroller.dispose();
     passwordController.dispose();
     confirmPasswordController.dispose();
+    addresscontroller.dispose();
+    datecontroller.dispose();
+
+    isFormValid.dispose();
+    selectRoleController.close();
+    streamController.close();
+
     super.dispose();
-  }
-}
-
-class Selectcountry extends StatefulWidget {
-  Selectcountry({super.key, required this.name});
-  String name;
-  @override
-  State<Selectcountry> createState() => _SelectcountryState();
-}
-
-class _SelectcountryState extends State<Selectcountry> {
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text("Select nationality"),
-        SizedBox(height: 4),
-        Container(
-          decoration: BoxDecoration(
-            color: Color(0xffF6F6F6),
-            borderRadius: BorderRadius.circular(8),
-            border: BoxBorder.all(color: ColorManger.kPrimary),
-          ),
-          height: 45,
-          width: double.infinity,
-          child: InkWell(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Align(
-                alignment: AlignmentGeometry.centerLeft,
-
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      widget.name,
-                      style: TextStyle(color: ColorManger.lightGrey2),
-                    ),
-                    Icon(
-                      color: ColorManger.lightGrey2,
-                      size: 30,
-                      Icons.keyboard_arrow_down,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            onTap: () {
-              setState(() {});
-            },
-          ),
-        ),
-      ],
-    );
   }
 }

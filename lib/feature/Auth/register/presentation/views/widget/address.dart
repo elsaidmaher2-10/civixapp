@@ -15,7 +15,7 @@ class Address extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          Constantmanger.address,
+          Constantmanger.addressT,
           style: TextStyle(
             color: ColorManger.lightGrey,
             fontSize: ScreenUtilsManager.s16,

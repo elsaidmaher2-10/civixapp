@@ -33,7 +33,7 @@ class Constantmanger {
   static const String donthaveaccount = "Don’t have an account?";
   static const String Signup = "Sign up now";
   static const String forgetPassword = "Forget Password....?";
-
+  static const String datebrith = "Date Brith";
   // ================== Fields ==================
   static const String email = "Email";
   static const String pass = "Password";
