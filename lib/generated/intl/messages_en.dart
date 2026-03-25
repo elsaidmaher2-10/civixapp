@@ -41,6 +41,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "citizenIdentity": MessageLookupByLibrary.simpleMessage("Citizen Identity"),
     "civix": MessageLookupByLibrary.simpleMessage("Civix"),
     "completed": MessageLookupByLibrary.simpleMessage("Resolved"),
+    "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage("Confirm Password"),
     "confirmPasswordRequired": MessageLookupByLibrary.simpleMessage(
       "Please confirm your password",
@@ -60,9 +61,13 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "emailRequired": MessageLookupByLibrary.simpleMessage("Email is required"),
     "english": MessageLookupByLibrary.simpleMessage("English"),
+    "enterConfirmPassword": MessageLookupByLibrary.simpleMessage(
+      "Enter confirm password",
+    ),
     "enterNewPassword": MessageLookupByLibrary.simpleMessage(
       "Enter new password",
     ),
+    "error": MessageLookupByLibrary.simpleMessage("Error"),
     "fcm": MessageLookupByLibrary.simpleMessage("FCM"),
     "finish": MessageLookupByLibrary.simpleMessage("Get Started"),
     "firstName": MessageLookupByLibrary.simpleMessage("First Name"),
@@ -72,6 +77,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "forgetPassword": MessageLookupByLibrary.simpleMessage(
       "Forget Password....?",
     ),
+    "forgetPasswordDesc": MessageLookupByLibrary.simpleMessage(
+      "Please enter the email address associated with your account, and we\'ll send you an OTP to reset your password.",
+    ),
+    "forgetPasswordTitle": MessageLookupByLibrary.simpleMessage(
+      "Forgot Password",
+    ),
+    "forgotPassword": MessageLookupByLibrary.simpleMessage("Forgot Password"),
     "fullName": MessageLookupByLibrary.simpleMessage("Full Name"),
     "gender": MessageLookupByLibrary.simpleMessage("Gender"),
     "haveAccount": MessageLookupByLibrary.simpleMessage(
@@ -121,6 +133,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "msgResettingPass": MessageLookupByLibrary.simpleMessage(
       "Code verified successfully. Please set your new password.",
     ),
+    "msgResettingPassword": MessageLookupByLibrary.simpleMessage(
+      "Resetting password...",
+    ),
     "nationalID": MessageLookupByLibrary.simpleMessage("National ID"),
     "nationalIdDigits": MessageLookupByLibrary.simpleMessage(
       "National ID must contain only digits",
@@ -137,6 +152,14 @@ class MessageLookup extends MessageLookupByLibrary {
     "noInternet": MessageLookupByLibrary.simpleMessage(
       "No internet connection",
     ),
+    "oldPassword": MessageLookupByLibrary.simpleMessage("Old Password"),
+    "otpMsgRegister": MessageLookupByLibrary.simpleMessage(
+      "Enter the code sent to your email",
+    ),
+    "otpMsgResetPassword": MessageLookupByLibrary.simpleMessage(
+      "Enter the code to reset your password",
+    ),
+    "otpVerification": MessageLookupByLibrary.simpleMessage("OTP Verification"),
     "overview": MessageLookupByLibrary.simpleMessage("OverView"),
     "password": MessageLookupByLibrary.simpleMessage("Password"),
     "passwordLowercase": MessageLookupByLibrary.simpleMessage(
@@ -161,6 +184,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "passwordUppercase": MessageLookupByLibrary.simpleMessage(
       "One uppercase character",
     ),
+    "passwordsDoNotMatch": MessageLookupByLibrary.simpleMessage(
+      "Passwords do not match",
+    ),
     "pending": MessageLookupByLibrary.simpleMessage("Pending"),
     "phone": MessageLookupByLibrary.simpleMessage("Phone"),
     "phoneRequired": MessageLookupByLibrary.simpleMessage("Phone is required"),
@@ -178,6 +204,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "reportTitle": MessageLookupByLibrary.simpleMessage("Street hole"),
     "reportTitleHint": MessageLookupByLibrary.simpleMessage("Report title"),
     "reports": MessageLookupByLibrary.simpleMessage("Reports"),
+    "resendCode": MessageLookupByLibrary.simpleMessage("Resend Code"),
+    "resendCodeIn": MessageLookupByLibrary.simpleMessage("Resend Code In"),
+    "resetPasswordPurpose": MessageLookupByLibrary.simpleMessage(
+      "reset your password",
+    ),
     "search": MessageLookupByLibrary.simpleMessage("Search"),
     "searchMyReports": MessageLookupByLibrary.simpleMessage(
       "Search my reports",
@@ -189,12 +220,14 @@ class MessageLookup extends MessageLookupByLibrary {
     "selectRoleError": MessageLookupByLibrary.simpleMessage(
       "Please select a role",
     ),
+    "sendCode": MessageLookupByLibrary.simpleMessage("Send Code"),
     "sendReport": MessageLookupByLibrary.simpleMessage("Submit Report"),
     "settings": MessageLookupByLibrary.simpleMessage("SETTINGS"),
     "signUp": MessageLookupByLibrary.simpleMessage("Sign Up"),
     "signUpNow": MessageLookupByLibrary.simpleMessage("Sign up now"),
     "skip": MessageLookupByLibrary.simpleMessage("Skip"),
     "submit": MessageLookupByLibrary.simpleMessage("Submit"),
+    "success": MessageLookupByLibrary.simpleMessage("Success"),
     "support": MessageLookupByLibrary.simpleMessage("Support"),
     "worker": MessageLookupByLibrary.simpleMessage("Worker"),
   };

@@ -10,6 +10,7 @@ import 'package:citifix/core/widget/customloading.dart';
 import 'package:citifix/feature/Auth/foregetpassword/presentation/manager/ForgetpasswordState.dart';
 import 'package:citifix/feature/Auth/foregetpassword/presentation/manager/forgetpasswordcubit.dart';
 import 'package:citifix/feature/Auth/register/presentation/views/widget/Email.dart';
+import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,13 +26,9 @@ class Foregetpassword extends StatefulWidget {
 
 class _ForegetpasswordState extends State<Foregetpassword> {
   bool isvalid = false;
-  final StreamController streamController = StreamController.broadcast();
+  final StreamController<bool> streamController =
+      StreamController<bool>.broadcast();
   final TextEditingController emailController = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   void dispose() {
@@ -44,142 +41,148 @@ class _ForegetpasswordState extends State<Foregetpassword> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => Forgetpasswordcubit(),
-      child: Builder(
-        builder: (context) {
-          return BlocConsumer<Forgetpasswordcubit, Forgetpasswordstate>(
-            listener: (context, state) async {
-              if (state is ForgetpasswordstatecontrollerFailure) {
-                Customsnackbar.show(
-                  context: context,
-                  backgroundColor: ColorManger.red,
-                  message: state.message,
-                );
-              } else if (state is ForgetpasswordstatecontrollerSuccess) {
-                Customsnackbar.show(
-                  context: context,
-                  backgroundColor: ColorManger.green,
-                  message: state.response,
-                );
-                Future.delayed(
-                  const Duration(seconds: 3),
-                  () => Navigator.pushNamed(
-                    context,
-                    Routes.otpverficationc,
-                    arguments: {
-                      Constantmanger.email: emailController.text.trim(),
-                      Constantmanger.screen: Constantmanger.forgetPassword,
-                    },
+      child: BlocConsumer<Forgetpasswordcubit, Forgetpasswordstate>(
+        listener: (context, state) async {
+          if (state is ForgetpasswordstatecontrollerFailure) {
+            Customsnackbar.show(
+              context: context,
+              backgroundColor: ColorManger.red,
+              message: state.message,
+            );
+          } else if (state is ForgetpasswordstatecontrollerSuccess) {
+            Customsnackbar.show(
+              context: context,
+              backgroundColor: ColorManger.green,
+              message: state.response,
+            );
+
+            Future.delayed(
+              const Duration(seconds: 3),
+              () => Navigator.pushNamed(
+                context,
+                Routes.otpverficationc,
+                arguments: {
+                  Constantmanger.email: emailController.text.trim(),
+                  Constantmanger.screen: Constantmanger.forgetPassword,
+                },
+              ),
+            );
+          }
+        },
+        builder: (context, state) {
+          final inAsyncCall = state is ForgetpasswordstatecontrollerLoading;
+
+          return ModalProgressHUD(
+            inAsyncCall: inAsyncCall,
+            blur: 7,
+            color: Colors.white,
+            opacity: 0.5,
+            progressIndicator: customloading(),
+            child: Scaffold(
+              backgroundColor: ColorManger.white,
+              appBar: foregetpasswordappbar(context),
+              body: SafeArea(
+                child: SingleChildScrollView(
+                  physics: const BouncingScrollPhysics(),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: ScreenUtilsManager.w24,
                   ),
-                );
-              }
-            },
-            builder: (context, state) {
-              bool inAsyncCall = state is ForgetpasswordstatecontrollerLoading;
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(height: 20.h),
 
-              return ModalProgressHUD(
-                inAsyncCall: inAsyncCall,
-                blur: 7,
-                color: Colors.white,
-                opacity: 0.5,
-                progressIndicator: customloading(),
-                child: Scaffold(
-                  backgroundColor: ColorManger.white,
-                  appBar: foregetpasswordappbar(context),
-                  body: SafeArea(
-                    child: SingleChildScrollView(
-                      physics: const BouncingScrollPhysics(),
-                      padding: EdgeInsets.symmetric(
-                        horizontal: ScreenUtilsManager.w24,
+                      Center(
+                        child: Icon(
+                          Icons.lock_reset_rounded,
+                          size: 80.r,
+                          color: ColorManger.kPrimary.withOpacity(0.8),
+                        ),
                       ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(height: 20.h),
 
-                          Center(
-                            child: Icon(
-                              Icons.lock_reset_rounded,
-                              size: 80.r,
-                              color: ColorManger.kPrimary.withOpacity(0.8),
-                            ),
-                          ),
-                          SizedBox(height: 30.h),
+                      SizedBox(height: 30.h),
 
-                          Text(
-                            "Please enter the email address associated with your account, and we'll send you an OTP to reset your password.",
-                            style: TextStyle(
-                              color: ColorManger.lightGrey2,
-                              fontSize: ScreenUtilsManager.s14,
-                              height: 1.5,
-                              fontWeight: FontWeight.w400,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                          SizedBox(height: 40.h),
+                      Text(
+                        S.of(context).forgetPasswordDesc,
+                        style: TextStyle(
+                          color: ColorManger.lightGrey2,
+                          fontSize: ScreenUtilsManager.s14,
+                          height: 1.5,
+                          fontWeight: FontWeight.w400,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
 
-                          Email(
-                            controller: emailController,
-                            validator: (validator) {
-                              isvalid =
-                                  emailvalidator(context, validator) == null
-                                  ? true
-                                  : false;
-                              streamController.add(isvalid);
-                              return emailvalidator(context, validator);
-                            },
-                          ),
-                          SizedBox(height: 60.h),
+                      SizedBox(height: 40.h),
 
-                          SizedBox(
-                            width: double.infinity,
-                            child: StreamBuilder(
-                              initialData: false,
-                              stream: streamController.stream,
-                              builder: (context, snapshot) => ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: ColorManger.kPrimary,
-                                  foregroundColor: ColorManger.white,
-                                  disabledForegroundColor: Colors.white70,
-                                  elevation: 2,
-                                  padding: EdgeInsets.symmetric(vertical: 10.h),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(
-                                      ScreenUtilsManager.r10,
-                                    ),
-                                  ),
-                                ),
-                                onPressed: snapshot.data == true
-                                    ? () async {
-                                        FocusScope.of(context).unfocus();
-                                        context
-                                            .read<Forgetpasswordcubit>()
-                                            .forgetpassword(
-                                              isreset: true,
-                                              email: emailController.text
-                                                  .trim(),
-                                              purpose: "reset your password",
-                                            );
-                                      }
-                                    : null,
-                                child: Text(
-                                  "Send Code",
-                                  style: TextStyle(
-                                    fontSize: ScreenUtilsManager.s16,
-                                    fontWeight: FontWeight.bold,
-                                    letterSpacing: 1.0,
+                      Email(
+                        controller: emailController,
+                        validator: (validator) {
+                          final result = emailvalidator(context, validator);
+
+                          isvalid = result == null;
+
+                          streamController.add(isvalid);
+
+                          return result;
+                        },
+                      ),
+
+                      SizedBox(height: 60.h),
+
+                      SizedBox(
+                        width: double.infinity,
+                        child: StreamBuilder<bool>(
+                          initialData: false,
+                          stream: streamController.stream,
+                          builder: (context, snapshot) {
+                            return ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: ColorManger.kPrimary,
+                                foregroundColor: ColorManger.white,
+                                disabledForegroundColor: Colors.white70,
+                                elevation: 2,
+                                padding: EdgeInsets.symmetric(vertical: 10.h),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(
+                                    ScreenUtilsManager.r10,
                                   ),
                                 ),
                               ),
-                            ),
-                          ),
-                          SizedBox(height: 20.h),
-                        ],
+                              onPressed: snapshot.data == true
+                                  ? () {
+                                      FocusScope.of(context).unfocus();
+
+                                      context
+                                          .read<Forgetpasswordcubit>()
+                                          .forgetpassword(
+                                            isreset: true,
+                                            email: emailController.text.trim(),
+                                            purpose: S
+                                                .of(context)
+                                                .resetPasswordPurpose,
+                                          );
+                                    }
+                                  : null,
+                              child: Text(
+                                S.of(context).sendCode,
+                                style: TextStyle(
+                                  fontSize: ScreenUtilsManager.s16,
+                                  fontWeight: FontWeight.bold,
+                                  letterSpacing: 1.0,
+                                ),
+                              ),
+                            );
+                          },
+                        ),
                       ),
-                    ),
+
+                      SizedBox(height: 20.h),
+                    ],
                   ),
                 ),
-              );
-            },
+              ),
+            ),
           );
         },
       ),
@@ -194,7 +197,7 @@ PreferredSizeWidget foregetpasswordappbar(BuildContext context) {
     elevation: 0,
     scrolledUnderElevation: 0,
     title: Text(
-      "Forget Password",
+      S.of(context).forgetPasswordTitle,
       style: TextStyle(
         color: ColorManger.kPrimary,
         fontSize: ScreenUtilsManager.s20,

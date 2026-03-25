@@ -104,5 +104,22 @@
   "citizen": "مواطن",
   "selectRoleError": "من فضلك اختر الدور",
   "haveAccount": "لديك حساب بالفعل؟",
-  "login": "تسجيل الدخول"
+  "login": "تسجيل الدخول",
+  "forgetPasswordTitle": "نسيت كلمة المرور",
+  "forgetPasswordDesc": "يرجى إدخال البريد الإلكتروني المرتبط بحسابك، وسنرسل لك رمز تحقق لإعادة تعيين كلمة المرور.",
+  "sendCode": "إرسال الكود",
+  "resetPasswordPurpose": "إعادة تعيين كلمة المرور",
+  "confirm": "تأكيد",
+  "otpMsgRegister": "أدخل الكود المرسل إلى بريدك الإلكتروني",
+  "otpMsgResetPassword": "أدخل الكود لإعادة تعيين كلمة المرور",
+  "msgResettingPassword": "جاري إعادة تعيين كلمة المرور...",
+  "resendCode": "إعادة إرسال الكود",
+  "resendCodeIn": "إعادة الإرسال خلال",
+  "enterConfirmPassword": "أدخل تأكيد كلمة المرور",
+  "passwordsDoNotMatch": "كلمات المرور غير متطابقة",
+  "success": "تم بنجاح",
+  "error": "خطأ",
+  "otpVerification": "التحقق من OTP",
+  "forgotPassword": "نسيت كلمة المرور",
+  "oldPassword": "كلمة المرور القديمة"
 }

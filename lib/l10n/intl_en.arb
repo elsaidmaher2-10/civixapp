@@ -104,5 +104,21 @@
   "citizen": "Citizen",
   "selectRoleError": "Please select a role",
   "haveAccount": "Have an account already?",
-  "login": "Log in"
+  "login": "Log in",
+  "forgetPasswordTitle": "Forgot Password",
+  "forgetPasswordDesc": "Please enter the email address associated with your account, and we'll send you an OTP to reset your password.",
+  "sendCode": "Send Code",
+  "resetPasswordPurpose": "reset your password",
+  "confirm": "Confirm",
+  "otpMsgRegister": "Enter the code sent to your email",
+  "otpMsgResetPassword": "Enter the code to reset your password",
+  "msgResettingPassword": "Resetting password...",  "otpVerification": "OTP Verification"
+, "resendCode": "Resend Code",
+  "resendCodeIn": "Resend Code In",
+  "enterConfirmPassword": "Enter confirm password",
+  "passwordsDoNotMatch": "Passwords do not match",
+  "success": "Success",
+  "error": "Error",
+  "forgotPassword": "Forgot Password",
+  "oldPassword": "Old Password"
 }

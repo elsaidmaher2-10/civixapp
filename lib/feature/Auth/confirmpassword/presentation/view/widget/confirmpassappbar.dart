@@ -1,32 +1,27 @@
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
+import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 PreferredSizeWidget confirmpassappbar(
   BuildContext context,
-  Null Function() param1,
+  VoidCallback onBack,
 ) {
   return AppBar(
     centerTitle: true,
     titleSpacing: 3.w,
     title: Text(
-      "Create New Password",
-      style: TextStyle(
-        fontSize: 20.sp,
-        color: ColorManger.kPrimary,
-      ),
+      S.of(context).newPassword,
+      style: TextStyle(fontSize: 20.sp, color: ColorManger.kPrimary),
     ),
     backgroundColor: ColorManger.white,
     leadingWidth: 36.w,
-
     leading: Padding(
       padding: EdgeInsets.only(left: 10.w, bottom: ScreenUtilsManager.h4),
       child: IconButton(
-        onPressed: () {
-          Navigator.pop(context);
-        },
+        onPressed: onBack,
         icon: Icon(CupertinoIcons.back, color: ColorManger.kPrimary),
       ),
     ),

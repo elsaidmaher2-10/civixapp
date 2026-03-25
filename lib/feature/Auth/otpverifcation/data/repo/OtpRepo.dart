@@ -4,7 +4,9 @@ import 'package:citifix/core/database/remote/error/ServerExciptionmodel.dart';
 import 'package:citifix/core/database/remote/error/failureResponse.dart';
 import 'package:citifix/feature/Auth/otpverifcation/data/models/otpSuccessModel.dart';
 import 'package:citifix/feature/Auth/otpverifcation/data/models/otpmodel.dart';
+import 'package:citifix/generated/l10n.dart';
 import 'package:dartz/dartz.dart';
+import 'package:flutter/material.dart';
 
 class OtpRepo {
   OtpRepo(this.service);
@@ -37,11 +39,20 @@ class OtpRepo {
     }
   }
 
-  Future<Either<FailureResponse, String>> SendOtP(String email) async {
+  Future<Either<FailureResponse, String>> SendOtP({
+    required String email,
+    required bool isreset,
+    required BuildContext context,
+  }) async {
     try {
       final response = await service.post(
         path: Apiconstant.sendotp,
-        body: {"email": email},
+        body: {
+          "email": email,
+          "Purpose": isreset
+              ? S.of(context).resetPasswordPurpose
+              : S.of(context).confirm,
+        },
       );
       return right(response);
     } on Serverexciptionmodel catch (e) {

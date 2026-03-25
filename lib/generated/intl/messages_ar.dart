@@ -41,6 +41,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "citizenIdentity": MessageLookupByLibrary.simpleMessage("هوية المواطن"),
     "civix": MessageLookupByLibrary.simpleMessage("Civix"),
     "completed": MessageLookupByLibrary.simpleMessage("تم الحل"),
+    "confirm": MessageLookupByLibrary.simpleMessage("تأكيد"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage(
       "تأكيد كلمة المرور",
     ),
@@ -62,9 +63,13 @@ class MessageLookup extends MessageLookupByLibrary {
       "البريد الإلكتروني مطلوب",
     ),
     "english": MessageLookupByLibrary.simpleMessage("الإنجليزية"),
+    "enterConfirmPassword": MessageLookupByLibrary.simpleMessage(
+      "أدخل تأكيد كلمة المرور",
+    ),
     "enterNewPassword": MessageLookupByLibrary.simpleMessage(
       "أدخل كلمة مرور جديدة",
     ),
+    "error": MessageLookupByLibrary.simpleMessage("خطأ"),
     "fcm": MessageLookupByLibrary.simpleMessage("FCM"),
     "finish": MessageLookupByLibrary.simpleMessage("ابدأ الآن"),
     "firstName": MessageLookupByLibrary.simpleMessage("الاسم الأول"),
@@ -72,6 +77,13 @@ class MessageLookup extends MessageLookupByLibrary {
       "الاسم الأول مطلوب",
     ),
     "forgetPassword": MessageLookupByLibrary.simpleMessage("نسيت كلمة المرور؟"),
+    "forgetPasswordDesc": MessageLookupByLibrary.simpleMessage(
+      "يرجى إدخال البريد الإلكتروني المرتبط بحسابك، وسنرسل لك رمز تحقق لإعادة تعيين كلمة المرور.",
+    ),
+    "forgetPasswordTitle": MessageLookupByLibrary.simpleMessage(
+      "نسيت كلمة المرور",
+    ),
+    "forgotPassword": MessageLookupByLibrary.simpleMessage("نسيت كلمة المرور"),
     "fullName": MessageLookupByLibrary.simpleMessage("الاسم الكامل"),
     "gender": MessageLookupByLibrary.simpleMessage("النوع"),
     "haveAccount": MessageLookupByLibrary.simpleMessage("لديك حساب بالفعل؟"),
@@ -115,6 +127,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "msgResettingPass": MessageLookupByLibrary.simpleMessage(
       "تم التحقق من الكود بنجاح. يرجى تعيين كلمة مرور جديدة.",
     ),
+    "msgResettingPassword": MessageLookupByLibrary.simpleMessage(
+      "جاري إعادة تعيين كلمة المرور...",
+    ),
     "nationalID": MessageLookupByLibrary.simpleMessage("الرقم القومي"),
     "nationalIdDigits": MessageLookupByLibrary.simpleMessage(
       "يجب أن يحتوي الرقم القومي على أرقام فقط",
@@ -131,6 +146,14 @@ class MessageLookup extends MessageLookupByLibrary {
     "noInternet": MessageLookupByLibrary.simpleMessage(
       "لا يوجد اتصال بالإنترنت",
     ),
+    "oldPassword": MessageLookupByLibrary.simpleMessage("كلمة المرور القديمة"),
+    "otpMsgRegister": MessageLookupByLibrary.simpleMessage(
+      "أدخل الكود المرسل إلى بريدك الإلكتروني",
+    ),
+    "otpMsgResetPassword": MessageLookupByLibrary.simpleMessage(
+      "أدخل الكود لإعادة تعيين كلمة المرور",
+    ),
+    "otpVerification": MessageLookupByLibrary.simpleMessage("التحقق من OTP"),
     "overview": MessageLookupByLibrary.simpleMessage("نظرة عامة"),
     "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
     "passwordLowercase": MessageLookupByLibrary.simpleMessage("حرف صغير واحد"),
@@ -149,6 +172,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "passwordSpecialChar": MessageLookupByLibrary.simpleMessage("رمز خاص واحد"),
     "passwordUppercase": MessageLookupByLibrary.simpleMessage("حرف كبير واحد"),
+    "passwordsDoNotMatch": MessageLookupByLibrary.simpleMessage(
+      "كلمات المرور غير متطابقة",
+    ),
     "pending": MessageLookupByLibrary.simpleMessage("قيد المعالجة"),
     "phone": MessageLookupByLibrary.simpleMessage("رقم الهاتف"),
     "phoneRequired": MessageLookupByLibrary.simpleMessage("رقم الهاتف مطلوب"),
@@ -164,6 +190,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "reportTitle": MessageLookupByLibrary.simpleMessage("حفرة في الشارع"),
     "reportTitleHint": MessageLookupByLibrary.simpleMessage("عنوان البلاغ"),
     "reports": MessageLookupByLibrary.simpleMessage("البلاغات"),
+    "resendCode": MessageLookupByLibrary.simpleMessage("إعادة إرسال الكود"),
+    "resendCodeIn": MessageLookupByLibrary.simpleMessage("إعادة الإرسال خلال"),
+    "resetPasswordPurpose": MessageLookupByLibrary.simpleMessage(
+      "إعادة تعيين كلمة المرور",
+    ),
     "search": MessageLookupByLibrary.simpleMessage("بحث"),
     "searchMyReports": MessageLookupByLibrary.simpleMessage("ابحث في بلاغاتي"),
     "seeAll": MessageLookupByLibrary.simpleMessage("عرض الكل"),
@@ -173,12 +204,14 @@ class MessageLookup extends MessageLookupByLibrary {
     "selectRoleError": MessageLookupByLibrary.simpleMessage(
       "من فضلك اختر الدور",
     ),
+    "sendCode": MessageLookupByLibrary.simpleMessage("إرسال الكود"),
     "sendReport": MessageLookupByLibrary.simpleMessage("إرسال البلاغ"),
     "settings": MessageLookupByLibrary.simpleMessage("الإعدادات"),
     "signUp": MessageLookupByLibrary.simpleMessage("إنشاء حساب"),
     "signUpNow": MessageLookupByLibrary.simpleMessage("سجل الآن"),
     "skip": MessageLookupByLibrary.simpleMessage("تخطي"),
     "submit": MessageLookupByLibrary.simpleMessage("إرسال"),
+    "success": MessageLookupByLibrary.simpleMessage("تم بنجاح"),
     "support": MessageLookupByLibrary.simpleMessage("الدعم"),
     "worker": MessageLookupByLibrary.simpleMessage("عامل"),
   };

@@ -3,6 +3,7 @@ import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/core/widget/customtextfromfield.dart';
 import 'package:citifix/feature/Auth/register/presentation/manager/visblitypassword/visibleeye_cubit.dart';
+import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -32,7 +33,7 @@ class ConfirmPassword extends StatelessWidget {
                 validator: validator,
                 controller: controller,
                 obstext: state,
-                hinttext: Constantmanger.hinytextpass,
+                hinttext: S.of(context).confirmPassword,
                 suffix: IconButton(
                   onPressed: () {
                     context.read<VisibleeyeCubit>().chanagevisbilitypassword();
@@ -42,7 +43,7 @@ class ConfirmPassword extends StatelessWidget {
                     color: ColorManger.lightGrey2,
                   ),
                 ),
-                lable: Constantmanger.confirmPassword,
+                lable: S.of(context).confirmPassword,
               );
             },
           ),

@@ -3,6 +3,7 @@ import 'package:citifix/feature/Auth/otpverifcation/data/models/otpmodel.dart';
 import 'package:citifix/feature/Auth/otpverifcation/data/repo/OtpRepo.dart';
 import 'package:citifix/feature/Auth/otpverifcation/presentation/manager/cubit/otp_verication_state.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OtpVericationCubit extends Cubit<OtpVericationState> {
@@ -24,7 +25,11 @@ class OtpVericationCubit extends Cubit<OtpVericationState> {
     });
   }
 
-  Future<void> sendOtp(String email) async {
-     await otpRepo.SendOtP(email);
+  Future<void> sendOtp({
+    required String email,
+    required bool isreset,
+    required BuildContext ctx,
+  }) async {
+    await otpRepo.SendOtP(email: email, isreset: isreset, context: ctx);
   }
 }

@@ -863,6 +863,151 @@ class S {
   String get login {
     return Intl.message('Log in', name: 'login', desc: '', args: []);
   }
+
+  /// `Forgot Password`
+  String get forgetPasswordTitle {
+    return Intl.message(
+      'Forgot Password',
+      name: 'forgetPasswordTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter the email address associated with your account, and we'll send you an OTP to reset your password.`
+  String get forgetPasswordDesc {
+    return Intl.message(
+      'Please enter the email address associated with your account, and we\'ll send you an OTP to reset your password.',
+      name: 'forgetPasswordDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send Code`
+  String get sendCode {
+    return Intl.message('Send Code', name: 'sendCode', desc: '', args: []);
+  }
+
+  /// `reset your password`
+  String get resetPasswordPurpose {
+    return Intl.message(
+      'reset your password',
+      name: 'resetPasswordPurpose',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm`
+  String get confirm {
+    return Intl.message('Confirm', name: 'confirm', desc: '', args: []);
+  }
+
+  /// `Enter the code sent to your email`
+  String get otpMsgRegister {
+    return Intl.message(
+      'Enter the code sent to your email',
+      name: 'otpMsgRegister',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter the code to reset your password`
+  String get otpMsgResetPassword {
+    return Intl.message(
+      'Enter the code to reset your password',
+      name: 'otpMsgResetPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Resetting password...`
+  String get msgResettingPassword {
+    return Intl.message(
+      'Resetting password...',
+      name: 'msgResettingPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `OTP Verification`
+  String get otpVerification {
+    return Intl.message(
+      'OTP Verification',
+      name: 'otpVerification',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Resend Code`
+  String get resendCode {
+    return Intl.message('Resend Code', name: 'resendCode', desc: '', args: []);
+  }
+
+  /// `Resend Code In`
+  String get resendCodeIn {
+    return Intl.message(
+      'Resend Code In',
+      name: 'resendCodeIn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter confirm password`
+  String get enterConfirmPassword {
+    return Intl.message(
+      'Enter confirm password',
+      name: 'enterConfirmPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Passwords do not match`
+  String get passwordsDoNotMatch {
+    return Intl.message(
+      'Passwords do not match',
+      name: 'passwordsDoNotMatch',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Success`
+  String get success {
+    return Intl.message('Success', name: 'success', desc: '', args: []);
+  }
+
+  /// `Error`
+  String get error {
+    return Intl.message('Error', name: 'error', desc: '', args: []);
+  }
+
+  /// `Forgot Password`
+  String get forgotPassword {
+    return Intl.message(
+      'Forgot Password',
+      name: 'forgotPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Old Password`
+  String get oldPassword {
+    return Intl.message(
+      'Old Password',
+      name: 'oldPassword',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -28,7 +28,6 @@ class PasswordField extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(height: ScreenUtilsManager.h12),
-
               CustomTextfromfield(
                 maxLines: 1,
                 controller: controller,
