@@ -2,6 +2,7 @@ import 'package:citifix/core/resource/assetvaluemanger.dart';
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
+import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -20,7 +21,7 @@ class signuplogo extends StatelessWidget {
 
           SizedBox(height: ScreenUtilsManager.h9),
           Text(
-            Constantmanger.sinup,
+            S.of(context).signUp,
             style: TextStyle(
               fontWeight: FontWeight.w600,
               fontSize: ScreenUtilsManager.s34,

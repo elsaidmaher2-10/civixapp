@@ -1,8 +1,10 @@
 import 'dart:async' show StreamController;
 
+import 'package:citifix/core/function/sinupvalidator.dart';
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
+import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -23,7 +25,7 @@ class _PasswordRulesState extends State<PasswordRules> {
           children: [
             snapshot.data.any((e) => e["status"] == false)
                 ? Text(
-                    Constantmanger.passwordRulestitle,
+                    S.of(context).passwordRulesTitle,
                     style: TextStyle(
                       fontSize: ScreenUtilsManager.s10,
                       color: ColorManger.red,
@@ -44,8 +46,7 @@ class _PasswordRulesState extends State<PasswordRules> {
                   ),
                   SizedBox(width: 2.sp),
                   Text(
-                    e["title"],
-
+                    getRuleText(context, e["title"]),
                     style: TextStyle(
                       decoration: e["status"] == true
                           ? TextDecoration.lineThrough

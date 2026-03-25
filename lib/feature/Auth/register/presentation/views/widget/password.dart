@@ -1,60 +1,73 @@
 import 'package:citifix/core/resource/colormanager.dart';
-import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/core/widget/customtextfromfield.dart';
 import 'package:citifix/feature/Auth/register/presentation/manager/visblitypassword/visibleeye_cubit.dart';
+import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class Password extends StatelessWidget {
-  const Password({
+class PasswordField extends StatelessWidget {
+  const PasswordField({
     super.key,
-    required this.isnew,
     required this.controller,
-    required this.onChanged,
+    this.onChanged,
+    this.isNew = false,
   });
 
   final TextEditingController controller;
   final Function(String)? onChanged;
-  final bool isnew;
+  final bool isNew;
+
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        SizedBox(height: ScreenUtilsManager.h12),
-        BlocProvider(
-          create: (BuildContext context) => VisibleeyeCubit(),
-          child: BlocBuilder<VisibleeyeCubit, bool>(
-            builder: (BuildContext context, state) {
-              return CustomTextfromfield(
+    return BlocProvider(
+      create: (_) => VisibleeyeCubit(),
+      child: BlocBuilder<VisibleeyeCubit, bool>(
+        builder: (context, isHidden) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: ScreenUtilsManager.h12),
+
+              CustomTextfromfield(
                 maxLines: 1,
+                controller: controller,
+                onChanged: onChanged,
+                obstext: isHidden,
+
+                hinttext: isNew
+                    ? S.of(context).enterNewPassword
+                    : S.of(context).hintPassword,
+
+                lable: isNew
+                    ? S.of(context).newPassword
+                    : S.of(context).password,
+
                 prefix: Icon(
-                  isnew ? Icons.lock : Icons.password_sharp,
+                  isNew ? Icons.lock : Icons.password,
                   color: ColorManger.lightGrey2,
                 ),
-                onChanged: onChanged,
-                controller: controller,
-                obstext: state,
-                hinttext: isnew
-                    ? "Enter New Password"
-                    : Constantmanger.hinytextpass,
+
                 suffix: IconButton(
                   onPressed: () {
-                    context.read<VisibleeyeCubit>().chanagevisbilitypassword();
+                    context
+                        .read<VisibleeyeCubit>()
+                        .chanagevisbilitypassword();
                   },
                   icon: Icon(
-                    state == true ? Icons.remove_red_eye : Icons.visibility_off,
+                    isHidden
+                        ? Icons.visibility_off
+                        : Icons.remove_red_eye,
                     color: ColorManger.lightGrey2,
                   ),
                 ),
-                lable: isnew ? "New Password" : Constantmanger.pass,
-              );
-            },
-          ),
-        ),
-        SizedBox(height: ScreenUtilsManager.h16),
-      ],
+              ),
+
+              SizedBox(height: ScreenUtilsManager.h16),
+            ],
+          );
+        },
+      ),
     );
   }
 }

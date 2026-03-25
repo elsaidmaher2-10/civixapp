@@ -16,6 +16,7 @@ import 'package:citifix/feature/Auth/register/presentation/manager/cubit/signupc
 import 'package:citifix/feature/Auth/register/presentation/manager/imagepickercubit/singup_cubit.dart';
 import 'package:citifix/feature/Auth/register/presentation/views/HaveAccountORLogin.dart';
 import 'package:citifix/feature/Auth/register/presentation/views/selectRole.dart';
+import 'package:citifix/feature/Auth/register/presentation/views/widget/CustomDatePicker.dart';
 import 'package:citifix/feature/Auth/register/presentation/views/widget/Email.dart';
 import 'package:citifix/feature/Auth/register/presentation/views/widget/Lname.dart';
 import 'package:citifix/feature/Auth/register/presentation/views/widget/Phone.dart';
@@ -152,98 +153,40 @@ class _SingnupState extends State<Singnup> {
                               SizedBox(height: ScreenUtilsManager.h20),
                               const signuplogo(),
                               SizedBox(height: ScreenUtilsManager.h20),
-
                               Fname(
                                 controller: fnameController,
-                                validator: fnamevalidator,
+                                validator: (value) =>
+                                    fnamevalidator(context, value),
                               ),
                               Lname(
                                 controller: lnameController,
-                                validator: lnamevalidator,
+                                validator: (value) =>
+                                    lnamevalidator(context, value),
                               ),
                               Email(
                                 controller: emailController,
-                                validator: emailvalidator,
+                                validator: (value) =>
+                                    emailvalidator(context, value),
                               ),
                               Phone(
                                 controller: phoneController,
-                                validator: phonevalidator,
+                                validator: (value) =>
+                                    phonevalidator(context, value),
                               ),
                               Nationalnumber(
                                 controller: nationalnumbercontroller,
                               ),
 
-                              Text(
-                                Constantmanger.datebrith,
-                                style: TextStyle(
-                                  color: ColorManger.lightGrey,
-                                  fontSize: ScreenUtilsManager.s16,
-                                ),
-                              ),
                               SizedBox(height: ScreenUtilsManager.h6),
-
-                              CustomTextfromfield(
-                                onTap: () async {
-                                  DateTime? pickedDate = await showDatePicker(
-                                    context: context,
-                                    initialDate: DateTime.now(),
-                                    firstDate: DateTime(1950),
-                                    lastDate: DateTime(DateTime.now().year + 1),
-                                    builder: (context, child) {
-                                      return Theme(
-                                        data: Theme.of(context).copyWith(
-                                          colorScheme: ColorScheme.light(
-                                            primary: ColorManger.kPrimary,
-                                            onPrimary: Colors.white,
-                                            onSurface: Colors.black,
-                                          ),
-                                          textButtonTheme: TextButtonThemeData(
-                                            style: TextButton.styleFrom(
-                                              foregroundColor:
-                                                  ColorManger.kPrimary,
-                                            ),
-                                          ),
-                                        ),
-                                        child: child!,
-                                      );
-                                    },
-                                  );
-
-                                  if (pickedDate != null) {
-                                    datecontroller.text =
-                                        "${pickedDate.year}-${pickedDate.month.toString().padLeft(2, "0")}-${pickedDate.day.toString().padLeft(2, "0")}";
-                                  }
-                                },
-                                onChanged: (value) {
-                                  if (datecontroller.text.isEmpty) {
-                                    return "Please choose date of birth";
-                                  }
-                                  return null;
-                                },
-                                controller: datecontroller,
-                                readonly: true,
-                                prefix: const Icon(Icons.date_range_outlined),
-                                hinttext: datecontroller.text.isEmpty
-                                    ? 'Date of Birth'
-                                    : datecontroller.text,
-                                lable: 'Date of Birth',
-                              ),
+                              CustomDateField(controller: datecontroller),
 
                               SizedBox(height: ScreenUtilsManager.h20),
-
                               Address(
                                 controller: addresscontroller,
                                 onChanged: (value) {},
                               ),
-                              Text(
-                                Constantmanger.pass,
-                                style: TextStyle(
-                                  color: ColorManger.lightGrey,
-                                  fontSize: ScreenUtilsManager.s16,
-                                ),
-                              ),
-                              Password(
-                                isnew: false,
+                              PasswordField(
+                                isNew: false,
                                 controller: passwordController,
                                 onChanged: (value) {
                                   streamController.add(
@@ -251,7 +194,6 @@ class _SingnupState extends State<Singnup> {
                                   );
                                 },
                               ),
-
                               PasswordRules(streamController: streamController),
 
                               SizedBox(height: ScreenUtilsManager.h16),
@@ -263,9 +205,7 @@ class _SingnupState extends State<Singnup> {
                                 },
                                 streamController: selectRoleController,
                               ),
-
-                              SizedBox(height: ScreenUtilsManager.h30),
-
+                              SizedBox(height: ScreenUtilsManager.h20),
                               ValueListenableBuilder<bool>(
                                 valueListenable: isFormValid,
                                 builder: (context, isValid, child) {
@@ -308,8 +248,8 @@ class _SingnupState extends State<Singnup> {
                                   );
                                 },
                               ),
-
-                              HaveAccountORLogin(
+                              SizedBox(height: ScreenUtilsManager.h8),
+                              HaveAccountOrLogin(
                                 onPressed: () {
                                   Navigator.pop(context);
                                 },

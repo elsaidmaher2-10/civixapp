@@ -219,6 +219,11 @@ class S {
     );
   }
 
+  /// `Remember me`
+  String get rememberMe {
+    return Intl.message('Remember me', name: 'rememberMe', desc: '', args: []);
+  }
+
   /// `First name is required`
   String get firstNameRequired {
     return Intl.message(
@@ -672,6 +677,191 @@ class S {
   /// `FCM`
   String get fcm {
     return Intl.message('FCM', name: 'fcm', desc: '', args: []);
+  }
+
+  /// `Please confirm your password`
+  String get confirmPasswordRequired {
+    return Intl.message(
+      'Please confirm your password',
+      name: 'confirmPasswordRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Passwords do not match`
+  String get passwordNotMatch {
+    return Intl.message(
+      'Passwords do not match',
+      name: 'passwordNotMatch',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter national ID`
+  String get nationalIdRequired {
+    return Intl.message(
+      'Please enter national ID',
+      name: 'nationalIdRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `National ID must be exactly 14 digits`
+  String get nationalIdLength {
+    return Intl.message(
+      'National ID must be exactly 14 digits',
+      name: 'nationalIdLength',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `National ID must contain only digits`
+  String get nationalIdDigits {
+    return Intl.message(
+      'National ID must contain only digits',
+      name: 'nationalIdDigits',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Date of Birth`
+  String get dateOfBirth {
+    return Intl.message(
+      'Date of Birth',
+      name: 'dateOfBirth',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please choose date of birth`
+  String get dateRequired {
+    return Intl.message(
+      'Please choose date of birth',
+      name: 'dateRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New Password`
+  String get newPassword {
+    return Intl.message(
+      'New Password',
+      name: 'newPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter new password`
+  String get enterNewPassword {
+    return Intl.message(
+      'Enter new password',
+      name: 'enterNewPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Minimum 12 characters`
+  String get passwordMinLength {
+    return Intl.message(
+      'Minimum 12 characters',
+      name: 'passwordMinLength',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `One uppercase character`
+  String get passwordUppercase {
+    return Intl.message(
+      'One uppercase character',
+      name: 'passwordUppercase',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `One lowercase character`
+  String get passwordLowercase {
+    return Intl.message(
+      'One lowercase character',
+      name: 'passwordLowercase',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `One special character`
+  String get passwordSpecialChar {
+    return Intl.message(
+      'One special character',
+      name: 'passwordSpecialChar',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `One number`
+  String get passwordNumber {
+    return Intl.message(
+      'One number',
+      name: 'passwordNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select a role`
+  String get selectRole {
+    return Intl.message(
+      'Select a role',
+      name: 'selectRole',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Worker`
+  String get worker {
+    return Intl.message('Worker', name: 'worker', desc: '', args: []);
+  }
+
+  /// `Citizen`
+  String get citizen {
+    return Intl.message('Citizen', name: 'citizen', desc: '', args: []);
+  }
+
+  /// `Please select a role`
+  String get selectRoleError {
+    return Intl.message(
+      'Please select a role',
+      name: 'selectRoleError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Have an account already?`
+  String get haveAccount {
+    return Intl.message(
+      'Have an account already?',
+      name: 'haveAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Log in`
+  String get login {
+    return Intl.message('Log in', name: 'login', desc: '', args: []);
   }
 }
 

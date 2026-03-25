@@ -37,11 +37,19 @@ class MessageLookup extends MessageLookupByLibrary {
     "choosePreferredLanguage": MessageLookupByLibrary.simpleMessage(
       "Choose your preferred language",
     ),
+    "citizen": MessageLookupByLibrary.simpleMessage("Citizen"),
     "citizenIdentity": MessageLookupByLibrary.simpleMessage("Citizen Identity"),
     "civix": MessageLookupByLibrary.simpleMessage("Civix"),
     "completed": MessageLookupByLibrary.simpleMessage("Resolved"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage("Confirm Password"),
+    "confirmPasswordRequired": MessageLookupByLibrary.simpleMessage(
+      "Please confirm your password",
+    ),
     "dateBirth": MessageLookupByLibrary.simpleMessage("Date Brith"),
+    "dateOfBirth": MessageLookupByLibrary.simpleMessage("Date of Birth"),
+    "dateRequired": MessageLookupByLibrary.simpleMessage(
+      "Please choose date of birth",
+    ),
     "dontHaveAccount": MessageLookupByLibrary.simpleMessage(
       "Don’t have an account?",
     ),
@@ -52,6 +60,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "emailRequired": MessageLookupByLibrary.simpleMessage("Email is required"),
     "english": MessageLookupByLibrary.simpleMessage("English"),
+    "enterNewPassword": MessageLookupByLibrary.simpleMessage(
+      "Enter new password",
+    ),
     "fcm": MessageLookupByLibrary.simpleMessage("FCM"),
     "finish": MessageLookupByLibrary.simpleMessage("Get Started"),
     "firstName": MessageLookupByLibrary.simpleMessage("First Name"),
@@ -63,6 +74,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "fullName": MessageLookupByLibrary.simpleMessage("Full Name"),
     "gender": MessageLookupByLibrary.simpleMessage("Gender"),
+    "haveAccount": MessageLookupByLibrary.simpleMessage(
+      "Have an account already?",
+    ),
     "hintAddress": MessageLookupByLibrary.simpleMessage("Enter your address"),
     "hintEmail": MessageLookupByLibrary.simpleMessage(
       "Enter your email address",
@@ -96,6 +110,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "location": MessageLookupByLibrary.simpleMessage("Location"),
     "logIn": MessageLookupByLibrary.simpleMessage("log in"),
+    "login": MessageLookupByLibrary.simpleMessage("Log in"),
     "logout": MessageLookupByLibrary.simpleMessage("Log out"),
     "msgRegister": MessageLookupByLibrary.simpleMessage(
       "we have sent a 6-digit code to your registered email address/phone number",
@@ -107,18 +122,44 @@ class MessageLookup extends MessageLookupByLibrary {
       "Code verified successfully. Please set your new password.",
     ),
     "nationalID": MessageLookupByLibrary.simpleMessage("National ID"),
+    "nationalIdDigits": MessageLookupByLibrary.simpleMessage(
+      "National ID must contain only digits",
+    ),
+    "nationalIdLength": MessageLookupByLibrary.simpleMessage(
+      "National ID must be exactly 14 digits",
+    ),
+    "nationalIdRequired": MessageLookupByLibrary.simpleMessage(
+      "Please enter national ID",
+    ),
     "nationalNumber": MessageLookupByLibrary.simpleMessage("National number"),
+    "newPassword": MessageLookupByLibrary.simpleMessage("New Password"),
     "next": MessageLookupByLibrary.simpleMessage("Next"),
     "noInternet": MessageLookupByLibrary.simpleMessage(
       "No internet connection",
     ),
     "overview": MessageLookupByLibrary.simpleMessage("OverView"),
     "password": MessageLookupByLibrary.simpleMessage("Password"),
+    "passwordLowercase": MessageLookupByLibrary.simpleMessage(
+      "One lowercase character",
+    ),
+    "passwordMinLength": MessageLookupByLibrary.simpleMessage(
+      "Minimum 12 characters",
+    ),
+    "passwordNotMatch": MessageLookupByLibrary.simpleMessage(
+      "Passwords do not match",
+    ),
+    "passwordNumber": MessageLookupByLibrary.simpleMessage("One number"),
     "passwordRequired": MessageLookupByLibrary.simpleMessage(
       "Password is required",
     ),
     "passwordRulesTitle": MessageLookupByLibrary.simpleMessage(
       "Please add all necessary characters to create safe password.",
+    ),
+    "passwordSpecialChar": MessageLookupByLibrary.simpleMessage(
+      "One special character",
+    ),
+    "passwordUppercase": MessageLookupByLibrary.simpleMessage(
+      "One uppercase character",
     ),
     "pending": MessageLookupByLibrary.simpleMessage("Pending"),
     "phone": MessageLookupByLibrary.simpleMessage("Phone"),
@@ -126,6 +167,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "photoGallery": MessageLookupByLibrary.simpleMessage("Photo Gallery"),
     "profile": MessageLookupByLibrary.simpleMessage("Profile"),
     "recentReport": MessageLookupByLibrary.simpleMessage("My Recent Reports"),
+    "rememberMe": MessageLookupByLibrary.simpleMessage("Remember me"),
     "reportDescription": MessageLookupByLibrary.simpleMessage(
       "Report Description",
     ),
@@ -143,6 +185,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "seeAll": MessageLookupByLibrary.simpleMessage("See all"),
     "selectCategory": MessageLookupByLibrary.simpleMessage("Select Category"),
     "selectLanguage": MessageLookupByLibrary.simpleMessage("Select Language"),
+    "selectRole": MessageLookupByLibrary.simpleMessage("Select a role"),
+    "selectRoleError": MessageLookupByLibrary.simpleMessage(
+      "Please select a role",
+    ),
     "sendReport": MessageLookupByLibrary.simpleMessage("Submit Report"),
     "settings": MessageLookupByLibrary.simpleMessage("SETTINGS"),
     "signUp": MessageLookupByLibrary.simpleMessage("Sign Up"),
@@ -150,5 +196,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "skip": MessageLookupByLibrary.simpleMessage("Skip"),
     "submit": MessageLookupByLibrary.simpleMessage("Submit"),
     "support": MessageLookupByLibrary.simpleMessage("Support"),
+    "worker": MessageLookupByLibrary.simpleMessage("Worker"),
   };
 }

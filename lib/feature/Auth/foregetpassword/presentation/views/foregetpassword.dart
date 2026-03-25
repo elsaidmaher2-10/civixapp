@@ -89,8 +89,7 @@ class _ForegetpasswordState extends State<Foregetpassword> {
                     child: SingleChildScrollView(
                       physics: const BouncingScrollPhysics(),
                       padding: EdgeInsets.symmetric(
-                        horizontal: ScreenUtilsManager
-                            .w24, 
+                        horizontal: ScreenUtilsManager.w24,
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -121,11 +120,12 @@ class _ForegetpasswordState extends State<Foregetpassword> {
                           Email(
                             controller: emailController,
                             validator: (validator) {
-                              isvalid = emailvalidator(validator) == null
+                              isvalid =
+                                  emailvalidator(context, validator) == null
                                   ? true
                                   : false;
                               streamController.add(isvalid);
-                              return emailvalidator(validator);
+                              return emailvalidator(context, validator);
                             },
                           ),
                           SizedBox(height: 60.h),
@@ -191,14 +191,13 @@ PreferredSizeWidget foregetpasswordappbar(BuildContext context) {
   return AppBar(
     titleSpacing: 3.w,
     centerTitle: true,
-    elevation: 0, 
-    scrolledUnderElevation: 0, 
+    elevation: 0,
+    scrolledUnderElevation: 0,
     title: Text(
       "Forget Password",
       style: TextStyle(
         color: ColorManger.kPrimary,
-        fontSize: ScreenUtilsManager
-            .s20, 
+        fontSize: ScreenUtilsManager.s20,
         fontWeight: FontWeight.w600,
       ),
     ),

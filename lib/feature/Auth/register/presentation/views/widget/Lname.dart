@@ -3,6 +3,7 @@ import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/core/widget/customtextfromfield.dart';
+import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
 class Lname extends StatelessWidget {
@@ -15,13 +16,13 @@ class Lname extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          Constantmanger.lname,
-          style: TextStyle(
-            color: ColorManger.lightGrey,
-            fontSize: ScreenUtilsManager.s16,
-          ),
-        ),
+        // Text(
+        //   Constantmanger.lname,
+        //   style: TextStyle(
+        //     color: ColorManger.lightGrey,
+        //     fontSize: ScreenUtilsManager.s16,
+        //   ),
+        // ),
         SizedBox(height: ScreenUtilsManager.h6),
         CustomTextfromfield(
           controller: controller,
@@ -29,9 +30,9 @@ class Lname extends StatelessWidget {
             padding: const EdgeInsets.all(12.0),
             child: Image.asset(AssetValueManager.name, height: 2, width: 2),
           ),
-          hinttext: Constantmanger.flnamehint,
+          hinttext: S.of(context).hintLastName,
           validator: validator,
-          lable: Constantmanger.lname,
+          lable: S.of(context).lastName,
         ),
         SizedBox(height: ScreenUtilsManager.h16),
       ],

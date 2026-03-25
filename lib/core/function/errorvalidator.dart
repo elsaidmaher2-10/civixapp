@@ -2,7 +2,6 @@ import 'package:citifix/core/resource/constantmanger.dart';
 
 // String errorvalidator(Failuerresponse e) {
 //   List<String> errors = [];
-
 //   e.error.forEach((msg) {
 //     if (msg.contains(Constantmanger.emailrequired)) {
 //       errors.add(Constantmanger.emailrequired);

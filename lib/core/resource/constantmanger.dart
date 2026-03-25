@@ -66,7 +66,6 @@ class Constantmanger {
       "Password must be at least 6 characters and include letters and numbers and special characters";
   static const String emailAlreadyExists =
       "Email already exists or database error";
-  // ================== Password Rules ==================
   static const String passwordRulestitle =
       "Please add all necessary characters to create safe password.";
 
@@ -77,8 +76,6 @@ class Constantmanger {
     {"title": "One special character", "status": false},
     {"title": "One number", "status": false},
   ];
-
-  // ================== Media ==================
   static const String photoGallery = "Photo Gallery";
   static const String camera = "Camera";
   static const String cancel = "Cancel";

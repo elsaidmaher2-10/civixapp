@@ -1,4 +1,3 @@
-
 import 'package:citifix/core/DI/getit.dart';
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
@@ -12,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+
 class Citifix extends StatelessWidget {
   const Citifix({
     super.key,
@@ -34,6 +34,7 @@ class Citifix extends StatelessWidget {
         return Routes.login;
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -54,6 +55,7 @@ class Citifix extends StatelessWidget {
             ],
             supportedLocales: S.delegate.supportedLocales,
             initialRoute: _initialRoute,
+            locale: Locale("ar"),
             onGenerateRoute: Routingmanger.onGenerateRoute,
             title: Constantmanger.apptitle,
             debugShowCheckedModeBanner: false,

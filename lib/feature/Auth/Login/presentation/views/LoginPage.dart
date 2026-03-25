@@ -6,6 +6,7 @@ import 'package:citifix/core/widget/customloading.dart';
 import 'package:citifix/feature/Auth/Login/presentation/manager/cubit/loginmanger_cubit.dart';
 import 'package:citifix/feature/Auth/Login/presentation/manager/cubit/loginmanger_state.dart';
 import 'package:citifix/feature/reports/presentation/manager/reportManger/cubit/report_manager_cubit.dart';
+import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -33,8 +34,7 @@ class _LoginpageState extends State<Loginpage> {
   StreamController<bool> streamController = StreamController.broadcast();
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
-
-  isvisible() {
+  void isvisible() {
     _isVisible = !_isVisible;
     streamController.add(_isVisible);
   }
@@ -44,8 +44,14 @@ class _LoginpageState extends State<Loginpage> {
   bool ischeck = false;
 
   StreamController<bool> btnController = StreamController.broadcast();
-
-  var value;
+  @override
+  void dispose() {
+    streamController.close();
+    password.dispose();
+    email.dispose();
+    btnController.close();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -75,6 +81,7 @@ class _LoginpageState extends State<Loginpage> {
                   case AppRole.worker:
                     Navigator.pushNamed(context, Routes.workerMain);
                   case AppRole.unknown:
+                    // ignore: use_build_context_synchronously
                     Navigator.pushNamed(context, Routes.login);
                 }
               }
@@ -97,30 +104,18 @@ class _LoginpageState extends State<Loginpage> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        RichText(
-                          textAlign: TextAlign.center,
-                          text: TextSpan(
-                            children: [
-                              TextSpan(
-                                text: "${Constantmanger.donthaveaccount} ",
-                                style: TextStyle(color: ColorManger.lightGrey2),
-                              ),
-                              WidgetSpan(
-                                child: InkWell(
-                                  onTap: () {
-                                    Navigator.of(
-                                      context,
-                                    ).pushNamed(Routes.signup);
-                                  },
-                                  child: Text(
-                                    Constantmanger.Signup,
-                                    style: TextStyle(
-                                      color: ColorManger.kPrimary,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
+                        Text(
+                          S.of(context).dontHaveAccount,
+                          style: const TextStyle(color: ColorManger.lightGrey2),
+                        ),
+                        SizedBox(width: ScreenUtilsManager.w4),
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context).pushNamed(Routes.signup);
+                          },
+                          child: Text(
+                            S.of(context).signUpNow,
+                            style: const TextStyle(color: ColorManger.kPrimary),
                           ),
                         ),
                       ],
@@ -150,7 +145,7 @@ class _LoginpageState extends State<Loginpage> {
                                     ),
                                     SizedBox(height: ScreenUtilsManager.h9),
                                     Text(
-                                      Constantmanger.logIn,
+                                      S.of(context).logIn,
                                       style: TextStyle(
                                         fontWeight: FontWeight.w600,
                                         fontSize: ScreenUtilsManager.s34,
@@ -168,15 +163,16 @@ class _LoginpageState extends State<Loginpage> {
                                 Icons.email,
                                 color: ColorManger.lightGrey2,
                               ),
-                              hinttext: Constantmanger.hinytextemail,
+                              hinttext: S.of(context).hintEmail,
                               validator: (value) {
-                                isvalidemail = emailvalidator(value) == null
+                                isvalidemail =
+                                    emailvalidator(context, value) == null
                                     ? true
                                     : false;
                                 btnController.add(isvalidemail && isvalidpass);
-                                return emailvalidator(value);
+                                return emailvalidator(context, value);
                               },
-                              lable: Constantmanger.email,
+                              lable: S.of(context).email,
                             ),
                             SizedBox(height: ScreenUtilsManager.h20),
                             StreamBuilder<bool>(
@@ -202,7 +198,7 @@ class _LoginpageState extends State<Loginpage> {
                                           btnController.add(
                                             isvalidemail && isvalidpass,
                                           );
-                                          return "Please Enter password";
+                                          return S.of(context).passwordRequired;
                                         } else {
                                           isvalidpass = true;
                                           btnController.add(
@@ -212,7 +208,7 @@ class _LoginpageState extends State<Loginpage> {
                                         }
                                       },
                                       obstext: snapshot.data ?? true,
-                                      hinttext: Constantmanger.hinytextpass,
+                                      hinttext: S.of(context).hintPassword,
                                       suffix: IconButton(
                                         onPressed: () {
                                           isvisible();
@@ -224,7 +220,7 @@ class _LoginpageState extends State<Loginpage> {
                                           color: ColorManger.lightGrey3,
                                         ),
                                       ),
-                                      lable: Constantmanger.pass,
+                                      lable: S.of(context).password,
                                     );
                                   },
                             ),
@@ -250,7 +246,7 @@ class _LoginpageState extends State<Loginpage> {
                                       ),
                                     ),
                                     Text(
-                                      "Remember me view",
+                                      S.of(context).rememberMe,
                                       style: TextStyle(
                                         fontSize: ScreenUtilsManager.s14,
                                       ),
@@ -265,7 +261,7 @@ class _LoginpageState extends State<Loginpage> {
                                     );
                                   },
                                   child: Text(
-                                    Constantmanger.forgetPassword,
+                                    S.of(context).forgetPassword,
                                     style: TextStyle(
                                       color: ColorManger.kPrimary,
                                       fontSize: ScreenUtilsManager.s14,
@@ -304,7 +300,7 @@ class _LoginpageState extends State<Loginpage> {
                                                   );
                                             }
                                           : null,
-                                      child: Text(Constantmanger.logIn),
+                                      child: Text(S.of(context).logIn),
                                     ),
                               ),
                             ),

@@ -2,6 +2,7 @@ import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/core/widget/customtextfromfield.dart';
+import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
 class Phone extends StatelessWidget {
@@ -13,21 +14,21 @@ class Phone extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          Constantmanger.phone,
-          style: TextStyle(
-            color: ColorManger.lightGrey,
-            fontSize: ScreenUtilsManager.s16,
-          ),
-        ),
+        // Text(
+        //   Constantmanger.phone,
+        //   style: TextStyle(
+        //     color: ColorManger.lightGrey,
+        //     fontSize: ScreenUtilsManager.s16,
+        //   ),
+        // ),
         SizedBox(height: ScreenUtilsManager.h6),
         CustomTextfromfield(
           controller: controller,
           ktype: TextInputType.number,
           prefix: Icon(Icons.phone, color: ColorManger.lightGrey2),
-          hinttext: Constantmanger.phonehint,
+          hinttext: S.of(context).hintPhone,
           validator: validator,
-          lable: Constantmanger.phonehint,
+          lable: S.of(context).phone,
         ),
         SizedBox(height: ScreenUtilsManager.h16),
       ],

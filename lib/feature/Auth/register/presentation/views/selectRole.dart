@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:citifix/core/resource/colormanager.dart';
+import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -17,13 +18,13 @@ class SelectRoleDropdown extends StatelessWidget {
   Widget build(BuildContext context) {
     return StreamBuilder<String>(
       stream: streamController.stream,
-      builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+      builder: (context, snapshot) {
         return DropdownButtonFormField<String>(
           value: snapshot.data,
-          isExpanded: true, // يمنع تجاوز النص (Overflow) إذا كان طويلاً
+          isExpanded: true,
           autovalidateMode: AutovalidateMode.onUserInteraction,
-          icon: const Icon(Icons.keyboard_arrow_down, color: Colors.grey),
 
+          icon: const Icon(Icons.keyboard_arrow_down, color: Colors.grey),
           borderRadius: BorderRadius.circular(8.r),
           dropdownColor: const Color(0xffF6F6F6),
 
@@ -48,7 +49,7 @@ class SelectRoleDropdown extends StatelessWidget {
             ),
             errorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8.r),
-              borderSide: const BorderSide(color: Colors.red, width: 1),
+              borderSide: const BorderSide(color: Colors.red),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8.r),
@@ -57,31 +58,26 @@ class SelectRoleDropdown extends StatelessWidget {
           ),
 
           hint: Text(
-            "Select a role",
+            S.of(context).selectRole,
             style: TextStyle(color: Colors.black54, fontSize: 14.sp),
           ),
 
           items: [
             DropdownMenuItem(
               value: "WORKER",
-              child: Text(
-                "Worker",
-                style: TextStyle(color: Colors.black, fontSize: 14.sp),
-              ),
+              child: Text(S.of(context).worker),
             ),
             DropdownMenuItem(
               value: "CITIZEN",
-              child: Text(
-                "Citizen",
-                style: TextStyle(color: Colors.black, fontSize: 14.sp),
-              ),
+              child: Text(S.of(context).citizen),
             ),
           ],
 
           onChanged: onChanged,
+
           validator: (value) {
             if (value == null || value.isEmpty) {
-              return "Please select a role";
+              return S.of(context).selectRoleError;
             }
             return null;
           },

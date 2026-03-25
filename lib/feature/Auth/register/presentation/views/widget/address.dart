@@ -2,6 +2,7 @@ import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/core/widget/customtextfromfield.dart';
+import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
 class Address extends StatelessWidget {
@@ -14,21 +15,14 @@ class Address extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          Constantmanger.addressT,
-          style: TextStyle(
-            color: ColorManger.lightGrey,
-            fontSize: ScreenUtilsManager.s16,
-          ),
-        ),
         SizedBox(height: ScreenUtilsManager.h6),
         CustomTextfromfield(
           prefix: Icon(Icons.location_city, color: ColorManger.lightGrey2),
           onChanged: onChanged,
           controller: controller,
           obstext: false,
-          hinttext: Constantmanger.address,
-          lable: Constantmanger.Address,
+          hinttext: S.of(context).hintAddress,
+          lable: S.of(context).address,
         ),
         SizedBox(height: ScreenUtilsManager.h16),
       ],

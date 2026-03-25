@@ -37,13 +37,21 @@ class MessageLookup extends MessageLookupByLibrary {
     "choosePreferredLanguage": MessageLookupByLibrary.simpleMessage(
       "اختر اللغة المفضلة",
     ),
+    "citizen": MessageLookupByLibrary.simpleMessage("مواطن"),
     "citizenIdentity": MessageLookupByLibrary.simpleMessage("هوية المواطن"),
     "civix": MessageLookupByLibrary.simpleMessage("Civix"),
     "completed": MessageLookupByLibrary.simpleMessage("تم الحل"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage(
       "تأكيد كلمة المرور",
     ),
+    "confirmPasswordRequired": MessageLookupByLibrary.simpleMessage(
+      "من فضلك أكد كلمة المرور",
+    ),
     "dateBirth": MessageLookupByLibrary.simpleMessage("تاريخ الميلاد"),
+    "dateOfBirth": MessageLookupByLibrary.simpleMessage("تاريخ الميلاد"),
+    "dateRequired": MessageLookupByLibrary.simpleMessage(
+      "من فضلك اختر تاريخ الميلاد",
+    ),
     "dontHaveAccount": MessageLookupByLibrary.simpleMessage("ليس لديك حساب؟"),
     "editProfile": MessageLookupByLibrary.simpleMessage("تعديل الملف الشخصي"),
     "email": MessageLookupByLibrary.simpleMessage("البريد الإلكتروني"),
@@ -54,6 +62,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "البريد الإلكتروني مطلوب",
     ),
     "english": MessageLookupByLibrary.simpleMessage("الإنجليزية"),
+    "enterNewPassword": MessageLookupByLibrary.simpleMessage(
+      "أدخل كلمة مرور جديدة",
+    ),
     "fcm": MessageLookupByLibrary.simpleMessage("FCM"),
     "finish": MessageLookupByLibrary.simpleMessage("ابدأ الآن"),
     "firstName": MessageLookupByLibrary.simpleMessage("الاسم الأول"),
@@ -63,6 +74,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "forgetPassword": MessageLookupByLibrary.simpleMessage("نسيت كلمة المرور؟"),
     "fullName": MessageLookupByLibrary.simpleMessage("الاسم الكامل"),
     "gender": MessageLookupByLibrary.simpleMessage("النوع"),
+    "haveAccount": MessageLookupByLibrary.simpleMessage("لديك حساب بالفعل؟"),
     "hintAddress": MessageLookupByLibrary.simpleMessage("أدخل عنوانك"),
     "hintEmail": MessageLookupByLibrary.simpleMessage("أدخل بريدك الإلكتروني"),
     "hintFirstName": MessageLookupByLibrary.simpleMessage("أدخل اسمك الأول"),
@@ -92,6 +104,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "location": MessageLookupByLibrary.simpleMessage("الموقع"),
     "logIn": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
+    "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
     "logout": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
     "msgRegister": MessageLookupByLibrary.simpleMessage(
       "لقد أرسلنا كود مكون من 6 أرقام إلى بريدك الإلكتروني / رقم الهاتف",
@@ -103,25 +116,46 @@ class MessageLookup extends MessageLookupByLibrary {
       "تم التحقق من الكود بنجاح. يرجى تعيين كلمة مرور جديدة.",
     ),
     "nationalID": MessageLookupByLibrary.simpleMessage("الرقم القومي"),
+    "nationalIdDigits": MessageLookupByLibrary.simpleMessage(
+      "يجب أن يحتوي الرقم القومي على أرقام فقط",
+    ),
+    "nationalIdLength": MessageLookupByLibrary.simpleMessage(
+      "يجب أن يتكون الرقم القومي من 14 رقمًا",
+    ),
+    "nationalIdRequired": MessageLookupByLibrary.simpleMessage(
+      "من فضلك أدخل الرقم القومي",
+    ),
     "nationalNumber": MessageLookupByLibrary.simpleMessage("الرقم القومي"),
+    "newPassword": MessageLookupByLibrary.simpleMessage("كلمة مرور جديدة"),
     "next": MessageLookupByLibrary.simpleMessage("التالي"),
     "noInternet": MessageLookupByLibrary.simpleMessage(
       "لا يوجد اتصال بالإنترنت",
     ),
     "overview": MessageLookupByLibrary.simpleMessage("نظرة عامة"),
     "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
+    "passwordLowercase": MessageLookupByLibrary.simpleMessage("حرف صغير واحد"),
+    "passwordMinLength": MessageLookupByLibrary.simpleMessage(
+      "12 حرف على الأقل",
+    ),
+    "passwordNotMatch": MessageLookupByLibrary.simpleMessage(
+      "كلمتا المرور غير متطابقتين",
+    ),
+    "passwordNumber": MessageLookupByLibrary.simpleMessage("رقم واحد"),
     "passwordRequired": MessageLookupByLibrary.simpleMessage(
       "كلمة المرور مطلوبة",
     ),
     "passwordRulesTitle": MessageLookupByLibrary.simpleMessage(
       "يرجى إضافة جميع الشروط لإنشاء كلمة مرور آمنة.",
     ),
+    "passwordSpecialChar": MessageLookupByLibrary.simpleMessage("رمز خاص واحد"),
+    "passwordUppercase": MessageLookupByLibrary.simpleMessage("حرف كبير واحد"),
     "pending": MessageLookupByLibrary.simpleMessage("قيد المعالجة"),
     "phone": MessageLookupByLibrary.simpleMessage("رقم الهاتف"),
     "phoneRequired": MessageLookupByLibrary.simpleMessage("رقم الهاتف مطلوب"),
     "photoGallery": MessageLookupByLibrary.simpleMessage("معرض الصور"),
     "profile": MessageLookupByLibrary.simpleMessage("الملف الشخصي"),
     "recentReport": MessageLookupByLibrary.simpleMessage("آخر البلاغات"),
+    "rememberMe": MessageLookupByLibrary.simpleMessage("تذكرني"),
     "reportDescription": MessageLookupByLibrary.simpleMessage("وصف البلاغ"),
     "reportDescriptionHint": MessageLookupByLibrary.simpleMessage(
       "اكتب تفاصيل البلاغ",
@@ -135,6 +169,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "seeAll": MessageLookupByLibrary.simpleMessage("عرض الكل"),
     "selectCategory": MessageLookupByLibrary.simpleMessage("اختر الفئة"),
     "selectLanguage": MessageLookupByLibrary.simpleMessage("اختار اللغة"),
+    "selectRole": MessageLookupByLibrary.simpleMessage("اختر الدور"),
+    "selectRoleError": MessageLookupByLibrary.simpleMessage(
+      "من فضلك اختر الدور",
+    ),
     "sendReport": MessageLookupByLibrary.simpleMessage("إرسال البلاغ"),
     "settings": MessageLookupByLibrary.simpleMessage("الإعدادات"),
     "signUp": MessageLookupByLibrary.simpleMessage("إنشاء حساب"),
@@ -142,5 +180,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "skip": MessageLookupByLibrary.simpleMessage("تخطي"),
     "submit": MessageLookupByLibrary.simpleMessage("إرسال"),
     "support": MessageLookupByLibrary.simpleMessage("الدعم"),
+    "worker": MessageLookupByLibrary.simpleMessage("عامل"),
   };
 }

@@ -49,8 +49,8 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(height: ScreenUtilsManager.h16),
-        Password(
-          isnew: false,
+        PasswordField(
+          isNew: false,
           controller: confirmPasswordController.passwordController,
           onChanged: (String value) {
             confirmPasswordController.forgotPasswordStreamController.add(
@@ -87,14 +87,14 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(height: ScreenUtilsManager.h8),
-        Password(
-          isnew: false,
+        PasswordField(
+          isNew: false,
           controller: confirmPasswordController.oldPasswordController,
           onChanged: (_) {},
         ),
         SizedBox(height: ScreenUtilsManager.h8),
-        Password(
-          isnew: true,
+        PasswordField(
+          isNew: true,
           controller: confirmPasswordController.newPasswordController,
           onChanged: (String value) {
             confirmPasswordController.changePasswordStreamController.add(
@@ -112,8 +112,6 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
       ],
     );
   }
-
- 
 
   @override
   void dispose() {
