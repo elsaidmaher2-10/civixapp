@@ -1,0 +1,112 @@
+{
+  "@@locale": "ar",
+
+  "isOnboardingViewed": "is_show_on_board",
+  "skip": "تخطي",
+
+  "civix": "Civix",
+  "noInternet": "لا يوجد اتصال بالإنترنت",
+
+  "logIn": "تسجيل الدخول",
+  "signUp": "إنشاء حساب",
+  "dontHaveAccount": "ليس لديك حساب؟",
+  "signUpNow": "سجل الآن",
+  "forgetPassword": "نسيت كلمة المرور؟",
+  "dateBirth": "تاريخ الميلاد",
+
+  "email": "البريد الإلكتروني",
+  "password": "كلمة المرور",
+  "phone": "رقم الهاتف",
+  "firstName": "الاسم الأول",
+  "lastName": "الاسم الأخير",
+  "confirmPassword": "تأكيد كلمة المرور",
+  "address": "العنوان",
+
+  "hintEmail": "أدخل بريدك الإلكتروني",
+  "hintPassword": "********",
+  "hintFirstName": "أدخل اسمك الأول",
+  "hintLastName": "أدخل اسمك الأخير",
+  "hintAddress": "أدخل عنوانك",
+  "hintPhone": "أدخل رقم هاتفك",
+
+  "firstNameRequired": "الاسم الأول مطلوب",
+  "lastNameRequired": "الاسم الأخير مطلوب",
+  "emailRequired": "البريد الإلكتروني مطلوب",
+  "passwordRequired": "كلمة المرور مطلوبة",
+  "phoneRequired": "رقم الهاتف مطلوب",
+  "imageRequired": "الصورة مطلوبة",
+
+  "invalidEmail": "بريد إلكتروني غير صالح",
+  "invalidPhone": "رقم هاتف غير صالح",
+  "invalidPassword": "كلمة المرور يجب أن تكون 6 أحرف على الأقل وتحتوي على أرقام وحروف ورموز",
+  "emailAlreadyExists": "البريد الإلكتروني موجود بالفعل أو يوجد خطأ",
+
+  "passwordRulesTitle": "يرجى إضافة جميع الشروط لإنشاء كلمة مرور آمنة.",
+
+  "photoGallery": "معرض الصور",
+  "camera": "الكاميرا",
+  "cancel": "إلغاء",
+  "submit": "إرسال",
+
+  "nationalNumber": "الرقم القومي",
+  "hintNationalNumber": "أدخل الرقم القومي",
+
+  "msgResetPassword": "لقد أرسلنا لك كود لإعادة تعيين كلمة المرور. يرجى التحقق من بريدك الإلكتروني.",
+  "msgRegister": "لقد أرسلنا كود مكون من 6 أرقام إلى بريدك الإلكتروني / رقم الهاتف",
+  "msgResettingPass": "تم التحقق من الكود بنجاح. يرجى تعيين كلمة مرور جديدة.",
+
+  "appTitle": "CitiFix",
+
+  "active": "نشط",
+  "pending": "قيد المعالجة",
+  "completed": "تم الحل",
+
+  "finish": "ابدأ الآن",
+  "next": "التالي",
+
+  "sendReport": "إرسال البلاغ",
+  "location": "الموقع",
+  "selectCategory": "اختر الفئة",
+
+  "reportDescriptionHint": "اكتب تفاصيل البلاغ",
+  "reportDescription": "وصف البلاغ",
+
+  "reportTitle": "حفرة في الشارع",
+  "reportTitleHint": "عنوان البلاغ",
+
+  "addReport": "إضافة بلاغ",
+
+  "language": "اللغة",
+  "identity": "الهوية",
+  "support": "الدعم",
+  "accountInformation": "معلومات الحساب",
+  "settings": "الإعدادات",
+  "profile": "الملف الشخصي",
+
+  "overview": "نظرة عامة",
+  "recentReport": "آخر البلاغات",
+  "seeAll": "عرض الكل",
+  "searchMyReports": "ابحث في بلاغاتي",
+
+  "search": "بحث",
+  "logout": "تسجيل الخروج",
+
+  "reports": "البلاغات",
+  "reportDetails": "تفاصيل البلاغ",
+
+  "selectLanguage": "اختار اللغة",
+  "choosePreferredLanguage": "اختر اللغة المفضلة",
+  "english": "الإنجليزية",
+  "arabic": "العربية",
+
+  "citizenIdentity": "هوية المواطن",
+  "fullName": "الاسم الكامل",
+  "nationalID": "الرقم القومي",
+  "address2": "العنوان",
+  "job": "الوظيفة",
+  "gender": "النوع",
+  "age": "العمر",
+
+  "editProfile": "تعديل الملف الشخصي",
+  "fcm": "FCM"
+}

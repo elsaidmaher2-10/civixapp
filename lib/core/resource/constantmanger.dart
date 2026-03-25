@@ -90,19 +90,13 @@ class Constantmanger {
 
   static String msgforResetpassword =
       "We’ve sent you a code to reset your password. Please check your email.";
-
   static String msgforregister =
       "we have sent a 6-digit code to your registered  email address/phone number";
-
   static String screen = "screen";
-
   static String msgresetingpass =
       "Code verified successfully. Please set your new password.";
-
   static String token = "token";
-
   static var otp = "otp";
-
   static String apptitle = "CitiFix";
   static String kActive = "Active";
   static String kPending = "Pending";

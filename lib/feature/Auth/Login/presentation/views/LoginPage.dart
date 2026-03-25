@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:citifix/core/DI/getit.dart';
-import 'package:citifix/core/database/local/prefmanger.dart';
 import 'package:citifix/core/routing/appRoutingRole.dart';
 import 'package:citifix/core/widget/CustomSnackBar.dart';
 import 'package:citifix/core/widget/customloading.dart';

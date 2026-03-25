@@ -5,10 +5,10 @@ import 'package:citifix/core/widget/customtextfromfield.dart';
 import 'package:flutter/material.dart';
 
 class Address extends StatelessWidget {
-  Address({super.key, required this.controller, required this.onChanged});
+  const Address({super.key, required this.controller, required this.onChanged});
 
-  TextEditingController controller;
-  Function(String)? onChanged;
+  final TextEditingController controller;
+  final Function(String)? onChanged;
   @override
   Widget build(BuildContext context) {
     return Column(

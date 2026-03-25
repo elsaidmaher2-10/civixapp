@@ -1,0 +1,111 @@
+{
+  "@@locale": "en",
+  "isOnboardingViewed": "is_show_on_board",
+  "skip": "Skip",
+
+  "civix": "Civix",
+  "noInternet": "No internet connection",
+
+  "logIn": "log in",
+  "signUp": "Sign Up",
+  "dontHaveAccount": "Don’t have an account?",
+  "signUpNow": "Sign up now",
+  "forgetPassword": "Forget Password....?",
+  "dateBirth": "Date Brith",
+
+  "email": "Email",
+  "password": "Password",
+  "phone": "Phone",
+  "firstName": "First Name",
+  "lastName": "Last Name",
+  "confirmPassword": "Confirm Password",
+  "address": "Address",
+
+  "hintEmail": "Enter your email address",
+  "hintPassword": "********",
+  "hintFirstName": "Enter your First Name",
+  "hintLastName": "Enter your Last Name",
+  "hintAddress": "Enter your address",
+  "hintPhone": "Enter your Phone",
+
+  "firstNameRequired": "First name is required",
+  "lastNameRequired": "Last name is required",
+  "emailRequired": "Email is required",
+  "passwordRequired": "Password is required",
+  "phoneRequired": "Phone is required",
+  "imageRequired": "Image is required",
+
+  "invalidEmail": "Invalid email",
+  "invalidPhone": "Invalid phone",
+  "invalidPassword": "Password must be at least 6 characters and include letters and numbers and special characters",
+  "emailAlreadyExists": "Email already exists or database error",
+
+  "passwordRulesTitle": "Please add all necessary characters to create safe password.",
+
+  "photoGallery": "Photo Gallery",
+  "camera": "Camera",
+  "cancel": "Cancel",
+  "submit": "Submit",
+
+  "nationalNumber": "National number",
+  "hintNationalNumber": "Enter National number",
+
+  "msgResetPassword": "We’ve sent you a code to reset your password. Please check your email.",
+  "msgRegister": "we have sent a 6-digit code to your registered email address/phone number",
+  "msgResettingPass": "Code verified successfully. Please set your new password.",
+
+  "appTitle": "CitiFix",
+
+  "active": "Active",
+  "pending": "Pending",
+  "completed": "Resolved",
+
+  "finish": "Get Started",
+  "next": "Next",
+
+  "sendReport": "Submit Report",
+  "location": "Location",
+  "selectCategory": "Select Category",
+
+  "reportDescriptionHint": "Describe the details of the Report",
+  "reportDescription": "Report Description",
+
+  "reportTitle": "Street hole",
+  "reportTitleHint": "Report title",
+
+  "addReport": "Add Report",
+
+  "language": "Language",
+  "identity": "Identity",
+  "support": "Support",
+  "accountInformation": "Account information",
+  "settings": "SETTINGS",
+  "profile": "Profile",
+
+  "overview": "OverView",
+  "recentReport": "My Recent Reports",
+  "seeAll": "See all",
+  "searchMyReports": "Search my reports",
+
+  "search": "Search",
+  "logout": "Log out",
+
+  "reports": "Reports",
+  "reportDetails": "Report Details",
+
+  "selectLanguage": "Select Language",
+  "choosePreferredLanguage": "Choose your preferred language",
+  "english": "English",
+  "arabic": "Arabic",
+
+  "citizenIdentity": "Citizen Identity",
+  "fullName": "Full Name",
+  "nationalID": "National ID",
+  "address2": "Address",
+  "job": "Job",
+  "gender": "Gender",
+  "age": "Age",
+
+  "editProfile": "Edit Profile",
+  "fcm": "FCM"
+}
