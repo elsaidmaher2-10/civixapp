@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:citifix/core/widget/uploadimage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -25,7 +24,7 @@ class ImagePickerList extends StatelessWidget {
       child: Row(
         children: [
           Uploadimage(onTap: onAddImage),
-          SizedBox(width: 5.w),
+          SizedBox(width: 8.w), 
           Expanded(
             child: StreamBuilder<List<File>>(
               initialData: images ?? [],
@@ -34,7 +33,7 @@ class ImagePickerList extends StatelessWidget {
                 clipBehavior: Clip.antiAliasWithSaveLayer,
                 scrollDirection: Axis.horizontal,
                 itemCount: snapshot.data?.length ?? 0,
-                separatorBuilder: (_, __) => SizedBox(width: 5.w),
+                separatorBuilder: (_, __) => SizedBox(width: 8.w),
                 itemBuilder: (ctx, index) {
                   final image = snapshot.data![index];
                   return ClipRRect(
@@ -48,8 +47,9 @@ class ImagePickerList extends StatelessWidget {
                             Positioned.fill(
                               child: Image.file(image, fit: BoxFit.cover),
                             ),
-                            Positioned(
-                              right: 2.h,
+                            Positioned.directional(
+                              textDirection: Directionality.of(context),
+                              end: 4.w,
                               top: 4.h,
                               child: InkWell(
                                 onTap: () => onRemove(index),
@@ -61,7 +61,7 @@ class ImagePickerList extends StatelessWidget {
                                   child: Icon(
                                     Icons.close,
                                     color: Colors.white,
-                                    size: 18.sp,
+                                    size: 16.sp,
                                   ),
                                 ),
                               ),

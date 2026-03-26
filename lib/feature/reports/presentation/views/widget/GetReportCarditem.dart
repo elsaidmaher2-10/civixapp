@@ -6,6 +6,7 @@ import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/feature/reports/data/Models/Report/GetReportModel.dart';
 import 'package:citifix/feature/reports/presentation/manager/reportManger/cubit/report_manager_cubit.dart';
 import 'package:citifix/feature/reports/presentation/views/reportdetails.dart';
+import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -60,7 +61,7 @@ class ReportCardIem extends StatelessWidget {
                           ),
                           SizedBox(width: ScreenUtilsManager.h8),
                           Text(
-                            report.status.toUpperCase(),
+                            _getTranslatedStatus(context, report.status),
                             style: TextStyle(
                               color: statusColor,
                               fontSize: ScreenUtilsManager.s10,
@@ -82,9 +83,9 @@ class ReportCardIem extends StatelessWidget {
                       SizedBox(height: ScreenUtilsManager.h6),
                       Row(
                         children: [
-                          Icon(
+                          const Icon(
                             Icons.location_pin,
-                            size: ScreenUtilsManager.s14,
+                            size: 14,
                             color: Colors.red,
                           ),
                           SizedBox(width: ScreenUtilsManager.w4),
@@ -102,7 +103,7 @@ class ReportCardIem extends StatelessWidget {
                       ),
                       SizedBox(height: ScreenUtilsManager.h12),
                       Text(
-                        'Submitted: ${report.createdAt.timeAgo}',
+                        '${S.of(context).submitted} ${report.createdAt.timeAgo}',
                         style: TextStyle(
                           fontSize: ScreenUtilsManager.s11,
                           color: Colors.black38,
@@ -115,12 +116,13 @@ class ReportCardIem extends StatelessWidget {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(ScreenUtilsManager.r10),
                   child: CachedNetworkImage(
-                    placeholder: (context, url) => CupertinoActivityIndicator(
-                      color: ColorManger.lightColor,
-                    ),
+                    placeholder: (context, url) =>
+                        const CupertinoActivityIndicator(
+                          color: ColorManger.lightColor,
+                        ),
                     width: ScreenUtilsManager.w80,
                     height: ScreenUtilsManager.h80,
-                    fit: BoxFit.fill,
+                    fit: BoxFit.cover,
                     imageUrl: report.imagesUrls.isNotEmpty
                         ? report.imagesUrls.first
                         : Constantmanger.defualtImage,
@@ -144,7 +146,7 @@ class ReportCardIem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Reference: ${report.hashCode}',
+                  '${S.of(context).reference} ${report.id.toString().padLeft(5, '0')}',
                   style: GoogleFonts.publicSans(
                     fontWeight: FontWeight.w600,
                     fontSize: 13,
@@ -175,17 +177,21 @@ class ReportCardIem extends StatelessWidget {
                         vertical: ScreenUtilsManager.h6,
                       ),
                       child: Row(
+                        mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
-                            'Details',
+                            S.of(context).details,
                             style: GoogleFonts.publicSans(
                               fontWeight: FontWeight.bold,
                               fontSize: ScreenUtilsManager.s12,
                               color: ColorManger.lightColor,
                             ),
                           ),
+                          SizedBox(width: 4.w),
                           Icon(
-                            Icons.chevron_right,
+                            Directionality.of(context) == TextDirection.rtl
+                                ? Icons.chevron_left
+                                : Icons.chevron_right,
                             size: ScreenUtilsManager.h16,
                             color: ColorManger.lightColor,
                           ),
@@ -200,5 +206,18 @@ class ReportCardIem extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  String _getTranslatedStatus(BuildContext context, String status) {
+    switch (status.toLowerCase()) {
+      case 'pending':
+        return S.of(context).pending.toUpperCase();
+      case 'resolved':
+        return S.of(context).resolved.toUpperCase();
+      case 'completed':
+        return S.of(context).completed.toUpperCase();
+      default:
+        return status.toUpperCase();
+    }
   }
 }

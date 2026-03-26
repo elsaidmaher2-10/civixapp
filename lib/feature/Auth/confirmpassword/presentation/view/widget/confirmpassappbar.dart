@@ -19,7 +19,7 @@ PreferredSizeWidget confirmpassappbar(
     backgroundColor: ColorManger.white,
     leadingWidth: 36.w,
     leading: Padding(
-      padding: EdgeInsets.only(left: 10.w, bottom: ScreenUtilsManager.h4),
+      padding: EdgeInsetsDirectional.all(ScreenUtilsManager.w8),
       child: IconButton(
         onPressed: onBack,
         icon: Icon(CupertinoIcons.back, color: ColorManger.kPrimary),

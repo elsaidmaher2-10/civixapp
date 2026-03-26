@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:citifix/core/database/local/prefmanger.dart';
 import 'package:citifix/core/resource/colormanager.dart';
@@ -7,22 +6,26 @@ import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/feature/Profile/data/Models/UserProfileModel/userProfile.dart';
 import 'package:citifix/feature/Profile/presentation/view/widget/citzencardItem.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-void showCitizenCard(context) async {
+void showCitizenCard(BuildContext context) async {
   String? userinfoStr = PrefrenceManager().getstring("user_profile_data");
   UserProfile? userProfile;
+
   if (userinfoStr != null) {
     userProfile = UserProfile.fromJson(jsonDecode(userinfoStr));
   }
-  await showCupertinoDialog(
+
+  await showDialog(
     context: context,
     builder: (context) => Dialog(
-      insetAnimationCurve: Curves.easeInOut,
       backgroundColor: ColorManger.white,
       clipBehavior: Clip.antiAlias,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(ScreenUtilsManager.r10),
+      ),
       child: ConstrainedBox(
         constraints: BoxConstraints(
           maxHeight: MediaQuery.of(context).size.height * 0.8,
@@ -34,23 +37,24 @@ void showCitizenCard(context) async {
               Container(
                 width: double.infinity,
                 color: ColorManger.kPrimary,
-                padding: EdgeInsets.all(ScreenUtilsManager.h10),
+                padding: EdgeInsets.symmetric(
+                  horizontal: ScreenUtilsManager.w16,
+                  vertical: ScreenUtilsManager.h10,
+                ),
                 child: Row(
                   children: [
                     Text(
-                      Constantmanger.citizenIdentity,
+                      S.of(context).citizenIdentity,
                       style: GoogleFonts.inter(
                         fontSize: ScreenUtilsManager.s18,
-                        fontWeight: FontWeight.w600,
+                        fontWeight: FontWeight.bold,
                         color: ColorManger.white,
                       ),
                     ),
-                    Spacer(),
+                    const Spacer(),
                     IconButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      icon: Icon(
+                      onPressed: () => Navigator.pop(context),
+                      icon: const Icon(
                         Icons.cancel_rounded,
                         color: ColorManger.white,
                       ),
@@ -58,39 +62,41 @@ void showCitizenCard(context) async {
                   ],
                 ),
               ),
-
               Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: ScreenUtilsManager.h24,
-                  vertical: ScreenUtilsManager.h24,
-                ),
+                padding: EdgeInsets.all(ScreenUtilsManager.h24),
                 child: Column(
                   children: [
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        CachedNetworkImage(
-                          fit: BoxFit.fill,
-                          height: ScreenUtilsManager.w90,
-                          width: ScreenUtilsManager.h120,
-                          imageUrl:
-                              userProfile?.profileImage ??
-                              Constantmanger.defualtImage,
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(
+                            ScreenUtilsManager.r8,
+                          ),
+                          child: CachedNetworkImage(
+                            fit: BoxFit.cover,
+                            height: ScreenUtilsManager.h100,
+                            width: ScreenUtilsManager.w100,
+                            imageUrl:
+                                userProfile?.profileImage ??
+                                Constantmanger.defualtImage,
+                            errorWidget: (context, url, error) =>
+                                const Icon(Icons.person, size: 50),
+                          ),
                         ),
-                        SizedBox(width: ScreenUtilsManager.w12),
-
+                        SizedBox(width: ScreenUtilsManager.w16),
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               buildItem(
-                                Constantmanger.fullName,
-                                userProfile?.fullName ?? "Ahmed Mahmoud Hassan",
+                                S.of(context).fullName,
+                                userProfile?.fullName ?? "---",
                               ),
-                              SizedBox(height: ScreenUtilsManager.h10),
+                              SizedBox(height: ScreenUtilsManager.h12),
                               buildItem(
-                                Constantmanger.nationalID,
-                                userProfile?.nationalId ?? "29801011234567",
+                                S.of(context).nationalID,
+                                userProfile?.nationalId ?? "---",
                               ),
                             ],
                           ),
@@ -98,36 +104,28 @@ void showCitizenCard(context) async {
                       ],
                     ),
                     SizedBox(height: ScreenUtilsManager.h16),
-                    Divider(),
-
+                    const Divider(),
+                    SizedBox(height: ScreenUtilsManager.h16),
                     Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               buildItem(
-                                Constantmanger.address,
-                                userProfile?.address ?? "Mansoura",
+                                S.of(context).address,
+                                userProfile?.address ?? "---",
                               ),
-                              SizedBox(height: ScreenUtilsManager.h10),
+                              SizedBox(height: ScreenUtilsManager.h12),
                               buildItem(
-                                "DateBirth",
-                                userProfile?.dateOfBirth ?? "12-8-2004",
+                                S.of(context).phone,
+                                userProfile?.phoneNumber ?? "---",
                               ),
                             ],
                           ),
                         ),
                         SizedBox(width: ScreenUtilsManager.w12),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              buildItem(Constantmanger.gender, "Male"),
-                              SizedBox(height: ScreenUtilsManager.h10),
-                            ],
-                          ),
-                        ),
                       ],
                     ),
                   ],

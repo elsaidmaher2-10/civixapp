@@ -3,40 +3,38 @@ import 'package:citifix/core/extenstion/datetimeextension.dart';
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
-import 'package:citifix/feature/reports/data/Models/Report/CreateReportResponseModel.dart';
 import 'package:citifix/feature/reports/data/Models/Report/GetReportModel.dart';
+import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
 
 class Reportcard extends StatelessWidget {
   final ReportItem report;
 
   const Reportcard({super.key, required this.report});
+
   Future<bool> _showDeleteDialog(BuildContext context) async {
     return await showCupertinoDialog<bool>(
           context: context,
           builder: (BuildContext context) {
             return CupertinoAlertDialog(
-              title: const Text('Confirm Delete'),
-              content: const Text(
-                'Are you sure you want to delete this report?',
-              ),
+              title: Text(S.of(context).confirmDelete),
+              content: Text(S.of(context).deleteConfirmationMessage),
               actions: <Widget>[
-                TextButton(
+                CupertinoDialogAction(
                   onPressed: () => Navigator.of(context).pop(false),
-                  child: const Text(
-                    'Cancel',
-                    style: TextStyle(color: ColorManger.kPrimaryDark),
+                  child: Text(
+                    S.of(context).cancel,
+                    style: const TextStyle(color: ColorManger.kPrimaryDark),
                   ),
                 ),
-                TextButton(
+                CupertinoDialogAction(
+                  isDestructiveAction: true,
                   onPressed: () => Navigator.of(context).pop(true),
-                  style: TextButton.styleFrom(foregroundColor: Colors.red),
-                  child: const Text('Delete'),
+                  child: Text(S.of(context).delete),
                 ),
               ],
             );
@@ -47,25 +45,24 @@ class Reportcard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String translatedStatus = _getTranslatedStatus(context, report.status);
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.w),
-
+      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
       child: Slidable(
         startActionPane: ActionPane(
           motion: const ScrollMotion(),
-
           children: [
             SlidableAction(
               onPressed: (context) async {
                 final bool shouldDelete = await _showDeleteDialog(context);
                 if (shouldDelete) {
-                  // TODO: Call your Cubit/API delete method here
+                  // TODO: تنفيذ عملية الحذف
                 }
               },
               backgroundColor: const Color(0xFFFE4A49),
               foregroundColor: Colors.white,
               icon: Icons.delete,
-              label: 'Delete',
+              label: S.of(context).delete,
             ),
           ],
         ),
@@ -74,18 +71,26 @@ class Reportcard extends StatelessWidget {
           decoration: BoxDecoration(
             color: ColorManger.white,
             borderRadius: BorderRadius.circular(10.r),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.05),
+                blurRadius: 10,
+                offset: const Offset(0, 4),
+              ),
+            ],
           ),
           child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 16.h),
+            padding: EdgeInsets.symmetric(vertical: 14.h),
             child: Row(
               children: [
                 SizedBox(width: 11.w),
                 ClipRRect(
                   borderRadius: BorderRadius.circular(5.r),
                   child: CachedNetworkImage(
-                    placeholder: (context, url) => CupertinoActivityIndicator(
-                      color: ColorManger.lightBlue,
-                    ),
+                    placeholder: (context, url) =>
+                        const CupertinoActivityIndicator(
+                          color: ColorManger.lightBlue,
+                        ),
                     fit: BoxFit.cover,
                     height: 80.h,
                     width: 80.w,
@@ -94,90 +99,83 @@ class Reportcard extends StatelessWidget {
                         : Constantmanger.defualtImage,
                   ),
                 ),
-                SizedBox(width: 23.w),
+                SizedBox(width: 16.w),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      SizedBox(
-                        child: Text(
-                          report.title,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: GoogleFonts.publicSans(
-                            color: ColorManger.kPrimaryDark,
-                            fontSize: ScreenUtilsManager.s16,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                      Row(
-                        children: [
-                          Icon(Icons.place_outlined, size: 12.h),
-                          SizedBox(width: 2.w),
-                          Expanded(
-                            child: Text(
-                              report.location,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                color: ColorManger.lightGrey6,
-                                fontSize: ScreenUtilsManager.s12,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Icon(Icons.watch_later_outlined, size: 12.h),
-                          SizedBox(width: 5.w),
-                          Text(
-                            report.createdAt.timeAgo,
-                            style: TextStyle(
-                              color: ColorManger.lightGrey6,
-                              fontSize: ScreenUtilsManager.s11,
-                              fontWeight: FontWeight.w300,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-
-                Container(
-                  margin: EdgeInsets.only(right: 12.w),
-                  padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 6.h),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.r),
-                    color: _getStatusColor(report.status).withOpacity(0.1),
-                  ),
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.circle,
-                        size: 8,
-                        color: _getStatusColor(report.status),
-                      ),
-                      SizedBox(width: 5.w),
                       Text(
-                        report.status.toLowerCase(),
-                        style: TextStyle(
-                          color: _getStatusColor(report.status),
-                          fontSize: ScreenUtilsManager.s12,
-                          fontWeight: FontWeight.bold,
+                        report.title,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: GoogleFonts.publicSans(
+                          color: ColorManger.kPrimaryDark,
+                          fontSize: ScreenUtilsManager.s16,
+                          fontWeight: FontWeight.w600,
                         ),
+                      ),
+                      _buildInfoRow(Icons.place_outlined, report.location),
+                      _buildInfoRow(
+                        Icons.watch_later_outlined,
+                        report.createdAt.timeAgo(context),
                       ),
                     ],
                   ),
                 ),
+                _buildStatusTag(context, report.status, translatedStatus),
               ],
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildInfoRow(IconData icon, String text) {
+    return Row(
+      children: [
+        Icon(icon, size: 14.h, color: ColorManger.lightGrey6),
+        SizedBox(width: 4.w),
+        Expanded(
+          child: Text(
+            text,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+              color: ColorManger.lightGrey6,
+              fontSize: ScreenUtilsManager.s12,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildStatusTag(BuildContext context, String rawStatus, String label) {
+    Color statusColor = _getStatusColor(rawStatus);
+    return Container(
+      margin: EdgeInsetsDirectional.only(end: 12.w),
+      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 6.h),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10.r),
+        color: statusColor.withOpacity(0.1),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(Icons.circle, size: 8, color: statusColor),
+          SizedBox(width: 6.w),
+          Text(
+            label,
+            style: TextStyle(
+              color: statusColor,
+              fontSize: ScreenUtilsManager.s12,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -191,6 +189,19 @@ class Reportcard extends StatelessWidget {
         return Colors.green;
       default:
         return ColorManger.kPrimary;
+    }
+  }
+
+  String _getTranslatedStatus(BuildContext context, String status) {
+    switch (status.toLowerCase()) {
+      case 'pending':
+        return S.of(context).pending;
+      case 'resolved':
+        return S.of(context).resolved;
+      case 'completed':
+        return S.of(context).completed;
+      default:
+        return S.of(context).unknownStatus;
     }
   }
 }

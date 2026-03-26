@@ -9,6 +9,7 @@ import 'package:citifix/feature/reports/presentation/manager/reportManger/cubit/
 import 'package:citifix/feature/reports/presentation/manager/reportManger/cubit/report_manager_state.dart';
 import 'package:citifix/feature/reports/presentation/views/widget/GetReportCarditem.dart';
 import 'package:citifix/feature/reports/presentation/views/widget/GetreportFiltring.dart';
+import 'package:citifix/generated/l10n.dart'; // استيراد ملف الترجمة
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,19 +27,20 @@ class ReportsPage extends StatefulWidget {
 
 class _ReportsPageState extends State<ReportsPage> {
   final List<Map<String, dynamic>> filters = [
-    {"title": "All", "selected": true},
-    {"title": "Pending", "selected": false},
-    {"title": "In Progress", "selected": false},
-    {"title": "Resolved", "selected": false},
+    {"key": "All", "selected": true},
+    {"key": "Pending", "selected": false},
+    {"key": "In Progress", "selected": false},
+    {"key": "Resolved", "selected": false},
   ];
 
   final TextEditingController _controller = TextEditingController();
   final FocusNode _focusNode = FocusNode();
-  String _selectedFilter = "All";
+  String _selectedFilterKey = "All";
   late ReportCubit _reportCubit;
+
   @override
   void dispose() {
-    _controller.clear();
+    _controller.dispose();
     _focusNode.dispose();
     _reportCubit.resetSearch();
     super.dispose();
@@ -50,6 +52,21 @@ class _ReportsPageState extends State<ReportsPage> {
     _reportCubit = context.read<ReportCubit>();
   }
 
+  String _getFilterTitle(BuildContext context, String key) {
+    switch (key) {
+      case "All":
+        return S.of(context).all;
+      case "Pending":
+        return S.of(context).pending;
+      case "In Progress":
+        return S.of(context).inProgress;
+      case "Resolved":
+        return S.of(context).resolved;
+      default:
+        return key;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,14 +76,16 @@ class _ReportsPageState extends State<ReportsPage> {
         backgroundColor: Colors.white.withOpacity(0.8),
         elevation: 0,
         leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: const Icon(Icons.arrow_back),
+          onPressed: () => Navigator.pop(context),
+          icon: Icon(
+            Directionality.of(context) == TextDirection.rtl
+                ? CupertinoIcons.back
+                : CupertinoIcons.forward,
+          ),
           color: ColorManger.kPrimary,
         ),
         title: Text(
-          Constantmanger.reports,
+          S.of(context).reports,
           style: TextStyle(
             color: ColorManger.kPrimary,
             fontWeight: FontWeight.bold,
@@ -107,11 +126,11 @@ class _ReportsPageState extends State<ReportsPage> {
                       e["selected"] = false;
                     }
                     filters[index]["selected"] = true;
-                    _selectedFilter = filters[index]["title"];
+                    _selectedFilterKey = filters[index]["key"];
                   });
                 },
                 child: FliterCheap(
-                  label: filters[index]["title"],
+                  label: _getFilterTitle(context, filters[index]["key"]),
                   isActive: filters[index]["selected"],
                 ),
               ),
@@ -125,13 +144,19 @@ class _ReportsPageState extends State<ReportsPage> {
 
                 if (state is GetReportsLoading) {
                   return Center(
-                    child: SpinKitWaveSpinner(color: ColorManger.lightColor),
+                    child: SpinKitWaveSpinner(
+                      color: ColorManger.lightColor,
+                      size: 50.sp,
+                    ),
                   );
                 }
 
                 if (state is SearchLoading) {
                   return Center(
-                    child: Lottie.asset(AssetValueManager.searchAnimation),
+                    child: Lottie.asset(
+                      AssetValueManager.searchAnimation,
+                      width: 200.w,
+                    ),
                   );
                 }
 
@@ -148,37 +173,45 @@ class _ReportsPageState extends State<ReportsPage> {
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Lottie.asset(AssetValueManager.notFoundsearchAnimation),
-                      Center(
-                        child: Text(
-                          error,
-                          style: GoogleFonts.publicSans(
-                            fontWeight: FontWeight.w500,
-                            color: ColorManger.lightGrey.withOpacity(0.8),
-                            fontSize: ScreenUtilsManager.s16,
-                          ),
+                      Lottie.asset(
+                        AssetValueManager.notFoundsearchAnimation,
+                        height: 200.h,
+                      ),
+                      Text(
+                        error,
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.publicSans(
+                          fontWeight: FontWeight.w500,
+                          color: ColorManger.lightGrey.withOpacity(0.8),
+                          fontSize: ScreenUtilsManager.s16,
                         ),
                       ),
                     ],
                   );
                 }
 
-                final finalFiltered = _selectedFilter == "All"
+                final finalFiltered = _selectedFilterKey == "All"
                     ? displayList
                     : displayList
                           .where(
                             (r) =>
                                 r.status.toLowerCase() ==
-                                _selectedFilter.toLowerCase(),
+                                _selectedFilterKey.toLowerCase(),
                           )
                           .toList();
 
-                if (finalFiltered.isEmpty && _controller.text.isEmpty) {
-                  return Center(child: const Text("No reports available"));
+                if (finalFiltered.isEmpty) {
+                  return Center(
+                    child: Text(
+                      S.of(context).noReportsAvailable,
+                      style: const TextStyle(color: Colors.grey),
+                    ),
+                  );
                 }
+
                 return RefreshIndicator(
                   color: ColorManger.kPrimary,
-                  backgroundColor: ColorManger.bgLight,
+                  backgroundColor: Colors.white,
                   onRefresh: () => context.read<ReportCubit>().fetchReports(),
                   child: ListView.builder(
                     padding: const EdgeInsets.symmetric(horizontal: 16),

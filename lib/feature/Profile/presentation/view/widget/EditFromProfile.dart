@@ -1,4 +1,6 @@
 import 'package:citifix/core/resource/colormanager.dart';
+import 'package:citifix/core/resource/screenutilsmaanger.dart';
+import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -10,284 +12,134 @@ class Editfromprofile extends StatelessWidget {
     required this.addressCotroller,
     required this.phoneCotroller,
   });
+
   final TextEditingController phoneCotroller;
   final TextEditingController EmailCotroller;
   final TextEditingController nameCotroller;
   final TextEditingController addressCotroller;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24),
+      padding: EdgeInsets.symmetric(horizontal: ScreenUtilsManager.w24),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'Full Name',
-            style: GoogleFonts.outfit(
-              fontSize: 13,
-              fontWeight: FontWeight.w600,
-              color: const Color(0xFF334155),
-            ),
+          _buildTextFieldSection(
+            context,
+            label: S.of(context).fullName,
+            hint: S.of(context).fullName,
+            controller: nameCotroller,
+            icon: Icons.person_outline,
           ),
-          const SizedBox(height: 8),
-          Container(
-            decoration: BoxDecoration(
-              color: ColorManger.white,
-              borderRadius: BorderRadius.circular(14),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.04),
-                  blurRadius: 8,
-                  offset: const Offset(0, 2),
-                ),
-              ],
-            ),
-            child: TextField(
-              controller: nameCotroller,
-              style: GoogleFonts.outfit(
-                fontSize: 15,
-                fontWeight: FontWeight.w500,
-                color: const Color(0xFF0F172A),
-              ),
-              decoration: InputDecoration(
-                prefixIcon: const Icon(
-                  Icons.person_outline,
-                  color: Color(0xFF94A3B8),
-                  size: 22,
-                ),
-                hintText: 'Enter your full name',
-                hintStyle: GoogleFonts.outfit(
-                  fontSize: 14,
-                  color: const Color(0xFF94A3B8),
-                ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(14),
-                  borderSide: BorderSide.none,
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(14),
-                  borderSide: const BorderSide(
-                    color: Color(0xFFE2E8F0),
-                    width: 1,
-                  ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(14),
-                  borderSide: const BorderSide(
-                    color: ColorManger.kPrimary,
-                    width: 2,
-                  ),
-                ),
-                contentPadding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 16,
-                ),
-              ),
-            ),
+          SizedBox(height: ScreenUtilsManager.h20),
+          _buildTextFieldSection(
+            context,
+            label: S.of(context).email,
+            hint: S.of(context).hintEmail,
+            controller: EmailCotroller,
+            icon: Icons.mail_outline,
+            keyboardType: TextInputType.emailAddress,
           ),
-          const SizedBox(height: 20),
-
-          Text(
-            'Email Address',
-            style: GoogleFonts.outfit(
-              fontSize: 13,
-              fontWeight: FontWeight.w600,
-              color: const Color(0xFF334155),
-            ),
+          SizedBox(height: ScreenUtilsManager.h20),
+          _buildTextFieldSection(
+            context,
+            label: S.of(context).phone,
+            hint: S.of(context).hintPhone,
+            controller: phoneCotroller,
+            icon: Icons.call_outlined,
+            keyboardType: TextInputType.phone,
           ),
-          const SizedBox(height: 8),
-          Container(
-            decoration: BoxDecoration(
-              color: ColorManger.white,
-              borderRadius: BorderRadius.circular(14),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.04),
-                  blurRadius: 8,
-                  offset: const Offset(0, 2),
-                ),
-              ],
-            ),
-            child: TextField(
-              controller: EmailCotroller,
-              keyboardType: TextInputType.emailAddress,
-              style: GoogleFonts.outfit(
-                fontSize: 15,
-                fontWeight: FontWeight.w500,
-                color: const Color(0xFF0F172A),
-              ),
-              decoration: InputDecoration(
-                prefixIcon: const Icon(
-                  Icons.mail_outline,
-                  color: Color(0xFF94A3B8),
-                  size: 22,
-                ),
-                hintText: 'Enter your email',
-                hintStyle: GoogleFonts.outfit(
-                  fontSize: 14,
-                  color: const Color(0xFF94A3B8),
-                ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(14),
-                  borderSide: BorderSide.none,
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(14),
-                  borderSide: const BorderSide(
-                    color: Color(0xFFE2E8F0),
-                    width: 1,
-                  ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(14),
-                  borderSide: const BorderSide(
-                    color: ColorManger.kPrimary,
-                    width: 2,
-                  ),
-                ),
-                contentPadding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 16,
-                ),
-              ),
-            ),
-          ),
-          const SizedBox(height: 20),
-
-          Text(
-            'Phone Number',
-            style: GoogleFonts.outfit(
-              fontSize: 13,
-              fontWeight: FontWeight.w600,
-              color: const Color(0xFF334155),
-            ),
-          ),
-          const SizedBox(height: 8),
-          Container(
-            decoration: BoxDecoration(
-              color: ColorManger.white,
-              borderRadius: BorderRadius.circular(14),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.04),
-                  blurRadius: 8,
-                  offset: const Offset(0, 2),
-                ),
-              ],
-            ),
-            child: TextField(
-              controller: phoneCotroller,
-              keyboardType: TextInputType.phone,
-              style: GoogleFonts.outfit(
-                fontSize: 15,
-                fontWeight: FontWeight.w500,
-                color: const Color(0xFF0F172A),
-              ),
-              decoration: InputDecoration(
-                prefixIcon: const Icon(
-                  Icons.call_outlined,
-                  color: Color(0xFF94A3B8),
-                  size: 22,
-                ),
-                hintText: 'Enter phone number',
-                hintStyle: GoogleFonts.outfit(
-                  fontSize: 14,
-                  color: const Color(0xFF94A3B8),
-                ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(14),
-                  borderSide: BorderSide.none,
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(14),
-                  borderSide: const BorderSide(
-                    color: Color(0xFFE2E8F0),
-                    width: 1,
-                  ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(14),
-                  borderSide: const BorderSide(
-                    color: ColorManger.kPrimary,
-                    width: 2,
-                  ),
-                ),
-                contentPadding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 16,
-                ),
-              ),
-            ),
-          ),
-          const SizedBox(height: 8),
-
-          Text(
-            'Address',
-            style: GoogleFonts.outfit(
-              fontSize: 13,
-              fontWeight: FontWeight.w600,
-              color: const Color(0xFF334155),
-            ),
-          ),
-          const SizedBox(height: 8),
-          Container(
-            decoration: BoxDecoration(
-              color: ColorManger.white,
-              borderRadius: BorderRadius.circular(14),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.04),
-                  blurRadius: 8,
-                  offset: const Offset(0, 2),
-                ),
-              ],
-            ),
-            child: TextField(
-              controller: addressCotroller,
-              keyboardType: TextInputType.phone,
-              style: GoogleFonts.outfit(
-                fontSize: 15,
-                fontWeight: FontWeight.w500,
-                color: const Color(0xFF0F172A),
-              ),
-              decoration: InputDecoration(
-                prefixIcon: const Icon(
-                  Icons.location_city,
-                  color: Color(0xFF94A3B8),
-                  size: 22,
-                ),
-                hintText: 'Enter Address',
-                hintStyle: GoogleFonts.outfit(
-                  fontSize: 14,
-                  color: const Color(0xFF94A3B8),
-                ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(14),
-                  borderSide: BorderSide.none,
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(14),
-                  borderSide: const BorderSide(
-                    color: Color(0xFFE2E8F0),
-                    width: 1,
-                  ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(14),
-                  borderSide: const BorderSide(
-                    color: ColorManger.kPrimary,
-                    width: 2,
-                  ),
-                ),
-                contentPadding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 16,
-                ),
-              ),
-            ),
+          SizedBox(height: ScreenUtilsManager.h20),
+          _buildTextFieldSection(
+            context,
+            label: S.of(context).address,
+            hint: S.of(context).hintAddress,
+            controller: addressCotroller,
+            icon: Icons.location_on_outlined,
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildTextFieldSection(
+    BuildContext context, {
+    required String label,
+    required String hint,
+    required TextEditingController controller,
+    required IconData icon,
+    TextInputType keyboardType = TextInputType.text,
+  }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          label,
+          style: GoogleFonts.outfit(
+            fontSize: ScreenUtilsManager.s14,
+            fontWeight: FontWeight.w600,
+            color: const Color(0xFF334155),
+          ),
+        ),
+        SizedBox(height: ScreenUtilsManager.h8),
+        Container(
+          decoration: BoxDecoration(
+            color: ColorManger.white,
+            borderRadius: BorderRadius.circular(ScreenUtilsManager.r14),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.04),
+                blurRadius: 8,
+                offset: const Offset(0, 2),
+              ),
+            ],
+          ),
+          child: TextField(
+            controller: controller,
+            keyboardType: keyboardType,
+            style: GoogleFonts.outfit(
+              fontSize: ScreenUtilsManager.s14,
+              fontWeight: FontWeight.w500,
+              color: const Color(0xFF0F172A),
+            ),
+            decoration: InputDecoration(
+              prefixIcon: Icon(
+                icon,
+                color: const Color(0xFF94A3B8),
+                size: ScreenUtilsManager.s20,
+              ),
+              hintText: hint,
+              hintStyle: GoogleFonts.outfit(
+                fontSize: ScreenUtilsManager.s14,
+                color: const Color(0xFF94A3B8),
+              ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(ScreenUtilsManager.r14),
+                borderSide: BorderSide.none,
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(ScreenUtilsManager.r14),
+                borderSide: const BorderSide(
+                  color: Color(0xFFE2E8F0),
+                  width: 1,
+                ),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(ScreenUtilsManager.r14),
+                borderSide: const BorderSide(
+                  color: ColorManger.kPrimary,
+                  width: 2,
+                ),
+              ),
+              contentPadding: EdgeInsets.symmetric(
+                horizontal: ScreenUtilsManager.w16,
+                vertical: ScreenUtilsManager.h16,
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

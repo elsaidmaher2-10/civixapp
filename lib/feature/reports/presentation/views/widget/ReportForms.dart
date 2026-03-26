@@ -2,10 +2,10 @@ import 'package:animated_custom_dropdown/custom_dropdown.dart';
 import 'package:citifix/feature/reports/data/Models/catogory/categorymodels.dart';
 import 'package:flutter/material.dart';
 import 'package:citifix/core/resource/colormanager.dart';
-import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/core/widget/customtextfromfield.dart';
 import 'package:citifix/feature/reports/presentation/views/widget/SimpleDropdown.dart';
+import 'package:citifix/generated/l10n.dart'; // استيراد ملف الترجمة
 
 class ReportFormFields extends StatelessWidget {
   final TextEditingController titleController;
@@ -13,6 +13,7 @@ class ReportFormFields extends StatelessWidget {
   final List<CategoryItem> categories = const [];
   final dynamic Function(CategoryItem?) onCategoryChanged;
   final SingleSelectController<CategoryItem?>? controller;
+
   const ReportFormFields({
     Key? key,
     required this.titleController,
@@ -24,68 +25,65 @@ class ReportFormFields extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start, 
       children: [
-        Text(
-          Constantmanger.ReportTitle1,
-          style: TextStyle(
-            color: ColorManger.kPrimary,
-            fontWeight: FontWeight.w600,
-            fontSize: ScreenUtilsManager.s16,
-          ),
-        ),
+        _buildSectionTitle(S.of(context).reportTitleLabel),
         SizedBox(height: ScreenUtilsManager.h16),
         CustomTextfromfield(
           validator: (value) {
             if (value == null || value.isEmpty) {
-              return 'Title is required';
+              return S.of(context).titleIsRequired;
             }
             if (value.length < 3) {
-              return 'Title must be at least 3 characters';
+              return S.of(context).titleTooShort;
             }
             return null;
           },
-          hinttext: Constantmanger.ReportTitle,
-          lable: Constantmanger.ReportTitle1,
+          hinttext: S.of(context).reportTitleHint,
+          lable: S.of(context).reportTitleLabel,
           controller: titleController,
         ),
-        SizedBox(height: ScreenUtilsManager.h16),
-        Text(
-          Constantmanger.descriptionTitle,
-          style: TextStyle(
-            color: ColorManger.kPrimary,
-            fontWeight: FontWeight.w600,
-            fontSize: ScreenUtilsManager.s16,
-          ),
-        ),
+
+        SizedBox(height: ScreenUtilsManager.h24),
+
+        _buildSectionTitle(S.of(context).descriptionLabel),
         SizedBox(height: ScreenUtilsManager.h16),
         CustomTextfromfield(
           validator: (value) {
             if (value == null || value.isEmpty) {
-              return 'Description is required';
+              return S.of(context).descriptionIsRequired;
             }
             if (value.length < 10) {
-              return 'Description must be at least 10 characters';
+              return S.of(context).descriptionTooShort;
             }
             return null;
           },
-          maxLines: 3,
-          hinttext: Constantmanger.hintReportDescription,
-          lable: Constantmanger.labeldescription,
+          maxLines: 4, 
+          hinttext: S.of(context).descriptionHint,
+          lable: S.of(context).descriptionLabel,
           controller: descriptionController,
         ),
+
+        SizedBox(height: ScreenUtilsManager.h24),
+
+        _buildSectionTitle(S.of(context).selectCategory),
         SizedBox(height: ScreenUtilsManager.h16),
-        Text(
-          Constantmanger.selectcategory,
-          style: TextStyle(
-            color: ColorManger.kPrimary,
-            fontWeight: FontWeight.w600,
-            fontSize: ScreenUtilsManager.s16,
-          ),
+        CategoryDropdown(
+          onChanged: onCategoryChanged, 
+          controller: controller
         ),
-        SizedBox(height: ScreenUtilsManager.h16),
-        CategoryDropdown(onChanged: onCategoryChanged, controller: controller),
       ],
+    );
+  }
+
+  Widget _buildSectionTitle(String title) {
+    return Text(
+      title,
+      style: TextStyle(
+        color: ColorManger.kPrimary,
+        fontWeight: FontWeight.w600,
+        fontSize: ScreenUtilsManager.s16,
+      ),
     );
   }
 }

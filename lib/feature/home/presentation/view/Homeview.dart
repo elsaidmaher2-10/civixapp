@@ -9,6 +9,7 @@ import 'package:citifix/feature/home/presentation/view/widget/MainscreenAppbar.d
 import 'package:citifix/feature/reports/presentation/views/GetAllReport.dart';
 import 'package:citifix/feature/reports/presentation/views/widget/ReportCard.dart';
 import 'package:citifix/feature/home/presentation/view/widget/statusCard.dart';
+import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -99,7 +100,7 @@ class HomeScreen extends StatelessWidget {
                         ),
                         SizedBox(width: ScreenUtilsManager.w8),
                         Text(
-                          Constantmanger.overview,
+                          S.of(context).overview,
                           style: GoogleFonts.publicSans(
                             letterSpacing: -0.5,
                             color: ColorManger.kPrimaryDark,
@@ -122,7 +123,7 @@ class HomeScreen extends StatelessWidget {
                           child: StatusCard(
                             color: ColorManger.kPrimary,
                             number: activeCount,
-                            title: Constantmanger.kActive,
+                            title: S.of(context).active,
                             iconPath: AssetValueManager.active,
                             iconcolor: ColorManger.kPrimary,
                           ),
@@ -132,7 +133,7 @@ class HomeScreen extends StatelessWidget {
                           child: StatusCard(
                             color: ColorManger.orange,
                             number: pendingCount,
-                            title: Constantmanger.kPending,
+                            title: S.of(context).pending,
                             iconPath: AssetValueManager.pending,
                             iconcolor: ColorManger.orange,
                           ),
@@ -141,7 +142,7 @@ class HomeScreen extends StatelessWidget {
                         Expanded(
                           child: StatusCard(
                             number: completedCount,
-                            title: Constantmanger.kCompleted,
+                            title: S.of(context).completed,
                             iconPath: AssetValueManager.resolved,
                             color: ColorManger.green,
                             iconcolor: ColorManger.green,
@@ -162,7 +163,7 @@ class HomeScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          Constantmanger.recenreport,
+                          S.of(context).recentReport,
                           style: GoogleFonts.publicSans(
                             fontSize: ScreenUtilsManager.s18,
                             fontWeight: FontWeight.bold,
@@ -192,7 +193,7 @@ class HomeScreen extends StatelessWidget {
                               );
                             },
                             child: Text(
-                              Constantmanger.seeall,
+                              S.of(context).seeAll,
                               style: GoogleFonts.publicSans(
                                 fontSize: ScreenUtilsManager.s14,
                                 fontWeight: FontWeight.w600,
@@ -206,9 +207,8 @@ class HomeScreen extends StatelessWidget {
 
                   SizedBox(height: ScreenUtilsManager.h16),
 
-                  // --- REPORTS LIST OR EMPTY STATE ---
                   if (reports.isEmpty)
-                    _buildEmptyState()
+                    _buildEmptyState(context)
                   else
                     ListView.separated(
                       key: ValueKey(reports.length),
@@ -234,7 +234,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildEmptyState() {
+  Widget _buildEmptyState(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: ScreenUtilsManager.h40),
       child: Center(
@@ -254,7 +254,7 @@ class HomeScreen extends StatelessWidget {
             ),
             SizedBox(height: ScreenUtilsManager.h16),
             Text(
-              "No recent reports",
+              S.of(context).noRecentReports, // ARB
               style: GoogleFonts.publicSans(
                 fontSize: ScreenUtilsManager.s16,
                 fontWeight: FontWeight.bold,
@@ -263,7 +263,8 @@ class HomeScreen extends StatelessWidget {
             ),
             SizedBox(height: ScreenUtilsManager.h8),
             Text(
-              "Any new reports you create will appear here.",
+              S.of(context).emptyReportsSubtitle, // ARB
+              textAlign: TextAlign.center,
               style: GoogleFonts.publicSans(
                 fontSize: ScreenUtilsManager.s14,
                 color: Colors.grey.shade600,

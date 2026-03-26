@@ -20,20 +20,39 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
+  static String m0(count) =>
+      "${count} ${Intl.plural(count, one: 'day', other: 'days')} ago";
+
+  static String m1(count) =>
+      "${count} ${Intl.plural(count, one: 'hour', other: 'hours')} ago";
+
+  static String m2(count) =>
+      "${count} ${Intl.plural(count, one: 'minute', other: 'minutes')} ago";
+
+  static String m3(count) =>
+      "${count} ${Intl.plural(count, one: 'week', other: 'weeks')} ago";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "accountInformation": MessageLookupByLibrary.simpleMessage(
       "Account information",
     ),
+    "achievement": MessageLookupByLibrary.simpleMessage("Achievement"),
     "active": MessageLookupByLibrary.simpleMessage("Active"),
+    "addPhoto": MessageLookupByLibrary.simpleMessage("Add Photo"),
     "addReport": MessageLookupByLibrary.simpleMessage("Add Report"),
     "address": MessageLookupByLibrary.simpleMessage("Address"),
     "address2": MessageLookupByLibrary.simpleMessage("Address"),
     "age": MessageLookupByLibrary.simpleMessage("Age"),
+    "all": MessageLookupByLibrary.simpleMessage("All"),
     "appTitle": MessageLookupByLibrary.simpleMessage("CitiFix"),
     "arabic": MessageLookupByLibrary.simpleMessage("Arabic"),
     "camera": MessageLookupByLibrary.simpleMessage("Camera"),
     "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+    "caughtUpMessage": MessageLookupByLibrary.simpleMessage(
+      "You are all caught up! Check back later.",
+    ),
+    "changePassword": MessageLookupByLibrary.simpleMessage("Change Password"),
     "choosePreferredLanguage": MessageLookupByLibrary.simpleMessage(
       "Choose your preferred language",
     ),
@@ -42,15 +61,39 @@ class MessageLookup extends MessageLookupByLibrary {
     "civix": MessageLookupByLibrary.simpleMessage("Civix"),
     "completed": MessageLookupByLibrary.simpleMessage("Resolved"),
     "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
+    "confirmDelete": MessageLookupByLibrary.simpleMessage("Confirm Delete"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage("Confirm Password"),
     "confirmPasswordRequired": MessageLookupByLibrary.simpleMessage(
       "Please confirm your password",
+    ),
+    "dataSecurityNote": MessageLookupByLibrary.simpleMessage(
+      "Your data is securely stored and encrypted.",
     ),
     "dateBirth": MessageLookupByLibrary.simpleMessage("Date Brith"),
     "dateOfBirth": MessageLookupByLibrary.simpleMessage("Date of Birth"),
     "dateRequired": MessageLookupByLibrary.simpleMessage(
       "Please choose date of birth",
     ),
+    "daysAgo": m0,
+    "delete": MessageLookupByLibrary.simpleMessage("Delete"),
+    "deleteConfirmationMessage": MessageLookupByLibrary.simpleMessage(
+      "Are you sure you want to delete this report?",
+    ),
+    "describeIssue": MessageLookupByLibrary.simpleMessage(
+      "Describe the issue...",
+    ),
+    "description": MessageLookupByLibrary.simpleMessage("Description"),
+    "descriptionHint": MessageLookupByLibrary.simpleMessage(
+      "Write a detailed description...",
+    ),
+    "descriptionIsRequired": MessageLookupByLibrary.simpleMessage(
+      "Description is required",
+    ),
+    "descriptionLabel": MessageLookupByLibrary.simpleMessage("Description"),
+    "descriptionTooShort": MessageLookupByLibrary.simpleMessage(
+      "Description must be at least 10 characters",
+    ),
+    "details": MessageLookupByLibrary.simpleMessage("Details"),
     "dontHaveAccount": MessageLookupByLibrary.simpleMessage(
       "Don’t have an account?",
     ),
@@ -60,6 +103,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Email already exists or database error",
     ),
     "emailRequired": MessageLookupByLibrary.simpleMessage("Email is required"),
+    "emptyReportsSubtitle": MessageLookupByLibrary.simpleMessage(
+      "Any new reports you create will appear here.",
+    ),
     "english": MessageLookupByLibrary.simpleMessage("English"),
     "enterConfirmPassword": MessageLookupByLibrary.simpleMessage(
       "Enter confirm password",
@@ -68,6 +114,15 @@ class MessageLookup extends MessageLookupByLibrary {
       "Enter new password",
     ),
     "error": MessageLookupByLibrary.simpleMessage("Error"),
+    "errorOccurred": MessageLookupByLibrary.simpleMessage(
+      "Something went wrong",
+    ),
+    "errorTitle": MessageLookupByLibrary.simpleMessage(
+      "Oops! Something went wrong.",
+    ),
+    "failedToLoadCategories": MessageLookupByLibrary.simpleMessage(
+      "Failed to load categories",
+    ),
     "fcm": MessageLookupByLibrary.simpleMessage("FCM"),
     "finish": MessageLookupByLibrary.simpleMessage("Get Started"),
     "firstName": MessageLookupByLibrary.simpleMessage("First Name"),
@@ -104,8 +159,11 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "hintPassword": MessageLookupByLibrary.simpleMessage("********"),
     "hintPhone": MessageLookupByLibrary.simpleMessage("Enter your Phone"),
+    "home": MessageLookupByLibrary.simpleMessage("Home"),
+    "hoursAgo": m1,
     "identity": MessageLookupByLibrary.simpleMessage("Identity"),
     "imageRequired": MessageLookupByLibrary.simpleMessage("Image is required"),
+    "inProgress": MessageLookupByLibrary.simpleMessage("In Progress"),
     "invalidEmail": MessageLookupByLibrary.simpleMessage("Invalid email"),
     "invalidPassword": MessageLookupByLibrary.simpleMessage(
       "Password must be at least 6 characters and include letters and numbers and special characters",
@@ -115,15 +173,24 @@ class MessageLookup extends MessageLookupByLibrary {
       "is_show_on_board",
     ),
     "job": MessageLookupByLibrary.simpleMessage("Job"),
+    "justNow": MessageLookupByLibrary.simpleMessage("Just now"),
     "language": MessageLookupByLibrary.simpleMessage("Language"),
     "lastName": MessageLookupByLibrary.simpleMessage("Last Name"),
     "lastNameRequired": MessageLookupByLibrary.simpleMessage(
       "Last name is required",
     ),
+    "loadingCategories": MessageLookupByLibrary.simpleMessage(
+      "Loading Categories...",
+    ),
     "location": MessageLookupByLibrary.simpleMessage("Location"),
     "logIn": MessageLookupByLibrary.simpleMessage("log in"),
     "login": MessageLookupByLibrary.simpleMessage("Log in"),
     "logout": MessageLookupByLibrary.simpleMessage("Log out"),
+    "logoutConfirmationMessage": MessageLookupByLibrary.simpleMessage(
+      "Are you sure you want to log out of your account?",
+    ),
+    "markAllRead": MessageLookupByLibrary.simpleMessage("Mark all read"),
+    "minutesAgo": m2,
     "msgRegister": MessageLookupByLibrary.simpleMessage(
       "we have sent a 6-digit code to your registered email address/phone number",
     ),
@@ -152,6 +219,17 @@ class MessageLookup extends MessageLookupByLibrary {
     "noInternet": MessageLookupByLibrary.simpleMessage(
       "No internet connection",
     ),
+    "noNotifications": MessageLookupByLibrary.simpleMessage(
+      "No new notifications",
+    ),
+    "noRecentReports": MessageLookupByLibrary.simpleMessage(
+      "No recent reports",
+    ),
+    "noReportsAvailable": MessageLookupByLibrary.simpleMessage(
+      "No reports available currently",
+    ),
+    "noResult": MessageLookupByLibrary.simpleMessage("No results found"),
+    "notifications": MessageLookupByLibrary.simpleMessage("Notifications"),
     "oldPassword": MessageLookupByLibrary.simpleMessage("Old Password"),
     "otpMsgRegister": MessageLookupByLibrary.simpleMessage(
       "Enter the code sent to your email",
@@ -192,7 +270,14 @@ class MessageLookup extends MessageLookupByLibrary {
     "phoneRequired": MessageLookupByLibrary.simpleMessage("Phone is required"),
     "photoGallery": MessageLookupByLibrary.simpleMessage("Photo Gallery"),
     "profile": MessageLookupByLibrary.simpleMessage("Profile"),
+    "profileUpdatedSuccess": MessageLookupByLibrary.simpleMessage(
+      "Profile updated successfully",
+    ),
+    "progressTracking": MessageLookupByLibrary.simpleMessage(
+      "Progress Tracking",
+    ),
     "recentReport": MessageLookupByLibrary.simpleMessage("My Recent Reports"),
+    "reference": MessageLookupByLibrary.simpleMessage("Reference:"),
     "rememberMe": MessageLookupByLibrary.simpleMessage("Remember me"),
     "reportDescription": MessageLookupByLibrary.simpleMessage(
       "Report Description",
@@ -201,20 +286,58 @@ class MessageLookup extends MessageLookupByLibrary {
       "Describe the details of the Report",
     ),
     "reportDetails": MessageLookupByLibrary.simpleMessage("Report Details"),
+    "reportSentSuccess": MessageLookupByLibrary.simpleMessage(
+      "Report sent successfully",
+    ),
     "reportTitle": MessageLookupByLibrary.simpleMessage("Street hole"),
     "reportTitleHint": MessageLookupByLibrary.simpleMessage("Report title"),
+    "reportTitleLabel": MessageLookupByLibrary.simpleMessage("Report Title"),
+    "reportedBy": MessageLookupByLibrary.simpleMessage("Reported by"),
     "reports": MessageLookupByLibrary.simpleMessage("Reports"),
     "resendCode": MessageLookupByLibrary.simpleMessage("Resend Code"),
     "resendCodeIn": MessageLookupByLibrary.simpleMessage("Resend Code In"),
     "resetPasswordPurpose": MessageLookupByLibrary.simpleMessage(
       "reset your password",
     ),
+    "resolved": MessageLookupByLibrary.simpleMessage("Resolved"),
+    "saveChanges": MessageLookupByLibrary.simpleMessage("Save Changes"),
     "search": MessageLookupByLibrary.simpleMessage("Search"),
+    "searchHint": MessageLookupByLibrary.simpleMessage("Search for report..."),
+    "searchHint1": MessageLookupByLibrary.simpleMessage(
+      "Search for \"Water leak\"",
+    ),
+    "searchHint2": MessageLookupByLibrary.simpleMessage(
+      "Search for \"Broken streetlight\"",
+    ),
+    "searchHint3": MessageLookupByLibrary.simpleMessage(
+      "Search for \"Waste accumulation\"",
+    ),
+    "searchHint4": MessageLookupByLibrary.simpleMessage(
+      "Search for \"Pothole repair\"",
+    ),
+    "searchHint5": MessageLookupByLibrary.simpleMessage(
+      "Describe the issue...",
+    ),
     "searchMyReports": MessageLookupByLibrary.simpleMessage(
       "Search my reports",
     ),
+    "searchPothole": MessageLookupByLibrary.simpleMessage(
+      "Search for \"Pothole repair\"",
+    ),
+    "searchStreetlight": MessageLookupByLibrary.simpleMessage(
+      "Search for \"Broken streetlight\"",
+    ),
+    "searchWaste": MessageLookupByLibrary.simpleMessage(
+      "Search for \"Waste accumulation\"",
+    ),
+    "searchWaterLeak": MessageLookupByLibrary.simpleMessage(
+      "Search for \"Water leak\"",
+    ),
     "seeAll": MessageLookupByLibrary.simpleMessage("See all"),
     "selectCategory": MessageLookupByLibrary.simpleMessage("Select Category"),
+    "selectCategoryHint": MessageLookupByLibrary.simpleMessage(
+      "Select Category",
+    ),
     "selectLanguage": MessageLookupByLibrary.simpleMessage("Select Language"),
     "selectRole": MessageLookupByLibrary.simpleMessage("Select a role"),
     "selectRoleError": MessageLookupByLibrary.simpleMessage(
@@ -227,8 +350,19 @@ class MessageLookup extends MessageLookupByLibrary {
     "signUpNow": MessageLookupByLibrary.simpleMessage("Sign up now"),
     "skip": MessageLookupByLibrary.simpleMessage("Skip"),
     "submit": MessageLookupByLibrary.simpleMessage("Submit"),
+    "submitted": MessageLookupByLibrary.simpleMessage("Submitted:"),
     "success": MessageLookupByLibrary.simpleMessage("Success"),
     "support": MessageLookupByLibrary.simpleMessage("Support"),
+    "titleIsRequired": MessageLookupByLibrary.simpleMessage(
+      "Title is required",
+    ),
+    "titleTooShort": MessageLookupByLibrary.simpleMessage(
+      "Title must be at least 3 characters",
+    ),
+    "tryAgain": MessageLookupByLibrary.simpleMessage("Try Again"),
+    "unknownLocation": MessageLookupByLibrary.simpleMessage("Unknown Location"),
+    "unknownStatus": MessageLookupByLibrary.simpleMessage("Unknown"),
+    "weeksAgo": m3,
     "worker": MessageLookupByLibrary.simpleMessage("Worker"),
   };
 }

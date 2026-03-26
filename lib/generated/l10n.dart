@@ -1008,6 +1008,531 @@ class S {
       args: [],
     );
   }
+
+  /// `Home`
+  String get home {
+    return Intl.message('Home', name: 'home', desc: '', args: []);
+  }
+
+  /// `Achievement`
+  String get achievement {
+    return Intl.message('Achievement', name: 'achievement', desc: '', args: []);
+  }
+
+  /// `No recent reports`
+  String get noRecentReports {
+    return Intl.message(
+      'No recent reports',
+      name: 'noRecentReports',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Any new reports you create will appear here.`
+  String get emptyReportsSubtitle {
+    return Intl.message(
+      'Any new reports you create will appear here.',
+      name: 'emptyReportsSubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unknown Location`
+  String get unknownLocation {
+    return Intl.message(
+      'Unknown Location',
+      name: 'unknownLocation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Report sent successfully`
+  String get reportSentSuccess {
+    return Intl.message(
+      'Report sent successfully',
+      name: 'reportSentSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Something went wrong`
+  String get errorOccurred {
+    return Intl.message(
+      'Something went wrong',
+      name: 'errorOccurred',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Title is required`
+  String get titleIsRequired {
+    return Intl.message(
+      'Title is required',
+      name: 'titleIsRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Title must be at least 3 characters`
+  String get titleTooShort {
+    return Intl.message(
+      'Title must be at least 3 characters',
+      name: 'titleTooShort',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Description is required`
+  String get descriptionIsRequired {
+    return Intl.message(
+      'Description is required',
+      name: 'descriptionIsRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Description must be at least 10 characters`
+  String get descriptionTooShort {
+    return Intl.message(
+      'Description must be at least 10 characters',
+      name: 'descriptionTooShort',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Report Title`
+  String get reportTitleLabel {
+    return Intl.message(
+      'Report Title',
+      name: 'reportTitleLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Description`
+  String get descriptionLabel {
+    return Intl.message(
+      'Description',
+      name: 'descriptionLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Write a detailed description...`
+  String get descriptionHint {
+    return Intl.message(
+      'Write a detailed description...',
+      name: 'descriptionHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Photo`
+  String get addPhoto {
+    return Intl.message('Add Photo', name: 'addPhoto', desc: '', args: []);
+  }
+
+  /// `Loading Categories...`
+  String get loadingCategories {
+    return Intl.message(
+      'Loading Categories...',
+      name: 'loadingCategories',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed to load categories`
+  String get failedToLoadCategories {
+    return Intl.message(
+      'Failed to load categories',
+      name: 'failedToLoadCategories',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select Category`
+  String get selectCategoryHint {
+    return Intl.message(
+      'Select Category',
+      name: 'selectCategoryHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No results found`
+  String get noResult {
+    return Intl.message(
+      'No results found',
+      name: 'noResult',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unknown`
+  String get unknownStatus {
+    return Intl.message('Unknown', name: 'unknownStatus', desc: '', args: []);
+  }
+
+  /// `All`
+  String get all {
+    return Intl.message('All', name: 'all', desc: '', args: []);
+  }
+
+  /// `In Progress`
+  String get inProgress {
+    return Intl.message('In Progress', name: 'inProgress', desc: '', args: []);
+  }
+
+  /// `No reports available currently`
+  String get noReportsAvailable {
+    return Intl.message(
+      'No reports available currently',
+      name: 'noReportsAvailable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Resolved`
+  String get resolved {
+    return Intl.message('Resolved', name: 'resolved', desc: '', args: []);
+  }
+
+  /// `Submitted:`
+  String get submitted {
+    return Intl.message('Submitted:', name: 'submitted', desc: '', args: []);
+  }
+
+  /// `Reference:`
+  String get reference {
+    return Intl.message('Reference:', name: 'reference', desc: '', args: []);
+  }
+
+  /// `Details`
+  String get details {
+    return Intl.message('Details', name: 'details', desc: '', args: []);
+  }
+
+  /// `Search for report...`
+  String get searchHint {
+    return Intl.message(
+      'Search for report...',
+      name: 'searchHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm Delete`
+  String get confirmDelete {
+    return Intl.message(
+      'Confirm Delete',
+      name: 'confirmDelete',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to delete this report?`
+  String get deleteConfirmationMessage {
+    return Intl.message(
+      'Are you sure you want to delete this report?',
+      name: 'deleteConfirmationMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete`
+  String get delete {
+    return Intl.message('Delete', name: 'delete', desc: '', args: []);
+  }
+
+  /// `Just now`
+  String get justNow {
+    return Intl.message('Just now', name: 'justNow', desc: '', args: []);
+  }
+
+  /// `{count} {count, plural, =1{minute} other{minutes}} ago`
+  String minutesAgo(num count) {
+    return Intl.message(
+      '$count ${Intl.plural(count, one: 'minute', other: 'minutes')} ago',
+      name: 'minutesAgo',
+      desc: '',
+      args: [count],
+    );
+  }
+
+  /// `{count} {count, plural, =1{hour} other{hours}} ago`
+  String hoursAgo(num count) {
+    return Intl.message(
+      '$count ${Intl.plural(count, one: 'hour', other: 'hours')} ago',
+      name: 'hoursAgo',
+      desc: '',
+      args: [count],
+    );
+  }
+
+  /// `{count} {count, plural, =1{day} other{days}} ago`
+  String daysAgo(num count) {
+    return Intl.message(
+      '$count ${Intl.plural(count, one: 'day', other: 'days')} ago',
+      name: 'daysAgo',
+      desc: '',
+      args: [count],
+    );
+  }
+
+  /// `{count} {count, plural, =1{week} other{weeks}} ago`
+  String weeksAgo(num count) {
+    return Intl.message(
+      '$count ${Intl.plural(count, one: 'week', other: 'weeks')} ago',
+      name: 'weeksAgo',
+      desc: '',
+      args: [count],
+    );
+  }
+
+  /// `Search for "Water leak"`
+  String get searchHint1 {
+    return Intl.message(
+      'Search for "Water leak"',
+      name: 'searchHint1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search for "Broken streetlight"`
+  String get searchHint2 {
+    return Intl.message(
+      'Search for "Broken streetlight"',
+      name: 'searchHint2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search for "Waste accumulation"`
+  String get searchHint3 {
+    return Intl.message(
+      'Search for "Waste accumulation"',
+      name: 'searchHint3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search for "Pothole repair"`
+  String get searchHint4 {
+    return Intl.message(
+      'Search for "Pothole repair"',
+      name: 'searchHint4',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Describe the issue...`
+  String get searchHint5 {
+    return Intl.message(
+      'Describe the issue...',
+      name: 'searchHint5',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Description`
+  String get description {
+    return Intl.message('Description', name: 'description', desc: '', args: []);
+  }
+
+  /// `Progress Tracking`
+  String get progressTracking {
+    return Intl.message(
+      'Progress Tracking',
+      name: 'progressTracking',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reported by`
+  String get reportedBy {
+    return Intl.message('Reported by', name: 'reportedBy', desc: '', args: []);
+  }
+
+  /// `Try Again`
+  String get tryAgain {
+    return Intl.message('Try Again', name: 'tryAgain', desc: '', args: []);
+  }
+
+  /// `Are you sure you want to log out of your account?`
+  String get logoutConfirmationMessage {
+    return Intl.message(
+      'Are you sure you want to log out of your account?',
+      name: 'logoutConfirmationMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Profile updated successfully`
+  String get profileUpdatedSuccess {
+    return Intl.message(
+      'Profile updated successfully',
+      name: 'profileUpdatedSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your data is securely stored and encrypted.`
+  String get dataSecurityNote {
+    return Intl.message(
+      'Your data is securely stored and encrypted.',
+      name: 'dataSecurityNote',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save Changes`
+  String get saveChanges {
+    return Intl.message(
+      'Save Changes',
+      name: 'saveChanges',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Change Password`
+  String get changePassword {
+    return Intl.message(
+      'Change Password',
+      name: 'changePassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Notifications`
+  String get notifications {
+    return Intl.message(
+      'Notifications',
+      name: 'notifications',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Mark all read`
+  String get markAllRead {
+    return Intl.message(
+      'Mark all read',
+      name: 'markAllRead',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Oops! Something went wrong.`
+  String get errorTitle {
+    return Intl.message(
+      'Oops! Something went wrong.',
+      name: 'errorTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No new notifications`
+  String get noNotifications {
+    return Intl.message(
+      'No new notifications',
+      name: 'noNotifications',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You are all caught up! Check back later.`
+  String get caughtUpMessage {
+    return Intl.message(
+      'You are all caught up! Check back later.',
+      name: 'caughtUpMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search for "Water leak"`
+  String get searchWaterLeak {
+    return Intl.message(
+      'Search for "Water leak"',
+      name: 'searchWaterLeak',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search for "Broken streetlight"`
+  String get searchStreetlight {
+    return Intl.message(
+      'Search for "Broken streetlight"',
+      name: 'searchStreetlight',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search for "Waste accumulation"`
+  String get searchWaste {
+    return Intl.message(
+      'Search for "Waste accumulation"',
+      name: 'searchWaste',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search for "Pothole repair"`
+  String get searchPothole {
+    return Intl.message(
+      'Search for "Pothole repair"',
+      name: 'searchPothole',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Describe the issue...`
+  String get describeIssue {
+    return Intl.message(
+      'Describe the issue...',
+      name: 'describeIssue',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

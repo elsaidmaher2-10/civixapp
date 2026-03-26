@@ -63,7 +63,6 @@ class ScreenUtilsManager {
   static double get s32 => 32.sp;
   static double get s34 => 34.sp;
 
-  // Popup Menu Position
   static const double menuLeft = 100;
   static const double menuTop = 200;
   static const double menuRight = 0;
@@ -72,7 +71,18 @@ class ScreenUtilsManager {
   static double w128 = 128.w;
 
   static double h128 = 128.h;
-  // أضف دول
+
+  static double r14 = 14.r;
+
+   static double get s64 =>64.sp;
+
+ static double get r15 =>15.r;
+
+ static double get s22=>22.sp;
+
+  static double get w48 => 48.w;
+
+  static double get h100 => 100.h;
   static double get filterChipHeight => 80.h;
   static double get filterChipSpacing => 8.w;
   static double get reportCardSpacing => 16.h;

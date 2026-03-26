@@ -1,13 +1,12 @@
 import 'package:citifix/core/resource/assetvaluemanger.dart';
 import 'package:citifix/core/resource/colormanager.dart';
-import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/core/routing/routes.dart';
 import 'package:citifix/feature/Profile/presentation/manager/userinfoManger/user_profile_info_cubit.dart';
 import 'package:citifix/feature/Profile/presentation/view/Function/ShowCitezenaCard.dart';
 import 'package:citifix/feature/Profile/presentation/view/Function/showLanguagePicker.dart';
 import 'package:citifix/feature/Profile/presentation/view/widget/ProfileMenu.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -23,7 +22,7 @@ class Profilesettings extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            Constantmanger.settings,
+            S.of(context).settings,
             style: GoogleFonts.inter(
               letterSpacing: 1.6,
               color: ColorManger.lightGrey6,
@@ -32,38 +31,26 @@ class Profilesettings extends StatelessWidget {
           ),
           SizedBox(height: ScreenUtilsManager.h16),
           Column(
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Column(
-                children: [
-                  ProfileMenuItem(
-                    iconPath: AssetValueManager.language,
-                    title: Constantmanger.language,
-                    onTap: () async {
-                      showLanguagePicker(context);
-                    },
-                  ),
-                  ProfileMenuItem(
-                    onTap: () async {
-                      showCitizenCard(context);
-                    },
-                    iconPath: AssetValueManager.identity,
-                    title: Constantmanger.identity,
-                  ),
-
-                  // ProfileMenuItem(
-                  //   iconPath: AssetValueManager.support,
-                  //   title: Constantmanger.support,
-                  // ),
-                  ProfileMenuItem(
-                    iconPath: AssetValueManager.accountinformation,
-                    title: Constantmanger.accouninormation,
-                    onTap: () async {
-                      await Navigator.pushNamed(context, Routes.editProfile);
-                      context.read<UserProfileInfoCubit>().getUserProfleInfo();
-                    },
-                  ),
-                ],
+              ProfileMenuItem(
+                iconPath: AssetValueManager.language,
+                title: S.of(context).language,
+                onTap: () => showLanguagePicker(context),
+              ),
+              ProfileMenuItem(
+                iconPath: AssetValueManager.identity,
+                title: S.of(context).identity,
+                onTap: () => showCitizenCard(context),
+              ),
+              ProfileMenuItem(
+                iconPath: AssetValueManager.accountinformation,
+                title: S.of(context).accountInformation,
+                onTap: () async {
+                  await Navigator.pushNamed(context, Routes.editProfile);
+                  if (context.mounted) {
+                    context.read<UserProfileInfoCubit>().getUserProfleInfo();
+                  }
+                },
               ),
             ],
           ),

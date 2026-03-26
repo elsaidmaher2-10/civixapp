@@ -1,7 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:citifix/core/resource/colormanager.dart';
-import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/core/widget/CustomSnackBar.dart';
 import 'package:citifix/core/widget/customloading.dart';
@@ -12,6 +11,8 @@ import 'package:citifix/feature/Profile/presentation/view/widget/EditFromProfile
 import 'package:citifix/feature/Profile/presentation/view/widget/chanagePassword.dart';
 import 'package:citifix/feature/Profile/presentation/view/widget/customImagePicker.dart';
 import 'package:citifix/feature/Profile/presentation/view/widget/saveeditProfile.dart';
+import 'package:citifix/generated/l10n.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -25,7 +26,7 @@ class EditProfileScreen extends StatefulWidget {
 }
 
 class _WorkerEditProfileScreenState extends State<EditProfileScreen> {
-  Userprofilecontroller userprofilecontroller = Userprofilecontroller();
+  final Userprofilecontroller userprofilecontroller = Userprofilecontroller();
 
   @override
   void initState() {
@@ -40,78 +41,48 @@ class _WorkerEditProfileScreenState extends State<EditProfileScreen> {
   }
 
   @override
-  @override
   Widget build(BuildContext context) {
     return BlocConsumer<UserProfileInfoCubit, UserProfileInfoState>(
-      builder: (context, state) {
-        bool isasync = false;
-        if (state is EditUserProfileInfoLoading) {
-          isasync = true;
-        } else {
-          isasync = false;
+      listener: (context, state) {
+        if (state is EditUserProfileInfoError) {
+          Customsnackbar.show(
+            context: context,
+            backgroundColor: ColorManger.red,
+            message: state.message,
+          );
         }
+        if (state is EditUserProfileInfoSuccess) {
+          Customsnackbar.show(
+            context: context,
+            backgroundColor: ColorManger.green,
+            message: S.of(context).profileUpdatedSuccess,
+          );
+          Future.delayed(const Duration(seconds: 1), () {
+            if (context.mounted) Navigator.of(context).pop();
+          });
+        }
+      },
+      builder: (context, state) {
         return ModalProgressHUD(
           progressIndicator: customloading(),
-          inAsyncCall: isasync,
+          inAsyncCall: state is EditUserProfileInfoLoading,
           child: Scaffold(
             backgroundColor: ColorManger.reportsPageBackground,
             body: SafeArea(
               child: Column(
                 children: [
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: ScreenUtilsManager.w8,
-                      vertical: ScreenUtilsManager.h8,
-                    ),
-                    child: Row(
-                      children: [
-                        GestureDetector(
-                          onTap: () => Navigator.pop(context),
-                          child: Container(
-                            width: ScreenUtilsManager.w40,
-                            height: ScreenUtilsManager.h40,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Colors.transparent,
-                            ),
-                            child: Icon(
-                              Icons.arrow_back,
-                              color: ColorManger.kPrimaryDark,
-                              size: ScreenUtilsManager.s24,
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: Text(
-                            Constantmanger.editProfile,
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.outfit(
-                              fontSize: ScreenUtilsManager.s20,
-                              fontWeight: FontWeight.w700,
-                              color: ColorManger.kPrimaryDark,
-                            ),
-                          ),
-                        ),
-                        SizedBox(width: ScreenUtilsManager.w40),
-                      ],
-                    ),
-                  ),
-
+                  _buildAppBar(context),
                   Expanded(
                     child: SingleChildScrollView(
+                      physics: const BouncingScrollPhysics(),
                       child: Column(
                         children: [
                           Padding(
                             padding: EdgeInsets.symmetric(
                               vertical: ScreenUtilsManager.h32,
                             ),
-                            child: Column(
-                              children: [
-                                Customimagepicker(
-                                  userProfile:
-                                      userprofilecontroller.userProfile,
-                                ),
-                              ],
+                            child: Customimagepicker(
+                              userProfile: userprofilecontroller.userProfile,
                             ),
                           ),
                           Editfromprofile(
@@ -123,16 +94,13 @@ class _WorkerEditProfileScreenState extends State<EditProfileScreen> {
                             addressCotroller:
                                 userprofilecontroller.addressController,
                           ),
-                          const SizedBox(height: 16),
-
                           Padding(
                             padding: EdgeInsets.symmetric(
                               vertical: ScreenUtilsManager.p10,
                               horizontal: ScreenUtilsManager.p23,
                             ),
-                            child: Chanagepassword(),
+                            child: const Chanagepassword(),
                           ),
-
                           SizedBox(height: ScreenUtilsManager.h24),
                           Saveeditprofile(
                             ontap: () {
@@ -155,7 +123,6 @@ class _WorkerEditProfileScreenState extends State<EditProfileScreen> {
                                       email: userprofilecontroller
                                           .emailController
                                           .text,
-
                                       username: userprofilecontroller
                                           .userProfile
                                           .username,
@@ -167,16 +134,9 @@ class _WorkerEditProfileScreenState extends State<EditProfileScreen> {
                             },
                             bntcontroller: userprofilecontroller.bntController,
                           ),
-                          const SizedBox(height: 12),
-                          Text(
-                            'Your data is securely stored and encrypted.',
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.outfit(
-                              fontSize: 12,
-                              color: const Color(0xFF94A3B8),
-                            ),
-                          ),
-                          const SizedBox(height: 16),
+                          SizedBox(height: ScreenUtilsManager.h12),
+                          _buildSecurityNote(context),
+                          SizedBox(height: ScreenUtilsManager.h16),
                         ],
                       ),
                     ),
@@ -187,24 +147,47 @@ class _WorkerEditProfileScreenState extends State<EditProfileScreen> {
           ),
         );
       },
-      listener: (BuildContext context, UserProfileInfoState state) async {
-        if (state is EditUserProfileInfoError) {
-          Customsnackbar.show(
-            context: context,
-            backgroundColor: ColorManger.red,
-            message: state.message,
-          );
-        }
-        if (state is EditUserProfileInfoSuccess) {
-          Customsnackbar.show(
-            context: context,
-            backgroundColor: ColorManger.green,
-            message: "Profile updated successfully",
-          );
-          await Future.delayed(Duration(seconds: 1));
-          Navigator.of(context).pop();
-        }
-      },
+    );
+  }
+
+  Widget _buildAppBar(BuildContext context) {
+    return Padding(
+      padding: EdgeInsetsDirectional.all(ScreenUtilsManager.w8),
+      child: Row(
+        children: [
+          IconButton(
+            onPressed: () => Navigator.pop(context),
+            icon: Icon(
+              CupertinoIcons.back,
+              color: ColorManger.primary,
+              size: ScreenUtilsManager.s20,
+            ),
+          ),
+          Expanded(
+            child: Text(
+              S.of(context).editProfile,
+              textAlign: TextAlign.center,
+              style: GoogleFonts.outfit(
+                fontSize: ScreenUtilsManager.s20,
+                fontWeight: FontWeight.w700,
+                color: ColorManger.primary,
+              ),
+            ),
+          ),
+          SizedBox(width: ScreenUtilsManager.w48),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSecurityNote(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: ScreenUtilsManager.w24),
+      child: Text(
+        S.of(context).dataSecurityNote,
+        textAlign: TextAlign.center,
+        style: GoogleFonts.outfit(fontSize: 12, color: const Color(0xFF94A3B8)),
+      ),
     );
   }
 }

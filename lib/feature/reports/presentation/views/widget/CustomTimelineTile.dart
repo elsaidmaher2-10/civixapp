@@ -22,56 +22,39 @@ class CustomTimelineTile extends StatelessWidget {
     return SizedBox(
       height: 80.h,
       child: TimelineTile(
+        alignment: TimelineAlign.start,
+        lineXY: 0,
         isFirst: isFirst,
         isLast: isLast,
-        alignment: TimelineAlign.start,
-        lineXY: 0.1,
-        beforeLineStyle: LineStyle(
-          color: isDone
-              ? isLast
-                    ? ColorManger.green
-                    : ColorManger.kPrimary
-              : Colors.grey.shade300,
-          thickness: 3,
-        ),
-        afterLineStyle: LineStyle(
-          color: isDone
-              ? isLast
-                    ? ColorManger.green
-                    : ColorManger.kPrimary
-              : Colors.grey.shade300,
-          thickness: 3,
-        ),
         indicatorStyle: IndicatorStyle(
-          width: 25.w,
-          color: isDone
-              ? isLast
-                    ? ColorManger.green
-                    : ColorManger.kPrimary
-              : Colors.grey.shade400,
-          iconStyle: isDone
-              ? IconStyle(
-                  iconData: Icons.check,
-                  color: Colors.white,
-                  fontSize: 14.sp,
-                )
-              : null,
+          width: 24.w,
+          height: 24.w,
+          padding: EdgeInsets.zero, 
+          color: isDone ? ColorManger.kPrimary : Colors.grey[300]!,
         ),
+
         endChild: Container(
-          padding: EdgeInsets.only(left: 16.w),
-          alignment: Alignment.centerLeft,
+          padding: EdgeInsetsDirectional.only(
+            start: 12.w, 
+            top: 20.h,
+            bottom: 20.h,
+          ),
+          alignment: AlignmentDirectional
+              .centerStart,
           child: Text(
             title,
+            textAlign: TextAlign.start,
             style: TextStyle(
-              fontWeight: isDone && isLast
-                  ? FontWeight.bold
-                  : FontWeight.normal,
               fontSize: 16.sp,
-              color: isDone && isLast
-                  ? ColorManger.green
-                  : Colors.grey.shade600,
+              color: isDone ? Colors.black : Colors.grey[600],
+              // ...
             ),
           ),
+        ),
+
+        beforeLineStyle: LineStyle(
+          color: isDone ? ColorManger.kPrimary : Colors.grey[300]!,
+          thickness: 2,
         ),
       ),
     );

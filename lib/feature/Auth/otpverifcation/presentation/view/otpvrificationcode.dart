@@ -146,51 +146,51 @@ class _OtpvrificationcodeState extends State<Otpvrificationcode> {
                     ),
 
                     SizedBox(height: 48.h),
-
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: List.generate(otpLength, (index) {
-                        return SizedBox(
-                          width: 45.w,
-                          child: TextFormField(
-                            controller: controllers[index],
-                            focusNode: focusNodes[index],
-                            textAlign: TextAlign.center,
-                            keyboardType: TextInputType.number,
-                            maxLength: 1,
-                            style: TextStyle(
-                              fontSize: 18.sp,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            onChanged: (value) => onOtpChanged(value, index),
-                            decoration: InputDecoration(
-                              counterText: "",
-                              filled: true,
-                              fillColor: const Color(0xffF6F6F6),
-                              contentPadding: EdgeInsets.symmetric(
-                                vertical: 14.h,
+                    Directionality(
+                      textDirection: TextDirection.ltr,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: List.generate(otpLength, (index) {
+                          return SizedBox(
+                            width: 45.w,
+                            child: TextFormField(
+                              controller: controllers[index],
+                              focusNode: focusNodes[index],
+                              textAlign: TextAlign.center,
+                              keyboardType: TextInputType.number,
+                              maxLength: 1,
+                              style: TextStyle(
+                                fontSize: 18.sp,
+                                fontWeight: FontWeight.bold,
                               ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8.r),
-                                borderSide: const BorderSide(
-                                  color: Colors.transparent,
+                              onChanged: (value) => onOtpChanged(value, index),
+                              decoration: InputDecoration(
+                                counterText: "",
+                                filled: true,
+                                fillColor: const Color(0xffF6F6F6),
+                                contentPadding: EdgeInsets.symmetric(
+                                  vertical: 14.h,
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8.r),
+                                  borderSide: const BorderSide(
+                                    color: Colors.transparent,
+                                  ),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8.r),
+                                  borderSide: BorderSide(
+                                    color: ColorManger.kPrimary,
+                                    width: 1.5,
+                                  ),
                                 ),
                               ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8.r),
-                                borderSide: BorderSide(
-                                  color: ColorManger.kPrimary,
-                                  width: 1.5,
-                                ),
-                              ),
                             ),
-                          ),
-                        );
-                      }),
+                          );
+                        }),
+                      ),
                     ),
-
                     SizedBox(height: 32.h),
-
                     ValueListenableBuilder<bool>(
                       valueListenable: isOtpComplete,
                       builder: (context, isComplete, child) {

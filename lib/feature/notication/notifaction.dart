@@ -1,5 +1,7 @@
 import 'package:citifix/core/resource/colormanager.dart';
+import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/feature/notication/presentation/views/widget/noticationtile.dart';
+import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,6 +27,18 @@ class _NotificationCenterState extends State<NotificationCenter> {
     return Scaffold(
       backgroundColor: ColorManger.surface,
       appBar: AppBar(
+        leading: IconButton(
+          color: ColorManger.primary,
+
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          icon: Icon(
+            Directionality.of(context) == TextDirection.rtl
+                ? CupertinoIcons.back
+                : CupertinoIcons.forward,
+          ),
+        ),
         backgroundColor: ColorManger.surface,
         elevation: 0,
         centerTitle: false,
@@ -37,24 +51,27 @@ class _NotificationCenterState extends State<NotificationCenter> {
 
             return Row(
               children: [
-                const Text(
-                  'Notifications',
+                Text(
+                  S.of(context).notifications,
                   style: TextStyle(
-                    color: ColorManger.onSurface,
-                    fontSize: 22,
+                    color: ColorManger.primary,
+                    fontSize: ScreenUtilsManager.s22,
                     fontWeight: FontWeight.bold,
                     letterSpacing: -0.5,
                   ),
                 ),
                 if (unreadCount > 0) ...[
-                  const SizedBox(width: 8),
+                  SizedBox(width: ScreenUtilsManager.w8),
                   Badge(
                     backgroundColor: Colors.redAccent,
                     label: Text(
                       '$unreadCount',
                       style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    child: const SizedBox(width: 8, height: 8),
+                    child: SizedBox(
+                      width: ScreenUtilsManager.w8,
+                      height: ScreenUtilsManager.h8,
+                    ),
                   ),
                 ],
               ],
@@ -67,20 +84,27 @@ class _NotificationCenterState extends State<NotificationCenter> {
               if (state is NotificationLoaded &&
                   state.notifications.any((e) => !e.isRead)) {
                 return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: ScreenUtilsManager.w8,
+                  ),
                   child: TextButton.icon(
                     onPressed: () {
                       context.read<NotificationCubit>().clearAllNotifications();
                     },
-                    icon: const Icon(Icons.done_all_rounded, size: 20),
-                    label: const Text(
-                      'Mark all read',
-                      style: TextStyle(fontWeight: FontWeight.w600),
+                    icon: Icon(
+                      Icons.done_all_rounded,
+                      size: ScreenUtilsManager.s20,
+                    ),
+                    label: Text(
+                      S.of(context).markAllRead,
+                      style: const TextStyle(fontWeight: FontWeight.w600),
                     ),
                     style: TextButton.styleFrom(
                       foregroundColor: ColorManger.primary,
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(
+                          ScreenUtilsManager.r12,
+                        ),
                       ),
                     ),
                   ),
@@ -94,10 +118,10 @@ class _NotificationCenterState extends State<NotificationCenter> {
       body: BlocBuilder<NotificationCubit, NotificationState>(
         builder: (context, state) {
           if (state is NotificationLoading) {
-            return const Center(
+            return Center(
               child: CupertinoActivityIndicator(
                 color: ColorManger.kPrimary,
-                radius: 15,
+                radius: ScreenUtilsManager.r15,
               ),
             );
           }
@@ -105,41 +129,43 @@ class _NotificationCenterState extends State<NotificationCenter> {
           if (state is NotificationError) {
             return Center(
               child: Padding(
-                padding: const EdgeInsets.all(24.0),
+                padding: EdgeInsets.all(ScreenUtilsManager.w24),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(
                       Icons.error_outline_rounded,
-                      size: 64,
+                      size: ScreenUtilsManager.s64,
                       color: Colors.red.shade300,
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: ScreenUtilsManager.h16),
                     Text(
-                      'Oops! Something went wrong.',
+                      S.of(context).errorTitle,
                       style: TextStyle(
-                        fontSize: 18,
+                        fontSize: ScreenUtilsManager.s18,
                         fontWeight: FontWeight.bold,
                         color: Colors.grey.shade800,
                       ),
                     ),
-                    const SizedBox(height: 8),
+                    SizedBox(height: ScreenUtilsManager.h8),
                     Text(
                       state.message,
                       textAlign: TextAlign.center,
                       style: TextStyle(color: Colors.grey.shade600),
                     ),
-                    const SizedBox(height: 24),
+                    SizedBox(height: ScreenUtilsManager.h24),
                     ElevatedButton.icon(
                       onPressed: () =>
                           context.read<NotificationCubit>().getNotifications(),
                       icon: const Icon(Icons.refresh_rounded),
-                      label: const Text('Try Again'),
+                      label: Text(S.of(context).tryAgain),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: ColorManger.primary,
                         foregroundColor: Colors.white,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius: BorderRadius.circular(
+                            ScreenUtilsManager.r12,
+                          ),
                         ),
                       ),
                     ),
@@ -158,29 +184,29 @@ class _NotificationCenterState extends State<NotificationCenter> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      padding: const EdgeInsets.all(24),
+                      padding: EdgeInsets.all(ScreenUtilsManager.w24),
                       decoration: BoxDecoration(
                         color: Colors.grey.shade100,
                         shape: BoxShape.circle,
                       ),
                       child: Icon(
                         Icons.notifications_paused_rounded,
-                        size: 64,
+                        size: ScreenUtilsManager.s64,
                         color: Colors.grey.shade400,
                       ),
                     ),
-                    const SizedBox(height: 24),
-                    const Text(
-                      'No new notifications',
-                      style: TextStyle(
+                    SizedBox(height: ScreenUtilsManager.h24),
+                    Text(
+                      S.of(context).noNotifications,
+                      style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                         color: Colors.black87,
                       ),
                     ),
-                    const SizedBox(height: 8),
+                    SizedBox(height: ScreenUtilsManager.h8),
                     Text(
-                      'You are all caught up! Check back later.',
+                      S.of(context).caughtUpMessage,
                       style: TextStyle(color: Colors.grey.shade500),
                     ),
                   ],
@@ -194,7 +220,10 @@ class _NotificationCenterState extends State<NotificationCenter> {
               onRefresh: () =>
                   context.read<NotificationCubit>().refreshNotifications(),
               child: ListView.builder(
-                padding: const EdgeInsets.only(top: 8, bottom: 24),
+                padding: EdgeInsets.only(
+                  top: ScreenUtilsManager.h8,
+                  bottom: ScreenUtilsManager.h24,
+                ),
                 itemCount: list.length,
                 itemBuilder: (context, index) {
                   final item = list[index];

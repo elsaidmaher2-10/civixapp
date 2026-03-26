@@ -1,3 +1,5 @@
+import 'package:citifix/generated/l10n.dart';
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 extension Datetimeextension on DateTime {
@@ -5,22 +7,24 @@ extension Datetimeextension on DateTime {
     return DateFormat('yyyy-MM-dd').format(this);
   }
 
-  String get timeAgo {
-    final Duration diff = DateTime.now().difference(this);
+  String timeAgo(BuildContext context) {
+    final dateUtc = this.toUtc();
+    final nowUtc = DateTime.now().toUtc();
+    final Duration diff = nowUtc.difference(dateUtc);
 
     if (diff.inDays >= 30) {
       return setdate;
     } else if (diff.inDays >= 7) {
       int weeks = (diff.inDays / 7).floor();
-      return "$weeks ${weeks == 1 ? 'week' : 'weeks'} ago";
+      return S.of(context).weeksAgo(weeks);
     } else if (diff.inDays >= 1) {
-      return "${diff.inDays} ${diff.inDays == 1 ? 'day' : 'days'} ago";
+      return S.of(context).daysAgo(diff.inDays);
     } else if (diff.inHours >= 1) {
-      return "${diff.inHours} ${diff.inHours == 1 ? 'hour' : 'hours'} ago";
+      return S.of(context).hoursAgo(diff.inHours);
     } else if (diff.inMinutes >= 1) {
-      return "${diff.inMinutes} ${diff.inMinutes == 1 ? 'minute' : 'minutes'} ago";
+      return S.of(context).minutesAgo(diff.inMinutes);
     } else {
-      return "Just now";
+      return S.of(context).justNow;
     }
   }
 }

@@ -1,5 +1,8 @@
 import 'package:citifix/core/resource/colormanager.dart';
+import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/core/routing/routes.dart';
+import 'package:citifix/generated/l10n.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -17,36 +20,38 @@ class Chanagepassword extends StatelessWidget {
         );
       },
       child: Container(
-        padding: const EdgeInsets.all(16),
+        padding: EdgeInsets.all(ScreenUtilsManager.w16),
         decoration: BoxDecoration(
           color: ColorManger.kPrimary.withOpacity(0.05),
-          borderRadius: BorderRadius.circular(14),
+          borderRadius: BorderRadius.circular(ScreenUtilsManager.r14),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Row(
               children: [
-                const Icon(
+                Icon(
                   Icons.lock_outline,
                   color: ColorManger.kPrimary,
-                  size: 22,
+                  size: ScreenUtilsManager.s20,
                 ),
-                const SizedBox(width: 12),
+                SizedBox(width: ScreenUtilsManager.w12),
                 Text(
-                  'Change Password',
+                  S.of(context).changePassword,
                   style: GoogleFonts.outfit(
-                    fontSize: 14,
+                    fontSize: ScreenUtilsManager.s14,
                     fontWeight: FontWeight.w600,
                     color: ColorManger.kPrimary,
                   ),
                 ),
               ],
             ),
-            const Icon(
-              Icons.chevron_right,
+            Icon(
+              Directionality.of(context) == TextDirection.rtl
+                  ? CupertinoIcons.back
+                  : CupertinoIcons.forward,
               color: ColorManger.kPrimary,
-              size: 22,
+              size: ScreenUtilsManager.s20,
             ),
           ],
         ),

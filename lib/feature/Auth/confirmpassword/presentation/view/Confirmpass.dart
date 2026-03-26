@@ -21,6 +21,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:citifix/core/resource/constantmanger.dart';
 
 class CreatePasswordScreen extends StatefulWidget {
   const CreatePasswordScreen({Key? key}) : super(key: key);
@@ -128,7 +129,6 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)?.settings.arguments as Map? ?? {};
-
     return BlocProvider(
       create: (context) => ConfirmPasswordController(
         Confirmpasswordrepo(
@@ -234,7 +234,8 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                                           context
                                               .read<ConfirmPasswordController>()
                                               .createnewpassword(
-                                                email: args["email"],
+                                                email:
+                                                    args[Constantmanger.email],
                                                 newPassword:
                                                     confirmPasswordController
                                                         .confirmPasswordController
