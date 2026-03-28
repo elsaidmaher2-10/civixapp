@@ -1,10 +1,10 @@
 import 'package:citifix/core/database/remote/api/ApiService.dart';
 import 'package:citifix/core/service/networkchecker.dart';
-import 'package:citifix/feature/Profile/data/repos/UserProfileRepos/LogOutRepos.dart';
-import 'package:citifix/feature/Profile/data/repos/UserProfileRepos/userprofileRepos.dart';
-import 'package:citifix/feature/notication/data/repo/noticationRepo.dart';
-import 'package:citifix/feature/reports/data/repos/reports/reports.dart';
-import 'package:citifix/feature/reports/presentation/manager/reportManger/cubit/report_manager_cubit.dart';
+import 'package:citifix/feature/citzenFeature/Profile/data/repos/UserProfileRepos/LogOutRepos.dart';
+import 'package:citifix/feature/citzenFeature/Profile/data/repos/UserProfileRepos/userprofileRepos.dart';
+import 'package:citifix/feature/citzenFeature/notication/data/repo/noticationRepo.dart';
+import 'package:citifix/feature/citzenFeature/reports/data/repos/reports/reports.dart';
+import 'package:citifix/feature/citzenFeature/reports/presentation/manager/reportManger/cubit/report_manager_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 

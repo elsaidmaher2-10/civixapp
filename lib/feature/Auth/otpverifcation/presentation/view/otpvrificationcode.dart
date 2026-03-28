@@ -50,6 +50,13 @@ class _OtpvrificationcodeState extends State<Otpvrificationcode> {
   }
 
   void onOtpChanged(String value, int index) {
+    if (value.length > 1) {
+      controllers[index].text = value.substring(value.length - 1);
+      controllers[index].selection = TextSelection.fromPosition(
+        TextPosition(offset: controllers[index].text.length),
+      );
+    }
+
     if (value.isNotEmpty) {
       if (index < otpLength - 1) {
         FocusScope.of(context).requestFocus(focusNodes[index + 1]);
@@ -61,6 +68,7 @@ class _OtpvrificationcodeState extends State<Otpvrificationcode> {
         FocusScope.of(context).requestFocus(focusNodes[index - 1]);
       }
     }
+
     isOtpComplete.value = getOtpCode().length == otpLength;
   }
 

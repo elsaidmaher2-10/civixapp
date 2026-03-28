@@ -7,7 +7,7 @@ import 'package:citifix/core/database/remote/error/failureResponse.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/service/networkchecker.dart';
 import 'package:citifix/feature/Auth/Login/data/models/loginsuccesresponse.dart';
-import 'package:citifix/feature/notication/data/repo/noticationRepo.dart';
+import 'package:citifix/feature/citzenFeature/notication/data/repo/noticationRepo.dart';
 import 'package:dartz/dartz.dart';
 
 class Loginrepo {

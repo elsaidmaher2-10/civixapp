@@ -1,3 +1,4 @@
+import 'package:citifix/App/manager/cubit/localization_controller_cubit.dart';
 import 'package:citifix/core/DI/getit.dart';
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
@@ -19,9 +20,11 @@ class Citifix extends StatelessWidget {
     required this.isAuth,
     required this.role,
   });
+
   final bool isOnboardingViewed;
   final bool isAuth;
   final AppRole role;
+
   String get _initialRoute {
     if (!isOnboardingViewed) return Routes.onbroading;
     if (!isAuth) return Routes.login;
@@ -42,26 +45,43 @@ class Citifix extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
-        return BlocProvider(
-          lazy: false,
-          create: (_) => getIt<ReportCubit>(),
-          child: MaterialApp(
-            key: navigatorKey,
-            localizationsDelegates: const [
-              S.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            supportedLocales: S.delegate.supportedLocales,
-            initialRoute: _initialRoute,
-            locale: Locale("ar"),
-            onGenerateRoute: Routingmanger.onGenerateRoute,
-            title: Constantmanger.apptitle,
-            debugShowCheckedModeBanner: false,
-            themeMode: ThemeMode.light,
-            theme: _lightTheme,
-          ),
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider(lazy: false, create: (_) => getIt<ReportCubit>()),
+            BlocProvider(
+              create: (context) =>
+                  LocalizationControllerCubit()..fetchLanguage(),
+            ),
+          ],
+          child:
+              BlocBuilder<
+                LocalizationControllerCubit,
+                LocalizationControllerState
+              >(
+                builder: (context, state) {
+                  String currentLang = "en";
+                  if (state is LocalizationControllerChanged) {
+                    currentLang = state.lang;
+                  }
+                  return MaterialApp(
+                    key: navigatorKey,
+                    localizationsDelegates: const [
+                      S.delegate,
+                      GlobalMaterialLocalizations.delegate,
+                      GlobalWidgetsLocalizations.delegate,
+                      GlobalCupertinoLocalizations.delegate,
+                    ],
+                    supportedLocales: S.delegate.supportedLocales,
+                    initialRoute: _initialRoute,
+                    locale: Locale(currentLang),
+                    onGenerateRoute: Routingmanger.onGenerateRoute,
+                    title: Constantmanger.apptitle,
+                    debugShowCheckedModeBanner: false,
+                    themeMode: ThemeMode.light,
+                    theme: _lightTheme,
+                  );
+                },
+              ),
         );
       },
     );

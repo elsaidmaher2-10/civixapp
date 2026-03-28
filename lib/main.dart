@@ -1,4 +1,5 @@
 import 'package:citifix/App/citifix.dart';
+import 'package:citifix/App/manager/cubit/localization_controller_cubit.dart';
 import 'package:citifix/core/DI/getit.dart';
 import 'package:citifix/core/database/local/prefmanger.dart';
 import 'package:citifix/core/resource/colormanager.dart';
@@ -8,12 +9,12 @@ import 'package:citifix/core/routing/routingmanger.dart';
 import 'package:citifix/core/service/local_notification_service.dart';
 import 'package:citifix/core/service/notification_service.dart';
 import 'package:citifix/core/service/observer.dart';
-import 'package:citifix/feature/Profile/presentation/manager/userinfoManger/user_profile_info_cubit.dart';
-import 'package:citifix/feature/home/presentation/manager/navbarManger/mange_custom_bottomnav_bar_cubit.dart';
-import 'package:citifix/feature/notication/data/repo/noticationRepo.dart';
-import 'package:citifix/feature/notication/presentation/manager/cubit/notifcation_cubit.dart';
-import 'package:citifix/feature/reports/data/repos/reports/reports.dart';
-import 'package:citifix/feature/reports/presentation/manager/reportManger/cubit/report_manager_cubit.dart';
+import 'package:citifix/feature/citzenFeature/Profile/presentation/manager/userinfoManger/user_profile_info_cubit.dart';
+import 'package:citifix/feature/citzenFeature/home/presentation/manager/navbarManger/mange_custom_bottomnav_bar_cubit.dart';
+import 'package:citifix/feature/citzenFeature/notication/data/repo/noticationRepo.dart';
+import 'package:citifix/feature/citzenFeature/notication/presentation/manager/cubit/notifcation_cubit.dart';
+import 'package:citifix/feature/citzenFeature/reports/data/repos/reports/reports.dart';
+import 'package:citifix/feature/citzenFeature/reports/presentation/manager/reportManger/cubit/report_manager_cubit.dart';
 import 'package:citifix/core/routing/appRoutingRole.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -70,6 +71,9 @@ class MyAppWrapper extends StatelessWidget {
         BlocProvider(create: (_) => MangeCustomBottomnavBarCubit()),
         BlocProvider(
           create: (_) => NotificationCubit(getIt<NotificationRepo>()),
+        ),
+        BlocProvider(
+          create: (context) => LocalizationControllerCubit()..fetchLanguage(),
         ),
       ],
       child: Citifix(

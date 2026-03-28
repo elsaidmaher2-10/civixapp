@@ -1,5 +1,5 @@
-import 'package:citifix/feature/reports/data/Models/timelinestep/timelinestep.dart';
-import 'package:citifix/feature/onbroading/model/onbroadingmodel.dart';
+import 'package:citifix/feature/citzenFeature/reports/data/Models/timelinestep/timelinestep.dart';
+import 'package:citifix/feature/citzenFeature/onbroading/model/onbroadingmodel.dart';
 
 class Constantmanagerar {
   Constantmanagerar._();

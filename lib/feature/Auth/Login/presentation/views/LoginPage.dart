@@ -5,7 +5,7 @@ import 'package:citifix/core/widget/CustomSnackBar.dart';
 import 'package:citifix/core/widget/customloading.dart';
 import 'package:citifix/feature/Auth/Login/presentation/manager/cubit/loginmanger_cubit.dart';
 import 'package:citifix/feature/Auth/Login/presentation/manager/cubit/loginmanger_state.dart';
-import 'package:citifix/feature/reports/presentation/manager/reportManger/cubit/report_manager_cubit.dart';
+import 'package:citifix/feature/citzenFeature/reports/presentation/manager/reportManger/cubit/report_manager_cubit.dart';
 import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
