@@ -187,7 +187,7 @@ class Constantmanger {
   static const String daSHBOARD = "DASHBOARD";
 
   static const String tasks = 'TASKS';
-  static String welceommsg = 'Good Morning, Alex';
+  static String welceommsg = 'Good Morning, ';
 
   static String verificationPage = 'Verification Page';
   static const String mainTitle = "Verify Your\nCredentials";
@@ -201,4 +201,16 @@ class Constantmanger {
   static const String step3Label = "Step 3 of 3";
   static const String dropdownHint = "Select your work zone";
   static const String verifyButtonText = "Verify Now";
+
+  static String VERIFIED = 'VERIFIED ✅';
+
+  static String Pending = 'PENDING ⚠️';
+
+  static String verifynow = 'Verify Now';
+
+  static String Online = 'Online & Ready';
+
+  static String alertrequired = 'Verification required';
+
+  static String updateYourID = 'Update your ID by EOD to keep access.';
 }

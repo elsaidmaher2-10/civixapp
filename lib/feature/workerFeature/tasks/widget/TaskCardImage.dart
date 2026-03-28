@@ -1,12 +1,10 @@
 import 'package:citifix/core/resource/colormanager.dart';
-import 'package:citifix/feature/workerFeature/tasks/taskScreen.dart';
-import 'package:citifix/feature/workerFeature/tasks/testDummydata.dart';
+import 'package:citifix/core/service/StatusReport.dart';
+import 'package:citifix/feature/workerFeature/tasks/data/model/ReportResponse.dart';
 import 'package:flutter/cupertino.dart';
 
-import '../verfication/verficationinit.dart';
-
 class TaskCardImage extends StatelessWidget {
-  final TaskModel task;
+  final ReportModelWorker task;
   const TaskCardImage({required this.task});
 
   @override
@@ -14,7 +12,7 @@ class TaskCardImage extends StatelessWidget {
     return Stack(
       children: [
         Image.network(
-          task.imageUrl!,
+          task.imagesUrls.first!,
           height: 192,
           width: double.infinity,
           fit: BoxFit.cover,
@@ -25,8 +23,6 @@ class TaskCardImage extends StatelessWidget {
             width: double.infinity,
             color: ColorManger.primary.withOpacity(0.2),
           ),
-        if (task.isHighPriority)
-          const Positioned(top: 16, left: 16, child: HighPriorityBadge()),
       ],
     );
   }

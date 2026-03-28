@@ -1,4 +1,3 @@
-import 'package:citifix/feature/citzenFeature/reports/data/Models/Report/CreateReportRequestModel.dart';
 import 'package:citifix/feature/workerFeature/home/data/repo/homrepo.dart';
 import 'package:citifix/feature/workerFeature/home/presentation/manager/dashbroadHomemanager/cubit/dashbroad_home_manager_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,9 +7,9 @@ class HomeCubit extends Cubit<HomeState> {
 
   HomeCubit(this._repository) : super(HomeInitial());
 
-  Future<void> getWorkerDashboard(CreateReportRequest request) async {
+  Future<void> getWorkerDashboard() async {
     emit(HomeLoading());
-    final result = await _repository.workerdashboard(request: request);
+    final result = await _repository.workerdashboard();
     result.fold((failure) {
       String message = failure.errors.isNotEmpty
           ? failure.errors.join()

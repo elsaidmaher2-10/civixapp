@@ -14,7 +14,7 @@ class ImagePickerMenu {
       shadowColor: ColorManger.white,
       color: ColorManger.white,
       context: context,
-      position: const RelativeRect.fromLTRB(
+      position: RelativeRect.fromLTRB(
         ScreenUtilsManager.menuLeft,
         ScreenUtilsManager.menuTop,
         ScreenUtilsManager.menuRight,

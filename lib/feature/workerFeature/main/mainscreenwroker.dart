@@ -3,7 +3,8 @@ import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/feature/workerFeature/home/presentation/view/Home.dart';
 import 'package:citifix/feature/workerFeature/main/Manager/cubit/worker_cubit_cubit.dart';
 import 'package:citifix/feature/workerFeature/profile/profle.dart';
-import 'package:citifix/feature/workerFeature/tasks/tasks.dart';
+import 'package:citifix/feature/workerFeature/tasks/taskScreen.dart';
+import 'package:citifix/feature/workerFeature/taskDetails/TaskDetailsPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -17,7 +18,7 @@ class Mainscreenwroker extends StatefulWidget {
 class _MainscreenwrokerState extends State<Mainscreenwroker> {
   final List<Widget> _pages = [
     const HomePage(),
-    const TaskDetailsPage(),
+    const TasksView(),
     const ProfileView(),
   ];
   @override
@@ -32,7 +33,6 @@ class _MainscreenwrokerState extends State<Mainscreenwroker> {
             selectedItemColor: ColorManger.workerprimary,
             unselectedItemColor: Colors.grey,
             onTap: (index) {
-              print(index);
               context.read<WorkerCubit>().changeCurrentIndex(index);
             },
             items: const [

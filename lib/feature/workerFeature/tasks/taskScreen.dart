@@ -1,119 +1,84 @@
-import 'dart:async';
 import 'package:citifix/core/resource/colormanager.dart';
-import 'package:citifix/feature/workerFeature/tasks/taskFilter.dart';
-import 'package:citifix/feature/workerFeature/tasks/tasksearchbar.dart';
-import 'package:citifix/feature/workerFeature/tasks/testDummydata.dart';
+import 'package:citifix/core/resource/screenutilsmaanger.dart';
+import 'package:citifix/core/service/StatusReport.dart';
+import 'package:citifix/feature/workerFeature/tasks/data/model/ReportResponse.dart';
+import 'package:citifix/feature/workerFeature/tasks/widget/ActiveTaskCard.dart';
+import 'package:citifix/feature/workerFeature/tasks/widget/CompeletedTask.dart';
+import 'package:citifix/feature/workerFeature/tasks/widget/taskFilter.dart';
 import 'package:flutter/material.dart';
-import '../verfication/verficationinit.dart';
-import 'ActiveTaskCard.dart';
-import 'CompeletedTask.dart';
-import 'TaskStatusBadge.dart';
-import 'TasksHeader.dart';
 
-class TasksView extends StatelessWidget {
+class TasksView extends StatefulWidget {
   const TasksView({super.key});
 
+  @override
+  State<TasksView> createState() => _TasksViewState();
+}
+
+class _TasksViewState extends State<TasksView> {
+  String selectedFilter = 'All';
   static const List<String> _filters = [
     'All',
     'Available',
-    'In Progress',
-    'Completed',
-    'High Priority',
-    'Near',
+    'InProgress',
+    'Resolved',
   ];
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      padding: const EdgeInsets.fromLTRB(24, 32, 24, 120),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const TasksHeader(),
-          const SizedBox(height: 32),
-          TaskSearchBar(),
-          const SizedBox(height: 24),
-          TaskFilterChips(
-            filters: _filters,
-            filter: (String selecteFilter) {
-              final filtredList = dummyTasks
-                  .where(
-                    (e) => e.status == TaskStatus.fromString(selecteFilter),
-                  )
-                  .toList();
-            },
-          ),
-          const SizedBox(height: 32),
-          ListView.builder(
-            shrinkWrap: true,
-            itemCount: dummyTasks.length,
-            physics: NeverScrollableScrollPhysics(),
-            itemBuilder: (context, index) {
-              if (dummyTasks[index].status == TaskStatus.completed) {
-                return CompletedTaskCard(task: dummyTasks[index]);
-              } else {
-                return ActiveTaskCard(task: dummyTasks[index]);
-              }
-            },
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class HighPriorityBadge extends StatelessWidget {
-  const HighPriorityBadge();
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-      decoration: BoxDecoration(
-        color: ColorManger.errorContainer,
-        borderRadius: BorderRadius.circular(24),
-      ),
-      child: const Text(
-        'HIGH PRIORITY',
-        style: TextStyle(
-          color: ColorManger.onErrorContainer,
-          fontSize: 10,
-          fontWeight: FontWeight.bold,
-          letterSpacing: 1,
+    final filteredTasks = dummyReports.where((task) {
+      if (selectedFilter == 'All') return true;
+      return task.status.toLowerCase() == selectedFilter.toLowerCase();
+    }).toList();
+    return Scaffold(
+      backgroundColor: const Color(0xFFF8F9FB),
+      body: SingleChildScrollView(
+        padding: EdgeInsets.fromLTRB(
+          ScreenUtilsManager.w20,
+          ScreenUtilsManager.h48,
+          ScreenUtilsManager.w20,
+          ScreenUtilsManager.h100,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const TasksHeader(),
+            SizedBox(height: ScreenUtilsManager.h28),
+            const _TaskSearchBar(),
+            SizedBox(height: ScreenUtilsManager.h24),
+            TaskFilterChips(
+              filters: _filters,
+              onFilterSelected: (filter) {
+                setState(() {
+                  selectedFilter = filter;
+                });
+                ;
+              },
+            ),
+            ListView.builder(
+              shrinkWrap: true,
+              itemCount: filteredTasks.length,
+              physics: const NeverScrollableScrollPhysics(),
+              itemBuilder: (context, index) {
+                final ReportModelWorker task = filteredTasks[index];
+                return Padding(
+                  padding: EdgeInsets.only(bottom: ScreenUtilsManager.h16),
+                  child:
+                      StatusReport.fromString(task.status) ==
+                          StatusReport.resolved
+                      ? CompletedTaskCard(task: task)
+                      : ActiveTaskCard(task: task),
+                );
+              },
+            ),
+          ],
         ),
       ),
     );
   }
 }
 
-class TaskAddressRow extends StatelessWidget {
-  final String address;
-  const TaskAddressRow({required this.address});
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        const Icon(
-          Icons.location_on_outlined,
-          size: 18,
-          color: ColorManger.onSurfaceVariant,
-        ),
-        const SizedBox(width: 6),
-        Text(
-          address,
-          style: const TextStyle(
-            fontSize: 14,
-            color: ColorManger.onSurfaceVariant,
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class TaskProgressBar extends StatelessWidget {
-  final double progress;
-  const TaskProgressBar({required this.progress});
+class TasksHeader extends StatelessWidget {
+  const TasksHeader();
 
   @override
   Widget build(BuildContext context) {
@@ -121,43 +86,33 @@ class TaskProgressBar extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text(
-              'TASK COMPLETION',
+            Text(
+              'Tasks',
               style: TextStyle(
-                fontSize: 10,
-                fontWeight: FontWeight.bold,
-                color: ColorManger.onSurfaceVariant,
+                fontFamily: 'Manrope',
+                fontWeight: FontWeight.w800,
+                fontSize: ScreenUtilsManager.s32,
+                color: ColorManger.onSurface,
+                letterSpacing: -1,
               ),
             ),
-            Text(
-              '${(progress * 100).toInt()}%',
-              style: const TextStyle(
-                fontSize: 10,
-                fontWeight: FontWeight.bold,
-                color: ColorManger.onSurfaceVariant,
+            const Spacer(),
+            CircleAvatar(
+              backgroundColor: ColorManger.primaryColor.withOpacity(0.1),
+              child: Icon(
+                Icons.notifications_none,
+                color: ColorManger.primaryColor,
               ),
             ),
           ],
         ),
-        const SizedBox(height: 6),
-        Container(
-          height: 6,
-          width: double.infinity,
-          decoration: BoxDecoration(
-            color: ColorManger.surfaceContainerHighest,
-            borderRadius: BorderRadius.circular(3),
-          ),
-          child: FractionallySizedBox(
-            alignment: Alignment.centerLeft,
-            widthFactor: 0.8,
-            child: Container(
-              decoration: BoxDecoration(
-                gradient: ColorManger.kineticGradient,
-                borderRadius: BorderRadius.circular(3),
-              ),
-            ),
+        Text(
+          'Keep track of your daily progress',
+          style: TextStyle(
+            fontSize: ScreenUtilsManager.s15,
+            color: ColorManger.onSurfaceVariant.withOpacity(0.7),
+            fontWeight: FontWeight.w500,
           ),
         ),
       ],
@@ -165,100 +120,39 @@ class TaskProgressBar extends StatelessWidget {
   }
 }
 
-class AvailableActions extends StatelessWidget {
-  const AvailableActions();
+class _TaskSearchBar extends StatelessWidget {
+  const _TaskSearchBar();
   @override
   Widget build(BuildContext context) {
-    return Row(
-      spacing: 15,
-      children: [
-        OutlinedButton(
-          onPressed: () {},
-          style: OutlinedButton.styleFrom(
-            foregroundColor: const Color(0xFFD32F2F),
-            side: BorderSide(color: const Color(0xFFD32F2F).withOpacity(0.5)),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-            textStyle: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 13,
-            ),
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(ScreenUtilsManager.r12),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.03),
+            blurRadius: 15,
+            offset: const Offset(0, 8),
           ),
-          child: const Text('Refuse'),
-        ),
-        Container(
-          decoration: BoxDecoration(
-            gradient: ColorManger.kineticGradient,
-            borderRadius: BorderRadius.circular(8),
+        ],
+      ),
+      child: TextField(
+        decoration: InputDecoration(
+          hintText: 'Search for tasks...',
+          hintStyle: TextStyle(
+            color: Colors.grey.shade400,
+            fontSize: ScreenUtilsManager.s14,
           ),
-          child: Material(
-            color: Colors.transparent,
-            child: InkWell(
-              onTap: () {},
-              borderRadius: BorderRadius.circular(8),
-              child: const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 10),
-                child: Text(
-                  'Accept',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 13,
-                  ),
-                ),
-              ),
-            ),
+          prefixIcon: Icon(
+            Icons.search_rounded,
+            color: ColorManger.primaryColor,
+          ),
+          border: InputBorder.none,
+          contentPadding: EdgeInsets.symmetric(
+            vertical: ScreenUtilsManager.h16,
           ),
         ),
-      ],
-    );
-  }
-}
-
-class InProgressActions extends StatelessWidget {
-  const InProgressActions();
-  @override
-  Widget build(BuildContext context) {
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      children: [
-        OutlinedButton(
-          onPressed: () {},
-          style: OutlinedButton.styleFrom(
-            side: BorderSide(color: const Color(0xFFACADAD).withOpacity(0.3)),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
-            foregroundColor: ColorManger.primary,
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-            textStyle: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 13,
-            ),
-          ),
-          child: const Text('View Details'),
-        ),
-        ElevatedButton(
-          onPressed: () {},
-          style: ElevatedButton.styleFrom(
-            backgroundColor: ColorManger.onSurface,
-            foregroundColor: Colors.white,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-            elevation: 0,
-            textStyle: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 13,
-            ),
-          ),
-          child: const Text('Update Status'),
-        ),
-      ],
+      ),
     );
   }
 }

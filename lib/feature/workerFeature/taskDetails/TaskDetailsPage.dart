@@ -4,8 +4,8 @@ import 'package:citifix/feature/workerFeature/home/presentation/view/widget/Cust
 import 'package:flutter/material.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 import '../verfication/verficationinit.dart';
-import 'TaskInfoSection.dart';
-import 'TaskOwnerHeader.dart';
+import '../tasks/TaskInfoSection.dart';
+import '../tasks/widget/TaskOwnerHeader.dart';
 
 enum StepState { completed, active, pending }
 

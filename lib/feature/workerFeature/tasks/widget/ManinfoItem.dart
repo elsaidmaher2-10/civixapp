@@ -1,7 +1,6 @@
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:flutter/cupertino.dart';
 
-import '../verfication/verficationinit.dart';
 
 class MetaInfoItem extends StatelessWidget {
   final IconData icon;

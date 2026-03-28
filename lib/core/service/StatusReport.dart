@@ -3,9 +3,8 @@ import 'package:flutter/material.dart';
 
 enum StatusReport {
   pending("Pending", Colors.orange),
-  active("6", ColorManger.kPrimary),
-  resolved("Resolved", Colors.green),
-  rejected("Rejected", Colors.red);
+  inpprogress("Assigned", ColorManger.kPrimary),
+  resolved("Resolved", Colors.green);
 
   final String value;
   final Color color;
@@ -15,5 +14,24 @@ enum StatusReport {
       (e) => e.value.toLowerCase() == status.toLowerCase(),
       orElse: () => StatusReport.pending,
     );
+  }
+}
+
+enum TaskStatus {
+  assigned,
+  inProgress,
+  resolved;
+
+  static TaskStatus fromString(String? status) {
+    switch (status) {
+      case 'InProgress':
+        return TaskStatus.inProgress;
+      case 'Resolved':
+        return TaskStatus.resolved;
+      case 'Assigned':
+        return TaskStatus.assigned;
+      default:
+        return TaskStatus.assigned;
+    }
   }
 }

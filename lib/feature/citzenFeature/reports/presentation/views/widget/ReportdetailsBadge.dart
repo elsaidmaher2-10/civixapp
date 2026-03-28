@@ -43,7 +43,7 @@ Widget iconStatus(StatusReport status) {
         AssetValueManager.pending,
         colorFilter: ColorFilter.mode(ColorManger.orange, BlendMode.srcATop),
       );
-    case StatusReport.active:
+    case StatusReport.inpprogress:
       return SvgPicture.asset(
         AssetValueManager.active,
         colorFilter: ColorFilter.mode(ColorManger.kPrimary, BlendMode.srcATop),
@@ -54,7 +54,5 @@ Widget iconStatus(StatusReport status) {
 
         colorFilter: ColorFilter.mode(ColorManger.green, BlendMode.srcATop),
       );
-    case StatusReport.rejected:
-      return Icon(Icons.cancel, color: ColorManger.white);
   }
 }

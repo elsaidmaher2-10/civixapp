@@ -5,6 +5,7 @@ import 'package:citifix/feature/citzenFeature/Profile/data/repos/UserProfileRepo
 import 'package:citifix/feature/citzenFeature/notication/data/repo/noticationRepo.dart';
 import 'package:citifix/feature/citzenFeature/reports/data/repos/reports/reports.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/manager/reportManger/cubit/report_manager_cubit.dart';
+import 'package:citifix/feature/workerFeature/home/data/repo/homrepo.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
@@ -31,5 +32,11 @@ void setupgetit() {
   );
   getIt.registerSingleton<NotificationRepo>(
     NotificationRepo(getIt<Apiservice>()),
+  );
+  getIt.registerSingleton<Homreposatory>(
+    Homreposatory(
+      service: getIt<Apiservice>(),
+      internetChecker: getIt<InternetChecker>(),
+    ),
   );
 }

@@ -3,14 +3,23 @@ class DashBroadHome {
   final int assignedReports;
   final int inProgressReports;
   final int resolvedReports;
+  final String workerName;
+  final bool verified;
+  final String profileImageUrl;
+  final String areaName;
+  final String departmentName;
   final List<RecentReportModel> recentReports;
-
   DashBroadHome({
+    required this.areaName,
+    required this.departmentName,
+    required this.profileImageUrl,
+    required this.workerName,
     required this.totalReports,
     required this.assignedReports,
     required this.inProgressReports,
     required this.resolvedReports,
     required this.recentReports,
+    required this.verified,
   });
 
   factory DashBroadHome.fromJson(Map<String, dynamic> json) {
@@ -24,6 +33,11 @@ class DashBroadHome {
               ?.map((report) => RecentReportModel.fromJson(report))
               .toList() ??
           [],
+      areaName: json["areaName"],
+      departmentName: json["departmentName"],
+      profileImageUrl: json["profileImageUrl"],
+      workerName: json["workerName"],
+      verified: json["verified"],
     );
   }
 }

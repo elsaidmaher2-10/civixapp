@@ -4,7 +4,6 @@ import 'package:citifix/core/database/remote/error/ServerExciptionmodel.dart';
 import 'package:citifix/core/database/remote/error/failureResponse.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/service/networkchecker.dart';
-import 'package:citifix/feature/citzenFeature/reports/data/Models/Report/CreateReportRequestModel.dart';
 import 'package:citifix/feature/workerFeature/home/data/models/dashbroadmodel.dart';
 import 'package:dartz/dartz.dart';
 
@@ -12,9 +11,7 @@ class Homreposatory {
   final Apiservice service;
   final InternetChecker internetChecker;
   Homreposatory({required this.service, required this.internetChecker});
-  Future<Either<FailureResponse, DashBroadHome>> workerdashboard({
-    required CreateReportRequest request,
-  }) async {
+  Future<Either<FailureResponse, DashBroadHome>> workerdashboard() async {
     if (!await internetChecker.checkInternet()) {
       return left(
         FailureResponse(errors: [Constantmanger.nointernet], statusCode: 1),

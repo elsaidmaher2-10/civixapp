@@ -2,7 +2,6 @@ import 'package:citifix/core/resource/colormanager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../verfication/verficationinit.dart';
 
 class TaskOwnerHeader extends StatelessWidget {
   const TaskOwnerHeader();
