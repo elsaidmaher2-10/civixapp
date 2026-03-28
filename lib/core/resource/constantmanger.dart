@@ -1,5 +1,6 @@
 import 'package:citifix/feature/citzenFeature/reports/data/Models/timelinestep/timelinestep.dart';
 import 'package:citifix/feature/citzenFeature/onbroading/model/onbroadingmodel.dart';
+import 'package:dartz/dartz.dart';
 
 class Constantmanger {
   static const String isOnboardingViewed = "is_show_on_board";
@@ -129,7 +130,7 @@ class Constantmanger {
 
   static String settings = "SETTINGS";
 
-  static String proile = "Profile";
+  static const String proile = "Profile";
 
   static String overview = "OverView";
 
@@ -181,6 +182,10 @@ class Constantmanger {
   static const age = "Age";
 
   static String editProfile = 'Edit Profile';
-
   static String fcm = "FCM";
+
+  // Worker
+  static const String daSHBOARD = "DASHBOARD";
+
+  static const String tasks = 'TASKS';
 }

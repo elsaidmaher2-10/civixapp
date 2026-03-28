@@ -1,4 +1,4 @@
-import 'package:citifix/feature/workerFeature/core/resource/colormanger.dart';
+import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/feature/workerFeature/home/widget/CustomMapSection.dart';
 import 'package:citifix/feature/workerFeature/home/widget/CustomtaskListView.dart';
 import 'package:citifix/feature/workerFeature/home/widget/HomeAppBar.dart';
@@ -12,7 +12,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colormanger.bgbackground,
+      backgroundColor: ColorManger.bgbackground,
       appBar: homeAppbar(context),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
@@ -24,7 +24,7 @@ class HomePage extends StatelessWidget {
               style: TextStyle(
                 fontSize: 32,
                 fontWeight: FontWeight.w800,
-                color: Colormanger.onSurface,
+                color: ColorManger.onSurface,
               ),
             ),
             const SizedBox(height: 4),
@@ -33,7 +33,7 @@ class HomePage extends StatelessWidget {
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
-                color: Colormanger.onSurfaceVariant,
+                color: ColorManger.onSurfaceVariant,
               ),
             ),
             const SizedBox(height: 24),

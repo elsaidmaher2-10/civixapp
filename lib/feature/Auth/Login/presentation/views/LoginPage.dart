@@ -16,7 +16,6 @@ import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:citifix/core/function/sinupvalidator.dart';
 import 'package:citifix/core/resource/assetvaluemanger.dart';
 import 'package:citifix/core/resource/colormanager.dart';
-import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/core/routing/routes.dart';
 import 'package:citifix/core/widget/customtextfromfield.dart';
@@ -81,7 +80,6 @@ class _LoginpageState extends State<Loginpage> {
                   case AppRole.worker:
                     Navigator.pushNamed(context, Routes.workerMain);
                   case AppRole.unknown:
-                    // ignore: use_build_context_synchronously
                     Navigator.pushNamed(context, Routes.login);
                 }
               }

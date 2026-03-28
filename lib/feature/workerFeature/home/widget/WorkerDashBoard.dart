@@ -1,6 +1,5 @@
+import 'package:citifix/core/resource/colormanager.dart';
 import 'package:flutter/material.dart';
-
-import '../../core/resource/colormanger.dart';
 
 class WorkerDashboard extends StatelessWidget {
   const WorkerDashboard({super.key});
@@ -15,11 +14,11 @@ class WorkerDashboard extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
-                  color: Colormanger.surfaceContainerLowest,
+                  color: ColorManger.surfaceContainerLowest,
                   borderRadius: BorderRadius.circular(16),
                   boxShadow: [
                     BoxShadow(
-                      color: Colormanger.onSurface.withOpacity(0.04),
+                      color: ColorManger.onSurface.withOpacity(0.04),
                       blurRadius: 32,
                       offset: const Offset(0, 12),
                     ),
@@ -33,7 +32,7 @@ class WorkerDashboard extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 11,
                         fontWeight: FontWeight.bold,
-                        color: Colormanger.onSurfaceVariant,
+                        color: ColorManger.onSurfaceVariant,
                         letterSpacing: 1,
                       ),
                     ),
@@ -54,11 +53,11 @@ class WorkerDashboard extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
-                  color: Colormanger.surfaceContainerLowest,
+                  color: ColorManger.surfaceContainerLowest,
                   borderRadius: BorderRadius.circular(16),
                   boxShadow: [
                     BoxShadow(
-                      color: Colormanger.onSurface.withOpacity(0.04),
+                      color: ColorManger.onSurface.withOpacity(0.04),
                       blurRadius: 32,
                       offset: const Offset(0, 12),
                     ),
@@ -72,7 +71,7 @@ class WorkerDashboard extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 11,
                         fontWeight: FontWeight.bold,
-                        color: Colormanger.onSurfaceVariant,
+                        color: ColorManger.onSurfaceVariant,
                         letterSpacing: 1,
                       ),
                     ),
@@ -94,11 +93,11 @@ class WorkerDashboard extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
-            color: Colormanger.surfaceContainerLowest,
+            color: ColorManger.surfaceContainerLowest,
             borderRadius: BorderRadius.circular(16),
             boxShadow: [
               BoxShadow(
-                color: Colormanger.onSurface.withOpacity(0.04),
+                color: ColorManger.onSurface.withOpacity(0.04),
                 blurRadius: 32,
                 offset: const Offset(0, 12),
               ),
@@ -118,7 +117,7 @@ class WorkerDashboard extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 11,
                           fontWeight: FontWeight.bold,
-                          color: Colormanger.onSurfaceVariant,
+                          color: ColorManger.onSurfaceVariant,
                           letterSpacing: 1,
                         ),
                       ),
@@ -160,7 +159,7 @@ class WorkerDashboard extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 11,
                       fontWeight: FontWeight.bold,
-                      color: Colormanger.onSurfaceVariant,
+                      color: ColorManger.onSurfaceVariant,
                     ),
                   ),
                   Text(
@@ -168,7 +167,7 @@ class WorkerDashboard extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 11,
                       fontWeight: FontWeight.bold,
-                      color: Colormanger.onSurfaceVariant,
+                      color: ColorManger.onSurfaceVariant,
                     ),
                   ),
                 ],
@@ -176,9 +175,9 @@ class WorkerDashboard extends StatelessWidget {
               const SizedBox(height: 8),
               LinearProgressIndicator(
                 value: 0.9,
-                backgroundColor: Colormanger.surfaceContainer,
+                backgroundColor: ColorManger.surfaceContainer,
                 valueColor: AlwaysStoppedAnimation<Color>(
-                  Colormanger.primaryColor,
+                  ColorManger.primaryColor,
                 ),
                 minHeight: 6,
                 borderRadius: BorderRadius.circular(8),

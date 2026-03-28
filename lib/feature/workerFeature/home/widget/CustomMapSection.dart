@@ -1,3 +1,4 @@
+import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/feature/workerFeature/home/mapController/cubit/map_controller_cubit.dart';
 import 'package:citifix/feature/workerFeature/home/mapController/cubit/map_controller_state.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +7,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:lottie/lottie.dart' hide Marker;
-import '../../core/resource/colormanger.dart';
 class CustomMapSection extends StatefulWidget {
   const CustomMapSection({super.key});
   @override
@@ -66,11 +66,11 @@ class _CustomMapSectionState extends State<CustomMapSection> {
         builder: (context, state) {
           return Container(
             decoration: BoxDecoration(
-              color: Colormanger.surfaceContainerLowest,
+              color: ColorManger.surfaceContainerLowest,
               borderRadius: BorderRadius.circular(16),
               boxShadow: [
                 BoxShadow(
-                  color: Colormanger.onSurface.withOpacity(0.04),
+                  color: ColorManger.onSurface.withOpacity(0.04),
                   blurRadius: 32,
                   offset: const Offset(0, 12),
                 ),
@@ -165,7 +165,7 @@ class _CustomMapSectionState extends State<CustomMapSection> {
                           child: Container(
                             padding: const EdgeInsets.all(12),
                             decoration: BoxDecoration(
-                              color: Colormanger.primaryColor.withValues(
+                              color: ColorManger.primaryColor.withValues(
                                 alpha: 0.5,
                               ),
                               borderRadius: BorderRadius.circular(8),
@@ -216,7 +216,7 @@ class _CustomMapSectionState extends State<CustomMapSection> {
                   padding: const EdgeInsets.all(16.0),
                   child: Row(
                     children: [
-                      Icon(Icons.location_on, color: Colormanger.primaryColor),
+                      Icon(Icons.location_on, color: ColorManger.primaryColor),
                       const SizedBox(width: 12),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -226,7 +226,7 @@ class _CustomMapSectionState extends State<CustomMapSection> {
                             style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.bold,
-                              color: Colormanger.onSurfaceVariant,
+                              color: ColorManger.onSurfaceVariant,
                               letterSpacing: 1,
                             ),
                           ),

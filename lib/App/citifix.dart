@@ -5,7 +5,7 @@ import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/routing/appRoutingRole.dart';
 import 'package:citifix/core/routing/routes.dart';
 import 'package:citifix/core/routing/routingmanger.dart';
-import 'package:citifix/feature/reports/presentation/manager/reportManger/cubit/report_manager_cubit.dart';
+import 'package:citifix/feature/citzenFeature/reports/presentation/manager/reportManger/cubit/report_manager_cubit.dart';
 import 'package:citifix/generated/l10n.dart';
 import 'package:citifix/main.dart';
 import 'package:flutter/material.dart';
@@ -72,7 +72,7 @@ class Citifix extends StatelessWidget {
                       GlobalCupertinoLocalizations.delegate,
                     ],
                     supportedLocales: S.delegate.supportedLocales,
-                    initialRoute: _initialRoute,
+                    initialRoute: Routes.workerMain,
                     locale: Locale(currentLang),
                     onGenerateRoute: Routingmanger.onGenerateRoute,
                     title: Constantmanger.apptitle,

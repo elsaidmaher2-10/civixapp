@@ -1,4 +1,3 @@
-import 'package:citifix/WorkerFeature/workerMainScreen.dart';
 import 'package:citifix/core/DI/getit.dart';
 import 'package:citifix/core/routing/routes.dart';
 import 'package:citifix/feature/Auth/Login/presentation/views/LoginPage.dart';
@@ -14,6 +13,8 @@ import 'package:citifix/feature/citzenFeature/Profile/presentation/view/ProfileS
 import 'package:citifix/feature/citzenFeature/Profile/presentation/view/widget/editprofile.dart';
 import 'package:citifix/feature/citzenFeature/home/presentation/view/mainScreen.dart';
 import 'package:citifix/feature/citzenFeature/onbroading/onbroading.dart';
+import 'package:citifix/feature/workerFeature/main/Manager/cubit/worker_cubit_cubit.dart';
+import 'package:citifix/feature/workerFeature/main/mainscreenwroker.dart';
 import 'package:citifix/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -66,7 +67,12 @@ class Routingmanger {
       case Routes.citizenMain:
         return _noPopRoute(child: CitizenMainScreen());
       case Routes.workerMain:
-        return _noPopRoute(child: WorkerMainScreen());
+        return _noPopRoute(
+          child: BlocProvider(
+            create: (BuildContext context) => WorkerCubit(),
+            child: Mainscreenwroker(),
+          ),
+        );
       default:
         return MaterialPageRoute(
           builder: (_) =>

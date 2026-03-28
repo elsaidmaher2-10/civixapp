@@ -1,6 +1,6 @@
+import 'package:citifix/core/resource/colormanager.dart';
 import 'package:flutter/material.dart';
 
-import '../../core/resource/colormanger.dart';
 
 class ActiveWorkCard extends StatelessWidget {
   const ActiveWorkCard({super.key});
@@ -9,11 +9,11 @@ class ActiveWorkCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colormanger.surfaceContainerLowest,
+        color: ColorManger.surfaceContainerLowest,
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colormanger.onSurface.withOpacity(0.04),
+            color: ColorManger.onSurface.withOpacity(0.04),
             blurRadius: 32,
             offset: const Offset(0, 12),
           ),
@@ -71,7 +71,7 @@ class ActiveWorkCard extends StatelessWidget {
                     Icon(
                       Icons.pin_drop,
                       size: 16,
-                      color: Colormanger.onSurfaceVariant,
+                      color: ColorManger.onSurfaceVariant,
                     ),
                     const SizedBox(width: 8),
                     Text(
@@ -79,7 +79,7 @@ class ActiveWorkCard extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
-                        color: Colormanger.onSurfaceVariant,
+                        color: ColorManger.onSurfaceVariant,
                       ),
                     ),
                   ],
@@ -88,7 +88,7 @@ class ActiveWorkCard extends StatelessWidget {
                 Text(
                   'Emergency pipe burst reported in the main bathroom. High priority. Residents are currently on-site and have shut off the main valve.',
                   style: TextStyle(
-                    color: Colormanger.onSurfaceVariant,
+                    color: ColorManger.onSurfaceVariant,
                     fontSize: 14,
                   ),
                   maxLines: 2,
@@ -105,7 +105,7 @@ class ActiveWorkCard extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8),
                       boxShadow: [
                         BoxShadow(
-                          color: Colormanger.primaryColor.withOpacity(0.2),
+                          color: ColorManger.primaryColor.withOpacity(0.2),
                           blurRadius: 10,
                           offset: const Offset(0, 4),
                         ),

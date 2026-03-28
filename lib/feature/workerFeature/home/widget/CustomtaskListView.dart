@@ -1,6 +1,6 @@
+import 'package:citifix/core/resource/colormanager.dart';
 import 'package:flutter/material.dart';
 
-import '../../core/resource/colormanger.dart';
 
 class CustomtaskListView extends StatelessWidget {
   const CustomtaskListView({super.key});
@@ -21,7 +21,7 @@ class CustomtaskListView extends StatelessWidget {
               '(3)',
               style: TextStyle(
                 fontSize: 14,
-                color: Colormanger.onSurfaceVariant,
+                color: ColorManger.onSurfaceVariant,
               ),
             ),
           ],
@@ -69,14 +69,14 @@ class CustomtaskListView extends StatelessWidget {
                             Icon(
                               Icons.near_me,
                               size: 14,
-                              color: Colormanger.onSurfaceVariant,
+                              color: ColorManger.onSurfaceVariant,
                             ),
                             const SizedBox(width: 4),
                             Text(
                               '1.2 miles',
                               style: TextStyle(
                                 fontSize: 12,
-                                color: Colormanger.onSurfaceVariant,
+                                color: ColorManger.onSurfaceVariant,
                               ),
                             ),
                           ],
@@ -86,7 +86,7 @@ class CustomtaskListView extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
-                            color: Colormanger.primaryColor,
+                            color: ColorManger.primaryColor,
                           ),
                         ),
                       ],
@@ -133,14 +133,14 @@ class CustomtaskListView extends StatelessWidget {
                             Icon(
                               Icons.near_me,
                               size: 14,
-                              color: Colormanger.onSurfaceVariant,
+                              color: ColorManger.onSurfaceVariant,
                             ),
                             const SizedBox(width: 4),
                             Text(
                               '2.8 miles',
                               style: TextStyle(
                                 fontSize: 12,
-                                color: Colormanger.onSurfaceVariant,
+                                color: ColorManger.onSurfaceVariant,
                               ),
                             ),
                           ],
@@ -150,7 +150,7 @@ class CustomtaskListView extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
-                            color: Colormanger.primaryColor,
+                            color: ColorManger.primaryColor,
                           ),
                         ),
                       ],

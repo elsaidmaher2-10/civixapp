@@ -30,4 +30,9 @@ class ColorManger {
   static const Color searchIconColor = Color(0xff475569);
   static const Color searchHintColor = Color(0xff94A3B8);
   static const Color searchFocusBorder = Color(0xff475569);
+  static final Color primaryColor = const Color(0xFFFF7B04);
+  static final Color surfaceContainer = const Color(0xFFE7E8E8);
+  static final Color bgbackground = const Color(0xFFF6F6F6);
+  static const Color workerprimary = Color(0xFFFF7B00);
+  static const Color workerbgLight = Color(0xFFF8F7F5);
 }

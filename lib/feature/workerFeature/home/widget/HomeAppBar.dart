@@ -1,18 +1,18 @@
+import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/generated/l10n.dart';
 import 'package:citifix/feature/workerFeature/tasks/Slivers.dart';
 import 'package:citifix/feature/workerFeature/verfication/verficationinit.dart';
 import 'package:flutter/material.dart';
 
-import '../../core/resource/colormanger.dart';
 
 PreferredSizeWidget homeAppbar(context) {
   return AppBar(
-    backgroundColor: Colormanger.surfaceContainerLowest,
+    backgroundColor: ColorManger.surfaceContainerLowest,
     elevation: 0,
     scrolledUnderElevation: 0,
     title: Row(
       children: [
-        Icon(Icons.location_city, color: Colormanger.primaryColor),
+        Icon(Icons.location_city, color: ColorManger.primaryColor),
         const SizedBox(width: 8),
         Text(
           "City Fix",
@@ -44,7 +44,7 @@ class WorkerCard extends StatelessWidget {
       width: double.infinity,
       child: Card(
         color: Colors.white,
-        shadowColor: Colormanger.onSurface.withOpacity(0.04),
+        shadowColor: ColorManger.onSurface.withOpacity(0.04),
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
@@ -78,7 +78,7 @@ class WorkerCard extends StatelessWidget {
                           vertical: 2,
                         ),
                         decoration: BoxDecoration(
-                          color: Colormanger.primaryColor.withOpacity(0.1),
+                          color: ColorManger.primaryColor.withOpacity(0.1),
                           borderRadius: BorderRadius.circular(4),
                         ),
                         child: Text(
@@ -86,7 +86,7 @@ class WorkerCard extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 10,
                             fontWeight: FontWeight.bold,
-                            color: Colormanger.primaryColor,
+                            color: ColorManger.primaryColor,
                             letterSpacing: 1,
                           ),
                         ),
@@ -107,7 +107,7 @@ class WorkerCard extends StatelessWidget {
                             'Online & Ready',
                             style: TextStyle(
                               fontSize: 14,
-                              color: Colormanger.onSurfaceVariant,
+                              color: ColorManger.onSurfaceVariant,
                             ),
                           ),
                         ],
@@ -123,7 +123,7 @@ class WorkerCard extends StatelessWidget {
                     child: TextButton(
                       onPressed: () {},
                       style: TextButton.styleFrom(
-                        backgroundColor: Colormanger.surfaceContainer,
+                        backgroundColor: ColorManger.surfaceContainer,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
@@ -132,7 +132,7 @@ class WorkerCard extends StatelessWidget {
                       child: Text(
                         'Go Offline',
                         style: TextStyle(
-                          color: Colormanger.onSurface,
+                          color: ColorManger.onSurface,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
@@ -148,7 +148,7 @@ class WorkerCard extends StatelessWidget {
                         borderRadius: BorderRadius.circular(8),
                         boxShadow: [
                           BoxShadow(
-                            color: Colormanger.primaryColor.withOpacity(0.2),
+                            color: ColorManger.primaryColor.withOpacity(0.2),
                             blurRadius: 10,
                             offset: const Offset(0, 4),
                           ),

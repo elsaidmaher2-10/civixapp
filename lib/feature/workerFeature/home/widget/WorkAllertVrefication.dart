@@ -1,6 +1,6 @@
+import 'package:citifix/core/resource/colormanager.dart';
 import 'package:flutter/material.dart';
 
-import '../../core/resource/colormanger.dart';
 
 class WorkerAlertVrefication extends StatelessWidget {
   const WorkerAlertVrefication({super.key});
@@ -10,8 +10,8 @@ class WorkerAlertVrefication extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: Colormanger.primaryColor.withValues(alpha: 0.05),
-        border: Border.all(color: Colormanger.primaryColor.withOpacity(0.1)),
+        color: ColorManger.primaryColor.withValues(alpha: 0.05),
+        border: Border.all(color: ColorManger.primaryColor.withOpacity(0.1)),
         borderRadius: BorderRadius.circular(16),
       ),
       child: Row(
@@ -20,10 +20,10 @@ class WorkerAlertVrefication extends StatelessWidget {
             width: 40,
             height: 40,
             decoration: BoxDecoration(
-              color: Colormanger.primaryColor.withOpacity(0.2),
+              color: ColorManger.primaryColor.withOpacity(0.2),
               shape: BoxShape.circle,
             ),
-            child: Icon(Icons.report_problem, color: Colormanger.primaryColor),
+            child: Icon(Icons.report_problem, color: ColorManger.primaryColor),
           ),
           const SizedBox(width: 16),
           Expanded(
@@ -34,7 +34,7 @@ class WorkerAlertVrefication extends StatelessWidget {
                   'Verification required',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: Colormanger.primaryColor,
+                    color: ColorManger.primaryColor,
                   ),
                 ),
                 const SizedBox(height: 4),
