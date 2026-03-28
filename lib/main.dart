@@ -39,7 +39,6 @@ Future<void> _initApp() async {
   await PrefrenceManager().init();
   await LocalNotificationService.init();
   await NotificationService.init();
-
   Bloc.observer = MyBlocObserver();
 }
 
@@ -59,6 +58,7 @@ class MyAppWrapper extends StatelessWidget {
     final String? accessToken = PrefrenceManager().getstring(
       Constantmanger.accessToken,
     );
+    print(accessToken);
     final String? roleString = PrefrenceManager().getstring(
       Constantmanger.role,
     );

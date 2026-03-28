@@ -50,12 +50,9 @@ class ColorManger {
 
   static const surfaceVariant = Color(0xFFE0E0E0);
 
-
   static const Color surfaceLowest = Color(0xFFFFFFFF);
 
-
   static const Color surfaceContainerHighest = Color(0xFFDBDDDD);
-
 
   static const Color errorContainer = Color(0xFFF95630);
 
@@ -76,4 +73,7 @@ class ColorManger {
 
     end: Alignment.bottomRight,
   );
+
+  static const surfaceContainerLow = Color(0xFFF5F5F5);
+  static const surfaceContainerHigh = Color(0xFFF5F5F5);
 }

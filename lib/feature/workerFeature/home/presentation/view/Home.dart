@@ -2,12 +2,12 @@ import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/constantmanagerAr.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
-import 'package:citifix/feature/workerFeature/home/widget/CustomMapSection.dart';
-import 'package:citifix/feature/workerFeature/home/widget/CustomtaskListView.dart';
-import 'package:citifix/feature/workerFeature/home/widget/HomeAppBar.dart';
-import 'package:citifix/feature/workerFeature/home/widget/WorkAllertVrefication.dart';
-import 'package:citifix/feature/workerFeature/home/widget/WorkerDashBoard.dart';
-import 'package:citifix/feature/workerFeature/home/widget/workerCard.dart';
+import 'package:citifix/feature/workerFeature/home/presentation/view/widget/CustomMapSection.dart';
+import 'package:citifix/feature/workerFeature/home/presentation/view/widget/CustomtaskListView.dart';
+import 'package:citifix/feature/workerFeature/home/presentation/view/widget/HomeAppBar.dart';
+import 'package:citifix/feature/workerFeature/home/presentation/view/widget/WorkAllertVrefication.dart';
+import 'package:citifix/feature/workerFeature/home/presentation/view/widget/WorkerDashBoard.dart';
+import 'package:citifix/feature/workerFeature/home/presentation/view/widget/workerCard.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {

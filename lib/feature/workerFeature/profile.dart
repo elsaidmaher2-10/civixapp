@@ -20,13 +20,11 @@ class _WorkerProfileScreenState extends State<WorkerProfileScreen> {
       body: SafeArea(
         child: Stack(
           children: [
-
             SingleChildScrollView(
               padding: const EdgeInsets.only(bottom: 100),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-
                   Container(
                     color: Colors.white,
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),

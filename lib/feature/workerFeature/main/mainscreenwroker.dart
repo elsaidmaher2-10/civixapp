@@ -1,6 +1,6 @@
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
-import 'package:citifix/feature/workerFeature/home/Home.dart';
+import 'package:citifix/feature/workerFeature/home/presentation/view/Home.dart';
 import 'package:citifix/feature/workerFeature/main/Manager/cubit/worker_cubit_cubit.dart';
 import 'package:citifix/feature/workerFeature/profile/profle.dart';
 import 'package:citifix/feature/workerFeature/tasks/tasks.dart';

@@ -1,33 +1,5 @@
+import 'package:citifix/core/resource/colormanager.dart';
 import 'package:flutter/material.dart';
-
-class ColorManger {
-  static const primary = Color(0xFFFF7A00);
-  static const onPrimary = Color(0xFFFFFFFF);
-  static const background = Color(0xFFFFFFFF);
-  static const surface = Color(0xFFF5F5F5);
-  static const onSurface = Color(0xFF222222);
-  static const secondary = Color(0xFF777777);
-  static const error = Color(0xFFFF3B30);
-  static const success = Color(0xFF34C759);
-  static const outline = Color(0xFFD1D1D1);
-  static const surfaceVariant = Color(0xFFE0E0E0);
-  static const Color primaryFixed = Color(0xFFFF7A00);
-  static const Color surfaceLowest = Color(0xFFFFFFFF);
-  static const Color onSurfaceVariant = Color(0xFF5A5C5C);
-  static const Color surfaceContainerHighest = Color(0xFFDBDDDD);
-  static const Color surfaceContainer = Color(0xFFE7E8E8);
-  static const Color errorContainer = Color(0xFFF95630);
-  static const Color onErrorContainer = Color(0xFF520C00);
-  static const Color availableContainer = Color(0xFFF9BD26);
-  static const Color onAvailableContainer = Color(0xFF543C00);
-  static const Color inProgressContainer = Color(0xFFFF7B04);
-  static const Color onInProgressContainer = Color(0xFF3D1800);
-  static const LinearGradient kineticGradient = LinearGradient(
-    colors: [primary, primaryFixed],
-    begin: Alignment.topLeft,
-    end: Alignment.bottomRight,
-  );
-}
 
 class VerificationFailedScreen extends StatelessWidget {
   const VerificationFailedScreen({super.key});

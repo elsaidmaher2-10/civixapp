@@ -1,43 +1,6 @@
+import 'package:citifix/core/resource/colormanager.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Global Gate - Verification Complete',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        scaffoldBackgroundColor: const Color(0xFFFFFFFF), // bg-background
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFFFF7A00)),
-        textTheme: GoogleFonts.interTextTheme(),
-      ),
-      home: const VerificationCompleteScreen(),
-    );
-  }
-}
-
-// --- Colors translated from Tailwind config ---
-class ColorManger {
-  static const primary = Color(0xFFFF7A00);
-  static const background = Color(0xFFFFFFFF);
-  static const surface = Color(0xFFFFFFFF);
-  static const onSurface = Color(0xFF222222);
-  static const secondary = Color(0xFF777777);
-  static const success = Color(0xFF34C759);
-
-  // Surface variations
-  static const surfaceVariant = Color(0xFFF5F5F5);
-  static const surfaceContainerLow = Color(0xFFF5F5F5);
-  static const surfaceContainerLowest = Color(0xFFFFFFFF);
-  static const surfaceContainerHigh = Color(0xFFF5F5F5);
-}
 
 class VerificationCompleteScreen extends StatelessWidget {
   const VerificationCompleteScreen({super.key});

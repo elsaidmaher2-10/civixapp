@@ -1,7 +1,7 @@
 import 'package:citifix/core/resource/assetvaluemanger.dart';
 import 'package:citifix/core/resource/colormanager.dart';
-import 'package:citifix/feature/workerFeature/home/mapController/cubit/map_controller_cubit.dart';
-import 'package:citifix/feature/workerFeature/home/mapController/cubit/map_controller_state.dart';
+import 'package:citifix/feature/workerFeature/home/presentation/manager/mapController/cubit/map_controller_cubit.dart';
+import 'package:citifix/feature/workerFeature/home/presentation/manager/mapController/cubit/map_controller_state.dart';
 import 'package:flutter/material.dart';
 import 'package:geo_fence_utils/geo_fence_utils.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

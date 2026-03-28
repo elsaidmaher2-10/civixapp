@@ -1,5 +1,5 @@
 import 'package:citifix/core/service/LocationService.dart';
-import 'package:citifix/feature/workerFeature/home/mapController/cubit/map_controller_state.dart';
+import 'package:citifix/feature/workerFeature/home/presentation/manager/mapController/cubit/map_controller_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geo_fence_utils/geo_fence_utils.dart';
 import 'package:latlong2/latlong.dart';
