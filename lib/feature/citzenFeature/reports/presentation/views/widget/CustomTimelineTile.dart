@@ -29,18 +29,17 @@ class CustomTimelineTile extends StatelessWidget {
         indicatorStyle: IndicatorStyle(
           width: 24.w,
           height: 24.w,
-          padding: EdgeInsets.zero, 
+          padding: EdgeInsets.zero,
           color: isDone ? ColorManger.kPrimary : Colors.grey[300]!,
         ),
 
         endChild: Container(
           padding: EdgeInsetsDirectional.only(
-            start: 12.w, 
+            start: 12.w,
             top: 20.h,
             bottom: 20.h,
           ),
-          alignment: AlignmentDirectional
-              .centerStart,
+          alignment: AlignmentDirectional.centerStart,
           child: Text(
             title,
             textAlign: TextAlign.start,

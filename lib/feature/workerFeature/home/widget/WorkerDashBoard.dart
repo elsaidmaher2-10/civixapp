@@ -1,8 +1,43 @@
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:flutter/material.dart';
 
-class WorkerDashboard extends StatelessWidget {
+class WorkerDashboard extends StatefulWidget {
   const WorkerDashboard({super.key});
+
+  @override
+  State<WorkerDashboard> createState() => _WorkerDashboardState();
+}
+
+class _WorkerDashboardState extends State<WorkerDashboard>
+    with SingleTickerProviderStateMixin {
+  late AnimationController animationController;
+  late Animation<double> animation;
+  @override
+  @override
+  void initState() {
+    super.initState();
+
+    animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 1500),
+    );
+
+    animation = Tween<double>(begin: 0, end: 0.9).animate(
+      CurvedAnimation(parent: animationController, curve: Curves.easeOutQuart),
+    );
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) {
+        animationController.forward();
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    animationController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -173,14 +208,18 @@ class WorkerDashboard extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 8),
-              LinearProgressIndicator(
-                value: 0.9,
-                backgroundColor: ColorManger.surfaceContainer,
-                valueColor: AlwaysStoppedAnimation<Color>(
-                  ColorManger.primaryColor,
-                ),
-                minHeight: 6,
-                borderRadius: BorderRadius.circular(8),
+              AnimatedBuilder(
+                animation: animation,
+                builder: (BuildContext context, Widget? child) =>
+                    LinearProgressIndicator(
+                      value: animation.value,
+                      backgroundColor: ColorManger.surfaceContainer,
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                        ColorManger.primaryColor,
+                      ),
+                      minHeight: 6,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
               ),
             ],
           ),

@@ -27,6 +27,7 @@ class _MainscreenwrokerState extends State<Mainscreenwroker> {
         return Scaffold(
           body: _pages[state],
           bottomNavigationBar: BottomNavigationBar(
+            backgroundColor: ColorManger.white,
             currentIndex: state,
             selectedItemColor: ColorManger.workerprimary,
             unselectedItemColor: Colors.grey,

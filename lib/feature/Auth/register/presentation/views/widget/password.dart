@@ -49,14 +49,10 @@ class PasswordField extends StatelessWidget {
 
                 suffix: IconButton(
                   onPressed: () {
-                    context
-                        .read<VisibleeyeCubit>()
-                        .chanagevisbilitypassword();
+                    context.read<VisibleeyeCubit>().chanagevisbilitypassword();
                   },
                   icon: Icon(
-                    isHidden
-                        ? Icons.visibility_off
-                        : Icons.remove_red_eye,
+                    isHidden ? Icons.visibility_off : Icons.remove_red_eye,
                     color: ColorManger.lightGrey2,
                   ),
                 ),

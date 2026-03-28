@@ -1,7 +1,6 @@
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:flutter/material.dart';
 
-
 class CustomtaskListView extends StatelessWidget {
   const CustomtaskListView({super.key});
 

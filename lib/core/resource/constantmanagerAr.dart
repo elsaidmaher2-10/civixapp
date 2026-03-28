@@ -24,8 +24,7 @@ class Constantmanagerar {
     ),
     Onbroadingmodel(
       title: "حسّن مدينتك",
-      subtitle:
-          "شارك مجتمعك في جعل مدينتك مكانًا أفضل للجميع. كل بلاغ مهم!",
+      subtitle: "شارك مجتمعك في جعل مدينتك مكانًا أفضل للجميع. كل بلاغ مهم!",
       image: "assets/onbroadingimage/3.svg",
     ),
   ];
@@ -105,8 +104,7 @@ class Constantmanagerar {
   static String location = "الموقع";
   static String selectcategory = "اختر الفئة";
 
-  static String hintReportDescription =
-      "اكتب تفاصيل البلاغ";
+  static String hintReportDescription = "اكتب تفاصيل البلاغ";
 
   static String labeldescription = "وصف البلاغ";
   static String descriptionTitle = "وصف البلاغ";
@@ -139,4 +137,6 @@ class Constantmanagerar {
   static const arabic = "العربية";
 
   static String editProfile = 'تعديل الملف الشخصي';
+
+  static String stayfocus = 'Stay focused and keep delivering';
 }

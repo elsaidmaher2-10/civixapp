@@ -35,4 +35,45 @@ class ColorManger {
   static final Color bgbackground = const Color(0xFFF6F6F6);
   static const Color workerprimary = Color(0xFFFF7B00);
   static const Color workerbgLight = Color(0xFFF8F7F5);
+
+  static const background = Color(0xFFFFFFFF);
+
+  static const secondary = Color(0xFF777777);
+
+  static const success = Color(0xFF34C759);
+
+  static const outline = Color(0xFFDDDDDD);
+
+  static const onPrimary = Color(0xFFFFFFFF);
+
+  static const error = Color(0xFFFF3B30);
+
+  static const surfaceVariant = Color(0xFFE0E0E0);
+
+
+  static const Color surfaceLowest = Color(0xFFFFFFFF);
+
+
+  static const Color surfaceContainerHighest = Color(0xFFDBDDDD);
+
+
+  static const Color errorContainer = Color(0xFFF95630);
+
+  static const Color onErrorContainer = Color(0xFF520C00);
+
+  static const Color availableContainer = Color(0xFFF9BD26);
+
+  static const Color onAvailableContainer = Color(0xFF543C00);
+
+  static const Color inProgressContainer = Color(0xFFFF7B04);
+
+  static const Color onInProgressContainer = Color(0xFF3D1800);
+
+  static const LinearGradient kineticGradient = LinearGradient(
+    colors: [primary, primaryFixed],
+
+    begin: Alignment.topLeft,
+
+    end: Alignment.bottomRight,
+  );
 }

@@ -1,3 +1,4 @@
+import 'package:citifix/core/resource/colormanager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +12,7 @@ class TaskInfoSection extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: ColorManger.surface,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(color: Colors.grey.shade200),
       ),
@@ -54,7 +55,7 @@ class TaskInfoSection extends StatelessWidget {
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.w800,
-              color: AppColors.onSurface,
+              color: ColorManger.onSurface,
               fontFamily: 'Manrope',
             ),
           ),
@@ -63,7 +64,7 @@ class TaskInfoSection extends StatelessWidget {
             'Main waterline ruptured in the basement utility room. Immediate pressure stabilization and valve replacement required.',
             style: TextStyle(
               fontSize: 14,
-              color: AppColors.onSurfaceVariant,
+              color: ColorManger.onSurfaceVariant,
               height: 1.5,
             ),
           ),

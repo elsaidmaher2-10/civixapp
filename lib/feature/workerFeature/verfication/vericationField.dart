@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class AppColors {
+class ColorManger {
   static const primary = Color(0xFFFF7A00);
   static const onPrimary = Color(0xFFFFFFFF);
   static const background = Color(0xFFFFFFFF);
@@ -63,21 +63,21 @@ class VerificationFailedScreen extends StatelessWidget {
 
   PreferredSizeWidget _buildAppBar() {
     return AppBar(
-      backgroundColor: AppColors.background.withOpacity(0.9),
+      backgroundColor: ColorManger.background.withOpacity(0.9),
       elevation: 0,
       surfaceTintColor: Colors.transparent,
       bottom: PreferredSize(
         preferredSize: const Size.fromHeight(1.0),
-        child: Container(color: AppColors.surface, height: 1.0),
+        child: Container(color: ColorManger.surface, height: 1.0),
       ),
       title: const Row(
         children: [
-          Icon(Icons.security, color: AppColors.primary),
+          Icon(Icons.security, color: ColorManger.primary),
           SizedBox(width: 8),
           Text(
             'Global Gate',
             style: TextStyle(
-              color: AppColors.onSurface,
+              color: ColorManger.onSurface,
               fontWeight: FontWeight.bold,
               fontSize: 18,
               letterSpacing: -0.5,
@@ -91,7 +91,7 @@ class VerificationFailedScreen extends StatelessWidget {
           child: const Text(
             'Verification',
             style: TextStyle(
-              color: AppColors.secondary,
+              color: ColorManger.secondary,
               fontWeight: FontWeight.w600,
             ),
           ),
@@ -101,7 +101,7 @@ class VerificationFailedScreen extends StatelessWidget {
           child: const Text(
             'Support',
             style: TextStyle(
-              color: AppColors.secondary,
+              color: ColorManger.secondary,
               fontWeight: FontWeight.w600,
             ),
           ),
@@ -118,13 +118,13 @@ class VerificationFailedScreen extends StatelessWidget {
           width: 80,
           height: 80,
           decoration: BoxDecoration(
-            color: AppColors.error.withOpacity(0.1),
+            color: ColorManger.error.withOpacity(0.1),
             shape: BoxShape.circle,
           ),
           child: const Center(
             child: Icon(
               Icons.warning_rounded,
-              color: AppColors.error,
+              color: ColorManger.error,
               size: 36,
             ),
           ),
@@ -136,7 +136,7 @@ class VerificationFailedScreen extends StatelessWidget {
           style: TextStyle(
             fontSize: 44,
             fontWeight: FontWeight.w800,
-            color: AppColors.onSurface,
+            color: ColorManger.onSurface,
             height: 1.1,
             letterSpacing: -0.5,
           ),
@@ -149,7 +149,7 @@ class VerificationFailedScreen extends StatelessWidget {
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 18,
-              color: AppColors.secondary,
+              color: ColorManger.secondary,
               height: 1.5,
             ),
           ),
@@ -162,10 +162,10 @@ class VerificationFailedScreen extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: ColorManger.surface,
         borderRadius: BorderRadius.circular(12),
         border: const Border(
-          left: BorderSide(color: AppColors.error, width: 4),
+          left: BorderSide(color: ColorManger.error, width: 4),
         ),
       ),
       child: Row(
@@ -173,7 +173,7 @@ class VerificationFailedScreen extends StatelessWidget {
         children: [
           const Padding(
             padding: EdgeInsets.only(top: 4.0),
-            child: Icon(Icons.report, color: AppColors.error, size: 24),
+            child: Icon(Icons.report, color: ColorManger.error, size: 24),
           ),
           const SizedBox(width: 16),
           Expanded(
@@ -185,7 +185,7 @@ class VerificationFailedScreen extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
-                    color: AppColors.onSurface,
+                    color: ColorManger.onSurface,
                   ),
                 ),
                 const SizedBox(height: 8),
@@ -207,7 +207,7 @@ class VerificationFailedScreen extends StatelessWidget {
           width: 6,
           height: 6,
           decoration: const BoxDecoration(
-            color: AppColors.error,
+            color: ColorManger.error,
             shape: BoxShape.circle,
           ),
         ),
@@ -217,7 +217,7 @@ class VerificationFailedScreen extends StatelessWidget {
           style: const TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w500,
-            color: AppColors.secondary,
+            color: ColorManger.secondary,
           ),
         ),
       ],
@@ -233,7 +233,7 @@ class VerificationFailedScreen extends StatelessWidget {
           style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
-            color: AppColors.onSurface,
+            color: ColorManger.onSurface,
           ),
         ),
         const SizedBox(height: 16),
@@ -249,9 +249,9 @@ class VerificationFailedScreen extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: ColorManger.surface,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: AppColors.outline),
+        border: Border.all(color: ColorManger.outline),
       ),
       child: Column(
         children: [
@@ -266,7 +266,7 @@ class VerificationFailedScreen extends StatelessWidget {
                     'Passport Photo Page',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: AppColors.onSurface,
+                      color: ColorManger.onSurface,
                       fontSize: 16,
                     ),
                   ),
@@ -275,7 +275,7 @@ class VerificationFailedScreen extends StatelessWidget {
                     children: [
                       Icon(
                         Icons.error_outline,
-                        color: AppColors.error,
+                        color: ColorManger.error,
                         size: 14,
                       ),
                       SizedBox(width: 4),
@@ -284,7 +284,7 @@ class VerificationFailedScreen extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w600,
-                          color: AppColors.error,
+                          color: ColorManger.error,
                         ),
                       ),
                     ],
@@ -296,8 +296,8 @@ class VerificationFailedScreen extends StatelessWidget {
                 icon: const Icon(Icons.upload, size: 16),
                 label: const Text('Re-upload'),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.primary,
-                  foregroundColor: AppColors.onPrimary,
+                  backgroundColor: ColorManger.primary,
+                  foregroundColor: ColorManger.onPrimary,
                   elevation: 2,
                   padding: const EdgeInsets.symmetric(
                     horizontal: 16,
@@ -319,7 +319,7 @@ class VerificationFailedScreen extends StatelessWidget {
             aspectRatio: 16 / 9,
             child: Container(
               decoration: BoxDecoration(
-                color: AppColors.surfaceVariant,
+                color: ColorManger.surfaceVariant,
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Stack(
@@ -334,11 +334,11 @@ class VerificationFailedScreen extends StatelessWidget {
                       colorBlendMode: BlendMode.saturation,
                     ),
                   ),
-                  Container(color: AppColors.onSurface.withOpacity(0.4)),
+                  Container(color: ColorManger.onSurface.withOpacity(0.4)),
                   const Center(
                     child: Icon(
                       Icons.hide_source,
-                      color: AppColors.background,
+                      color: ColorManger.background,
                       size: 40,
                     ),
                   ),
@@ -355,9 +355,9 @@ class VerificationFailedScreen extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: ColorManger.surface,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: AppColors.outline),
+        border: Border.all(color: ColorManger.outline),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -366,12 +366,12 @@ class VerificationFailedScreen extends StatelessWidget {
             'Review Information',
             style: TextStyle(
               fontWeight: FontWeight.bold,
-              color: AppColors.onSurface,
+              color: ColorManger.onSurface,
               fontSize: 16,
             ),
           ),
           const SizedBox(height: 12),
-          const Divider(color: AppColors.outline, height: 1),
+          const Divider(color: ColorManger.outline, height: 1),
           const SizedBox(height: 20),
 
           _buildInputGroup(
@@ -379,14 +379,14 @@ class VerificationFailedScreen extends StatelessWidget {
             initialValue: 'A1234567',
             hasError: true,
             errorMessage: "Number didn't match the image provided",
-            iconColor: AppColors.primary,
+            iconColor: ColorManger.primary,
           ),
           const SizedBox(height: 24),
           _buildInputGroup(
             label: 'Full Legal Name',
             hintText: 'Enter as shown on ID',
             hasError: false,
-            iconColor: AppColors.secondary,
+            iconColor: ColorManger.secondary,
           ),
         ],
       ),
@@ -411,7 +411,7 @@ class VerificationFailedScreen extends StatelessWidget {
             style: const TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w600,
-              color: AppColors.secondary,
+              color: ColorManger.secondary,
             ),
           ),
         ),
@@ -420,7 +420,7 @@ class VerificationFailedScreen extends StatelessWidget {
           decoration: InputDecoration(
             hintText: hintText,
             filled: true,
-            fillColor: AppColors.background,
+            fillColor: ColorManger.background,
             contentPadding: const EdgeInsets.symmetric(
               horizontal: 16,
               vertical: 16,
@@ -429,20 +429,20 @@ class VerificationFailedScreen extends StatelessWidget {
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
               borderSide: BorderSide(
-                color: hasError ? AppColors.error : AppColors.outline,
+                color: hasError ? ColorManger.error : ColorManger.outline,
               ),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
               borderSide: BorderSide(
                 color: hasError
-                    ? AppColors.error
-                    : AppColors.primary.withOpacity(0.5),
+                    ? ColorManger.error
+                    : ColorManger.primary.withOpacity(0.5),
                 width: 2,
               ),
             ),
           ),
-          style: const TextStyle(color: AppColors.onSurface, fontSize: 16),
+          style: const TextStyle(color: ColorManger.onSurface, fontSize: 16),
         ),
         if (hasError && errorMessage != null)
           Padding(
@@ -450,7 +450,7 @@ class VerificationFailedScreen extends StatelessWidget {
             child: Text(
               errorMessage,
               style: const TextStyle(
-                color: AppColors.error,
+                color: ColorManger.error,
                 fontSize: 10,
                 fontWeight: FontWeight.w600,
               ),
@@ -466,8 +466,8 @@ class VerificationFailedScreen extends StatelessWidget {
         ElevatedButton(
           onPressed: () {},
           style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.primary,
-            foregroundColor: AppColors.onPrimary,
+            backgroundColor: ColorManger.primary,
+            foregroundColor: ColorManger.onPrimary,
             minimumSize: const Size(double.infinity, 56),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
@@ -490,9 +490,9 @@ class VerificationFailedScreen extends StatelessWidget {
         OutlinedButton(
           onPressed: () {},
           style: OutlinedButton.styleFrom(
-            foregroundColor: AppColors.secondary,
+            foregroundColor: ColorManger.secondary,
             minimumSize: const Size(double.infinity, 56),
-            side: const BorderSide(color: AppColors.outline),
+            side: const BorderSide(color: ColorManger.outline),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
             ),
@@ -510,13 +510,13 @@ class VerificationFailedScreen extends StatelessWidget {
     return Center(
       child: RichText(
         text: const TextSpan(
-          style: TextStyle(fontSize: 14, color: AppColors.secondary),
+          style: TextStyle(fontSize: 14, color: ColorManger.secondary),
           children: [
             TextSpan(text: 'Need help? Visit our '),
             TextSpan(
               text: 'Verification Guide',
               style: TextStyle(
-                color: AppColors.primary,
+                color: ColorManger.primary,
                 fontWeight: FontWeight.bold,
                 decoration: TextDecoration.underline,
                 decorationColor: Color(0x4DFF7A00),

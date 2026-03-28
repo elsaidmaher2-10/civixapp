@@ -123,7 +123,6 @@ class MapControllerCubit extends Cubit<MapControllerState> {
       print(coords);
       return coords.map<LatLng>((e) => LatLng(e.$2, e.$1)).toList();
     } catch (e) {
-      print("OSRM ERROR: $e");
       return [];
     }
   }

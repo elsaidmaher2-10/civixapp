@@ -72,7 +72,7 @@ class Citifix extends StatelessWidget {
                       GlobalCupertinoLocalizations.delegate,
                     ],
                     supportedLocales: S.delegate.supportedLocales,
-                    initialRoute: Routes.workerMain,
+                    initialRoute: _initialRoute,
                     locale: Locale(currentLang),
                     onGenerateRoute: Routingmanger.onGenerateRoute,
                     title: Constantmanger.apptitle,

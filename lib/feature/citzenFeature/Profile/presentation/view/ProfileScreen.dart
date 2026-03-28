@@ -53,7 +53,8 @@ class ProfileScreen extends StatelessWidget {
           listeners: [
             BlocListener<UserProfileInfoCubit, UserProfileInfoState>(
               listener: (context, state) {
-                if (state is UserProfileImageUpdatedSuccess || state is UserProfileInfoError) {
+                if (state is UserProfileImageUpdatedSuccess ||
+                    state is UserProfileInfoError) {
                   ImagePickerController().reset();
                 }
               },
@@ -69,10 +70,9 @@ class ProfileScreen extends StatelessWidget {
                   PrefrenceManager().remove(Constantmanger.accessToken);
                   PrefrenceManager().remove(Constantmanger.refreshToken);
                   PrefrenceManager().remove(Constantmanger.userid);
-                  Navigator.of(context).pushNamedAndRemoveUntil(
-                    Routes.login,
-                    (route) => false,
-                  );
+                  Navigator.of(
+                    context,
+                  ).pushNamedAndRemoveUntil(Routes.login, (route) => false);
                 }
                 if (state is LogFailure) {
                   Customsnackbar.show(
@@ -94,17 +94,23 @@ class ProfileScreen extends StatelessWidget {
                       onTap: () async {
                         final image = await ImagePickerMenu.show(context);
                         if (image != null && context.mounted) {
-                          context.read<UserProfileInfoCubit>().updateUserProfleImage(image);
+                          context
+                              .read<UserProfileInfoCubit>()
+                              .updateUserProfleImage(image);
                         }
                       },
                     ),
                     const Profilesettings(),
                     SizedBox(height: ScreenUtilsManager.h24),
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: ScreenUtilsManager.w32),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: ScreenUtilsManager.w32,
+                      ),
                       child: logoutState is LogLoading
                           ? const Center(
-                              child: CupertinoActivityIndicator(color: ColorManger.kPrimary),
+                              child: CupertinoActivityIndicator(
+                                color: ColorManger.kPrimary,
+                              ),
                             )
                           : CustomButton(
                               onPressed: () => _onLogoutPressed(context),
@@ -140,7 +146,9 @@ class LogoutConfirmDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(ScreenUtilsManager.r20)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(ScreenUtilsManager.r20),
+      ),
       backgroundColor: Colors.white,
       title: Column(
         children: [
@@ -169,7 +177,10 @@ class LogoutConfirmDialog extends StatelessWidget {
       ),
       content: Text(
         S.of(context).logoutConfirmationMessage,
-        style: GoogleFonts.inter(fontSize: ScreenUtilsManager.s14, color: Colors.black54),
+        style: GoogleFonts.inter(
+          fontSize: ScreenUtilsManager.s14,
+          color: Colors.black54,
+        ),
         textAlign: TextAlign.center,
       ),
       actions: [
@@ -183,7 +194,9 @@ class LogoutConfirmDialog extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(ScreenUtilsManager.r10),
                   ),
-                  padding: EdgeInsets.symmetric(vertical: ScreenUtilsManager.h12),
+                  padding: EdgeInsets.symmetric(
+                    vertical: ScreenUtilsManager.h12,
+                  ),
                 ),
                 child: Text(
                   S.of(context).cancel,
@@ -205,7 +218,9 @@ class LogoutConfirmDialog extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(ScreenUtilsManager.r10),
                   ),
-                  padding: EdgeInsets.symmetric(vertical: ScreenUtilsManager.h12),
+                  padding: EdgeInsets.symmetric(
+                    vertical: ScreenUtilsManager.h12,
+                  ),
                 ),
                 child: Text(
                   S.of(context).logout,

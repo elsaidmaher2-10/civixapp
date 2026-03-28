@@ -1,3 +1,4 @@
+import 'package:citifix/core/resource/colormanager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +12,7 @@ class TaskOwnerHeader extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: ColorManger.surface,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(color: Colors.grey.shade200),
       ),
@@ -66,7 +67,7 @@ class TaskOwnerHeader extends StatelessWidget {
                         '4.8',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: AppColors.onSurface,
+                          color: ColorManger.onSurface,
                           fontSize: 12,
                         ),
                       ),
@@ -74,7 +75,7 @@ class TaskOwnerHeader extends StatelessWidget {
                       Text(
                         '• Task Owner',
                         style: TextStyle(
-                          color: AppColors.onSurfaceVariant,
+                          color: ColorManger.onSurfaceVariant,
                           fontSize: 12,
                         ),
                       ),

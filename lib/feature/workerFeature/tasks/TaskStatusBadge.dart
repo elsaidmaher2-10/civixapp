@@ -1,7 +1,6 @@
+import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/feature/workerFeature/tasks/testDummydata.dart';
 import 'package:flutter/cupertino.dart';
-
-import '../verfication/verficationinit.dart';
 
 class TaskStatusBadge extends StatelessWidget {
   final TaskStatus status;
@@ -11,13 +10,13 @@ class TaskStatusBadge extends StatelessWidget {
   Widget build(BuildContext context) {
     final (bgColor, textColor, label) = switch (status) {
       TaskStatus.available => (
-        AppColors.availableContainer,
-        AppColors.onAvailableContainer,
+        ColorManger.availableContainer,
+        ColorManger.onAvailableContainer,
         'AVAILABLE',
       ),
       TaskStatus.inProgress => (
-        AppColors.inProgressContainer,
-        AppColors.onInProgressContainer,
+        ColorManger.inProgressContainer,
+        ColorManger.onInProgressContainer,
         'IN PROGRESS',
       ),
       TaskStatus.completed => (

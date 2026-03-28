@@ -1,3 +1,4 @@
+import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/feature/workerFeature/tasks/taskScreen.dart';
 import 'package:citifix/feature/workerFeature/tasks/testDummydata.dart';
 import 'package:flutter/cupertino.dart';
@@ -19,7 +20,7 @@ class ActiveTaskCard extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.surfaceLowest,
+        color: ColorManger.surfaceLowest,
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
@@ -50,7 +51,7 @@ class ActiveTaskCard extends StatelessWidget {
                           fontFamily: 'Manrope',
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
-                          color: AppColors.onSurface,
+                          color: ColorManger.onSurface,
                         ),
                       ),
                     ),
@@ -64,7 +65,7 @@ class ActiveTaskCard extends StatelessWidget {
                   task.description,
                   style: const TextStyle(
                     fontSize: 14,
-                    color: AppColors.onSurfaceVariant,
+                    color: ColorManger.onSurfaceVariant,
                     height: 1.5,
                   ),
                   maxLines: 2,
@@ -75,7 +76,7 @@ class ActiveTaskCard extends StatelessWidget {
                   TaskProgressBar(progress: task.progress!),
                   const SizedBox(height: 24),
                 ],
-                const Divider(color: AppColors.surfaceContainer, height: 1),
+                Divider(color: ColorManger.surfaceContainer, height: 1),
                 const SizedBox(height: 16),
                 SizedBox(
                   width: double.infinity,

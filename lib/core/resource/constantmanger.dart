@@ -1,6 +1,5 @@
 import 'package:citifix/feature/citzenFeature/reports/data/Models/timelinestep/timelinestep.dart';
 import 'package:citifix/feature/citzenFeature/onbroading/model/onbroadingmodel.dart';
-import 'package:dartz/dartz.dart';
 
 class Constantmanger {
   static const String isOnboardingViewed = "is_show_on_board";
@@ -188,4 +187,18 @@ class Constantmanger {
   static const String daSHBOARD = "DASHBOARD";
 
   static const String tasks = 'TASKS';
+  static String welceommsg = 'Good Morning, Alex';
+
+  static String verificationPage = 'Verification Page';
+  static const String mainTitle = "Verify Your\nCredentials";
+  static const String subTitle =
+      "Complete these steps to access the secure network.";
+  static const String step1Title = "Identity Documents";
+  static const String step1Label = "Step 1 of 3";
+  static const String step2Title = "Workspace";
+  static const String step2Label = "Step 2 of 3";
+  static const String step3Title = "Service Category";
+  static const String step3Label = "Step 3 of 3";
+  static const String dropdownHint = "Select your work zone";
+  static const String verifyButtonText = "Verify Now";
 }

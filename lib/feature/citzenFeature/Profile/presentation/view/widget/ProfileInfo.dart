@@ -62,7 +62,6 @@ class ProfileInfo extends StatelessWidget {
           );
         }
 
-
         return Column(
           children: [
             SizedBox(height: ScreenUtilsManager.h32),

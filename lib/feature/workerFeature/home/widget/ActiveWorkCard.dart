@@ -1,7 +1,6 @@
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:flutter/material.dart';
 
-
 class ActiveWorkCard extends StatelessWidget {
   const ActiveWorkCard({super.key});
 

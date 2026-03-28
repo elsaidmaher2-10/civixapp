@@ -5,7 +5,7 @@ import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/core/widget/customtextfromfield.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/views/widget/SimpleDropdown.dart';
-import 'package:citifix/generated/l10n.dart'; // استيراد ملف الترجمة
+import 'package:citifix/generated/l10n.dart';
 
 class ReportFormFields extends StatelessWidget {
   final TextEditingController titleController;
@@ -25,7 +25,7 @@ class ReportFormFields extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start, 
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildSectionTitle(S.of(context).reportTitleLabel),
         SizedBox(height: ScreenUtilsManager.h16),
@@ -58,7 +58,7 @@ class ReportFormFields extends StatelessWidget {
             }
             return null;
           },
-          maxLines: 4, 
+          maxLines: 4,
           hinttext: S.of(context).descriptionHint,
           lable: S.of(context).descriptionLabel,
           controller: descriptionController,
@@ -68,10 +68,7 @@ class ReportFormFields extends StatelessWidget {
 
         _buildSectionTitle(S.of(context).selectCategory),
         SizedBox(height: ScreenUtilsManager.h16),
-        CategoryDropdown(
-          onChanged: onCategoryChanged, 
-          controller: controller
-        ),
+        CategoryDropdown(onChanged: onCategoryChanged, controller: controller),
       ],
     );
   }

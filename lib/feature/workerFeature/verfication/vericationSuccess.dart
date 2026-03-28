@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
 }
 
 // --- Colors translated from Tailwind config ---
-class AppColors {
+class ColorManger {
   static const primary = Color(0xFFFF7A00);
   static const background = Color(0xFFFFFFFF);
   static const surface = Color(0xFFFFFFFF);
@@ -77,21 +77,21 @@ class VerificationCompleteScreen extends StatelessWidget {
   // --- App Bar ---
   PreferredSizeWidget _buildAppBar() {
     return AppBar(
-      backgroundColor: AppColors.background.withOpacity(0.9),
+      backgroundColor: ColorManger.background.withOpacity(0.9),
       elevation: 0,
       surfaceTintColor: Colors.transparent,
       bottom: PreferredSize(
         preferredSize: const Size.fromHeight(1.0),
-        child: Container(color: AppColors.surfaceVariant, height: 1.0),
+        child: Container(color: ColorManger.surfaceVariant, height: 1.0),
       ),
       title: Row(
         children: [
-          const Icon(Icons.security, color: AppColors.primary),
+          const Icon(Icons.security, color: ColorManger.primary),
           const SizedBox(width: 12),
           Text(
             'Global Gate',
             style: GoogleFonts.manrope(
-              color: AppColors.onSurface,
+              color: ColorManger.onSurface,
               fontWeight: FontWeight.bold,
               fontSize: 18,
               letterSpacing: -0.5,
@@ -106,13 +106,13 @@ class VerificationCompleteScreen extends StatelessWidget {
             width: 32,
             height: 32,
             decoration: const BoxDecoration(
-              color: AppColors.surfaceContainerHigh,
+              color: ColorManger.surfaceContainerHigh,
               shape: BoxShape.circle,
             ),
             child: const Icon(
               Icons.person,
               size: 18,
-              color: AppColors.onSurface,
+              color: ColorManger.onSurface,
             ),
           ),
         ),
@@ -131,10 +131,10 @@ class VerificationCompleteScreen extends StatelessWidget {
               height: 120,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: AppColors.success.withOpacity(0.2),
+                color: ColorManger.success.withOpacity(0.2),
                 boxShadow: [
                   BoxShadow(
-                    color: AppColors.success.withOpacity(0.3),
+                    color: ColorManger.success.withOpacity(0.3),
                     blurRadius: 40,
                     spreadRadius: 20,
                   ),
@@ -145,7 +145,7 @@ class VerificationCompleteScreen extends StatelessWidget {
               width: 96,
               height: 96,
               decoration: BoxDecoration(
-                color: AppColors.success,
+                color: ColorManger.success,
                 shape: BoxShape.circle,
                 boxShadow: [
                   BoxShadow(
@@ -170,7 +170,7 @@ class VerificationCompleteScreen extends StatelessWidget {
           style: GoogleFonts.manrope(
             fontSize: 32,
             fontWeight: FontWeight.w800,
-            color: AppColors.onSurface,
+            color: ColorManger.onSurface,
             height: 1.2,
             letterSpacing: -0.5,
           ),
@@ -183,7 +183,7 @@ class VerificationCompleteScreen extends StatelessWidget {
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 16,
-              color: AppColors.secondary,
+              color: ColorManger.secondary,
               height: 1.5,
             ),
           ),
@@ -222,9 +222,9 @@ class VerificationCompleteScreen extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        color: AppColors.surfaceContainerLowest,
+        color: ColorManger.surfaceContainerLowest,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: AppColors.surfaceVariant),
+        border: Border.all(color: ColorManger.surfaceVariant),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -234,14 +234,14 @@ class VerificationCompleteScreen extends StatelessWidget {
             style: const TextStyle(
               fontSize: 10,
               fontWeight: FontWeight.w600,
-              color: AppColors.secondary,
+              color: ColorManger.secondary,
               letterSpacing: 1.2,
             ),
           ),
           const SizedBox(height: 8),
           Row(
             children: [
-              Icon(icon, color: AppColors.primary, size: 20),
+              Icon(icon, color: ColorManger.primary, size: 20),
               const SizedBox(width: 8),
               // Wrap the Text in an Expanded widget so it doesn't overflow!
               Expanded(
@@ -250,7 +250,7 @@ class VerificationCompleteScreen extends StatelessWidget {
                   style: GoogleFonts.manrope(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
-                    color: AppColors.onSurface,
+                    color: ColorManger.onSurface,
                   ),
                   // Optional: adds an ellipsis (...) if the text is still too long
                   overflow: TextOverflow.ellipsis,
@@ -268,9 +268,9 @@ class VerificationCompleteScreen extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        color: AppColors.surfaceContainerLow,
+        color: ColorManger.surfaceContainerLow,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: AppColors.surfaceVariant),
+        border: Border.all(color: ColorManger.surfaceVariant),
       ),
       child: Row(
         children: [
@@ -288,7 +288,11 @@ class VerificationCompleteScreen extends StatelessWidget {
                 ),
               ],
             ),
-            child: const Icon(Icons.badge, color: AppColors.primary, size: 20),
+            child: const Icon(
+              Icons.badge,
+              color: ColorManger.primary,
+              size: 20,
+            ),
           ),
           const SizedBox(width: 16),
           Expanded(
@@ -300,20 +304,20 @@ class VerificationCompleteScreen extends StatelessWidget {
                   style: GoogleFonts.manrope(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
-                    color: AppColors.onSurface,
+                    color: ColorManger.onSurface,
                   ),
                 ),
                 const SizedBox(height: 2),
                 const Text(
                   'Expires Oct 2025',
-                  style: TextStyle(fontSize: 12, color: AppColors.secondary),
+                  style: TextStyle(fontSize: 12, color: ColorManger.secondary),
                 ),
               ],
             ),
           ),
           Icon(
             Icons.chevron_right,
-            color: AppColors.secondary.withOpacity(0.4),
+            color: ColorManger.secondary.withOpacity(0.4),
           ),
         ],
       ),
@@ -325,9 +329,9 @@ class VerificationCompleteScreen extends StatelessWidget {
       height: 128,
       width: double.infinity,
       decoration: BoxDecoration(
-        color: AppColors.surfaceContainerLow,
+        color: ColorManger.surfaceContainerLow,
         borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: AppColors.surfaceVariant),
+        border: Border.all(color: ColorManger.surfaceVariant),
       ),
       child: Stack(
         children: [
@@ -338,7 +342,7 @@ class VerificationCompleteScreen extends StatelessWidget {
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
                 colors: [
-                  AppColors.primary.withOpacity(0.05),
+                  ColorManger.primary.withOpacity(0.05),
                   Colors.transparent,
                 ],
               ),
@@ -354,7 +358,7 @@ class VerificationCompleteScreen extends StatelessWidget {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 border: Border.all(
-                  color: AppColors.primary.withOpacity(0.05),
+                  color: ColorManger.primary.withOpacity(0.05),
                   width: 20,
                 ),
               ),
@@ -371,7 +375,7 @@ class VerificationCompleteScreen extends StatelessWidget {
                   width: 48,
                   height: 4,
                   decoration: BoxDecoration(
-                    color: AppColors.primary.withOpacity(0.2),
+                    color: ColorManger.primary.withOpacity(0.2),
                     borderRadius: BorderRadius.circular(4),
                   ),
                 ),
@@ -380,7 +384,7 @@ class VerificationCompleteScreen extends StatelessWidget {
                   width: 96,
                   height: 4,
                   decoration: BoxDecoration(
-                    color: AppColors.primary.withOpacity(0.1),
+                    color: ColorManger.primary.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(4),
                   ),
                 ),
@@ -407,14 +411,14 @@ class VerificationCompleteScreen extends StatelessWidget {
         ElevatedButton(
           onPressed: () {},
           style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.primary,
+            backgroundColor: ColorManger.primary,
             foregroundColor: Colors.white,
             minimumSize: const Size(double.infinity, 56),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16),
             ),
             elevation: 4,
-            shadowColor: AppColors.primary.withOpacity(0.5),
+            shadowColor: ColorManger.primary.withOpacity(0.5),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -435,7 +439,7 @@ class VerificationCompleteScreen extends StatelessWidget {
         TextButton(
           onPressed: () {},
           style: TextButton.styleFrom(
-            foregroundColor: AppColors.onSurface,
+            foregroundColor: ColorManger.onSurface,
             minimumSize: const Size(double.infinity, 48),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16),

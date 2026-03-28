@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/feature/workerFeature/tasks/taskFilter.dart';
 import 'package:citifix/feature/workerFeature/tasks/tasksearchbar.dart';
 import 'package:citifix/feature/workerFeature/tasks/testDummydata.dart';
@@ -68,13 +69,13 @@ class HighPriorityBadge extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
       decoration: BoxDecoration(
-        color: AppColors.errorContainer,
+        color: ColorManger.errorContainer,
         borderRadius: BorderRadius.circular(24),
       ),
       child: const Text(
         'HIGH PRIORITY',
         style: TextStyle(
-          color: AppColors.onErrorContainer,
+          color: ColorManger.onErrorContainer,
           fontSize: 10,
           fontWeight: FontWeight.bold,
           letterSpacing: 1,
@@ -95,14 +96,14 @@ class TaskAddressRow extends StatelessWidget {
         const Icon(
           Icons.location_on_outlined,
           size: 18,
-          color: AppColors.onSurfaceVariant,
+          color: ColorManger.onSurfaceVariant,
         ),
         const SizedBox(width: 6),
         Text(
           address,
           style: const TextStyle(
             fontSize: 14,
-            color: AppColors.onSurfaceVariant,
+            color: ColorManger.onSurfaceVariant,
           ),
         ),
       ],
@@ -127,7 +128,7 @@ class TaskProgressBar extends StatelessWidget {
               style: TextStyle(
                 fontSize: 10,
                 fontWeight: FontWeight.bold,
-                color: AppColors.onSurfaceVariant,
+                color: ColorManger.onSurfaceVariant,
               ),
             ),
             Text(
@@ -135,7 +136,7 @@ class TaskProgressBar extends StatelessWidget {
               style: const TextStyle(
                 fontSize: 10,
                 fontWeight: FontWeight.bold,
-                color: AppColors.onSurfaceVariant,
+                color: ColorManger.onSurfaceVariant,
               ),
             ),
           ],
@@ -145,7 +146,7 @@ class TaskProgressBar extends StatelessWidget {
           height: 6,
           width: double.infinity,
           decoration: BoxDecoration(
-            color: AppColors.surfaceContainerHighest,
+            color: ColorManger.surfaceContainerHighest,
             borderRadius: BorderRadius.circular(3),
           ),
           child: FractionallySizedBox(
@@ -153,7 +154,7 @@ class TaskProgressBar extends StatelessWidget {
             widthFactor: 0.8,
             child: Container(
               decoration: BoxDecoration(
-                gradient: AppColors.kineticGradient,
+                gradient: ColorManger.kineticGradient,
                 borderRadius: BorderRadius.circular(3),
               ),
             ),
@@ -189,7 +190,7 @@ class AvailableActions extends StatelessWidget {
         ),
         Container(
           decoration: BoxDecoration(
-            gradient: AppColors.kineticGradient,
+            gradient: ColorManger.kineticGradient,
             borderRadius: BorderRadius.circular(8),
           ),
           child: Material(
@@ -231,7 +232,7 @@ class InProgressActions extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8),
             ),
-            foregroundColor: AppColors.primary,
+            foregroundColor: ColorManger.primary,
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
             textStyle: const TextStyle(
               fontWeight: FontWeight.bold,
@@ -243,7 +244,7 @@ class InProgressActions extends StatelessWidget {
         ElevatedButton(
           onPressed: () {},
           style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.onSurface,
+            backgroundColor: ColorManger.onSurface,
             foregroundColor: Colors.white,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8),

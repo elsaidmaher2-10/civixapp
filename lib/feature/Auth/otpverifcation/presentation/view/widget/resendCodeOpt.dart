@@ -15,8 +15,7 @@ class _ResendCodeOptState extends State<ResendCodeOpt> {
   int counter = 60;
   late Timer timer;
 
-  StreamController<int> streamController =
-      StreamController<int>.broadcast();
+  StreamController<int> streamController = StreamController<int>.broadcast();
 
   @override
   void initState() {

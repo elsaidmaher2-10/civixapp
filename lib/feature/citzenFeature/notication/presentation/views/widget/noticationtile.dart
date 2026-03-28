@@ -34,8 +34,8 @@ class NotificationTile extends StatelessWidget {
                   : ColorManger.surfaceContainerLowest,
               borderRadius: BorderRadius.circular(16),
               border: Border.all(
-                color: item.isRead 
-                    ? Colors.grey.shade200 
+                color: item.isRead
+                    ? Colors.grey.shade200
                     : ColorManger.primary.withOpacity(0.3),
                 width: 1,
               ),
@@ -46,16 +46,16 @@ class NotificationTile extends StatelessWidget {
                         color: ColorManger.primary.withOpacity(0.05),
                         blurRadius: 10,
                         offset: const Offset(0, 4),
-                      )
+                      ),
                     ],
             ),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _buildIconContainer(),
-            
+
                 const SizedBox(width: 16),
-                
+
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -64,7 +64,9 @@ class NotificationTile extends StatelessWidget {
                         item.title,
                         style: TextStyle(
                           fontSize: 16,
-                          fontWeight: item.isRead ? FontWeight.w600 : FontWeight.bold,
+                          fontWeight: item.isRead
+                              ? FontWeight.w600
+                              : FontWeight.bold,
                           color: item.isRead ? Colors.black87 : Colors.black,
                         ),
                       ),
@@ -73,16 +75,18 @@ class NotificationTile extends StatelessWidget {
                         item.message,
                         style: TextStyle(
                           fontSize: 14,
-                          color: item.isRead ? Colors.grey.shade600 : Colors.grey.shade800,
+                          color: item.isRead
+                              ? Colors.grey.shade600
+                              : Colors.grey.shade800,
                           height: 1.4,
                         ),
                       ),
                     ],
                   ),
                 ),
-                
+
                 const SizedBox(width: 12),
-                
+
                 _buildDeleteButton(),
               ],
             ),
@@ -98,11 +102,13 @@ class NotificationTile extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
-            color: item.isRead ? Colors.grey.shade100 : ColorManger.primaryFixed,
+            color: item.isRead
+                ? Colors.grey.shade100
+                : ColorManger.primaryFixed,
             shape: BoxShape.circle,
           ),
           child: Icon(
-            Icons.notifications_rounded, 
+            Icons.notifications_rounded,
             color: item.isRead ? Colors.grey.shade500 : ColorManger.primary,
             size: 24,
           ),
@@ -117,7 +123,7 @@ class NotificationTile extends StatelessWidget {
               decoration: BoxDecoration(
                 color: Colors.redAccent,
                 shape: BoxShape.circle,
-                border: Border.all(color: Colors.white, width: 2), 
+                border: Border.all(color: Colors.white, width: 2),
               ),
             ),
           ),
@@ -134,7 +140,7 @@ class NotificationTile extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Icon(
-            Icons.delete_outline_rounded, 
+            Icons.delete_outline_rounded,
             color: Colors.red.shade300,
             size: 22,
           ),

@@ -4,8 +4,6 @@ import 'package:citifix/core/DI/getit.dart';
 import 'package:citifix/core/database/local/prefmanger.dart';
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
-import 'package:citifix/core/routing/routes.dart';
-import 'package:citifix/core/routing/routingmanger.dart';
 import 'package:citifix/core/service/local_notification_service.dart';
 import 'package:citifix/core/service/notification_service.dart';
 import 'package:citifix/core/service/observer.dart';

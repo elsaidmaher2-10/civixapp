@@ -1,3 +1,4 @@
+import 'package:citifix/core/resource/assetvaluemanger.dart';
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/feature/workerFeature/home/mapController/cubit/map_controller_cubit.dart';
 import 'package:citifix/feature/workerFeature/home/mapController/cubit/map_controller_state.dart';
@@ -7,21 +8,22 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:lottie/lottie.dart' hide Marker;
+
 class CustomMapSection extends StatefulWidget {
   const CustomMapSection({super.key});
   @override
   State<CustomMapSection> createState() => _CustomMapSectionState();
 }
+
 class _CustomMapSectionState extends State<CustomMapSection> {
   final MapController _mapController = MapController();
   bool _mapReady = false;
   LatLng? _currLocation;
-
   final List<LatLng> zonemLevel = [
     const LatLng(31.41663201768019, 31.860368768499974),
     const LatLng(31.40487411404046, 31.857285834514656),
-    const LatLng(31.405614165409748, 31.867787078402152),
-    const LatLng(31.40668311819574, 31.877999297228538),
+    const LatLng(31.405614165409748, 31.877787078402152),
+    const LatLng(31.40668311819574, 31.897999297228538),
   ];
 
   @override
@@ -119,12 +121,17 @@ class _CustomMapSectionState extends State<CustomMapSection> {
                           PolygonLayer(
                             polygons: [
                               Polygon(
-                                labelStyle: TextStyle(color: Colors.black),
-                                label: "Worker Zone",
                                 points: zonemLevel,
-                                color: Colors.red.withOpacity(0.3),
-                                borderColor: Colors.red,
-                                borderStrokeWidth: 1,
+                                color: ColorManger.lightBlue.withOpacity(0.15),
+                                borderColor: ColorManger.lightBlue,
+                                borderStrokeWidth: 2.5,
+                                isFilled: true,
+                                label: "ZONE A",
+                                labelStyle: TextStyle(
+                                  color: ColorManger.textBlack,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 10,
+                                ),
                               ),
                             ],
                           ),
@@ -135,7 +142,7 @@ class _CustomMapSectionState extends State<CustomMapSection> {
                               polylines: [
                                 Polyline(
                                   color: Colors.blue,
-                                  strokeWidth: 4,
+                                  strokeWidth: 2,
                                   points: state.routePoints,
                                 ),
                               ],
@@ -149,7 +156,7 @@ class _CustomMapSectionState extends State<CustomMapSection> {
                                   width: 60,
                                   height: 60,
                                   child: Lottie.asset(
-                                    "assets/location loading(1).json",
+                                    AssetValueManager.location,
                                   ),
                                 ),
                             ],

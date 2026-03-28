@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:citifix/core/resource/colormanager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -82,11 +83,11 @@ class _FilterChip extends StatelessWidget {
           margin: const EdgeInsets.only(right: 12),
           child: Material(
             color: isSelected
-                ? AppColors.primaryFixed
-                : AppColors.surfaceContainerHighest,
+                ? ColorManger.primaryFixed
+                : ColorManger.surfaceContainerHighest,
             borderRadius: BorderRadius.circular(24),
             shadowColor: isSelected
-                ? AppColors.primaryFixed.withOpacity(0.4)
+                ? ColorManger.primaryFixed.withOpacity(0.4)
                 : Colors.transparent,
             elevation: isSelected ? 4 : 0,
             child: InkWell(
@@ -102,7 +103,7 @@ class _FilterChip extends StatelessWidget {
                     letterSpacing: 0.5,
                     color: isSelected
                         ? Colors.white
-                        : AppColors.onSurfaceVariant,
+                        : ColorManger.onSurfaceVariant,
                   ),
                 ),
               ),

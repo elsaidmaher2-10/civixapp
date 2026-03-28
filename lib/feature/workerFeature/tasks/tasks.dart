@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/feature/workerFeature/home/widget/CustomMapSection.dart';
 import 'package:flutter/material.dart';
 import 'package:timeline_tile/timeline_tile.dart';
@@ -26,7 +27,7 @@ class TaskDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: ColorManger.background,
       appBar: _buildAppBar(context),
       bottomNavigationBar: const _TaskBottomBar(),
       body: SingleChildScrollView(
@@ -53,17 +54,17 @@ class TaskDetailsPage extends StatelessWidget {
 
   PreferredSizeWidget _buildAppBar(BuildContext context) {
     return AppBar(
-      backgroundColor: AppColors.surface,
+      backgroundColor: ColorManger.surface,
       elevation: 0,
       scrolledUnderElevation: 0,
       leading: IconButton(
-        icon: Icon(Icons.arrow_back, color: AppColors.onSurface),
+        icon: Icon(Icons.arrow_back, color: ColorManger.onSurface),
         onPressed: () => Navigator.pop(context),
       ),
       title: Text(
         'Task Details',
         style: TextStyle(
-          color: AppColors.onSurface,
+          color: ColorManger.onSurface,
           fontWeight: FontWeight.bold,
           fontSize: 18,
           fontFamily: 'Manrope',
@@ -71,7 +72,7 @@ class TaskDetailsPage extends StatelessWidget {
       ),
       actions: [
         IconButton(
-          icon: Icon(Icons.more_vert, color: AppColors.onSurfaceVariant),
+          icon: Icon(Icons.more_vert, color: ColorManger.onSurfaceVariant),
           onPressed: () {},
         ),
       ],
@@ -140,7 +141,7 @@ class _ActivityTimelineSectionState extends State<ActivityTimelineSection> {
     return Container(
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: ColorManger.surface,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(color: Colors.grey.shade200),
       ),
@@ -149,7 +150,7 @@ class _ActivityTimelineSectionState extends State<ActivityTimelineSection> {
         children: [
           Row(
             children: [
-              Icon(Icons.event_repeat, color: AppColors.primary, size: 16),
+              Icon(Icons.event_repeat, color: ColorManger.primary, size: 16),
               const SizedBox(width: 8),
               const Text(
                 'ACTIVITY TIMELINE',
@@ -184,12 +185,12 @@ class _ActivityTimelineSectionState extends State<ActivityTimelineSection> {
                         child: Container(
                           decoration: BoxDecoration(
                             color: step.state
-                                ? AppColors.primary
+                                ? ColorManger.primary
                                 : Colors.white,
                             shape: BoxShape.circle,
                             border: Border.all(
                               color: step.state
-                                  ? AppColors.primary
+                                  ? ColorManger.primary
                                   : Colors.grey.shade200,
                               width: step.state ? 4 : 1,
                             ),
@@ -207,7 +208,7 @@ class _ActivityTimelineSectionState extends State<ActivityTimelineSection> {
 
                     beforeLineStyle: LineStyle(
                       color: step.state
-                          ? AppColors.primary
+                          ? ColorManger.primary
                           : Colors.grey.shade200,
                       thickness: 2,
                     ),
@@ -216,7 +217,7 @@ class _ActivityTimelineSectionState extends State<ActivityTimelineSection> {
                           data[index].state &&
                               index + 1 < data.length &&
                               data[index + 1].state
-                          ? AppColors.primary
+                          ? ColorManger.primary
                           : Colors.grey.shade200,
                       thickness: 2,
                     ),
@@ -237,8 +238,8 @@ class _ActivityTimelineSectionState extends State<ActivityTimelineSection> {
                                 fontWeight: FontWeight.bold,
                                 fontFamily: 'Manrope',
                                 color: step.state
-                                    ? AppColors.primary
-                                    : AppColors.onSurface,
+                                    ? ColorManger.primary
+                                    : ColorManger.onSurface,
                               ),
                             ),
                             if (step.time.isNotEmpty)
@@ -277,7 +278,7 @@ class _IssuePhotosSection extends StatelessWidget {
           style: TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.bold,
-            color: AppColors.onSurfaceVariant,
+            color: ColorManger.onSurfaceVariant,
             letterSpacing: 1,
           ),
         ),
@@ -325,7 +326,7 @@ class _MapNavigationSection extends StatelessWidget {
           right: 40,
           child: Column(
             children: [
-              Icon(Icons.location_on, color: AppColors.primary, size: 40),
+              Icon(Icons.location_on, color: ColorManger.primary, size: 40),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                 decoration: BoxDecoration(
@@ -361,12 +362,12 @@ class _MapNavigationSection extends StatelessWidget {
                       width: 40,
                       height: 40,
                       decoration: BoxDecoration(
-                        color: AppColors.primary.withOpacity(0.1),
+                        color: ColorManger.primary.withOpacity(0.1),
                         shape: BoxShape.circle,
                       ),
                       child: Icon(
                         Icons.directions_car,
-                        color: AppColors.primary,
+                        color: ColorManger.primary,
                       ),
                     ),
 
@@ -379,7 +380,7 @@ class _MapNavigationSection extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 10,
                             fontWeight: FontWeight.bold,
-                            color: AppColors.primary,
+                            color: ColorManger.primary,
                             letterSpacing: 1,
                           ),
                         ),
@@ -390,7 +391,7 @@ class _MapNavigationSection extends StatelessWidget {
                               style: TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w800,
-                                color: AppColors.onSurface,
+                                color: ColorManger.onSurface,
                               ),
                             ),
                             Text(
@@ -410,7 +411,7 @@ class _MapNavigationSection extends StatelessWidget {
                 ElevatedButton(
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.primary,
+                    backgroundColor: ColorManger.primary,
                     foregroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
@@ -442,7 +443,7 @@ class _CompletionDataSection extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: ColorManger.surface,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(color: Colors.grey.shade200),
       ),
@@ -451,7 +452,7 @@ class _CompletionDataSection extends StatelessWidget {
         children: [
           Row(
             children: [
-              Icon(Icons.task_alt, color: AppColors.primary, size: 16),
+              Icon(Icons.task_alt, color: ColorManger.primary, size: 16),
               const SizedBox(width: 8),
               const Text(
                 'COMPLETION DATA',
@@ -495,7 +496,7 @@ class _CompletionDataSection extends StatelessWidget {
               height: 120,
               width: double.infinity,
               decoration: BoxDecoration(
-                color: AppColors.surface,
+                color: ColorManger.surface,
                 borderRadius: BorderRadius.circular(12),
                 border: Border.all(
                   color: Colors.grey.shade300,
@@ -538,7 +539,7 @@ class _TaskBottomBar extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(24.0),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: ColorManger.surface,
         border: Border(top: BorderSide(color: Colors.grey.shade200)),
       ),
       child: Container(
@@ -551,7 +552,7 @@ class _TaskBottomBar extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
           boxShadow: [
             BoxShadow(
-              color: AppColors.primary.withOpacity(0.3),
+              color: ColorManger.primary.withOpacity(0.3),
               blurRadius: 15,
               offset: const Offset(0, 4),
             ),

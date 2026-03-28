@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ScreenUtilsManager {
@@ -74,11 +75,14 @@ class ScreenUtilsManager {
 
   static double r14 = 14.r;
 
-   static double get s64 =>64.sp;
+  static double get h64 => 64.h;
+  static double get w64 => 64.w;
 
- static double get r15 =>15.r;
+  static double get s64 => 64.sp;
 
- static double get s22=>22.sp;
+  static double get r15 => 15.r;
+
+  static double get s22 => 22.sp;
 
   static double get w48 => 48.w;
 
@@ -90,4 +94,13 @@ class ScreenUtilsManager {
   static double get searchBorderWidth => 1.5;
 
   static double get h250 => 250.h;
+  static const double headerFontSize = 36.0;
+  static const double subHeaderFontSize = 16.0;
+  static const double sectionSpacing = 40.0;
+  static const double itemSpacing = 20.0;
+  static const double gridSpacing = 16.0;
+  static const double cardRadius = 20.0;
+  static const double buttonHeight = 60.0;
+  static const double childAspectRatio = 1.1;
+  static const EdgeInsets pagePadding = EdgeInsets.fromLTRB(24, 20, 24, 120);
 }

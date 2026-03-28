@@ -1,3 +1,4 @@
+import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/feature/workerFeature/tasks/taskScreen.dart';
 import 'package:citifix/feature/workerFeature/tasks/testDummydata.dart';
 import 'package:flutter/cupertino.dart';
@@ -22,7 +23,7 @@ class TaskCardImage extends StatelessWidget {
           Container(
             height: 192,
             width: double.infinity,
-            color: AppColors.primary.withOpacity(0.2),
+            color: ColorManger.primary.withOpacity(0.2),
           ),
         if (task.isHighPriority)
           const Positioned(top: 16, left: 16, child: HighPriorityBadge()),
