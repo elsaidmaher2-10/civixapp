@@ -1,7 +1,9 @@
 class ReportResponse {
   final int totalCount;
   final List<ReportModelWorker> items;
+
   ReportResponse({required this.totalCount, required this.items});
+
   factory ReportResponse.fromJson(Map<String, dynamic> json) {
     return ReportResponse(
       totalCount: json['totalCount'] ?? 0,

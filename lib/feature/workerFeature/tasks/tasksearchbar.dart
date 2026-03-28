@@ -1,31 +1,38 @@
 import 'package:citifix/core/resource/colormanager.dart';
+import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:flutter/material.dart';
 
 class TaskSearchBar extends StatelessWidget {
-  const TaskSearchBar({super.key});
+  const TaskSearchBar();
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: ColorManger.surfaceLowest,
-        borderRadius: BorderRadius.circular(12),
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(ScreenUtilsManager.r12),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.02),
-            blurRadius: 4,
-            offset: const Offset(0, 2),
+            color: Colors.black.withOpacity(0.03),
+            blurRadius: 15,
+            offset: const Offset(0, 8),
           ),
         ],
       ),
       child: TextField(
         decoration: InputDecoration(
-          hintText: 'Search tasks by name or location',
+          hintText: 'Search for tasks...',
           hintStyle: TextStyle(
-            color: ColorManger.onSurfaceVariant.withOpacity(0.6),
+            color: Colors.grey.shade400,
+            fontSize: ScreenUtilsManager.s14,
           ),
-          prefixIcon: const Icon(Icons.search, color: Color(0xFF767777)),
+          prefixIcon: Icon(
+            Icons.search_rounded,
+            color: ColorManger.primaryColor,
+          ),
           border: InputBorder.none,
-          contentPadding: const EdgeInsets.symmetric(vertical: 16),
+          contentPadding: EdgeInsets.symmetric(
+            vertical: ScreenUtilsManager.h16,
+          ),
         ),
       ),
     );

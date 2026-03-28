@@ -18,4 +18,5 @@ class Apiconstant {
   static String clearallnotification = "notifications/clear";
 
   static String workerdashboard = "Worker/dashboard";
+  static String workertasks = "Worker/my-reports";
 }

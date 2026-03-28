@@ -1,3 +1,5 @@
+
+
 import 'package:citifix/feature/workerFeature/home/data/repo/homrepo.dart';
 import 'package:citifix/feature/workerFeature/home/presentation/manager/dashbroadHomemanager/cubit/dashbroad_home_manager_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,6 +17,6 @@ class HomeCubit extends Cubit<HomeState> {
           ? failure.errors.join()
           : "Something went wrong";
       emit(HomeError(message));
-    }, (data) => emit(HomeSuccess(data)));
+    }, ( data) => emit(HomeSuccess(data)));
   }
 }
