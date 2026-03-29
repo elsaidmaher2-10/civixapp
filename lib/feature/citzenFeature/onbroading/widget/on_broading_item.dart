@@ -1,12 +1,9 @@
 import 'package:citifix/core/database/local/prefmanger.dart';
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
-import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/core/routing/routes.dart';
 import 'package:citifix/feature/citzenFeature/onbroading/controller/onbroadingprovider.dart';
-import 'package:citifix/feature/citzenFeature/onbroading/model/onbroadingmodel.dart';
 import 'package:citifix/feature/citzenFeature/onbroading/widget/indicator.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -14,159 +11,176 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class Customonbroadingitem extends StatelessWidget {
-  const Customonbroadingitem({
-    super.key,
-    required this.x,
-    required this.value,
-    required this.pages,
-    required this.controller,
-  });
-
-  final int value;
-  final int x;
-  final List<Onbroadingmodel> pages;
-  final PageController controller;
+  final int index;
+  const Customonbroadingitem({super.key, required this.index});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(ScreenUtilsManager.p23),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SizedBox(height: 50.h),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              !context.watch<Onbroadingprovider>().isLastPage
-                  ? Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        TextButton(
-                          style: TextButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              side: BorderSide(
-                                color: ColorManger.lightGrey,
-                                width: 0.5.w,
-                              ),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(8.r),
-                              ),
-                            ),
-                          ),
-                          onPressed: () {
-                            controller.animateToPage(
-                              pages.length - 1,
-                              duration: const Duration(milliseconds: 400),
-                              curve: Curves.easeInOut,
-                            );
-                          },
-                          child: Text(
-                            Constantmanger.skip,
-                            style: GoogleFonts.publicSans(
-                              color: ColorManger.lightColor,
-                              fontSize: ScreenUtilsManager.s16,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ],
-                    )
-                  : SizedBox(height: 10.h),
-            ],
-          ),
-          SizedBox(height: ScreenUtilsManager.h9),
+    final pageData = Constantmanger.pages[index];
+    final provider = context.read<Onbroadingprovider>();
 
-          Expanded(
-            flex: 4,
-            child: SvgPicture.asset(
-              height: MediaQuery.of(context).size.height * 0.75,
-              pages[x].image,
-              fit: BoxFit.fill,
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            ColorManger.reportsPageBackground,
+            ColorManger.reportsPageBackground.withOpacity(0.8),
+            Colors.white,
+          ],
+        ),
+      ),
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 25.w),
+        child: Column(
+          children: [
+            SizedBox(height: 60.h),
+            Align(
+              alignment: Alignment.centerRight,
+              child: _buildSkipButton(provider),
             ),
-          ),
 
-          SizedBox(height: ScreenUtilsManager.h16),
+            const Spacer(),
 
-          Text(
-            pages[x].title,
-            textAlign: TextAlign.center,
-            style: GoogleFonts.publicSans(
-              fontSize: ScreenUtilsManager.h22,
-              color: ColorManger.kPrimaryDark,
-              fontWeight: FontWeight.w600,
+            TweenAnimationBuilder(
+              duration: const Duration(milliseconds: 600),
+              tween: Tween<double>(begin: 0.8, end: 1.0),
+              builder: (context, double value, child) {
+                return Transform.scale(
+                  scale: value,
+                  child: RepaintBoundary(
+                    child: SvgPicture.asset(
+                      pageData.image,
+                      height: 280.h,
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+                );
+              },
             ),
-          ),
 
-          SizedBox(height: ScreenUtilsManager.h9),
-
-          Text(
-            pages[x].subtitle,
-            textAlign: TextAlign.center,
-            style: GoogleFonts.publicSans(
-              fontSize: ScreenUtilsManager.s16,
-              color: ColorManger.lightGrey6,
-              fontWeight: FontWeight.w400,
+            const Spacer(),
+            Text(
+              pageData.title,
+              textAlign: TextAlign.center,
+              style: GoogleFonts.publicSans(
+                fontSize: 26.sp,
+                color: ColorManger.kPrimaryDark,
+                fontWeight: FontWeight.w800,
+                letterSpacing: -0.5,
+              ),
             ),
-          ),
-
-          const Spacer(),
-
-          _buildBottomActions(context),
-        ],
+            SizedBox(height: 12.h),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10.w),
+              child: Text(
+                pageData.subtitle,
+                textAlign: TextAlign.center,
+                style: GoogleFonts.publicSans(
+                  fontSize: 15.sp,
+                  color: ColorManger.lightGrey6.withOpacity(0.8),
+                  height: 1.5,
+                ),
+              ),
+            ),
+            const Spacer(flex: 2),
+            _buildBottomBar(provider),
+            SizedBox(height: 40.h),
+          ],
+        ),
       ),
     );
   }
 
-  Widget _buildBottomActions(BuildContext context) {
+  Widget _buildSkipButton(Onbroadingprovider provider) {
+    return Selector<Onbroadingprovider, bool>(
+      selector: (_, p) => p.isLastPage,
+      builder: (context, isLastPage, child) {
+        if (isLastPage) return SizedBox(height: 40.h);
+        return InkWell(
+          onTap: () => provider.controller.animateToPage(
+            Constantmanger.pages.length - 1,
+            duration: const Duration(milliseconds: 600),
+            curve: Curves.fastOutSlowIn,
+          ),
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+            decoration: BoxDecoration(
+              color: ColorManger.lightGrey.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(20.r),
+            ),
+            child: Text(
+              Constantmanger.skip,
+              style: TextStyle(
+                color: ColorManger.kPrimary,
+                fontWeight: FontWeight.w600,
+                fontSize: 14.sp,
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildBottomBar(Onbroadingprovider provider) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        customindicator(controller: controller),
-        Consumer<Onbroadingprovider>(
-          builder: (context, provider, child) {
-            return ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(ScreenUtilsManager.r8),
+        CustomIndicator(controller: provider.controller, count: 3),
+        Selector<Onbroadingprovider, bool>(
+          selector: (_, p) => p.isLastPage,
+          builder: (context, isLastPage, child) {
+            return AnimatedContainer(
+              duration: const Duration(milliseconds: 300),
+              width: isLastPage ? 140.w : 60.w,
+              height: 60.w,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: ColorManger.kPrimary,
+                  foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(
+                      isLastPage ? 15.r : 30.r,
+                    ),
+                  ),
+                  elevation: 5,
+                  shadowColor: ColorManger.kPrimary.withOpacity(0.4),
                 ),
-                elevation: 0,
-                backgroundColor: provider.isLastPage
-                    ? ColorManger.kPrimary
-                    : ColorManger.reportsPageBackground,
-                foregroundColor: provider.isLastPage
-                    ? Colors.white
-                    : ColorManger.kPrimary,
-              ),
-              onPressed: () async {
-                if (!provider.isLastPage) {
-                  controller.nextPage(
-                    duration: const Duration(milliseconds: 400),
-                    curve: Curves.fastOutSlowIn,
-                  );
-                } else {
-                  await PrefrenceManager().setbool(
-                    Constantmanger.isOnboardingViewed,
-                    true,
-                  );
-                  if (context.mounted) {
-                    Navigator.pushReplacementNamed(context, Routes.login);
-                  }
-                }
-              },
-              child: Text(
-                provider.isLastPage
-                    ? Constantmanger.finish
-                    : Constantmanger.next,
-                style: TextStyle(
-                  fontSize: ScreenUtilsManager.s18,
-                  fontWeight: FontWeight.bold,
-                ),
+                onPressed: () => _handleNext(context, provider, isLastPage),
+                child: isLastPage
+                    ? Text(
+                        Constantmanger.finish,
+                        style: TextStyle(
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )
+                    : const Icon(Icons.arrow_forward_ios, size: 20),
               ),
             );
           },
         ),
       ],
     );
+  }
+
+  void _handleNext(
+    BuildContext context,
+    Onbroadingprovider provider,
+    bool isLastPage,
+  ) async {
+    if (!isLastPage) {
+      provider.controller.nextPage(
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.easeInOutCubic,
+      );
+    } else {
+      await PrefrenceManager().setbool(Constantmanger.isOnboardingViewed, true);
+      if (context.mounted) {
+        Navigator.pushReplacementNamed(context, Routes.login);
+      }
+    }
   }
 }

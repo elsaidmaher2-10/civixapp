@@ -3,10 +3,9 @@ import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 
 class ProfileMenuItem extends StatelessWidget {
-  final String iconPath;
+  final Widget iconPath;
   final String title;
   final VoidCallback? onTap;
 
@@ -38,13 +37,7 @@ class ProfileMenuItem extends StatelessWidget {
               horizontal: ScreenUtilsManager.w8,
             ),
             onTap: onTap,
-            leading: SvgPicture.asset(
-              iconPath,
-              colorFilter: ColorFilter.mode(
-                ColorManger.lightBlue.withOpacity(0.1),
-                BlendMode.srcATop,
-              ),
-            ),
+            leading:iconPath,
             title: Text(title),
             trailing: RotatedBox(
               quarterTurns: 90,

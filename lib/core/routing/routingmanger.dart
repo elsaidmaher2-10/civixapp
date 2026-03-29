@@ -10,6 +10,7 @@ import 'package:citifix/feature/citzenFeature/Profile/data/repos/UserProfileRepo
 import 'package:citifix/feature/citzenFeature/Profile/presentation/manager/LogOut/LogOutcubit.dart';
 import 'package:citifix/feature/citzenFeature/Profile/presentation/manager/userinfoManger/user_profile_info_cubit.dart';
 import 'package:citifix/feature/citzenFeature/Profile/presentation/view/ProfileScreen.dart';
+import 'package:citifix/feature/citzenFeature/Profile/presentation/view/widget/HelpAndTermsPage.dart';
 import 'package:citifix/feature/citzenFeature/Profile/presentation/view/widget/editprofile.dart';
 import 'package:citifix/feature/citzenFeature/home/presentation/view/mainScreen.dart';
 import 'package:citifix/feature/citzenFeature/onbroading/onbroading.dart';
@@ -17,6 +18,8 @@ import 'package:citifix/feature/workerFeature/home/data/repo/homrepo.dart';
 import 'package:citifix/feature/workerFeature/home/presentation/manager/dashbroadHomemanager/cubit/dashbroad_home_manager_cubit.dart';
 import 'package:citifix/feature/workerFeature/main/Manager/cubit/worker_cubit_cubit.dart';
 import 'package:citifix/feature/workerFeature/main/mainscreenwroker.dart';
+import 'package:citifix/feature/workerFeature/tasks/data/repos/worker_task_Repo.dart';
+import 'package:citifix/feature/workerFeature/tasks/presentation/manager/cubit/task_report_cubit.dart';
 import 'package:citifix/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -46,8 +49,11 @@ class Routingmanger {
             child: const ProfileScreen(),
           ),
         );
+
       case Routes.foregetpassword:
         return MaterialPageRoute(builder: (_) => Foregetpassword());
+      case Routes.helpSupportRoute:
+        return MaterialPageRoute(builder: (_) => HelpAndTermsPage());
       case Routes.otpverficationc:
         return MaterialPageRoute(
           settings: route,
@@ -76,6 +82,10 @@ class Routingmanger {
               BlocProvider(
                 create: (context) =>
                     HomeCubit(getIt<Homreposatory>())..getWorkerDashboard(),
+              ),
+              BlocProvider(
+                create: (context) =>
+                    WorkerTasksCubit(getIt<WorkerTaskRepo>())..getWorkerTasks(),
               ),
             ],
             child: Mainscreenwroker(),

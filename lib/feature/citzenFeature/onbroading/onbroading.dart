@@ -5,38 +5,31 @@ import 'package:citifix/feature/citzenFeature/onbroading/widget/on_broading_item
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class Onbroading extends StatefulWidget {
-  Onbroading({super.key});
-  @override
-  State<Onbroading> createState() => _OnbroadingState();
-}
+class Onbroading extends StatelessWidget {
+  const Onbroading({super.key});
 
-class _OnbroadingState extends State<Onbroading> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (BuildContext context) => Onbroadingprovider(),
-      child: Builder(
-        builder: (context) {
-          return Scaffold(
-            backgroundColor: ColorManger.reportsPageBackground,
-            body: PageView(
-              onPageChanged: (value) {
-                context.read<Onbroadingprovider>().updateIndex(value);
+      create: (context) => Onbroadingprovider(),
+      child: Scaffold(
+        backgroundColor: ColorManger.reportsPageBackground,
+        body: Consumer<Onbroadingprovider>(
+          builder: (context, provider, child) {
+            return PageView.builder(
+              allowImplicitScrolling: true,
+              physics: const BouncingScrollPhysics(),
+              itemCount: Constantmanger.pages.length,
+              controller: provider.controller,
+              onPageChanged: (index) {
+                provider.updateIndex(index);
               },
-              controller: context.read<Onbroadingprovider>().controller,
-              children: List.generate(
-                Constantmanger.pages.length,
-                (x) => Customonbroadingitem(
-                  value: context.read<Onbroadingprovider>().value,
-                  pages: Constantmanger.pages,
-                  controller: context.read<Onbroadingprovider>().controller,
-                  x: x,
-                ),
-              ),
-            ),
-          );
-        },
+              itemBuilder: (context, index) {
+                return Customonbroadingitem(index: index);
+              },
+            );
+          },
+        ),
       ),
     );
   }

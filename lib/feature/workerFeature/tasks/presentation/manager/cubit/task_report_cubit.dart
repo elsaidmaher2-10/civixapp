@@ -12,7 +12,7 @@ class WorkerTasksCubit extends Cubit<WorkerTasksState> {
     final result = await _workerTaskRepo.workertasRepo();
     result.fold(
       (failure) {
-        emit(WorkerTasksError(failure.errors.join(", ")));
+        emit(WorkerTasksError(failure.errors.join(",")));
       },
       (reportResponse) {
         emit(WorkerTasksSuccess(reportResponse));

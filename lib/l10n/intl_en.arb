@@ -181,5 +181,22 @@
   "searchStreetlight": "Search for \"Broken streetlight\"",
   "searchWaste": "Search for \"Waste accumulation\"",
   "searchPothole": "Search for \"Pothole repair\"",
-  "describeIssue": "Describe the issue..."
+  "describeIssue": "Describe the issue...",
+  "help": "Help & Terms",
+  "helpAndLegal": "Help & Legal",
+  "contactSupport": "Still have questions? Contact Support",
+  "faqCategory": "Frequently Asked Questions",
+  "howToReportQuestion": "How do I report a maintenance issue?",
+  "howToReportAnswer": "Open the app, tap the '+' button, take a photo, and pin the location. Our system will automatically notify the nearest worker.",
+  "fixTimeQuestion": "How long does it take to fix a problem?",
+  "fixTimeAnswer": "Repair time depends on the issue's severity. You can track the real-time progress in the 'My Reports' section.",
+  "termsCitizenCategory": "Terms for Citizens",
+  "citizenResponsibilityTitle": "Citizen Responsibilities",
+  "citizenResponsibilityDesc": "1. Reports must be truthful and accurate.\n2. Photos must be clear and related to the issue.\n3. Misuse of the platform (fake reports) leads to a permanent ban.",
+  "termsWorkerCategory": "Terms for Workers",
+  "workerConductTitle": "Worker Standards & Conduct",
+  "workerConductDesc": "1. Workers must upload 'Before' and 'After' photos for every task.\n2. Tasks must be completed within the assigned timeframe.\n3. Professional behavior is mandatory during site visits.",
+  "legalCategory": "Legal & Privacy",
+  "privacyPolicyTitle": "Data Protection Policy",
+  "privacyPolicyDesc": "Citifix protects your privacy. Citizen contact details are hidden from workers; they only receive the location and issue description."
 }

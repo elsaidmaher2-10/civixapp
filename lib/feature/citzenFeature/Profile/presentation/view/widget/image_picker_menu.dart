@@ -1,8 +1,8 @@
 import 'dart:io';
 import 'package:citifix/core/resource/colormanager.dart';
-import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/feature/citzenFeature/Profile/presentation/manager/controller/imageController.dart';
+import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -24,17 +24,17 @@ class ImagePickerMenu {
       items: [
         _buildMenuItem(
           value: 'camera',
-          label: Constantmanger.camera,
+          label: S.of(context).camera,
           icon: Icons.camera_alt,
         ),
         _buildMenuItem(
           value: 'gallery',
-          label: Constantmanger.photoGallery,
+          label: S.of(context).photoGallery,
           icon: Icons.photo_library,
         ),
         _buildMenuItem(
           value: 'cancel',
-          label: Constantmanger.cancel,
+          label: S.of(context).cancel,
           icon: Icons.close,
           iconBgColor: ColorManger.lightGrey2,
         ),

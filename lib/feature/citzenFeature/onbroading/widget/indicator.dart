@@ -3,27 +3,41 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class customindicator extends StatelessWidget {
-  const customindicator({super.key, required this.controller});
+class CustomIndicator extends StatelessWidget {
+  const CustomIndicator({
+    super.key,
+    required this.controller,
+    required this.count,
+    this.activeColor = ColorManger.kPrimary,
+    this.dotColor = Colors.grey,
+    this.dotSize = 12,
+    this.spacing = 12.0,
+    this.effectType = 'jumping',
+  });
 
   final PageController controller;
+  final int count;
+  final Color activeColor;
+  final Color dotColor;
+  final double dotSize;
+  final double spacing;
+  final String effectType;
 
   @override
   Widget build(BuildContext context) {
     return SmoothPageIndicator(
       controller: controller,
-      count: 3,
+      count: count,
       axisDirection: Axis.horizontal,
       effect: JumpingDotEffect(
-        offset: 2,
-        spacing: 20.0,
-        radius: 12.r,
-        dotWidth: 16.w,
-        dotHeight: 16.h,
-        paintStyle: PaintingStyle.stroke,
+        spacing: spacing.w,
+        radius: dotSize.r,
+        dotWidth: dotSize.w,
+        dotHeight: dotSize.h,
+        paintStyle: PaintingStyle.fill,
         strokeWidth: 1.5,
-        dotColor: Colors.grey,
-        activeDotColor: ColorManger.kPrimary,
+        dotColor: dotColor,
+        activeDotColor: activeColor,
       ),
     );
   }

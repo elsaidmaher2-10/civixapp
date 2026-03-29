@@ -63,7 +63,6 @@ class _CustomMapState extends State<CustomMap> with TickerProviderStateMixin {
           _isLoading = false;
         });
 
-        // جلب اسم الشارع لو مش موجود
         if (_street.isEmpty && targetPosition != null) {
           await _updateStreet(targetPosition);
         }
@@ -132,7 +131,11 @@ class _CustomMapState extends State<CustomMap> with TickerProviderStateMixin {
                           TileLayer(
                             urlTemplate:
                                 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                            userAgentPackageName: 'com.citifix.app',
+                            userAgentPackageName: 'com.example.citifix',
+                            additionalOptions: {
+                              'User-Agent':
+                                  'CitifixApp/1.0 (contact: your-email@domain.com)',
+                            },
                           ),
                           if (_currentPosition != null)
                             MarkerLayer(

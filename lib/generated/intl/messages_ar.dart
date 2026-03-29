@@ -54,6 +54,12 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "citizen": MessageLookupByLibrary.simpleMessage("مواطن"),
     "citizenIdentity": MessageLookupByLibrary.simpleMessage("هوية المواطن"),
+    "citizenResponsibilityDesc": MessageLookupByLibrary.simpleMessage(
+      "١. يجب أن تكون البلاغات صادقة ودقيقة.\n٢. يجب أن تكون الصور واضحة ومرتبطة بالمشكلة.\n٣. سوء استخدام المنصة (البلاغات الكاذبة) يؤدي إلى حظر دائم للحساب.",
+    ),
+    "citizenResponsibilityTitle": MessageLookupByLibrary.simpleMessage(
+      "مسؤوليات المواطن",
+    ),
     "civix": MessageLookupByLibrary.simpleMessage("Civix"),
     "completed": MessageLookupByLibrary.simpleMessage("تم الحل"),
     "confirm": MessageLookupByLibrary.simpleMessage("تأكيد"),
@@ -63,6 +69,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "confirmPasswordRequired": MessageLookupByLibrary.simpleMessage(
       "من فضلك أكد كلمة المرور",
+    ),
+    "contactSupport": MessageLookupByLibrary.simpleMessage(
+      "لديك أسئلة أخرى؟ تواصل مع الدعم",
     ),
     "dataSecurityNote": MessageLookupByLibrary.simpleMessage(
       "بياناتك مخزنة ومُشفرة بشكل آمن.",
@@ -115,11 +124,18 @@ class MessageLookup extends MessageLookupByLibrary {
     "failedToLoadCategories": MessageLookupByLibrary.simpleMessage(
       "فشل تحميل الأقسام",
     ),
+    "faqCategory": MessageLookupByLibrary.simpleMessage("الأسئلة الشائعة"),
     "fcm": MessageLookupByLibrary.simpleMessage("FCM"),
     "finish": MessageLookupByLibrary.simpleMessage("ابدأ الآن"),
     "firstName": MessageLookupByLibrary.simpleMessage("الاسم الأول"),
     "firstNameRequired": MessageLookupByLibrary.simpleMessage(
       "الاسم الأول مطلوب",
+    ),
+    "fixTimeAnswer": MessageLookupByLibrary.simpleMessage(
+      "يعتمد وقت الإصلاح على مدى خطورة المشكلة. يمكنك متابعة التقدم في الوقت الفعلي من قسم \'بلاغاتي\'.",
+    ),
+    "fixTimeQuestion": MessageLookupByLibrary.simpleMessage(
+      "كم من الوقت يستغرق إصلاح المشكلة؟",
     ),
     "forgetPassword": MessageLookupByLibrary.simpleMessage("نسيت كلمة المرور؟"),
     "forgetPasswordDesc": MessageLookupByLibrary.simpleMessage(
@@ -132,6 +148,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "fullName": MessageLookupByLibrary.simpleMessage("الاسم الكامل"),
     "gender": MessageLookupByLibrary.simpleMessage("النوع"),
     "haveAccount": MessageLookupByLibrary.simpleMessage("لديك حساب بالفعل؟"),
+    "help": MessageLookupByLibrary.simpleMessage("المساعدة والشروط"),
+    "helpAndLegal": MessageLookupByLibrary.simpleMessage(
+      "المساعدة والأحكام القانونية",
+    ),
     "hintAddress": MessageLookupByLibrary.simpleMessage("أدخل عنوانك"),
     "hintEmail": MessageLookupByLibrary.simpleMessage("أدخل بريدك الإلكتروني"),
     "hintFirstName": MessageLookupByLibrary.simpleMessage("أدخل اسمك الأول"),
@@ -143,6 +163,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "hintPhone": MessageLookupByLibrary.simpleMessage("أدخل رقم هاتفك"),
     "home": MessageLookupByLibrary.simpleMessage("الرئيسية"),
     "hoursAgo": m1,
+    "howToReportAnswer": MessageLookupByLibrary.simpleMessage(
+      "افتح التطبيق، اضغط على زر \'+\', التقط صورة، وحدد الموقع. سيقوم نظامنا تلقائياً بإخطار أقرب عامل مختص.",
+    ),
+    "howToReportQuestion": MessageLookupByLibrary.simpleMessage(
+      "كيف يمكنني الإبلاغ عن مشكلة صيانة؟",
+    ),
     "identity": MessageLookupByLibrary.simpleMessage("الهوية"),
     "imageRequired": MessageLookupByLibrary.simpleMessage("الصورة مطلوبة"),
     "inProgress": MessageLookupByLibrary.simpleMessage("قيد التنفيذ"),
@@ -163,6 +189,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "lastNameRequired": MessageLookupByLibrary.simpleMessage(
       "الاسم الأخير مطلوب",
     ),
+    "legalCategory": MessageLookupByLibrary.simpleMessage("القانون والخصوصية"),
     "loadingCategories": MessageLookupByLibrary.simpleMessage(
       "جاري تحميل الأقسام...",
     ),
@@ -247,6 +274,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "phone": MessageLookupByLibrary.simpleMessage("رقم الهاتف"),
     "phoneRequired": MessageLookupByLibrary.simpleMessage("رقم الهاتف مطلوب"),
     "photoGallery": MessageLookupByLibrary.simpleMessage("معرض الصور"),
+    "privacyPolicyDesc": MessageLookupByLibrary.simpleMessage(
+      "سيتيفيكس يحمي خصوصيتك. بيانات الاتصال الخاصة بالمواطن مخفية عن العمال؛ حيث يتلقون فقط الموقع ووصف المشكلة.",
+    ),
+    "privacyPolicyTitle": MessageLookupByLibrary.simpleMessage(
+      "سياسة حماية البيانات",
+    ),
     "profile": MessageLookupByLibrary.simpleMessage("الملف الشخصي"),
     "profileUpdatedSuccess": MessageLookupByLibrary.simpleMessage(
       "تم تحديث الملف الشخصي بنجاح",
@@ -323,6 +356,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "submitted": MessageLookupByLibrary.simpleMessage("تاريخ التقديم:"),
     "success": MessageLookupByLibrary.simpleMessage("تم بنجاح"),
     "support": MessageLookupByLibrary.simpleMessage("الدعم"),
+    "termsCitizenCategory": MessageLookupByLibrary.simpleMessage(
+      "شروط المواطنين",
+    ),
+    "termsWorkerCategory": MessageLookupByLibrary.simpleMessage("شروط العمال"),
     "titleIsRequired": MessageLookupByLibrary.simpleMessage("العنوان مطلوب"),
     "titleTooShort": MessageLookupByLibrary.simpleMessage(
       "يجب أن يكون العنوان 3 أحرف على الأقل",
@@ -332,5 +369,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "unknownStatus": MessageLookupByLibrary.simpleMessage("غير معروف"),
     "weeksAgo": m3,
     "worker": MessageLookupByLibrary.simpleMessage("عامل"),
+    "workerConductDesc": MessageLookupByLibrary.simpleMessage(
+      "١. يجب على العمال رفع صور \'قبل\' و \'بعد\' لكل مهمة.\n٢. يجب إتمام المهام في الإطار الزمني المحدد.\n٣. السلوك المهني إلزامي أثناء الزيارات الميدانية.",
+    ),
+    "workerConductTitle": MessageLookupByLibrary.simpleMessage(
+      "معايير وسلوك العامل",
+    ),
   };
 }

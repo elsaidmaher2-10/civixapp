@@ -58,6 +58,12 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "citizen": MessageLookupByLibrary.simpleMessage("Citizen"),
     "citizenIdentity": MessageLookupByLibrary.simpleMessage("Citizen Identity"),
+    "citizenResponsibilityDesc": MessageLookupByLibrary.simpleMessage(
+      "1. Reports must be truthful and accurate.\n2. Photos must be clear and related to the issue.\n3. Misuse of the platform (fake reports) leads to a permanent ban.",
+    ),
+    "citizenResponsibilityTitle": MessageLookupByLibrary.simpleMessage(
+      "Citizen Responsibilities",
+    ),
     "civix": MessageLookupByLibrary.simpleMessage("Civix"),
     "completed": MessageLookupByLibrary.simpleMessage("Resolved"),
     "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
@@ -65,6 +71,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "confirmPassword": MessageLookupByLibrary.simpleMessage("Confirm Password"),
     "confirmPasswordRequired": MessageLookupByLibrary.simpleMessage(
       "Please confirm your password",
+    ),
+    "contactSupport": MessageLookupByLibrary.simpleMessage(
+      "Still have questions? Contact Support",
     ),
     "dataSecurityNote": MessageLookupByLibrary.simpleMessage(
       "Your data is securely stored and encrypted.",
@@ -123,11 +132,20 @@ class MessageLookup extends MessageLookupByLibrary {
     "failedToLoadCategories": MessageLookupByLibrary.simpleMessage(
       "Failed to load categories",
     ),
+    "faqCategory": MessageLookupByLibrary.simpleMessage(
+      "Frequently Asked Questions",
+    ),
     "fcm": MessageLookupByLibrary.simpleMessage("FCM"),
     "finish": MessageLookupByLibrary.simpleMessage("Get Started"),
     "firstName": MessageLookupByLibrary.simpleMessage("First Name"),
     "firstNameRequired": MessageLookupByLibrary.simpleMessage(
       "First name is required",
+    ),
+    "fixTimeAnswer": MessageLookupByLibrary.simpleMessage(
+      "Repair time depends on the issue\'s severity. You can track the real-time progress in the \'My Reports\' section.",
+    ),
+    "fixTimeQuestion": MessageLookupByLibrary.simpleMessage(
+      "How long does it take to fix a problem?",
     ),
     "forgetPassword": MessageLookupByLibrary.simpleMessage(
       "Forget Password....?",
@@ -144,6 +162,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "haveAccount": MessageLookupByLibrary.simpleMessage(
       "Have an account already?",
     ),
+    "help": MessageLookupByLibrary.simpleMessage("Help & Terms"),
+    "helpAndLegal": MessageLookupByLibrary.simpleMessage("Help & Legal"),
     "hintAddress": MessageLookupByLibrary.simpleMessage("Enter your address"),
     "hintEmail": MessageLookupByLibrary.simpleMessage(
       "Enter your email address",
@@ -161,6 +181,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "hintPhone": MessageLookupByLibrary.simpleMessage("Enter your Phone"),
     "home": MessageLookupByLibrary.simpleMessage("Home"),
     "hoursAgo": m1,
+    "howToReportAnswer": MessageLookupByLibrary.simpleMessage(
+      "Open the app, tap the \'+\' button, take a photo, and pin the location. Our system will automatically notify the nearest worker.",
+    ),
+    "howToReportQuestion": MessageLookupByLibrary.simpleMessage(
+      "How do I report a maintenance issue?",
+    ),
     "identity": MessageLookupByLibrary.simpleMessage("Identity"),
     "imageRequired": MessageLookupByLibrary.simpleMessage("Image is required"),
     "inProgress": MessageLookupByLibrary.simpleMessage("In Progress"),
@@ -179,6 +205,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "lastNameRequired": MessageLookupByLibrary.simpleMessage(
       "Last name is required",
     ),
+    "legalCategory": MessageLookupByLibrary.simpleMessage("Legal & Privacy"),
     "loadingCategories": MessageLookupByLibrary.simpleMessage(
       "Loading Categories...",
     ),
@@ -269,6 +296,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "phone": MessageLookupByLibrary.simpleMessage("Phone"),
     "phoneRequired": MessageLookupByLibrary.simpleMessage("Phone is required"),
     "photoGallery": MessageLookupByLibrary.simpleMessage("Photo Gallery"),
+    "privacyPolicyDesc": MessageLookupByLibrary.simpleMessage(
+      "Citifix protects your privacy. Citizen contact details are hidden from workers; they only receive the location and issue description.",
+    ),
+    "privacyPolicyTitle": MessageLookupByLibrary.simpleMessage(
+      "Data Protection Policy",
+    ),
     "profile": MessageLookupByLibrary.simpleMessage("Profile"),
     "profileUpdatedSuccess": MessageLookupByLibrary.simpleMessage(
       "Profile updated successfully",
@@ -353,6 +386,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "submitted": MessageLookupByLibrary.simpleMessage("Submitted:"),
     "success": MessageLookupByLibrary.simpleMessage("Success"),
     "support": MessageLookupByLibrary.simpleMessage("Support"),
+    "termsCitizenCategory": MessageLookupByLibrary.simpleMessage(
+      "Terms for Citizens",
+    ),
+    "termsWorkerCategory": MessageLookupByLibrary.simpleMessage(
+      "Terms for Workers",
+    ),
     "titleIsRequired": MessageLookupByLibrary.simpleMessage(
       "Title is required",
     ),
@@ -364,5 +403,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "unknownStatus": MessageLookupByLibrary.simpleMessage("Unknown"),
     "weeksAgo": m3,
     "worker": MessageLookupByLibrary.simpleMessage("Worker"),
+    "workerConductDesc": MessageLookupByLibrary.simpleMessage(
+      "1. Workers must upload \'Before\' and \'After\' photos for every task.\n2. Tasks must be completed within the assigned timeframe.\n3. Professional behavior is mandatory during site visits.",
+    ),
+    "workerConductTitle": MessageLookupByLibrary.simpleMessage(
+      "Worker Standards & Conduct",
+    ),
   };
 }

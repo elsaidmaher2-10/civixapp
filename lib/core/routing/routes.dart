@@ -9,4 +9,6 @@ class Routes {
   static const String workerMain = "/worker-main";
   static const String profile = "profile";
   static const String editProfile = "/editProfile";
+
+  static const String helpSupportRoute = "/helpSupportRoute";
 }

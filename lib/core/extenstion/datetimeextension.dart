@@ -8,10 +8,8 @@ extension Datetimeextension on DateTime {
   }
 
   String timeAgo(BuildContext context) {
-    final dateUtc = this.toUtc();
-    final nowUtc = DateTime.now().toUtc();
-    final Duration diff = nowUtc.difference(dateUtc);
-
+    final now = DateTime.now().subtract(const Duration(hours: 2));
+    final diff = now.difference(this);
     if (diff.inDays >= 30) {
       return setdate;
     } else if (diff.inDays >= 7) {

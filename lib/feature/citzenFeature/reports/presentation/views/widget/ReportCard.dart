@@ -3,7 +3,9 @@ import 'package:citifix/core/extenstion/datetimeextension.dart';
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
+import 'package:citifix/core/routing/routes.dart';
 import 'package:citifix/feature/citzenFeature/reports/data/Models/GetReportModel.dart';
+import 'package:citifix/feature/citzenFeature/reports/presentation/views/reportdetails.dart';
 import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -46,85 +48,95 @@ class Reportcard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String translatedStatus = _getTranslatedStatus(context, report.status);
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
-      child: Slidable(
-        startActionPane: ActionPane(
-          motion: const ScrollMotion(),
-          children: [
-            SlidableAction(
-              onPressed: (context) async {
-                final bool shouldDelete = await _showDeleteDialog(context);
-                if (shouldDelete) {
-                  // TODO: تنفيذ عملية الحذف
-                }
-              },
-              backgroundColor: const Color(0xFFFE4A49),
-              foregroundColor: Colors.white,
-              icon: Icons.delete,
-              label: S.of(context).delete,
-            ),
-          ],
-        ),
-        child: Container(
-          height: 108.h,
-          decoration: BoxDecoration(
-            color: ColorManger.white,
-            borderRadius: BorderRadius.circular(10.r),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.05),
-                blurRadius: 10,
-                offset: const Offset(0, 4),
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ReportDetailsScreen(reportId: report.id),
+          ),
+        );
+      },
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+        child: Slidable(
+          startActionPane: ActionPane(
+            motion: const ScrollMotion(),
+            children: [
+              SlidableAction(
+                onPressed: (context) async {
+                  final bool shouldDelete = await _showDeleteDialog(context);
+                  if (shouldDelete) {
+                    // TODO: تنفيذ عملية الحذف
+                  }
+                },
+                backgroundColor: const Color(0xFFFE4A49),
+                foregroundColor: Colors.white,
+                icon: Icons.delete,
+                label: S.of(context).delete,
               ),
             ],
           ),
-          child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 14.h),
-            child: Row(
-              children: [
-                SizedBox(width: 11.w),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(5.r),
-                  child: CachedNetworkImage(
-                    placeholder: (context, url) =>
-                        const CupertinoActivityIndicator(
-                          color: ColorManger.lightBlue,
-                        ),
-                    fit: BoxFit.cover,
-                    height: 80.h,
-                    width: 80.w,
-                    imageUrl: report.imagesUrls.isNotEmpty
-                        ? report.imagesUrls.first
-                        : Constantmanger.defualtImage,
-                  ),
+          child: Container(
+            height: 108.h,
+            decoration: BoxDecoration(
+              color: ColorManger.white,
+              borderRadius: BorderRadius.circular(10.r),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.05),
+                  blurRadius: 10,
+                  offset: const Offset(0, 4),
                 ),
-                SizedBox(width: 16.w),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Text(
-                        report.title,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: GoogleFonts.publicSans(
-                          color: ColorManger.kPrimaryDark,
-                          fontSize: ScreenUtilsManager.s16,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      _buildInfoRow(Icons.place_outlined, report.location),
-                      _buildInfoRow(
-                        Icons.watch_later_outlined,
-                        report.createdAt.timeAgo(context),
-                      ),
-                    ],
-                  ),
-                ),
-                _buildStatusTag(context, report.status, translatedStatus),
               ],
+            ),
+            child: Padding(
+              padding: EdgeInsets.symmetric(vertical: 14.h),
+              child: Row(
+                children: [
+                  SizedBox(width: 11.w),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(5.r),
+                    child: CachedNetworkImage(
+                      placeholder: (context, url) =>
+                          const CupertinoActivityIndicator(
+                            color: ColorManger.lightBlue,
+                          ),
+                      fit: BoxFit.cover,
+                      height: 80.h,
+                      width: 80.w,
+                      imageUrl: report.imagesUrls.isNotEmpty
+                          ? report.imagesUrls.first
+                          : Constantmanger.defualtImage,
+                    ),
+                  ),
+                  SizedBox(width: 16.w),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Text(
+                          report.title,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: GoogleFonts.publicSans(
+                            color: ColorManger.kPrimaryDark,
+                            fontSize: ScreenUtilsManager.s16,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        _buildInfoRow(Icons.place_outlined, report.location),
+                        _buildInfoRow(
+                          Icons.watch_later_outlined,
+                          report.createdAt.timeAgo(context),
+                        ),
+                      ],
+                    ),
+                  ),
+                  _buildStatusTag(context, report.status, translatedStatus),
+                ],
+              ),
             ),
           ),
         ),

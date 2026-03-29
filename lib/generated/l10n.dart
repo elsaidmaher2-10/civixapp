@@ -1533,6 +1533,171 @@ class S {
       args: [],
     );
   }
+
+  /// `Help & Terms`
+  String get help {
+    return Intl.message('Help & Terms', name: 'help', desc: '', args: []);
+  }
+
+  /// `Help & Legal`
+  String get helpAndLegal {
+    return Intl.message(
+      'Help & Legal',
+      name: 'helpAndLegal',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Still have questions? Contact Support`
+  String get contactSupport {
+    return Intl.message(
+      'Still have questions? Contact Support',
+      name: 'contactSupport',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Frequently Asked Questions`
+  String get faqCategory {
+    return Intl.message(
+      'Frequently Asked Questions',
+      name: 'faqCategory',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `How do I report a maintenance issue?`
+  String get howToReportQuestion {
+    return Intl.message(
+      'How do I report a maintenance issue?',
+      name: 'howToReportQuestion',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Open the app, tap the '+' button, take a photo, and pin the location. Our system will automatically notify the nearest worker.`
+  String get howToReportAnswer {
+    return Intl.message(
+      'Open the app, tap the \'+\' button, take a photo, and pin the location. Our system will automatically notify the nearest worker.',
+      name: 'howToReportAnswer',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `How long does it take to fix a problem?`
+  String get fixTimeQuestion {
+    return Intl.message(
+      'How long does it take to fix a problem?',
+      name: 'fixTimeQuestion',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Repair time depends on the issue's severity. You can track the real-time progress in the 'My Reports' section.`
+  String get fixTimeAnswer {
+    return Intl.message(
+      'Repair time depends on the issue\'s severity. You can track the real-time progress in the \'My Reports\' section.',
+      name: 'fixTimeAnswer',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Terms for Citizens`
+  String get termsCitizenCategory {
+    return Intl.message(
+      'Terms for Citizens',
+      name: 'termsCitizenCategory',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Citizen Responsibilities`
+  String get citizenResponsibilityTitle {
+    return Intl.message(
+      'Citizen Responsibilities',
+      name: 'citizenResponsibilityTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `1. Reports must be truthful and accurate.\n2. Photos must be clear and related to the issue.\n3. Misuse of the platform (fake reports) leads to a permanent ban.`
+  String get citizenResponsibilityDesc {
+    return Intl.message(
+      '1. Reports must be truthful and accurate.\n2. Photos must be clear and related to the issue.\n3. Misuse of the platform (fake reports) leads to a permanent ban.',
+      name: 'citizenResponsibilityDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Terms for Workers`
+  String get termsWorkerCategory {
+    return Intl.message(
+      'Terms for Workers',
+      name: 'termsWorkerCategory',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Worker Standards & Conduct`
+  String get workerConductTitle {
+    return Intl.message(
+      'Worker Standards & Conduct',
+      name: 'workerConductTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `1. Workers must upload 'Before' and 'After' photos for every task.\n2. Tasks must be completed within the assigned timeframe.\n3. Professional behavior is mandatory during site visits.`
+  String get workerConductDesc {
+    return Intl.message(
+      '1. Workers must upload \'Before\' and \'After\' photos for every task.\n2. Tasks must be completed within the assigned timeframe.\n3. Professional behavior is mandatory during site visits.',
+      name: 'workerConductDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Legal & Privacy`
+  String get legalCategory {
+    return Intl.message(
+      'Legal & Privacy',
+      name: 'legalCategory',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Data Protection Policy`
+  String get privacyPolicyTitle {
+    return Intl.message(
+      'Data Protection Policy',
+      name: 'privacyPolicyTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Citifix protects your privacy. Citizen contact details are hidden from workers; they only receive the location and issue description.`
+  String get privacyPolicyDesc {
+    return Intl.message(
+      'Citifix protects your privacy. Citizen contact details are hidden from workers; they only receive the location and issue description.',
+      name: 'privacyPolicyDesc',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

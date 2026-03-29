@@ -9,6 +9,8 @@ import 'package:citifix/feature/citzenFeature/Profile/presentation/view/widget/P
 import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Profilesettings extends StatelessWidget {
@@ -33,23 +35,61 @@ class Profilesettings extends StatelessWidget {
           Column(
             children: [
               ProfileMenuItem(
-                iconPath: AssetValueManager.language,
+                iconPath: SvgPicture.asset(
+                  AssetValueManager.language,
+                  colorFilter: ColorFilter.mode(
+                    ColorManger.lightBlue.withOpacity(0.1),
+                    BlendMode.srcATop,
+                  ),
+                ),
+
                 title: S.of(context).language,
                 onTap: () => showLanguagePicker(context),
               ),
               ProfileMenuItem(
-                iconPath: AssetValueManager.identity,
+                iconPath: SvgPicture.asset(
+                  AssetValueManager.identity,
+                  colorFilter: ColorFilter.mode(
+                    ColorManger.lightBlue.withOpacity(0.1),
+                    BlendMode.srcATop,
+                  ),
+                ),
+
                 title: S.of(context).identity,
                 onTap: () => showCitizenCard(context),
               ),
               ProfileMenuItem(
-                iconPath: AssetValueManager.accountinformation,
+                iconPath: SvgPicture.asset(
+                  AssetValueManager.accountinformation,
+
+                  colorFilter: ColorFilter.mode(
+                    ColorManger.lightBlue.withOpacity(0.1),
+                    BlendMode.srcATop,
+                  ),
+                ),
                 title: S.of(context).accountInformation,
                 onTap: () async {
                   await Navigator.pushNamed(context, Routes.editProfile);
                   if (context.mounted) {
                     context.read<UserProfileInfoCubit>().getUserProfleInfo();
                   }
+                },
+              ),
+              ProfileMenuItem(
+                iconPath: Container(
+                  padding: EdgeInsets.all(6.w),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(6),
+                    color: ColorManger.lightBlue.withOpacity(0.18),
+                  ),
+                  child: Icon(
+                    Icons.list_outlined,
+                    color: ColorManger.kPrimaryDark.withOpacity(0.8),
+                  ),
+                ),
+                title:S.of(context).help,
+                onTap: () {
+                  Navigator.pushNamed(context, Routes.helpSupportRoute);
                 },
               ),
             ],

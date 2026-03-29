@@ -1,5 +1,6 @@
 import 'package:citifix/core/extenstion/datetimeextension.dart';
 import 'package:citifix/core/resource/colormanager.dart';
+import 'package:citifix/core/resource/constantmanagerAr.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/service/StatusReport.dart';
 import 'package:citifix/feature/citzenFeature/home/presentation/view/widget/CustomMap.dart';
@@ -7,7 +8,7 @@ import 'package:citifix/feature/citzenFeature/reports/presentation/manager/repor
 import 'package:citifix/feature/citzenFeature/reports/presentation/manager/reportManger/cubit/report_manager_state.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/views/widget/CustomTimelineTile.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/views/widget/ReportDetailsAppbar.dart';
-import 'package:citifix/generated/l10n.dart'; // استيراد ملف الترجمة
+import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -55,9 +56,9 @@ class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
                 physics: const BouncingScrollPhysics(),
                 slivers: [
                   ReportDetailsAppbar(
-                    image: report.imagesUrls.isNotEmpty
-                        ? report.imagesUrls.first
-                        : Constantmanger.defualtImage,
+                    image: report.imagesUrls.isEmpty
+                        ? [Constantmanger.defualtImage]
+                        : report.imagesUrls,
                     ontap: () => Navigator.pop(context, true),
                   ),
                   SliverToBoxAdapter(
@@ -69,10 +70,7 @@ class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          _buildStatusBadge(
-                            context,
-                            report.status,
-                          ), // تعريب الحالة
+                          _buildStatusBadge(context, report.status),
                           SizedBox(height: 16.h),
                           Text(
                             report.title,
@@ -92,9 +90,7 @@ class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
                               SizedBox(width: 16.w),
                               _buildInfoChip(
                                 Icons.access_time_rounded,
-                                report.createdAt.timeAgo(
-                                  context,
-                                ), // تمرير context للتعريب
+                                report.createdAt.timeAgo(context),
                               ),
                             ],
                           ),
