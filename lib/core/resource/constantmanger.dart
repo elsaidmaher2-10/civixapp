@@ -21,7 +21,7 @@ class Constantmanger {
       title: "Improve Your City",
       subtitle:
           "Join your community in making your city a better place for everyone. Every report counts! ",
-      image: "assets/onbroadingimage/3.svg",
+      image: "assets/4794867_51838.svg",
     ),
   ];
   static const String civix = "Civix";

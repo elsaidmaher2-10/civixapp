@@ -30,7 +30,7 @@ class Userprofilecontroller {
     emailController.addListener(checkEditReqeust);
   }
 
-  checkEditReqeust() {
+  void checkEditReqeust() {
      isvalid =
         emailController.text != userProfile.email ||
         phoneController.text != userProfile.phoneNumber ||

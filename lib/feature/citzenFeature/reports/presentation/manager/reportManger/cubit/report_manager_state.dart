@@ -52,3 +52,8 @@ class CreateReportFailure extends ReportManagerState {
   final String errMessage;
   CreateReportFailure(this.errMessage);
 }
+
+class deleteReportState extends ReportManagerState {
+  final String errMessage;
+  deleteReportState(this.errMessage);
+}

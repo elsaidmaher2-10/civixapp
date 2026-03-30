@@ -11,7 +11,7 @@ class Forgetpasswordcubit extends Cubit<Forgetpasswordstate> {
     Apiservice(Dio()),
     InternetChecker(),
   );
-  forgetpassword({
+  Future<void> forgetpassword({
     required email,
     required purpose,
     required bool isreset,

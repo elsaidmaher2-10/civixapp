@@ -9,7 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ConfirmPassword extends StatelessWidget {
-  ConfirmPassword({
+  const ConfirmPassword({
     super.key,
     required this.controller,
     required this.validator,

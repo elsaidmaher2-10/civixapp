@@ -11,7 +11,6 @@ import 'package:citifix/feature/Auth/otpverifcation/presentation/manager/cubit/o
 import 'package:citifix/feature/Auth/otpverifcation/presentation/view/widget/otpappbar.dart';
 import 'package:citifix/feature/Auth/otpverifcation/presentation/view/widget/resendCodeOpt.dart';
 import 'package:citifix/generated/l10n.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

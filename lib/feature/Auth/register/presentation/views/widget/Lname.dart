@@ -1,6 +1,4 @@
 import 'package:citifix/core/resource/assetvaluemanger.dart';
-import 'package:citifix/core/resource/colormanager.dart';
-import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/core/widget/customtextfromfield.dart';
 import 'package:citifix/generated/l10n.dart';

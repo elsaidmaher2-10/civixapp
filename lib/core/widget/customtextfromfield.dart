@@ -3,25 +3,27 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomTextfromfield extends StatelessWidget {
   const CustomTextfromfield({
-    this.readonly = false,
     super.key,
-    this.initialValue,
+    required this.controller,
     required this.hinttext,
-    this.suffix,
     required this.lable,
+    this.readonly = false,
+    this.initialValue,
+    this.suffix,
     this.validator,
     this.obstext = false,
-    required this.controller,
     this.prefix,
     this.onChanged,
     this.ktype = TextInputType.text,
     this.onTap,
-    this.maxLines,
+    this.maxLines = 1,
+    this.color = const Color(0xffF6F6F6),
   });
+
   final Function()? onTap;
   final bool readonly;
   final String hinttext;
-  final IconButton? suffix;
+  final Widget? suffix;
   final TextInputType ktype;
   final bool obstext;
   final Function(String)? onChanged;
@@ -31,6 +33,7 @@ class CustomTextfromfield extends StatelessWidget {
   final String lable;
   final String? initialValue;
   final int? maxLines;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
@@ -50,31 +53,29 @@ class CustomTextfromfield extends StatelessWidget {
         labelStyle: TextStyle(color: Colors.black, fontSize: 14.sp),
         alignLabelWithHint: true,
         labelText: lable,
-        isDense: false,
+        isDense: true,
         floatingLabelAlignment: FloatingLabelAlignment.start,
-        contentPadding: EdgeInsets.only(
-          left: 2,
-          bottom: 10,
-          top: 10,
-          right: 10,
-        ),
-        fillColor: Color(0xffF6F6F6),
+        contentPadding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 14.h),
+        fillColor: color,
         filled: true,
         suffixIcon: suffix,
         hintText: hinttext,
-        hintStyle: TextStyle(color: Color(0xff6C6C6C), fontSize: 12.sp),
+        hintStyle: TextStyle(color: const Color(0xff6C6C6C), fontSize: 12.sp),
         border: OutlineInputBorder(
           borderSide: BorderSide.none,
           borderRadius: BorderRadius.circular(10.r),
         ),
         focusedBorder: OutlineInputBorder(
-          gapPadding: 15,
-          borderSide: BorderSide(color: Color(0xff04332D), width: 1),
+          borderSide: const BorderSide(color: Color(0xff04332D), width: 1),
           borderRadius: BorderRadius.circular(10.r),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10.r),
-          borderSide: BorderSide(color: Color(0xffFC1B1A), width: 2),
+          borderSide: const BorderSide(color: Color(0xffFC1B1A), width: 1.5),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10.r),
+          borderSide: const BorderSide(color: Color(0xffFC1B1A), width: 2),
         ),
       ),
     );

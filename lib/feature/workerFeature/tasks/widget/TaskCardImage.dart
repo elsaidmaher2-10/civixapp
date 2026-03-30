@@ -5,14 +5,14 @@ import 'package:flutter/cupertino.dart';
 
 class TaskCardImage extends StatelessWidget {
   final ReportModelWorker task;
-  const TaskCardImage({required this.task});
+  const TaskCardImage({super.key, required this.task});
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         Image.network(
-          task.imagesUrls.first!,
+          task.imagesUrls.first,
           height: 192,
           width: double.infinity,
           fit: BoxFit.cover,

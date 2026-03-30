@@ -19,4 +19,7 @@ class Apiconstant {
 
   static String workerdashboard = "Worker/dashboard";
   static String workertasks = "Worker/my-reports";
+
+  static String markallread = "notifications/mark-all-read";
+  static String getcomments(int reportId) => "/reports/$reportId/comments";
 }

@@ -151,4 +151,39 @@ class ReportRepository {
       );
     }
   }
+
+  Future<Either<FailureResponse, String>> DeleteReport({
+    required int ReportID,
+  }) async {
+    if (!await internetChecker.checkInternet()) {
+      return left(
+        FailureResponse(errors: [Constantmanger.nointernet], statusCode: 1),
+      );
+    }
+
+    try {
+      final response = await service.delete(
+        path: "${Apiconstant.report}/$ReportID",
+      );
+      return right(response);
+    } on Serverexciptionmodel catch (e) {
+      final dynamic errorData = e.errors;
+      if (errorData is Map<String, dynamic>) {
+        return left(FailureResponse.fromJson(errorData));
+      }
+      return left(
+        FailureResponse(
+          errors: [errorData?.toString() ?? "Unknown server error"],
+          statusCode: e.statuscode,
+        ),
+      );
+    } catch (e) {
+      return left(
+        FailureResponse(
+          errors: ["Unknown Error${e.toString()}"],
+          statusCode: 500,
+        ),
+      );
+    }
+  }
 }

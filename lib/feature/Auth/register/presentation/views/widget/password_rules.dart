@@ -11,10 +11,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class PasswordRules extends StatefulWidget {
   const PasswordRules({super.key, required this.streamController});
   final StreamController<List> streamController;
+  @override
   State<PasswordRules> createState() => _PasswordRulesState();
 }
 
 class _PasswordRulesState extends State<PasswordRules> {
+  @override
   Widget build(BuildContext context) {
     return StreamBuilder(
       initialData: Constantmanger.passwordRules,

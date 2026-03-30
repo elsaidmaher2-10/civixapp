@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import '../verfication/verficationinit.dart';
 
 class TaskInfoSection extends StatelessWidget {
-  const TaskInfoSection();
+  const TaskInfoSection({super.key});
 
   @override
   Widget build(BuildContext context) {

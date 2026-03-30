@@ -3,7 +3,7 @@ import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:flutter/material.dart';
 
 class TaskSearchBar extends StatelessWidget {
-  const TaskSearchBar();
+  const TaskSearchBar({super.key});
   @override
   Widget build(BuildContext context) {
     return Container(

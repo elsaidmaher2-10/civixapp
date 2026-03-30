@@ -7,7 +7,7 @@ class MetaInfoItem extends StatelessWidget {
   final String label;
   final bool muted;
 
-  const MetaInfoItem({
+  const MetaInfoItem({super.key, 
     required this.icon,
     required this.label,
     this.muted = false,

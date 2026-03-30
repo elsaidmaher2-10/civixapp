@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 
 class TaskOwnerHeader extends StatelessWidget {
-  const TaskOwnerHeader();
+  const TaskOwnerHeader({super.key});
 
   @override
   Widget build(BuildContext context) {

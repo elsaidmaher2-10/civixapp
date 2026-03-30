@@ -4,7 +4,6 @@ import 'package:citifix/feature/workerFeature/home/presentation/view/Home.dart';
 import 'package:citifix/feature/workerFeature/main/Manager/cubit/worker_cubit_cubit.dart';
 import 'package:citifix/feature/workerFeature/profile/profle.dart';
 import 'package:citifix/feature/workerFeature/tasks/taskScreen.dart';
-import 'package:citifix/feature/workerFeature/taskDetails/TaskDetailsPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

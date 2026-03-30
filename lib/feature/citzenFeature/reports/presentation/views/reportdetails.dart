@@ -1,13 +1,16 @@
+import 'package:citifix/core/DI/getit.dart';
 import 'package:citifix/core/extenstion/datetimeextension.dart';
 import 'package:citifix/core/resource/colormanager.dart';
-import 'package:citifix/core/resource/constantmanagerAr.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/service/StatusReport.dart';
 import 'package:citifix/feature/citzenFeature/home/presentation/view/widget/CustomMap.dart';
+import 'package:citifix/feature/citzenFeature/reports/presentation/manager/comment/commentmanger_cubit.dart'; // تأكد من المسار
 import 'package:citifix/feature/citzenFeature/reports/presentation/manager/reportManger/cubit/report_manager_cubit.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/manager/reportManger/cubit/report_manager_state.dart';
+import 'package:citifix/feature/citzenFeature/reports/presentation/views/StatusBadge.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/views/widget/CustomTimelineTile.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/views/widget/ReportDetailsAppbar.dart';
+import 'package:citifix/feature/citzenFeature/reports/presentation/views/widget/commentsystem.dart';
 import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,10 +26,18 @@ class ReportDetailsScreen extends StatefulWidget {
 }
 
 class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
+  final TextEditingController controller = TextEditingController();
+
   @override
   void initState() {
     super.initState();
     context.read<ReportCubit>().GetReportByID(ReportID: widget.reportId);
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
   }
 
   @override
@@ -42,102 +53,112 @@ class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
           });
         }
       },
-      child: Scaffold(
-        backgroundColor: ColorManger.white,
-        body: BlocBuilder<ReportCubit, ReportManagerState>(
-          builder: (context, state) {
-            if (state is GetReportsByidLoading) {
-              return const Center(
-                child: CircularProgressIndicator(color: ColorManger.kPrimary),
-              );
-            } else if (state is GetReportsByidSuccess) {
-              final report = state.reports;
-              return CustomScrollView(
-                physics: const BouncingScrollPhysics(),
-                slivers: [
-                  ReportDetailsAppbar(
-                    image: report.imagesUrls.isEmpty
-                        ? [Constantmanger.defualtImage]
-                        : report.imagesUrls,
-                    ontap: () => Navigator.pop(context, true),
-                  ),
-                  SliverToBoxAdapter(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 24.w,
-                        vertical: 16.h,
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          _buildStatusBadge(context, report.status),
-                          SizedBox(height: 16.h),
-                          Text(
-                            report.title,
-                            style: TextStyle(
-                              fontSize: 24.sp,
-                              fontWeight: FontWeight.w900,
-                              color: ColorManger.kPrimary,
-                            ),
-                          ),
-                          SizedBox(height: 8.h),
-                          Row(
-                            children: [
-                              _buildInfoChip(
-                                Icons.category_outlined,
-                                report.categoryName,
+      child: BlocProvider(
+        create: (context) =>
+            getIt<CommentsCubit>()..fetchComments(widget.reportId),
+        child: Scaffold(
+          backgroundColor: ColorManger.reportsPageBackground,
+          body: BlocBuilder<ReportCubit, ReportManagerState>(
+            builder: (context, state) {
+              if (state is GetReportsByidLoading) {
+                return const Center(
+                  child: CircularProgressIndicator(color: ColorManger.kPrimary),
+                );
+              } else if (state is GetReportsByidSuccess) {
+                final report = state.reports;
+                return CustomScrollView(
+                  physics: const BouncingScrollPhysics(),
+                  slivers: [
+                    // 1. الجزء العلوي (الصور وزر الرجوع)
+                    ReportDetailsAppbar(
+                      image: report.imagesUrls.isEmpty
+                          ? [Constantmanger.defualtImage]
+                          : report.imagesUrls,
+                      ontap: () => Navigator.pop(context, true),
+                    ),
+
+                    // 2. تفاصيل التقرير (Title, Description, Map, Timeline)
+                    SliverToBoxAdapter(
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 24.w,
+                          vertical: 16.h,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            _buildStatusBadge(context, report.status),
+                            SizedBox(height: 16.h),
+                            Text(
+                              report.title,
+                              style: TextStyle(
+                                fontSize: 24.sp,
+                                fontWeight: FontWeight.w900,
+                                color: ColorManger.kPrimary,
                               ),
-                              SizedBox(width: 16.w),
-                              _buildInfoChip(
-                                Icons.access_time_rounded,
-                                report.createdAt.timeAgo(context),
+                            ),
+                            SizedBox(height: 8.h),
+                            Row(
+                              children: [
+                                _buildInfoChip(
+                                  Icons.category_outlined,
+                                  report.categoryName,
+                                ),
+                                SizedBox(width: 16.w),
+                                _buildInfoChip(
+                                  Icons.access_time_rounded,
+                                  report.createdAt.timeAgo(context),
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 20.h),
+                            _buildCitizenCard(context, report.citizenName),
+                            SizedBox(height: 20.h),
+                            _sectionTitle(S.of(context).description),
+                            SizedBox(height: 8.h),
+                            Text(
+                              report.description,
+                              style: TextStyle(
+                                fontSize: 15.sp,
+                                color: Colors.black87.withOpacity(0.7),
+                                height: 1.6,
                               ),
-                            ],
-                          ),
-                          SizedBox(height: 20.h),
-                          _buildCitizenCard(context, report.citizenName),
-                          SizedBox(height: 20.h),
-                          _sectionTitle(S.of(context).description),
-                          SizedBox(height: 8.h),
-                          Text(
-                            report.description,
-                            style: TextStyle(
-                              fontSize: 15.sp,
-                              color: Colors.black87.withOpacity(0.7),
-                              height: 1.6,
                             ),
-                          ),
-                          SizedBox(height: 24.h),
-                          _sectionTitle(S.of(context).location),
-                          SizedBox(height: 4.h),
-                          Text(
-                            report.location,
-                            style: TextStyle(
-                              fontSize: 13.sp,
-                              color: Colors.grey[600],
+                            SizedBox(height: 24.h),
+                            _sectionTitle(S.of(context).location),
+                            SizedBox(height: 4.h),
+                            Text(
+                              report.location,
+                              style: TextStyle(
+                                fontSize: 13.sp,
+                                color: Colors.grey[600],
+                              ),
                             ),
-                          ),
-                          SizedBox(height: 12.h),
-                          _buildMapSection(
-                            LatLng(report.latitude, report.longitude),
-                            report.location,
-                          ),
-                          SizedBox(height: 24.h),
-                          _sectionTitle(S.of(context).progressTracking),
-                          SizedBox(height: 12.h),
-                          _buildTimeline(context, report.status),
-                          SizedBox(height: 40.h),
-                        ],
+                            SizedBox(height: 12.h),
+                            _buildMapSection(
+                              LatLng(report.latitude, report.longitude),
+                              report.location,
+                            ),
+                            SizedBox(height: 24.h),
+                            _sectionTitle(S.of(context).progressTracking),
+                            SizedBox(height: 12.h),
+                            _buildTimeline(context, report.status),
+                            SizedBox(height: 40.h),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              );
-            } else if (state is GetReportsByidFailure) {
-              return _buildErrorState(context, state.errMessage);
-            }
-            return const SizedBox.shrink();
-          },
+
+                    // 3. نظام التعليقات (Cubit inside)
+                    Commentsystem(controller: controller, reporID: report.id),
+                  ],
+                );
+              } else if (state is GetReportsByidFailure) {
+                return _buildErrorState(context, state.errMessage);
+              }
+              return const SizedBox.shrink();
+            },
+          ),
         ),
       ),
     );

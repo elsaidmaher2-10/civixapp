@@ -15,12 +15,12 @@ class ReportFormFields extends StatelessWidget {
   final SingleSelectController<CategoryItem?>? controller;
 
   const ReportFormFields({
-    Key? key,
+    super.key,
     required this.titleController,
     required this.descriptionController,
     required this.onCategoryChanged,
     required this.controller,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

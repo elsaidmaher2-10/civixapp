@@ -20,7 +20,7 @@ class SelectRoleDropdown extends StatelessWidget {
       stream: streamController.stream,
       builder: (context, snapshot) {
         return DropdownButtonFormField<String>(
-          value: snapshot.data,
+          initialValue: snapshot.data,
           isExpanded: true,
           autovalidateMode: AutovalidateMode.onUserInteraction,
 

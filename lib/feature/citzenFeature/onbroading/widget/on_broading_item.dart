@@ -45,16 +45,14 @@ class Customonbroadingitem extends StatelessWidget {
 
             TweenAnimationBuilder(
               duration: const Duration(milliseconds: 600),
-              tween: Tween<double>(begin: 0.8, end: 1.0),
+              tween: Tween<double>(begin: 0.5, end: 1.0),
               builder: (context, double value, child) {
                 return Transform.scale(
                   scale: value,
-                  child: RepaintBoundary(
-                    child: SvgPicture.asset(
-                      pageData.image,
-                      height: 280.h,
-                      fit: BoxFit.contain,
-                    ),
+                  child: SvgPicture.asset(
+                    pageData.image,
+                    height: 280.h,
+                    fit: BoxFit.fill,
                   ),
                 );
               },

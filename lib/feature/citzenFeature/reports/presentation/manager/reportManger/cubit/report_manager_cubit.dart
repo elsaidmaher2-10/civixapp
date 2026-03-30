@@ -62,6 +62,23 @@ class ReportCubit extends Cubit<ReportManagerState> {
     );
   }
 
+  Future<void> deleteReport({required int ReportID}) async {
+    if (isClosed) return;
+    emit(GetReportsByidLoading());
+
+    final result = await reportRepository.DeleteReport(ReportID: ReportID);
+
+    if (isClosed) return;
+
+    result.fold(
+      (failure) => emit(GetReportsByidFailure(failure.errors.first)),
+      (String successMessage) async {
+        emit(deleteReportState(successMessage));
+        await fetchReports();
+      },
+    );
+  }
+
   void searchReport({required String query}) async {
     if (isClosed) return;
 

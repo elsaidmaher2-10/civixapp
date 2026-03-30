@@ -33,7 +33,7 @@ class ImagePickerList extends StatelessWidget {
                 clipBehavior: Clip.antiAliasWithSaveLayer,
                 scrollDirection: Axis.horizontal,
                 itemCount: snapshot.data?.length ?? 0,
-                separatorBuilder: (_, __) => SizedBox(width: 8.w),
+                separatorBuilder: (_, _) => SizedBox(width: 8.w),
                 itemBuilder: (ctx, index) {
                   final image = snapshot.data![index];
                   return ClipRRect(

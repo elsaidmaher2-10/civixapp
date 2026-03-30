@@ -3,7 +3,7 @@ import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:flutter/material.dart';
 
 class Customsnackbar {
-  static show({
+  static void show({
     required context,
     required Color backgroundColor,
     required String message,

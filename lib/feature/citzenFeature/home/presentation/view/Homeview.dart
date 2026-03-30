@@ -1,6 +1,5 @@
 import 'package:citifix/core/resource/assetvaluemanger.dart';
 import 'package:citifix/core/resource/colormanager.dart';
-import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/feature/citzenFeature/reports/data/Models/GetReportModel.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/manager/reportManger/cubit/report_manager_cubit.dart';
@@ -27,7 +26,7 @@ class HomeScreen extends StatelessWidget {
       appBar: const MainscreenAppbar(),
       body: BlocBuilder<ReportCubit, ReportManagerState>(
         builder: (context, state) {
-          if (state is GetReportsLoading) {
+          if (state is GetReportsLoading || state is deleteReportState) {
             return const Center(
               child: SpinKitWaveSpinner(color: ColorManger.lightColor),
             );

@@ -12,7 +12,7 @@ class MangeCustomBottomnavBarCubit extends Cubit<MangeCustomBottomnavBarState> {
   int curindex = 0;
   final List<Widget> _screens = [HomeScreen(), ReportListingScreen(), ProfileScreen()];
 
-  ontap(int newindex) {
+  void ontap(int newindex) {
     curindex = newindex;
     if (curindex == 2) {
       PrefrenceManager().setbool("isvisit", true);

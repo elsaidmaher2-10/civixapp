@@ -3,47 +3,23 @@ import 'package:citifix/core/extenstion/datetimeextension.dart';
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
-import 'package:citifix/core/routing/routes.dart';
 import 'package:citifix/feature/citzenFeature/reports/data/Models/GetReportModel.dart';
+import 'package:citifix/feature/citzenFeature/reports/presentation/manager/reportManger/cubit/report_manager_cubit.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/views/reportdetails.dart';
 import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import 'deleteReportDialog.dart';
 
 class Reportcard extends StatelessWidget {
   final ReportItem report;
 
   const Reportcard({super.key, required this.report});
-
-  Future<bool> _showDeleteDialog(BuildContext context) async {
-    return await showCupertinoDialog<bool>(
-          context: context,
-          builder: (BuildContext context) {
-            return CupertinoAlertDialog(
-              title: Text(S.of(context).confirmDelete),
-              content: Text(S.of(context).deleteConfirmationMessage),
-              actions: <Widget>[
-                CupertinoDialogAction(
-                  onPressed: () => Navigator.of(context).pop(false),
-                  child: Text(
-                    S.of(context).cancel,
-                    style: const TextStyle(color: ColorManger.kPrimaryDark),
-                  ),
-                ),
-                CupertinoDialogAction(
-                  isDestructiveAction: true,
-                  onPressed: () => Navigator.of(context).pop(true),
-                  child: Text(S.of(context).delete),
-                ),
-              ],
-            );
-          },
-        ) ??
-        false;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,10 +41,7 @@ class Reportcard extends StatelessWidget {
             children: [
               SlidableAction(
                 onPressed: (context) async {
-                  final bool shouldDelete = await _showDeleteDialog(context);
-                  if (shouldDelete) {
-                    // TODO: تنفيذ عملية الحذف
-                  }
+                  await showDeleteDialog(context, ReportID: report.id);
                 },
                 backgroundColor: const Color(0xFFFE4A49),
                 foregroundColor: Colors.white,

@@ -9,21 +9,25 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class NotificationCubit extends Cubit<NotificationState> {
   final NotificationRepo repo;
-  
-  StreamSubscription? _messagingSubscription; 
+
+  StreamSubscription? _messagingSubscription;
 
   NotificationCubit(this.repo) : super(NotificationInitial()) {
     getNotifications();
-    _listenToRealTimeNotifications(); 
+    _listenToRealTimeNotifications();
   }
 
   void _listenToRealTimeNotifications() {
-    _messagingSubscription = FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    _messagingSubscription = FirebaseMessaging.onMessage.listen((
+      RemoteMessage message,
+    ) {
       _getNotificationsSilent();
     });
   }
+
   Future<void> _getNotificationsSilent() async {
-    final Either<FailureResponse, List<NotificationModel>> response = await repo.getNotifications();
+    final Either<FailureResponse, List<NotificationModel>> response = await repo
+        .getNotifications();
 
     response.fold(
       (failure) => emit(NotificationError(failure.errors.join(", "))),
@@ -35,7 +39,8 @@ class NotificationCubit extends Cubit<NotificationState> {
 
   Future<void> getNotifications() async {
     emit(NotificationLoading());
-    final Either<FailureResponse, List<NotificationModel>> response = await repo.getNotifications();
+    final Either<FailureResponse, List<NotificationModel>> response = await repo
+        .getNotifications();
 
     response.fold(
       (failure) => emit(NotificationError(failure.errors.join(", "))),
@@ -46,16 +51,20 @@ class NotificationCubit extends Cubit<NotificationState> {
   }
 
   Future<void> markAsRead(int id) async {
-    final Either<FailureResponse, dynamic> response = await repo.markAsRead(id: id);
+    final Either<FailureResponse, dynamic> response = await repo.markAsRead(
+      id: id,
+    );
 
     response.fold(
       (failure) => emit(NotificationError(failure.errors.join(", "))),
-      (_) => _getNotificationsSilent(), 
+      (_) => _getNotificationsSilent(),
     );
   }
 
   Future<void> deleteNotification(int id) async {
-    final Either<FailureResponse, Map> response = await repo.deleteNotification(id: id);
+    final Either<FailureResponse, Map> response = await repo.deleteNotification(
+      id: id,
+    );
 
     response.fold(
       (failure) => emit(NotificationError(failure.errors.join(", "))),
@@ -64,9 +73,19 @@ class NotificationCubit extends Cubit<NotificationState> {
   }
 
   Future<void> clearAllNotifications() async {
-    emit(NotificationLoading()); 
-    final Either<FailureResponse, Map> response = await repo.clearAllNotifications();
+    emit(NotificationLoading());
+    final Either<FailureResponse, Map> response = await repo
+        .clearAllNotifications();
 
+    response.fold(
+      (failure) => emit(NotificationError(failure.errors.join(", "))),
+      (_) => getNotifications(),
+    );
+  }
+
+  Future<void> markAllNotificationsAsRead() async {
+    final Either<FailureResponse, Map> response = await repo
+        .markAllNotificationsAsRead();
     response.fold(
       (failure) => emit(NotificationError(failure.errors.join(", "))),
       (_) => getNotifications(),
@@ -86,7 +105,7 @@ class NotificationCubit extends Cubit<NotificationState> {
   }
 
   Future<void> refreshNotifications() async {
-    await _getNotificationsSilent(); 
+    await _getNotificationsSilent();
   }
 
   @override

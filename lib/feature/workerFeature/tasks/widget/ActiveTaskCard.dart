@@ -159,7 +159,7 @@ class _LocationRow extends StatelessWidget {
 
 class StatusBadge extends StatelessWidget {
   final TaskStatus status;
-  const StatusBadge({required this.status});
+  const StatusBadge({super.key, required this.status});
   @override
   Widget build(BuildContext context) {
     Color color = status == TaskStatus.inProgress

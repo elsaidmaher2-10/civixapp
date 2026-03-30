@@ -10,7 +10,7 @@ class LoginmangerCubit extends Cubit<LogincontrollerState> {
   LoginmangerCubit() : super(LogincontrollerInitial());
   Loginrepo loginrepo = Loginrepo(Apiservice(Dio()), InternetChecker());
 
-  login({required email, required password}) async {
+  Future<void> login({required email, required password}) async {
     emit(LogincontrollerLoading());
     await Future.delayed(Duration(seconds: 3));
     final result = await loginrepo.login(email: email, password: password);

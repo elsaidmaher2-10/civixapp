@@ -8,7 +8,6 @@ import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/core/routing/routes.dart';
 import 'package:citifix/core/widget/CustomSnackBar.dart';
 import 'package:citifix/core/widget/customloading.dart';
-import 'package:citifix/core/widget/customtextfromfield.dart';
 import 'package:citifix/feature/Auth/register/data/models/usermodel.dart';
 import 'package:citifix/feature/Auth/register/presentation/manager/ValidatebuttonCubit/validatebutton_cubit.dart';
 import 'package:citifix/feature/Auth/register/presentation/manager/cubit/signupcontroller_cubit.dart';
@@ -27,7 +26,6 @@ import 'package:citifix/feature/Auth/register/presentation/views/widget/password
 import 'package:citifix/feature/Auth/register/presentation/views/widget/password_rules.dart';
 import 'package:citifix/feature/Auth/register/presentation/views/widget/signupbutton.dart';
 import 'package:citifix/feature/Auth/register/presentation/views/widget/signuplogo.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';

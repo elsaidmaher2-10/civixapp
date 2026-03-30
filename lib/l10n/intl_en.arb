@@ -198,5 +198,7 @@
   "workerConductDesc": "1. Workers must upload 'Before' and 'After' photos for every task.\n2. Tasks must be completed within the assigned timeframe.\n3. Professional behavior is mandatory during site visits.",
   "legalCategory": "Legal & Privacy",
   "privacyPolicyTitle": "Data Protection Policy",
-  "privacyPolicyDesc": "Citifix protects your privacy. Citizen contact details are hidden from workers; they only receive the location and issue description."
+  "privacyPolicyDesc": "Citifix protects your privacy. Citizen contact details are hidden from workers; they only receive the location and issue description.",
+"unread": "unread",
+"deleteall": "Delete all"
 }

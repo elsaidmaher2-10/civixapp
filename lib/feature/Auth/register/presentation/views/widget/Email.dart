@@ -9,6 +9,7 @@ class Email extends StatelessWidget {
   const Email({super.key, required this.controller, required this.validator});
   final TextEditingController controller;
   final String? Function(String?)? validator;
+  @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

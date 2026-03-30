@@ -1,6 +1,5 @@
 import 'package:citifix/core/resource/assetvaluemanger.dart';
 import 'package:citifix/core/resource/colormanager.dart';
-import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/core/service/StatusReport.dart';
 import 'package:citifix/core/widget/CustomAnimatedSearch.dart';
@@ -9,7 +8,7 @@ import 'package:citifix/feature/citzenFeature/reports/presentation/manager/repor
 import 'package:citifix/feature/citzenFeature/reports/presentation/manager/reportManger/cubit/report_manager_state.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/views/widget/GetReportCarditem.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/views/widget/GetreportFiltring.dart';
-import 'package:citifix/generated/l10n.dart'; // استيراد ملف الترجمة
+import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -118,7 +117,7 @@ class _ReportsPageState extends State<ReportsPage> {
               scrollDirection: Axis.horizontal,
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
               itemCount: filters.length,
-              separatorBuilder: (_, __) => const SizedBox(width: 8),
+              separatorBuilder: (_, _) => const SizedBox(width: 8),
               itemBuilder: (context, index) => InkWell(
                 onTap: () {
                   setState(() {

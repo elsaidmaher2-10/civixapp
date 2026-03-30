@@ -12,7 +12,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_snake_navigationbar/flutter_snake_navigationbar.dart';
 
 class CitizenMainScreen extends StatefulWidget {
-  const CitizenMainScreen({CitizenMainScreenKey});
+  const CitizenMainScreen({super.key, CitizenMainScreenKey});
 
   @override
   State<CitizenMainScreen> createState() => _CitizenMainScreenState();

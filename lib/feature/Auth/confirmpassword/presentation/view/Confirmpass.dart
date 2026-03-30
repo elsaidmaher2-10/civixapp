@@ -24,7 +24,7 @@ import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
 
 class CreatePasswordScreen extends StatefulWidget {
-  const CreatePasswordScreen({Key? key}) : super(key: key);
+  const CreatePasswordScreen({super.key});
 
   @override
   State<CreatePasswordScreen> createState() => _CreatePasswordScreenState();

@@ -21,7 +21,7 @@ import 'package:citifix/core/routing/routes.dart';
 import 'package:citifix/core/widget/customtextfromfield.dart';
 
 class Loginpage extends StatefulWidget {
-  Loginpage({super.key});
+  const Loginpage({super.key});
 
   @override
   State<Loginpage> createState() => _LoginpageState();

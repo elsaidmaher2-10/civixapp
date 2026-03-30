@@ -9,7 +9,7 @@ class PrefrenceManager {
   }
 
   late final SharedPreferences _pref;
-  init() async {
+  Future<void> init() async {
     _pref = await SharedPreferences.getInstance();
   }
 

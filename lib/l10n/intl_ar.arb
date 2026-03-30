@@ -172,7 +172,6 @@
   "dataSecurityNote": "بياناتك مخزنة ومُشفرة بشكل آمن.",
   "saveChanges": "حفظ التغييرات",
   "changePassword": "تغيير كلمة المرور",
-  "notifications": "الإشعارات",
   "markAllRead": "تحديد الكل كمقروء",
   "errorTitle": "عذراً! حدث خطأ ما.",
   "noNotifications": "لا توجد إشعارات جديدة",
@@ -199,4 +198,8 @@
   "legalCategory": "القانون والخصوصية",
   "privacyPolicyTitle": "سياسة حماية البيانات",
   "privacyPolicyDesc": "سيتيفيكس يحمي خصوصيتك. بيانات الاتصال الخاصة بالمواطن مخفية عن العمال؛ حيث يتلقون فقط الموقع ووصف المشكلة."
+
+,"notifications": "الإشعارات",
+ "deleteAll": "حذف الكل",
+ "noNotifications": "لا توجد إشعارات",
 }

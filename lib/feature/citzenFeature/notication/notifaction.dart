@@ -26,225 +26,191 @@ class _NotificationCenterState extends State<NotificationCenter> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorManger.surface,
-      appBar: AppBar(
-        leading: IconButton(
-          color: ColorManger.primary,
+      appBar: _buildAppBar(context),
+      body: _buildBody(),
+    );
+  }
 
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          icon: Icon(
-            Directionality.of(context) == TextDirection.ltr
-                ? CupertinoIcons.back
-                : CupertinoIcons.back,
-          ),
-        ),
-        backgroundColor: ColorManger.surface,
-        elevation: 0,
-        centerTitle: false,
-        title: BlocBuilder<NotificationCubit, NotificationState>(
-          builder: (context, state) {
-            int unreadCount = 0;
-            if (state is NotificationLoaded) {
-              unreadCount = state.notifications.where((e) => !e.isRead).length;
-            }
-
-            return Row(
-              children: [
+  // --- AppBar Widget ---
+  PreferredSizeWidget _buildAppBar(BuildContext context) {
+    return AppBar(
+      leading: IconButton(
+        color: ColorManger.primary,
+        onPressed: () => Navigator.of(context).pop(),
+        icon: const Icon(Icons.arrow_back),
+      ),
+      backgroundColor: ColorManger.surface,
+      elevation: 0,
+      centerTitle: false,
+      title: BlocBuilder<NotificationCubit, NotificationState>(
+        builder: (context, state) {
+          int unreadCount = 0;
+          if (state is NotificationLoaded) {
+            unreadCount = state.notifications.where((e) => !e.isRead).length;
+          }
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                S.of(context).notifications,
+                style: TextStyle(
+                  color: ColorManger.primary,
+                  fontSize: ScreenUtilsManager.s20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              if (unreadCount > 0)
                 Text(
-                  S.of(context).notifications,
+                  "$unreadCount ${S.of(context).unread}",
                   style: TextStyle(
-                    color: ColorManger.primary,
-                    fontSize: ScreenUtilsManager.s22,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: -0.5,
+                    color: Colors.grey.shade600,
+                    fontSize: ScreenUtilsManager.s12,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
-                if (unreadCount > 0) ...[
-                  SizedBox(width: ScreenUtilsManager.w8),
-                  Badge(
-                    backgroundColor: Colors.redAccent,
-                    label: Text(
-                      '$unreadCount',
-                      style: const TextStyle(fontWeight: FontWeight.bold),
+            ],
+          );
+        },
+      ),
+      actions: [
+        BlocBuilder<NotificationCubit, NotificationState>(
+          builder: (context, state) {
+            if (state is NotificationLoaded && state.notifications.isNotEmpty) {
+              final hasUnread = state.notifications.any((e) => !e.isRead);
+              return Row(
+                children: [
+                  if (hasUnread)
+                    IconButton(
+                      tooltip: S.of(context).markAllRead,
+                      icon: const Icon(Icons.done_all_rounded),
+                      color: ColorManger.primary,
+                      onPressed: () => context
+                          .read<NotificationCubit>()
+                          .markAllNotificationsAsRead(),
                     ),
-                    child: SizedBox(
-                      width: ScreenUtilsManager.w8,
-                      height: ScreenUtilsManager.h8,
-                    ),
+                  IconButton(
+                    tooltip: S.of(context).deleteall,
+                    icon: const Icon(Icons.delete_sweep_outlined),
+                    color: Colors.redAccent,
+                    onPressed: () => context
+                        .read<NotificationCubit>()
+                        .clearAllNotifications(),
                   ),
+                  SizedBox(width: ScreenUtilsManager.w8),
                 ],
-              ],
-            );
+              );
+            }
+            return const SizedBox();
           },
         ),
-        actions: [
-          BlocBuilder<NotificationCubit, NotificationState>(
-            builder: (context, state) {
-              if (state is NotificationLoaded &&
-                  state.notifications.any((e) => !e.isRead)) {
-                return Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: ScreenUtilsManager.w8,
-                  ),
-                  child: TextButton.icon(
-                    onPressed: () {
-                      context.read<NotificationCubit>().clearAllNotifications();
-                    },
-                    icon: Icon(
-                      Icons.done_all_rounded,
-                      size: ScreenUtilsManager.s20,
-                    ),
-                    label: Text(
-                      S.of(context).markAllRead,
-                      style: const TextStyle(fontWeight: FontWeight.w600),
-                    ),
-                    style: TextButton.styleFrom(
-                      foregroundColor: ColorManger.primary,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(
-                          ScreenUtilsManager.r12,
-                        ),
-                      ),
-                    ),
-                  ),
-                );
-              }
-              return const SizedBox();
+      ],
+    );
+  }
+
+  // --- Body Logic ---
+  Widget _buildBody() {
+    return BlocBuilder<NotificationCubit, NotificationState>(
+      builder: (context, state) {
+        if (state is NotificationLoading) {
+          return Center(
+            child: CupertinoActivityIndicator(
+              color: ColorManger.kPrimary,
+              radius: ScreenUtilsManager.r15,
+            ),
+          );
+        }
+
+        if (state is NotificationError) {
+          return _buildErrorState(state.message);
+        }
+
+        if (state is NotificationLoaded) {
+          if (state.notifications.isEmpty) {
+            return _buildEmptyState();
+          }
+          return _buildNotificationList(state.notifications);
+        }
+
+        return const SizedBox();
+      },
+    );
+  }
+
+  // --- Notification List with Swipe-to-Delete ---
+  Widget _buildNotificationList(List notifications) {
+    return RefreshIndicator(
+      color: ColorManger.primary,
+      onRefresh: () => context.read<NotificationCubit>().refreshNotifications(),
+      child: ListView.builder(
+        padding: EdgeInsets.symmetric(vertical: ScreenUtilsManager.h8),
+        itemCount: notifications.length,
+        itemBuilder: (context, index) {
+          final item = notifications[index];
+
+          return Dismissible(
+            key: Key(item.id.toString()),
+            direction: DismissDirection.endToStart,
+            background: Container(
+              alignment: Alignment.centerRight,
+              padding: EdgeInsets.symmetric(horizontal: ScreenUtilsManager.w20),
+              color: Colors.redAccent.withOpacity(0.9),
+              child: const Icon(Icons.delete_outline, color: Colors.white),
+            ),
+            onDismissed: (direction) {
+              context.read<NotificationCubit>().deleteNotification(item.id);
             },
+            child: NotificationTile(
+              item: item,
+              onTap: () =>
+                  context.read<NotificationCubit>().markAsRead(item.id),
+              onDelete: () =>
+                  context.read<NotificationCubit>().deleteNotification(item.id),
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  // --- Empty State UI ---
+  Widget _buildEmptyState() {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            Icons.notifications_none_rounded,
+            size: 80,
+            color: Colors.grey.shade300,
+          ),
+          SizedBox(height: ScreenUtilsManager.h16),
+          Text(
+            S.of(context).noNotifications,
+            style: const TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: Colors.black54,
+            ),
           ),
         ],
       ),
-      body: BlocBuilder<NotificationCubit, NotificationState>(
-        builder: (context, state) {
-          if (state is NotificationLoading) {
-            return Center(
-              child: CupertinoActivityIndicator(
-                color: ColorManger.kPrimary,
-                radius: ScreenUtilsManager.r15,
-              ),
-            );
-          }
+    );
+  }
 
-          if (state is NotificationError) {
-            return Center(
-              child: Padding(
-                padding: EdgeInsets.all(ScreenUtilsManager.w24),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.error_outline_rounded,
-                      size: ScreenUtilsManager.s64,
-                      color: Colors.red.shade300,
-                    ),
-                    SizedBox(height: ScreenUtilsManager.h16),
-                    Text(
-                      S.of(context).errorTitle,
-                      style: TextStyle(
-                        fontSize: ScreenUtilsManager.s18,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey.shade800,
-                      ),
-                    ),
-                    SizedBox(height: ScreenUtilsManager.h8),
-                    Text(
-                      state.message,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.grey.shade600),
-                    ),
-                    SizedBox(height: ScreenUtilsManager.h24),
-                    ElevatedButton.icon(
-                      onPressed: () =>
-                          context.read<NotificationCubit>().getNotifications(),
-                      icon: const Icon(Icons.refresh_rounded),
-                      label: Text(S.of(context).tryAgain),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: ColorManger.primary,
-                        foregroundColor: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(
-                            ScreenUtilsManager.r12,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            );
-          }
-
-          if (state is NotificationLoaded) {
-            final list = state.notifications;
-
-            if (list.isEmpty) {
-              return Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      padding: EdgeInsets.all(ScreenUtilsManager.w24),
-                      decoration: BoxDecoration(
-                        color: Colors.grey.shade100,
-                        shape: BoxShape.circle,
-                      ),
-                      child: Icon(
-                        Icons.notifications_paused_rounded,
-                        size: ScreenUtilsManager.s64,
-                        color: Colors.grey.shade400,
-                      ),
-                    ),
-                    SizedBox(height: ScreenUtilsManager.h24),
-                    Text(
-                      S.of(context).noNotifications,
-                      style: const TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black87,
-                      ),
-                    ),
-                    SizedBox(height: ScreenUtilsManager.h8),
-                    Text(
-                      S.of(context).caughtUpMessage,
-                      style: TextStyle(color: Colors.grey.shade500),
-                    ),
-                  ],
-                ),
-              );
-            }
-
-            return RefreshIndicator(
-              color: ColorManger.primary,
-              backgroundColor: Colors.white,
-              onRefresh: () =>
-                  context.read<NotificationCubit>().refreshNotifications(),
-              child: ListView.builder(
-                padding: EdgeInsets.only(
-                  top: ScreenUtilsManager.h8,
-                  bottom: ScreenUtilsManager.h24,
-                ),
-                itemCount: list.length,
-                itemBuilder: (context, index) {
-                  final item = list[index];
-                  return NotificationTile(
-                    item: item,
-                    onTap: () {
-                      context.read<NotificationCubit>().markAsRead(item.id);
-                    },
-                    onDelete: () {
-                      context.read<NotificationCubit>().deleteNotification(
-                        item.id,
-                      );
-                    },
-                  );
-                },
-              ),
-            );
-          }
-
-          return const SizedBox();
-        },
+  // --- Error State UI ---
+  Widget _buildErrorState(String message) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Icon(Icons.wifi_off_rounded, size: 60, color: Colors.redAccent),
+          Text(message),
+          TextButton(
+            onPressed: () =>
+                context.read<NotificationCubit>().getNotifications(),
+            child: Text(S.of(context).tryAgain),
+          ),
+        ],
       ),
     );
   }

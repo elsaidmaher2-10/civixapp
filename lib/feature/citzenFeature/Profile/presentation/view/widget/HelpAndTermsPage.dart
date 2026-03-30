@@ -92,7 +92,7 @@ class HelpAndTermsPage extends StatelessWidget {
                       ),
                     ),
                   )
-                  .toList(),
+                  ,
               SizedBox(height: 10.h),
             ],
           );

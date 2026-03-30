@@ -1,4 +1,3 @@
-import 'package:citifix/core/resource/constantmanger.dart';
 
 // String errorvalidator(Failuerresponse e) {
 //   List<String> errors = [];

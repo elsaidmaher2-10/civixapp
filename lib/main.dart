@@ -35,10 +35,10 @@ Future<void> _initApp() async {
   if (Firebase.apps.isEmpty) {
     await Firebase.initializeApp();
   }
-
   await PrefrenceManager().init();
   await LocalNotificationService.init();
   await NotificationService.init();
+
   Bloc.observer = MyBlocObserver();
 }
 
@@ -61,6 +61,7 @@ class MyAppWrapper extends StatelessWidget {
     final String? roleString = PrefrenceManager().getstring(
       Constantmanger.role,
     );
+    print(accessToken);
 
     return MultiBlocProvider(
       providers: [

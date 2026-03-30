@@ -1698,6 +1698,16 @@ class S {
       args: [],
     );
   }
+
+  /// `unread`
+  String get unread {
+    return Intl.message('unread', name: 'unread', desc: '', args: []);
+  }
+
+  /// `Delete all`
+  String get deleteall {
+    return Intl.message('Delete all', name: 'deleteall', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -28,7 +28,7 @@ class Locationservice {
     return true;
   }
 
-  getLocationData(void Function(LocationData)? onData) {
+  void getLocationData(void Function(LocationData)? onData) {
     location.changeSettings(distanceFilter: 10, interval: 10000);
     location.onLocationChanged.listen(onData);
   }

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class TaskFilterChips extends StatefulWidget {
   final List<String> filters;
   final Function(String) onFilterSelected;
-  const TaskFilterChips({
+  const TaskFilterChips({super.key, 
     required this.filters,
     required this.onFilterSelected,
   });
