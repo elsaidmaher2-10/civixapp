@@ -201,5 +201,9 @@
 
 ,"notifications": "الإشعارات",
  "deleteAll": "حذف الكل",
- "noNotifications": "لا توجد إشعارات",
+  "searchPlaceholder": "بحث عن التقارير...",
+  "topAchievements": "أبرز تقارير الإنجازات",
+  "resolvedReports": "البلاغات المنجزة",
+  "noData": "لا توجد بيانات حالياً",
+  "retry": "إعادة المحاولة"
 }

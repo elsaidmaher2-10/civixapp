@@ -28,7 +28,7 @@ class CommentBubble extends StatelessWidget {
               if (isWorker)
                 Text(
                   "2 hours ago",
-                  style: GoogleFonts.inter(
+                  style: GoogleFonts.cairo(
                     fontSize: 10.sp,
                     color: const Color(0xff737783),
                   ),
@@ -36,7 +36,7 @@ class CommentBubble extends StatelessWidget {
               SizedBox(width: 8.w),
               Text(
                 isWorker ? "Worker" : "Reporter",
-                style: GoogleFonts.inter(
+                style: GoogleFonts.cairo(
                   fontSize: 10.sp,
                   fontWeight: FontWeight.bold,
                   color: isWorker
@@ -48,7 +48,7 @@ class CommentBubble extends StatelessWidget {
               if (!isWorker)
                 Text(
                   "2 hours ago",
-                  style: GoogleFonts.inter(
+                  style: GoogleFonts.cairo(
                     fontSize: 10.sp,
                     color: const Color(0xff737783),
                   ),
@@ -90,7 +90,7 @@ class CommentBubble extends StatelessWidget {
                   ),
                   child: Text(
                     comment.commentText,
-                    style: GoogleFonts.inter(
+                    style: GoogleFonts.cairo(
                       fontSize: 13.sp,
                       color: isWorker ? Colors.white : Colors.black87,
                       height: 1.4,

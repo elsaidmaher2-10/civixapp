@@ -25,7 +25,7 @@ class Profilesettings extends StatelessWidget {
         children: [
           Text(
             S.of(context).settings,
-            style: GoogleFonts.inter(
+            style: GoogleFonts.cairo(
               letterSpacing: 1.6,
               color: ColorManger.lightGrey6,
               fontWeight: FontWeight.bold,
@@ -87,7 +87,7 @@ class Profilesettings extends StatelessWidget {
                     color: ColorManger.kPrimaryDark.withOpacity(0.8),
                   ),
                 ),
-                title:S.of(context).help,
+                title: S.of(context).help,
                 onTap: () {
                   Navigator.pushNamed(context, Routes.helpSupportRoute);
                 },

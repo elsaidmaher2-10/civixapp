@@ -70,7 +70,7 @@ class CustomButton extends StatelessWidget {
         icon: icon,
         label: Text(
           lable,
-          style: GoogleFonts.inter(fontWeight: FontWeight.bold),
+          style: GoogleFonts.cairo(fontWeight: FontWeight.bold),
         ),
       ),
     );

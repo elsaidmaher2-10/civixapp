@@ -28,7 +28,7 @@ class HelpAndTermsPage extends StatelessWidget {
         ),
         title: Text(
           S.of(context).helpAndLegal,
-          style: GoogleFonts.publicSans(
+          style: GoogleFonts.cairo(
             fontWeight: FontWeight.bold,
             fontSize: 18.sp,
           ),
@@ -58,41 +58,39 @@ class HelpAndTermsPage extends StatelessWidget {
                 ),
                 child: Text(
                   category,
-                  style: GoogleFonts.publicSans(
+                  style: GoogleFonts.cairo(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.bold,
                     color: ColorManger.kPrimary,
                   ),
                 ),
               ),
-              ...items
-                  .map(
-                    (item) => Padding(
-                      padding: EdgeInsets.only(bottom: 8.h),
-                      child: FAQ(
-                        question: item.question,
-                        answer: item.answer,
-                        showDivider: false,
-                        ansDecoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(12.r),
-                        ),
-                        queDecoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(12.r),
-                        ),
-                        queStyle: GoogleFonts.publicSans(
-                          fontWeight: FontWeight.w600,
-                          color: ColorManger.kPrimaryDark,
-                        ),
-                        ansStyle: GoogleFonts.publicSans(
-                          color: Colors.grey[600],
-                          height: 1.5,
-                        ),
-                      ),
+              ...items.map(
+                (item) => Padding(
+                  padding: EdgeInsets.only(bottom: 8.h),
+                  child: FAQ(
+                    question: item.question,
+                    answer: item.answer,
+                    showDivider: false,
+                    ansDecoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(12.r),
                     ),
-                  )
-                  ,
+                    queDecoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(12.r),
+                    ),
+                    queStyle: GoogleFonts.cairo(
+                      fontWeight: FontWeight.w600,
+                      color: ColorManger.kPrimaryDark,
+                    ),
+                    ansStyle: GoogleFonts.cairo(
+                      color: Colors.grey[600],
+                      height: 1.5,
+                    ),
+                  ),
+                ),
+              ),
               SizedBox(height: 10.h),
             ],
           );

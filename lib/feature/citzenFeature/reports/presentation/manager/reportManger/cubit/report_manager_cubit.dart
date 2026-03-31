@@ -6,7 +6,7 @@ import 'package:citifix/feature/citzenFeature/reports/presentation/manager/repor
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ReportCubit extends Cubit<ReportManagerState> {
-  final ReportRepository reportRepository;
+  final ReportRepositoryT reportRepository;
   ReportCubit(this.reportRepository) : super(ReportManagerInitial());
 
   List<ReportItem> _allReports = [];

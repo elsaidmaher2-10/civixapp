@@ -21,5 +21,7 @@ class Apiconstant {
   static String workertasks = "Worker/my-reports";
 
   static String markallread = "notifications/mark-all-read";
+
+  static var achievemnent = "Achievements";
   static String getcomments(int reportId) => "/reports/$reportId/comments";
 }

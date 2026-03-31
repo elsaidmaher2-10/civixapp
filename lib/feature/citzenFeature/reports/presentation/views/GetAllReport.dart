@@ -85,7 +85,7 @@ class _ReportsPageState extends State<ReportsPage> {
         ),
         title: Text(
           S.of(context).reports,
-          style: TextStyle(
+          style: GoogleFonts.cairo(
             color: ColorManger.kPrimary,
             fontWeight: FontWeight.bold,
           ),
@@ -179,7 +179,7 @@ class _ReportsPageState extends State<ReportsPage> {
                       Text(
                         error,
                         textAlign: TextAlign.center,
-                        style: GoogleFonts.publicSans(
+                        style: GoogleFonts.cairo(
                           fontWeight: FontWeight.w500,
                           color: ColorManger.lightGrey.withOpacity(0.8),
                           fontSize: ScreenUtilsManager.s16,
@@ -203,7 +203,7 @@ class _ReportsPageState extends State<ReportsPage> {
                   return Center(
                     child: Text(
                       S.of(context).noReportsAvailable,
-                      style: const TextStyle(color: Colors.grey),
+                      style: GoogleFonts.cairo(color: Colors.grey),
                     ),
                   );
                 }

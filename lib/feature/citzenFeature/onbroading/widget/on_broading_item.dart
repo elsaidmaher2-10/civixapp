@@ -62,7 +62,7 @@ class Customonbroadingitem extends StatelessWidget {
             Text(
               pageData.title,
               textAlign: TextAlign.center,
-              style: GoogleFonts.publicSans(
+              style: GoogleFonts.cairo(
                 fontSize: 26.sp,
                 color: ColorManger.kPrimaryDark,
                 fontWeight: FontWeight.w800,
@@ -75,7 +75,7 @@ class Customonbroadingitem extends StatelessWidget {
               child: Text(
                 pageData.subtitle,
                 textAlign: TextAlign.center,
-                style: GoogleFonts.publicSans(
+                style: GoogleFonts.cairo(
                   fontSize: 15.sp,
                   color: ColorManger.lightGrey6.withOpacity(0.8),
                   height: 1.5,

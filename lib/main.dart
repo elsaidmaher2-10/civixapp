@@ -66,7 +66,7 @@ class MyAppWrapper extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => UserProfileInfoCubit(getIt())),
-        BlocProvider(create: (_) => ReportCubit(getIt<ReportRepository>())),
+        BlocProvider(create: (_) => ReportCubit(getIt<ReportRepositoryT>())),
         BlocProvider(create: (_) => MangeCustomBottomnavBarCubit()),
         BlocProvider(
           create: (_) => NotificationCubit(getIt<NotificationRepo>()),

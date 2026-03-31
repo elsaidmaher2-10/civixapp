@@ -165,7 +165,6 @@ class Constantmanger {
     TimelineStep(index: 0, title: "Report Received", isDone: true),
     TimelineStep(index: 1, title: "Report Processed", isDone: false),
     TimelineStep(index: 2, title: "Report Resolved", isDone: false),
-    TimelineStep(index: 3, title: "Report Rejected", isDone: false),
   ];
   static const selectLanguage = "Select Language";
   static const choosePreferredLanguage = "Choose your preferred language";

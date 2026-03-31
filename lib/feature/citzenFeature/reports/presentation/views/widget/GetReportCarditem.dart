@@ -3,6 +3,7 @@ import 'package:citifix/core/extenstion/datetimeextension.dart';
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
+import 'package:citifix/core/widget/stautsBageApp.dart';
 import 'package:citifix/feature/citzenFeature/reports/data/Models/GetReportModel.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/manager/reportManger/cubit/report_manager_cubit.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/views/reportdetails.dart';
@@ -67,32 +68,14 @@ class ReportCardIem extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Row(
-                          children: [
-                            Container(
-                              width: ScreenUtilsManager.w8,
-                              height: ScreenUtilsManager.h8,
-                              decoration: BoxDecoration(
-                                color: statusColor,
-                                shape: BoxShape.circle,
-                              ),
-                            ),
-                            SizedBox(width: ScreenUtilsManager.h8),
-                            Text(
-                              _getTranslatedStatus(context, report.status),
-                              style: TextStyle(
-                                color: statusColor,
-                                fontSize: ScreenUtilsManager.s10,
-                                fontWeight: FontWeight.bold,
-                                letterSpacing: 0.5.h,
-                              ),
-                            ),
-                          ],
+                        SizedBox(width: ScreenUtilsManager.h8),
+                        StatusBadgeApp(
+                          status: _getTranslatedStatus(context, report.status),
                         ),
                         SizedBox(height: ScreenUtilsManager.h8),
                         Text(
                           report.title,
-                          style: GoogleFonts.publicSans(
+                          style: GoogleFonts.cairo(
                             fontSize: ScreenUtilsManager.s18,
                             fontWeight: FontWeight.bold,
                             color: ColorManger.kPrimary,
@@ -110,7 +93,7 @@ class ReportCardIem extends StatelessWidget {
                             Expanded(
                               child: Text(
                                 report.location,
-                                style: GoogleFonts.publicSans(
+                                style: GoogleFonts.cairo(
                                   fontSize: ScreenUtilsManager.s12,
                                   color: Colors.black54,
                                 ),
@@ -122,7 +105,7 @@ class ReportCardIem extends StatelessWidget {
                         SizedBox(height: ScreenUtilsManager.h12),
                         Text(
                           '${S.of(context).submitted} ${report.createdAt.timeAgo}',
-                          style: TextStyle(
+                          style: GoogleFonts.cairo(
                             fontSize: ScreenUtilsManager.s11,
                             color: Colors.black38,
                           ),
@@ -165,7 +148,7 @@ class ReportCardIem extends StatelessWidget {
                 children: [
                   Text(
                     '${S.of(context).reference} ${report.id.toString().padLeft(5, '0')}',
-                    style: GoogleFonts.publicSans(
+                    style: GoogleFonts.cairo(
                       fontWeight: FontWeight.w600,
                       fontSize: 13,
                       color: ColorManger.lightColor,
@@ -201,7 +184,7 @@ class ReportCardIem extends StatelessWidget {
                           children: [
                             Text(
                               S.of(context).details,
-                              style: GoogleFonts.publicSans(
+                              style: GoogleFonts.cairo(
                                 fontWeight: FontWeight.bold,
                                 fontSize: ScreenUtilsManager.s12,
                                 color: ColorManger.lightColor,

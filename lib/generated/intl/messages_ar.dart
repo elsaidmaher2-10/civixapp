@@ -227,6 +227,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "nationalNumber": MessageLookupByLibrary.simpleMessage("الرقم القومي"),
     "newPassword": MessageLookupByLibrary.simpleMessage("كلمة مرور جديدة"),
     "next": MessageLookupByLibrary.simpleMessage("التالي"),
+    "noData": MessageLookupByLibrary.simpleMessage("لا توجد بيانات حالياً"),
     "noInternet": MessageLookupByLibrary.simpleMessage(
       "لا يوجد اتصال بالإنترنت",
     ),
@@ -309,6 +310,8 @@ class MessageLookup extends MessageLookupByLibrary {
       "إعادة تعيين كلمة المرور",
     ),
     "resolved": MessageLookupByLibrary.simpleMessage("تم الحل"),
+    "resolvedReports": MessageLookupByLibrary.simpleMessage("البلاغات المنجزة"),
+    "retry": MessageLookupByLibrary.simpleMessage("إعادة المحاولة"),
     "saveChanges": MessageLookupByLibrary.simpleMessage("حفظ التغييرات"),
     "search": MessageLookupByLibrary.simpleMessage("بحث"),
     "searchHint": MessageLookupByLibrary.simpleMessage("ابحث عن قسم..."),
@@ -326,6 +329,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "searchHint5": MessageLookupByLibrary.simpleMessage("صف المشكلة هنا..."),
     "searchMyReports": MessageLookupByLibrary.simpleMessage("ابحث في بلاغاتي"),
+    "searchPlaceholder": MessageLookupByLibrary.simpleMessage(
+      "بحث عن التقارير...",
+    ),
     "searchPothole": MessageLookupByLibrary.simpleMessage(
       "ابحث عن \"إصلاح حفرة\"",
     ),
@@ -363,6 +369,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "titleIsRequired": MessageLookupByLibrary.simpleMessage("العنوان مطلوب"),
     "titleTooShort": MessageLookupByLibrary.simpleMessage(
       "يجب أن يكون العنوان 3 أحرف على الأقل",
+    ),
+    "topAchievements": MessageLookupByLibrary.simpleMessage(
+      "أبرز تقارير الإنجازات",
     ),
     "tryAgain": MessageLookupByLibrary.simpleMessage("إعادة المحاولة"),
     "unknownLocation": MessageLookupByLibrary.simpleMessage("موقع غير معروف"),

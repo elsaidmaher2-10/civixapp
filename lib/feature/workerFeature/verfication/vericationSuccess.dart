@@ -53,7 +53,7 @@ class VerificationCompleteScreen extends StatelessWidget {
           const SizedBox(width: 12),
           Text(
             'Global Gate',
-            style: GoogleFonts.manrope(
+            style: GoogleFonts.cairo(
               color: ColorManger.onSurface,
               fontWeight: FontWeight.bold,
               fontSize: 18,
@@ -130,7 +130,7 @@ class VerificationCompleteScreen extends StatelessWidget {
         Text(
           'Verification Complete',
           textAlign: TextAlign.center,
-          style: GoogleFonts.manrope(
+          style: GoogleFonts.cairo(
             fontSize: 32,
             fontWeight: FontWeight.w800,
             color: ColorManger.onSurface,
@@ -210,7 +210,7 @@ class VerificationCompleteScreen extends StatelessWidget {
               Expanded(
                 child: Text(
                   value,
-                  style: GoogleFonts.manrope(
+                  style: GoogleFonts.cairo(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                     color: ColorManger.onSurface,
@@ -264,7 +264,7 @@ class VerificationCompleteScreen extends StatelessWidget {
               children: [
                 Text(
                   'Digital ID Issued',
-                  style: GoogleFonts.manrope(
+                  style: GoogleFonts.cairo(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
                     color: ColorManger.onSurface,
@@ -388,7 +388,7 @@ class VerificationCompleteScreen extends StatelessWidget {
             children: [
               Text(
                 'Continue to App',
-                style: GoogleFonts.manrope(
+                style: GoogleFonts.cairo(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                 ),

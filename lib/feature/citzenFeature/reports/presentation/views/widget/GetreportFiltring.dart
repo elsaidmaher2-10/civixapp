@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class FliterCheap extends StatelessWidget {
   const FliterCheap({super.key, required this.label, required this.isActive});
@@ -28,7 +29,7 @@ class FliterCheap extends StatelessWidget {
       ),
       child: Text(
         label,
-        style: TextStyle(
+        style: GoogleFonts.cairo(
           color: isActive ? Colors.white : Colors.black87,
           fontWeight: isActive ? FontWeight.bold : FontWeight.w500,
           fontSize: 14,

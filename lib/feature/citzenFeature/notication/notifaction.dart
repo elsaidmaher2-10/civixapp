@@ -31,7 +31,6 @@ class _NotificationCenterState extends State<NotificationCenter> {
     );
   }
 
-  // --- AppBar Widget ---
   PreferredSizeWidget _buildAppBar(BuildContext context) {
     return AppBar(
       leading: IconButton(
@@ -107,7 +106,6 @@ class _NotificationCenterState extends State<NotificationCenter> {
     );
   }
 
-  // --- Body Logic ---
   Widget _buildBody() {
     return BlocBuilder<NotificationCubit, NotificationState>(
       builder: (context, state) {
@@ -136,7 +134,6 @@ class _NotificationCenterState extends State<NotificationCenter> {
     );
   }
 
-  // --- Notification List with Swipe-to-Delete ---
   Widget _buildNotificationList(List notifications) {
     return RefreshIndicator(
       color: ColorManger.primary,
@@ -146,14 +143,13 @@ class _NotificationCenterState extends State<NotificationCenter> {
         itemCount: notifications.length,
         itemBuilder: (context, index) {
           final item = notifications[index];
-
           return Dismissible(
             key: Key(item.id.toString()),
             direction: DismissDirection.endToStart,
             background: Container(
               alignment: Alignment.centerRight,
               padding: EdgeInsets.symmetric(horizontal: ScreenUtilsManager.w20),
-              color: Colors.redAccent.withOpacity(0.9),
+              color: Colors.redAccent.withOpacity(0.1),
               child: const Icon(Icons.delete_outline, color: Colors.white),
             ),
             onDismissed: (direction) {
@@ -172,7 +168,6 @@ class _NotificationCenterState extends State<NotificationCenter> {
     );
   }
 
-  // --- Empty State UI ---
   Widget _buildEmptyState() {
     return Center(
       child: Column(
@@ -197,7 +192,6 @@ class _NotificationCenterState extends State<NotificationCenter> {
     );
   }
 
-  // --- Error State UI ---
   Widget _buildErrorState(String message) {
     return Center(
       child: Column(

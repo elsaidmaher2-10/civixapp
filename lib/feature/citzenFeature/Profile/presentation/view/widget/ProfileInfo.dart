@@ -142,7 +142,7 @@ class ProfileInfo extends StatelessWidget {
             SizedBox(height: ScreenUtilsManager.h18),
             Text(
               user.fullName?.toUpperCase() ?? "UNKNOWN USER",
-              style: GoogleFonts.inter(
+              style: GoogleFonts.cairo(
                 letterSpacing: 1.1,
                 fontSize: ScreenUtilsManager.s24,
                 fontWeight: FontWeight.w700,
@@ -151,7 +151,7 @@ class ProfileInfo extends StatelessWidget {
             ),
             Text(
               user.email ?? "",
-              style: GoogleFonts.inter(
+              style: GoogleFonts.cairo(
                 fontSize: ScreenUtilsManager.s14,
                 fontWeight: FontWeight.w300,
                 color: ColorManger.lightGrey2,

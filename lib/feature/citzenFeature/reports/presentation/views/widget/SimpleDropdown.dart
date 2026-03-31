@@ -10,6 +10,7 @@ import 'package:citifix/feature/citzenFeature/reports/presentation/manager/categ
 import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CategoryDropdown extends StatelessWidget {
   final Function(CategoryItem?) onChanged;
@@ -54,13 +55,13 @@ class CategoryDropdown extends StatelessWidget {
               noResultFoundText: S.of(context).noResult,
               headerBuilder: (context, selectedItem, enabled) => Text(
                 selectedItem?.name ?? '',
-                style: const TextStyle(fontSize: 14),
+                style: GoogleFonts.cairo(fontSize: 14),
                 textAlign: TextAlign.start,
               ),
               listItemBuilder: (context, item, isSelected, onItemSelect) =>
                   Text(
                     item?.name ?? '',
-                    style: const TextStyle(fontSize: 14),
+                    style: GoogleFonts.cairo(fontSize: 14),
                     textAlign: TextAlign.start,
                   ),
               onChanged: onChanged,
@@ -74,8 +75,8 @@ class CategoryDropdown extends StatelessWidget {
                     closedFillColor: const Color(0xffF6F6F6),
                     closedBorder: Border.all(color: ColorManger.kPrimary),
                     searchFieldDecoration: SearchFieldDecoration(
-                      textStyle: const TextStyle(fontSize: 14),
-                      hintStyle: const TextStyle(fontSize: 14),
+                      textStyle: GoogleFonts.cairo(fontSize: 14),
+                      hintStyle: GoogleFonts.cairo(fontSize: 14),
                     ),
                   ),
             );
@@ -83,7 +84,7 @@ class CategoryDropdown extends StatelessWidget {
             return Center(
               child: Text(
                 S.of(context).failedToLoadCategories,
-                style: const TextStyle(color: Colors.red),
+                style: GoogleFonts.cairo(color: Colors.red),
               ),
             );
           }

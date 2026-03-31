@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart' as report;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../../../../../../core/resource/colormanager.dart';
 import '../../../../../../generated/l10n.dart';
 import '../../manager/reportManger/cubit/report_manager_cubit.dart';
@@ -20,7 +21,7 @@ Future<bool> showDeleteDialog(
                 onPressed: () => Navigator.of(context).pop(false),
                 child: Text(
                   S.of(context).cancel,
-                  style: const TextStyle(color: ColorManger.kPrimaryDark),
+                  style: GoogleFonts.cairo(color: ColorManger.kPrimaryDark),
                 ),
               ),
               CupertinoDialogAction(

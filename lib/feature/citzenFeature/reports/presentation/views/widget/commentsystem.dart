@@ -47,7 +47,7 @@ class Commentsystem extends StatelessWidget {
                       SizedBox(width: ScreenUtilsManager.w8),
                       Text(
                         "Comments",
-                        style: TextStyle(
+                        style: GoogleFonts.cairo(
                           color: ColorManger.kPrimary,
                           fontWeight: FontWeight.bold,
                           fontSize: 16.sp,
@@ -65,7 +65,7 @@ class Commentsystem extends StatelessWidget {
                         ),
                         child: Text(
                           "${comments.length} Messages",
-                          style: GoogleFonts.inter(
+                          style: GoogleFonts.cairo(
                             fontSize: 12.sp,
                             color: Colors.grey[700],
                           ),
@@ -83,7 +83,7 @@ class Commentsystem extends StatelessWidget {
                     child: Center(
                       child: Text(
                         "No comments yet. Be the first to reply!",
-                        style: GoogleFonts.inter(color: Colors.grey),
+                        style: GoogleFonts.cairo(color: Colors.grey),
                       ),
                     ),
                   ),

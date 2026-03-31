@@ -200,5 +200,10 @@
   "privacyPolicyTitle": "Data Protection Policy",
   "privacyPolicyDesc": "Citifix protects your privacy. Citizen contact details are hidden from workers; they only receive the location and issue description.",
 "unread": "unread",
-"deleteall": "Delete all"
+"deleteall": "Delete all",
+  "searchPlaceholder": "Search reports...",
+  "topAchievements": "Top Achievement Reports",
+  "resolvedReports": "Resolved Reports",
+  "noData": "No data available at the moment",
+  "retry": "Retry"
 }

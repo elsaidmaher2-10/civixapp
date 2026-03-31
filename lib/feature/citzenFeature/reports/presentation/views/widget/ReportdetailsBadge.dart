@@ -4,6 +4,7 @@ import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/core/service/StatusReport.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 Widget buildStatusBadge(String text) {
   return Container(
@@ -25,7 +26,7 @@ Widget buildStatusBadge(String text) {
         SizedBox(width: ScreenUtilsManager.w4),
         Text(
           text,
-          style: TextStyle(
+          style: GoogleFonts.cairo(
             color: StatusReport.values.firstWhere((e) => e.value == text).color,
             fontWeight: FontWeight.bold,
             fontSize: ScreenUtilsManager.s12,

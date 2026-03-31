@@ -54,7 +54,7 @@ class StatusCard extends StatelessWidget {
           ),
           Text(
             number.toString(),
-            style: GoogleFonts.publicSans(
+            style: GoogleFonts.cairo(
               color: color,
               fontWeight: FontWeight.w500,
               fontSize: ScreenUtilsManager.s24,

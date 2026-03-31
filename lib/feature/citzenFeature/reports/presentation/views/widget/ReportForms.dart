@@ -6,6 +6,7 @@ import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/core/widget/customtextfromfield.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/views/widget/SimpleDropdown.dart';
 import 'package:citifix/generated/l10n.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ReportFormFields extends StatelessWidget {
   final TextEditingController titleController;
@@ -76,7 +77,7 @@ class ReportFormFields extends StatelessWidget {
   Widget _buildSectionTitle(String title) {
     return Text(
       title,
-      style: TextStyle(
+      style: GoogleFonts.cairo(
         color: ColorManger.kPrimary,
         fontWeight: FontWeight.w600,
         fontSize: ScreenUtilsManager.s16,

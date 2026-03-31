@@ -9,7 +9,7 @@ Widget buildItem(String title, String value) {
     children: [
       Text(
         title,
-        style: GoogleFonts.libertinusSans(
+        style: GoogleFonts.cairo(
           fontSize: ScreenUtilsManager.s12,
           fontWeight: FontWeight.bold,
           color: ColorManger.kPrimary,
@@ -17,7 +17,7 @@ Widget buildItem(String title, String value) {
       ),
       Text(
         value,
-        style: GoogleFonts.libertinusSans(
+        style: GoogleFonts.cairo(
           fontSize: ScreenUtilsManager.s14,
           fontWeight: FontWeight.w600,
           color: Color(0xff111827),

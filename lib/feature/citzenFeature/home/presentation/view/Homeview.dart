@@ -47,7 +47,7 @@ class HomeScreen extends StatelessWidget {
                     Text(
                       state.errMessage,
                       textAlign: TextAlign.center,
-                      style: GoogleFonts.publicSans(
+                      style: GoogleFonts.cairo(
                         fontSize: ScreenUtilsManager.s16,
                         color: ColorManger.kPrimaryDark,
                       ),
@@ -100,7 +100,7 @@ class HomeScreen extends StatelessWidget {
                         SizedBox(width: ScreenUtilsManager.w8),
                         Text(
                           S.of(context).overview,
-                          style: GoogleFonts.publicSans(
+                          style: GoogleFonts.cairo(
                             letterSpacing: -0.5,
                             color: ColorManger.kPrimaryDark,
                             fontWeight: FontWeight.w700,
@@ -163,7 +163,7 @@ class HomeScreen extends StatelessWidget {
                       children: [
                         Text(
                           S.of(context).recentReport,
-                          style: GoogleFonts.publicSans(
+                          style: GoogleFonts.cairo(
                             fontSize: ScreenUtilsManager.s18,
                             fontWeight: FontWeight.bold,
                             letterSpacing: -0.3,
@@ -193,7 +193,7 @@ class HomeScreen extends StatelessWidget {
                             },
                             child: Text(
                               S.of(context).seeAll,
-                              style: GoogleFonts.publicSans(
+                              style: GoogleFonts.cairo(
                                 fontSize: ScreenUtilsManager.s14,
                                 fontWeight: FontWeight.w600,
                                 color: ColorManger.lightBlue,
@@ -254,7 +254,7 @@ class HomeScreen extends StatelessWidget {
             SizedBox(height: ScreenUtilsManager.h16),
             Text(
               S.of(context).noRecentReports, // ARB
-              style: GoogleFonts.publicSans(
+              style: GoogleFonts.cairo(
                 fontSize: ScreenUtilsManager.s16,
                 fontWeight: FontWeight.bold,
                 color: ColorManger.kPrimaryDark,
@@ -264,7 +264,7 @@ class HomeScreen extends StatelessWidget {
             Text(
               S.of(context).emptyReportsSubtitle, // ARB
               textAlign: TextAlign.center,
-              style: GoogleFonts.publicSans(
+              style: GoogleFonts.cairo(
                 fontSize: ScreenUtilsManager.s14,
                 color: Colors.grey.shade600,
               ),

@@ -12,6 +12,8 @@ import 'package:citifix/feature/workerFeature/tasks/data/repos/worker_task_Repo.
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
+import '../../feature/citzenFeature/home/data/Repos/reports/reports.dart';
+
 final GetIt getIt = GetIt.instance;
 void setupgetit() {
   getIt.registerSingleton<InternetChecker>(InternetChecker());
@@ -22,10 +24,16 @@ void setupgetit() {
     Userprofilerepos(getIt<Apiservice>(), getIt<InternetChecker>()),
   );
   getIt.registerLazySingleton<ReportCubit>(
-    () => ReportCubit(getIt<ReportRepository>()),
+    () => ReportCubit(getIt<ReportRepositoryT>()),
   );
   getIt.registerSingleton<ReportRepository>(
     ReportRepository(
+      service: getIt<Apiservice>(),
+      internetChecker: getIt<InternetChecker>(),
+    ),
+  );
+  getIt.registerSingleton<ReportRepositoryT>(
+    ReportRepositoryT(
       service: getIt<Apiservice>(),
       internetChecker: getIt<InternetChecker>(),
     ),

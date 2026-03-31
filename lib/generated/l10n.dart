@@ -1708,6 +1708,51 @@ class S {
   String get deleteall {
     return Intl.message('Delete all', name: 'deleteall', desc: '', args: []);
   }
+
+  /// `Search reports...`
+  String get searchPlaceholder {
+    return Intl.message(
+      'Search reports...',
+      name: 'searchPlaceholder',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Top Achievement Reports`
+  String get topAchievements {
+    return Intl.message(
+      'Top Achievement Reports',
+      name: 'topAchievements',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Resolved Reports`
+  String get resolvedReports {
+    return Intl.message(
+      'Resolved Reports',
+      name: 'resolvedReports',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No data available at the moment`
+  String get noData {
+    return Intl.message(
+      'No data available at the moment',
+      name: 'noData',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Retry`
+  String get retry {
+    return Intl.message('Retry', name: 'retry', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

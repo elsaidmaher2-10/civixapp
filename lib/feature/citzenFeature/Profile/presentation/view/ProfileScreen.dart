@@ -41,7 +41,7 @@ class ProfileScreen extends StatelessWidget {
           elevation: 0,
           title: Text(
             S.of(context).profile,
-            style: GoogleFonts.inter(
+            style: GoogleFonts.cairo(
               color: ColorManger.kPrimary,
               fontWeight: FontWeight.bold,
             ),
@@ -167,7 +167,7 @@ class LogoutConfirmDialog extends StatelessWidget {
           SizedBox(height: ScreenUtilsManager.h12),
           Text(
             S.of(context).logout,
-            style: GoogleFonts.inter(
+            style: GoogleFonts.cairo(
               fontWeight: FontWeight.bold,
               fontSize: ScreenUtilsManager.s18,
               color: Colors.black87,
@@ -177,7 +177,7 @@ class LogoutConfirmDialog extends StatelessWidget {
       ),
       content: Text(
         S.of(context).logoutConfirmationMessage,
-        style: GoogleFonts.inter(
+        style: GoogleFonts.cairo(
           fontSize: ScreenUtilsManager.s14,
           color: Colors.black54,
         ),
@@ -200,7 +200,7 @@ class LogoutConfirmDialog extends StatelessWidget {
                 ),
                 child: Text(
                   S.of(context).cancel,
-                  style: GoogleFonts.inter(
+                  style: GoogleFonts.cairo(
                     color: ColorManger.kPrimary,
                     fontWeight: FontWeight.w600,
                   ),
@@ -224,7 +224,7 @@ class LogoutConfirmDialog extends StatelessWidget {
                 ),
                 child: Text(
                   S.of(context).logout,
-                  style: GoogleFonts.inter(fontWeight: FontWeight.w600),
+                  style: GoogleFonts.cairo(fontWeight: FontWeight.w600),
                 ),
               ),
             ),

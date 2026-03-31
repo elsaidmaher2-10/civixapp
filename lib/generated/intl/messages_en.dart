@@ -88,6 +88,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "deleteConfirmationMessage": MessageLookupByLibrary.simpleMessage(
       "Are you sure you want to delete this report?",
     ),
+    "deleteall": MessageLookupByLibrary.simpleMessage("Delete all"),
     "describeIssue": MessageLookupByLibrary.simpleMessage(
       "Describe the issue...",
     ),
@@ -243,6 +244,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "nationalNumber": MessageLookupByLibrary.simpleMessage("National number"),
     "newPassword": MessageLookupByLibrary.simpleMessage("New Password"),
     "next": MessageLookupByLibrary.simpleMessage("Next"),
+    "noData": MessageLookupByLibrary.simpleMessage(
+      "No data available at the moment",
+    ),
     "noInternet": MessageLookupByLibrary.simpleMessage(
       "No internet connection",
     ),
@@ -333,6 +337,8 @@ class MessageLookup extends MessageLookupByLibrary {
       "reset your password",
     ),
     "resolved": MessageLookupByLibrary.simpleMessage("Resolved"),
+    "resolvedReports": MessageLookupByLibrary.simpleMessage("Resolved Reports"),
+    "retry": MessageLookupByLibrary.simpleMessage("Retry"),
     "saveChanges": MessageLookupByLibrary.simpleMessage("Save Changes"),
     "search": MessageLookupByLibrary.simpleMessage("Search"),
     "searchHint": MessageLookupByLibrary.simpleMessage("Search for report..."),
@@ -353,6 +359,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "searchMyReports": MessageLookupByLibrary.simpleMessage(
       "Search my reports",
+    ),
+    "searchPlaceholder": MessageLookupByLibrary.simpleMessage(
+      "Search reports...",
     ),
     "searchPothole": MessageLookupByLibrary.simpleMessage(
       "Search for \"Pothole repair\"",
@@ -398,9 +407,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "titleTooShort": MessageLookupByLibrary.simpleMessage(
       "Title must be at least 3 characters",
     ),
+    "topAchievements": MessageLookupByLibrary.simpleMessage(
+      "Top Achievement Reports",
+    ),
     "tryAgain": MessageLookupByLibrary.simpleMessage("Try Again"),
     "unknownLocation": MessageLookupByLibrary.simpleMessage("Unknown Location"),
     "unknownStatus": MessageLookupByLibrary.simpleMessage("Unknown"),
+    "unread": MessageLookupByLibrary.simpleMessage("unread"),
     "weeksAgo": m3,
     "worker": MessageLookupByLibrary.simpleMessage("Worker"),
     "workerConductDesc": MessageLookupByLibrary.simpleMessage(

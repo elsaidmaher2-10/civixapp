@@ -45,7 +45,7 @@ void showCitizenCard(BuildContext context) async {
                   children: [
                     Text(
                       S.of(context).citizenIdentity,
-                      style: GoogleFonts.inter(
+                      style: GoogleFonts.cairo(
                         fontSize: ScreenUtilsManager.s18,
                         fontWeight: FontWeight.bold,
                         color: ColorManger.white,

@@ -76,7 +76,7 @@ class Editfromprofile extends StatelessWidget {
       children: [
         Text(
           label,
-          style: GoogleFonts.outfit(
+          style: GoogleFonts.cairo(
             fontSize: ScreenUtilsManager.s14,
             fontWeight: FontWeight.w600,
             color: const Color(0xFF334155),
@@ -98,7 +98,7 @@ class Editfromprofile extends StatelessWidget {
           child: TextField(
             controller: controller,
             keyboardType: keyboardType,
-            style: GoogleFonts.outfit(
+            style: GoogleFonts.cairo(
               fontSize: ScreenUtilsManager.s14,
               fontWeight: FontWeight.w500,
               color: const Color(0xFF0F172A),
@@ -110,7 +110,7 @@ class Editfromprofile extends StatelessWidget {
                 size: ScreenUtilsManager.s20,
               ),
               hintText: hint,
-              hintStyle: GoogleFonts.outfit(
+              hintStyle: GoogleFonts.cairo(
                 fontSize: ScreenUtilsManager.s14,
                 color: const Color(0xFF94A3B8),
               ),

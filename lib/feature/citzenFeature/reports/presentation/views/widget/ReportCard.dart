@@ -93,7 +93,7 @@ class Reportcard extends StatelessWidget {
                           report.title,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style: GoogleFonts.publicSans(
+                          style: GoogleFonts.cairo(
                             color: ColorManger.kPrimaryDark,
                             fontSize: ScreenUtilsManager.s16,
                             fontWeight: FontWeight.w600,
@@ -127,7 +127,7 @@ class Reportcard extends StatelessWidget {
             text,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: TextStyle(
+            style: GoogleFonts.cairo(
               color: ColorManger.lightGrey6,
               fontSize: ScreenUtilsManager.s12,
               fontWeight: FontWeight.w400,
@@ -154,7 +154,7 @@ class Reportcard extends StatelessWidget {
           SizedBox(width: 6.w),
           Text(
             label,
-            style: TextStyle(
+            style: GoogleFonts.cairo(
               color: statusColor,
               fontSize: ScreenUtilsManager.s12,
               fontWeight: FontWeight.bold,

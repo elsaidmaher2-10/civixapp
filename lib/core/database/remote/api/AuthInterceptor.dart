@@ -23,8 +23,10 @@ class AuthInterceptor extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     final token = PrefrenceManager().getstring(Constantmanger.accessToken);
-    if (token != null) {
+    String? savedLang = PrefrenceManager().getstring("Lang");
+    if (token != null && savedLang != null) {
       options.headers['Authorization'] = 'Bearer $token';
+      options.headers['Accept-Language'] = savedLang;
     }
     handler.next(options);
   }

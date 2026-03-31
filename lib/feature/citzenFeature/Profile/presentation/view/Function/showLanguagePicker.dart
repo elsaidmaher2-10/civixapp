@@ -22,7 +22,7 @@ void showLanguagePicker(BuildContext context) async {
           children: [
             Text(
               S.of(context).selectLanguage,
-              style: GoogleFonts.inter(
+              style: GoogleFonts.cairo(
                 fontSize: ScreenUtilsManager.s20,
                 fontWeight: FontWeight.bold,
                 color: ColorManger.kPrimary,
@@ -32,7 +32,7 @@ void showLanguagePicker(BuildContext context) async {
             Text(
               S.of(context).choosePreferredLanguage,
               textAlign: TextAlign.center,
-              style: GoogleFonts.inter(
+              style: GoogleFonts.cairo(
                 fontSize: ScreenUtilsManager.s12,
                 fontWeight: FontWeight.w400,
                 color: ColorManger.lightGrey2,
@@ -80,7 +80,7 @@ Widget _buildLanguageOption(
       child: Text(
         title,
         textAlign: TextAlign.center,
-        style: GoogleFonts.inter(
+        style: GoogleFonts.cairo(
           fontSize: ScreenUtilsManager.s14,
           fontWeight: FontWeight.w600,
           color: ColorManger.textBlack,

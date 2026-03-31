@@ -2,19 +2,22 @@ import 'package:citifix/core/DI/getit.dart';
 import 'package:citifix/core/extenstion/datetimeextension.dart';
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
+import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/core/service/StatusReport.dart';
+import 'package:citifix/core/widget/stautsBageApp.dart';
 import 'package:citifix/feature/citzenFeature/home/presentation/view/widget/CustomMap.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/manager/comment/commentmanger_cubit.dart'; // تأكد من المسار
 import 'package:citifix/feature/citzenFeature/reports/presentation/manager/reportManger/cubit/report_manager_cubit.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/manager/reportManger/cubit/report_manager_state.dart';
-import 'package:citifix/feature/citzenFeature/reports/presentation/views/StatusBadge.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/views/widget/CustomTimelineTile.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/views/widget/ReportDetailsAppbar.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/views/widget/commentsystem.dart';
 import 'package:citifix/generated/l10n.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:latlong2/latlong.dart';
 
 class ReportDetailsScreen extends StatefulWidget {
@@ -61,15 +64,17 @@ class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
           body: BlocBuilder<ReportCubit, ReportManagerState>(
             builder: (context, state) {
               if (state is GetReportsByidLoading) {
-                return const Center(
-                  child: CircularProgressIndicator(color: ColorManger.kPrimary),
+                return Center(
+                  child: CupertinoActivityIndicator(
+                    radius: ScreenUtilsManager.r12,
+                    color: ColorManger.kPrimary,
+                  ),
                 );
               } else if (state is GetReportsByidSuccess) {
                 final report = state.reports;
                 return CustomScrollView(
                   physics: const BouncingScrollPhysics(),
                   slivers: [
-                    // 1. الجزء العلوي (الصور وزر الرجوع)
                     ReportDetailsAppbar(
                       image: report.imagesUrls.isEmpty
                           ? [Constantmanger.defualtImage]
@@ -77,7 +82,6 @@ class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
                       ontap: () => Navigator.pop(context, true),
                     ),
 
-                    // 2. تفاصيل التقرير (Title, Description, Map, Timeline)
                     SliverToBoxAdapter(
                       child: Padding(
                         padding: EdgeInsets.symmetric(
@@ -87,11 +91,11 @@ class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            _buildStatusBadge(context, report.status),
+                            StatusBadgeApp(status: report.status),
                             SizedBox(height: 16.h),
                             Text(
                               report.title,
-                              style: TextStyle(
+                              style: GoogleFonts.cairo(
                                 fontSize: 24.sp,
                                 fontWeight: FontWeight.w900,
                                 color: ColorManger.kPrimary,
@@ -118,7 +122,7 @@ class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
                             SizedBox(height: 8.h),
                             Text(
                               report.description,
-                              style: TextStyle(
+                              style: GoogleFonts.cairo(
                                 fontSize: 15.sp,
                                 color: Colors.black87.withOpacity(0.7),
                                 height: 1.6,
@@ -129,7 +133,7 @@ class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
                             SizedBox(height: 4.h),
                             Text(
                               report.location,
-                              style: TextStyle(
+                              style: GoogleFonts.cairo(
                                 fontSize: 13.sp,
                                 color: Colors.grey[600],
                               ),
@@ -149,7 +153,6 @@ class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
                       ),
                     ),
 
-                    // 3. نظام التعليقات (Cubit inside)
                     Commentsystem(controller: controller, reporID: report.id),
                   ],
                 );
@@ -167,7 +170,7 @@ class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
   Widget _sectionTitle(String title) {
     return Text(
       title,
-      style: TextStyle(
+      style: GoogleFonts.cairo(
         fontSize: 18.sp,
         fontWeight: FontWeight.bold,
         color: ColorManger.kPrimary,
@@ -183,35 +186,9 @@ class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
         SizedBox(width: 4.w),
         Text(
           label,
-          style: TextStyle(fontSize: 13.sp, color: Colors.grey[700]),
+          style: GoogleFonts.cairo(fontSize: 13.sp, color: Colors.grey[700]),
         ),
       ],
-    );
-  }
-
-  Widget _buildStatusBadge(BuildContext context, String status) {
-    String translatedStatus = status.toLowerCase();
-    if (status.toLowerCase() == 'pending') {
-      translatedStatus = S.of(context).pending;
-    }
-    if (status.toLowerCase() == 'resolved') {
-      translatedStatus = S.of(context).resolved;
-    }
-
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
-      decoration: BoxDecoration(
-        color: ColorManger.kPrimary.withOpacity(0.1),
-        borderRadius: BorderRadius.circular(20.r),
-      ),
-      child: Text(
-        translatedStatus.toUpperCase(),
-        style: TextStyle(
-          color: ColorManger.kPrimary,
-          fontSize: 12.sp,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
     );
   }
 
@@ -238,11 +215,14 @@ class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
             children: [
               Text(
                 S.of(context).reportedBy,
-                style: TextStyle(fontSize: 11.sp, color: Colors.grey),
+                style: GoogleFonts.cairo(fontSize: 11.sp, color: Colors.grey),
               ),
               Text(
                 name,
-                style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold),
+                style: GoogleFonts.cairo(
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ],
           ),

@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 
+import '../../../../core/widget/stautsBageApp.dart';
+
 class ActiveTaskCard extends StatelessWidget {
   final ReportModelWorker task;
 
@@ -28,7 +30,6 @@ class ActiveTaskCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Optional: Add Image Header if URL exists
           if (task.imagesUrls.isNotEmpty)
             ClipRRect(
               borderRadius: BorderRadius.vertical(
@@ -51,7 +52,7 @@ class ActiveTaskCard extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    _StatusBadge(status: task.status),
+                    StatusBadgeApp(status: task.status),
                     Text(
                       "#${task.hashCode}",
                       style: TextStyle(
@@ -85,43 +86,6 @@ class ActiveTaskCard extends StatelessWidget {
                 : const _AvailableActions(),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class _StatusBadge extends StatelessWidget {
-  final String status;
-  const _StatusBadge({required this.status});
-
-  @override
-  Widget build(BuildContext context) {
-    Color color;
-    switch (status) {
-      case "InProgress":
-        color = Colors.orange;
-        break;
-      case "Resolved":
-        color = Colors.green;
-        break;
-      default:
-        color = ColorManger.primaryColor;
-    }
-
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-      decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
-        borderRadius: BorderRadius.circular(6),
-      ),
-      child: Text(
-        status.toUpperCase(),
-        style: TextStyle(
-          color: color,
-          fontSize: 10,
-          fontWeight: FontWeight.w800,
-          letterSpacing: 0.5,
-        ),
       ),
     );
   }
@@ -162,7 +126,7 @@ class StatusBadge extends StatelessWidget {
   const StatusBadge({super.key, required this.status});
   @override
   Widget build(BuildContext context) {
-    Color color = status == TaskStatus.inProgress
+    Color color = status == TaskStatus.assigned
         ? Colors.orange
         : ColorManger.primaryColor;
     return Container(

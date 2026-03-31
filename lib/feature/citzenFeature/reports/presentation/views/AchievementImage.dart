@@ -1,5 +1,5 @@
-
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ReportImage extends StatelessWidget {
   final String url;
@@ -40,9 +40,9 @@ class ReportImage extends StatelessWidget {
                 color: const Color(0xFF137FEC),
                 borderRadius: BorderRadius.circular(20),
               ),
-              child: const Text(
+              child: Text(
                 'TOP IMPACT',
-                style: TextStyle(
+                style: GoogleFonts.cairo(
                   color: Colors.white,
                   fontSize: 9,
                   fontWeight: FontWeight.w700,

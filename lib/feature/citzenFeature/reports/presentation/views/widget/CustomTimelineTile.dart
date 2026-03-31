@@ -1,6 +1,7 @@
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 
 class CustomTimelineTile extends StatelessWidget {
@@ -43,7 +44,7 @@ class CustomTimelineTile extends StatelessWidget {
           child: Text(
             title,
             textAlign: TextAlign.start,
-            style: TextStyle(
+            style: GoogleFonts.cairo(
               fontSize: 16.sp,
               color: isDone ? Colors.black : Colors.grey[600],
               // ...

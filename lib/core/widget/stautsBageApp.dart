@@ -1,0 +1,77 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+import '../../generated/l10n.dart';
+import '../resource/colormanager.dart';
+
+class StatusBadgeApp extends StatelessWidget {
+  final String status;
+
+  const StatusBadgeApp({super.key, required this.status});
+
+  @override
+  Widget build(BuildContext context) {
+    final statusData = _getStatusTheme(status, context);
+    final Color color = statusData['color'];
+    final String label = statusData['label'];
+
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
+      decoration: BoxDecoration(
+        color: color.withOpacity(0.08),
+        borderRadius: BorderRadius.circular(20.r),
+        border: Border.all(color: color.withOpacity(0.2), width: 1),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            width: 6.w,
+            height: 6.w,
+            decoration: BoxDecoration(
+              color: color,
+              shape: BoxShape.circle,
+              boxShadow: [
+                BoxShadow(
+                  color: color.withOpacity(0.4),
+                  blurRadius: 4,
+                  spreadRadius: 1,
+                ),
+              ],
+            ),
+          ),
+          SizedBox(width: 6.w),
+          Text(
+            label.toUpperCase(),
+            style: GoogleFonts.cairo(
+              color: color,
+              fontSize: 10.sp,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 0.5,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Map<String, dynamic> _getStatusTheme(String status, BuildContext context) {
+    switch (status) {
+      case "InProgress":
+        return {
+          'color': ColorManger.kPrimary,
+          'label': S.of(context).inProgress,
+        };
+      case "Resolved":
+      case "Completed":
+        return {'color': Colors.green, 'label': S.of(context).completed};
+      case "Pending":
+        return {'color': Colors.orange, 'label': S.of(context).pending};
+      case "Rejected":
+        return {'color': Colors.red, 'label': "Rejected"};
+      default:
+        return {'color': Colors.grey, 'label': status};
+    }
+  }
+}

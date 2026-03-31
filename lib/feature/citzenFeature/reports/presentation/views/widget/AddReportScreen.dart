@@ -17,6 +17,7 @@ import 'package:citifix/feature/citzenFeature/reports/presentation/views/widget/
 import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -149,7 +150,7 @@ class _AddReportScreenState extends State<AddReportScreen> {
                       SizedBox(height: ScreenUtilsManager.h16),
                       Text(
                         S.of(context).location,
-                        style: TextStyle(
+                        style: GoogleFonts.cairo(
                           color: ColorManger.kPrimary,
                           fontWeight: FontWeight.bold,
                           fontSize: ScreenUtilsManager.s16,

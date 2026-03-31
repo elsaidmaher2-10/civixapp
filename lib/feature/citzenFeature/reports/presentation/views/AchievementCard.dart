@@ -1,10 +1,16 @@
-import 'package:citifix/feature/citzenFeature/reports/presentation/views/AchievementImage.dart';
-import 'package:citifix/feature/citzenFeature/reports/presentation/views/StatusBadge.dart';
-import 'package:citifix/feature/citzenFeature/reports/presentation/views/dummydata.dart';
+import 'package:citifix/core/service/StatusReport.dart';
+import 'package:citifix/core/widget/stautsBageApp.dart';
+import 'package:citifix/feature/citzenFeature/reports/data/Models/Achievment/achievementModel.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+import '../../../../../generated/l10n.dart';
+import '../../../../workerFeature/tasks/widget/ActiveTaskCard.dart';
+import 'AchievementImage.dart';
 
 class AchievementCard extends StatelessWidget {
-  final ReportModel report;
+  final Achievementmodel report;
   const AchievementCard({super.key, required this.report});
 
   @override
@@ -27,7 +33,10 @@ class AchievementCard extends StatelessWidget {
       child: Column(
         children: [
           Expanded(
-            child: ReportImage(url: report.imageUrl, isTop: report.isTopImpact),
+            child: ReportImage(
+              url: report.completionImageUrls.first,
+              isTop: true,
+            ),
           ),
           Padding(
             padding: const EdgeInsets.all(12),
@@ -39,12 +48,12 @@ class AchievementCard extends StatelessWidget {
                     children: [
                       Text(
                         report.title,
-                        style: const TextStyle(fontWeight: FontWeight.w700),
+                        style: GoogleFonts.cairo(fontWeight: FontWeight.w700),
                         overflow: TextOverflow.ellipsis,
                       ),
                       Text(
-                        report.address,
-                        style: const TextStyle(
+                        report.areaName,
+                        style: GoogleFonts.cairo(
                           fontSize: 11,
                           color: Colors.grey,
                         ),
@@ -52,7 +61,7 @@ class AchievementCard extends StatelessWidget {
                     ],
                   ),
                 ),
-                StatusBadge(status: report.status),
+                StatusBadgeApp(status: "Resolved"),
               ],
             ),
           ),

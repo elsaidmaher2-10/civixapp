@@ -38,7 +38,7 @@ class Chanagepassword extends StatelessWidget {
                 SizedBox(width: ScreenUtilsManager.w12),
                 Text(
                   S.of(context).changePassword,
-                  style: GoogleFonts.outfit(
+                  style: GoogleFonts.cairo(
                     fontSize: ScreenUtilsManager.s14,
                     fontWeight: FontWeight.w600,
                     color: ColorManger.kPrimary,

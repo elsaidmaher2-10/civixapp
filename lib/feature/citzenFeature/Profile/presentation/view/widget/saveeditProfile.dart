@@ -41,7 +41,7 @@ class Saveeditprofile extends StatelessWidget {
               ),
               child: Text(
                 S.of(context).saveChanges,
-                style: GoogleFonts.outfit(
+                style: GoogleFonts.cairo(
                   fontSize: ScreenUtilsManager.s16,
                   fontWeight: FontWeight.w700,
                 ),

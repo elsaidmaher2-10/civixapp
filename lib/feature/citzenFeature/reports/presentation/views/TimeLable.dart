@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class TimeLabel extends StatelessWidget {
   final String time;
@@ -13,7 +14,7 @@ class TimeLabel extends StatelessWidget {
         const SizedBox(width: 3),
         Text(
           time,
-          style: TextStyle(
+          style: GoogleFonts.cairo(
             fontSize: 10,
             color: Colors.grey.shade400,
             fontWeight: FontWeight.w500,

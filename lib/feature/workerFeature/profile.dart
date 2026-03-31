@@ -27,7 +27,10 @@ class _WorkerProfileScreenState extends State<WorkerProfileScreen> {
                 children: [
                   Container(
                     color: Colors.white,
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 14,
+                    ),
                     child: Row(
                       children: [
                         const SizedBox(width: 48),
@@ -35,7 +38,7 @@ class _WorkerProfileScreenState extends State<WorkerProfileScreen> {
                           child: Text(
                             'Profile',
                             textAlign: TextAlign.center,
-                            style: GoogleFonts.outfit(
+                            style: GoogleFonts.cairo(
                               fontSize: 18,
                               fontWeight: FontWeight.w700,
                               color: const Color(0xFF0F172A),
@@ -53,7 +56,6 @@ class _WorkerProfileScreenState extends State<WorkerProfileScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-
                         Container(
                           width: double.infinity,
                           padding: const EdgeInsets.all(32),
@@ -80,7 +82,7 @@ class _WorkerProfileScreenState extends State<WorkerProfileScreen> {
 
                               Text(
                                 'Johnathan Doe',
-                                style: GoogleFonts.outfit(
+                                style: GoogleFonts.cairo(
                                   fontSize: 20,
                                   fontWeight: FontWeight.w700,
                                   color: const Color(0xFF0F172A),
@@ -90,11 +92,15 @@ class _WorkerProfileScreenState extends State<WorkerProfileScreen> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  const Icon(Icons.verified, color: Colors.green, size: 14),
+                                  const Icon(
+                                    Icons.verified,
+                                    color: Colors.green,
+                                    size: 14,
+                                  ),
                                   const SizedBox(width: 4),
                                   Text(
                                     'Verified Worker',
-                                    style: GoogleFonts.outfit(
+                                    style: GoogleFonts.cairo(
                                       fontSize: 12,
                                       fontWeight: FontWeight.w600,
                                       color: Colors.green,
@@ -115,12 +121,16 @@ class _WorkerProfileScreenState extends State<WorkerProfileScreen> {
                                     Expanded(
                                       child: Column(
                                         children: [
-                                          const Icon(Icons.mail_outline, color: Color(0xFF94A3B8), size: 20),
+                                          const Icon(
+                                            Icons.mail_outline,
+                                            color: Color(0xFF94A3B8),
+                                            size: 20,
+                                          ),
                                           const SizedBox(height: 4),
                                           Text(
                                             'john.doe@workerportal.co',
                                             textAlign: TextAlign.center,
-                                            style: GoogleFonts.outfit(
+                                            style: GoogleFonts.cairo(
                                               fontSize: 10,
                                               color: const Color(0xFF64748B),
                                             ),
@@ -130,18 +140,25 @@ class _WorkerProfileScreenState extends State<WorkerProfileScreen> {
                                     ),
 
                                     Divider(),
-                                    Container(width: 1, height: 40, color: const Color(0xFFE2E8F0)),
+                                    Container(
+                                      width: 1,
+                                      height: 40,
+                                      color: const Color(0xFFE2E8F0),
+                                    ),
 
-                                    
                                     Expanded(
                                       child: Column(
                                         children: [
-                                          const Icon(Icons.call_outlined, color: Color(0xFF94A3B8), size: 20),
+                                          const Icon(
+                                            Icons.call_outlined,
+                                            color: Color(0xFF94A3B8),
+                                            size: 20,
+                                          ),
                                           const SizedBox(height: 4),
                                           Text(
                                             '+1 (555) 123-4567',
                                             textAlign: TextAlign.center,
-                                            style: GoogleFonts.outfit(
+                                            style: GoogleFonts.cairo(
                                               fontSize: 10,
                                               color: const Color(0xFF64748B),
                                             ),
@@ -159,7 +176,7 @@ class _WorkerProfileScreenState extends State<WorkerProfileScreen> {
 
                         Text(
                           'WORK SCOPE',
-                          style: GoogleFonts.outfit(
+                          style: GoogleFonts.cairo(
                             fontSize: 11,
                             fontWeight: FontWeight.w700,
                             color: const Color(0xFF94A3B8),
@@ -181,19 +198,23 @@ class _WorkerProfileScreenState extends State<WorkerProfileScreen> {
                           ),
                           child: Column(
                             children: [
-                               
                               Padding(
                                 padding: const EdgeInsets.all(16),
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Row(
                                       children: [
-                                        const Icon(Icons.location_on_outlined, color: Color(0xFF94A3B8), size: 22),
+                                        const Icon(
+                                          Icons.location_on_outlined,
+                                          color: Color(0xFF94A3B8),
+                                          size: 22,
+                                        ),
                                         const SizedBox(width: 12),
                                         Text(
                                           'Assigned Area',
-                                          style: GoogleFonts.outfit(
+                                          style: GoogleFonts.cairo(
                                             fontSize: 14,
                                             fontWeight: FontWeight.w500,
                                             color: const Color(0xFF475569),
@@ -203,7 +224,7 @@ class _WorkerProfileScreenState extends State<WorkerProfileScreen> {
                                     ),
                                     Text(
                                       'North Industrial Park',
-                                      style: GoogleFonts.outfit(
+                                      style: GoogleFonts.cairo(
                                         fontSize: 14,
                                         fontWeight: FontWeight.w700,
                                         color: const Color(0xFF0F172A),
@@ -212,21 +233,28 @@ class _WorkerProfileScreenState extends State<WorkerProfileScreen> {
                                   ],
                                 ),
                               ),
-                              const Divider(height: 1, color: Color(0xFFF8FAFC)),
+                              const Divider(
+                                height: 1,
+                                color: Color(0xFFF8FAFC),
+                              ),
 
-                              
                               Padding(
                                 padding: const EdgeInsets.all(16),
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Row(
                                       children: [
-                                        const Icon(Icons.badge_outlined, color: Color(0xFF94A3B8), size: 22),
+                                        const Icon(
+                                          Icons.badge_outlined,
+                                          color: Color(0xFF94A3B8),
+                                          size: 22,
+                                        ),
                                         const SizedBox(width: 12),
                                         Text(
                                           'Department',
-                                          style: GoogleFonts.outfit(
+                                          style: GoogleFonts.cairo(
                                             fontSize: 14,
                                             fontWeight: FontWeight.w500,
                                             color: const Color(0xFF475569),
@@ -236,7 +264,7 @@ class _WorkerProfileScreenState extends State<WorkerProfileScreen> {
                                     ),
                                     Text(
                                       'Field Operations',
-                                      style: GoogleFonts.outfit(
+                                      style: GoogleFonts.cairo(
                                         fontSize: 14,
                                         fontWeight: FontWeight.w700,
                                         color: const Color(0xFF0F172A),
@@ -252,7 +280,6 @@ class _WorkerProfileScreenState extends State<WorkerProfileScreen> {
 
                         Column(
                           children: [
-                            
                             GestureDetector(
                               onTap: () {},
                               child: Container(
@@ -269,15 +296,20 @@ class _WorkerProfileScreenState extends State<WorkerProfileScreen> {
                                   ],
                                 ),
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Row(
                                       children: [
-                                        const Icon(Icons.settings_outlined, color: Color(0xFF94A3B8), size: 22),
+                                        const Icon(
+                                          Icons.settings_outlined,
+                                          color: Color(0xFF94A3B8),
+                                          size: 22,
+                                        ),
                                         const SizedBox(width: 12),
                                         Text(
                                           'Settings',
-                                          style: GoogleFonts.outfit(
+                                          style: GoogleFonts.cairo(
                                             fontSize: 14,
                                             fontWeight: FontWeight.w500,
                                             color: const Color(0xFF334155),
@@ -285,14 +317,17 @@ class _WorkerProfileScreenState extends State<WorkerProfileScreen> {
                                         ),
                                       ],
                                     ),
-                                    const Icon(Icons.chevron_right, color: Color(0xFFCBD5E1), size: 22),
+                                    const Icon(
+                                      Icons.chevron_right,
+                                      color: Color(0xFFCBD5E1),
+                                      size: 22,
+                                    ),
                                   ],
                                 ),
                               ),
                             ),
                             const SizedBox(height: 8),
 
-                            
                             GestureDetector(
                               onTap: () {},
                               child: Container(
@@ -309,15 +344,20 @@ class _WorkerProfileScreenState extends State<WorkerProfileScreen> {
                                   ],
                                 ),
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Row(
                                       children: [
-                                        const Icon(Icons.logout, color: Colors.red, size: 22),
+                                        const Icon(
+                                          Icons.logout,
+                                          color: Colors.red,
+                                          size: 22,
+                                        ),
                                         const SizedBox(width: 12),
                                         Text(
                                           'Logout',
-                                          style: GoogleFonts.outfit(
+                                          style: GoogleFonts.cairo(
                                             fontSize: 14,
                                             fontWeight: FontWeight.w700,
                                             color: Colors.red,
@@ -325,7 +365,11 @@ class _WorkerProfileScreenState extends State<WorkerProfileScreen> {
                                         ),
                                       ],
                                     ),
-                                    const Icon(Icons.chevron_right, color: Color(0xFFFFCDD2), size: 22),
+                                    const Icon(
+                                      Icons.chevron_right,
+                                      color: Color(0xFFFFCDD2),
+                                      size: 22,
+                                    ),
                                   ],
                                 ),
                               ),
@@ -340,7 +384,9 @@ class _WorkerProfileScreenState extends State<WorkerProfileScreen> {
             ),
 
             Positioned(
-              bottom: 0, left: 0, right: 0,
+              bottom: 0,
+              left: 0,
+              right: 0,
               child: Container(
                 decoration: const BoxDecoration(
                   color: Colors.white,
@@ -349,38 +395,49 @@ class _WorkerProfileScreenState extends State<WorkerProfileScreen> {
                 padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    (Icons.home_filled,         Icons.home_outlined,          'Home'),
-                    (Icons.assignment_turned_in, Icons.assignment_outlined,   'Tasks'),
-                    (Icons.verified,             Icons.verified_outlined,     'Verify'),
-                    (Icons.person,               Icons.person_outline,        'Profile'),
-                  ].asMap().entries.map((e) {
-                    final i = e.key;
-                    final item = e.value;
-                    final isSelected = _selectedIndex == i;
-                    return GestureDetector(
-                      onTap: () => setState(() => _selectedIndex = i),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Icon(
-                            isSelected ? item.$1 : item.$2,
-                            color: isSelected ? primary : const Color(0xFF94A3B8),
-                            size: 24,
+                  children:
+                      [
+                        (Icons.home_filled, Icons.home_outlined, 'Home'),
+                        (
+                          Icons.assignment_turned_in,
+                          Icons.assignment_outlined,
+                          'Tasks',
+                        ),
+                        (Icons.verified, Icons.verified_outlined, 'Verify'),
+                        (Icons.person, Icons.person_outline, 'Profile'),
+                      ].asMap().entries.map((e) {
+                        final i = e.key;
+                        final item = e.value;
+                        final isSelected = _selectedIndex == i;
+                        return GestureDetector(
+                          onTap: () => setState(() => _selectedIndex = i),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Icon(
+                                isSelected ? item.$1 : item.$2,
+                                color: isSelected
+                                    ? primary
+                                    : const Color(0xFF94A3B8),
+                                size: 24,
+                              ),
+                              const SizedBox(height: 2),
+                              Text(
+                                item.$3,
+                                style: GoogleFonts.cairo(
+                                  fontSize: 10,
+                                  fontWeight: isSelected
+                                      ? FontWeight.w700
+                                      : FontWeight.w500,
+                                  color: isSelected
+                                      ? primary
+                                      : const Color(0xFF94A3B8),
+                                ),
+                              ),
+                            ],
                           ),
-                          const SizedBox(height: 2),
-                          Text(
-                            item.$3,
-                            style: GoogleFonts.outfit(
-                              fontSize: 10,
-                              fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
-                              color: isSelected ? primary : const Color(0xFF94A3B8),
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  }).toList(),
+                        );
+                      }).toList(),
                 ),
               ),
             ),

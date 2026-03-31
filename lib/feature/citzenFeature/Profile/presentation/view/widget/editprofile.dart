@@ -167,7 +167,7 @@ class _WorkerEditProfileScreenState extends State<EditProfileScreen> {
             child: Text(
               S.of(context).editProfile,
               textAlign: TextAlign.center,
-              style: GoogleFonts.outfit(
+              style: GoogleFonts.cairo(
                 fontSize: ScreenUtilsManager.s20,
                 fontWeight: FontWeight.w700,
                 color: ColorManger.primary,
@@ -186,7 +186,7 @@ class _WorkerEditProfileScreenState extends State<EditProfileScreen> {
       child: Text(
         S.of(context).dataSecurityNote,
         textAlign: TextAlign.center,
-        style: GoogleFonts.outfit(fontSize: 12, color: const Color(0xFF94A3B8)),
+        style: GoogleFonts.cairo(fontSize: 12, color: const Color(0xFF94A3B8)),
       ),
     );
   }
