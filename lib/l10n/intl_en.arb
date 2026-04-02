@@ -205,5 +205,17 @@
   "topAchievements": "Top Achievement Reports",
   "resolvedReports": "Resolved Reports",
   "noData": "No data available at the moment",
-  "retry": "Retry"
-}
+  "retry": "Retry","assigned": "Assigned"
+,"comments": "Comments",
+  "messagesCount": "{count} Messages",
+  "@messagesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "noCommentsYet": "No comments yet. Be the first to reply!",
+  "addCommentHint": "Add a reply or a new inquiry...",
+  "addCommentLabel": "Add Comment",
+  "reporter": "Reporter"}

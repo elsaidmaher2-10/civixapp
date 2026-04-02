@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_snake_navigationbar/flutter_snake_navigationbar.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CustomSnakeNavbar extends StatelessWidget {
   const CustomSnakeNavbar({super.key});
@@ -36,6 +37,8 @@ class CustomSnakeNavbar extends StatelessWidget {
         ];
 
         return SnakeNavigationBar.color(
+          unselectedLabelStyle: GoogleFonts.cairo(),
+          selectedLabelStyle: GoogleFonts.cairo(),
           behaviour: SnakeBarBehaviour.floating,
           snakeShape: SnakeShape.rectangle,
           shape: const RoundedRectangleBorder(

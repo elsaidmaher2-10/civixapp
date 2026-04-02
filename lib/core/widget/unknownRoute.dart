@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Unknownroute extends StatelessWidget {
   const Unknownroute({super.key});
@@ -10,8 +11,11 @@ class Unknownroute extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("unkown Route",style: TextStyle(color: Colors.red,fontSize: 22,)),
-            Icon(Icons.route,size: 30,)
+            Text(
+              "unkown Route",
+              style: GoogleFonts.cairo(color: Colors.red, fontSize: 22),
+            ),
+            Icon(Icons.route, size: 30),
           ],
         ),
       ),

@@ -138,13 +138,13 @@ class VerificationCompleteScreen extends StatelessWidget {
             letterSpacing: -0.5,
           ),
         ),
-        const SizedBox(height: 16),
-        const SizedBox(
+        SizedBox(height: 16),
+        SizedBox(
           width: 280,
           child: Text(
             'Your digital credentials have been successfully authenticated.',
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: GoogleFonts.cairo(
               fontSize: 16,
               color: ColorManger.secondary,
               height: 1.5,
@@ -194,7 +194,7 @@ class VerificationCompleteScreen extends StatelessWidget {
         children: [
           Text(
             label,
-            style: const TextStyle(
+            style: GoogleFonts.cairo(
               fontSize: 10,
               fontWeight: FontWeight.w600,
               color: ColorManger.secondary,
@@ -271,9 +271,12 @@ class VerificationCompleteScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 2),
-                const Text(
+                Text(
                   'Expires Oct 2025',
-                  style: TextStyle(fontSize: 12, color: ColorManger.secondary),
+                  style: GoogleFonts.cairo(
+                    fontSize: 12,
+                    color: ColorManger.secondary,
+                  ),
                 ),
               ],
             ),
@@ -408,9 +411,9 @@ class VerificationCompleteScreen extends StatelessWidget {
               borderRadius: BorderRadius.circular(16),
             ),
           ),
-          child: const Text(
+          child: Text(
             'View Digital Badge',
-            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+            style: GoogleFonts.cairo(fontSize: 14, fontWeight: FontWeight.w600),
           ),
         ),
       ],

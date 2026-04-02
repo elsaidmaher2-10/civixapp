@@ -4,6 +4,7 @@ import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/core/widget/customShimerwidget.dart';
 import 'package:citifix/feature/workerFeature/home/data/models/dashbroadmodel.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class TaskCard extends StatelessWidget {
   final RecentReportModel report;
@@ -38,7 +39,6 @@ class TaskCard extends StatelessWidget {
                 child: CachedNetworkImage(
                   placeholder: (context, url) {
                     return customShimer(150);
-                
                   },
                   height: 130,
                   width: double.infinity,
@@ -62,7 +62,7 @@ class TaskCard extends StatelessWidget {
                   ),
                   child: Text(
                     report.status,
-                    style: const TextStyle(
+                    style: GoogleFonts.cairo(
                       color: Colors.white,
                       fontSize: 10,
                       fontWeight: FontWeight.bold,
@@ -75,7 +75,7 @@ class TaskCard extends StatelessWidget {
           const SizedBox(height: 12),
           Text(
             report.categoryName.toUpperCase(),
-            style: TextStyle(
+            style: GoogleFonts.cairo(
               color: ColorManger.primaryColor,
               fontSize: 10,
               fontWeight: FontWeight.bold,
@@ -87,7 +87,7 @@ class TaskCard extends StatelessWidget {
             report.title,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+            style: GoogleFonts.cairo(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           const SizedBox(height: 8),
           Row(
@@ -101,7 +101,7 @@ class TaskCard extends StatelessWidget {
               Expanded(
                 child: Text(
                   report.areaName,
-                  style: TextStyle(
+                  style: GoogleFonts.cairo(
                     fontSize: 12,
                     color: ColorManger.onSurfaceVariant,
                   ),
@@ -109,7 +109,10 @@ class TaskCard extends StatelessWidget {
               ),
               Text(
                 "${report.createdAt.day}/${report.createdAt.month}",
-                style: TextStyle(fontSize: 11, color: Colors.grey.shade400),
+                style: GoogleFonts.cairo(
+                  fontSize: 11,
+                  color: Colors.grey.shade400,
+                ),
               ),
             ],
           ),

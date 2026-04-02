@@ -2,6 +2,7 @@ import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class WorkerAlertVrefication extends StatelessWidget {
   const WorkerAlertVrefication({super.key});
@@ -33,7 +34,7 @@ class WorkerAlertVrefication extends StatelessWidget {
               children: [
                 Text(
                   Constantmanger.alertrequired,
-                  style: TextStyle(
+                  style: GoogleFonts.cairo(
                     fontWeight: FontWeight.bold,
                     color: ColorManger.primaryColor,
                   ),
@@ -41,7 +42,7 @@ class WorkerAlertVrefication extends StatelessWidget {
                 SizedBox(height: ScreenUtilsManager.h4),
                 Text(
                   Constantmanger.updateYourID,
-                  style: TextStyle(
+                  style: GoogleFonts.cairo(
                     fontSize: ScreenUtilsManager.s14,
                     color: ColorManger.onInProgressContainer,
                   ),

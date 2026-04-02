@@ -1753,6 +1753,61 @@ class S {
   String get retry {
     return Intl.message('Retry', name: 'retry', desc: '', args: []);
   }
+
+  /// `Assigned`
+  String get assigned {
+    return Intl.message('Assigned', name: 'assigned', desc: '', args: []);
+  }
+
+  /// `Comments`
+  String get comments {
+    return Intl.message('Comments', name: 'comments', desc: '', args: []);
+  }
+
+  /// `{count} Messages`
+  String messagesCount(int count) {
+    return Intl.message(
+      '$count Messages',
+      name: 'messagesCount',
+      desc: '',
+      args: [count],
+    );
+  }
+
+  /// `No comments yet. Be the first to reply!`
+  String get noCommentsYet {
+    return Intl.message(
+      'No comments yet. Be the first to reply!',
+      name: 'noCommentsYet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add a reply or a new inquiry...`
+  String get addCommentHint {
+    return Intl.message(
+      'Add a reply or a new inquiry...',
+      name: 'addCommentHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Comment`
+  String get addCommentLabel {
+    return Intl.message(
+      'Add Comment',
+      name: 'addCommentLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reporter`
+  String get reporter {
+    return Intl.message('Reporter', name: 'reporter', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

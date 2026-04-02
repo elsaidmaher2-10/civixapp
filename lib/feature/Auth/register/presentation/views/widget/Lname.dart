@@ -16,7 +16,7 @@ class Lname extends StatelessWidget {
       children: [
         // Text(
         //   Constantmanger.lname,
-        //   style: TextStyle(
+        //   style: GoogleFonts.cairo(
         //     color: ColorManger.lightGrey,
         //     fontSize: ScreenUtilsManager.s16,
         //   ),

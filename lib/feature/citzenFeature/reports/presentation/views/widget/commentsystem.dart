@@ -6,11 +6,13 @@ import 'package:citifix/core/widget/customtextfromfield.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/manager/comment/commentmanger_cubit.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/manager/comment/commentmanger_state.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/views/widget/commentBubble.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../../../../../generated/l10n.dart';
 
 class Commentsystem extends StatelessWidget {
   const Commentsystem({
@@ -27,8 +29,13 @@ class Commentsystem extends StatelessWidget {
     return BlocBuilder<CommentsCubit, CommentsState>(
       builder: (context, state) {
         if (state is CommentsLoading) {
-          return const SliverToBoxAdapter(
-            child: Center(child: CircularProgressIndicator()),
+          return SliverToBoxAdapter(
+            child: Center(
+              child: CupertinoActivityIndicator(
+                color: ColorManger.primary,
+                radius: ScreenUtilsManager.r12,
+              ),
+            ),
           );
         } else if (state is CommentsFailure) {
           return SliverToBoxAdapter(
@@ -46,7 +53,7 @@ class Commentsystem extends StatelessWidget {
                       SvgPicture.asset("assets/commentsytem.svg", width: 24.w),
                       SizedBox(width: ScreenUtilsManager.w8),
                       Text(
-                        "Comments",
+                        S.of(context).comments,
                         style: GoogleFonts.cairo(
                           color: ColorManger.kPrimary,
                           fontWeight: FontWeight.bold,
@@ -64,7 +71,7 @@ class Commentsystem extends StatelessWidget {
                           borderRadius: BorderRadius.circular(8.r),
                         ),
                         child: Text(
-                          "${comments.length} Messages",
+                          S.of(context).messagesCount(comments.length),
                           style: GoogleFonts.cairo(
                             fontSize: 12.sp,
                             color: Colors.grey[700],
@@ -82,7 +89,7 @@ class Commentsystem extends StatelessWidget {
                     padding: EdgeInsets.symmetric(vertical: 20.h),
                     child: Center(
                       child: Text(
-                        "No comments yet. Be the first to reply!",
+                        S.of(context).noCommentsYet,
                         style: GoogleFonts.cairo(color: Colors.grey),
                       ),
                     ),
@@ -109,9 +116,9 @@ class Commentsystem extends StatelessWidget {
                         Icons.send_rounded,
                         color: ColorManger.kPrimary,
                       ),
-                      onPressed: () {
+                      onPressed: () async {
                         if (controller.text.isNotEmpty) {
-                          context.read<CommentsCubit>().makeComments(
+                          await context.read<CommentsCubit>().makeComments(
                             reporID,
                             content: controller.text,
                           );
@@ -120,8 +127,8 @@ class Commentsystem extends StatelessWidget {
                       },
                     ),
                     color: Colors.white,
-                    hinttext: "Add a reply or a new inquiry...",
-                    lable: "Add Comment",
+                    hinttext: S.of(context).addCommentHint,
+                    lable: S.of(context).addCommentLabel,
                     controller: controller,
                   ),
                 ),

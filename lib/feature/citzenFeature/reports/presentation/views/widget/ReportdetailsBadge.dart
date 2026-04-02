@@ -42,18 +42,32 @@ Widget iconStatus(StatusReport status) {
     case StatusReport.pending:
       return SvgPicture.asset(
         AssetValueManager.pending,
-        colorFilter: ColorFilter.mode(ColorManger.orange, BlendMode.srcATop),
+        colorFilter: const ColorFilter.mode(Color(0xFFFFB300), BlendMode.srcIn),
       );
-    case StatusReport.inpprogress:
+
+    case StatusReport.assigned:
       return SvgPicture.asset(
         AssetValueManager.active,
-        colorFilter: ColorFilter.mode(ColorManger.kPrimary, BlendMode.srcATop),
+        colorFilter: const ColorFilter.mode(Color(0xFF3F51B5), BlendMode.srcIn),
       );
+
+    case StatusReport.inProgress:
+      return SvgPicture.asset(
+        AssetValueManager.active,
+        colorFilter: ColorFilter.mode(ColorManger.kPrimary, BlendMode.srcIn),
+      );
+
     case StatusReport.resolved:
+    case StatusReport.completed:
       return SvgPicture.asset(
         AssetValueManager.resolved,
+        colorFilter: const ColorFilter.mode(Colors.green, BlendMode.srcIn),
+      );
 
-        colorFilter: ColorFilter.mode(ColorManger.green, BlendMode.srcATop),
+    case StatusReport.rejected:
+      return SvgPicture.asset(
+        AssetValueManager.resolved,
+        colorFilter: const ColorFilter.mode(Colors.red, BlendMode.srcIn),
       );
   }
 }

@@ -4,6 +4,7 @@ import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 PreferredSizeWidget confirmpassappbar(
   BuildContext context,
@@ -14,7 +15,7 @@ PreferredSizeWidget confirmpassappbar(
     titleSpacing: 3.w,
     title: Text(
       S.of(context).newPassword,
-      style: TextStyle(fontSize: 20.sp, color: ColorManger.kPrimary),
+      style: GoogleFonts.cairo(fontSize: 20.sp, color: ColorManger.kPrimary),
     ),
     backgroundColor: ColorManger.white,
     leadingWidth: 36.w,

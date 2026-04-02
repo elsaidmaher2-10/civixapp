@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/feature/workerFeature/home/presentation/view/widget/CustomMapSection.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 import '../tasks/TaskInfoSection.dart';
 import '../tasks/widget/TaskOwnerHeader.dart';
@@ -21,19 +22,19 @@ class TimelineStepModel {
 }
 
 class TaskDetailsPage extends StatelessWidget {
-  const TaskDetailsPage({super.key});
+  TaskDetailsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorManger.background,
       appBar: _buildAppBar(context),
-      bottomNavigationBar: const _TaskBottomBar(),
+      bottomNavigationBar: _TaskBottomBar(),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
+          children: [
             TaskOwnerHeader(),
             SizedBox(height: 16),
             TaskInfoSection(),
@@ -62,11 +63,10 @@ class TaskDetailsPage extends StatelessWidget {
       ),
       title: Text(
         'Task Details',
-        style: TextStyle(
+        style: GoogleFonts.cairo(
           color: ColorManger.onSurface,
           fontWeight: FontWeight.bold,
           fontSize: 18,
-          fontFamily: 'Manrope',
         ),
       ),
       actions: [
@@ -80,7 +80,7 @@ class TaskDetailsPage extends StatelessWidget {
 }
 
 class ActivityTimelineSection extends StatefulWidget {
-  const ActivityTimelineSection({super.key});
+  ActivityTimelineSection({super.key});
   @override
   State<ActivityTimelineSection> createState() =>
       _ActivityTimelineSectionState();
@@ -138,7 +138,7 @@ class _ActivityTimelineSectionState extends State<ActivityTimelineSection> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(24),
+      padding: EdgeInsets.all(24),
       decoration: BoxDecoration(
         color: ColorManger.surface,
         borderRadius: BorderRadius.circular(12),
@@ -150,25 +150,24 @@ class _ActivityTimelineSectionState extends State<ActivityTimelineSection> {
           Row(
             children: [
               Icon(Icons.event_repeat, color: ColorManger.primary, size: 16),
-              const SizedBox(width: 8),
-              const Text(
+              SizedBox(width: 8),
+              Text(
                 'ACTIVITY TIMELINE',
-                style: TextStyle(
+                style: GoogleFonts.cairo(
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
-                  fontFamily: 'Manrope',
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 24),
+          SizedBox(height: 24),
           StreamBuilder<List<TimelineStepModel>>(
             stream: _streamController.stream,
             builder: (context, snapshot) {
               final data = snapshot.data ?? _timelineData;
               return ListView.builder(
                 shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
+                physics: NeverScrollableScrollPhysics(),
                 itemCount: data.length,
                 itemBuilder: (context, index) {
                   final step = data[index];
@@ -195,11 +194,7 @@ class _ActivityTimelineSectionState extends State<ActivityTimelineSection> {
                             ),
                           ),
                           child: step.state
-                              ? const Icon(
-                                  Icons.check,
-                                  color: Colors.white,
-                                  size: 14,
-                                )
+                              ? Icon(Icons.check, color: Colors.white, size: 14)
                               : null,
                         ),
                       ),
@@ -223,7 +218,7 @@ class _ActivityTimelineSectionState extends State<ActivityTimelineSection> {
                     endChild: GestureDetector(
                       onTap: () => _onStepTap(index),
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(
+                        padding: EdgeInsets.symmetric(
                           horizontal: 16,
                           vertical: 8,
                         ),
@@ -232,10 +227,9 @@ class _ActivityTimelineSectionState extends State<ActivityTimelineSection> {
                           children: [
                             Text(
                               step.title,
-                              style: TextStyle(
+                              style: GoogleFonts.cairo(
                                 fontSize: 14,
                                 fontWeight: FontWeight.bold,
-                                fontFamily: 'Manrope',
                                 color: step.state
                                     ? ColorManger.primary
                                     : ColorManger.onSurface,
@@ -244,7 +238,7 @@ class _ActivityTimelineSectionState extends State<ActivityTimelineSection> {
                             if (step.time.isNotEmpty)
                               Text(
                                 step.time,
-                                style: TextStyle(
+                                style: GoogleFonts.cairo(
                                   fontSize: 11,
                                   color: Colors.grey.shade500,
                                 ),
@@ -265,7 +259,7 @@ class _ActivityTimelineSectionState extends State<ActivityTimelineSection> {
 }
 
 class _IssuePhotosSection extends StatelessWidget {
-  const _IssuePhotosSection();
+  _IssuePhotosSection();
 
   @override
   Widget build(BuildContext context) {
@@ -274,14 +268,14 @@ class _IssuePhotosSection extends StatelessWidget {
       children: [
         Text(
           'ISSUE PHOTOS',
-          style: TextStyle(
+          style: GoogleFonts.cairo(
             fontSize: 12,
             fontWeight: FontWeight.bold,
             color: ColorManger.onSurfaceVariant,
             letterSpacing: 1,
           ),
         ),
-        const SizedBox(height: 12),
+        SizedBox(height: 12),
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
@@ -289,11 +283,11 @@ class _IssuePhotosSection extends StatelessWidget {
               _buildPhotoCard(
                 'https://images.unsplash.com/photo-1585704032915-c3400ca199e7?q=80&w=2070',
               ),
-              const SizedBox(width: 12),
+              SizedBox(width: 12),
               _buildPhotoCard(
                 'https://cdn.pixabay.com/photo/2023/10/03/10/49/anonymous-8291223_1280.png',
               ),
-              const SizedBox(width: 12),
+              SizedBox(width: 12),
               _buildPhotoCard(
                 'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?q=80&w=2069',
               ),
@@ -313,13 +307,13 @@ class _IssuePhotosSection extends StatelessWidget {
 }
 
 class _MapNavigationSection extends StatelessWidget {
-  const _MapNavigationSection();
+  _MapNavigationSection();
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        const CustomMapSection(),
+        CustomMapSection(),
         Positioned(
           bottom: 40,
           right: 40,
@@ -327,15 +321,18 @@ class _MapNavigationSection extends StatelessWidget {
             children: [
               Icon(Icons.location_on, color: ColorManger.primary, size: 40),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                padding: EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(4),
                   border: Border.all(color: Colors.grey.shade200),
                 ),
-                child: const Text(
+                child: Text(
                   'TASK SITE',
-                  style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
+                  style: GoogleFonts.cairo(
+                    fontSize: 10,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ],
@@ -346,7 +343,7 @@ class _MapNavigationSection extends StatelessWidget {
           left: 12,
           right: 12,
           child: Container(
-            padding: const EdgeInsets.all(12),
+            padding: EdgeInsets.all(12),
             decoration: BoxDecoration(
               color: Colors.white.withOpacity(0.95),
               borderRadius: BorderRadius.circular(12),
@@ -370,13 +367,13 @@ class _MapNavigationSection extends StatelessWidget {
                       ),
                     ),
 
-                    const SizedBox(width: 12),
+                    SizedBox(width: 12),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           'ESTIMATED ARRIVAL',
-                          style: TextStyle(
+                          style: GoogleFonts.cairo(
                             fontSize: 10,
                             fontWeight: FontWeight.bold,
                             color: ColorManger.primary,
@@ -387,7 +384,7 @@ class _MapNavigationSection extends StatelessWidget {
                           children: [
                             Text(
                               '12 mins',
-                              style: TextStyle(
+                              style: GoogleFonts.cairo(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w800,
                                 color: ColorManger.onSurface,
@@ -395,7 +392,7 @@ class _MapNavigationSection extends StatelessWidget {
                             ),
                             Text(
                               ' • 1.8 km away',
-                              style: TextStyle(
+                              style: GoogleFonts.cairo(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w500,
                                 color: Colors.grey.shade500,
@@ -415,14 +412,14 @@ class _MapNavigationSection extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 8,
-                    ),
+                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   ),
-                  child: const Text(
+                  child: Text(
                     'NAVIGATE',
-                    style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold),
+                    style: GoogleFonts.cairo(
+                      fontSize: 11,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ],
@@ -435,12 +432,12 @@ class _MapNavigationSection extends StatelessWidget {
 }
 
 class _CompletionDataSection extends StatelessWidget {
-  const _CompletionDataSection();
+  _CompletionDataSection();
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(24),
+      padding: EdgeInsets.all(24),
       decoration: BoxDecoration(
         color: ColorManger.surface,
         borderRadius: BorderRadius.circular(12),
@@ -452,31 +449,30 @@ class _CompletionDataSection extends StatelessWidget {
           Row(
             children: [
               Icon(Icons.task_alt, color: ColorManger.primary, size: 16),
-              const SizedBox(width: 8),
-              const Text(
+              SizedBox(width: 8),
+              Text(
                 'COMPLETION DATA',
-                style: TextStyle(
+                style: GoogleFonts.cairo(
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
-                  fontFamily: 'Manrope',
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
           Row(
             children: [
               Text(
                 'PROOF OF WORK ',
-                style: TextStyle(
+                style: GoogleFonts.cairo(
                   fontSize: 11,
                   fontWeight: FontWeight.bold,
                   color: Colors.grey.shade400,
                 ),
               ),
-              const Text(
+              Text(
                 '*',
-                style: TextStyle(
+                style: GoogleFonts.cairo(
                   fontSize: 11,
                   fontWeight: FontWeight.bold,
                   color: Colors.red,
@@ -484,7 +480,7 @@ class _CompletionDataSection extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8),
 
           InkWell(
             onTap: () {
@@ -511,10 +507,10 @@ class _CompletionDataSection extends StatelessWidget {
                     color: Colors.grey.shade400,
                     size: 32,
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8),
                   Text(
                     'Tap to upload photos',
-                    style: TextStyle(
+                    style: GoogleFonts.cairo(
                       color: Colors.grey.shade500,
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
@@ -531,19 +527,19 @@ class _CompletionDataSection extends StatelessWidget {
 }
 
 class _TaskBottomBar extends StatelessWidget {
-  const _TaskBottomBar();
+  _TaskBottomBar();
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(24.0),
+      padding: EdgeInsets.all(24.0),
       decoration: BoxDecoration(
         color: ColorManger.surface,
         border: Border(top: BorderSide(color: Colors.grey.shade200)),
       ),
       child: Container(
         decoration: BoxDecoration(
-          gradient: const LinearGradient(
+          gradient: LinearGradient(
             colors: [Color(0xFFFF7A00), Color(0xFFFF9533)],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
@@ -553,7 +549,7 @@ class _TaskBottomBar extends StatelessWidget {
             BoxShadow(
               color: ColorManger.primary.withOpacity(0.3),
               blurRadius: 15,
-              offset: const Offset(0, 4),
+              offset: Offset(0, 4),
             ),
           ],
         ),
@@ -562,23 +558,22 @@ class _TaskBottomBar extends StatelessWidget {
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.transparent,
             shadowColor: Colors.transparent,
-            padding: const EdgeInsets.symmetric(vertical: 16),
+            padding: EdgeInsets.symmetric(vertical: 16),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
             ),
           ),
-          child: const Row(
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(Icons.verified, color: Colors.white),
               SizedBox(width: 8),
               Text(
                 'Mark as Completed',
-                style: TextStyle(
+                style: GoogleFonts.cairo(
                   color: Colors.white,
                   fontSize: 18,
                   fontWeight: FontWeight.w800,
-                  fontFamily: 'Manrope',
                 ),
               ),
             ],

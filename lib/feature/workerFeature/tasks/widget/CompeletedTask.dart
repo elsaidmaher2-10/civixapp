@@ -1,6 +1,7 @@
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/feature/workerFeature/tasks/data/model/ReportResponse.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CompletedTaskCard extends StatelessWidget {
   final ReportModelWorker task;
@@ -32,7 +33,7 @@ class CompletedTaskCard extends StatelessWidget {
               children: [
                 Text(
                   task.title,
-                  style: TextStyle(
+                  style: GoogleFonts.cairo(
                     decoration: TextDecoration.lineThrough,
                     color: Colors.grey.shade600,
                     fontWeight: FontWeight.w600,
@@ -40,7 +41,7 @@ class CompletedTaskCard extends StatelessWidget {
                 ),
                 Text(
                   'Completed on ${task.createdAt}',
-                  style: TextStyle(
+                  style: GoogleFonts.cairo(
                     fontSize: ScreenUtilsManager.s12,
                     color: Colors.grey,
                   ),

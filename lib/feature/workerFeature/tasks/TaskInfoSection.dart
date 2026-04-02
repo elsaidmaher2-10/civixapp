@@ -1,6 +1,7 @@
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../verfication/verficationinit.dart';
 
@@ -31,7 +32,7 @@ class TaskInfoSection extends StatelessWidget {
                 ),
                 child: Text(
                   'URGENT PRIORITY',
-                  style: TextStyle(
+                  style: GoogleFonts.cairo(
                     fontSize: 10,
                     fontWeight: FontWeight.bold,
                     color: Colors.red.shade700,
@@ -41,7 +42,7 @@ class TaskInfoSection extends StatelessWidget {
               ),
               Text(
                 'ID: #FO-29481',
-                style: TextStyle(
+                style: GoogleFonts.cairo(
                   fontSize: 10,
                   fontWeight: FontWeight.w500,
                   color: Colors.grey.shade500,
@@ -52,17 +53,16 @@ class TaskInfoSection extends StatelessWidget {
           const SizedBox(height: 12),
           Text(
             'Emergency Pipe Burst',
-            style: TextStyle(
+            style: GoogleFonts.cairo(
               fontSize: 20,
               fontWeight: FontWeight.w800,
               color: ColorManger.onSurface,
-              fontFamily: 'Manrope',
             ),
           ),
           const SizedBox(height: 8),
           Text(
             'Main waterline ruptured in the basement utility room. Immediate pressure stabilization and valve replacement required.',
-            style: TextStyle(
+            style: GoogleFonts.cairo(
               fontSize: 14,
               color: ColorManger.onSurfaceVariant,
               height: 1.5,

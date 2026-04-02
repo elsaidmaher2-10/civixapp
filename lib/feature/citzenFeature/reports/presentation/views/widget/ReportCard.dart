@@ -14,6 +14,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../../../../core/widget/stautsBageApp.dart';
 import 'deleteReportDialog.dart';
 
 class Reportcard extends StatelessWidget {
@@ -34,7 +35,7 @@ class Reportcard extends StatelessWidget {
         );
       },
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+        padding: EdgeInsets.symmetric(vertical: 8.h),
         child: Slidable(
           startActionPane: ActionPane(
             motion: const ScrollMotion(),
@@ -107,7 +108,8 @@ class Reportcard extends StatelessWidget {
                       ],
                     ),
                   ),
-                  _buildStatusTag(context, report.status, translatedStatus),
+                  StatusBadgeApp(status: report.status),
+                  SizedBox(width: 5.w),
                 ],
               ),
             ),

@@ -13,6 +13,7 @@ import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../feature/citzenFeature/home/data/Repos/reports/reports.dart';
+import '../../feature/workerFeature/verfication/data/repo/VerficationInitRepo.dart';
 
 final GetIt getIt = GetIt.instance;
 void setupgetit() {
@@ -50,6 +51,12 @@ void setupgetit() {
       internetChecker: getIt<InternetChecker>(),
     ),
   );
+  getIt.registerSingleton<VerficationInitRepo>(
+    VerficationInitRepo(
+      apiservice: getIt<Apiservice>(),
+      internetChecker: getIt<InternetChecker>(),
+    ),
+  );
   getIt.registerSingleton<WorkerTaskRepo>(
     WorkerTaskRepo(
       service: getIt<Apiservice>(),
@@ -63,5 +70,4 @@ void setupgetit() {
       internetChecker: getIt<InternetChecker>(),
     ),
   );
-  getIt.registerSingleton<CommentsCubit>(CommentsCubit(getIt<Commentrepo>()));
 }

@@ -1,6 +1,7 @@
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/feature/citzenFeature/notication/data/model/notifavtionmodel.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class NotificationTile extends StatelessWidget {
   final NotificationModel item;
@@ -62,7 +63,7 @@ class NotificationTile extends StatelessWidget {
                     children: [
                       Text(
                         item.title,
-                        style: TextStyle(
+                        style: GoogleFonts.cairo(
                           fontSize: 16,
                           fontWeight: item.isRead
                               ? FontWeight.w600
@@ -73,7 +74,7 @@ class NotificationTile extends StatelessWidget {
                       const SizedBox(height: 6),
                       Text(
                         item.message,
-                        style: TextStyle(
+                        style: GoogleFonts.cairo(
                           fontSize: 14,
                           color: item.isRead
                               ? Colors.grey.shade600

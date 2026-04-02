@@ -24,9 +24,11 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m1(count) => "منذ ${count} ساعة";
 
-  static String m2(count) => "منذ ${count} دقيقة";
+  static String m2(count) => "${count} رسائل";
 
-  static String m3(count) => "منذ ${count} أسبوع";
+  static String m3(count) => "منذ ${count} دقيقة";
+
+  static String m4(count) => "منذ ${count} أسبوع";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -35,14 +37,19 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "achievement": MessageLookupByLibrary.simpleMessage("الإنجازات"),
     "active": MessageLookupByLibrary.simpleMessage("نشط"),
+    "addCommentHint": MessageLookupByLibrary.simpleMessage(
+      "أضف رداً أو استفساراً جديداً...",
+    ),
+    "addCommentLabel": MessageLookupByLibrary.simpleMessage("إضافة تعليق"),
     "addPhoto": MessageLookupByLibrary.simpleMessage("إضافة صورة"),
     "addReport": MessageLookupByLibrary.simpleMessage("إضافة بلاغ"),
     "address": MessageLookupByLibrary.simpleMessage("العنوان"),
     "address2": MessageLookupByLibrary.simpleMessage("العنوان"),
     "age": MessageLookupByLibrary.simpleMessage("العمر"),
     "all": MessageLookupByLibrary.simpleMessage("الكل"),
-    "appTitle": MessageLookupByLibrary.simpleMessage("سيتي فيكس"),
+    "appTitle": MessageLookupByLibrary.simpleMessage("سيتيفيكس"),
     "arabic": MessageLookupByLibrary.simpleMessage("العربية"),
+    "assigned": MessageLookupByLibrary.simpleMessage("تم التعيين"),
     "camera": MessageLookupByLibrary.simpleMessage("الكاميرا"),
     "cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
     "caughtUpMessage": MessageLookupByLibrary.simpleMessage(
@@ -61,6 +68,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "مسؤوليات المواطن",
     ),
     "civix": MessageLookupByLibrary.simpleMessage("Civix"),
+    "comments": MessageLookupByLibrary.simpleMessage("التعليقات"),
     "completed": MessageLookupByLibrary.simpleMessage("تم الحل"),
     "confirm": MessageLookupByLibrary.simpleMessage("تأكيد"),
     "confirmDelete": MessageLookupByLibrary.simpleMessage("تأكيد الحذف"),
@@ -201,7 +209,8 @@ class MessageLookup extends MessageLookupByLibrary {
       "هل أنت متأكد أنك تريد تسجيل الخروج من حسابك؟",
     ),
     "markAllRead": MessageLookupByLibrary.simpleMessage("تحديد الكل كمقروء"),
-    "minutesAgo": m2,
+    "messagesCount": m2,
+    "minutesAgo": m3,
     "msgRegister": MessageLookupByLibrary.simpleMessage(
       "لقد أرسلنا كود مكون من 6 أرقام إلى بريدك الإلكتروني / رقم الهاتف",
     ),
@@ -227,6 +236,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "nationalNumber": MessageLookupByLibrary.simpleMessage("الرقم القومي"),
     "newPassword": MessageLookupByLibrary.simpleMessage("كلمة مرور جديدة"),
     "next": MessageLookupByLibrary.simpleMessage("التالي"),
+    "noCommentsYet": MessageLookupByLibrary.simpleMessage(
+      "لا توجد تعليقات بعد. كن أول من يرد!",
+    ),
     "noData": MessageLookupByLibrary.simpleMessage("لا توجد بيانات حالياً"),
     "noInternet": MessageLookupByLibrary.simpleMessage(
       "لا يوجد اتصال بالإنترنت",
@@ -303,6 +315,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "reportTitleHint": MessageLookupByLibrary.simpleMessage("عنوان البلاغ"),
     "reportTitleLabel": MessageLookupByLibrary.simpleMessage("عنوان البلاغ"),
     "reportedBy": MessageLookupByLibrary.simpleMessage("تم التبليغ بواسطة"),
+    "reporter": MessageLookupByLibrary.simpleMessage("صاحب البلاغ"),
     "reports": MessageLookupByLibrary.simpleMessage("البلاغات"),
     "resendCode": MessageLookupByLibrary.simpleMessage("إعادة إرسال الكود"),
     "resendCodeIn": MessageLookupByLibrary.simpleMessage("إعادة الإرسال خلال"),
@@ -376,7 +389,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "tryAgain": MessageLookupByLibrary.simpleMessage("إعادة المحاولة"),
     "unknownLocation": MessageLookupByLibrary.simpleMessage("موقع غير معروف"),
     "unknownStatus": MessageLookupByLibrary.simpleMessage("غير معروف"),
-    "weeksAgo": m3,
+    "weeksAgo": m4,
     "worker": MessageLookupByLibrary.simpleMessage("عامل"),
     "workerConductDesc": MessageLookupByLibrary.simpleMessage(
       "١. يجب على العمال رفع صور \'قبل\' و \'بعد\' لكل مهمة.\n٢. يجب إتمام المهام في الإطار الزمني المحدد.\n٣. السلوك المهني إلزامي أثناء الزيارات الميدانية.",

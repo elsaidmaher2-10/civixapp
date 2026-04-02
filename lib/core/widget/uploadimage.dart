@@ -4,7 +4,8 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:citifix/generated/l10n.dart'; // استيراد ملف الترجمة
+import 'package:citifix/generated/l10n.dart';
+import 'package:google_fonts/google_fonts.dart'; // استيراد ملف الترجمة
 
 class Uploadimage extends StatelessWidget {
   const Uploadimage({super.key, required this.onTap});
@@ -31,7 +32,7 @@ class Uploadimage extends StatelessWidget {
               SizedBox(height: 7.h),
               Text(
                 S.of(context).addPhoto,
-                style: TextStyle(
+                style: GoogleFonts.cairo(
                   fontSize: ScreenUtilsManager.s12,
                   color: ColorManger.lightGrey,
                   fontWeight: FontWeight.w500,

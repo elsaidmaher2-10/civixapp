@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:citifix/core/resource/colormanager.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class TaskStatusBadge extends StatelessWidget {
   final String status;
@@ -20,7 +21,7 @@ class TaskStatusBadge extends StatelessWidget {
         'IN PROGRESS',
       ),
       'Resolved' => (
-        const Color(0xFFE8F5E9), 
+        const Color(0xFFE8F5E9),
         const Color(0xFF2E7D32),
         'RESOLVED',
       ),
@@ -35,7 +36,7 @@ class TaskStatusBadge extends StatelessWidget {
       ),
       child: Text(
         label,
-        style: TextStyle(
+        style: GoogleFonts.cairo(
           color: textColor,
           fontSize: 10,
           fontWeight: FontWeight.w900, // Extra bold for that "badge" look

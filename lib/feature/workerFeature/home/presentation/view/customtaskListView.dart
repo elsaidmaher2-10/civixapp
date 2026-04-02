@@ -4,6 +4,7 @@ import 'package:citifix/feature/workerFeature/home/presentation/view/widget/Task
 import 'package:citifix/feature/workerFeature/main/Manager/cubit/worker_cubit_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CustomTaskListView extends StatelessWidget {
   final List<RecentReportModel> reports;
@@ -22,14 +23,17 @@ class CustomTaskListView extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  const Text(
+                  Text(
                     'Available Tasks',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    style: GoogleFonts.cairo(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   const SizedBox(width: 8),
                   Text(
                     '(${reports.length})',
-                    style: TextStyle(
+                    style: GoogleFonts.cairo(
                       fontSize: 14,
                       color: ColorManger.onSurfaceVariant,
                     ),
@@ -42,7 +46,7 @@ class CustomTaskListView extends StatelessWidget {
                 },
                 child: Text(
                   "See All",
-                  style: TextStyle(color: ColorManger.primaryColor),
+                  style: GoogleFonts.cairo(color: ColorManger.primaryColor),
                 ),
               ),
             ],
@@ -50,7 +54,7 @@ class CustomTaskListView extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         SizedBox(
-          height: 240, 
+          height: 240,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             physics: const BouncingScrollPhysics(),

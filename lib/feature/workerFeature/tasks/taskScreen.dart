@@ -9,6 +9,7 @@ import 'package:citifix/feature/workerFeature/tasks/widget/TasksHeader.dart';
 import 'package:citifix/feature/workerFeature/tasks/widget/taskFilter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:shimmer/shimmer.dart';
 
 class TasksView extends StatefulWidget {
@@ -99,7 +100,7 @@ class _TasksViewState extends State<TasksView> {
                     return Center(
                       child: Text(
                         state.message,
-                        style: const TextStyle(color: Colors.red),
+                        style: GoogleFonts.cairo(color: Colors.red),
                       ),
                     );
                   }
@@ -136,7 +137,7 @@ class _EmptyState extends StatelessWidget {
             SizedBox(height: ScreenUtilsManager.h16),
             Text(
               "No tasks found for '$filterName'",
-              style: TextStyle(
+              style: GoogleFonts.cairo(
                 fontSize: ScreenUtilsManager.s16,
                 color: Colors.grey.shade600,
                 fontWeight: FontWeight.w600,

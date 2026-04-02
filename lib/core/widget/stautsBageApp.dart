@@ -65,11 +65,22 @@ class StatusBadgeApp extends StatelessWidget {
         };
       case "Resolved":
       case "Completed":
-        return {'color': Colors.green, 'label': S.of(context).completed};
+        return {
+          'color': const Color(0xFF4CAF50), // Green
+          'label': S.of(context).completed,
+        };
+      case "Assigned":
+        return {
+          'color': const Color(0xFF3F51B5),
+          'label': S.of(context).assigned,
+        };
       case "Pending":
-        return {'color': Colors.orange, 'label': S.of(context).pending};
+        return {
+          'color': const Color(0xFFFFA000),
+          'label': S.of(context).pending,
+        };
       case "Rejected":
-        return {'color': Colors.red, 'label': "Rejected"};
+        return {'color': const Color(0xFFD32F2F), 'label': "Rejected"};
       default:
         return {'color': Colors.grey, 'label': status};
     }

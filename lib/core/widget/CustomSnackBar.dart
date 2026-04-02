@@ -1,6 +1,7 @@
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Customsnackbar {
   static void show({
@@ -20,7 +21,7 @@ class Customsnackbar {
         dismissDirection: DismissDirection.endToStart,
         content: Text(
           message,
-          style: TextStyle(
+          style: GoogleFonts.cairo(
             fontWeight: FontWeight.w700,
             color: ColorManger.white,
             fontSize: ScreenUtilsManager.h16,

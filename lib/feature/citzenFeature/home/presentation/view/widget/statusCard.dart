@@ -9,17 +9,17 @@ class StatusCard extends StatelessWidget {
   final String title;
   final String iconPath;
   final int number;
+  final Color? color;
+  final Color iconcolor;
 
   const StatusCard({
-    required this.color,
-    required this.iconcolor,
     super.key,
     required this.number,
     required this.title,
     required this.iconPath,
+    this.color,
+    required this.iconcolor,
   });
-  final Color? color;
-  final Color iconcolor;
 
   @override
   Widget build(BuildContext context) {
@@ -27,37 +27,45 @@ class StatusCard extends StatelessWidget {
       height: 106.h,
       decoration: BoxDecoration(
         color: ColorManger.white,
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(10.r),
       ),
       padding: EdgeInsets.all(12.w),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
               SvgPicture.asset(
                 iconPath,
-                colorFilter: ColorFilter.mode(iconcolor, BlendMode.srcATop),
+                width: 18.w,
+                height: 18.w,
+                colorFilter: ColorFilter.mode(iconcolor, BlendMode.srcIn),
               ),
-              SizedBox(width: 8.w),
-              RichText(
-                text: TextSpan(
-                  style: TextStyle(
+              SizedBox(width: 4.w),
+
+              Expanded(
+                child: Text(
+                  title,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: GoogleFonts.cairo(
                     color: ColorManger.lightGrey6,
-                    fontSize: 14.sp,
+                    fontSize: 12.sp,
                     fontWeight: FontWeight.w600,
                   ),
-                  text: title,
                 ),
               ),
             ],
           ),
-          Text(
-            number.toString(),
-            style: GoogleFonts.cairo(
-              color: color,
-              fontWeight: FontWeight.w500,
-              fontSize: ScreenUtilsManager.s24,
+          Center(
+            child: Text(
+              number.toString(),
+              style: GoogleFonts.cairo(
+                color: color,
+                fontWeight: FontWeight.w500,
+                fontSize: 22.sp, // يفضل استخدام .sp للخطوط
+              ),
             ),
           ),
         ],

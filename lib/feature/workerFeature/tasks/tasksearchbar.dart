@@ -1,6 +1,7 @@
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class TaskSearchBar extends StatelessWidget {
   const TaskSearchBar({super.key});
@@ -21,7 +22,7 @@ class TaskSearchBar extends StatelessWidget {
       child: TextField(
         decoration: InputDecoration(
           hintText: 'Search for tasks...',
-          hintStyle: TextStyle(
+          hintStyle: GoogleFonts.cairo(
             color: Colors.grey.shade400,
             fontSize: ScreenUtilsManager.s14,
           ),

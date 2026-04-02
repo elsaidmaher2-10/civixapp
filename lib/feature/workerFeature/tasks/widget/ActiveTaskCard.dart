@@ -3,6 +3,7 @@ import 'package:citifix/feature/workerFeature/tasks/data/model/ReportResponse.da
 import 'package:flutter/material.dart';
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../core/widget/stautsBageApp.dart';
 
@@ -55,7 +56,7 @@ class ActiveTaskCard extends StatelessWidget {
                     StatusBadgeApp(status: task.status),
                     Text(
                       "#${task.hashCode}",
-                      style: TextStyle(
+                      style: GoogleFonts.cairo(
                         color: Colors.grey.shade400,
                         fontSize: 12,
                       ),
@@ -65,11 +66,10 @@ class ActiveTaskCard extends StatelessWidget {
                 SizedBox(height: ScreenUtilsManager.h12),
                 Text(
                   task.title ?? "No Title",
-                  style: TextStyle(
+                  style: GoogleFonts.cairo(
                     fontSize: ScreenUtilsManager.s18,
                     fontWeight: FontWeight.w800,
                     color: ColorManger.onSurface,
-                    fontFamily: 'Manrope',
                   ),
                 ),
                 SizedBox(height: ScreenUtilsManager.h6),
@@ -81,7 +81,8 @@ class ActiveTaskCard extends StatelessWidget {
           const Divider(height: 1),
           Padding(
             padding: EdgeInsets.all(ScreenUtilsManager.w16),
-            child: TaskStatus.fromString(task.status) == TaskStatus.inProgress
+            child:
+                StatusReport.fromString(task.status) == StatusReport.inProgress
                 ? const _InProgressActions()
                 : const _AvailableActions(),
           ),
@@ -108,7 +109,7 @@ class _LocationRow extends StatelessWidget {
         Expanded(
           child: Text(
             address,
-            style: TextStyle(
+            style: GoogleFonts.cairo(
               fontSize: ScreenUtilsManager.s13,
               color: Colors.grey.shade600,
             ),
@@ -122,11 +123,11 @@ class _LocationRow extends StatelessWidget {
 }
 
 class StatusBadge extends StatelessWidget {
-  final TaskStatus status;
+  final StatusReport status;
   const StatusBadge({super.key, required this.status});
   @override
   Widget build(BuildContext context) {
-    Color color = status == TaskStatus.assigned
+    Color color = status == StatusReport.assigned
         ? Colors.orange
         : ColorManger.primaryColor;
     return Container(
@@ -137,7 +138,7 @@ class StatusBadge extends StatelessWidget {
       ),
       child: Text(
         status.name.toUpperCase(),
-        style: TextStyle(
+        style: GoogleFonts.cairo(
           color: color,
           fontSize: 10,
           fontWeight: FontWeight.w800,
@@ -166,12 +167,9 @@ class _AvailableActions extends StatelessWidget {
                 borderRadius: BorderRadius.circular(ScreenUtilsManager.r8),
               ),
             ),
-            child: const Text(
+            child: Text(
               'Decline',
-              style: TextStyle(
-                fontWeight: FontWeight.w600,
-                fontFamily: 'Manrope',
-              ),
+              style: GoogleFonts.cairo(fontWeight: FontWeight.w600),
             ),
           ),
         ),
@@ -208,12 +206,11 @@ class _AvailableActions extends StatelessWidget {
                   borderRadius: BorderRadius.circular(ScreenUtilsManager.r8),
                 ),
               ),
-              child: const Text(
+              child: Text(
                 'Accept Task',
-                style: TextStyle(
+                style: GoogleFonts.cairo(
                   color: Colors.white,
                   fontWeight: FontWeight.w700,
-                  fontFamily: 'Manrope',
                 ),
               ),
             ),
@@ -236,9 +233,9 @@ class _InProgressActions extends StatelessWidget {
           backgroundColor: ColorManger.onSurface,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         ),
-        child: const Text(
+        child: Text(
           'View Directions & Update',
-          style: TextStyle(color: Colors.white),
+          style: GoogleFonts.cairo(color: Colors.white),
         ),
       ),
     );

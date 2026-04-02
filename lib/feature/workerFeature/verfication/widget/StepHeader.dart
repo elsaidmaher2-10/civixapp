@@ -1,5 +1,7 @@
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
 class StepHeader extends StatelessWidget {
   final String title;
   final String stepLabel;
@@ -13,7 +15,7 @@ class StepHeader extends StatelessWidget {
       children: [
         Text(
           title,
-          style: const TextStyle(
+          style: GoogleFonts.cairo(
             fontSize: 20,
             fontWeight: FontWeight.bold,
             color: ColorManger.onSurface,
@@ -28,7 +30,7 @@ class StepHeader extends StatelessWidget {
           ),
           child: Text(
             stepLabel.toUpperCase(),
-            style: const TextStyle(
+            style: GoogleFonts.cairo(
               fontSize: 10,
               fontWeight: FontWeight.w800,
               color: ColorManger.secondary,

@@ -69,9 +69,7 @@ class ReportCardIem extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(width: ScreenUtilsManager.h8),
-                        StatusBadgeApp(
-                          status: _getTranslatedStatus(context, report.status),
-                        ),
+                        StatusBadgeApp(status: report.status),
                         SizedBox(height: ScreenUtilsManager.h8),
                         Text(
                           report.title,
@@ -104,7 +102,7 @@ class ReportCardIem extends StatelessWidget {
                         ),
                         SizedBox(height: ScreenUtilsManager.h12),
                         Text(
-                          '${S.of(context).submitted} ${report.createdAt.timeAgo}',
+                          '${S.of(context).submitted} ${report.createdAt.timeAgo(context)}',
                           style: GoogleFonts.cairo(
                             fontSize: ScreenUtilsManager.s11,
                             color: Colors.black38,
@@ -210,18 +208,5 @@ class ReportCardIem extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  String _getTranslatedStatus(BuildContext context, String status) {
-    switch (status.toLowerCase()) {
-      case 'pending':
-        return S.of(context).pending.toUpperCase();
-      case 'resolved':
-        return S.of(context).resolved.toUpperCase();
-      case 'completed':
-        return S.of(context).completed.toUpperCase();
-      default:
-        return status.toUpperCase();
-    }
   }
 }

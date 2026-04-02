@@ -44,7 +44,7 @@
   "msgResetPassword": "لقد أرسلنا لك كود لإعادة تعيين كلمة المرور. يرجى التحقق من بريدك الإلكتروني.",
   "msgRegister": "لقد أرسلنا كود مكون من 6 أرقام إلى بريدك الإلكتروني / رقم الهاتف",
   "msgResettingPass": "تم التحقق من الكود بنجاح. يرجى تعيين كلمة مرور جديدة.",
-  "appTitle": "سيتي فيكس",
+  "appTitle": "سيتيفيكس",
   "active": "نشط",
   "pending": "قيد المعالجة",
   "completed": "تم الحل",
@@ -205,5 +205,19 @@
   "topAchievements": "أبرز تقارير الإنجازات",
   "resolvedReports": "البلاغات المنجزة",
   "noData": "لا توجد بيانات حالياً",
-  "retry": "إعادة المحاولة"
+  "retry": "إعادة المحاولة","assigned": "تم التعيين",
+  "comments": "التعليقات",
+  "messagesCount": "{count} رسائل",
+  "@messagesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "noCommentsYet": "لا توجد تعليقات بعد. كن أول من يرد!",
+  "addCommentHint": "أضف رداً أو استفساراً جديداً...",
+  "addCommentLabel": "إضافة تعليق",
+  "reporter": "صاحب البلاغ"
+
 }

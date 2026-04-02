@@ -1,6 +1,7 @@
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 PreferredSizeWidget homeAppbar(context) {
   return AppBar(
@@ -14,7 +15,7 @@ PreferredSizeWidget homeAppbar(context) {
         const SizedBox(width: 8),
         Text(
           "City Fix",
-          style: TextStyle(
+          style: GoogleFonts.cairo(
             fontSize: 20,
             fontWeight: FontWeight.bold,
             color: Colors.black,

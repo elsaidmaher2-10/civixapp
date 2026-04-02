@@ -1,13 +1,14 @@
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:flutter/cupertino.dart';
-
+import 'package:google_fonts/google_fonts.dart';
 
 class MetaInfoItem extends StatelessWidget {
   final IconData icon;
   final String label;
   final bool muted;
 
-  const MetaInfoItem({super.key, 
+  const MetaInfoItem({
+    super.key,
     required this.icon,
     required this.label,
     this.muted = false,
@@ -22,7 +23,7 @@ class MetaInfoItem extends StatelessWidget {
         const SizedBox(width: 4),
         Text(
           label,
-          style: TextStyle(
+          style: GoogleFonts.cairo(
             fontSize: 12,
             fontWeight: FontWeight.w600,
             color: color,

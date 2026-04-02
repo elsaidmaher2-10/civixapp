@@ -5,6 +5,12 @@ import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/core/widget/customShimerwidget.dart';
 import 'package:citifix/feature/workerFeature/verfication/verficationinit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+import '../../../../../../core/DI/getit.dart';
+import '../../../../verfication/Presentation/VerficationinitManger/VerificationInitCubit.dart';
+import '../../../../verfication/data/repo/VerficationInitRepo.dart';
 
 class WorkerCard extends StatelessWidget {
   final bool isVerified;
@@ -54,7 +60,7 @@ class WorkerCard extends StatelessWidget {
                     children: [
                       Text(
                         name,
-                        style: TextStyle(
+                        style: GoogleFonts.cairo(
                           fontSize: ScreenUtilsManager.s20,
                           fontWeight: FontWeight.bold,
                           color: ColorManger.onSurface,
@@ -92,7 +98,7 @@ class WorkerCard extends StatelessWidget {
       ),
       child: Text(
         isVerified ? Constantmanger.VERIFIED : Constantmanger.Pending,
-        style: TextStyle(
+        style: GoogleFonts.cairo(
           fontSize: ScreenUtilsManager.s10,
           fontWeight: FontWeight.w700,
           color: isVerified ? ColorManger.green : ColorManger.orange,
@@ -116,7 +122,7 @@ class WorkerCard extends StatelessWidget {
         SizedBox(width: ScreenUtilsManager.w6),
         Text(
           Constantmanger.Online,
-          style: TextStyle(
+          style: GoogleFonts.cairo(
             fontSize: ScreenUtilsManager.s14,
             color: ColorManger.onSurfaceVariant,
           ),
@@ -141,7 +147,11 @@ class WorkerCard extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => GlobalGateVerificationPage(),
+                builder: (context) => BlocProvider(
+                  create: (context) =>
+                      VerificationInitCubit(getIt<VerficationInitRepo>()),
+                  child: GlobalGateVerificationPage(),
+                ),
               ),
             );
           },
@@ -154,7 +164,7 @@ class WorkerCard extends StatelessWidget {
           ),
           child: Text(
             Constantmanger.verifynow,
-            style: TextStyle(
+            style: GoogleFonts.cairo(
               fontSize: ScreenUtilsManager.s16,
               color: Colors.white,
               fontWeight: FontWeight.bold,

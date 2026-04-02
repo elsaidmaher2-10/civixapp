@@ -4,6 +4,7 @@ import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 PreferredSizeWidget otpappbar(BuildContext context, Null Function() param1) {
   return AppBar(
@@ -11,7 +12,7 @@ PreferredSizeWidget otpappbar(BuildContext context, Null Function() param1) {
     titleSpacing: 3.w,
     title: Text(
       S.of(context).otpVerification,
-      style: TextStyle(color: ColorManger.kPrimary, fontSize: 20.sp),
+      style: GoogleFonts.cairo(color: ColorManger.kPrimary, fontSize: 20.sp),
     ),
     backgroundColor: ColorManger.white,
     leadingWidth: 36.w,

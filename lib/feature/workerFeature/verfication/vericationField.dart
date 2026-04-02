@@ -1,29 +1,30 @@
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class VerificationFailedScreen extends StatelessWidget {
-  const VerificationFailedScreen({super.key});
+  VerificationFailedScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppBar(),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 32.0),
+        padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 32.0),
         child: Center(
           child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 600),
+            constraints: BoxConstraints(maxWidth: 600),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 _buildHeroSection(),
-                const SizedBox(height: 48),
+                SizedBox(height: 48),
                 _buildErrorSummaryBox(),
-                const SizedBox(height: 40),
+                SizedBox(height: 40),
                 _buildUpdateDocumentsSection(),
-                const SizedBox(height: 48),
+                SizedBox(height: 48),
                 _buildActionButtons(),
-                const SizedBox(height: 32),
+                SizedBox(height: 32),
                 _buildHelpLink(),
               ],
             ),
@@ -39,16 +40,16 @@ class VerificationFailedScreen extends StatelessWidget {
       elevation: 0,
       surfaceTintColor: Colors.transparent,
       bottom: PreferredSize(
-        preferredSize: const Size.fromHeight(1.0),
+        preferredSize: Size.fromHeight(1.0),
         child: Container(color: ColorManger.surface, height: 1.0),
       ),
-      title: const Row(
+      title: Row(
         children: [
           Icon(Icons.security, color: ColorManger.primary),
           SizedBox(width: 8),
           Text(
             'Global Gate',
-            style: TextStyle(
+            style: GoogleFonts.cairo(
               color: ColorManger.onSurface,
               fontWeight: FontWeight.bold,
               fontSize: 18,
@@ -60,9 +61,9 @@ class VerificationFailedScreen extends StatelessWidget {
       actions: [
         TextButton(
           onPressed: () {},
-          child: const Text(
+          child: Text(
             'Verification',
-            style: TextStyle(
+            style: GoogleFonts.cairo(
               color: ColorManger.secondary,
               fontWeight: FontWeight.w600,
             ),
@@ -70,15 +71,15 @@ class VerificationFailedScreen extends StatelessWidget {
         ),
         TextButton(
           onPressed: () {},
-          child: const Text(
+          child: Text(
             'Support',
-            style: TextStyle(
+            style: GoogleFonts.cairo(
               color: ColorManger.secondary,
               fontWeight: FontWeight.w600,
             ),
           ),
         ),
-        const SizedBox(width: 16),
+        SizedBox(width: 16),
       ],
     );
   }
@@ -93,7 +94,7 @@ class VerificationFailedScreen extends StatelessWidget {
             color: ColorManger.error.withOpacity(0.1),
             shape: BoxShape.circle,
           ),
-          child: const Center(
+          child: Center(
             child: Icon(
               Icons.warning_rounded,
               color: ColorManger.error,
@@ -101,11 +102,11 @@ class VerificationFailedScreen extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(height: 24),
-        const Text(
+        SizedBox(height: 24),
+        Text(
           'Verification Failed',
           textAlign: TextAlign.center,
-          style: TextStyle(
+          style: GoogleFonts.cairo(
             fontSize: 44,
             fontWeight: FontWeight.w800,
             color: ColorManger.onSurface,
@@ -113,13 +114,13 @@ class VerificationFailedScreen extends StatelessWidget {
             letterSpacing: -0.5,
           ),
         ),
-        const SizedBox(height: 16),
-        const SizedBox(
+        SizedBox(height: 16),
+        SizedBox(
           width: 400,
           child: Text(
             "We couldn't verify your identity based on the documents provided. Please review the details below.",
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: GoogleFonts.cairo(
               fontSize: 18,
               color: ColorManger.secondary,
               height: 1.5,
@@ -132,37 +133,35 @@ class VerificationFailedScreen extends StatelessWidget {
 
   Widget _buildErrorSummaryBox() {
     return Container(
-      padding: const EdgeInsets.all(24),
+      padding: EdgeInsets.all(24),
       decoration: BoxDecoration(
         color: ColorManger.surface,
         borderRadius: BorderRadius.circular(12),
-        border: const Border(
-          left: BorderSide(color: ColorManger.error, width: 4),
-        ),
+        border: Border(left: BorderSide(color: ColorManger.error, width: 4)),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Padding(
+          Padding(
             padding: EdgeInsets.only(top: 4.0),
             child: Icon(Icons.report, color: ColorManger.error, size: 24),
           ),
-          const SizedBox(width: 16),
+          SizedBox(width: 16),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
+                Text(
                   'Attention Required',
-                  style: TextStyle(
+                  style: GoogleFonts.cairo(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                     color: ColorManger.onSurface,
                   ),
                 ),
-                const SizedBox(height: 8),
+                SizedBox(height: 8),
                 _buildErrorBulletItem('ID not clear'),
-                const SizedBox(height: 8),
+                SizedBox(height: 8),
                 _buildErrorBulletItem('Missing data'),
               ],
             ),
@@ -178,15 +177,15 @@ class VerificationFailedScreen extends StatelessWidget {
         Container(
           width: 6,
           height: 6,
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             color: ColorManger.error,
             shape: BoxShape.circle,
           ),
         ),
-        const SizedBox(width: 8),
+        SizedBox(width: 8),
         Text(
           text,
-          style: const TextStyle(
+          style: GoogleFonts.cairo(
             fontSize: 16,
             fontWeight: FontWeight.w500,
             color: ColorManger.secondary,
@@ -200,17 +199,17 @@ class VerificationFailedScreen extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
+        Text(
           'Update Documents',
-          style: TextStyle(
+          style: GoogleFonts.cairo(
             fontSize: 20,
             fontWeight: FontWeight.bold,
             color: ColorManger.onSurface,
           ),
         ),
-        const SizedBox(height: 16),
+        SizedBox(height: 16),
         _buildReuploadCard(),
-        const SizedBox(height: 20),
+        SizedBox(height: 20),
         _buildEditableInputsCard(),
       ],
     );
@@ -219,7 +218,7 @@ class VerificationFailedScreen extends StatelessWidget {
   // Document Reupload Card
   Widget _buildReuploadCard() {
     return Container(
-      padding: const EdgeInsets.all(20),
+      padding: EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: ColorManger.surface,
         borderRadius: BorderRadius.circular(12),
@@ -231,12 +230,12 @@ class VerificationFailedScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Column(
+              Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     'Passport Photo Page',
-                    style: TextStyle(
+                    style: GoogleFonts.cairo(
                       fontWeight: FontWeight.bold,
                       color: ColorManger.onSurface,
                       fontSize: 16,
@@ -253,7 +252,7 @@ class VerificationFailedScreen extends StatelessWidget {
                       SizedBox(width: 4),
                       Text(
                         'Image Blurry',
-                        style: TextStyle(
+                        style: GoogleFonts.cairo(
                           fontSize: 12,
                           fontWeight: FontWeight.w600,
                           color: ColorManger.error,
@@ -265,20 +264,17 @@ class VerificationFailedScreen extends StatelessWidget {
               ),
               ElevatedButton.icon(
                 onPressed: () {},
-                icon: const Icon(Icons.upload, size: 16),
-                label: const Text('Re-upload'),
+                icon: Icon(Icons.upload, size: 16),
+                label: Text('Re-upload'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: ColorManger.primary,
                   foregroundColor: ColorManger.onPrimary,
                   elevation: 2,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 8,
-                  ),
+                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  textStyle: const TextStyle(
+                  textStyle: GoogleFonts.cairo(
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
                   ),
@@ -286,7 +282,7 @@ class VerificationFailedScreen extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
           AspectRatio(
             aspectRatio: 16 / 9,
             child: Container(
@@ -307,7 +303,7 @@ class VerificationFailedScreen extends StatelessWidget {
                     ),
                   ),
                   Container(color: ColorManger.onSurface.withOpacity(0.4)),
-                  const Center(
+                  Center(
                     child: Icon(
                       Icons.hide_source,
                       color: ColorManger.background,
@@ -325,7 +321,7 @@ class VerificationFailedScreen extends StatelessWidget {
 
   Widget _buildEditableInputsCard() {
     return Container(
-      padding: const EdgeInsets.all(24),
+      padding: EdgeInsets.all(24),
       decoration: BoxDecoration(
         color: ColorManger.surface,
         borderRadius: BorderRadius.circular(12),
@@ -334,17 +330,17 @@ class VerificationFailedScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
+          Text(
             'Review Information',
-            style: TextStyle(
+            style: GoogleFonts.cairo(
               fontWeight: FontWeight.bold,
               color: ColorManger.onSurface,
               fontSize: 16,
             ),
           ),
-          const SizedBox(height: 12),
-          const Divider(color: ColorManger.outline, height: 1),
-          const SizedBox(height: 20),
+          SizedBox(height: 12),
+          Divider(color: ColorManger.outline, height: 1),
+          SizedBox(height: 20),
 
           _buildInputGroup(
             label: 'Document Number',
@@ -353,7 +349,7 @@ class VerificationFailedScreen extends StatelessWidget {
             errorMessage: "Number didn't match the image provided",
             iconColor: ColorManger.primary,
           ),
-          const SizedBox(height: 24),
+          SizedBox(height: 24),
           _buildInputGroup(
             label: 'Full Legal Name',
             hintText: 'Enter as shown on ID',
@@ -377,10 +373,10 @@ class VerificationFailedScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.only(left: 4.0, bottom: 6.0),
+          padding: EdgeInsets.only(left: 4.0, bottom: 6.0),
           child: Text(
             label,
-            style: const TextStyle(
+            style: GoogleFonts.cairo(
               fontSize: 12,
               fontWeight: FontWeight.w600,
               color: ColorManger.secondary,
@@ -393,10 +389,7 @@ class VerificationFailedScreen extends StatelessWidget {
             hintText: hintText,
             filled: true,
             fillColor: ColorManger.background,
-            contentPadding: const EdgeInsets.symmetric(
-              horizontal: 16,
-              vertical: 16,
-            ),
+            contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
             suffixIcon: Icon(Icons.edit, size: 20, color: iconColor),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
@@ -414,14 +407,14 @@ class VerificationFailedScreen extends StatelessWidget {
               ),
             ),
           ),
-          style: const TextStyle(color: ColorManger.onSurface, fontSize: 16),
+          style: GoogleFonts.cairo(color: ColorManger.onSurface, fontSize: 16),
         ),
         if (hasError && errorMessage != null)
           Padding(
-            padding: const EdgeInsets.only(left: 4.0, top: 4.0),
+            padding: EdgeInsets.only(left: 4.0, top: 4.0),
             child: Text(
               errorMessage,
-              style: const TextStyle(
+              style: GoogleFonts.cairo(
                 color: ColorManger.error,
                 fontSize: 10,
                 fontWeight: FontWeight.w600,
@@ -440,38 +433,41 @@ class VerificationFailedScreen extends StatelessWidget {
           style: ElevatedButton.styleFrom(
             backgroundColor: ColorManger.primary,
             foregroundColor: ColorManger.onPrimary,
-            minimumSize: const Size(double.infinity, 56),
+            minimumSize: Size(double.infinity, 56),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
             ),
             elevation: 4,
           ),
-          child: const Row(
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
                 'Resubmit Verification',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                style: GoogleFonts.cairo(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               SizedBox(width: 12),
               Icon(Icons.arrow_forward, size: 20),
             ],
           ),
         ),
-        const SizedBox(height: 16),
+        SizedBox(height: 16),
         OutlinedButton(
           onPressed: () {},
           style: OutlinedButton.styleFrom(
             foregroundColor: ColorManger.secondary,
-            minimumSize: const Size(double.infinity, 56),
-            side: const BorderSide(color: ColorManger.outline),
+            minimumSize: Size(double.infinity, 56),
+            side: BorderSide(color: ColorManger.outline),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
             ),
           ),
-          child: const Text(
+          child: Text(
             'Contact Global Support',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+            style: GoogleFonts.cairo(fontSize: 16, fontWeight: FontWeight.w600),
           ),
         ),
       ],
@@ -481,13 +477,13 @@ class VerificationFailedScreen extends StatelessWidget {
   Widget _buildHelpLink() {
     return Center(
       child: RichText(
-        text: const TextSpan(
-          style: TextStyle(fontSize: 14, color: ColorManger.secondary),
+        text: TextSpan(
+          style: GoogleFonts.cairo(fontSize: 14, color: ColorManger.secondary),
           children: [
             TextSpan(text: 'Need help? Visit our '),
             TextSpan(
               text: 'Verification Guide',
-              style: TextStyle(
+              style: GoogleFonts.cairo(
                 color: ColorManger.primary,
                 fontWeight: FontWeight.bold,
                 decoration: TextDecoration.underline,

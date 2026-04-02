@@ -1,10 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:citifix/core/extenstion/datetimeextension.dart';
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/feature/citzenFeature/reports/data/Models/commentmodel/commentmodel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../../../../../generated/l10n.dart';
 
 class CommentBubble extends StatelessWidget {
   final CommentModel comment;
@@ -13,6 +15,7 @@ class CommentBubble extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool isWorker = comment.userRole == UserType.worker;
+
     return Padding(
       padding: EdgeInsets.only(bottom: 20.h),
       child: Column(
@@ -25,17 +28,10 @@ class CommentBubble extends StatelessWidget {
                 ? MainAxisAlignment.end
                 : MainAxisAlignment.start,
             children: [
-              if (isWorker)
-                Text(
-                  "2 hours ago",
-                  style: GoogleFonts.cairo(
-                    fontSize: 10.sp,
-                    color: const Color(0xff737783),
-                  ),
-                ),
+              if (isWorker) _buildTime(context),
               SizedBox(width: 8.w),
               Text(
-                isWorker ? "Worker" : "Reporter",
+                isWorker ? S.of(context).worker : S.of(context).reporter,
                 style: GoogleFonts.cairo(
                   fontSize: 10.sp,
                   fontWeight: FontWeight.bold,
@@ -45,14 +41,7 @@ class CommentBubble extends StatelessWidget {
                 ),
               ),
               SizedBox(width: 8.w),
-              if (!isWorker)
-                Text(
-                  "2 hours ago",
-                  style: GoogleFonts.cairo(
-                    fontSize: 10.sp,
-                    color: const Color(0xff737783),
-                  ),
-                ),
+              if (!isWorker) _buildTime(context),
             ],
           ),
           SizedBox(height: 8.h),
@@ -108,15 +97,24 @@ class CommentBubble extends StatelessWidget {
     );
   }
 
+  Widget _buildTime(BuildContext context) {
+    return Text(
+      comment.createdAt.timeAgo(context),
+      style: GoogleFonts.cairo(fontSize: 10.sp, color: const Color(0xff737783)),
+    );
+  }
+
   Widget _buildAvatar(String url, Color color) {
     return CircleAvatar(
       radius: 16.r,
-      backgroundColor: color,
+      backgroundColor: color.withOpacity(0.1),
       child: ClipOval(
         child: CachedNetworkImage(
-          errorWidget: (c, e, s) =>
-              Icon(Icons.person, size: 18, color: Colors.white),
+          placeholder: (context, url) =>
+              const CupertinoActivityIndicator(radius: 8),
+          errorWidget: (c, e, s) => Icon(Icons.person, size: 18, color: color),
           imageUrl: url,
+          fit: BoxFit.cover,
         ),
       ),
     );

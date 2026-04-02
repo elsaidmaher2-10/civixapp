@@ -19,7 +19,7 @@ class Nationalnumber extends StatelessWidget {
       children: [
         // Text(
         //   Constantmanger.nationalnumber,
-        //   style: TextStyle(
+        //   style: GoogleFonts.cairo(
         //     color: ColorManger.lightGrey,
         //     fontSize: ScreenUtilsManager.s16,
         //   ),

@@ -2,6 +2,7 @@ import 'package:animated_hint_textfield/animated_hint_textfield.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CustomSearchField extends StatelessWidget {
   final TextEditingController? controller;
@@ -34,14 +35,14 @@ class CustomSearchField extends StatelessWidget {
       ],
       decoration: InputDecoration(
         prefixIcon: Icon(
-          Icons.search, 
+          Icons.search,
           color: const Color(0xff475569),
-          size: ScreenUtilsManager.s20, 
+          size: ScreenUtilsManager.s20,
         ),
         isDense: true,
         fillColor: const Color(0xffF1F5F9),
         filled: true,
-        hintStyle: TextStyle(
+        hintStyle: GoogleFonts.cairo(
           color: const Color(0xff94A3B8),
           fontSize: ScreenUtilsManager.s14,
         ),

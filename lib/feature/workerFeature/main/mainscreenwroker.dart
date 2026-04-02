@@ -18,7 +18,7 @@ class _MainscreenwrokerState extends State<Mainscreenwroker> {
   final List<Widget> _pages = [
     const HomePage(),
     const TasksView(),
-    const ProfileView(),
+    ProfileView(),
   ];
   @override
   Widget build(BuildContext context) {

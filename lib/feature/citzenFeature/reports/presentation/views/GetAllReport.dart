@@ -28,7 +28,7 @@ class _ReportsPageState extends State<ReportsPage> {
   final List<Map<String, dynamic>> filters = [
     {"key": "All", "selected": true},
     {"key": "Pending", "selected": false},
-    {"key": "In Progress", "selected": false},
+    {"key": "InProgress", "selected": false},
     {"key": "Resolved", "selected": false},
   ];
 
@@ -57,7 +57,7 @@ class _ReportsPageState extends State<ReportsPage> {
         return S.of(context).all;
       case "Pending":
         return S.of(context).pending;
-      case "In Progress":
+      case "InProgress":
         return S.of(context).inProgress;
       case "Resolved":
         return S.of(context).resolved;

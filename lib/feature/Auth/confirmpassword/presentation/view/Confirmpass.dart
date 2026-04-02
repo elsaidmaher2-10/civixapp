@@ -20,6 +20,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
 
@@ -254,7 +255,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                                 ),
                                 child: Text(
                                   S.of(context).submit,
-                                  style: const TextStyle(
+                                  style: GoogleFonts.cairo(
                                     fontSize: 16,
                                     fontWeight: FontWeight.w600,
                                     color: Colors.white,

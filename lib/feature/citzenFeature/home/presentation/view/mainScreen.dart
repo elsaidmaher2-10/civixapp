@@ -54,9 +54,9 @@ class _CitizenMainScreenState extends State<CitizenMainScreen> {
                           width: 62.w,
                           child: FloatingActionButton(
                             splashColor: ColorManger.lightGrey3,
-                            onPressed: () {
+                            onPressed: () async {
                               final reportCubit = context.read<ReportCubit>();
-                              showModalBottomSheet(
+                              await showModalBottomSheet(
                                 useSafeArea: true,
                                 backgroundColor: ColorManger.bgLight,
                                 context: context,

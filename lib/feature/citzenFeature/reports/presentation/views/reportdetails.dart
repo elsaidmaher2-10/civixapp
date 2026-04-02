@@ -20,6 +20,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:latlong2/latlong.dart';
 
+import '../../data/repos/commentRepo/commentRepo.dart';
+
 class ReportDetailsScreen extends StatefulWidget {
   final int reportId;
   const ReportDetailsScreen({super.key, required this.reportId});
@@ -58,7 +60,7 @@ class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
       },
       child: BlocProvider(
         create: (context) =>
-            getIt<CommentsCubit>()..fetchComments(widget.reportId),
+            CommentsCubit(getIt<Commentrepo>())..fetchComments(widget.reportId),
         child: Scaffold(
           backgroundColor: ColorManger.reportsPageBackground,
           body: BlocBuilder<ReportCubit, ReportManagerState>(
@@ -234,12 +236,12 @@ class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
   Widget _buildTimeline(BuildContext context, String currentStatus) {
     int currentIndex = StatusReport.fromString(currentStatus).index;
     return Column(
-      children: List.generate(Constantmanger.mySteps.length, (index) {
+      children: List.generate(4, (index) {
         return CustomTimelineTile(
           title: _getStepTitle(context, index),
           isFirst: index == 0,
           isDone: currentIndex >= index,
-          isLast: index == Constantmanger.mySteps.length - 1,
+          isLast: index == 4 - 1,
         );
       }),
     );
@@ -248,10 +250,12 @@ class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
   String _getStepTitle(BuildContext context, int index) {
     switch (index) {
       case 0:
-        return S.of(context).pending;
+        return S.of(context).assigned;
       case 1:
-        return S.of(context).inProgress;
+        return S.of(context).pending;
       case 2:
+        return S.of(context).inProgress;
+      case 3:
         return S.of(context).resolved;
       default:
         return Constantmanger.mySteps[index].title;

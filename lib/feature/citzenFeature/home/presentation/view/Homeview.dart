@@ -69,7 +69,7 @@ class HomeScreen extends StatelessWidget {
               .where((e) => e.status.toLowerCase() == "pending")
               .length;
           final int activeCount = reports
-              .where((e) => e.status.toLowerCase() == "active")
+              .where((e) => e.status == "InProgress")
               .length;
 
           return RefreshIndicator.adaptive(

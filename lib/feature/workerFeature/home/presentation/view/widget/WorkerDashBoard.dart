@@ -4,6 +4,7 @@ import 'package:citifix/feature/workerFeature/home/data/models/dashbroadmodel.da
 import 'package:citifix/feature/workerFeature/home/presentation/controller/homecontroller.dart';
 import 'package:citifix/feature/workerFeature/home/presentation/view/widget/workercardDashborad.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class WorkerDashboard extends StatefulWidget {
   final DashBroadHome data;
@@ -107,7 +108,7 @@ class _WorkerDashboardState extends State<WorkerDashboard>
                     children: [
                       Text(
                         'IN PROGRESS',
-                        style: TextStyle(
+                        style: GoogleFonts.cairo(
                           fontSize: ScreenUtilsManager.s11,
                           fontWeight: FontWeight.bold,
                           color: ColorManger.onSurfaceVariant,
@@ -118,7 +119,7 @@ class _WorkerDashboardState extends State<WorkerDashboard>
                         HomeDashboardLogic.formatNumber(
                           widget.data.inProgressReports,
                         ),
-                        style: TextStyle(
+                        style: GoogleFonts.cairo(
                           fontSize: ScreenUtilsManager.s32,
                           fontWeight: FontWeight.bold,
                         ),
@@ -138,7 +139,7 @@ class _WorkerDashboardState extends State<WorkerDashboard>
                 children: [
                   Text(
                     'TOTAL REPORTS: ${widget.data.totalReports}',
-                    style: TextStyle(
+                    style: GoogleFonts.cairo(
                       fontSize: ScreenUtilsManager.s11,
 
                       fontWeight: FontWeight.bold,
@@ -149,7 +150,7 @@ class _WorkerDashboardState extends State<WorkerDashboard>
                     animation: animation,
                     builder: (context, _) => Text(
                       'PROGRESS: ${(animation.value * 100).toInt()}%',
-                      style: TextStyle(
+                      style: GoogleFonts.cairo(
                         fontSize: ScreenUtilsManager.s11,
                         fontWeight: FontWeight.bold,
                         color: ColorManger.onSurfaceVariant,
@@ -193,7 +194,7 @@ class _WorkerDashboardState extends State<WorkerDashboard>
       ),
       child: Text(
         text,
-        style: TextStyle(
+        style: GoogleFonts.cairo(
           fontSize: ScreenUtilsManager.s12,
           fontWeight: FontWeight.bold,
           color: Colors.green.shade700,

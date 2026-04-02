@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
 class UnderReviewScreen extends StatelessWidget {
-  const UnderReviewScreen({super.key});
+  UnderReviewScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -8,21 +10,21 @@ class UnderReviewScreen extends StatelessWidget {
       appBar: _buildAppBar(),
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 32.0),
+          padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 32.0),
           child: Center(
             child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 600),
+              constraints: BoxConstraints(maxWidth: 600),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   _buildHeaderSection(),
-                  const SizedBox(height: 48),
+                  SizedBox(height: 48),
                   _buildSummarySection(),
-                  const SizedBox(height: 32),
+                  SizedBox(height: 32),
                   _buildWhatsNextSection(),
-                  const SizedBox(height: 32),
+                  SizedBox(height: 32),
                   _buildActionButtons(),
-                  const SizedBox(height: 48),
+                  SizedBox(height: 48),
                   _buildFooter(),
                 ],
               ),
@@ -39,16 +41,16 @@ class UnderReviewScreen extends StatelessWidget {
       elevation: 0,
       scrolledUnderElevation: 0,
       bottom: PreferredSize(
-        preferredSize: const Size.fromHeight(1.0),
-        child: Container(color: const Color(0xFFF5F5F5), height: 1.0),
+        preferredSize: Size.fromHeight(1.0),
+        child: Container(color: Color(0xFFF5F5F5), height: 1.0),
       ),
-      title: const Row(
+      title: Row(
         children: [
           Icon(Icons.security, color: Color(0xFFFF7A00)),
           SizedBox(width: 8),
           Text(
             'Global Gate',
-            style: TextStyle(
+            style: GoogleFonts.cairo(
               color: Color(0xFF222222),
               fontWeight: FontWeight.bold,
               fontSize: 18,
@@ -57,19 +59,19 @@ class UnderReviewScreen extends StatelessWidget {
           ),
         ],
       ),
-      actions: const [
+      actions: [
         // Hidden on mobile in the HTML, but added for completeness if viewed on wider screens
         Padding(
           padding: EdgeInsets.only(right: 24.0),
           child: Text(
             'Verification',
-            style: TextStyle(
+            style: GoogleFonts.cairo(
               color: Color(0xFFFF7A00),
               fontWeight: FontWeight.w600,
               fontSize: 16,
             ),
           ),
-        )
+        ),
       ],
     );
   }
@@ -81,29 +83,25 @@ class UnderReviewScreen extends StatelessWidget {
           width: 96,
           height: 96,
           decoration: BoxDecoration(
-            color: const Color(0xFFFF7A00).withOpacity(0.1),
+            color: Color(0xFFFF7A00).withOpacity(0.1),
             shape: BoxShape.circle,
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withOpacity(0.04),
                 blurRadius: 24,
-                offset: const Offset(0, 8),
-              )
+                offset: Offset(0, 8),
+              ),
             ],
           ),
-          child: const Center(
-            child: Icon(
-              Icons.schedule,
-              size: 48,
-              color: Color(0xFFFF7A00),
-            ),
+          child: Center(
+            child: Icon(Icons.schedule, size: 48, color: Color(0xFFFF7A00)),
           ),
         ),
-        const SizedBox(height: 24),
-        const Text(
+        SizedBox(height: 24),
+        Text(
           'Documents Under Review',
           textAlign: TextAlign.center,
-          style: TextStyle(
+          style: GoogleFonts.cairo(
             fontSize: 32,
             fontWeight: FontWeight.w800,
             color: Color(0xFF222222),
@@ -111,11 +109,11 @@ class UnderReviewScreen extends StatelessWidget {
             height: 1.2,
           ),
         ),
-        const SizedBox(height: 12),
-        const Text(
+        SizedBox(height: 12),
+        Text(
           'Your documents are being reviewed by our security team. This usually takes between 2-4 business hours.',
           textAlign: TextAlign.center,
-          style: TextStyle(
+          style: GoogleFonts.cairo(
             fontSize: 16,
             color: Color(0xFF777777),
             height: 1.5,
@@ -127,16 +125,16 @@ class UnderReviewScreen extends StatelessWidget {
 
   Widget _buildSummarySection() {
     return Container(
-      padding: const EdgeInsets.all(32),
+      padding: EdgeInsets.all(32),
       decoration: BoxDecoration(
-        color: const Color(0xFFF5F5F5),
+        color: Color(0xFFF5F5F5),
         borderRadius: BorderRadius.circular(24),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.04),
             blurRadius: 24,
-            offset: const Offset(0, 8),
-          )
+            offset: Offset(0, 8),
+          ),
         ],
       ),
       child: Column(
@@ -145,23 +143,23 @@ class UnderReviewScreen extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
+              Text(
                 'Submission Summary',
-                style: TextStyle(
+                style: GoogleFonts.cairo(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                   color: Color(0xFF222222),
                 ),
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFFF7A00).withOpacity(0.1),
+                  color: Color(0xFFFF7A00).withOpacity(0.1),
                   borderRadius: BorderRadius.circular(16),
                 ),
-                child: const Text(
+                child: Text(
                   'IN PROGRESS',
-                  style: TextStyle(
+                  style: GoogleFonts.cairo(
                     fontSize: 10,
                     fontWeight: FontWeight.bold,
                     color: Color(0xFFFF7A00),
@@ -171,7 +169,7 @@ class UnderReviewScreen extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 32),
+          SizedBox(height: 32),
           // Using a Wrap to simulate the grid behaviour (stacking on mobile, side-by-side on tablet)
           Wrap(
             spacing: 24,
@@ -182,9 +180,15 @@ class UnderReviewScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _buildInfoField('ACCESS ZONE', 'Tier 1 • High Security Data Center'),
-                    const SizedBox(height: 16),
-                    _buildInfoField('DEPARTMENT', 'Infrastructure & Operations'),
+                    _buildInfoField(
+                      'ACCESS ZONE',
+                      'Tier 1 • High Security Data Center',
+                    ),
+                    SizedBox(height: 16),
+                    _buildInfoField(
+                      'DEPARTMENT',
+                      'Infrastructure & Operations',
+                    ),
                   ],
                 ),
               ),
@@ -193,20 +197,20 @@ class UnderReviewScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       'IDENTITY DOCUMENTS',
-                      style: TextStyle(
+                      style: GoogleFonts.cairo(
                         fontSize: 10,
                         fontWeight: FontWeight.bold,
                         color: Color(0xFF777777),
                         letterSpacing: 1.2,
                       ),
                     ),
-                    const SizedBox(height: 8),
+                    SizedBox(height: 8),
                     Row(
                       children: [
                         Expanded(child: _buildDocumentPlaceholder()),
-                        const SizedBox(width: 12),
+                        SizedBox(width: 12),
                         Expanded(child: _buildDocumentPlaceholder()),
                       ],
                     ),
@@ -226,25 +230,25 @@ class UnderReviewScreen extends StatelessWidget {
       children: [
         Text(
           label,
-          style: const TextStyle(
+          style: GoogleFonts.cairo(
             fontSize: 10,
             fontWeight: FontWeight.bold,
             color: Color(0xFF777777),
             letterSpacing: 1.2,
           ),
         ),
-        const SizedBox(height: 8),
+        SizedBox(height: 8),
         Container(
           width: double.infinity,
-          padding: const EdgeInsets.all(16),
+          padding: EdgeInsets.all(16),
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: const Color(0xFFE0E0E0)),
+            border: Border.all(color: Color(0xFFE0E0E0)),
           ),
           child: Text(
             value,
-            style: const TextStyle(
+            style: GoogleFonts.cairo(
               fontWeight: FontWeight.w600,
               color: Color(0xFF222222),
             ),
@@ -261,7 +265,7 @@ class UnderReviewScreen extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: const Color(0xFFE0E0E0)),
+          border: Border.all(color: Color(0xFFE0E0E0)),
         ),
         child: Stack(
           fit: StackFit.expand,
@@ -275,7 +279,7 @@ class UnderReviewScreen extends StatelessWidget {
                 colorBlendMode: BlendMode.saturation,
               ),
             ),
-            const Center(
+            Center(
               child: Icon(
                 Icons.visibility_off,
                 color: Color(0x66777777), // secondary with 40% opacity
@@ -289,34 +293,31 @@ class UnderReviewScreen extends StatelessWidget {
 
   Widget _buildWhatsNextSection() {
     return Container(
-      padding: const EdgeInsets.all(24),
+      padding: EdgeInsets.all(24),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: const Color(0xFFE0E0E0)),
+        border: Border.all(color: Color(0xFFE0E0E0)),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            padding: const EdgeInsets.all(12),
+            padding: EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: const Color(0xFFFF7A00).withOpacity(0.1),
+              color: Color(0xFFFF7A00).withOpacity(0.1),
               borderRadius: BorderRadius.circular(16),
             ),
-            child: const Icon(
-              Icons.info_outline,
-              color: Color(0xFFFF7A00),
-            ),
+            child: Icon(Icons.info_outline, color: Color(0xFFFF7A00)),
           ),
-          const SizedBox(width: 16),
-          const Expanded(
+          SizedBox(width: 16),
+          Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   "What's next?",
-                  style: TextStyle(
+                  style: GoogleFonts.cairo(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                     color: Color(0xFF222222),
@@ -325,7 +326,7 @@ class UnderReviewScreen extends StatelessWidget {
                 SizedBox(height: 4),
                 Text(
                   'Once verified, you will receive a notification via the Global Gate app and a secure token will be issued for your mobile device.',
-                  style: TextStyle(
+                  style: GoogleFonts.cairo(
                     fontSize: 14,
                     color: Color(0xFF777777),
                     height: 1.5,
@@ -347,21 +348,21 @@ class UnderReviewScreen extends StatelessWidget {
           child: ElevatedButton(
             onPressed: null, // Disabled state
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFFFF7A00),
-              disabledBackgroundColor: const Color(0xFFFF7A00),
-              minimumSize: const Size(double.infinity, 56),
+              backgroundColor: Color(0xFFFF7A00),
+              disabledBackgroundColor: Color(0xFFFF7A00),
+              minimumSize: Size(double.infinity, 56),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
             ),
-            child: const Row(
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(Icons.lock, color: Colors.white, size: 20),
                 SizedBox(width: 8),
                 Text(
                   'Submit Additional Info',
-                  style: TextStyle(
+                  style: GoogleFonts.cairo(
                     color: Colors.white,
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -371,22 +372,22 @@ class UnderReviewScreen extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(height: 16),
+        SizedBox(height: 16),
         Opacity(
           opacity: 0.4,
           child: OutlinedButton(
             onPressed: null, // Disabled state
             style: OutlinedButton.styleFrom(
-              disabledForegroundColor: const Color(0xFF222222),
-              minimumSize: const Size(double.infinity, 56),
-              side: const BorderSide(color: Color(0xFFE0E0E0)),
+              disabledForegroundColor: Color(0xFF222222),
+              minimumSize: Size(double.infinity, 56),
+              side: BorderSide(color: Color(0xFFE0E0E0)),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
             ),
-            child: const Text(
+            child: Text(
               'Cancel Application',
-              style: TextStyle(
+              style: GoogleFonts.cairo(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
               ),
@@ -398,9 +399,9 @@ class UnderReviewScreen extends StatelessWidget {
   }
 
   Widget _buildFooter() {
-    return const Text(
+    return Text(
       'SECURE SESSION • 08:42:11 REMAINING',
-      style: TextStyle(
+      style: GoogleFonts.cairo(
         fontSize: 10,
         fontWeight: FontWeight.bold,
         color: Color(0xFF777777),

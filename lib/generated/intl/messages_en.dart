@@ -26,10 +26,12 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m1(count) =>
       "${count} ${Intl.plural(count, one: 'hour', other: 'hours')} ago";
 
-  static String m2(count) =>
-      "${count} ${Intl.plural(count, one: 'minute', other: 'minutes')} ago";
+  static String m2(count) => "${count} Messages";
 
   static String m3(count) =>
+      "${count} ${Intl.plural(count, one: 'minute', other: 'minutes')} ago";
+
+  static String m4(count) =>
       "${count} ${Intl.plural(count, one: 'week', other: 'weeks')} ago";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
@@ -39,6 +41,10 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "achievement": MessageLookupByLibrary.simpleMessage("Achievement"),
     "active": MessageLookupByLibrary.simpleMessage("Active"),
+    "addCommentHint": MessageLookupByLibrary.simpleMessage(
+      "Add a reply or a new inquiry...",
+    ),
+    "addCommentLabel": MessageLookupByLibrary.simpleMessage("Add Comment"),
     "addPhoto": MessageLookupByLibrary.simpleMessage("Add Photo"),
     "addReport": MessageLookupByLibrary.simpleMessage("Add Report"),
     "address": MessageLookupByLibrary.simpleMessage("Address"),
@@ -47,6 +53,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "all": MessageLookupByLibrary.simpleMessage("All"),
     "appTitle": MessageLookupByLibrary.simpleMessage("CitiFix"),
     "arabic": MessageLookupByLibrary.simpleMessage("Arabic"),
+    "assigned": MessageLookupByLibrary.simpleMessage("Assigned"),
     "camera": MessageLookupByLibrary.simpleMessage("Camera"),
     "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
     "caughtUpMessage": MessageLookupByLibrary.simpleMessage(
@@ -65,6 +72,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Citizen Responsibilities",
     ),
     "civix": MessageLookupByLibrary.simpleMessage("Civix"),
+    "comments": MessageLookupByLibrary.simpleMessage("Comments"),
     "completed": MessageLookupByLibrary.simpleMessage("Resolved"),
     "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
     "confirmDelete": MessageLookupByLibrary.simpleMessage("Confirm Delete"),
@@ -218,7 +226,8 @@ class MessageLookup extends MessageLookupByLibrary {
       "Are you sure you want to log out of your account?",
     ),
     "markAllRead": MessageLookupByLibrary.simpleMessage("Mark all read"),
-    "minutesAgo": m2,
+    "messagesCount": m2,
+    "minutesAgo": m3,
     "msgRegister": MessageLookupByLibrary.simpleMessage(
       "we have sent a 6-digit code to your registered email address/phone number",
     ),
@@ -244,6 +253,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "nationalNumber": MessageLookupByLibrary.simpleMessage("National number"),
     "newPassword": MessageLookupByLibrary.simpleMessage("New Password"),
     "next": MessageLookupByLibrary.simpleMessage("Next"),
+    "noCommentsYet": MessageLookupByLibrary.simpleMessage(
+      "No comments yet. Be the first to reply!",
+    ),
     "noData": MessageLookupByLibrary.simpleMessage(
       "No data available at the moment",
     ),
@@ -330,6 +342,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "reportTitleHint": MessageLookupByLibrary.simpleMessage("Report title"),
     "reportTitleLabel": MessageLookupByLibrary.simpleMessage("Report Title"),
     "reportedBy": MessageLookupByLibrary.simpleMessage("Reported by"),
+    "reporter": MessageLookupByLibrary.simpleMessage("Reporter"),
     "reports": MessageLookupByLibrary.simpleMessage("Reports"),
     "resendCode": MessageLookupByLibrary.simpleMessage("Resend Code"),
     "resendCodeIn": MessageLookupByLibrary.simpleMessage("Resend Code In"),
@@ -414,7 +427,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "unknownLocation": MessageLookupByLibrary.simpleMessage("Unknown Location"),
     "unknownStatus": MessageLookupByLibrary.simpleMessage("Unknown"),
     "unread": MessageLookupByLibrary.simpleMessage("unread"),
-    "weeksAgo": m3,
+    "weeksAgo": m4,
     "worker": MessageLookupByLibrary.simpleMessage("Worker"),
     "workerConductDesc": MessageLookupByLibrary.simpleMessage(
       "1. Workers must upload \'Before\' and \'After\' photos for every task.\n2. Tasks must be completed within the assigned timeframe.\n3. Professional behavior is mandatory during site visits.",

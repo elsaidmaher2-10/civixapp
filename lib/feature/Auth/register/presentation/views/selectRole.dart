@@ -3,6 +3,7 @@ import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SelectRoleDropdown extends StatelessWidget {
   final StreamController<String> streamController;
@@ -59,7 +60,7 @@ class SelectRoleDropdown extends StatelessWidget {
 
           hint: Text(
             S.of(context).selectRole,
-            style: TextStyle(color: Colors.black54, fontSize: 14.sp),
+            style: GoogleFonts.cairo(color: Colors.black54, fontSize: 14.sp),
           ),
 
           items: [

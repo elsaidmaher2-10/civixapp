@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CustomTextfromfield extends StatelessWidget {
   const CustomTextfromfield({
@@ -50,7 +51,7 @@ class CustomTextfromfield extends StatelessWidget {
       obscureText: obstext,
       decoration: InputDecoration(
         prefixIcon: prefix,
-        labelStyle: TextStyle(color: Colors.black, fontSize: 14.sp),
+        labelStyle: GoogleFonts.cairo(color: Colors.black, fontSize: 14.sp),
         alignLabelWithHint: true,
         labelText: lable,
         isDense: true,
@@ -60,7 +61,10 @@ class CustomTextfromfield extends StatelessWidget {
         filled: true,
         suffixIcon: suffix,
         hintText: hinttext,
-        hintStyle: TextStyle(color: const Color(0xff6C6C6C), fontSize: 12.sp),
+        hintStyle: GoogleFonts.cairo(
+          color: const Color(0xff6C6C6C),
+          fontSize: 12.sp,
+        ),
         border: OutlineInputBorder(
           borderSide: BorderSide.none,
           borderRadius: BorderRadius.circular(10.r),

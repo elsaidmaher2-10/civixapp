@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:geo_fence_utils/geo_fence_utils.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:lottie/lottie.dart' hide Marker;
 
@@ -127,7 +128,7 @@ class _CustomMapSectionState extends State<CustomMapSection> {
                                 borderStrokeWidth: 2.5,
                                 isFilled: true,
                                 label: "ZONE A",
-                                labelStyle: TextStyle(
+                                labelStyle: GoogleFonts.cairo(
                                   color: ColorManger.textBlack,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 10,
@@ -182,7 +183,7 @@ class _CustomMapSectionState extends State<CustomMapSection> {
                             ),
                             child: Text(
                               state.message,
-                              style: const TextStyle(
+                              style: GoogleFonts.cairo(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -197,7 +198,7 @@ class _CustomMapSectionState extends State<CustomMapSection> {
                           left: 16,
                           right: 16,
                           child: Container(
-                            padding: const EdgeInsets.all(12),
+                            padding: EdgeInsets.all(12),
                             decoration: BoxDecoration(
                               color: Colors.green,
                               borderRadius: BorderRadius.circular(8),
@@ -207,7 +208,7 @@ class _CustomMapSectionState extends State<CustomMapSection> {
                             ),
                             child: Text(
                               state.message,
-                              style: const TextStyle(
+                              style: GoogleFonts.cairo(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -230,16 +231,16 @@ class _CustomMapSectionState extends State<CustomMapSection> {
                         children: [
                           Text(
                             'ASSIGNED ZONE',
-                            style: TextStyle(
+                            style: GoogleFonts.cairo(
                               fontSize: 12,
                               fontWeight: FontWeight.bold,
                               color: ColorManger.onSurfaceVariant,
                               letterSpacing: 1,
                             ),
                           ),
-                          const Text(
+                          Text(
                             'North District',
-                            style: TextStyle(
+                            style: GoogleFonts.cairo(
                               fontWeight: FontWeight.bold,
                               fontSize: 16,
                             ),

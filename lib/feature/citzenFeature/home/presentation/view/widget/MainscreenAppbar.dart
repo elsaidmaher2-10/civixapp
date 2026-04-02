@@ -155,7 +155,7 @@ class MainscreenAppbar extends StatelessWidget implements PreferredSizeWidget {
                                     child: Center(
                                       child: Text(
                                         unreadCount > 9 ? '9+' : '$unreadCount',
-                                        style: const TextStyle(
+                                        style: GoogleFonts.cairo(
                                           color: Colors.white,
                                           fontSize: 9,
                                           fontWeight: FontWeight.bold,

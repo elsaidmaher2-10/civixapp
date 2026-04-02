@@ -3,6 +3,7 @@ import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ProfileMenuItem extends StatelessWidget {
   final Widget iconPath;
@@ -37,8 +38,8 @@ class ProfileMenuItem extends StatelessWidget {
               horizontal: ScreenUtilsManager.w8,
             ),
             onTap: onTap,
-            leading:iconPath,
-            title: Text(title),
+            leading: iconPath,
+            title: Text(title, style: GoogleFonts.cairo()),
             trailing: RotatedBox(
               quarterTurns: 90,
               child: Icon(CupertinoIcons.back),

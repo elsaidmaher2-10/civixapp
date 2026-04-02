@@ -17,7 +17,7 @@ class TaskCardImage extends StatelessWidget {
           width: double.infinity,
           fit: BoxFit.cover,
         ),
-        if (task.status == TaskStatus.inProgress)
+        if (task.status == StatusReport.inProgress)
           Container(
             height: 192,
             width: double.infinity,

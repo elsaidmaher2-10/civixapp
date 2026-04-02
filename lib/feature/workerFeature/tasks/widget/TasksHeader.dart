@@ -1,6 +1,7 @@
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class TasksHeader extends StatelessWidget {
   const TasksHeader({super.key});
@@ -14,8 +15,7 @@ class TasksHeader extends StatelessWidget {
           children: [
             Text(
               'Tasks',
-              style: TextStyle(
-                fontFamily: 'Manrope',
+              style: GoogleFonts.cairo(
                 fontWeight: FontWeight.w800,
                 fontSize: ScreenUtilsManager.s32,
                 color: ColorManger.onSurface,
@@ -34,7 +34,7 @@ class TasksHeader extends StatelessWidget {
         ),
         Text(
           'Keep track of your daily progress',
-          style: TextStyle(
+          style: GoogleFonts.cairo(
             fontSize: ScreenUtilsManager.s15,
             color: ColorManger.onSurfaceVariant.withOpacity(0.7),
             fontWeight: FontWeight.w500,

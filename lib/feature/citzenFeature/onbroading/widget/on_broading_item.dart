@@ -110,7 +110,7 @@ class Customonbroadingitem extends StatelessWidget {
             ),
             child: Text(
               Constantmanger.skip,
-              style: TextStyle(
+              style: GoogleFonts.cairo(
                 color: ColorManger.kPrimary,
                 fontWeight: FontWeight.w600,
                 fontSize: 14.sp,
@@ -150,7 +150,7 @@ class Customonbroadingitem extends StatelessWidget {
                 child: isLastPage
                     ? Text(
                         Constantmanger.finish,
-                        style: TextStyle(
+                        style: GoogleFonts.cairo(
                           fontSize: 16.sp,
                           fontWeight: FontWeight.bold,
                         ),

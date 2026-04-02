@@ -1,8 +1,9 @@
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ActiveWorkCard extends StatelessWidget {
-  const ActiveWorkCard({super.key});
+  ActiveWorkCard({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +15,7 @@ class ActiveWorkCard extends StatelessWidget {
           BoxShadow(
             color: ColorManger.onSurface.withOpacity(0.04),
             blurRadius: 32,
-            offset: const Offset(0, 12),
+            offset: Offset(0, 12),
           ),
         ],
       ),
@@ -29,33 +30,29 @@ class ActiveWorkCard extends StatelessWidget {
             fit: BoxFit.cover,
           ),
           Padding(
-            padding: const EdgeInsets.all(24.0),
+            padding: EdgeInsets.all(24.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text(
+                    Text(
                       'Fix Water Leak',
-                      style: TextStyle(
+                      style: GoogleFonts.cairo(
                         fontSize: 24,
                         fontWeight: FontWeight.w800,
-                        fontFamily: 'Manrope',
                       ),
                     ),
                     Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 8,
-                        vertical: 4,
-                      ),
+                      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                       decoration: BoxDecoration(
                         color: Colors.orange.shade50,
                         borderRadius: BorderRadius.circular(4),
                       ),
                       child: Text(
                         'URGENT',
-                        style: TextStyle(
+                        style: GoogleFonts.cairo(
                           fontSize: 11,
                           fontWeight: FontWeight.bold,
                           color: Colors.orange.shade700,
@@ -64,7 +61,7 @@ class ActiveWorkCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: 8),
+                SizedBox(height: 8),
                 Row(
                   children: [
                     Icon(
@@ -72,10 +69,10 @@ class ActiveWorkCard extends StatelessWidget {
                       size: 16,
                       color: ColorManger.onSurfaceVariant,
                     ),
-                    const SizedBox(width: 8),
+                    SizedBox(width: 8),
                     Text(
                       '842 Riverside Dr, Apt 4B',
-                      style: TextStyle(
+                      style: GoogleFonts.cairo(
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
                         color: ColorManger.onSurfaceVariant,
@@ -83,22 +80,22 @@ class ActiveWorkCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: 16),
                 Text(
                   'Emergency pipe burst reported in the main bathroom. High priority. Residents are currently on-site and have shut off the main valve.',
-                  style: TextStyle(
+                  style: GoogleFonts.cairo(
                     color: ColorManger.onSurfaceVariant,
                     fontSize: 14,
                   ),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
-                const SizedBox(height: 24),
+                SizedBox(height: 24),
                 SizedBox(
                   width: double.infinity,
                   child: Container(
                     decoration: BoxDecoration(
-                      gradient: const LinearGradient(
+                      gradient: LinearGradient(
                         colors: [Color(0xFF954400), Color(0xFFFF7B04)],
                       ),
                       borderRadius: BorderRadius.circular(8),
@@ -106,7 +103,7 @@ class ActiveWorkCard extends StatelessWidget {
                         BoxShadow(
                           color: ColorManger.primaryColor.withOpacity(0.2),
                           blurRadius: 10,
-                          offset: const Offset(0, 4),
+                          offset: Offset(0, 4),
                         ),
                       ],
                     ),
@@ -115,11 +112,11 @@ class ActiveWorkCard extends StatelessWidget {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.transparent,
                         shadowColor: Colors.transparent,
-                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        padding: EdgeInsets.symmetric(vertical: 16),
                       ),
-                      child: const Text(
+                      child: Text(
                         'View Details',
-                        style: TextStyle(
+                        style: GoogleFonts.cairo(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                         ),

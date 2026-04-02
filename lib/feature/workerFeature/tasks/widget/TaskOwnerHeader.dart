@@ -1,7 +1,7 @@
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:google_fonts/google_fonts.dart';
 
 class TaskOwnerHeader extends StatelessWidget {
   const TaskOwnerHeader({super.key});
@@ -53,18 +53,21 @@ class TaskOwnerHeader extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     'Sarah Jenkins',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                    style: GoogleFonts.cairo(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                    ),
                   ),
                   const SizedBox(height: 2),
                   Row(
                     children: [
-                      const Icon(Icons.star, color: Colors.amber, size: 14),
-                      const SizedBox(width: 4),
+                      Icon(Icons.star, color: Colors.amber, size: 14),
+                      SizedBox(width: 4),
                       Text(
                         '4.8',
-                        style: TextStyle(
+                        style: GoogleFonts.cairo(
                           fontWeight: FontWeight.bold,
                           color: ColorManger.onSurface,
                           fontSize: 12,
@@ -73,7 +76,7 @@ class TaskOwnerHeader extends StatelessWidget {
                       const SizedBox(width: 4),
                       Text(
                         '• Task Owner',
-                        style: TextStyle(
+                        style: GoogleFonts.cairo(
                           color: ColorManger.onSurfaceVariant,
                           fontSize: 12,
                         ),
@@ -89,7 +92,7 @@ class TaskOwnerHeader extends StatelessWidget {
             children: [
               Text(
                 'CREATED',
-                style: TextStyle(
+                style: GoogleFonts.cairo(
                   fontSize: 10,
                   fontWeight: FontWeight.bold,
                   color: Colors.grey.shade400,
@@ -97,9 +100,12 @@ class TaskOwnerHeader extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 2),
-              const Text(
+              Text(
                 '2 hours ago',
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
+                style: GoogleFonts.cairo(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
             ],
           ),

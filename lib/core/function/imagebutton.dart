@@ -1,6 +1,7 @@
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Appbutton extends StatelessWidget {
   const Appbutton({
@@ -28,7 +29,7 @@ class Appbutton extends StatelessWidget {
         onPressed: onPressed,
         child: Text(
           text,
-          style: TextStyle(color: ColorManger.primary, fontSize: 18.sp),
+          style: GoogleFonts.cairo(color: ColorManger.primary, fontSize: 18.sp),
         ),
       ),
     );

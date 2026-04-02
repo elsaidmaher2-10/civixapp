@@ -7,6 +7,7 @@ import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class PasswordRules extends StatefulWidget {
   const PasswordRules({super.key, required this.streamController});
@@ -28,7 +29,7 @@ class _PasswordRulesState extends State<PasswordRules> {
             snapshot.data.any((e) => e["status"] == false)
                 ? Text(
                     S.of(context).passwordRulesTitle,
-                    style: TextStyle(
+                    style: GoogleFonts.cairo(
                       fontSize: ScreenUtilsManager.s10,
                       color: ColorManger.red,
                     ),
@@ -49,7 +50,7 @@ class _PasswordRulesState extends State<PasswordRules> {
                   SizedBox(width: 2.sp),
                   Text(
                     getRuleText(context, e["title"]),
-                    style: TextStyle(
+                    style: GoogleFonts.cairo(
                       decoration: e["status"] == true
                           ? TextDecoration.lineThrough
                           : TextDecoration.none,

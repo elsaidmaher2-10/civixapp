@@ -1,10 +1,12 @@
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class TaskFilterChips extends StatefulWidget {
   final List<String> filters;
   final Function(String) onFilterSelected;
-  const TaskFilterChips({super.key, 
+  const TaskFilterChips({
+    super.key,
     required this.filters,
     required this.onFilterSelected,
   });
@@ -34,7 +36,7 @@ class _TaskFilterChipsState extends State<TaskFilterChips> {
               },
               selectedColor: ColorManger.primaryColor,
               backgroundColor: Colors.white,
-              labelStyle: TextStyle(
+              labelStyle: GoogleFonts.cairo(
                 color: isSelected ? Colors.white : Colors.grey.shade600,
                 fontWeight: FontWeight.w600,
               ),

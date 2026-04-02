@@ -193,12 +193,13 @@ class Constantmanger {
   static const String subTitle =
       "Complete these steps to access the secure network.";
   static const String step1Title = "Identity Documents";
-  static const String step1Label = "Step 1 of 3";
+  static const String step1Label = "Step 1 of 4";
   static const String step2Title = "Workspace";
-  static const String step2Label = "Step 2 of 3";
+  static const String step2Label = "Step 3 of 4";
   static const String step3Title = "Service Category";
-  static const String step3Label = "Step 3 of 3";
-  static const String dropdownHint = "Select your work zone";
+  static const String step3Label = "Step 2 of 4";
+  static const String step4Label = "Step 4 of 4";
+  static const String dropdownHint = "Select your service category";
   static const String verifyButtonText = "Verify Now";
 
   static String VERIFIED = 'VERIFIED ✅';

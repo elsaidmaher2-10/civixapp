@@ -4,6 +4,7 @@ import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class signuplogo extends StatelessWidget {
   const signuplogo({super.key});
@@ -21,7 +22,7 @@ class signuplogo extends StatelessWidget {
           SizedBox(height: ScreenUtilsManager.h9),
           Text(
             S.of(context).signUp,
-            style: TextStyle(
+            style: GoogleFonts.cairo(
               fontWeight: FontWeight.w600,
               fontSize: ScreenUtilsManager.s34,
               color: ColorManger.kPrimary,

@@ -13,6 +13,7 @@ import 'package:citifix/feature/workerFeature/home/presentation/view/widget/Work
 import 'package:citifix/feature/workerFeature/home/presentation/view/widget/workerCard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:shimmer/shimmer.dart';
 
 class HomePage extends StatelessWidget {
@@ -77,7 +78,7 @@ class HomePage extends StatelessWidget {
       children: [
         Text(
           Constantmanger.welceommsg + name,
-          style: TextStyle(
+          style: GoogleFonts.cairo(
             fontSize: ScreenUtilsManager.s32,
             fontWeight: FontWeight.w800,
             color: ColorManger.onSurface,
@@ -86,7 +87,7 @@ class HomePage extends StatelessWidget {
         SizedBox(height: ScreenUtilsManager.h4),
         Text(
           Constantmanagerar.stayfocus,
-          style: TextStyle(
+          style: GoogleFonts.cairo(
             fontSize: ScreenUtilsManager.s16,
             fontWeight: FontWeight.w500,
             color: ColorManger.onSurfaceVariant,
@@ -127,12 +128,12 @@ class HomePage extends StatelessWidget {
         children: [
           const Icon(Icons.error_outline, size: 60, color: Colors.redAccent),
           const SizedBox(height: 16),
-          Text(message, style: const TextStyle(fontSize: 16)),
+          Text(message, style: GoogleFonts.cairo(fontSize: 16)),
           TextButton(
             onPressed: () => context.read<HomeCubit>().getWorkerDashboard(),
             child: Text(
               "Retry",
-              style: TextStyle(color: ColorManger.kPrimaryDark),
+              style: GoogleFonts.cairo(color: ColorManger.kPrimaryDark),
             ),
           ),
         ],
@@ -157,9 +158,9 @@ class HomePage extends StatelessWidget {
             color: ColorManger.secondary,
           ),
           const SizedBox(height: 10),
-          const Text(
+          Text(
             "No tasks available right now",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+            style: GoogleFonts.cairo(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           const Text("We'll notify you when new tasks arrive."),
         ],

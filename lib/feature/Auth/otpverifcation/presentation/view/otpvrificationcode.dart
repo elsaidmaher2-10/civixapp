@@ -14,6 +14,7 @@ import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class Otpvrificationcode extends StatefulWidget {
@@ -146,7 +147,7 @@ class _OtpvrificationcodeState extends State<Otpvrificationcode> {
                       isResetPassword
                           ? S.of(context).otpMsgResetPassword
                           : S.of(context).otpMsgRegister,
-                      style: TextStyle(
+                      style: GoogleFonts.cairo(
                         color: ColorManger.lightGrey2,
                         fontSize: 14.sp,
                       ),
@@ -166,7 +167,7 @@ class _OtpvrificationcodeState extends State<Otpvrificationcode> {
                               textAlign: TextAlign.center,
                               keyboardType: TextInputType.number,
                               maxLength: 1,
-                              style: TextStyle(
+                              style: GoogleFonts.cairo(
                                 fontSize: 18.sp,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -232,7 +233,7 @@ class _OtpvrificationcodeState extends State<Otpvrificationcode> {
                                 : null,
                             child: Text(
                               S.of(context).confirm,
-                              style: TextStyle(
+                              style: GoogleFonts.cairo(
                                 fontSize: 16.sp,
                                 fontWeight: FontWeight.bold,
                               ),

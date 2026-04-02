@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ResendCodeOpt extends StatefulWidget {
   const ResendCodeOpt({super.key, required this.resend});
@@ -70,7 +71,7 @@ class _ResendCodeOptState extends State<ResendCodeOpt> {
                 canResend
                     ? S.of(context).resendCode
                     : "${S.of(context).resendCodeIn} 00:${current.toString().padLeft(2, "0")}",
-                style: TextStyle(color: ColorManger.lightGrey),
+                style: GoogleFonts.cairo(color: ColorManger.lightGrey),
               ),
             ),
           ],

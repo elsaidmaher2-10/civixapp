@@ -15,6 +15,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class Foregetpassword extends StatefulWidget {
@@ -104,7 +105,7 @@ class _ForegetpasswordState extends State<Foregetpassword> {
 
                       Text(
                         S.of(context).forgetPasswordDesc,
-                        style: TextStyle(
+                        style: GoogleFonts.cairo(
                           color: ColorManger.lightGrey2,
                           fontSize: ScreenUtilsManager.s14,
                           height: 1.5,
@@ -166,7 +167,7 @@ class _ForegetpasswordState extends State<Foregetpassword> {
                                   : null,
                               child: Text(
                                 S.of(context).sendCode,
-                                style: TextStyle(
+                                style: GoogleFonts.cairo(
                                   fontSize: ScreenUtilsManager.s16,
                                   fontWeight: FontWeight.bold,
                                   letterSpacing: 1.0,
@@ -198,7 +199,7 @@ PreferredSizeWidget foregetpasswordappbar(BuildContext context) {
     scrolledUnderElevation: 0,
     title: Text(
       S.of(context).forgetPasswordTitle,
-      style: TextStyle(
+      style: GoogleFonts.cairo(
         color: ColorManger.kPrimary,
         fontSize: ScreenUtilsManager.s20,
         fontWeight: FontWeight.w600,

@@ -2,6 +2,7 @@ import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 ScaffoldFeatureController<SnackBar, SnackBarClosedReason> errorsnackbar(
   BuildContext context,
@@ -19,7 +20,7 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason> errorsnackbar(
       dismissDirection: DismissDirection.vertical,
       content: Text(
         Constantmanger.imagerequired,
-        style: TextStyle(
+        style: GoogleFonts.cairo(
           color: ColorManger.white,
           fontSize: ScreenUtilsManager.h16,
         ),

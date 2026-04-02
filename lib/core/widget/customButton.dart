@@ -29,7 +29,10 @@ class Appbutton extends StatelessWidget {
         onPressed: onPressed,
         child: Text(
           text,
-          style: TextStyle(color: ColorManger.kPrimary, fontSize: 18.sp),
+          style: GoogleFonts.cairo(
+            color: ColorManger.kPrimary,
+            fontSize: 18.sp,
+          ),
         ),
       ),
     );

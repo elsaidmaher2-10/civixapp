@@ -14,14 +14,13 @@ class Apiconstant {
   static String changePasswordAPIEndpoint = "Account/change-password";
   static String notificationRegister = "notifications/register-device";
   static String notification = "notifications";
-
   static String clearallnotification = "notifications/clear";
-
   static String workerdashboard = "Worker/dashboard";
   static String workertasks = "Worker/my-reports";
-
   static String markallread = "notifications/mark-all-read";
-
   static var achievemnent = "Achievements";
+  static String getareas = "Areas/list";
+  static String VerifcatioRequest = "Worker/verification-request";
+  static String get getdepartment => "Departments/list";
   static String getcomments(int reportId) => "/reports/$reportId/comments";
 }

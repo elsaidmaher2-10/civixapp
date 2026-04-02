@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:citifix/feature/citzenFeature/notication/presentation/manager/cubit/notifcation_cubit.dart';
 import 'package:citifix/feature/citzenFeature/notication/presentation/manager/cubit/notifcation_state.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class NotificationCenter extends StatefulWidget {
   const NotificationCenter({super.key});
@@ -52,7 +53,7 @@ class _NotificationCenterState extends State<NotificationCenter> {
             children: [
               Text(
                 S.of(context).notifications,
-                style: TextStyle(
+                style: GoogleFonts.cairo(
                   color: ColorManger.primary,
                   fontSize: ScreenUtilsManager.s20,
                   fontWeight: FontWeight.bold,
@@ -61,7 +62,7 @@ class _NotificationCenterState extends State<NotificationCenter> {
               if (unreadCount > 0)
                 Text(
                   "$unreadCount ${S.of(context).unread}",
-                  style: TextStyle(
+                  style: GoogleFonts.cairo(
                     color: Colors.grey.shade600,
                     fontSize: ScreenUtilsManager.s12,
                     fontWeight: FontWeight.w500,
@@ -181,7 +182,7 @@ class _NotificationCenterState extends State<NotificationCenter> {
           SizedBox(height: ScreenUtilsManager.h16),
           Text(
             S.of(context).noNotifications,
-            style: const TextStyle(
+            style: GoogleFonts.cairo(
               fontSize: 18,
               fontWeight: FontWeight.bold,
               color: Colors.black54,

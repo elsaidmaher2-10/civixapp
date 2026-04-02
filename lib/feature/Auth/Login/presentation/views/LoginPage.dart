@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:citifix/core/function/sinupvalidator.dart';
 import 'package:citifix/core/resource/assetvaluemanger.dart';
@@ -104,7 +105,9 @@ class _LoginpageState extends State<Loginpage> {
                       children: [
                         Text(
                           S.of(context).dontHaveAccount,
-                          style: const TextStyle(color: ColorManger.lightGrey2),
+                          style: GoogleFonts.cairo(
+                            color: ColorManger.lightGrey2,
+                          ),
                         ),
                         SizedBox(width: ScreenUtilsManager.w4),
                         InkWell(
@@ -113,7 +116,9 @@ class _LoginpageState extends State<Loginpage> {
                           },
                           child: Text(
                             S.of(context).signUpNow,
-                            style: const TextStyle(color: ColorManger.kPrimary),
+                            style: GoogleFonts.cairo(
+                              color: ColorManger.kPrimary,
+                            ),
                           ),
                         ),
                       ],
@@ -144,7 +149,7 @@ class _LoginpageState extends State<Loginpage> {
                                     SizedBox(height: ScreenUtilsManager.h9),
                                     Text(
                                       S.of(context).logIn,
-                                      style: TextStyle(
+                                      style: GoogleFonts.cairo(
                                         fontWeight: FontWeight.w600,
                                         fontSize: ScreenUtilsManager.s34,
                                         color: ColorManger.kPrimary,
@@ -245,7 +250,7 @@ class _LoginpageState extends State<Loginpage> {
                                     ),
                                     Text(
                                       S.of(context).rememberMe,
-                                      style: TextStyle(
+                                      style: GoogleFonts.cairo(
                                         fontSize: ScreenUtilsManager.s14,
                                       ),
                                     ),
@@ -260,7 +265,7 @@ class _LoginpageState extends State<Loginpage> {
                                   },
                                   child: Text(
                                     S.of(context).forgetPassword,
-                                    style: TextStyle(
+                                    style: GoogleFonts.cairo(
                                       color: ColorManger.kPrimary,
                                       fontSize: ScreenUtilsManager.s14,
                                     ),
