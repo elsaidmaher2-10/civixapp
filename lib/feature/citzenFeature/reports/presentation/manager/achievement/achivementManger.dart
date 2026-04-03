@@ -26,7 +26,7 @@ class AchievementCubit extends Cubit<AchievementState> {
       emit(AchievementLoading());
     }
 
-    final result = await repo.achievment();
+    final result = await repo.achievement();
 
     result.fold(
       (failure) {
@@ -38,6 +38,7 @@ class AchievementCubit extends Cubit<AchievementState> {
         if (reports.length >= response.totalCount) {
           hasMore = false;
         }
+        if (isClosed) return;
         emit(AchievementSuccess(reports: List.from(reports), hasMore: hasMore));
       },
     );

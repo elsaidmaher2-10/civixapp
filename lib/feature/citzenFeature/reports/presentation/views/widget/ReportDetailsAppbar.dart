@@ -3,16 +3,26 @@ import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/feature/citzenFeature/onbroading/widget/indicator.dart';
+import 'package:citifix/feature/citzenFeature/reports/presentation/views/widget/vedioplayer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ReportDetailsAppbar extends StatelessWidget {
-  ReportDetailsAppbar({super.key, required this.image, required this.ontap});
+  ReportDetailsAppbar({
+    super.key,
+    required this.mediaItems,
+    required this.ontap,
+  });
 
-  final List<String> image;
+  final List<String> mediaItems;
   final Function() ontap;
   final PageController pageController = PageController();
+
+  bool _isVideo(String path) {
+    final videoExtensions = ['.mp4', '.mov', '.avi', '.mkv'];
+    return videoExtensions.any((ext) => path.toLowerCase().endsWith(ext));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +35,7 @@ class ReportDetailsAppbar extends StatelessWidget {
         icon: CircleAvatar(
           backgroundColor: Colors.white70,
           child: Icon(
-            Directionality.of(context) == TextDirection.rtl
-                ? CupertinoIcons.back
-                : CupertinoIcons.back,
+            CupertinoIcons.back,
             color: ColorManger.kPrimary,
             size: ScreenUtilsManager.s18,
           ),
@@ -45,11 +53,17 @@ class ReportDetailsAppbar extends StatelessWidget {
             PageView.builder(
               controller: pageController,
               physics: const BouncingScrollPhysics(),
-              itemCount: image.length,
+              itemCount: mediaItems.length,
               itemBuilder: (BuildContext context, int index) {
+                final String item = mediaItems[index];
+
+                if (_isVideo(item)) {
+                  return AppVideoPlayer(dataSource: item, isRemote: true);
+                }
+
                 return CachedNetworkImage(
                   fit: BoxFit.cover,
-                  imageUrl: image[index],
+                  imageUrl: item,
                   placeholder: (context, url) => Container(
                     color: Colors.grey[200],
                     child: const Center(
@@ -66,7 +80,7 @@ class ReportDetailsAppbar extends StatelessWidget {
               },
             ),
 
-            if (image.length > 1)
+            if (mediaItems.length > 1)
               Padding(
                 padding: EdgeInsets.only(bottom: 15.h),
                 child: CustomIndicator(
@@ -74,7 +88,7 @@ class ReportDetailsAppbar extends StatelessWidget {
                   controller: pageController,
                   activeColor: ColorManger.kPrimary,
                   dotColor: Colors.white.withOpacity(0.6),
-                  count: image.length,
+                  count: mediaItems.length,
                 ),
               ),
           ],

@@ -32,6 +32,7 @@ class ReportCardIem extends StatelessWidget {
     return Slidable(
       startActionPane: ActionPane(
         motion: const ScrollMotion(),
+
         children: [
           SlidableAction(
             onPressed: (context) async {
@@ -40,6 +41,7 @@ class ReportCardIem extends StatelessWidget {
             backgroundColor: const Color(0xFFFE4A49),
             foregroundColor: Colors.white,
             icon: Icons.delete,
+
             label: S.of(context).delete,
           ),
         ],

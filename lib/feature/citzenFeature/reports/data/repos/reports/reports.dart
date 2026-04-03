@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:citifix/core/database/local/prefmanger.dart';
 import 'package:citifix/core/database/remote/api/ApiConstant.dart';
 import 'package:citifix/core/database/remote/api/ApiService.dart';
@@ -8,9 +10,10 @@ import 'package:citifix/core/service/networkchecker.dart';
 import 'package:citifix/feature/citzenFeature/reports/data/Models/GetReportModel.dart';
 import 'package:citifix/feature/citzenFeature/reports/data/Models/Report/CreateReportRequestModel.dart';
 import 'package:citifix/feature/citzenFeature/reports/data/Models/Report/CreateReportResponseModel.dart';
-import 'package:citifix/feature/citzenFeature/reports/presentation/views/achievment.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:video_compress/video_compress.dart';
 
 import '../../Models/Achievment/achievementModel.dart';
 
@@ -42,6 +45,21 @@ class ReportRepositoryT {
         }
       }
 
+      List<MultipartFile> videoFiles = [];
+      for (var vidPath in request.videos) {
+        if (vidPath.isNotEmpty) {
+          File? compressedVideo = await _getCompressedVideo(vidPath);
+          String pathToSend = compressedVideo?.path ?? vidPath;
+
+          videoFiles.add(
+            await MultipartFile.fromFile(
+              pathToSend,
+              filename: pathToSend.split('/').last,
+            ),
+          );
+        }
+      }
+
       FormData formData = FormData.fromMap({
         "Title": request.title,
         "Description": request.description,
@@ -50,12 +68,15 @@ class ReportRepositoryT {
         "Longitude": request.longitude,
         "CategoryId": request.categoryId,
         "Images": imageFiles,
+        "Videos": videoFiles,
+        "IsAnonymous": request.isAnonymous,
       });
 
       final response = await service.post(
         body: formData,
         path: Apiconstant.report,
       );
+      await VideoCompress.deleteAllCache();
       return right(response.toString());
     } on Serverexciptionmodel catch (e) {
       final dynamic errorData = e.errors;
@@ -71,15 +92,15 @@ class ReportRepositoryT {
     } catch (e) {
       return left(
         FailureResponse(
-          errors: ["Unknown Error${e.toString()}"],
+          errors: ["Unknown Error: ${e.toString()}"],
           statusCode: 500,
         ),
       );
     }
   }
 
-  Future<Either<FailureResponse, ReportResponseModelByid>> getReportByid({
-    required int ReportID,
+  Future<Either<FailureResponse, ReportResponseModelByid>> getReportById({
+    required int reportId,
   }) async {
     if (!await internetChecker.checkInternet()) {
       return left(
@@ -89,7 +110,7 @@ class ReportRepositoryT {
 
     try {
       final response = await service.get(
-        path: "${Apiconstant.report}/$ReportID",
+        path: "${Apiconstant.report}/$reportId",
       );
       return right(ReportResponseModelByid.fromJson(response));
     } on Serverexciptionmodel catch (e) {
@@ -106,7 +127,7 @@ class ReportRepositoryT {
     } catch (e) {
       return left(
         FailureResponse(
-          errors: ["Unknown Error${e.toString()}"],
+          errors: ["Unknown Error: ${e.toString()}"],
           statusCode: 500,
         ),
       );
@@ -155,8 +176,8 @@ class ReportRepositoryT {
     }
   }
 
-  Future<Either<FailureResponse, String>> DeleteReport({
-    required int ReportID,
+  Future<Either<FailureResponse, String>> deleteReport({
+    required int reportId,
   }) async {
     if (!await internetChecker.checkInternet()) {
       return left(
@@ -166,9 +187,9 @@ class ReportRepositoryT {
 
     try {
       final response = await service.delete(
-        path: "${Apiconstant.report}/$ReportID",
+        path: "${Apiconstant.report}/$reportId",
       );
-      return right(response);
+      return right(response.toString());
     } on Serverexciptionmodel catch (e) {
       final dynamic errorData = e.errors;
       if (errorData is Map<String, dynamic>) {
@@ -183,7 +204,7 @@ class ReportRepositoryT {
     } catch (e) {
       return left(
         FailureResponse(
-          errors: ["Unknown Error${e.toString()}"],
+          errors: ["Unknown Error: ${e.toString()}"],
           statusCode: 500,
         ),
       );
@@ -191,7 +212,7 @@ class ReportRepositoryT {
   }
 
   Future<Either<FailureResponse, AchievementmodelReportsResponse>>
-  achievment() async {
+  achievement() async {
     if (!await internetChecker.checkInternet()) {
       return left(
         FailureResponse(errors: [Constantmanger.nointernet], statusCode: 1),
@@ -215,10 +236,26 @@ class ReportRepositoryT {
     } catch (e) {
       return left(
         FailureResponse(
-          errors: ["Unknown Error${e.toString()}"],
+          errors: ["Unknown Error: ${e.toString()}"],
           statusCode: 500,
         ),
       );
     }
   }
+}
+
+Future<File?> _getCompressedVideo(String path) async {
+  debugPrint("Starting compression for: $path");
+
+  final MediaInfo? info = await VideoCompress.compressVideo(
+    path,
+    quality: VideoQuality.DefaultQuality,
+    deleteOrigin: false,
+  );
+
+  if (info != null && info.file != null) {
+    debugPrint("Compression finished. New size: ${info.filesize} bytes");
+    return info.file;
+  }
+  return null;
 }

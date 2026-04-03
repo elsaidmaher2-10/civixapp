@@ -40,12 +40,15 @@ class MessageLookup extends MessageLookupByLibrary {
       "Account information",
     ),
     "achievement": MessageLookupByLibrary.simpleMessage("Achievement"),
+    "achievementDetails": MessageLookupByLibrary.simpleMessage(
+      "Achievement Details",
+    ),
     "active": MessageLookupByLibrary.simpleMessage("Active"),
     "addCommentHint": MessageLookupByLibrary.simpleMessage(
       "Add a reply or a new inquiry...",
     ),
     "addCommentLabel": MessageLookupByLibrary.simpleMessage("Add Comment"),
-    "addPhoto": MessageLookupByLibrary.simpleMessage("Add Photo"),
+    "addPhoto": MessageLookupByLibrary.simpleMessage("Add Photo or Vedio"),
     "addReport": MessageLookupByLibrary.simpleMessage("Add Report"),
     "address": MessageLookupByLibrary.simpleMessage("Address"),
     "address2": MessageLookupByLibrary.simpleMessage("Address"),
@@ -54,6 +57,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "appTitle": MessageLookupByLibrary.simpleMessage("CitiFix"),
     "arabic": MessageLookupByLibrary.simpleMessage("Arabic"),
     "assigned": MessageLookupByLibrary.simpleMessage("Assigned"),
+    "assignedWorker": MessageLookupByLibrary.simpleMessage("Assigned Worker"),
     "camera": MessageLookupByLibrary.simpleMessage("Camera"),
     "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
     "caughtUpMessage": MessageLookupByLibrary.simpleMessage(
@@ -74,6 +78,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "civix": MessageLookupByLibrary.simpleMessage("Civix"),
     "comments": MessageLookupByLibrary.simpleMessage("Comments"),
     "completed": MessageLookupByLibrary.simpleMessage("Resolved"),
+    "completedBy": MessageLookupByLibrary.simpleMessage("Completed By"),
+    "completionImages": MessageLookupByLibrary.simpleMessage(
+      "Completion Images",
+    ),
+    "completionNote": MessageLookupByLibrary.simpleMessage("Completion Note"),
     "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
     "confirmDelete": MessageLookupByLibrary.simpleMessage("Confirm Delete"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage("Confirm Password"),
@@ -86,6 +95,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "dataSecurityNote": MessageLookupByLibrary.simpleMessage(
       "Your data is securely stored and encrypted.",
     ),
+    "date": MessageLookupByLibrary.simpleMessage("Date"),
     "dateBirth": MessageLookupByLibrary.simpleMessage("Date Brith"),
     "dateOfBirth": MessageLookupByLibrary.simpleMessage("Date of Birth"),
     "dateRequired": MessageLookupByLibrary.simpleMessage(
@@ -97,6 +107,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Are you sure you want to delete this report?",
     ),
     "deleteall": MessageLookupByLibrary.simpleMessage("Delete all"),
+    "department": MessageLookupByLibrary.simpleMessage("Department"),
     "describeIssue": MessageLookupByLibrary.simpleMessage(
       "Describe the issue...",
     ),
@@ -196,6 +207,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "howToReportQuestion": MessageLookupByLibrary.simpleMessage(
       "How do I report a maintenance issue?",
     ),
+    "id": MessageLookupByLibrary.simpleMessage("ID"),
     "identity": MessageLookupByLibrary.simpleMessage("Identity"),
     "imageRequired": MessageLookupByLibrary.simpleMessage("Image is required"),
     "inProgress": MessageLookupByLibrary.simpleMessage("In Progress"),
@@ -262,6 +274,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "noInternet": MessageLookupByLibrary.simpleMessage(
       "No internet connection",
     ),
+    "noMedia": MessageLookupByLibrary.simpleMessage("No media available"),
     "noNotifications": MessageLookupByLibrary.simpleMessage(
       "No new notifications",
     ),
@@ -398,12 +411,14 @@ class MessageLookup extends MessageLookupByLibrary {
     "selectRoleError": MessageLookupByLibrary.simpleMessage(
       "Please select a role",
     ),
+    "sendAnonymously": MessageLookupByLibrary.simpleMessage("Send Anonymously"),
     "sendCode": MessageLookupByLibrary.simpleMessage("Send Code"),
     "sendReport": MessageLookupByLibrary.simpleMessage("Submit Report"),
     "settings": MessageLookupByLibrary.simpleMessage("SETTINGS"),
     "signUp": MessageLookupByLibrary.simpleMessage("Sign Up"),
     "signUpNow": MessageLookupByLibrary.simpleMessage("Sign up now"),
     "skip": MessageLookupByLibrary.simpleMessage("Skip"),
+    "status": MessageLookupByLibrary.simpleMessage("Status"),
     "submit": MessageLookupByLibrary.simpleMessage("Submit"),
     "submitted": MessageLookupByLibrary.simpleMessage("Submitted:"),
     "success": MessageLookupByLibrary.simpleMessage("Success"),

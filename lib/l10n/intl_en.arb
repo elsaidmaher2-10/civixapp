@@ -136,7 +136,7 @@
   "reportTitleLabel": "Report Title",
   "descriptionLabel": "Description",
   "descriptionHint": "Write a detailed description...",
-  "addPhoto": "Add Photo",
+  "addPhoto": "Add Photo or Vedio",
   "loadingCategories": "Loading Categories...",
   "failedToLoadCategories": "Failed to load categories",
   "selectCategoryHint": "Select Category",
@@ -218,4 +218,18 @@
   "noCommentsYet": "No comments yet. Be the first to reply!",
   "addCommentHint": "Add a reply or a new inquiry...",
   "addCommentLabel": "Add Comment",
-  "reporter": "Reporter"}
+  "reporter": "Reporter",
+
+"sendAnonymously": "Send Anonymously",
+
+
+  "achievementDetails": "Achievement Details",
+  "completedBy": "Completed By",
+  "completionNote": "Completion Note",
+  "completionImages": "Completion Images",
+  "department": "Department",
+  "id": "ID",
+  "status": "Status",
+  "date": "Date",
+  "noMedia": "No media available","assignedWorker": "Assigned Worker"
+}

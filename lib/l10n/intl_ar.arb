@@ -136,7 +136,7 @@
   "reportTitleLabel": "عنوان البلاغ",
   "descriptionLabel": "الوصف",
   "descriptionHint": "اكتب وصفاً تفصيلياً للبلاغ...",
-  "addPhoto": "إضافة صورة",
+  "addPhoto":   "إضافة صورة او  فيديو",
   "loadingCategories": "جاري تحميل الأقسام...",
   "failedToLoadCategories": "فشل تحميل الأقسام",
   "selectCategoryHint": "اختر القسم",
@@ -218,6 +218,18 @@
   "noCommentsYet": "لا توجد تعليقات بعد. كن أول من يرد!",
   "addCommentHint": "أضف رداً أو استفساراً جديداً...",
   "addCommentLabel": "إضافة تعليق",
-  "reporter": "صاحب البلاغ"
+  "reporter": "صاحب البلاغ",
+  "sendAnonymously": "أرسل بشكل مجهول",
+  
+  
+  "achievementDetails": "تفاصيل الإنجاز",
+  "completedBy": "تم الإنجاز بواسطة",
+  "completionNote": "ملاحظات الإنجاز",
+  "completionImages": "صور وفيديوهات الإنجاز",
+  "department": "القسم المختص",
+  "id": "رقم البلاغ",
+  "status": "الحالة",
+  "date": "التاريخ",
+  "noMedia": "لا توجد وسائط متاحة","assignedWorker": "الموظف المسؤول"
 
 }

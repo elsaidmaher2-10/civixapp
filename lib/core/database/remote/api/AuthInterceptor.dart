@@ -11,12 +11,13 @@ class AuthInterceptor extends Interceptor {
   final Dio dio;
   final Dio _refreshDio;
   Completer<bool>? _refreshCompleter;
+
   AuthInterceptor(this.dio)
     : _refreshDio = Dio(
         BaseOptions(
           baseUrl: Apiconstant.baseurl,
-          connectTimeout: const Duration(seconds: 10),
-          receiveTimeout: const Duration(seconds: 10),
+          connectTimeout: const Duration(seconds: 20),
+          receiveTimeout: const Duration(seconds: 20),
         ),
       );
 
@@ -24,10 +25,12 @@ class AuthInterceptor extends Interceptor {
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     final token = PrefrenceManager().getstring(Constantmanger.accessToken);
     String? savedLang = PrefrenceManager().getstring("Lang");
-    if (token != null && savedLang != null) {
+
+    if (token != null) {
       options.headers['Authorization'] = 'Bearer $token';
-      options.headers['Accept-Language'] = savedLang;
     }
+    options.headers['Accept-Language'] = savedLang ?? 'en';
+
     handler.next(options);
   }
 
@@ -39,6 +42,7 @@ class AuthInterceptor extends Interceptor {
     if (error.response?.statusCode != 401) {
       return handler.next(error);
     }
+
     if (error.requestOptions.extra['retry'] == true) {
       _handleLogout();
       return handler.next(error);
@@ -47,35 +51,21 @@ class AuthInterceptor extends Interceptor {
     final refreshToken = PrefrenceManager().getstring(
       Constantmanger.refreshToken,
     );
-
-    final refreshExpireStr = PrefrenceManager().getstring(
-      Constantmanger.refreshTokenExpiration,
-    );
-
-    bool isExpired = true;
-    if (refreshExpireStr != null && refreshExpireStr.isNotEmpty) {
-      try {
-        isExpired = DateTime.parse(refreshExpireStr).isBefore(DateTime.now());
-      } catch (_) {
-        isExpired = true;
-      }
-    }
-    if (refreshToken == null || refreshToken.isEmpty || isExpired) {
+    if (refreshToken == null || refreshToken.isEmpty) {
       _handleLogout();
       return handler.next(error);
     }
+
     if (_refreshCompleter != null) {
       final success = await _refreshCompleter!.future;
       if (success) {
-        await _retryRequest(error.requestOptions, handler);
+        return await _retryRequest(error.requestOptions, handler);
       } else {
-        handler.next(error);
+        return handler.next(error);
       }
-      return;
     }
 
     _refreshCompleter = Completer<bool>();
-
     final refreshed = await _fetchNewAccessToken(refreshToken);
     _refreshCompleter!.complete(refreshed);
     _refreshCompleter = null;
@@ -93,17 +83,29 @@ class AuthInterceptor extends Interceptor {
     ErrorInterceptorHandler handler,
   ) async {
     final newToken = PrefrenceManager().getstring(Constantmanger.accessToken);
+
+    final Map<String, dynamic> newHeaders = Map<String, dynamic>.from(
+      opts.headers,
+    );
+    newHeaders['Authorization'] = 'Bearer $newToken';
+
+    if (opts.data is FormData) {
+      newHeaders.remove(Headers.contentTypeHeader);
+      newHeaders.remove('contentType');
+    }
+
     try {
       final response = await dio.request(
         opts.path,
         options: Options(
           method: opts.method,
-          headers: {...opts.headers, 'Authorization': 'Bearer $newToken'},
+          headers: newHeaders,
           extra: {...opts.extra, 'retry': true},
           responseType: opts.responseType,
-          contentType: opts.contentType,
+          contentType: opts.data is FormData ? null : opts.contentType,
         ),
         data: opts.data,
+        onSendProgress: opts.onSendProgress,
         queryParameters: opts.queryParameters,
       );
       handler.resolve(response);
@@ -120,11 +122,8 @@ class AuthInterceptor extends Interceptor {
       );
       if (response.statusCode == 200 || response.statusCode == 201) {
         final newAccess =
-            response.data['accessToken'] ??
-            response.data['token'] ??
-            response.data['access_token'];
-        final newRefresh =
-            response.data['refreshToken'] ?? response.data['refresh_token'];
+            response.data['accessToken'] ?? response.data['token'];
+        final newRefresh = response.data['refreshToken'];
         if (newAccess != null) {
           PrefrenceManager().setstring(Constantmanger.accessToken, newAccess);
           if (newRefresh != null) {

@@ -1,4 +1,5 @@
 import 'package:citifix/core/database/local/prefmanger.dart';
+import 'package:citifix/core/database/remote/api/ApiConstant.dart';
 import 'package:citifix/core/database/remote/api/ApiService.dart';
 import 'package:citifix/core/database/remote/error/ServerExciptionmodel.dart';
 import 'package:citifix/core/database/remote/error/failureResponse.dart';
@@ -21,7 +22,7 @@ class LogOutRepository {
       );
       final response = await service.post(
         body: {"refreshToken": refreshToken},
-        path: "Account/logout-all",
+        path: Apiconstant.logout,
       );
       return right(response);
     } on Serverexciptionmodel catch (e) {

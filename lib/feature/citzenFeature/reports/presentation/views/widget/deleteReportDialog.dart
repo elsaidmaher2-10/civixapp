@@ -14,8 +14,14 @@ Future<bool> showDeleteDialog(
         context: context,
         builder: (BuildContext context) {
           return CupertinoAlertDialog(
-            title: Text(S.of(context).confirmDelete),
-            content: Text(S.of(context).deleteConfirmationMessage),
+            title: Text(
+              S.of(context).confirmDelete,
+              style: GoogleFonts.cairo(),
+            ),
+            content: Text(
+              S.of(context).deleteConfirmationMessage,
+              style: GoogleFonts.cairo(),
+            ),
             actions: <Widget>[
               CupertinoDialogAction(
                 onPressed: () => Navigator.of(context).pop(false),
@@ -30,7 +36,7 @@ Future<bool> showDeleteDialog(
                   context.read<ReportCubit>().deleteReport(ReportID: ReportID);
                   Navigator.of(context).pop(true);
                 },
-                child: Text(S.of(context).delete),
+                child: Text(S.of(context).delete, style: GoogleFonts.cairo()),
               ),
             ],
           );

@@ -109,7 +109,10 @@ class HelpAndTermsPage extends StatelessWidget {
           await Customersupport.sendEmail("body");
         },
         icon: const Icon(Icons.headset_mic_outlined),
-        label: Text(S.of(context).contactSupport),
+        label: Text(
+          S.of(context).contactSupport,
+          style: GoogleFonts.cairo(fontSize: ScreenUtilsManager.s14),
+        ),
         style: ElevatedButton.styleFrom(
           backgroundColor: ColorManger.kPrimary,
           foregroundColor: Colors.white,

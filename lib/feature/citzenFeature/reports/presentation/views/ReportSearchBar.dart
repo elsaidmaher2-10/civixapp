@@ -28,7 +28,7 @@ class ReportSearchBar extends StatelessWidget {
           ),
           SizedBox(height: ScreenUtilsManager.h10),
 
-          const CustomSearchField(),
+          // const CustomSearchField(),
         ],
       ),
     );

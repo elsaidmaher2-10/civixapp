@@ -1,24 +1,22 @@
-import 'dart:async';
-import 'dart:io';
-import 'package:animated_custom_dropdown/custom_dropdown.dart';
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/core/widget/CustomSnackBar.dart';
 import 'package:citifix/core/widget/customButton.dart';
 import 'package:citifix/core/widget/customloading.dart';
+import 'package:citifix/feature/citzenFeature/reports/presentation/manager/ReportScreenController/reportscreencontroller.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/manager/reportManger/cubit/report_manager_cubit.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/manager/reportManger/cubit/report_manager_state.dart';
 import 'package:citifix/feature/citzenFeature/home/presentation/view/widget/CustomMap.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/views/widget/ImagePickerList.dart';
 import 'package:citifix/feature/citzenFeature/reports/data/Models/Report/CreateReportRequestModel.dart';
-import 'package:citifix/feature/citzenFeature/reports/data/Models/catogory/categorymodels.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/views/widget/ReportForms.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/views/widget/addreportAppbar.dart';
+import 'package:citifix/feature/citzenFeature/reports/presentation/views/widget/extensionvediotype.dart';
 import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
@@ -30,54 +28,18 @@ class AddReportScreen extends StatefulWidget {
 }
 
 class _AddReportScreenState extends State<AddReportScreen> {
-  final StreamController<List<File>> streamController =
-      StreamController.broadcast();
-  final TextEditingController titleController = TextEditingController();
-  final TextEditingController descriptionController = TextEditingController();
-  SingleSelectController<CategoryItem?>? controller;
-  int categoryitem = -1;
-  StreamController<bool> buttonStatusController = StreamController.broadcast();
-
-  bool isValid = false;
-  List<XFile>? images = [];
-  String? selectedStreet;
-  LatLng? selectedLatLng;
-
-  @override
-  void dispose() {
-    streamController.close();
-    titleController.dispose();
-    descriptionController.dispose();
-    buttonStatusController.close();
-    super.dispose();
-  }
-
-  void pickImages() async {
-    ImagePicker imagePicker = ImagePicker();
-    final pickedImages = await imagePicker.pickMultiImage();
-    if (pickedImages.isNotEmpty) {
-      setState(() {
-        images!.addAll(pickedImages);
-      });
-      streamController.add(images!.map((e) => File(e.path)).toList());
-    }
-  }
-
-  void updateButtonStatus() {
-    setState(() {
-      isValid =
-          titleController.text.isNotEmpty &&
-          descriptionController.text.isNotEmpty &&
-          categoryitem != -1;
-    });
-    buttonStatusController.add(isValid);
-  }
+  ReportScreenController reportscreencontroller = ReportScreenController();
 
   @override
   void initState() {
-    titleController.addListener(updateButtonStatus);
-    descriptionController.addListener(updateButtonStatus);
     super.initState();
+    reportscreencontroller.init();
+  }
+
+  @override
+  void dispose() {
+    reportscreencontroller.dispose();
+    super.dispose();
   }
 
   @override
@@ -120,30 +82,30 @@ class _AddReportScreenState extends State<AddReportScreen> {
                     children: [
                       SizedBox(height: ScreenUtilsManager.h40),
                       ReportFormFields(
-                        titleController: titleController,
-                        descriptionController: descriptionController,
+                        titleController: reportscreencontroller.titleController,
+                        descriptionController:
+                            reportscreencontroller.descriptionController,
                         onCategoryChanged: (p1) {
-                          setState(() {
-                            categoryitem = p1?.id ?? -1;
-                            controller?.value = p1;
-                            updateButtonStatus();
-                          });
+                          reportscreencontroller.categoryItem = p1?.id ?? -1;
+                          print(p1?.id);
+                          reportscreencontroller.updateButtonStatus();
                         },
-                        controller: controller,
                       ),
 
                       SizedBox(height: ScreenUtilsManager.h16),
+
                       ImagePickerList(
-                        images: images?.map((e) => File(e.path)).toList(),
-                        onAddImage: pickImages,
-                        stream: streamController.stream,
+                        images: reportscreencontroller.selectedFiles,
+                        onAddImage: () {
+                          reportscreencontroller.pickImages(context);
+                        },
+                        stream: reportscreencontroller.streamController.stream,
                         onRemove: (int index) {
-                          setState(() {
-                            images?.removeAt(index);
-                          });
-                          streamController.add(
-                            images?.map((e) => File(e.path)).toList() ?? [],
+                          reportscreencontroller.selectedFiles.removeAt(index);
+                          reportscreencontroller.streamController.add(
+                            reportscreencontroller.selectedFiles,
                           );
+                          reportscreencontroller.updateButtonStatus();
                         },
                       ),
 
@@ -161,34 +123,91 @@ class _AddReportScreenState extends State<AddReportScreen> {
 
                       CustomMap.fromDevice(
                         onmapCreated: (String street, LatLng latlang) {
-                          selectedStreet = street;
-                          selectedLatLng = latlang;
+                          reportscreencontroller.selectedStreet = street;
+                          reportscreencontroller.selectedLatLng = latlang;
                         },
                       ),
+                      SizedBox(height: ScreenUtilsManager.h16),
 
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Checkbox(
+                            value: reportscreencontroller.isAnonymous,
+                            activeColor: ColorManger.kPrimary,
+                            onChanged: (bool? value) {
+                              setState(() {
+                                reportscreencontroller.isAnonymous =
+                                    value ?? false;
+                              });
+                            },
+                          ),
+                          Text(
+                            S.of(context).sendAnonymously,
+                            style: TextStyle(
+                              color: ColorManger.kPrimary,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 16.sp,
+                            ),
+                          ),
+                        ],
+                      ),
                       SizedBox(height: ScreenUtilsManager.h24),
 
-                      CustomButton(
-                        onPressed: (isValid && state is! CreateReportLoading)
-                            ? () {
-                                context.read<ReportCubit>().createReport(
-                                  request: CreateReportRequest(
-                                    title: titleController.text,
-                                    description: descriptionController.text,
-                                    location:
-                                        selectedStreet ??
-                                        S.of(context).unknownLocation,
-                                    latitude: selectedLatLng?.latitude ?? 0.0,
-                                    longitude: selectedLatLng?.longitude ?? 0.0,
-                                    categoryId: categoryitem,
-                                    images:
-                                        images?.map((e) => e.path).toList() ??
-                                        [],
-                                  ),
-                                );
-                              }
-                            : null,
-                        lable: S.of(context).sendReport,
+                      StreamBuilder<bool>(
+                        initialData: false,
+                        stream: reportscreencontroller.btnController.stream,
+                        builder:
+                            (
+                              BuildContext context,
+                              AsyncSnapshot<bool> snapshot,
+                            ) => CustomButton(
+                              onPressed: snapshot.data == true
+                                  ? () {
+                                      context.read<ReportCubit>().createReport(
+                                        request: CreateReportRequest(
+                                          title: reportscreencontroller
+                                              .titleController
+                                              .text,
+                                          description: reportscreencontroller
+                                              .descriptionController
+                                              .text,
+                                          location:
+                                              reportscreencontroller
+                                                  .selectedStreet ??
+                                              S.of(context).unknownLocation,
+                                          latitude:
+                                              reportscreencontroller
+                                                  .selectedLatLng
+                                                  ?.latitude ??
+                                              0.0,
+                                          longitude:
+                                              reportscreencontroller
+                                                  .selectedLatLng
+                                                  ?.longitude ??
+                                              0.0,
+                                          categoryId: reportscreencontroller
+                                              .categoryItem,
+                                          images: reportscreencontroller
+                                              .selectedFiles
+                                              .where((e) => e.isImage)
+                                              .toList()
+                                              .map((e) => e.path)
+                                              .toList(),
+                                          videos: reportscreencontroller
+                                              .selectedFiles
+                                              .where((e) => e.isVideo)
+                                              .toList()
+                                              .map((e) => e.path)
+                                              .toList(),
+                                          isAnonymous: reportscreencontroller
+                                              .isAnonymous,
+                                        ),
+                                      );
+                                    }
+                                  : null,
+                              lable: S.of(context).sendReport,
+                            ),
                       ),
 
                       SizedBox(height: ScreenUtilsManager.h24),

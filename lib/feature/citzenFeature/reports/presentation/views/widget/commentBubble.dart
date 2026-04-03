@@ -66,15 +66,13 @@ class CommentBubble extends StatelessWidget {
                         color: Colors.black12,
                       ),
                     ],
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(12.r),
-                      topRight: Radius.circular(12.r),
-                      bottomLeft: isWorker
+                    borderRadius: BorderRadiusGeometry.directional(
+                      topStart: Radius.circular(12.r),
+                      topEnd: Radius.circular(12.r),
+                      bottomStart: isWorker
                           ? Radius.circular(12.r)
                           : Radius.zero,
-                      bottomRight: isWorker
-                          ? Radius.zero
-                          : Radius.circular(12.r),
+                      bottomEnd: isWorker ? Radius.zero : Radius.circular(12.r),
                     ),
                   ),
                   child: Text(

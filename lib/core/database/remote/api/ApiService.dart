@@ -12,8 +12,9 @@ class Apiservice extends Apiconsumer {
   Apiservice(this.dio) {
     dio.options = BaseOptions(
       baseUrl: Apiconstant.baseurl,
-      connectTimeout: const Duration(seconds: 15),
-      receiveTimeout: const Duration(seconds: 15),
+      sendTimeout: Duration(minutes: 5),
+      receiveTimeout: Duration(minutes: 5),
+      connectTimeout: Duration(minutes: 5),
     );
 
     dio.interceptors.addAll([

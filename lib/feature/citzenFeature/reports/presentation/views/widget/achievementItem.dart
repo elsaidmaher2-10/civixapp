@@ -9,7 +9,6 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../../core/resource/colormanager.dart';
 import '../../../../../../core/resource/constantmanger.dart';
-import '../../../../../../core/resource/screenutilsmaanger.dart';
 import '../reportdetails.dart';
 
 class AchievementReportCard extends StatelessWidget {

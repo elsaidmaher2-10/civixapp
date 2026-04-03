@@ -36,12 +36,15 @@ class MessageLookup extends MessageLookupByLibrary {
       "معلومات الحساب",
     ),
     "achievement": MessageLookupByLibrary.simpleMessage("الإنجازات"),
+    "achievementDetails": MessageLookupByLibrary.simpleMessage(
+      "تفاصيل الإنجاز",
+    ),
     "active": MessageLookupByLibrary.simpleMessage("نشط"),
     "addCommentHint": MessageLookupByLibrary.simpleMessage(
       "أضف رداً أو استفساراً جديداً...",
     ),
     "addCommentLabel": MessageLookupByLibrary.simpleMessage("إضافة تعليق"),
-    "addPhoto": MessageLookupByLibrary.simpleMessage("إضافة صورة"),
+    "addPhoto": MessageLookupByLibrary.simpleMessage("إضافة صورة او  فيديو"),
     "addReport": MessageLookupByLibrary.simpleMessage("إضافة بلاغ"),
     "address": MessageLookupByLibrary.simpleMessage("العنوان"),
     "address2": MessageLookupByLibrary.simpleMessage("العنوان"),
@@ -50,6 +53,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "appTitle": MessageLookupByLibrary.simpleMessage("سيتيفيكس"),
     "arabic": MessageLookupByLibrary.simpleMessage("العربية"),
     "assigned": MessageLookupByLibrary.simpleMessage("تم التعيين"),
+    "assignedWorker": MessageLookupByLibrary.simpleMessage("الموظف المسؤول"),
     "camera": MessageLookupByLibrary.simpleMessage("الكاميرا"),
     "cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
     "caughtUpMessage": MessageLookupByLibrary.simpleMessage(
@@ -70,6 +74,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "civix": MessageLookupByLibrary.simpleMessage("Civix"),
     "comments": MessageLookupByLibrary.simpleMessage("التعليقات"),
     "completed": MessageLookupByLibrary.simpleMessage("تم الحل"),
+    "completedBy": MessageLookupByLibrary.simpleMessage("تم الإنجاز بواسطة"),
+    "completionImages": MessageLookupByLibrary.simpleMessage(
+      "صور وفيديوهات الإنجاز",
+    ),
+    "completionNote": MessageLookupByLibrary.simpleMessage("ملاحظات الإنجاز"),
     "confirm": MessageLookupByLibrary.simpleMessage("تأكيد"),
     "confirmDelete": MessageLookupByLibrary.simpleMessage("تأكيد الحذف"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage(
@@ -84,6 +93,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "dataSecurityNote": MessageLookupByLibrary.simpleMessage(
       "بياناتك مخزنة ومُشفرة بشكل آمن.",
     ),
+    "date": MessageLookupByLibrary.simpleMessage("التاريخ"),
     "dateBirth": MessageLookupByLibrary.simpleMessage("تاريخ الميلاد"),
     "dateOfBirth": MessageLookupByLibrary.simpleMessage("تاريخ الميلاد"),
     "dateRequired": MessageLookupByLibrary.simpleMessage(
@@ -94,6 +104,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "deleteConfirmationMessage": MessageLookupByLibrary.simpleMessage(
       "هل أنت متأكد أنك تريد حذف هذا البلاغ؟",
     ),
+    "department": MessageLookupByLibrary.simpleMessage("القسم المختص"),
     "describeIssue": MessageLookupByLibrary.simpleMessage("صف المشكلة..."),
     "description": MessageLookupByLibrary.simpleMessage("الوصف"),
     "descriptionHint": MessageLookupByLibrary.simpleMessage(
@@ -177,6 +188,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "howToReportQuestion": MessageLookupByLibrary.simpleMessage(
       "كيف يمكنني الإبلاغ عن مشكلة صيانة؟",
     ),
+    "id": MessageLookupByLibrary.simpleMessage("رقم البلاغ"),
     "identity": MessageLookupByLibrary.simpleMessage("الهوية"),
     "imageRequired": MessageLookupByLibrary.simpleMessage("الصورة مطلوبة"),
     "inProgress": MessageLookupByLibrary.simpleMessage("قيد التنفيذ"),
@@ -243,6 +255,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "noInternet": MessageLookupByLibrary.simpleMessage(
       "لا يوجد اتصال بالإنترنت",
     ),
+    "noMedia": MessageLookupByLibrary.simpleMessage("لا توجد وسائط متاحة"),
     "noNotifications": MessageLookupByLibrary.simpleMessage(
       "لا توجد إشعارات جديدة",
     ),
@@ -365,12 +378,14 @@ class MessageLookup extends MessageLookupByLibrary {
     "selectRoleError": MessageLookupByLibrary.simpleMessage(
       "من فضلك اختر الدور",
     ),
+    "sendAnonymously": MessageLookupByLibrary.simpleMessage("أرسل بشكل مجهول"),
     "sendCode": MessageLookupByLibrary.simpleMessage("إرسال الكود"),
     "sendReport": MessageLookupByLibrary.simpleMessage("إرسال البلاغ"),
     "settings": MessageLookupByLibrary.simpleMessage("الإعدادات"),
     "signUp": MessageLookupByLibrary.simpleMessage("إنشاء حساب"),
     "signUpNow": MessageLookupByLibrary.simpleMessage("سجل الآن"),
     "skip": MessageLookupByLibrary.simpleMessage("تخطي"),
+    "status": MessageLookupByLibrary.simpleMessage("الحالة"),
     "submit": MessageLookupByLibrary.simpleMessage("إرسال"),
     "submitted": MessageLookupByLibrary.simpleMessage("تاريخ التقديم:"),
     "success": MessageLookupByLibrary.simpleMessage("تم بنجاح"),

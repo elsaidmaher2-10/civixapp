@@ -1,19 +1,18 @@
+import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:citifix/core/extenstion/datetimeextension.dart';
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/feature/citzenFeature/reports/data/Models/GetReportModel.dart';
-import 'package:citifix/feature/citzenFeature/reports/presentation/manager/reportManger/cubit/report_manager_cubit.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/views/reportdetails.dart';
+import 'package:citifix/feature/citzenFeature/reports/presentation/views/widget/vedioplayer.dart';
 import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../../../../../../core/widget/stautsBageApp.dart';
 import 'deleteReportDialog.dart';
 
@@ -24,7 +23,6 @@ class Reportcard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String translatedStatus = _getTranslatedStatus(context, report.status);
     return InkWell(
       onTap: () {
         Navigator.push(
@@ -37,6 +35,7 @@ class Reportcard extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 8.h),
         child: Slidable(
+          key: ValueKey(report.id), 
           startActionPane: ActionPane(
             motion: const ScrollMotion(),
             children: [
@@ -65,23 +64,15 @@ class Reportcard extends StatelessWidget {
               ],
             ),
             child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 14.h),
+              padding: EdgeInsets.symmetric(vertical: 14.h, horizontal: 11.w),
               child: Row(
                 children: [
-                  SizedBox(width: 11.w),
                   ClipRRect(
                     borderRadius: BorderRadius.circular(5.r),
-                    child: CachedNetworkImage(
-                      placeholder: (context, url) =>
-                          const CupertinoActivityIndicator(
-                            color: ColorManger.lightBlue,
-                          ),
-                      fit: BoxFit.cover,
+                    child: SizedBox(
                       height: 80.h,
                       width: 80.w,
-                      imageUrl: report.imagesUrls.isNotEmpty
-                          ? report.imagesUrls.first
-                          : Constantmanger.defualtImage,
+                      child: _buildMediaPreview(),
                     ),
                   ),
                   SizedBox(width: 16.w),
@@ -109,7 +100,6 @@ class Reportcard extends StatelessWidget {
                     ),
                   ),
                   StatusBadgeApp(status: report.status),
-                  SizedBox(width: 5.w),
                 ],
               ),
             ),
@@ -117,6 +107,24 @@ class Reportcard extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Widget _buildMediaPreview() {
+    if (report.imagesUrls.isNotEmpty) {
+      return CachedNetworkImage(
+        imageUrl: report.imagesUrls.first,
+        placeholder: (context, url) => const CupertinoActivityIndicator(),
+        errorWidget: (context, url, error) => const Icon(Icons.broken_image),
+        fit: BoxFit.cover,
+      );
+    } else if (report.videosUrls.isNotEmpty) {
+      return AppVideoPlayer(
+        dataSource: report.videosUrls.first,
+        isRemote: true,
+      );
+    } else {
+      return Image.asset(Constantmanger.defualtImage, fit: BoxFit.cover);
+    }
   }
 
   Widget _buildInfoRow(IconData icon, String text) {
@@ -138,57 +146,5 @@ class Reportcard extends StatelessWidget {
         ),
       ],
     );
-  }
-
-  Widget _buildStatusTag(BuildContext context, String rawStatus, String label) {
-    Color statusColor = _getStatusColor(rawStatus);
-    return Container(
-      margin: EdgeInsetsDirectional.only(end: 12.w),
-      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 6.h),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10.r),
-        color: statusColor.withOpacity(0.1),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(Icons.circle, size: 8, color: statusColor),
-          SizedBox(width: 6.w),
-          Text(
-            label,
-            style: GoogleFonts.cairo(
-              color: statusColor,
-              fontSize: ScreenUtilsManager.s12,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Color _getStatusColor(String status) {
-    switch (status.toLowerCase()) {
-      case 'pending':
-        return const Color(0xffFF7A07);
-      case 'completed':
-      case 'resolved':
-        return Colors.green;
-      default:
-        return ColorManger.kPrimary;
-    }
-  }
-
-  String _getTranslatedStatus(BuildContext context, String status) {
-    switch (status.toLowerCase()) {
-      case 'pending':
-        return S.of(context).pending;
-      case 'resolved':
-        return S.of(context).resolved;
-      case 'completed':
-        return S.of(context).completed;
-      default:
-        return S.of(context).unknownStatus;
-    }
   }
 }

@@ -1,4 +1,3 @@
-import 'package:animated_custom_dropdown/custom_dropdown.dart';
 import 'package:citifix/feature/citzenFeature/reports/data/Models/catogory/categorymodels.dart';
 import 'package:flutter/material.dart';
 import 'package:citifix/core/resource/colormanager.dart';
@@ -13,14 +12,12 @@ class ReportFormFields extends StatelessWidget {
   final TextEditingController descriptionController;
   final List<CategoryItem> categories = const [];
   final dynamic Function(CategoryItem?) onCategoryChanged;
-  final SingleSelectController<CategoryItem?>? controller;
 
   const ReportFormFields({
     super.key,
     required this.titleController,
     required this.descriptionController,
     required this.onCategoryChanged,
-    required this.controller,
   });
 
   @override
@@ -69,7 +66,7 @@ class ReportFormFields extends StatelessWidget {
 
         _buildSectionTitle(S.of(context).selectCategory),
         SizedBox(height: ScreenUtilsManager.h16),
-        CategoryDropdown(onChanged: onCategoryChanged, controller: controller),
+        CategoryDropdown(onChanged: onCategoryChanged,  ),
       ],
     );
   }

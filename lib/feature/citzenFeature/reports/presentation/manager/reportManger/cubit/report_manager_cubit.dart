@@ -50,7 +50,9 @@ class ReportCubit extends Cubit<ReportManagerState> {
     if (isClosed) return;
     emit(GetReportsByidLoading());
 
-    final result = await reportRepository.getReportByid(ReportID: ReportID);
+    final result = await reportRepository.getReportById(
+      reportId:  ReportID,
+    );
 
     if (isClosed) return;
 
@@ -66,7 +68,7 @@ class ReportCubit extends Cubit<ReportManagerState> {
     if (isClosed) return;
     emit(GetReportsByidLoading());
 
-    final result = await reportRepository.DeleteReport(ReportID: ReportID);
+    final result = await reportRepository.deleteReport(reportId: ReportID);
 
     if (isClosed) return;
 

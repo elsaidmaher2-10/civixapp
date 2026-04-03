@@ -1139,9 +1139,14 @@ class S {
     );
   }
 
-  /// `Add Photo`
+  /// `Add Photo or Vedio`
   String get addPhoto {
-    return Intl.message('Add Photo', name: 'addPhoto', desc: '', args: []);
+    return Intl.message(
+      'Add Photo or Vedio',
+      name: 'addPhoto',
+      desc: '',
+      args: [],
+    );
   }
 
   /// `Loading Categories...`
@@ -1807,6 +1812,96 @@ class S {
   /// `Reporter`
   String get reporter {
     return Intl.message('Reporter', name: 'reporter', desc: '', args: []);
+  }
+
+  /// `Send Anonymously`
+  String get sendAnonymously {
+    return Intl.message(
+      'Send Anonymously',
+      name: 'sendAnonymously',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Achievement Details`
+  String get achievementDetails {
+    return Intl.message(
+      'Achievement Details',
+      name: 'achievementDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Completed By`
+  String get completedBy {
+    return Intl.message(
+      'Completed By',
+      name: 'completedBy',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Completion Note`
+  String get completionNote {
+    return Intl.message(
+      'Completion Note',
+      name: 'completionNote',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Completion Images`
+  String get completionImages {
+    return Intl.message(
+      'Completion Images',
+      name: 'completionImages',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Department`
+  String get department {
+    return Intl.message('Department', name: 'department', desc: '', args: []);
+  }
+
+  /// `ID`
+  String get id {
+    return Intl.message('ID', name: 'id', desc: '', args: []);
+  }
+
+  /// `Status`
+  String get status {
+    return Intl.message('Status', name: 'status', desc: '', args: []);
+  }
+
+  /// `Date`
+  String get date {
+    return Intl.message('Date', name: 'date', desc: '', args: []);
+  }
+
+  /// `No media available`
+  String get noMedia {
+    return Intl.message(
+      'No media available',
+      name: 'noMedia',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Assigned Worker`
+  String get assignedWorker {
+    return Intl.message(
+      'Assigned Worker',
+      name: 'assignedWorker',
+      desc: '',
+      args: [],
+    );
   }
 }
 

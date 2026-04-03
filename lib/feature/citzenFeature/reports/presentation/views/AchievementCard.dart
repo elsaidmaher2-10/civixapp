@@ -5,8 +5,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../../../generated/l10n.dart';
-import '../../../../workerFeature/tasks/widget/ActiveTaskCard.dart';
 import 'AchievementImage.dart';
 
 class AchievementCard extends StatelessWidget {

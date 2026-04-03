@@ -35,8 +35,9 @@ class ReportItem {
   final String areaName;
   final String status;
   final DateTime createdAt;
-  final List<String> imagesUrls;
 
+  final List<String> imagesUrls;
+  final List<String> videosUrls;
   ReportItem({
     required this.location,
 
@@ -47,6 +48,7 @@ class ReportItem {
     required this.status,
     required this.createdAt,
     required this.imagesUrls,
+    required this.videosUrls,
   });
 
   factory ReportItem.fromJson(Map<String, dynamic> json) {
@@ -61,6 +63,7 @@ class ReportItem {
           ? DateTime.parse(json['createdAt'])
           : DateTime.now(),
       imagesUrls: List<String>.from(json['imagesUrls'] ?? []),
+      videosUrls: List<String>.from(json['videosUrls'] ?? []),
     );
   }
 }

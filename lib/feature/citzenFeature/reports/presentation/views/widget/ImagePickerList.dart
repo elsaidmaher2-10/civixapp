@@ -1,5 +1,7 @@
 import 'dart:io';
 import 'package:citifix/core/widget/uploadimage.dart';
+import 'package:citifix/feature/citzenFeature/reports/presentation/views/widget/extensionvediotype.dart';
+import 'package:citifix/feature/citzenFeature/reports/presentation/views/widget/vedioplayer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -24,7 +26,7 @@ class ImagePickerList extends StatelessWidget {
       child: Row(
         children: [
           Uploadimage(onTap: onAddImage),
-          SizedBox(width: 8.w), 
+          SizedBox(width: 8.w),
           Expanded(
             child: StreamBuilder<List<File>>(
               initialData: images ?? [],
@@ -45,7 +47,9 @@ class ImagePickerList extends StatelessWidget {
                         child: Stack(
                           children: [
                             Positioned.fill(
-                              child: Image.file(image, fit: BoxFit.cover),
+                              child: image.isVideo
+                                  ? AppVideoPlayer(dataSource: image.path)
+                                  : Image.file(image, fit: BoxFit.cover),
                             ),
                             Positioned.directional(
                               textDirection: Directionality.of(context),

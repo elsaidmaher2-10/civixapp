@@ -3,6 +3,7 @@ import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/core/widget/customtextfromfield.dart';
+import 'package:citifix/feature/citzenFeature/reports/data/Models/commentmodel/commentmodel.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/manager/comment/commentmanger_cubit.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/manager/comment/commentmanger_state.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/views/widget/commentBubble.dart';
@@ -16,13 +17,16 @@ import '../../../../../../generated/l10n.dart';
 
 class Commentsystem extends StatelessWidget {
   const Commentsystem({
+    required this.isComment,
+    required this.comments,
     required this.controller,
     required this.reporID,
-    super.key,
   });
 
+  final bool isComment;
   final TextEditingController controller;
   final int reporID;
+  final List<CommentModel> comments;
 
   @override
   Widget build(BuildContext context) {
@@ -30,19 +34,29 @@ class Commentsystem extends StatelessWidget {
       builder: (context, state) {
         if (state is CommentsLoading) {
           return SliverToBoxAdapter(
-            child: Center(
-              child: CupertinoActivityIndicator(
-                color: ColorManger.primary,
-                radius: ScreenUtilsManager.r12,
+            child: Padding(
+              padding: EdgeInsets.symmetric(vertical: 20.h),
+              child: Center(
+                child: CupertinoActivityIndicator(
+                  color: ColorManger.kPrimary,
+                  radius: ScreenUtilsManager.r12,
+                ),
               ),
             ),
           );
-        } else if (state is CommentsFailure) {
+        }
+
+        if (state is CommentsFailure) {
           return SliverToBoxAdapter(
             child: Center(child: Text(state.errorMessage)),
           );
-        } else if (state is CommentsSuccess) {
-          final comments = state.comments;
+        }
+
+        if (state is CommentsSuccess) {
+          final currentComments = state.comments.isEmpty
+              ? this.comments
+              : state.comments;
+
           return SliverMainAxisGroup(
             slivers: [
               SliverToBoxAdapter(
@@ -71,7 +85,7 @@ class Commentsystem extends StatelessWidget {
                           borderRadius: BorderRadius.circular(8.r),
                         ),
                         child: Text(
-                          S.of(context).messagesCount(comments.length),
+                          S.of(context).messagesCount(currentComments.length),
                           style: GoogleFonts.cairo(
                             fontSize: 12.sp,
                             color: Colors.grey[700],
@@ -82,79 +96,63 @@ class Commentsystem extends StatelessWidget {
                   ),
                 ),
               ),
-
-              if (comments.isEmpty)
-                SliverToBoxAdapter(
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(vertical: 20.h),
-                    child: Center(
-                      child: Text(
-                        S.of(context).noCommentsYet,
-                        style: GoogleFonts.cairo(color: Colors.grey),
+              currentComments.isEmpty
+                  ? SliverToBoxAdapter(
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(vertical: 20.h),
+                        child: Center(
+                          child: Text(
+                            S.of(context).noCommentsYet,
+                            style: GoogleFonts.cairo(color: Colors.grey),
+                          ),
+                        ),
+                      ),
+                    )
+                  : SliverPadding(
+                      padding: EdgeInsets.symmetric(horizontal: 16.w),
+                      sliver: SliverList.builder(
+                        itemCount: currentComments.length,
+                        itemBuilder: (context, index) {
+                          return CommentBubble(comment: currentComments[index]);
+                        },
                       ),
                     ),
-                  ),
-                )
-              else
-                SliverPadding(
-                  padding: EdgeInsets.symmetric(horizontal: 16.w),
-                  sliver: SliverList.builder(
-                    itemCount: comments.length,
-                    itemBuilder: (context, index) {
-                      return CommentBubble(comment: comments[index]);
-                    },
-                  ),
-                ),
-
               SliverToBoxAdapter(
-                child: Padding(
-                  padding: EdgeInsets.fromLTRB(16.w, 8.h, 16.w, 16.h),
-                  child: CustomTextfromfield(
-                    prefix: _buildUserAvatar(),
-                    suffix: IconButton(
-                      icon: Icon(
-                        Icons.send_rounded,
-                        color: ColorManger.kPrimary,
+                child: isComment
+                    ? const SizedBox.shrink()
+                    : Padding(
+                        padding: EdgeInsets.fromLTRB(16.w, 8.h, 16.w, 16.h),
+                        child: CustomTextfromfield(
+                          suffix: IconButton(
+                            icon: Icon(
+                              Icons.send_rounded,
+                              color: ColorManger.kPrimary,
+                            ),
+                            onPressed: () async {
+                              if (controller.text.isNotEmpty) {
+                                await context
+                                    .read<CommentsCubit>()
+                                    .makeComments(
+                                      reporID,
+                                      content: controller.text,
+                                    );
+                                controller.clear();
+                              }
+                            },
+                          ),
+                          color: Colors.white,
+                          hinttext: S.of(context).addCommentHint,
+                          lable: S.of(context).addCommentLabel,
+                          controller: controller,
+                        ),
                       ),
-                      onPressed: () async {
-                        if (controller.text.isNotEmpty) {
-                          await context.read<CommentsCubit>().makeComments(
-                            reporID,
-                            content: controller.text,
-                          );
-                          controller.clear();
-                        }
-                      },
-                    ),
-                    color: Colors.white,
-                    hinttext: S.of(context).addCommentHint,
-                    lable: S.of(context).addCommentLabel,
-                    controller: controller,
-                  ),
-                ),
               ),
-              SliverToBoxAdapter(child: SizedBox(height: 50.h)),
+              const SliverToBoxAdapter(child: SizedBox(height: 50)),
             ],
           );
         }
         return const SliverToBoxAdapter(child: SizedBox.shrink());
       },
-    );
-  }
-
-  Widget _buildUserAvatar() {
-    return Padding(
-      padding: EdgeInsets.all(8.r),
-      child: CircleAvatar(
-        radius: 12.r,
-        backgroundColor: ColorManger.lightGrey5,
-        child: ClipOval(
-          child: CachedNetworkImage(
-            imageUrl: Constantmanger.defualtImage,
-            fit: BoxFit.cover,
-          ),
-        ),
-      ),
     );
   }
 }

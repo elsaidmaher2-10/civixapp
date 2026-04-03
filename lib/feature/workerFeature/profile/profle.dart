@@ -835,7 +835,6 @@ class ProfileView extends StatelessWidget {
               ),
             ),
 
-            // --- 6. LOGOUT ACTION ---
             Padding(
               padding: EdgeInsets.only(
                 left: 24,

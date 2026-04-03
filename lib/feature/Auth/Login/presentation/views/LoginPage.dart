@@ -143,6 +143,7 @@ class _LoginpageState extends State<Loginpage> {
                                 child: Column(
                                   children: [
                                     SvgPicture.asset(
+                                      colorBlendMode: BlendMode.srcOut,
                                       AssetValueManager.Klog,
                                       height: ScreenUtilsManager.h120,
                                     ),

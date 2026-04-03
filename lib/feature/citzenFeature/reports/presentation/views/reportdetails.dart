@@ -1,12 +1,11 @@
 import 'package:citifix/core/DI/getit.dart';
 import 'package:citifix/core/extenstion/datetimeextension.dart';
 import 'package:citifix/core/resource/colormanager.dart';
-import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/core/service/StatusReport.dart';
 import 'package:citifix/core/widget/stautsBageApp.dart';
 import 'package:citifix/feature/citzenFeature/home/presentation/view/widget/CustomMap.dart';
-import 'package:citifix/feature/citzenFeature/reports/presentation/manager/comment/commentmanger_cubit.dart'; // تأكد من المسار
+import 'package:citifix/feature/citzenFeature/reports/presentation/manager/comment/commentmanger_cubit.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/manager/reportManger/cubit/report_manager_cubit.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/manager/reportManger/cubit/report_manager_state.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/views/widget/CustomTimelineTile.dart';
@@ -19,6 +18,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 import '../../data/repos/commentRepo/commentRepo.dart';
 
@@ -78,12 +78,9 @@ class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
                   physics: const BouncingScrollPhysics(),
                   slivers: [
                     ReportDetailsAppbar(
-                      image: report.imagesUrls.isEmpty
-                          ? [Constantmanger.defualtImage]
-                          : report.imagesUrls,
+                      mediaItems: [...report.imagesUrls, ...report.videosUrls],
                       ontap: () => Navigator.pop(context, true),
                     ),
-
                     SliverToBoxAdapter(
                       child: Padding(
                         padding: EdgeInsets.symmetric(
@@ -118,7 +115,28 @@ class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
                               ],
                             ),
                             SizedBox(height: 20.h),
-                            _buildCitizenCard(context, report.citizenName),
+
+                            _buildUserCard(
+                              context,
+                              label: S.of(context).reportedBy,
+                              name: report.citizenName,
+                              imageUrl: report.citizenProfileImageUrl,
+                              icon: Icons.person_outline,
+                            ),
+
+                            if (report.workerName.isNotEmpty) ...[
+                              SizedBox(height: 12.h),
+                              _buildUserCard(
+                                context,
+                                label: S.of(context).assignedWorker,
+                                name: report.workerName,
+                                imageUrl: report.workerProfileImageUrl,
+                                icon: Icons.engineering_outlined,
+                                isWorker: true,
+                                department: report.departmentName,
+                              ),
+                            ],
+
                             SizedBox(height: 20.h),
                             _sectionTitle(S.of(context).description),
                             SizedBox(height: 8.h),
@@ -130,32 +148,52 @@ class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
                                 height: 1.6,
                               ),
                             ),
+
                             SizedBox(height: 24.h),
                             _sectionTitle(S.of(context).location),
                             SizedBox(height: 4.h),
-                            Text(
-                              report.location,
-                              style: GoogleFonts.cairo(
-                                fontSize: 13.sp,
-                                color: Colors.grey[600],
-                              ),
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.location_on,
+                                  size: 14.sp,
+                                  color: Colors.red,
+                                ),
+                                SizedBox(width: 4.w),
+                                Expanded(
+                                  child: Text(
+                                    "${report.areaName} - ${report.location}",
+                                    style: GoogleFonts.cairo(
+                                      fontSize: 13.sp,
+                                      color: Colors.grey[600],
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                             SizedBox(height: 12.h),
                             _buildMapSection(
                               LatLng(report.latitude, report.longitude),
                               report.location,
                             ),
+
                             SizedBox(height: 24.h),
                             _sectionTitle(S.of(context).progressTracking),
                             SizedBox(height: 12.h),
                             _buildTimeline(context, report.status),
-                            SizedBox(height: 40.h),
+                            SizedBox(height: 24.h),
+                            const Divider(),
                           ],
                         ),
                       ),
                     ),
-
-                    Commentsystem(controller: controller, reporID: report.id),
+                    Commentsystem(
+                      controller: controller,
+                      reporID: report.id,
+                      comments: report.comments,
+                      isComment: report.status == "Resolved",
+                    ),
+                    SliverToBoxAdapter(child: SizedBox(height: 50.h)),
                   ],
                 );
               } else if (state is GetReportsByidFailure) {
@@ -165,6 +203,78 @@ class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
             },
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildUserCard(
+    BuildContext context, {
+    required String label,
+    required String name,
+    required String imageUrl,
+    required IconData icon,
+    bool isWorker = false,
+    String? department,
+  }) {
+    return Container(
+      padding: EdgeInsets.all(12.w),
+      decoration: BoxDecoration(
+        color: isWorker
+            ? ColorManger.kPrimary.withOpacity(0.03)
+            : Colors.grey[50],
+        borderRadius: BorderRadius.circular(12.r),
+        border: Border.all(
+          color: isWorker
+              ? ColorManger.kPrimary.withOpacity(0.1)
+              : Colors.grey[200]!,
+        ),
+      ),
+      child: Row(
+        children: [
+          CircleAvatar(
+            radius: 20.r,
+            backgroundColor: ColorManger.kPrimary.withOpacity(0.1),
+            child: ClipOval(
+              child: CachedNetworkImage(
+                imageUrl: imageUrl,
+                fit: BoxFit.cover,
+                width: 40.r,
+                height: 40.r,
+                errorWidget: (context, url, error) =>
+                    Icon(icon, color: ColorManger.kPrimary),
+                placeholder: (context, url) =>
+                    const CupertinoActivityIndicator(),
+              ),
+            ),
+          ),
+          SizedBox(width: 12.w),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  label,
+                  style: GoogleFonts.cairo(fontSize: 11.sp, color: Colors.grey),
+                ),
+                Text(
+                  name,
+                  style: GoogleFonts.cairo(
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                if (isWorker && department != null)
+                  Text(
+                    department,
+                    style: GoogleFonts.cairo(
+                      fontSize: 11.sp,
+                      color: ColorManger.kPrimary,
+                    ),
+                  ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -194,45 +304,6 @@ class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
     );
   }
 
-  Widget _buildCitizenCard(BuildContext context, String name) {
-    return Container(
-      padding: EdgeInsets.all(12.w),
-      decoration: BoxDecoration(
-        color: Colors.grey[50],
-        borderRadius: BorderRadius.circular(12.r),
-        border: Border.all(color: Colors.grey[200]!),
-      ),
-      child: Row(
-        children: [
-          CircleAvatar(
-            backgroundColor: ColorManger.kPrimary.withOpacity(0.1),
-            child: const Icon(
-              Icons.person_outline,
-              color: ColorManger.kPrimary,
-            ),
-          ),
-          SizedBox(width: 12.w),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                S.of(context).reportedBy,
-                style: GoogleFonts.cairo(fontSize: 11.sp, color: Colors.grey),
-              ),
-              Text(
-                name,
-                style: GoogleFonts.cairo(
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
   Widget _buildTimeline(BuildContext context, String currentStatus) {
     int currentIndex = StatusReport.fromString(currentStatus).index;
     return Column(
@@ -241,7 +312,7 @@ class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
           title: _getStepTitle(context, index),
           isFirst: index == 0,
           isDone: currentIndex >= index,
-          isLast: index == 4 - 1,
+          isLast: index == 3,
         );
       }),
     );
@@ -250,25 +321,27 @@ class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
   String _getStepTitle(BuildContext context, int index) {
     switch (index) {
       case 0:
-        return S.of(context).assigned;
-      case 1:
         return S.of(context).pending;
+      case 1:
+        return S.of(context).assigned;
       case 2:
         return S.of(context).inProgress;
       case 3:
         return S.of(context).resolved;
       default:
-        return Constantmanger.mySteps[index].title;
+        return "";
     }
   }
 
   Widget _buildMapSection(LatLng apiPosition, String location) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(16.r),
-      child: CustomMap.fromAPI(
-        location: location,
-        onmapCreated: (d, latlang) {},
-        apiPosition: apiPosition,
+      child: SizedBox(
+        child: CustomMap.fromAPI(
+          location: location,
+          onmapCreated: (d, latlang) {},
+          apiPosition: apiPosition,
+        ),
       ),
     );
   }
