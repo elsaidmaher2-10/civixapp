@@ -199,7 +199,7 @@ class _SingnupState extends State<Singnup> {
                               SelectRoleDropdown(
                                 onChanged: (value) {
                                   selectRoleController.add(value ?? "");
-                                  selectedRole = value?.toLowerCase() ?? "";
+                                  selectedRole = value ?? "";
                                 },
                                 streamController: selectRoleController,
                               ),
@@ -224,7 +224,8 @@ class _SingnupState extends State<Singnup> {
                                                     .trim(),
                                                 dateOfBirth: datecontroller.text
                                                     .trim(),
-                                                role: selectedRole,
+                                                role: selectedRole
+                                                    .toLowerCase(),
                                                 firstName: fnameController.text
                                                     .trim(),
                                                 lastName: lnameController.text

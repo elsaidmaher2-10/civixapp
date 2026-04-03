@@ -35,9 +35,8 @@ class CustomDateField extends StatelessWidget {
     );
 
     if (pickedDate != null) {
-      controller.text = DateFormat.yMd(
-        Localizations.localeOf(context).languageCode,
-      ).format(pickedDate);
+      String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
+      controller.text = formattedDate;
     }
   }
 

@@ -73,9 +73,7 @@ class SelectRoleDropdown extends StatelessWidget {
               child: Text(S.of(context).citizen),
             ),
           ],
-
           onChanged: onChanged,
-
           validator: (value) {
             if (value == null || value.isEmpty) {
               return S.of(context).selectRoleError;

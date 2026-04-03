@@ -93,7 +93,14 @@ class ReportCubit extends Cubit<ReportManagerState> {
     if (isClosed) return;
 
     final filteredList = _allReports.where((e) {
-      return e.title.toLowerCase().contains(query.toLowerCase());
+      final bool matchTitle = e.title.toLowerCase().contains(
+        query.toLowerCase(),
+      );
+      final bool matchId = e.id.toString().contains(query.toLowerCase());
+      final bool matchLocation = (e.location).toString().toLowerCase().contains(
+        query.toLowerCase(),
+      );
+      return matchTitle || matchId || matchLocation;
     }).toList();
 
     if (filteredList.isNotEmpty) {

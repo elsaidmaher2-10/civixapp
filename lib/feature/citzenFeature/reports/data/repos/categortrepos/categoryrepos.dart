@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:citifix/core/database/local/prefmanger.dart';
 import 'package:citifix/core/database/remote/api/ApiService.dart';
 import 'package:citifix/core/database/remote/error/ServerExciptionmodel.dart';
 import 'package:citifix/core/database/remote/error/failureResponse.dart';
@@ -21,6 +24,9 @@ class CategoryRepository {
 
     try {
       final response = await service.get(path: 'categories/list');
+
+ 
+
       return right(CategoryResponse.fromList(response));
     } on Serverexciptionmodel catch (e) {
       if (e.errors is Map?) {

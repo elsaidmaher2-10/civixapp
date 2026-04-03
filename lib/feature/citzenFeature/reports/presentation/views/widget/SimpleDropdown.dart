@@ -1,4 +1,7 @@
-import 'package:animated_custom_dropdown/custom_dropdown.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
+
 import 'package:citifix/core/DI/getit.dart';
 import 'package:citifix/core/database/remote/api/ApiService.dart';
 import 'package:citifix/core/resource/colormanager.dart';
@@ -8,88 +11,230 @@ import 'package:citifix/feature/citzenFeature/reports/data/repos/categortrepos/c
 import 'package:citifix/feature/citzenFeature/reports/presentation/manager/categoryManger/category_cubit.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/manager/categoryManger/category_state.dart';
 import 'package:citifix/generated/l10n.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 
-class CategoryDropdown extends StatelessWidget {
-  final Function(CategoryItem?) onChanged;
-  final SingleSelectController<CategoryItem?>? controller;
-  final CategoryItem? initialItem;
+class CategoryDropdown extends StatefulWidget {
+  final Function(CategoryItem?)? onChanged;
+  final ValueNotifier<CategoryItem?>? controller;
   final String? hintText;
-  final String? Function(CategoryItem?)? validator;
-  final CustomDropdownDecoration? decoration;
-
   const CategoryDropdown({
     super.key,
-    required this.onChanged,
+    this.onChanged,
     this.controller,
-    this.initialItem,
     this.hintText,
-    this.validator,
-    this.decoration,
   });
 
   @override
+  State<CategoryDropdown> createState() => _CategoryDropdownState();
+}
+
+class _CategoryDropdownState extends State<CategoryDropdown> {
+  late ValueNotifier<CategoryItem?> _controller;
+  @override
+  void initState() {
+    super.initState();
+    _controller = widget.controller ?? ValueNotifier<CategoryItem?>(null);
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final String currentLang = Localizations.localeOf(context).languageCode;
     return BlocProvider(
+      key: ValueKey(currentLang),
       create: (_) => CategoryCubit(
         CategoryRepository(
           service: getIt<Apiservice>(),
           internetChecker: getIt<InternetChecker>(),
         ),
-      )..fetchCategories(),
+      )..getCachedCategories(),
       child: BlocBuilder<CategoryCubit, CategoryState>(
         builder: (context, state) {
+          List<CategoryItem> items = [];
+          String hint = widget.hintText ?? S.of(context).selectCategoryHint;
           if (state is CategoryLoading) {
-            return CustomDropdown<CategoryItem?>.search(
-              items: const [],
-              onChanged: (_) {},
-              hintText: S.of(context).loadingCategories,
-              decoration: decoration,
-            );
+            hint = S.of(context).loadingCategories;
           } else if (state is CategoryLoaded) {
-            return CustomDropdown<CategoryItem?>.search(
-              items: state.categories,
-              searchHintText: S.of(context).searchHint,
-              noResultFoundText: S.of(context).noResult,
-              headerBuilder: (context, selectedItem, enabled) => Text(
-                selectedItem?.name ?? '',
-                style: GoogleFonts.cairo(fontSize: 14),
-                textAlign: TextAlign.start,
-              ),
-              listItemBuilder: (context, item, isSelected, onItemSelect) =>
-                  Text(
-                    item?.name ?? '',
-                    style: GoogleFonts.cairo(fontSize: 14),
-                    textAlign: TextAlign.start,
-                  ),
-              onChanged: onChanged,
-              controller: controller,
-              initialItem: initialItem,
-              hintText: hintText ?? S.of(context).selectCategoryHint,
-              validator: validator,
-              decoration:
-                  decoration ??
-                  CustomDropdownDecoration(
-                    closedFillColor: const Color(0xffF6F6F6),
-                    closedBorder: Border.all(color: ColorManger.kPrimary),
-                    searchFieldDecoration: SearchFieldDecoration(
-                      textStyle: GoogleFonts.cairo(fontSize: 14),
-                      hintStyle: GoogleFonts.cairo(fontSize: 14),
-                    ),
-                  ),
-            );
+            items = state.categories;
           } else if (state is CategoryError) {
-            return Center(
-              child: Text(
-                S.of(context).failedToLoadCategories,
-                style: GoogleFonts.cairo(color: Colors.red),
-              ),
-            );
+            hint = S.of(context).failedToLoadCategories;
           }
-          return const SizedBox();
+          return ValueListenableBuilder<CategoryItem?>(
+            valueListenable: _controller,
+            builder: (context, selectedItem, child) {
+              return InkWell(
+                onTap: items.isEmpty
+                    ? null
+                    : () => _showSearchBottomSheet(context, items),
+                child: Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 14,
+                  ),
+                  decoration: BoxDecoration(
+                    color: const Color(0xffF6F6F6),
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: ColorManger.kPrimary, width: 1),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        selectedItem?.name ?? hint,
+                        style: GoogleFonts.cairo(
+                          fontSize: 14,
+                          fontWeight: selectedItem == null
+                              ? FontWeight.normal
+                              : FontWeight.w500,
+                          color: selectedItem == null
+                              ? Colors.grey[600]
+                              : Colors.black,
+                        ),
+                      ),
+                      Icon(
+                        Icons.keyboard_arrow_down,
+                        color: ColorManger.kPrimary,
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          );
         },
+      ),
+    );
+  }
+
+  void _showSearchBottomSheet(BuildContext context, List<CategoryItem> items) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.white,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+      ),
+      builder: (context) {
+        return _SearchListWidget(
+          items: items,
+          searchHintText: S.of(context).searchHint,
+          noResultText: S.of(context).noResult,
+          onItemSelected: (item) {
+            _controller.value = item;
+            if (widget.onChanged != null) {
+              widget.onChanged!(item);
+            }
+            Navigator.pop(context);
+          },
+        );
+      },
+    );
+  }
+}
+
+class _SearchListWidget extends StatefulWidget {
+  final List<CategoryItem> items;
+  final Function(CategoryItem) onItemSelected;
+  final String searchHintText;
+  final String noResultText;
+
+  const _SearchListWidget({
+    required this.items,
+    required this.onItemSelected,
+    required this.searchHintText,
+    required this.noResultText,
+  });
+
+  @override
+  State<_SearchListWidget> createState() => _SearchListWidgetState();
+}
+
+class _SearchListWidgetState extends State<_SearchListWidget> {
+  late List<CategoryItem> filteredItems;
+
+  @override
+  void initState() {
+    super.initState();
+    filteredItems = widget.items;
+  }
+
+  void _filter(String query) {
+    setState(() {
+      filteredItems = widget.items.where((item) {
+        return item.name?.toLowerCase().contains(query.toLowerCase()) ?? false;
+      }).toList();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(
+        bottom: MediaQuery.of(context).viewInsets.bottom,
+        left: 16,
+        right: 16,
+        top: 16,
+      ),
+      child: FractionallySizedBox(
+        heightFactor: 0.6,
+        child: Column(
+          children: [
+            TextField(
+              onChanged: _filter,
+              style: GoogleFonts.cairo(fontSize: 14),
+              decoration: InputDecoration(
+                hintText: widget.searchHintText,
+                hintStyle: GoogleFonts.cairo(fontSize: 14),
+                prefixIcon: Icon(Icons.search, color: ColorManger.kPrimary),
+                filled: true,
+                fillColor: const Color(0xffF6F6F6),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide: BorderSide(
+                    color: ColorManger.kPrimary.withOpacity(0.5),
+                  ),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide: BorderSide(
+                    color: ColorManger.kPrimary.withOpacity(0.5),
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide: BorderSide(color: ColorManger.kPrimary),
+                ),
+              ),
+            ),
+            const SizedBox(height: 16),
+            Expanded(
+              child: filteredItems.isEmpty
+                  ? Center(
+                      child: Text(
+                        widget.noResultText,
+                        style: GoogleFonts.cairo(
+                          fontSize: 14,
+                          color: Colors.grey,
+                        ),
+                      ),
+                    )
+                  : ListView.separated(
+                      itemCount: filteredItems.length,
+                      separatorBuilder: (context, index) =>
+                          const Divider(height: 1),
+                      itemBuilder: (context, index) {
+                        final item = filteredItems[index];
+                        return ListTile(
+                          title: Text(
+                            item.name ?? '',
+                            style: GoogleFonts.cairo(fontSize: 14),
+                          ),
+                          onTap: () => widget.onItemSelected(item),
+                        );
+                      },
+                    ),
+            ),
+          ],
+        ),
       ),
     );
   }

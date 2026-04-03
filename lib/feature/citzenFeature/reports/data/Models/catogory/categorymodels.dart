@@ -19,7 +19,6 @@ class CategoryResponse {
 class CategoryItem {
   final int id;
   final String? name;
-
   CategoryItem({required this.id, this.name});
   factory CategoryItem.fromJson(Map<String, dynamic> json) {
     return CategoryItem(id: json['id'] ?? 0, name: json['name'] as String?);
@@ -28,4 +27,6 @@ class CategoryItem {
   Map<String, dynamic> toJson() {
     return {'id': id, 'name': name};
   }
+
+
 }
