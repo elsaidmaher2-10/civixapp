@@ -11,6 +11,7 @@ import 'package:citifix/feature/workerFeature/verfication/widget/IDUploadCard.da
 import 'package:citifix/feature/workerFeature/verfication/widget/StepHeader.dart';
 import 'package:citifix/feature/workerFeature/verfication/widget/verifcationinitWidget/buildAppBar.dart';
 import 'package:citifix/feature/workerFeature/verfication/widget/verifcationinitWidget/buildBottomBar.dart';
+import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,16 +24,16 @@ import 'Presentation/VerficationinitManger/VerificationInitCubit.dart';
 import 'Presentation/VerficationinitManger/verficationinitState.dart';
 import 'data/model/VerificationrequestModel.dart';
 
-class GlobalGateVerificationPage extends StatefulWidget {
-  const GlobalGateVerificationPage({super.key});
+class GlobalGateVerificationInitPage extends StatefulWidget {
+  const GlobalGateVerificationInitPage({super.key});
 
   @override
-  State<GlobalGateVerificationPage> createState() =>
+  State<GlobalGateVerificationInitPage> createState() =>
       _GlobalGateVerificationPageState();
 }
 
 class _GlobalGateVerificationPageState
-    extends State<GlobalGateVerificationPage> {
+    extends State<GlobalGateVerificationInitPage> {
   int? selectedZone;
   int? selectedCategory;
 
@@ -103,7 +104,7 @@ class _GlobalGateVerificationPageState
               Customsnackbar.show(
                 context: context,
                 backgroundColor: Colors.green,
-                message: state.message,
+                message: S.of(context).requestSentSuccessfully,
               );
               Navigator.of(context).pop();
             }

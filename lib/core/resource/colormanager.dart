@@ -76,4 +76,8 @@ class ColorManger {
 
   static const surfaceContainerLow = Color(0xFFF5F5F5);
   static const surfaceContainerHigh = Color(0xFFF5F5F5);
+  static const Color bgBackground = Color(0xFFF7F7F7);
+  static const Color textDark = Color(0xFF222222);
+  static const Color textGrey = Color(0xFF777777);
+  static const Color border = Color(0xFFE0E0E0);
 }

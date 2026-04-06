@@ -1,31 +1,36 @@
+import 'package:citifix/core/resource/colormanager.dart';
+import 'package:citifix/core/resource/screenutilsmaanger.dart';
+import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class UnderReviewScreen extends StatelessWidget {
-  UnderReviewScreen({super.key});
+  const UnderReviewScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final s = S.of(context);
+
     return Scaffold(
-      appBar: _buildAppBar(),
+      backgroundColor: ColorManger.bgBackground,
+      appBar: _buildAppBar(context, s),
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 32.0),
+          padding: EdgeInsets.symmetric(
+            horizontal: ScreenUtilsManager.p24,
+            vertical: ScreenUtilsManager.p32,
+          ),
           child: Center(
             child: ConstrainedBox(
-              constraints: BoxConstraints(maxWidth: 600),
+              constraints: const BoxConstraints(maxWidth: 600),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  _buildHeaderSection(),
-                  SizedBox(height: 48),
-                  _buildSummarySection(),
-                  SizedBox(height: 32),
-                  _buildWhatsNextSection(),
-                  SizedBox(height: 32),
-                  _buildActionButtons(),
-                  SizedBox(height: 48),
-                  _buildFooter(),
+                  _buildHeaderSection(context, s),
+                  SizedBox(height: ScreenUtilsManager.p24),
+                  _buildSummarySection(context, s),
+                  SizedBox(height: ScreenUtilsManager.p24),
+                  _buildWhatsNextSection(context, s),
                 ],
               ),
             ),
@@ -35,40 +40,38 @@ class UnderReviewScreen extends StatelessWidget {
     );
   }
 
-  PreferredSizeWidget _buildAppBar() {
+  PreferredSizeWidget _buildAppBar(BuildContext context, S s) {
     return AppBar(
-      backgroundColor: Colors.white.withOpacity(0.9),
+      backgroundColor: ColorManger.white.withOpacity(0.9),
       elevation: 0,
       scrolledUnderElevation: 0,
       bottom: PreferredSize(
-        preferredSize: Size.fromHeight(1.0),
-        child: Container(color: Color(0xFFF5F5F5), height: 1.0),
+        preferredSize: const Size.fromHeight(1),
+        child: Container(color: ColorManger.border, height: 1),
       ),
       title: Row(
         children: [
-          Icon(Icons.security, color: Color(0xFFFF7A00)),
-          SizedBox(width: 8),
+          Icon(Icons.location_city, color: ColorManger.workerprimary),
+          SizedBox(width: ScreenUtilsManager.p8),
           Text(
-            'Global Gate',
+            s.appTitle,
             style: GoogleFonts.cairo(
-              color: Color(0xFF222222),
+              color: ColorManger.textDark,
               fontWeight: FontWeight.bold,
-              fontSize: 18,
-              letterSpacing: -0.5,
+              fontSize: ScreenUtilsManager.s18,
             ),
           ),
         ],
       ),
       actions: [
-        // Hidden on mobile in the HTML, but added for completeness if viewed on wider screens
         Padding(
-          padding: EdgeInsets.only(right: 24.0),
+          padding: EdgeInsets.only(right: ScreenUtilsManager.p24),
           child: Text(
-            'Verification',
+            s.verification,
             style: GoogleFonts.cairo(
-              color: Color(0xFFFF7A00),
+              color: ColorManger.workerprimary,
               fontWeight: FontWeight.w600,
-              fontSize: 16,
+              fontSize: ScreenUtilsManager.s16,
             ),
           ),
         ),
@@ -76,46 +79,39 @@ class UnderReviewScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildHeaderSection() {
+  Widget _buildHeaderSection(BuildContext context, S s) {
     return Column(
       children: [
         Container(
           width: 96,
           height: 96,
           decoration: BoxDecoration(
-            color: Color(0xFFFF7A00).withOpacity(0.1),
+            color: ColorManger.workerprimary.withOpacity(0.1),
             shape: BoxShape.circle,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.04),
-                blurRadius: 24,
-                offset: Offset(0, 8),
-              ),
-            ],
           ),
-          child: Center(
-            child: Icon(Icons.schedule, size: 48, color: Color(0xFFFF7A00)),
+          child: Icon(
+            Icons.schedule,
+            size: ScreenUtilsManager.icon48,
+            color: ColorManger.workerprimary,
           ),
         ),
-        SizedBox(height: 24),
+        SizedBox(height: ScreenUtilsManager.p24),
         Text(
-          'Documents Under Review',
+          s.underReview,
           textAlign: TextAlign.center,
           style: GoogleFonts.cairo(
-            fontSize: 32,
+            fontSize: ScreenUtilsManager.s32,
             fontWeight: FontWeight.w800,
-            color: Color(0xFF222222),
-            letterSpacing: -0.5,
-            height: 1.2,
+            color: ColorManger.textDark,
           ),
         ),
-        SizedBox(height: 12),
+        SizedBox(height: ScreenUtilsManager.p12),
         Text(
-          'Your documents are being reviewed by our security team. This usually takes between 2-4 business hours.',
+          s.reviewDesc,
           textAlign: TextAlign.center,
           style: GoogleFonts.cairo(
-            fontSize: 16,
-            color: Color(0xFF777777),
+            fontSize: ScreenUtilsManager.s16,
+            color: ColorManger.textGrey,
             height: 1.5,
           ),
         ),
@@ -123,104 +119,117 @@ class UnderReviewScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildSummarySection() {
-    return Container(
-      padding: EdgeInsets.all(32),
-      decoration: BoxDecoration(
-        color: Color(0xFFF5F5F5),
-        borderRadius: BorderRadius.circular(24),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.04),
-            blurRadius: 24,
-            offset: Offset(0, 8),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Submission Summary',
-                style: GoogleFonts.cairo(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF222222),
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                decoration: BoxDecoration(
-                  color: Color(0xFFFF7A00).withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                child: Text(
-                  'IN PROGRESS',
-                  style: GoogleFonts.cairo(
-                    fontSize: 10,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFFFF7A00),
-                    letterSpacing: 1.2,
-                  ),
-                ),
+  Widget _buildSummarySection(BuildContext context, S s) {
+    return Stack(
+      children: [
+        Container(
+          padding: EdgeInsets.all(ScreenUtilsManager.p32),
+          decoration: BoxDecoration(
+            color: ColorManger.white,
+            borderRadius: BorderRadius.circular(ScreenUtilsManager.r24),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.04),
+                blurRadius: 24,
+                offset: const Offset(0, 8),
               ),
             ],
           ),
-          SizedBox(height: 32),
-          // Using a Wrap to simulate the grid behaviour (stacking on mobile, side-by-side on tablet)
-          Wrap(
-            spacing: 24,
-            runSpacing: 24,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
-                width: 250, // Approx half width for tablet
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _buildInfoField(
-                      'ACCESS ZONE',
-                      'Tier 1 • High Security Data Center',
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    s.submissionSummary,
+                    style: GoogleFonts.cairo(
+                      fontSize: ScreenUtilsManager.s20,
+                      fontWeight: FontWeight.bold,
+                      color: ColorManger.textDark,
                     ),
-                    SizedBox(height: 16),
-                    _buildInfoField(
-                      'DEPARTMENT',
-                      'Infrastructure & Operations',
+                  ),
+                  Container(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: ScreenUtilsManager.p12,
+                      vertical: ScreenUtilsManager.p8 / 2,
                     ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                width: 250,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'IDENTITY DOCUMENTS',
+                    decoration: BoxDecoration(
+                      color: ColorManger.workerprimary.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(
+                        ScreenUtilsManager.r16,
+                      ),
+                    ),
+                    child: Text(
+                      s.inProgress,
                       style: GoogleFonts.cairo(
-                        fontSize: 10,
+                        fontSize: ScreenUtilsManager.s10,
                         fontWeight: FontWeight.bold,
-                        color: Color(0xFF777777),
+                        color: ColorManger.workerprimary,
                         letterSpacing: 1.2,
                       ),
                     ),
-                    SizedBox(height: 8),
-                    Row(
+                  ),
+                ],
+              ),
+
+              SizedBox(height: ScreenUtilsManager.p32),
+
+              Wrap(
+                spacing: ScreenUtilsManager.p24,
+                runSpacing: ScreenUtilsManager.p24,
+                children: [
+                  SizedBox(
+                    width: 250,
+                    child: Column(
                       children: [
-                        Expanded(child: _buildDocumentPlaceholder()),
-                        SizedBox(width: 12),
-                        Expanded(child: _buildDocumentPlaceholder()),
+                        _buildInfoField(
+                          s.accessZone,
+                          "Tier 1 • High Security Data Center",
+                        ),
+                        SizedBox(height: ScreenUtilsManager.p16),
+                        _buildInfoField(
+                          s.department,
+                          "Infrastructure & Operations",
+                        ),
                       ],
                     ),
-                  ],
-                ),
+                  ),
+                  SizedBox(
+                    width: 250,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          s.identityDocs,
+                          style: GoogleFonts.cairo(
+                            fontSize: ScreenUtilsManager.s10,
+                            fontWeight: FontWeight.bold,
+                            color: ColorManger.textGrey,
+                            letterSpacing: 1.2,
+                          ),
+                        ),
+                        SizedBox(height: ScreenUtilsManager.p8),
+                        Row(
+                          children: [
+                            Expanded(child: _buildDocumentPlaceholder()),
+                            SizedBox(width: ScreenUtilsManager.p12),
+                            Expanded(child: _buildDocumentPlaceholder()),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
-        ],
-      ),
+        ),
+
+        Positioned.fill(
+          child: Container(color: ColorManger.bgbackground.withOpacity(0.5)),
+        ),
+      ],
     );
   }
 
@@ -231,26 +240,25 @@ class UnderReviewScreen extends StatelessWidget {
         Text(
           label,
           style: GoogleFonts.cairo(
-            fontSize: 10,
+            fontSize: ScreenUtilsManager.s10,
             fontWeight: FontWeight.bold,
-            color: Color(0xFF777777),
-            letterSpacing: 1.2,
+            color: ColorManger.textGrey,
           ),
         ),
-        SizedBox(height: 8),
+        SizedBox(height: ScreenUtilsManager.p8),
         Container(
           width: double.infinity,
-          padding: EdgeInsets.all(16),
+          padding: EdgeInsets.all(ScreenUtilsManager.p16),
           decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: Color(0xFFE0E0E0)),
+            color: ColorManger.white,
+            borderRadius: BorderRadius.circular(ScreenUtilsManager.r12),
+            border: Border.all(color: ColorManger.border),
           ),
           child: Text(
             value,
             style: GoogleFonts.cairo(
               fontWeight: FontWeight.w600,
-              color: Color(0xFF222222),
+              color: ColorManger.textDark,
             ),
           ),
         ),
@@ -263,72 +271,52 @@ class UnderReviewScreen extends StatelessWidget {
       aspectRatio: 4 / 3,
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: Color(0xFFE0E0E0)),
+          color: ColorManger.white,
+          borderRadius: BorderRadius.circular(ScreenUtilsManager.r12),
+          border: Border.all(color: ColorManger.border),
         ),
-        child: Stack(
-          fit: StackFit.expand,
-          children: [
-            Opacity(
-              opacity: 0.1,
-              child: Image.network(
-                'https://picsum.photos/seed/doc/200/150',
-                fit: BoxFit.cover,
-                color: Colors.grey,
-                colorBlendMode: BlendMode.saturation,
-              ),
-            ),
-            Center(
-              child: Icon(
-                Icons.visibility_off,
-                color: Color(0x66777777), // secondary with 40% opacity
-              ),
-            ),
-          ],
-        ),
+        child: Icon(Icons.visibility_off, color: ColorManger.textGrey),
       ),
     );
   }
 
-  Widget _buildWhatsNextSection() {
+  Widget _buildWhatsNextSection(BuildContext context, S s) {
     return Container(
-      padding: EdgeInsets.all(24),
+      padding: EdgeInsets.all(ScreenUtilsManager.p24),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: Color(0xFFE0E0E0)),
+        color: ColorManger.white,
+        borderRadius: BorderRadius.circular(ScreenUtilsManager.r24),
+        border: Border.all(color: ColorManger.border),
       ),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            padding: EdgeInsets.all(12),
+            padding: EdgeInsets.all(ScreenUtilsManager.p12),
             decoration: BoxDecoration(
-              color: Color(0xFFFF7A00).withOpacity(0.1),
-              borderRadius: BorderRadius.circular(16),
+              color: ColorManger.workerprimary.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(ScreenUtilsManager.r16),
             ),
-            child: Icon(Icons.info_outline, color: Color(0xFFFF7A00)),
+            child: Icon(Icons.info_outline, color: ColorManger.workerprimary),
           ),
-          SizedBox(width: 16),
+          SizedBox(width: ScreenUtilsManager.p16),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "What's next?",
+                  s.whatsNext,
                   style: GoogleFonts.cairo(
-                    fontSize: 16,
+                    fontSize: ScreenUtilsManager.s16,
                     fontWeight: FontWeight.bold,
-                    color: Color(0xFF222222),
+                    color: ColorManger.textDark,
                   ),
                 ),
-                SizedBox(height: 4),
+                SizedBox(height: ScreenUtilsManager.p8 / 2),
                 Text(
-                  'Once verified, you will receive a notification via the Global Gate app and a secure token will be issued for your mobile device.',
+                  s.whatsNextDesc,
                   style: GoogleFonts.cairo(
-                    fontSize: 14,
-                    color: Color(0xFF777777),
+                    fontSize: ScreenUtilsManager.s14,
+                    color: ColorManger.textGrey,
                     height: 1.5,
                   ),
                 ),
@@ -336,76 +324,6 @@ class UnderReviewScreen extends StatelessWidget {
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget _buildActionButtons() {
-    return Column(
-      children: [
-        Opacity(
-          opacity: 0.5,
-          child: ElevatedButton(
-            onPressed: null, // Disabled state
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Color(0xFFFF7A00),
-              disabledBackgroundColor: Color(0xFFFF7A00),
-              minimumSize: Size(double.infinity, 56),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(Icons.lock, color: Colors.white, size: 20),
-                SizedBox(width: 8),
-                Text(
-                  'Submit Additional Info',
-                  style: GoogleFonts.cairo(
-                    color: Colors.white,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-        SizedBox(height: 16),
-        Opacity(
-          opacity: 0.4,
-          child: OutlinedButton(
-            onPressed: null, // Disabled state
-            style: OutlinedButton.styleFrom(
-              disabledForegroundColor: Color(0xFF222222),
-              minimumSize: Size(double.infinity, 56),
-              side: BorderSide(color: Color(0xFFE0E0E0)),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-            ),
-            child: Text(
-              'Cancel Application',
-              style: GoogleFonts.cairo(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildFooter() {
-    return Text(
-      'SECURE SESSION • 08:42:11 REMAINING',
-      style: GoogleFonts.cairo(
-        fontSize: 10,
-        fontWeight: FontWeight.bold,
-        color: Color(0xFF777777),
-        letterSpacing: 2.0,
       ),
     );
   }

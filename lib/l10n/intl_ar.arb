@@ -13,7 +13,7 @@
   "email": "البريد الإلكتروني",
   "password": "كلمة المرور",
   "phone": "رقم الهاتف",
-  "firstName": "الاسم الأول",
+  "firstName": "الاسم الأول","requestSentSuccessfully": "تم إرسال الطلب بنجاح",
   "lastName": "الاسم الأخير",
   "confirmPassword": "تأكيد كلمة المرور",
   "address": "العنوان",
@@ -231,5 +231,47 @@
   "status": "الحالة",
   "date": "التاريخ",
   "noMedia": "لا توجد وسائط متاحة","assignedWorker": "الموظف المسؤول"
+, "appName": "البوابة العالمية",
+    "verification": "التحقق",
 
+    "underReview": "المستندات قيد المراجعة",
+    "reviewDesc":
+        "يتم الآن مراجعة مستنداتك من قبل فريق الأمان. عادة تستغرق العملية من 2 إلى 4 ساعات عمل.",
+
+    "submissionSummary": "ملخص الطلب",
+
+    "accessZone": "منطقة الوصول",
+    "identityDocs": "مستندات الهوية",
+
+    "whatsNext": "ما الخطوة التالية؟",
+    "whatsNextDesc":
+        "بعد التحقق، سيتم إشعارك عبر التطبيق وإصدار رمز أمان لجهازك المحمول.",
+    "submitMore": "إرسال معلومات إضافية",
+    "cancelApp": "إلغاء الطلب",
+    "secureSession": "جلسة آمنة • 08:42:11 متبقي", 
+
+  "verificationFailed": "فشل التحقق",
+  "verificationFailedDesc": "لم نتمكن من التحقق من هويتك بناءً على المستندات المقدمة. يرجى مراجعة التفاصيل أدناه.",
+
+  "attentionRequired": "يتطلب انتباه",
+  "updateDocuments": "تحديث المستندات",
+  "reviewInformation": "مراجعة المعلومات",
+
+  "passportPhoto": "صفحة صورة جواز السفر",
+  "imageBlurry": "الصورة غير واضحة",
+  "reupload": "إعادة الرفع",
+
+  "documentNumber": "رقم المستند",
+  "fullNamea": "الاسم القانوني الكامل",
+
+  "verificationGuide": "دليل التحقق",
+
+
+  "numberMismatch": "الرقم لا يتطابق مع الصورة المقدمة",
+  "enterNameHint": "أدخل الاسم كما هو في الهوية",
+  "errorIdNotClear": "صورة الهوية المرفوعة غير واضحة أو غير مقروءة.",
+  "errorMissingData": "بعض المعلومات المطلوبة مفقودة من مستنداتك.",
+  "errorSelfieMismatch": "الصورة الشخصية لا تتطابق مع صورة الهوية المقدمة.",
+  "resubmit": "حاول مرة أخرى",
+  "needHelp": "التواصل مع الدعم"
 }

@@ -10,7 +10,7 @@ class CustomDateField extends StatelessWidget {
 
   Future<void> _selectDate(BuildContext context) async {
     DateTime? pickedDate = await showDatePicker(
-      locale: Localizations.localeOf(context),
+      locale: Locale("en"),
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime(1950),

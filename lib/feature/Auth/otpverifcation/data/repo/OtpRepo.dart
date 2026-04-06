@@ -2,6 +2,7 @@ import 'package:citifix/core/database/remote/api/ApiConstant.dart';
 import 'package:citifix/core/database/remote/api/ApiService.dart';
 import 'package:citifix/core/database/remote/error/ServerExciptionmodel.dart';
 import 'package:citifix/core/database/remote/error/failureResponse.dart';
+import 'package:citifix/feature/Auth/otpverifcation/data/models/globalOtpModel.dart';
 import 'package:citifix/feature/Auth/otpverifcation/data/models/otpSuccessModel.dart';
 import 'package:citifix/feature/Auth/otpverifcation/data/models/otpmodel.dart';
 import 'package:citifix/generated/l10n.dart';
@@ -11,7 +12,7 @@ import 'package:flutter/material.dart';
 class OtpRepo {
   OtpRepo(this.service);
   Apiservice service;
-  Future<Either<FailureResponse, dynamic>> OtPVerification(
+  Future<Either<FailureResponse, OtpResponse>> OtPVerification(
     OtpModel otp,
     bool isreset,
   ) async {
@@ -20,8 +21,11 @@ class OtpRepo {
         path: isreset ? Apiconstant.verifyotp : Apiconstant.confirmemaillogin,
         body: {"email": otp.Email, isreset ? "otp" : "code": otp.code},
       );
-
-      return right(isreset ? response : Otpsuccessmodel.fromjson(response));
+      if (response is String) {
+        return Right(OtpResponse(message: response));
+      } else {
+        return Right(OtpResponse(data: Otpsuccessmodel.fromjson(response)));
+      }
     } on Serverexciptionmodel catch (e) {
       if (e.errors is Map?) {
         final d = FailureResponse.fromJson(e.errors);

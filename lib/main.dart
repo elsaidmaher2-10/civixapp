@@ -4,6 +4,7 @@ import 'package:citifix/core/DI/getit.dart';
 import 'package:citifix/core/database/local/prefmanger.dart';
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
+import 'package:citifix/core/service/LocationService.dart';
 import 'package:citifix/core/service/local_notification_service.dart';
 import 'package:citifix/core/service/notification_service.dart';
 import 'package:citifix/core/service/observer.dart';
@@ -28,9 +29,12 @@ Future<void> main() async {
 
   runApp(const MyAppWrapper());
 }
-
 Future<void> _initApp() async {
   SystemChrome.setSystemUIOverlayStyle(_statusBarStyle);
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown
+  ]);
   setupgetit();
   if (Firebase.apps.isEmpty) {
     await Firebase.initializeApp();
@@ -38,6 +42,7 @@ Future<void> _initApp() async {
   await PrefrenceManager().init();
   await LocalNotificationService.init();
   await NotificationService.init();
+  await Locationservice().init();
 
   Bloc.observer = MyBlocObserver();
 }

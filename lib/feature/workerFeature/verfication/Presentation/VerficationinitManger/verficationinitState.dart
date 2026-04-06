@@ -1,6 +1,8 @@
+import 'package:citifix/feature/workerFeature/verfication/data/model/WorkerRequestModel.dart';
 import '../../data/model/verficationmodel.dart';
 
 abstract class VerificationInitState {}
+
 
 class VerificationInitInitial extends VerificationInitState {}
 
@@ -14,18 +16,40 @@ class VerificationInitSuccess extends VerificationInitState {
 
 class VerificationInitError extends VerificationInitState {
   final String message;
-
   VerificationInitError(this.message);
 }
 
-class VerificationRequestLoading extends VerificationInitState {}
+class VerificationRequestLoading extends VerificationInitState {
+  final VerficationInitList? areas;
+  final VerficationInitList? departments;
+  
+  VerificationRequestLoading({this.areas, this.departments});
+}
 
 class VerificationRequestSuccess extends VerificationInitState {
-  final String message;
-  VerificationRequestSuccess(this.message);
+  VerificationRequestSuccess();
 }
 
 class VerificationRequestError extends VerificationInitState {
   final String errorMessage;
-  VerificationRequestError(this.errorMessage);
+  final VerficationInitList? areas;
+  final VerficationInitList? departments;
+
+  VerificationRequestError(this.errorMessage, {this.areas, this.departments});
+}
+
+
+class VerificationSuccess extends VerificationInitState {
+  final WorkerRequestModel workerRequest;
+  VerificationSuccess({required this.workerRequest});
+}
+
+class VerificationError extends VerificationInitState {
+  final String errorMessage;
+  final int? statusCode;
+
+  VerificationError({
+    required this.errorMessage,
+    this.statusCode,
+  });
 }

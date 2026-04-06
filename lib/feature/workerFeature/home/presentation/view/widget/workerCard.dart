@@ -3,7 +3,9 @@ import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/core/widget/customShimerwidget.dart';
-import 'package:citifix/feature/workerFeature/verfication/verficationinit.dart';
+import 'package:citifix/feature/workerFeature/verfication/verficationPending.dart';
+import 'package:citifix/feature/workerFeature/verfication/vericationField.dart';
+import 'package:citifix/feature/workerFeature/verfication/vericationSuccess.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -150,7 +152,7 @@ class WorkerCard extends StatelessWidget {
                 builder: (context) => BlocProvider(
                   create: (context) =>
                       VerificationInitCubit(getIt<VerficationInitRepo>()),
-                  child: GlobalGateVerificationPage(),
+                  child: VerificationCompleteScreen(),
                 ),
               ),
             );

@@ -659,6 +659,16 @@ class S {
     return Intl.message('Gender', name: 'gender', desc: '', args: []);
   }
 
+  /// `Request sent successfully`
+  String get requestSentSuccessfully {
+    return Intl.message(
+      'Request sent successfully',
+      name: 'requestSentSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Age`
   String get age {
     return Intl.message('Age', name: 'age', desc: '', args: []);
@@ -1884,21 +1894,276 @@ class S {
     return Intl.message('Date', name: 'date', desc: '', args: []);
   }
 
-  /// `No media available`
-  String get noMedia {
+  /// `Verification`
+  String get verification {
     return Intl.message(
-      'No media available',
-      name: 'noMedia',
+      'Verification',
+      name: 'verification',
       desc: '',
       args: [],
     );
   }
 
-  /// `Assigned Worker`
-  String get assignedWorker {
+  /// `Documents Under Review`
+  String get underReview {
     return Intl.message(
-      'Assigned Worker',
-      name: 'assignedWorker',
+      'Documents Under Review',
+      name: 'underReview',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your documents are being reviewed by our security team. This usually takes between 2-4 business hours.`
+  String get reviewDesc {
+    return Intl.message(
+      'Your documents are being reviewed by our security team. This usually takes between 2-4 business hours.',
+      name: 'reviewDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Submission Summary`
+  String get submissionSummary {
+    return Intl.message(
+      'Submission Summary',
+      name: 'submissionSummary',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ACCESS ZONE`
+  String get accessZone {
+    return Intl.message('ACCESS ZONE', name: 'accessZone', desc: '', args: []);
+  }
+
+  /// `IDENTITY DOCUMENTS`
+  String get identityDocs {
+    return Intl.message(
+      'IDENTITY DOCUMENTS',
+      name: 'identityDocs',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `What's next?`
+  String get whatsNext {
+    return Intl.message('What\'s next?', name: 'whatsNext', desc: '', args: []);
+  }
+
+  /// `Once verified, you will receive a notification via the CitiFix app and a secure token will be issued for your mobile device.`
+  String get whatsNextDesc {
+    return Intl.message(
+      'Once verified, you will receive a notification via the CitiFix app and a secure token will be issued for your mobile device.',
+      name: 'whatsNextDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Submit Additional Info`
+  String get submitMore {
+    return Intl.message(
+      'Submit Additional Info',
+      name: 'submitMore',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel Application`
+  String get cancelApp {
+    return Intl.message(
+      'Cancel Application',
+      name: 'cancelApp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `SECURE SESSION • 08:42:11 REMAINING`
+  String get secureSession {
+    return Intl.message(
+      'SECURE SESSION • 08:42:11 REMAINING',
+      name: 'secureSession',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Verification Failed`
+  String get verificationFailed {
+    return Intl.message(
+      'Verification Failed',
+      name: 'verificationFailed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We couldn't verify your identity based on the documents provided. Please review the details below.`
+  String get verificationFailedDesc {
+    return Intl.message(
+      'We couldn\'t verify your identity based on the documents provided. Please review the details below.',
+      name: 'verificationFailedDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Attention Required`
+  String get attentionRequired {
+    return Intl.message(
+      'Attention Required',
+      name: 'attentionRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Update Documents`
+  String get updateDocuments {
+    return Intl.message(
+      'Update Documents',
+      name: 'updateDocuments',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Review Information`
+  String get reviewInformation {
+    return Intl.message(
+      'Review Information',
+      name: 'reviewInformation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Passport Photo Page`
+  String get passportPhoto {
+    return Intl.message(
+      'Passport Photo Page',
+      name: 'passportPhoto',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Image Blurry`
+  String get imageBlurry {
+    return Intl.message(
+      'Image Blurry',
+      name: 'imageBlurry',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Re-upload`
+  String get reupload {
+    return Intl.message('Re-upload', name: 'reupload', desc: '', args: []);
+  }
+
+  /// `Document Number`
+  String get documentNumber {
+    return Intl.message(
+      'Document Number',
+      name: 'documentNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Full Legal Name`
+  String get fullNamea {
+    return Intl.message(
+      'Full Legal Name',
+      name: 'fullNamea',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Resubmit Verification`
+  String get resubmit {
+    return Intl.message(
+      'Resubmit Verification',
+      name: 'resubmit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Need help? Visit our `
+  String get needHelp {
+    return Intl.message(
+      'Need help? Visit our ',
+      name: 'needHelp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Verification Guide`
+  String get verificationGuide {
+    return Intl.message(
+      'Verification Guide',
+      name: 'verificationGuide',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Number didn't match the image provided`
+  String get numberMismatch {
+    return Intl.message(
+      'Number didn\'t match the image provided',
+      name: 'numberMismatch',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter as shown on ID`
+  String get enterNameHint {
+    return Intl.message(
+      'Enter as shown on ID',
+      name: 'enterNameHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The uploaded ID image is blurry or unreadable.`
+  String get errorIdNotClear {
+    return Intl.message(
+      'The uploaded ID image is blurry or unreadable.',
+      name: 'errorIdNotClear',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Some required information is missing from your documents.`
+  String get errorMissingData {
+    return Intl.message(
+      'Some required information is missing from your documents.',
+      name: 'errorMissingData',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The selfie does not match the provided ID photo.`
+  String get errorSelfieMismatch {
+    return Intl.message(
+      'The selfie does not match the provided ID photo.',
+      name: 'errorSelfieMismatch',
       desc: '',
       args: [],
     );

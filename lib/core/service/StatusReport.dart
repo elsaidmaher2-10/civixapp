@@ -20,3 +20,19 @@ enum StatusReport {
     );
   }
 }
+
+enum VerificationStatus {
+  assigned("init"),
+  pending("Pending"),
+  completed("Completed"),
+  rejected("Rejected");
+  final String value;
+  const VerificationStatus(this.value);
+  static VerificationStatus fromString(String? status) {
+    if (status == null) return VerificationStatus.pending;
+    return VerificationStatus.values.firstWhere(
+      (e) => e.value.toLowerCase() == status.toLowerCase(),
+      orElse: () => VerificationStatus.pending,
+    );
+  }
+}

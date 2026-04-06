@@ -1,4 +1,5 @@
 import 'package:citifix/core/database/remote/api/ApiService.dart';
+import 'package:citifix/feature/Auth/otpverifcation/data/models/otpSuccessModel.dart';
 import 'package:citifix/feature/Auth/otpverifcation/data/models/otpmodel.dart';
 import 'package:citifix/feature/Auth/otpverifcation/data/repo/OtpRepo.dart';
 import 'package:citifix/feature/Auth/otpverifcation/presentation/manager/cubit/otp_verication_state.dart';
@@ -18,7 +19,7 @@ class OtpVericationCubit extends Cubit<OtpVericationState> {
 
     result.fold((failure) => emit(OtpVericationFailure(failure)), (success) {
       if (isReset) {
-        emit(OtpVericationSucces(success.toString()));
+        emit(OtpVericationSucces(success));
       } else {
         emit(OtpVericationSucces(success));
       }

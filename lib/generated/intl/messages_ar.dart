@@ -32,6 +32,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "accessZone": MessageLookupByLibrary.simpleMessage("منطقة الوصول"),
     "accountInformation": MessageLookupByLibrary.simpleMessage(
       "معلومات الحساب",
     ),
@@ -53,9 +54,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "appTitle": MessageLookupByLibrary.simpleMessage("سيتيفيكس"),
     "arabic": MessageLookupByLibrary.simpleMessage("العربية"),
     "assigned": MessageLookupByLibrary.simpleMessage("تم التعيين"),
-    "assignedWorker": MessageLookupByLibrary.simpleMessage("الموظف المسؤول"),
+    "attentionRequired": MessageLookupByLibrary.simpleMessage("يتطلب انتباه"),
     "camera": MessageLookupByLibrary.simpleMessage("الكاميرا"),
     "cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
+    "cancelApp": MessageLookupByLibrary.simpleMessage("إلغاء الطلب"),
     "caughtUpMessage": MessageLookupByLibrary.simpleMessage(
       "أنت مطلع على كل شيء! تحقق لاحقاً.",
     ),
@@ -118,6 +120,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "يجب أن يكون الوصف 10 أحرف على الأقل",
     ),
     "details": MessageLookupByLibrary.simpleMessage("التفاصيل"),
+    "documentNumber": MessageLookupByLibrary.simpleMessage("رقم المستند"),
     "dontHaveAccount": MessageLookupByLibrary.simpleMessage("ليس لديك حساب؟"),
     "editProfile": MessageLookupByLibrary.simpleMessage("تعديل الملف الشخصي"),
     "email": MessageLookupByLibrary.simpleMessage("البريد الإلكتروني"),
@@ -134,11 +137,23 @@ class MessageLookup extends MessageLookupByLibrary {
     "enterConfirmPassword": MessageLookupByLibrary.simpleMessage(
       "أدخل تأكيد كلمة المرور",
     ),
+    "enterNameHint": MessageLookupByLibrary.simpleMessage(
+      "أدخل الاسم كما هو في الهوية",
+    ),
     "enterNewPassword": MessageLookupByLibrary.simpleMessage(
       "أدخل كلمة مرور جديدة",
     ),
     "error": MessageLookupByLibrary.simpleMessage("خطأ"),
+    "errorIdNotClear": MessageLookupByLibrary.simpleMessage(
+      "صورة الهوية المرفوعة غير واضحة أو غير مقروءة.",
+    ),
+    "errorMissingData": MessageLookupByLibrary.simpleMessage(
+      "بعض المعلومات المطلوبة مفقودة من مستنداتك.",
+    ),
     "errorOccurred": MessageLookupByLibrary.simpleMessage("حدث خطأ ما"),
+    "errorSelfieMismatch": MessageLookupByLibrary.simpleMessage(
+      "الصورة الشخصية لا تتطابق مع صورة الهوية المقدمة.",
+    ),
     "errorTitle": MessageLookupByLibrary.simpleMessage("عذراً! حدث خطأ ما."),
     "failedToLoadCategories": MessageLookupByLibrary.simpleMessage(
       "فشل تحميل الأقسام",
@@ -165,6 +180,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "forgotPassword": MessageLookupByLibrary.simpleMessage("نسيت كلمة المرور"),
     "fullName": MessageLookupByLibrary.simpleMessage("الاسم الكامل"),
+    "fullNamea": MessageLookupByLibrary.simpleMessage("الاسم القانوني الكامل"),
     "gender": MessageLookupByLibrary.simpleMessage("النوع"),
     "haveAccount": MessageLookupByLibrary.simpleMessage("لديك حساب بالفعل؟"),
     "help": MessageLookupByLibrary.simpleMessage("المساعدة والشروط"),
@@ -190,6 +206,8 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "id": MessageLookupByLibrary.simpleMessage("رقم البلاغ"),
     "identity": MessageLookupByLibrary.simpleMessage("الهوية"),
+    "identityDocs": MessageLookupByLibrary.simpleMessage("مستندات الهوية"),
+    "imageBlurry": MessageLookupByLibrary.simpleMessage("الصورة غير واضحة"),
     "imageRequired": MessageLookupByLibrary.simpleMessage("الصورة مطلوبة"),
     "inProgress": MessageLookupByLibrary.simpleMessage("قيد التنفيذ"),
     "invalidEmail": MessageLookupByLibrary.simpleMessage(
@@ -246,6 +264,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "من فضلك أدخل الرقم القومي",
     ),
     "nationalNumber": MessageLookupByLibrary.simpleMessage("الرقم القومي"),
+    "needHelp": MessageLookupByLibrary.simpleMessage("التواصل مع الدعم"),
     "newPassword": MessageLookupByLibrary.simpleMessage("كلمة مرور جديدة"),
     "next": MessageLookupByLibrary.simpleMessage("التالي"),
     "noCommentsYet": MessageLookupByLibrary.simpleMessage(
@@ -255,7 +274,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "noInternet": MessageLookupByLibrary.simpleMessage(
       "لا يوجد اتصال بالإنترنت",
     ),
-    "noMedia": MessageLookupByLibrary.simpleMessage("لا توجد وسائط متاحة"),
     "noNotifications": MessageLookupByLibrary.simpleMessage(
       "لا توجد إشعارات جديدة",
     ),
@@ -267,6 +285,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "noResult": MessageLookupByLibrary.simpleMessage("لم يتم العثور على نتائج"),
     "notifications": MessageLookupByLibrary.simpleMessage("الإشعارات"),
+    "numberMismatch": MessageLookupByLibrary.simpleMessage(
+      "الرقم لا يتطابق مع الصورة المقدمة",
+    ),
     "oldPassword": MessageLookupByLibrary.simpleMessage("كلمة المرور القديمة"),
     "otpMsgRegister": MessageLookupByLibrary.simpleMessage(
       "أدخل الكود المرسل إلى بريدك الإلكتروني",
@@ -276,6 +297,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "otpVerification": MessageLookupByLibrary.simpleMessage("التحقق من OTP"),
     "overview": MessageLookupByLibrary.simpleMessage("نظرة عامة"),
+    "passportPhoto": MessageLookupByLibrary.simpleMessage(
+      "صفحة صورة جواز السفر",
+    ),
     "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
     "passwordLowercase": MessageLookupByLibrary.simpleMessage("حرف صغير واحد"),
     "passwordMinLength": MessageLookupByLibrary.simpleMessage(
@@ -330,6 +354,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "reportedBy": MessageLookupByLibrary.simpleMessage("تم التبليغ بواسطة"),
     "reporter": MessageLookupByLibrary.simpleMessage("صاحب البلاغ"),
     "reports": MessageLookupByLibrary.simpleMessage("البلاغات"),
+    "requestSentSuccessfully": MessageLookupByLibrary.simpleMessage(
+      "تم إرسال الطلب بنجاح",
+    ),
     "resendCode": MessageLookupByLibrary.simpleMessage("إعادة إرسال الكود"),
     "resendCodeIn": MessageLookupByLibrary.simpleMessage("إعادة الإرسال خلال"),
     "resetPasswordPurpose": MessageLookupByLibrary.simpleMessage(
@@ -337,7 +364,15 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "resolved": MessageLookupByLibrary.simpleMessage("تم الحل"),
     "resolvedReports": MessageLookupByLibrary.simpleMessage("البلاغات المنجزة"),
+    "resubmit": MessageLookupByLibrary.simpleMessage("حاول مرة أخرى"),
     "retry": MessageLookupByLibrary.simpleMessage("إعادة المحاولة"),
+    "reupload": MessageLookupByLibrary.simpleMessage("إعادة الرفع"),
+    "reviewDesc": MessageLookupByLibrary.simpleMessage(
+      "يتم الآن مراجعة مستنداتك من قبل فريق الأمان. عادة تستغرق العملية من 2 إلى 4 ساعات عمل.",
+    ),
+    "reviewInformation": MessageLookupByLibrary.simpleMessage(
+      "مراجعة المعلومات",
+    ),
     "saveChanges": MessageLookupByLibrary.simpleMessage("حفظ التغييرات"),
     "search": MessageLookupByLibrary.simpleMessage("بحث"),
     "searchHint": MessageLookupByLibrary.simpleMessage("ابحث عن قسم..."),
@@ -370,6 +405,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "searchWaterLeak": MessageLookupByLibrary.simpleMessage(
       "ابحث عن \"تسرب مياه\"",
     ),
+    "secureSession": MessageLookupByLibrary.simpleMessage(
+      "جلسة آمنة • 08:42:11 متبقي",
+    ),
     "seeAll": MessageLookupByLibrary.simpleMessage("عرض الكل"),
     "selectCategory": MessageLookupByLibrary.simpleMessage("اختر الفئة"),
     "selectCategoryHint": MessageLookupByLibrary.simpleMessage("اختر القسم"),
@@ -386,7 +424,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "signUpNow": MessageLookupByLibrary.simpleMessage("سجل الآن"),
     "skip": MessageLookupByLibrary.simpleMessage("تخطي"),
     "status": MessageLookupByLibrary.simpleMessage("الحالة"),
+    "submissionSummary": MessageLookupByLibrary.simpleMessage("ملخص الطلب"),
     "submit": MessageLookupByLibrary.simpleMessage("إرسال"),
+    "submitMore": MessageLookupByLibrary.simpleMessage("إرسال معلومات إضافية"),
     "submitted": MessageLookupByLibrary.simpleMessage("تاريخ التقديم:"),
     "success": MessageLookupByLibrary.simpleMessage("تم بنجاح"),
     "support": MessageLookupByLibrary.simpleMessage("الدعم"),
@@ -402,9 +442,23 @@ class MessageLookup extends MessageLookupByLibrary {
       "أبرز تقارير الإنجازات",
     ),
     "tryAgain": MessageLookupByLibrary.simpleMessage("إعادة المحاولة"),
+    "underReview": MessageLookupByLibrary.simpleMessage(
+      "المستندات قيد المراجعة",
+    ),
     "unknownLocation": MessageLookupByLibrary.simpleMessage("موقع غير معروف"),
     "unknownStatus": MessageLookupByLibrary.simpleMessage("غير معروف"),
+    "updateDocuments": MessageLookupByLibrary.simpleMessage("تحديث المستندات"),
+    "verification": MessageLookupByLibrary.simpleMessage("التحقق"),
+    "verificationFailed": MessageLookupByLibrary.simpleMessage("فشل التحقق"),
+    "verificationFailedDesc": MessageLookupByLibrary.simpleMessage(
+      "لم نتمكن من التحقق من هويتك بناءً على المستندات المقدمة. يرجى مراجعة التفاصيل أدناه.",
+    ),
+    "verificationGuide": MessageLookupByLibrary.simpleMessage("دليل التحقق"),
     "weeksAgo": m4,
+    "whatsNext": MessageLookupByLibrary.simpleMessage("ما الخطوة التالية؟"),
+    "whatsNextDesc": MessageLookupByLibrary.simpleMessage(
+      "بعد التحقق، سيتم إشعارك عبر التطبيق وإصدار رمز أمان لجهازك المحمول.",
+    ),
     "worker": MessageLookupByLibrary.simpleMessage("عامل"),
     "workerConductDesc": MessageLookupByLibrary.simpleMessage(
       "١. يجب على العمال رفع صور \'قبل\' و \'بعد\' لكل مهمة.\n٢. يجب إتمام المهام في الإطار الزمني المحدد.\n٣. السلوك المهني إلزامي أثناء الزيارات الميدانية.",

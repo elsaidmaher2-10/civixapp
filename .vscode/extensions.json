@@ -1,6 +1,5 @@
 {
     "recommendations": [
-        "eamodio.gitlens",
         "uctakeoff.vscode-counter"
     ]
 }

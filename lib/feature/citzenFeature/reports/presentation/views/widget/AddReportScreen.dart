@@ -144,7 +144,7 @@ class _AddReportScreenState extends State<AddReportScreen> {
                           ),
                           Text(
                             S.of(context).sendAnonymously,
-                            style: TextStyle(
+                            style: GoogleFonts.cairo(
                               color: ColorManger.kPrimary,
                               fontWeight: FontWeight.w600,
                               fontSize: 16.sp,

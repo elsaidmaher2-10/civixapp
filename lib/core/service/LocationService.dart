@@ -2,6 +2,12 @@ import 'package:location/location.dart';
 
 class Locationservice {
   Location location = Location();
+
+
+  Future<void> init()async{
+   await  checkAndReqeustLocationService();
+    await checkAndRequestLocationPremmsion();
+  }
   Future<bool> checkAndReqeustLocationService() async {
     bool isEnabled = await location.serviceEnabled();
     if (!isEnabled) {

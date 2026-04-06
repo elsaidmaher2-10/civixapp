@@ -37,9 +37,7 @@ class Citifix extends StatelessWidget {
         return Routes.login;
     }
   }
-   
 
-     
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -75,7 +73,7 @@ class Citifix extends StatelessWidget {
                     ],
                     supportedLocales: S.delegate.supportedLocales,
                     initialRoute: _initialRoute,
-                    locale: Locale(currentLang),
+                    locale: Locale("en"),
                     onGenerateRoute: Routingmanger.onGenerateRoute,
                     title: Constantmanger.apptitle,
                     debugShowCheckedModeBanner: false,

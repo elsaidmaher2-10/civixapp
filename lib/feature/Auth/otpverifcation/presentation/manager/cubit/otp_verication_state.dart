@@ -1,4 +1,6 @@
 import 'package:citifix/core/database/remote/error/failureResponse.dart';
+import 'package:citifix/feature/Auth/otpverifcation/data/models/globalOtpModel.dart';
+import 'package:citifix/feature/Auth/otpverifcation/data/models/otpSuccessModel.dart';
 
 sealed class OtpVericationState {}
 
@@ -12,6 +14,6 @@ final class OtpVericationFailure extends OtpVericationState {
 final class OtpVericationLoading extends OtpVericationState {}
 
 final class OtpVericationSucces extends OtpVericationState {
-  dynamic otpsuccessmodel;
+  OtpResponse  otpsuccessmodel;
   OtpVericationSucces(this.otpsuccessmodel);
 }

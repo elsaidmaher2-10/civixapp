@@ -128,7 +128,7 @@ class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
                               SizedBox(height: 12.h),
                               _buildUserCard(
                                 context,
-                                label: S.of(context).assignedWorker,
+                                label: S.of(context).assigned,
                                 name: report.workerName,
                                 imageUrl: report.workerProfileImageUrl,
                                 icon: Icons.engineering_outlined,
@@ -320,9 +320,9 @@ class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
 
   String _getStepTitle(BuildContext context, int index) {
     switch (index) {
-      case 0:
-        return S.of(context).pending;
       case 1:
+        return S.of(context).pending;
+      case 0:
         return S.of(context).assigned;
       case 2:
         return S.of(context).inProgress;

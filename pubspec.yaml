@@ -73,7 +73,9 @@ dependencies:
   smooth_page_indicator: ^2.0.1
   timeline_tile: ^2.0.0
   video_compress: ^3.1.4
-  wechat_assets_picker: ^10.1.1
+  wechat_assets_picker: ^9.0.0
+  photo_manager: ^3.0.0
+
 dev_dependencies:
   flutter_launcher_icons: "^0.14.4"
   flutter_lints: ^6.0.0

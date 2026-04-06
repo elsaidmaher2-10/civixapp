@@ -10,12 +10,18 @@ class ScreenUtilsManager {
   static double get p10 => 10.h;
   static double get w1 => 1.w;
   static double get w2 => 2.w;
+  static double get w3 => 3.w; // added
   static double get w4 => 4.w;
+  static double get w5 => 5.w; // added
   static double get w6 => 6.w;
+  static double get w7 => 7.w; // added
   static double get w8 => 8.w;
+  static double get w9 => 9.w; // added
   static double get w12 => 12.w;
+  static double get w14 => 14.w; // added
   static double get w16 => 16.w;
   static double get w18 => 18.w;
+  static double get w20 => 20.w;
   static double get w24 => 24.w;
   static double get w32 => 32.w;
   static double get w40 => 40.w;
@@ -35,16 +41,19 @@ class ScreenUtilsManager {
   static double get h9 => 9.5.h;
   static double get h10 => 10.h;
   static double get h12 => 12.h;
+  static double get h14 => 14.h; // added
   static double get h16 => 16.h;
   static double get h18 => 18.h;
   static double get h20 => 20.h;
   static double get h22 => 22.h;
   static double get h24 => 24.h;
+  static double get h28 => 28.h;
   static double get h30 => 30.h;
   static double get h32 => 32.h;
   static double get h36 => 36.h;
   static double get h40 => 40.h;
   static double get h44 => 44.h;
+  static double get h48 => 48.h;
   static double get h61 => 61.h;
   static double get h64 => 64.h;
   static double get h68 => 68.h;
@@ -52,6 +61,7 @@ class ScreenUtilsManager {
   static double get h100 => 100.h;
   static double get h120 => 120.h;
   static double get h128 => 128.h;
+  static double get h150 => 150.h;
   static double get h200 => 200.h;
   static double get h250 => 250.h;
 
@@ -60,14 +70,18 @@ class ScreenUtilsManager {
   static double get r12 => 12.r;
   static double get r14 => 14.r;
   static double get r15 => 15.r;
+  static double get r16 => 16.r;
   static double get r20 => 20.r;
+  static double get r24 => 24.r;
 
   static double get s5 => 5.sp;
   static double get s9 => 9.sp;
   static double get s10 => 10.sp;
   static double get s11 => 11.sp;
   static double get s12 => 12.sp;
+  static double? s13 = 13.sp;
   static double get s14 => 14.sp;
+  static double? s15 = 15.sp; // fixed + added value
   static double get s16 => 16.sp;
   static double get s18 => 18.sp;
   static double get s20 => 20.sp;
@@ -77,10 +91,12 @@ class ScreenUtilsManager {
   static double get s34 => 34.sp;
   static double get s40 => 40.sp;
   static double get s64 => 64.sp;
+
   static double get menuLeft => 100.w;
   static double get menuTop => 200.h;
   static double get menuRight => 0.w;
   static double get menuBottom => 0.h;
+
   static const double headerFontSize = 36.0;
   static const double subHeaderFontSize = 16.0;
   static const double sectionSpacing = 40.0;
@@ -89,21 +105,22 @@ class ScreenUtilsManager {
   static const double cardRadius = 20.0;
   static const double buttonHeight = 60.0;
   static const double childAspectRatio = 1.1;
+
   static const EdgeInsets pagePadding = EdgeInsets.fromLTRB(24, 20, 24, 120);
-
-  static double h48 = 48.h;
-
-  static double h28 = 28.h;
-
-  static double? s13 = 13.sp;
-
-  static double? s15;
-
-  static double h150 = 150.h;
-
-  static double get w20 => 20.w;
 
   static double get w10 => 10.w;
 
-  static double get r16 => 16.r;
+  static double p24 = 24.w;
+  static double p32 = 32.w;
+  static double p16 = 16.w;
+  static double p12 = 12.w;
+  static double p8 = 8.w;
+
+  // radius
+
+  // icons
+  static double icon48 = 48.sp;
+  static double icon24 = 24.sp;
+
+  static double w400 = 400.w;
 }

@@ -1,4 +1,5 @@
 import 'package:citifix/core/resource/colormanager.dart';
+import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -8,7 +9,7 @@ class VerificationCompleteScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppBar(),
+      appBar: _buildAppBar(context),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 48.0),
@@ -37,8 +38,7 @@ class VerificationCompleteScreen extends StatelessWidget {
     );
   }
 
-  // --- App Bar ---
-  PreferredSizeWidget _buildAppBar() {
+  PreferredSizeWidget _buildAppBar(context) {
     return AppBar(
       backgroundColor: ColorManger.background.withOpacity(0.9),
       elevation: 0,
@@ -52,7 +52,7 @@ class VerificationCompleteScreen extends StatelessWidget {
           const Icon(Icons.security, color: ColorManger.primary),
           const SizedBox(width: 12),
           Text(
-            'Global Gate',
+            S.of(context).appTitle,
             style: GoogleFonts.cairo(
               color: ColorManger.onSurface,
               fontWeight: FontWeight.bold,
@@ -206,7 +206,6 @@ class VerificationCompleteScreen extends StatelessWidget {
             children: [
               Icon(icon, color: ColorManger.primary, size: 20),
               const SizedBox(width: 8),
-              // Wrap the Text in an Expanded widget so it doesn't overflow!
               Expanded(
                 child: Text(
                   value,
@@ -215,7 +214,6 @@ class VerificationCompleteScreen extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                     color: ColorManger.onSurface,
                   ),
-                  // Optional: adds an ellipsis (...) if the text is still too long
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
                 ),
@@ -314,7 +312,6 @@ class VerificationCompleteScreen extends StatelessWidget {
               ),
             ),
           ),
-          // Bottom right circle accent
           Positioned(
             right: -20,
             bottom: -20,
@@ -362,7 +359,7 @@ class VerificationCompleteScreen extends StatelessWidget {
             child: Icon(
               Icons.verified,
               size: 72,
-              color: Color(0x1AFF7A00), // 10% opacity primary
+              color: Color(0x1AFF7A00), 
             ),
           ),
         ],
@@ -370,7 +367,6 @@ class VerificationCompleteScreen extends StatelessWidget {
     );
   }
 
-  // --- Buttons ---
   Widget _buildActionButtons() {
     return Column(
       children: [

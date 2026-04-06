@@ -82,6 +82,7 @@
   "address2": "Address",
   "job": "Job",
   "gender": "Gender",
+  "requestSentSuccessfully": "Request sent successfully",
   "age": "Age",
   "editProfile": "Edit Profile",
   "fcm": "FCM",
@@ -231,5 +232,50 @@
   "id": "ID",
   "status": "Status",
   "date": "Date",
-  "noMedia": "No media available","assignedWorker": "Assigned Worker"
+    "verification": "Verification",
+  "underReview": "Documents Under Review",
+  "reviewDesc": "Your documents are being reviewed by our security team. This usually takes between 2-4 business hours.",
+
+  "submissionSummary": "Submission Summary",
+
+  "accessZone": "ACCESS ZONE",
+  "identityDocs": "IDENTITY DOCUMENTS",
+
+  "whatsNext": "What's next?",
+  "whatsNextDesc": "Once verified, you will receive a notification via the CitiFix app and a secure token will be issued for your mobile device.",
+
+  "submitMore": "Submit Additional Info",
+  "cancelApp": "Cancel Application",
+
+  "secureSession": "SECURE SESSION • 08:42:11 REMAINING","verification": "Verification",
+  "support": "Support",
+
+  "verificationFailed": "Verification Failed",
+  "verificationFailedDesc": "We couldn't verify your identity based on the documents provided. Please review the details below.",
+
+  "attentionRequired": "Attention Required",
+  "updateDocuments": "Update Documents",
+  "reviewInformation": "Review Information",
+
+  "passportPhoto": "Passport Photo Page",
+  "imageBlurry": "Image Blurry",
+  "reupload": "Re-upload",
+
+  "documentNumber": "Document Number",
+  "fullNamea": "Full Legal Name",
+
+  "resubmit": "Resubmit Verification",
+  "needHelp": "Need help? Visit our ",
+  "verificationGuide": "Verification Guide",
+
+
+  "numberMismatch": "Number didn't match the image provided",
+  "enterNameHint": "Enter as shown on ID",
+  
+  "errorIdNotClear": "The uploaded ID image is blurry or unreadable.",
+  "errorMissingData": "Some required information is missing from your documents.",
+  "errorSelfieMismatch": "The selfie does not match the provided ID photo."
+  
+
+
 }

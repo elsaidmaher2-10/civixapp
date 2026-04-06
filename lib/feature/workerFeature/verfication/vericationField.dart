@@ -1,497 +1,252 @@
+import 'package:citifix/core/DI/getit.dart';
 import 'package:citifix/core/resource/colormanager.dart';
+import 'package:citifix/feature/workerFeature/verfication/Presentation/VerficationinitManger/VerificationInitCubit.dart';
+import 'package:citifix/feature/workerFeature/verfication/data/repo/VerficationInitRepo.dart';
+import 'package:citifix/feature/workerFeature/verfication/verficationinit.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:citifix/generated/l10n.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class VerificationFailedScreen extends StatelessWidget {
-  VerificationFailedScreen({super.key});
+  const VerificationFailedScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final s = S.of(context);
+
     return Scaffold(
-      appBar: _buildAppBar(),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 32.0),
-        child: Center(
-          child: ConstrainedBox(
-            constraints: BoxConstraints(maxWidth: 600),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                _buildHeroSection(),
-                SizedBox(height: 48),
-                _buildErrorSummaryBox(),
-                SizedBox(height: 40),
-                _buildUpdateDocumentsSection(),
-                SizedBox(height: 48),
-                _buildActionButtons(),
-                SizedBox(height: 32),
-                _buildHelpLink(),
-              ],
+      backgroundColor: Colors.grey.shade50,
+      appBar: _buildAppBar(context, s),
+      body: SafeArea(
+        child: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 24.0,
+                  vertical: 16.0,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    _buildHeroIcon(),
+                    const SizedBox(height: 32),
+                    _buildHeaderTexts(s),
+                    const SizedBox(height: 40),
+                    _buildReasonCard(s),
+                  ],
+                ),
+              ),
             ),
-          ),
+            _buildBottomActions(s, context),
+          ],
         ),
       ),
     );
   }
 
-  PreferredSizeWidget _buildAppBar() {
+  PreferredSizeWidget _buildAppBar(BuildContext context, S s) {
     return AppBar(
-      backgroundColor: ColorManger.background.withOpacity(0.9),
+      backgroundColor: Colors.transparent,
       elevation: 0,
-      surfaceTintColor: Colors.transparent,
-      bottom: PreferredSize(
-        preferredSize: Size.fromHeight(1.0),
-        child: Container(color: ColorManger.surface, height: 1.0),
+      leading: IconButton(
+        icon: const Icon(Icons.close, color: Colors.black87),
+        onPressed: () => Navigator.pop(context),
       ),
-      title: Row(
-        children: [
-          Icon(Icons.security, color: ColorManger.primary),
-          SizedBox(width: 8),
-          Text(
-            'Global Gate',
-            style: GoogleFonts.cairo(
-              color: ColorManger.onSurface,
-              fontWeight: FontWeight.bold,
-              fontSize: 18,
-              letterSpacing: -0.5,
-            ),
-          ),
-        ],
+      title: Text(
+        s.appTitle,
+        style: const TextStyle(
+          color: Colors.black87,
+          fontWeight: FontWeight.bold,
+          fontSize: 18,
+        ),
       ),
+      centerTitle: true,
       actions: [
         TextButton(
           onPressed: () {},
           child: Text(
-            'Verification',
-            style: GoogleFonts.cairo(
-              color: ColorManger.secondary,
+            s.support,
+            style: const TextStyle(
+              color: ColorManger.inProgressContainer,
               fontWeight: FontWeight.w600,
             ),
           ),
         ),
-        TextButton(
-          onPressed: () {},
-          child: Text(
-            'Support',
-            style: GoogleFonts.cairo(
-              color: ColorManger.secondary,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-        ),
-        SizedBox(width: 16),
       ],
     );
   }
 
-  Widget _buildHeroSection() {
+  Widget _buildHeroIcon() {
+    return Container(
+      padding: const EdgeInsets.all(24),
+      decoration: BoxDecoration(
+        color: Colors.red.shade50,
+        shape: BoxShape.circle,
+      ),
+      child: const Icon(Icons.gpp_bad_rounded, color: Colors.red, size: 80),
+    );
+  }
+
+  Widget _buildHeaderTexts(S s) {
     return Column(
       children: [
-        Container(
-          width: 80,
-          height: 80,
-          decoration: BoxDecoration(
-            color: ColorManger.error.withOpacity(0.1),
-            shape: BoxShape.circle,
-          ),
-          child: Center(
-            child: Icon(
-              Icons.warning_rounded,
-              color: ColorManger.error,
-              size: 36,
-            ),
-          ),
-        ),
-        SizedBox(height: 24),
         Text(
-          'Verification Failed',
-          textAlign: TextAlign.center,
-          style: GoogleFonts.cairo(
-            fontSize: 44,
-            fontWeight: FontWeight.w800,
-            color: ColorManger.onSurface,
-            height: 1.1,
+          s.verificationFailed,
+          style: const TextStyle(
+            fontSize: 28,
+            fontWeight: FontWeight.bold,
+            color: Colors.black87,
             letterSpacing: -0.5,
           ),
         ),
-        SizedBox(height: 16),
-        SizedBox(
-          width: 400,
-          child: Text(
-            "We couldn't verify your identity based on the documents provided. Please review the details below.",
-            textAlign: TextAlign.center,
-            style: GoogleFonts.cairo(
-              fontSize: 18,
-              color: ColorManger.secondary,
-              height: 1.5,
-            ),
+        const SizedBox(height: 12),
+        Text(
+          s.verificationFailedDesc,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 16,
+            color: Colors.grey.shade600,
+            height: 1.5,
           ),
         ),
       ],
     );
   }
 
-  Widget _buildErrorSummaryBox() {
+  Widget _buildReasonCard(S s) {
     return Container(
-      padding: EdgeInsets.all(24),
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: ColorManger.surface,
-        borderRadius: BorderRadius.circular(12),
-        border: Border(left: BorderSide(color: ColorManger.error, width: 4)),
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: EdgeInsets.only(top: 4.0),
-            child: Icon(Icons.report, color: ColorManger.error, size: 24),
-          ),
-          SizedBox(width: 16),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Attention Required',
-                  style: GoogleFonts.cairo(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: ColorManger.onSurface,
-                  ),
-                ),
-                SizedBox(height: 8),
-                _buildErrorBulletItem('ID not clear'),
-                SizedBox(height: 8),
-                _buildErrorBulletItem('Missing data'),
-              ],
-            ),
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: Colors.red.shade100, width: 2),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.03),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
           ),
         ],
       ),
-    );
-  }
-
-  Widget _buildErrorBulletItem(String text) {
-    return Row(
-      children: [
-        Container(
-          width: 6,
-          height: 6,
-          decoration: BoxDecoration(
-            color: ColorManger.error,
-            shape: BoxShape.circle,
-          ),
-        ),
-        SizedBox(width: 8),
-        Text(
-          text,
-          style: GoogleFonts.cairo(
-            fontSize: 16,
-            fontWeight: FontWeight.w500,
-            color: ColorManger.secondary,
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildUpdateDocumentsSection() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Update Documents',
-          style: GoogleFonts.cairo(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-            color: ColorManger.onSurface,
-          ),
-        ),
-        SizedBox(height: 16),
-        _buildReuploadCard(),
-        SizedBox(height: 20),
-        _buildEditableInputsCard(),
-      ],
-    );
-  }
-
-  // Document Reupload Card
-  Widget _buildReuploadCard() {
-    return Container(
-      padding: EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: ColorManger.surface,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: ColorManger.outline),
-      ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Passport Photo Page',
-                    style: GoogleFonts.cairo(
-                      fontWeight: FontWeight.bold,
-                      color: ColorManger.onSurface,
-                      fontSize: 16,
-                    ),
-                  ),
-                  SizedBox(height: 2),
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.error_outline,
-                        color: ColorManger.error,
-                        size: 14,
-                      ),
-                      SizedBox(width: 4),
-                      Text(
-                        'Image Blurry',
-                        style: GoogleFonts.cairo(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w600,
-                          color: ColorManger.error,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              ElevatedButton.icon(
-                onPressed: () {},
-                icon: Icon(Icons.upload, size: 16),
-                label: Text('Re-upload'),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: ColorManger.primary,
-                  foregroundColor: ColorManger.onPrimary,
-                  elevation: 2,
-                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  textStyle: GoogleFonts.cairo(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                  ),
+              const Icon(Icons.error_outline, color: Colors.red, size: 20),
+              const SizedBox(width: 8),
+              Text(
+                s.attentionRequired,
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.red.shade800,
                 ),
               ),
             ],
           ),
-          SizedBox(height: 16),
-          AspectRatio(
-            aspectRatio: 16 / 9,
-            child: Container(
-              decoration: BoxDecoration(
-                color: ColorManger.surfaceVariant,
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Stack(
-                fit: StackFit.expand,
-                children: [
-                  Opacity(
-                    opacity: 0.3,
-                    child: Image.network(
-                      'https://picsum.photos/seed/passport/400/225', // Placeholder
-                      fit: BoxFit.cover,
-                      color: Colors.grey, // Grayscale effect
-                      colorBlendMode: BlendMode.saturation,
-                    ),
-                  ),
-                  Container(color: ColorManger.onSurface.withOpacity(0.4)),
-                  Center(
-                    child: Icon(
-                      Icons.hide_source,
-                      color: ColorManger.background,
-                      size: 40,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+          const SizedBox(height: 16),
+          _buildBulletPoint(s.errorIdNotClear),
+          const SizedBox(height: 12),
+          _buildBulletPoint(s.errorSelfieMismatch),
         ],
       ),
     );
   }
 
-  Widget _buildEditableInputsCard() {
-    return Container(
-      padding: EdgeInsets.all(24),
-      decoration: BoxDecoration(
-        color: ColorManger.surface,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: ColorManger.outline),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Review Information',
-            style: GoogleFonts.cairo(
-              fontWeight: FontWeight.bold,
-              color: ColorManger.onSurface,
-              fontSize: 16,
-            ),
-          ),
-          SizedBox(height: 12),
-          Divider(color: ColorManger.outline, height: 1),
-          SizedBox(height: 20),
-
-          _buildInputGroup(
-            label: 'Document Number',
-            initialValue: 'A1234567',
-            hasError: true,
-            errorMessage: "Number didn't match the image provided",
-            iconColor: ColorManger.primary,
-          ),
-          SizedBox(height: 24),
-          _buildInputGroup(
-            label: 'Full Legal Name',
-            hintText: 'Enter as shown on ID',
-            hasError: false,
-            iconColor: ColorManger.secondary,
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildInputGroup({
-    required String label,
-    String? initialValue,
-    String? hintText,
-    required bool hasError,
-    String? errorMessage,
-    required Color iconColor,
-  }) {
-    return Column(
+  Widget _buildBulletPoint(String text) {
+    return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: EdgeInsets.only(left: 4.0, bottom: 6.0),
+          padding: const EdgeInsets.only(top: 6.0),
+          child: Container(
+            width: 6,
+            height: 6,
+            decoration: const BoxDecoration(
+              color: Colors.red,
+              shape: BoxShape.circle,
+            ),
+          ),
+        ),
+        const SizedBox(width: 12),
+        Expanded(
           child: Text(
-            label,
-            style: GoogleFonts.cairo(
-              fontSize: 12,
-              fontWeight: FontWeight.w600,
-              color: ColorManger.secondary,
+            text,
+            style: const TextStyle(
+              fontSize: 15,
+              color: Colors.black87,
+              height: 1.4,
             ),
           ),
         ),
-        TextFormField(
-          initialValue: initialValue,
-          decoration: InputDecoration(
-            hintText: hintText,
-            filled: true,
-            fillColor: ColorManger.background,
-            contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-            suffixIcon: Icon(Icons.edit, size: 20, color: iconColor),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-              borderSide: BorderSide(
-                color: hasError ? ColorManger.error : ColorManger.outline,
-              ),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-              borderSide: BorderSide(
-                color: hasError
-                    ? ColorManger.error
-                    : ColorManger.primary.withOpacity(0.5),
-                width: 2,
-              ),
-            ),
-          ),
-          style: GoogleFonts.cairo(color: ColorManger.onSurface, fontSize: 16),
-        ),
-        if (hasError && errorMessage != null)
-          Padding(
-            padding: EdgeInsets.only(left: 4.0, top: 4.0),
-            child: Text(
-              errorMessage,
-              style: GoogleFonts.cairo(
-                color: ColorManger.error,
-                fontSize: 10,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
       ],
     );
   }
 
-  Widget _buildActionButtons() {
-    return Column(
-      children: [
-        ElevatedButton(
-          onPressed: () {},
-          style: ElevatedButton.styleFrom(
-            backgroundColor: ColorManger.primary,
-            foregroundColor: ColorManger.onPrimary,
-            minimumSize: Size(double.infinity, 56),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
-            elevation: 4,
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'Resubmit Verification',
-                style: GoogleFonts.cairo(
-                  fontSize: 16,
+  Widget _buildBottomActions(S s, context) {
+    return Container(
+      padding: const EdgeInsets.all(24),
+      decoration: BoxDecoration(color: Colors.grey.shade50),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          SizedBox(
+            width: double.infinity,
+            height: 56,
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => BlocProvider(
+                      create: (context) =>
+                          VerificationInitCubit(getIt<VerficationInitRepo>()),
+                      child: const GlobalGateVerificationInitPage(),
+                    ),
+                  ),
+                );
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: ColorManger.workerprimary,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                elevation: 0,
+              ),
+              child: Text(
+                s.resubmit,
+                style: const TextStyle(
+                  fontSize: 18,
                   fontWeight: FontWeight.bold,
+                  color: Colors.white,
                 ),
               ),
-              SizedBox(width: 12),
-              Icon(Icons.arrow_forward, size: 20),
-            ],
-          ),
-        ),
-        SizedBox(height: 16),
-        OutlinedButton(
-          onPressed: () {},
-          style: OutlinedButton.styleFrom(
-            foregroundColor: ColorManger.secondary,
-            minimumSize: Size(double.infinity, 56),
-            side: BorderSide(color: ColorManger.outline),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
             ),
           ),
-          child: Text(
-            'Contact Global Support',
-            style: GoogleFonts.cairo(fontSize: 16, fontWeight: FontWeight.w600),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildHelpLink() {
-    return Center(
-      child: RichText(
-        text: TextSpan(
-          style: GoogleFonts.cairo(fontSize: 14, color: ColorManger.secondary),
-          children: [
-            TextSpan(text: 'Need help? Visit our '),
-            TextSpan(
-              text: 'Verification Guide',
-              style: GoogleFonts.cairo(
-                color: ColorManger.primary,
-                fontWeight: FontWeight.bold,
-                decoration: TextDecoration.underline,
-                decorationColor: Color(0x4DFF7A00),
+          const SizedBox(height: 16),
+          SizedBox(
+            width: double.infinity,
+            height: 56,
+            child: OutlinedButton(
+              onPressed: () {},
+              style: OutlinedButton.styleFrom(
+                side: BorderSide(color: Colors.grey.shade300),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+              child: Text(
+                s.needHelp,
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.grey.shade800,
+                ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

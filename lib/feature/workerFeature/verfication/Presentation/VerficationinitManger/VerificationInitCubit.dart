@@ -1,9 +1,8 @@
 import 'package:citifix/feature/workerFeature/verfication/Presentation/VerficationinitManger/verficationinitState.dart';
+import 'package:citifix/feature/workerFeature/verfication/data/model/VerificationrequestModel.dart';
+import 'package:citifix/feature/workerFeature/verfication/data/model/verficationmodel.dart';
+import 'package:citifix/feature/workerFeature/verfication/data/repo/VerficationInitRepo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../data/model/VerificationrequestModel.dart';
-import '../../data/model/verficationmodel.dart';
-import '../../data/repo/VerficationInitRepo.dart';
 
 class VerificationInitCubit extends Cubit<VerificationInitState> {
   final VerficationInitRepo repo;
@@ -11,11 +10,9 @@ class VerificationInitCubit extends Cubit<VerificationInitState> {
   VerificationInitCubit(this.repo) : super(VerificationInitInitial()) {
     loadInitialData();
   }
-  VerficationInitList? areasList;
-  VerficationInitList? departmentsList;
-
   Future<void> loadInitialData() async {
     emit(VerificationInitLoading());
+
     final results = await Future.wait([
       repo.getAreas(),
       repo.getDepartmentname(),
@@ -23,7 +20,6 @@ class VerificationInitCubit extends Cubit<VerificationInitState> {
 
     final areasResult = results[0];
     final departmentsResult = results[1];
-
     areasResult.fold(
       (failure) => emit(VerificationInitError(failure.errors.first)),
       (areas) {
@@ -44,17 +40,47 @@ class VerificationInitCubit extends Cubit<VerificationInitState> {
     );
   }
 
+  VerficationInitList? areasList;
+  VerficationInitList? departmentsList;
   Future<void> sendVerificationRequest({
     required VerificationrequestModel request,
   }) async {
-    emit(VerificationRequestLoading());
+    emit(
+      VerificationRequestLoading(
+        areas: areasList,
+        departments: departmentsList,
+      ),
+    );
+
     final result = await repo.verificationrequest(request: request);
+
     result.fold(
       (failure) {
-        emit(VerificationRequestError(failure.errors.first));
+        emit(
+          VerificationRequestError(
+            failure.errors.first,
+            areas: areasList,
+            departments: departmentsList,
+          ),
+        );
       },
       (response) {
-        emit(VerificationRequestSuccess("Request sent successfully"));
+        emit(VerificationRequestSuccess());
+      },
+    );
+  }
+
+  Future<void> getVerificationRequestData() async {
+    emit(VerificationInitLoading());
+
+    final result = await repo.getvrificationRequest();
+
+    result.fold(
+      (failure) {
+        emit(VerificationInitError(failure.errors.first));
+      },
+      (workerRequestModel) {
+        emit(VerificationSuccess(workerRequest: workerRequestModel));
       },
     );
   }
