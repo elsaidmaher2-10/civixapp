@@ -115,7 +115,6 @@ class _GlobalGateVerificationPageState
                 backgroundColor: Colors.red,
                 message: state.errorMessage,
               );
-              Navigator.of(context).pop();
             }
           },
           builder: (context, state) {
@@ -136,7 +135,10 @@ class _GlobalGateVerificationPageState
                       onPressed: () => context
                           .read<VerificationInitCubit>()
                           .loadInitialData(),
-                      child: const Text("Retry"),
+                      child: Text(
+                        S.of(context).retry,
+                        style: GoogleFonts.cairo(),
+                      ),
                     ),
                   ],
                 ),

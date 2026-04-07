@@ -1,4 +1,5 @@
 import 'package:citifix/feature/workerFeature/verfication/data/model/WorkerRequestModel.dart';
+import 'package:citifix/feature/workerFeature/verfication/data/model/worker_verification_model.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
@@ -54,6 +55,25 @@ class VerficationInitRepo {
       final updatedUser = WorkerRequestModel.fromJson(response);
 
       return right(updatedUser);
+    } on Serverexciptionmodel catch (e) {
+      return left(_handleServerException(e));
+    } catch (e) {
+      return left(FailureResponse(errors: [e.toString()], statusCode: 500));
+    }
+  }
+
+  Future<Either<FailureResponse, List<WorkerVerificationModel>>>
+  getvrificationRequests() async {
+    if (!await internetChecker.checkInternet()) {
+      return left(
+        FailureResponse(errors: [Constantmanger.nointernet], statusCode: 1),
+      );
+    }
+
+    try {
+      final response = await apiservice.get(path: Apiconstant.verifications);
+
+      return right(WorkerVerificationModel.fromJsonList(response));
     } on Serverexciptionmodel catch (e) {
       return left(_handleServerException(e));
     } catch (e) {

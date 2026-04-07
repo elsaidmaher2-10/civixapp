@@ -3,7 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:citifix/core/resource/assetvaluemanger.dart';
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/feature/citzenFeature/Profile/data/Models/UserProfileModel/userProfile.dart';
-import 'package:citifix/feature/citzenFeature/Profile/presentation/manager/controller/imageController.dart';
+import 'package:citifix/core/cubit/controller/imageController.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';

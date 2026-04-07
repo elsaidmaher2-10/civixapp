@@ -89,9 +89,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "confirmPasswordRequired": MessageLookupByLibrary.simpleMessage(
       "من فضلك أكد كلمة المرور",
     ),
+    "confirmedZone": MessageLookupByLibrary.simpleMessage("المنطقة المؤكدة"),
     "contactSupport": MessageLookupByLibrary.simpleMessage(
       "لديك أسئلة أخرى؟ تواصل مع الدعم",
     ),
+    "continueToApp": MessageLookupByLibrary.simpleMessage("الاستمرار للتطبيق"),
     "dataSecurityNote": MessageLookupByLibrary.simpleMessage(
       "بياناتك مخزنة ومُشفرة بشكل آمن.",
     ),
@@ -120,6 +122,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "يجب أن يكون الوصف 10 أحرف على الأقل",
     ),
     "details": MessageLookupByLibrary.simpleMessage("التفاصيل"),
+    "digitalIdIssued": MessageLookupByLibrary.simpleMessage(
+      "تم إصدار الهوية الرقمية",
+    ),
     "documentNumber": MessageLookupByLibrary.simpleMessage("رقم المستند"),
     "dontHaveAccount": MessageLookupByLibrary.simpleMessage("ليس لديك حساب؟"),
     "editProfile": MessageLookupByLibrary.simpleMessage("تعديل الملف الشخصي"),
@@ -133,6 +138,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "emptyReportsSubtitle": MessageLookupByLibrary.simpleMessage(
       "أي بلاغات جديدة تقوم بإنشائها ستظهر هنا.",
     ),
+    "engineering": MessageLookupByLibrary.simpleMessage("هندسة"),
     "english": MessageLookupByLibrary.simpleMessage("الإنجليزية"),
     "enterConfirmPassword": MessageLookupByLibrary.simpleMessage(
       "أدخل تأكيد كلمة المرور",
@@ -155,6 +161,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "الصورة الشخصية لا تتطابق مع صورة الهوية المقدمة.",
     ),
     "errorTitle": MessageLookupByLibrary.simpleMessage("عذراً! حدث خطأ ما."),
+    "expiresDate": MessageLookupByLibrary.simpleMessage("صالح حتى أكتوبر 2025"),
     "failedToLoadCategories": MessageLookupByLibrary.simpleMessage(
       "فشل تحميل الأقسام",
     ),
@@ -205,6 +212,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "كيف يمكنني الإبلاغ عن مشكلة صيانة؟",
     ),
     "id": MessageLookupByLibrary.simpleMessage("رقم البلاغ"),
+    "idLabel": MessageLookupByLibrary.simpleMessage("المعرف"),
     "identity": MessageLookupByLibrary.simpleMessage("الهوية"),
     "identityDocs": MessageLookupByLibrary.simpleMessage("مستندات الهوية"),
     "imageBlurry": MessageLookupByLibrary.simpleMessage("الصورة غير واضحة"),
@@ -254,6 +262,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "جاري إعادة تعيين كلمة المرور...",
     ),
     "nationalID": MessageLookupByLibrary.simpleMessage("الرقم القومي"),
+    "nationalId": MessageLookupByLibrary.simpleMessage("الرقم القومي"),
     "nationalIdDigits": MessageLookupByLibrary.simpleMessage(
       "يجب أن يحتوي الرقم القومي على أرقام فقط",
     ),
@@ -284,6 +293,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "لا توجد تقارير متاحة حالياً",
     ),
     "noResult": MessageLookupByLibrary.simpleMessage("لم يتم العثور على نتائج"),
+    "notes": MessageLookupByLibrary.simpleMessage("ملاحظات"),
     "notifications": MessageLookupByLibrary.simpleMessage("الإشعارات"),
     "numberMismatch": MessageLookupByLibrary.simpleMessage(
       "الرقم لا يتطابق مع الصورة المقدمة",
@@ -322,6 +332,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "pending": MessageLookupByLibrary.simpleMessage("قيد المعالجة"),
     "phone": MessageLookupByLibrary.simpleMessage("رقم الهاتف"),
+    "phoneNumber": MessageLookupByLibrary.simpleMessage("رقم الهاتف"),
     "phoneRequired": MessageLookupByLibrary.simpleMessage("رقم الهاتف مطلوب"),
     "photoGallery": MessageLookupByLibrary.simpleMessage("معرض الصور"),
     "privacyPolicyDesc": MessageLookupByLibrary.simpleMessage(
@@ -337,8 +348,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "progressTracking": MessageLookupByLibrary.simpleMessage(
       "تتبع حالة البلاغ",
     ),
+    "quickApproveBtn": MessageLookupByLibrary.simpleMessage("موافقة سريعة"),
     "recentReport": MessageLookupByLibrary.simpleMessage("آخر البلاغات"),
     "reference": MessageLookupByLibrary.simpleMessage("المرجع:"),
+    "rejectionReasonLabel": MessageLookupByLibrary.simpleMessage("سبب الرفض"),
     "rememberMe": MessageLookupByLibrary.simpleMessage("تذكرني"),
     "reportDescription": MessageLookupByLibrary.simpleMessage("وصف البلاغ"),
     "reportDescriptionHint": MessageLookupByLibrary.simpleMessage(
@@ -424,10 +437,14 @@ class MessageLookup extends MessageLookupByLibrary {
     "signUpNow": MessageLookupByLibrary.simpleMessage("سجل الآن"),
     "skip": MessageLookupByLibrary.simpleMessage("تخطي"),
     "status": MessageLookupByLibrary.simpleMessage("الحالة"),
+    "statusApproved": MessageLookupByLibrary.simpleMessage("مقبول"),
+    "statusPending": MessageLookupByLibrary.simpleMessage("قيد المراجعة"),
+    "statusRejected": MessageLookupByLibrary.simpleMessage("مرفوض"),
     "submissionSummary": MessageLookupByLibrary.simpleMessage("ملخص الطلب"),
     "submit": MessageLookupByLibrary.simpleMessage("إرسال"),
     "submitMore": MessageLookupByLibrary.simpleMessage("إرسال معلومات إضافية"),
     "submitted": MessageLookupByLibrary.simpleMessage("تاريخ التقديم:"),
+    "submittedAtLabel": MessageLookupByLibrary.simpleMessage("تاريخ التقديم"),
     "success": MessageLookupByLibrary.simpleMessage("تم بنجاح"),
     "support": MessageLookupByLibrary.simpleMessage("الدعم"),
     "termsCitizenCategory": MessageLookupByLibrary.simpleMessage(
@@ -449,11 +466,25 @@ class MessageLookup extends MessageLookupByLibrary {
     "unknownStatus": MessageLookupByLibrary.simpleMessage("غير معروف"),
     "updateDocuments": MessageLookupByLibrary.simpleMessage("تحديث المستندات"),
     "verification": MessageLookupByLibrary.simpleMessage("التحقق"),
+    "verificationComplete": MessageLookupByLibrary.simpleMessage(
+      "اكتملت المصادقة",
+    ),
     "verificationFailed": MessageLookupByLibrary.simpleMessage("فشل التحقق"),
     "verificationFailedDesc": MessageLookupByLibrary.simpleMessage(
       "لم نتمكن من التحقق من هويتك بناءً على المستندات المقدمة. يرجى مراجعة التفاصيل أدناه.",
     ),
     "verificationGuide": MessageLookupByLibrary.simpleMessage("دليل التحقق"),
+    "verificationRequestsTitle": MessageLookupByLibrary.simpleMessage(
+      "طلبات التوثيق",
+    ),
+    "verificationSuccessDesc": MessageLookupByLibrary.simpleMessage(
+      "تمت مصادقة بيانات الاعتماد الرقمية الخاصة بك بنجاح.",
+    ),
+    "viewAllRequests": MessageLookupByLibrary.simpleMessage("عرض كل الطلبات"),
+    "viewDetailsBtn": MessageLookupByLibrary.simpleMessage("عرض التفاصيل"),
+    "viewDigitalBadge": MessageLookupByLibrary.simpleMessage(
+      "عرض الشارة الرقمية",
+    ),
     "weeksAgo": m4,
     "whatsNext": MessageLookupByLibrary.simpleMessage("ما الخطوة التالية؟"),
     "whatsNextDesc": MessageLookupByLibrary.simpleMessage(
@@ -466,5 +497,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "workerConductTitle": MessageLookupByLibrary.simpleMessage(
       "معايير وسلوك العامل",
     ),
+    "zoneAlpha": MessageLookupByLibrary.simpleMessage("المنطقة ألفا"),
   };
 }

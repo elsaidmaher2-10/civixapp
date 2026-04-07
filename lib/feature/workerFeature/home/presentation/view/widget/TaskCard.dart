@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:citifix/core/resource/colormanager.dart';
+import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/core/widget/customShimerwidget.dart';
 import 'package:citifix/feature/workerFeature/home/data/models/dashbroadmodel.dart';
@@ -45,7 +46,7 @@ class TaskCard extends StatelessWidget {
                   fit: BoxFit.cover,
                   imageUrl: report.imageUrls.isNotEmpty
                       ? report.imageUrls.first
-                      : 'https://via.placeholder.com/150',
+                      : Constantmanger.defualtImage,
                 ),
               ),
               Positioned(

@@ -2168,6 +2168,186 @@ class S {
       args: [],
     );
   }
+
+  /// `View All Requests`
+  String get viewAllRequests {
+    return Intl.message(
+      'View All Requests',
+      name: 'viewAllRequests',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Verification Complete`
+  String get verificationComplete {
+    return Intl.message(
+      'Verification Complete',
+      name: 'verificationComplete',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your digital credentials have been successfully authenticated.`
+  String get verificationSuccessDesc {
+    return Intl.message(
+      'Your digital credentials have been successfully authenticated.',
+      name: 'verificationSuccessDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `CONFIRMED ZONE`
+  String get confirmedZone {
+    return Intl.message(
+      'CONFIRMED ZONE',
+      name: 'confirmedZone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Zone Alpha`
+  String get zoneAlpha {
+    return Intl.message('Zone Alpha', name: 'zoneAlpha', desc: '', args: []);
+  }
+
+  /// `Engineering`
+  String get engineering {
+    return Intl.message('Engineering', name: 'engineering', desc: '', args: []);
+  }
+
+  /// `Digital ID Issued`
+  String get digitalIdIssued {
+    return Intl.message(
+      'Digital ID Issued',
+      name: 'digitalIdIssued',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Expires Oct 2025`
+  String get expiresDate {
+    return Intl.message(
+      'Expires Oct 2025',
+      name: 'expiresDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Continue to App`
+  String get continueToApp {
+    return Intl.message(
+      'Continue to App',
+      name: 'continueToApp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `View Digital Badge`
+  String get viewDigitalBadge {
+    return Intl.message(
+      'View Digital Badge',
+      name: 'viewDigitalBadge',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Verification Requests`
+  String get verificationRequestsTitle {
+    return Intl.message(
+      'Verification Requests',
+      name: 'verificationRequestsTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ID`
+  String get idLabel {
+    return Intl.message('ID', name: 'idLabel', desc: '', args: []);
+  }
+
+  /// `Submitted`
+  String get submittedAtLabel {
+    return Intl.message(
+      'Submitted',
+      name: 'submittedAtLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Rejection Reason`
+  String get rejectionReasonLabel {
+    return Intl.message(
+      'Rejection Reason',
+      name: 'rejectionReasonLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `View Details`
+  String get viewDetailsBtn {
+    return Intl.message(
+      'View Details',
+      name: 'viewDetailsBtn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Quick Approve`
+  String get quickApproveBtn {
+    return Intl.message(
+      'Quick Approve',
+      name: 'quickApproveBtn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Approved`
+  String get statusApproved {
+    return Intl.message('Approved', name: 'statusApproved', desc: '', args: []);
+  }
+
+  /// `Pending`
+  String get statusPending {
+    return Intl.message('Pending', name: 'statusPending', desc: '', args: []);
+  }
+
+  /// `Rejected`
+  String get statusRejected {
+    return Intl.message('Rejected', name: 'statusRejected', desc: '', args: []);
+  }
+
+  /// `Phone Number`
+  String get phoneNumber {
+    return Intl.message(
+      'Phone Number',
+      name: 'phoneNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `National ID`
+  String get nationalId {
+    return Intl.message('National ID', name: 'nationalId', desc: '', args: []);
+  }
+
+  /// `Notes`
+  String get notes {
+    return Intl.message('Notes', name: 'notes', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

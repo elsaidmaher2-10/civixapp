@@ -22,10 +22,11 @@ enum StatusReport {
 }
 
 enum VerificationStatus {
-  assigned("init"),
+  initial("init"),
   pending("Pending"),
-  completed("Completed"),
+  completed("Approved"),
   rejected("Rejected");
+
   final String value;
   const VerificationStatus(this.value);
   static VerificationStatus fromString(String? status) {

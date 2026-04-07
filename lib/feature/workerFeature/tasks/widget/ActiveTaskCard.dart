@@ -1,4 +1,5 @@
 import 'package:citifix/core/service/StatusReport.dart';
+import 'package:citifix/feature/workerFeature/taskDetails/TaskDetailsPage.dart';
 import 'package:citifix/feature/workerFeature/tasks/data/model/ReportResponse.dart';
 import 'package:flutter/material.dart';
 import 'package:citifix/core/resource/colormanager.dart';
@@ -55,7 +56,7 @@ class ActiveTaskCard extends StatelessWidget {
                   children: [
                     StatusBadgeApp(status: task.status),
                     Text(
-                      "#${task.hashCode}",
+                      "#${task.id}",
                       style: GoogleFonts.cairo(
                         color: Colors.grey.shade400,
                         fontSize: 12,
@@ -65,7 +66,7 @@ class ActiveTaskCard extends StatelessWidget {
                 ),
                 SizedBox(height: ScreenUtilsManager.h12),
                 Text(
-                  task.title ?? "No Title",
+                  task.title,
                   style: GoogleFonts.cairo(
                     fontSize: ScreenUtilsManager.s18,
                     fontWeight: FontWeight.w800,
@@ -73,7 +74,7 @@ class ActiveTaskCard extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: ScreenUtilsManager.h6),
-                _LocationRow(address: "Unknown Location"),
+                _LocationRow(address: task.areaName),
               ],
             ),
           ),
@@ -156,26 +157,7 @@ class _AvailableActions extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Expanded(
-          child: OutlinedButton(
-            onPressed: () {},
-            style: OutlinedButton.styleFrom(
-              side: BorderSide(color: Colors.red.shade200),
-              foregroundColor: Colors.red,
-              padding: EdgeInsets.symmetric(vertical: ScreenUtilsManager.h12),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(ScreenUtilsManager.r8),
-              ),
-            ),
-            child: Text(
-              'Decline',
-              style: GoogleFonts.cairo(fontWeight: FontWeight.w600),
-            ),
-          ),
-        ),
-
         SizedBox(width: ScreenUtilsManager.w12),
-
         Expanded(
           child: Container(
             decoration: BoxDecoration(
@@ -197,7 +179,12 @@ class _AvailableActions extends StatelessWidget {
               ],
             ),
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (C) => TaskDetailsPage()),
+                );
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.transparent,
                 shadowColor: Colors.transparent,
@@ -207,7 +194,7 @@ class _AvailableActions extends StatelessWidget {
                 ),
               ),
               child: Text(
-                'Accept Task',
+                'Start Task',
                 style: GoogleFonts.cairo(
                   color: Colors.white,
                   fontWeight: FontWeight.w700,

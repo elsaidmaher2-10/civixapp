@@ -1,5 +1,6 @@
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/core/service/StatusReport.dart';
+import 'package:citifix/feature/workerFeature/tasks/controller/tasksController.dart';
 import 'package:citifix/feature/workerFeature/tasks/presentation/manager/cubit/task_report_cubit.dart';
 import 'package:citifix/feature/workerFeature/tasks/presentation/manager/cubit/task_report_state.dart';
 import 'package:citifix/feature/workerFeature/tasks/tasksearchbar.dart';
@@ -20,14 +21,6 @@ class TasksView extends StatefulWidget {
 }
 
 class _TasksViewState extends State<TasksView> {
-  String selectedFilter = 'All';
-  static const List<String> _filters = [
-    'All',
-    'Assigned',
-    'InProgress',
-    'Resolved',
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,6 +36,7 @@ class _TasksViewState extends State<TasksView> {
             ScreenUtilsManager.h100,
           ),
           child: Column(
+            mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const TasksHeader(),
@@ -50,9 +44,9 @@ class _TasksViewState extends State<TasksView> {
               const TaskSearchBar(),
               SizedBox(height: ScreenUtilsManager.h24),
               TaskFilterChips(
-                filters: _filters,
+                filters: Taskscontroller.filters(context),
                 onFilterSelected: (filter) =>
-                    setState(() => selectedFilter = filter),
+                    setState(() => Taskscontroller.selectedFilter = filter),
               ),
               SizedBox(height: ScreenUtilsManager.h16),
 
@@ -63,15 +57,16 @@ class _TasksViewState extends State<TasksView> {
                   }
                   if (state is WorkerTasksSuccess) {
                     final filteredTasks = state.response.items.where((task) {
-                      if (selectedFilter == 'All') return true;
+                      if (Taskscontroller.selectedFilter == 'All') return true;
                       return task.status.toLowerCase() ==
-                          selectedFilter.toLowerCase();
+                          Taskscontroller.selectedFilter.toLowerCase();
                     }).toList();
-
                     if (filteredTasks.isEmpty) {
                       return _EmptyState(
-                        filterName: selectedFilter,
-                        onReset: () => setState(() => selectedFilter = 'All'),
+                        filterName: Taskscontroller.selectedFilter,
+                        onReset: () => setState(
+                          () => Taskscontroller.selectedFilter = 'All',
+                        ),
                       );
                     }
                     return ListView.builder(
@@ -119,15 +114,14 @@ class _TasksViewState extends State<TasksView> {
 class _EmptyState extends StatelessWidget {
   final String filterName;
   final VoidCallback onReset;
-
   const _EmptyState({required this.filterName, required this.onReset});
-
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Padding(
         padding: EdgeInsets.only(top: ScreenUtilsManager.h6),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(
               Icons.assignment_late_outlined,
@@ -143,8 +137,6 @@ class _EmptyState extends StatelessWidget {
                 fontWeight: FontWeight.w600,
               ),
             ),
-            if (filterName != 'All')
-              TextButton(onPressed: onReset, child: const Text("Clear Filter")),
           ],
         ),
       ),

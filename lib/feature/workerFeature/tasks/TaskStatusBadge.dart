@@ -39,7 +39,7 @@ class TaskStatusBadge extends StatelessWidget {
         style: GoogleFonts.cairo(
           color: textColor,
           fontSize: 10,
-          fontWeight: FontWeight.w900, // Extra bold for that "badge" look
+          fontWeight: FontWeight.w900, 
           letterSpacing: 0.5,
         ),
       ),

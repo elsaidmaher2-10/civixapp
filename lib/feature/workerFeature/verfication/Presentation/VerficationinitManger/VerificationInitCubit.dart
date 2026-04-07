@@ -7,9 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class VerificationInitCubit extends Cubit<VerificationInitState> {
   final VerficationInitRepo repo;
 
-  VerificationInitCubit(this.repo) : super(VerificationInitInitial()) {
-    loadInitialData();
-  }
+  VerificationInitCubit(this.repo) : super(VerificationInitInitial());
   Future<void> loadInitialData() async {
     emit(VerificationInitLoading());
 
@@ -81,6 +79,21 @@ class VerificationInitCubit extends Cubit<VerificationInitState> {
       },
       (workerRequestModel) {
         emit(VerificationSuccess(workerRequest: workerRequestModel));
+      },
+    );
+  }
+
+  Future<void> fetchRequests() async {
+    emit(VerificationRequestsLoading());
+
+    final result = await repo.getvrificationRequests();
+
+    result.fold(
+      (failure) {
+        emit(VerificationRequestsError(failure.errors.first));
+      },
+      (data) {
+        emit(VerificationRequestsSuccess(data));
       },
     );
   }

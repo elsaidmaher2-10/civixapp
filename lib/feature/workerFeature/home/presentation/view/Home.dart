@@ -30,7 +30,7 @@ class HomePage extends StatelessWidget {
             return buildShimmerLoading();
           } else if (state is HomeSuccess) {
             final data = state.dashboardData;
-            return _buildHomeContent(data);
+            return _buildHomeContent(data, context);
           } else if (state is HomeError) {
             return _buildErrorWidget(context, state.errorMessage);
           }
@@ -40,34 +40,40 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _buildHomeContent(DashBroadHome data) {
-    return SingleChildScrollView(
-      padding: EdgeInsets.symmetric(
-        horizontal: ScreenUtilsManager.w16,
-        vertical: ScreenUtilsManager.h24,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _buildHeaderSection(data.workerName),
-          SizedBox(height: ScreenUtilsManager.h16),
-          WorkerCard(
-            isVerified: data.verified,
-            name: data.workerName,
-            imageUrl: data.profileImageUrl,
-          ),
-          SizedBox(height: ScreenUtilsManager.h16),
-          const WorkerAlertVrefication(),
-          SizedBox(height: ScreenUtilsManager.h16),
-          WorkerDashboard(data: data),
-          SizedBox(height: ScreenUtilsManager.h24),
-          const CustomMapSection(),
-          const SizedBox(height: 24),
+  Widget _buildHomeContent(DashBroadHome data, BuildContext context) {
+    return RefreshIndicator(
+      notificationPredicate: (notification) => true,
+      onRefresh: () {
+        return context.read<HomeCubit>().getWorkerDashboard();
+      },
+      child: SingleChildScrollView(
+        padding: EdgeInsets.symmetric(
+          horizontal: ScreenUtilsManager.w16,
+          vertical: ScreenUtilsManager.h24,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _buildHeaderSection(data.workerName),
+            SizedBox(height: ScreenUtilsManager.h16),
+            WorkerCard(
+              isVerified: data.verified,
+              name: data.workerName,
+              imageUrl: data.profileImageUrl,
+            ),
+            SizedBox(height: ScreenUtilsManager.h16),
+            if (!data.verified) const WorkerAlertVrefication(),
+            SizedBox(height: ScreenUtilsManager.h16),
+            WorkerDashboard(data: data),
+            SizedBox(height: ScreenUtilsManager.h24),
+            const CustomMapSection(),
+            const SizedBox(height: 24),
 
-          data.recentReports.isEmpty
-              ? _buildEmptyTasksMessage()
-              : CustomTaskListView(reports: data.recentReports),
-        ],
+            data.recentReports.isEmpty
+                ? _buildEmptyTasksMessage()
+                : CustomTaskListView(reports: data.recentReports),
+          ],
+        ),
       ),
     );
   }

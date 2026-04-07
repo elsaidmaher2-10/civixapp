@@ -20,9 +20,11 @@ class Apiconstant {
   static String markallread = "notifications/mark-all-read";
   static var achievemnent = "Achievements";
   static String getareas = "Areas/list";
-  static String verification = "my-verification";
+  static String verification = "Worker/my-verification";
   static String VerifcatioRequest = "Worker/verification-request";
   static String logout = "Account/logout";
+
+  static String verifications = "Worker/verification-requests";
   static String get getdepartment => "Departments/list";
   static String getcomments(int reportId) => "/reports/$reportId/comments";
 }

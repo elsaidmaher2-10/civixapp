@@ -1,12 +1,19 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:citifix/core/DI/getit.dart';
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
+import 'package:citifix/feature/workerFeature/verfication/Presentation/VerficationinitManger/VerificationInitCubit.dart';
+import 'package:citifix/feature/workerFeature/verfication/data/model/WorkerRequestModel.dart';
+import 'package:citifix/feature/workerFeature/verfication/data/repo/VerficationInitRepo.dart';
+import 'package:citifix/feature/workerFeature/verfication/verificationreqeusts.dart';
 import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class UnderReviewScreen extends StatelessWidget {
-  const UnderReviewScreen({super.key});
-
+  UnderReviewScreen({super.key, required this.workerRequestModel});
+  WorkerRequestModel workerRequestModel;
   @override
   Widget build(BuildContext context) {
     final s = S.of(context);
@@ -28,7 +35,7 @@ class UnderReviewScreen extends StatelessWidget {
                 children: [
                   _buildHeaderSection(context, s),
                   SizedBox(height: ScreenUtilsManager.p24),
-                  _buildSummarySection(context, s),
+                  _buildSummarySection(context, s, workerRequestModel),
                   SizedBox(height: ScreenUtilsManager.p24),
                   _buildWhatsNextSection(context, s),
                 ],
@@ -66,12 +73,25 @@ class UnderReviewScreen extends StatelessWidget {
       actions: [
         Padding(
           padding: EdgeInsets.only(right: ScreenUtilsManager.p24),
-          child: Text(
-            s.verification,
-            style: GoogleFonts.cairo(
-              color: ColorManger.workerprimary,
-              fontWeight: FontWeight.w600,
-              fontSize: ScreenUtilsManager.s16,
+          child: TextButton(
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => BlocProvider(
+                    create: (context) =>
+                        VerificationInitCubit(getIt<VerficationInitRepo>()),
+                    child: const VerificationRequestsScreen(),
+                  ),
+                ),
+              );
+            },
+            child: Text(
+              s.verification,
+              style: GoogleFonts.cairo(
+                color: ColorManger.workerprimary,
+                fontWeight: FontWeight.w600,
+                fontSize: ScreenUtilsManager.s16,
+              ),
             ),
           ),
         ),
@@ -119,7 +139,11 @@ class UnderReviewScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildSummarySection(BuildContext context, S s) {
+  Widget _buildSummarySection(
+    BuildContext context,
+    S s,
+    WorkerRequestModel workerRequestModel,
+  ) {
     return Stack(
       children: [
         Container(
@@ -185,12 +209,12 @@ class UnderReviewScreen extends StatelessWidget {
                       children: [
                         _buildInfoField(
                           s.accessZone,
-                          "Tier 1 • High Security Data Center",
+                          workerRequestModel.areaName,
                         ),
                         SizedBox(height: ScreenUtilsManager.p16),
                         _buildInfoField(
                           s.department,
-                          "Infrastructure & Operations",
+                          workerRequestModel.departmentName,
                         ),
                       ],
                     ),
@@ -212,9 +236,17 @@ class UnderReviewScreen extends StatelessWidget {
                         SizedBox(height: ScreenUtilsManager.p8),
                         Row(
                           children: [
-                            Expanded(child: _buildDocumentPlaceholder()),
+                            Expanded(
+                              child: _buildDocumentPlaceholder(
+                                workerRequestModel.nationalIdFrontImageUrl,
+                              ),
+                            ),
                             SizedBox(width: ScreenUtilsManager.p12),
-                            Expanded(child: _buildDocumentPlaceholder()),
+                            Expanded(
+                              child: _buildDocumentPlaceholder(
+                                workerRequestModel.nationalIdBackImageUrl,
+                              ),
+                            ),
                           ],
                         ),
                       ],
@@ -266,7 +298,7 @@ class UnderReviewScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildDocumentPlaceholder() {
+  Widget _buildDocumentPlaceholder(imgurl) {
     return AspectRatio(
       aspectRatio: 4 / 3,
       child: Container(
@@ -275,7 +307,7 @@ class UnderReviewScreen extends StatelessWidget {
           borderRadius: BorderRadius.circular(ScreenUtilsManager.r12),
           border: Border.all(color: ColorManger.border),
         ),
-        child: Icon(Icons.visibility_off, color: ColorManger.textGrey),
+        child: CachedNetworkImage(fit: BoxFit.fill, imageUrl: imgurl),
       ),
     );
   }

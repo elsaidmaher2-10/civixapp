@@ -3,7 +3,7 @@ import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/feature/citzenFeature/Profile/data/repos/UserProfileRepos/userprofileRepos.dart';
 import 'package:citifix/feature/citzenFeature/home/presentation/manager/navbarManger/mange_custom_bottomnav_bar_cubit.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/manager/reportManger/cubit/report_manager_cubit.dart';
-import 'package:citifix/feature/citzenFeature/Profile/presentation/manager/userinfoManger/user_profile_info_cubit.dart';
+import 'package:citifix/core/cubit/userinfoManger/user_profile_info_cubit.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/views/widget/AddReportScreen.dart';
 import 'package:citifix/feature/citzenFeature/home/presentation/view/widget/Customnavarbar.dart';
 import 'package:flutter/material.dart';

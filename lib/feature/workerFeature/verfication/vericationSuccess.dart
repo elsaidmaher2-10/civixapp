@@ -1,18 +1,27 @@
 import 'package:citifix/core/resource/colormanager.dart';
+import 'package:citifix/core/resource/screenutilsmaanger.dart';
+import 'package:citifix/feature/workerFeature/verfication/data/model/WorkerRequestModel.dart';
 import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class VerificationCompleteScreen extends StatelessWidget {
-  const VerificationCompleteScreen({super.key});
-
+  VerificationCompleteScreen({
+    super.key,
+    required WorkerRequestModel this.workerRequestModel,
+  });
+  WorkerRequestModel workerRequestModel;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppBar(context),
+      backgroundColor: ColorManger.background,
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 48.0),
+          padding: EdgeInsets.symmetric(
+            horizontal: ScreenUtilsManager.s24,
+            vertical: ScreenUtilsManager.s40,
+          ),
           child: Center(
             child: ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 400),
@@ -20,15 +29,13 @@ class VerificationCompleteScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  _buildSuccessHero(),
-                  const SizedBox(height: 48),
-                  _buildSummaryGrid(),
-                  const SizedBox(height: 16),
-                  _buildStatusDetails(),
-                  const SizedBox(height: 40),
-                  _buildTransactionalIllustration(),
-                  const SizedBox(height: 40),
-                  _buildActionButtons(),
+                  _buildSuccessHero(context),
+                  const SizedBox(height: ScreenUtilsManager.s48),
+                  _buildSummaryGrid(context),
+                  SizedBox(height: ScreenUtilsManager.s16),
+                  _buildStatusDetails(context),
+                  SizedBox(height: ScreenUtilsManager.s32),
+                  SizedBox(height: ScreenUtilsManager.s40),
                 ],
               ),
             ),
@@ -38,114 +45,115 @@ class VerificationCompleteScreen extends StatelessWidget {
     );
   }
 
-  PreferredSizeWidget _buildAppBar(context) {
+  PreferredSizeWidget _buildAppBar(BuildContext context) {
     return AppBar(
       backgroundColor: ColorManger.background.withOpacity(0.9),
-      elevation: 0,
+      elevation: ScreenUtilsManager.s0,
       surfaceTintColor: Colors.transparent,
       bottom: PreferredSize(
-        preferredSize: const Size.fromHeight(1.0),
-        child: Container(color: ColorManger.surfaceVariant, height: 1.0),
+        preferredSize: const Size.fromHeight(ScreenUtilsManager.s1),
+        child: Container(
+          color: ColorManger.surfaceVariant,
+          height: ScreenUtilsManager.s1,
+        ),
       ),
       title: Row(
         children: [
-          const Icon(Icons.security, color: ColorManger.primary),
-          const SizedBox(width: 12),
+          const Icon(Icons.location_city, color: ColorManger.workerprimary),
+          SizedBox(width: ScreenUtilsManager.s12),
           Text(
             S.of(context).appTitle,
             style: GoogleFonts.cairo(
               color: ColorManger.onSurface,
               fontWeight: FontWeight.bold,
-              fontSize: 18,
+              fontSize: ScreenUtilsManager.s18,
               letterSpacing: -0.5,
             ),
           ),
         ],
       ),
       actions: [
-        Padding(
-          padding: const EdgeInsets.only(right: 24.0),
-          child: Container(
-            width: 32,
-            height: 32,
-            decoration: const BoxDecoration(
-              color: ColorManger.surfaceContainerHigh,
-              shape: BoxShape.circle,
-            ),
-            child: const Icon(
-              Icons.person,
-              size: 18,
-              color: ColorManger.onSurface,
-            ),
+        Container(
+          width: ScreenUtilsManager.s36,
+          height: ScreenUtilsManager.s36,
+          margin: EdgeInsets.all(8),
+          decoration: const BoxDecoration(
+            color: ColorManger.surfaceContainerHigh,
+            shape: BoxShape.circle,
+          ),
+          child: Icon(
+            Icons.menu,
+            size: ScreenUtilsManager.s20,
+            color: ColorManger.workerprimary,
           ),
         ),
       ],
     );
   }
 
-  Widget _buildSuccessHero() {
+  Widget _buildSuccessHero(BuildContext context) {
     return Column(
       children: [
         Stack(
           alignment: Alignment.center,
           children: [
             Container(
-              width: 120,
-              height: 120,
+              width: ScreenUtilsManager.s120,
+              height: ScreenUtilsManager.s120,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: ColorManger.success.withOpacity(0.2),
+                color: ColorManger.success.withOpacity(0.4),
                 boxShadow: [
                   BoxShadow(
-                    color: ColorManger.success.withOpacity(0.3),
-                    blurRadius: 40,
-                    spreadRadius: 20,
+                    color: ColorManger.success.withOpacity(0.2),
+                    blurRadius: ScreenUtilsManager.s40,
+                    spreadRadius: ScreenUtilsManager.s20,
                   ),
                 ],
               ),
             ),
             Container(
-              width: 96,
-              height: 96,
+              width: ScreenUtilsManager.s96,
+              height: ScreenUtilsManager.s96,
               decoration: BoxDecoration(
-                color: ColorManger.success,
+                color: ColorManger.success.withOpacity(1),
                 shape: BoxShape.circle,
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withOpacity(0.1),
-                    blurRadius: 10,
+                    blurRadius: ScreenUtilsManager.s10,
                     offset: const Offset(0, 4),
                   ),
                 ],
               ),
               child: const Icon(
                 Icons.check_circle,
-                color: Colors.white,
-                size: 56,
+                color: ColorManger.white,
+                size: ScreenUtilsManager.s56,
               ),
             ),
           ],
         ),
-        const SizedBox(height: 32),
+        SizedBox(height: ScreenUtilsManager.s32),
         Text(
-          'Verification Complete',
+          S.of(context).verificationComplete,
           textAlign: TextAlign.center,
           style: GoogleFonts.cairo(
-            fontSize: 32,
+            fontSize: ScreenUtilsManager.s32,
             fontWeight: FontWeight.w800,
             color: ColorManger.onSurface,
             height: 1.2,
             letterSpacing: -0.5,
           ),
         ),
-        SizedBox(height: 16),
+        SizedBox(height: ScreenUtilsManager.s16),
         SizedBox(
           width: 280,
           child: Text(
-            'Your digital credentials have been successfully authenticated.',
+            S.of(context).verificationSuccessDesc,
             textAlign: TextAlign.center,
             style: GoogleFonts.cairo(
-              fontSize: 16,
+              fontSize: ScreenUtilsManager.s16,
               color: ColorManger.secondary,
               height: 1.5,
             ),
@@ -155,21 +163,22 @@ class VerificationCompleteScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildSummaryGrid() {
+  Widget _buildSummaryGrid(BuildContext context) {
     return Row(
       children: [
         Expanded(
           child: _buildInfoCard(
-            label: 'CONFIRMED ZONE',
-            value: 'Zone Alpha',
+            label: S.of(context).confirmedZone,
+            value: workerRequestModel.areaName,
+
             icon: Icons.location_on,
           ),
         ),
-        const SizedBox(width: 16),
+        SizedBox(width: ScreenUtilsManager.s16),
         Expanded(
           child: _buildInfoCard(
-            label: 'DEPARTMENT',
-            value: 'Engineering',
+            label: S.of(context).department,
+            value: workerRequestModel.departmentName,
             icon: Icons.domain,
           ),
         ),
@@ -183,11 +192,11 @@ class VerificationCompleteScreen extends StatelessWidget {
     required IconData icon,
   }) {
     return Container(
-      padding: const EdgeInsets.all(24),
+      padding: EdgeInsets.all(ScreenUtilsManager.s20),
       decoration: BoxDecoration(
         color: ColorManger.surfaceContainerLowest,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: ColorManger.surfaceVariant),
+        borderRadius: BorderRadius.circular(ScreenUtilsManager.s16),
+        border: Border.all(color: ColorManger.surfaceVariant.withOpacity(0.5)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -195,22 +204,26 @@ class VerificationCompleteScreen extends StatelessWidget {
           Text(
             label,
             style: GoogleFonts.cairo(
-              fontSize: 10,
-              fontWeight: FontWeight.w600,
+              fontSize: ScreenUtilsManager.s10,
+              fontWeight: FontWeight.w700,
               color: ColorManger.secondary,
               letterSpacing: 1.2,
             ),
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: ScreenUtilsManager.s12),
           Row(
             children: [
-              Icon(icon, color: ColorManger.primary, size: 20),
-              const SizedBox(width: 8),
+              Icon(
+                icon,
+                color: ColorManger.workerprimary,
+                size: ScreenUtilsManager.s22,
+              ),
+              const SizedBox(width: ScreenUtilsManager.s8),
               Expanded(
                 child: Text(
                   value,
                   style: GoogleFonts.cairo(
-                    fontSize: 18,
+                    fontSize: ScreenUtilsManager.s18,
                     fontWeight: FontWeight.bold,
                     color: ColorManger.onSurface,
                   ),
@@ -225,54 +238,54 @@ class VerificationCompleteScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildStatusDetails() {
+  Widget _buildStatusDetails(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(24),
+      padding: EdgeInsets.all(ScreenUtilsManager.s20),
       decoration: BoxDecoration(
         color: ColorManger.surfaceContainerLow,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: ColorManger.surfaceVariant),
+        borderRadius: BorderRadius.circular(ScreenUtilsManager.s16),
+        border: Border.all(color: ColorManger.surfaceVariant.withOpacity(0.5)),
       ),
       child: Row(
         children: [
           Container(
-            width: 40,
-            height: 40,
+            width: ScreenUtilsManager.s44,
+            height: ScreenUtilsManager.s44,
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: ColorManger.white,
               shape: BoxShape.circle,
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withOpacity(0.05),
-                  blurRadius: 4,
+                  blurRadius: ScreenUtilsManager.s8,
                   offset: const Offset(0, 2),
                 ),
               ],
             ),
-            child: const Icon(
-              Icons.badge,
-              color: ColorManger.primary,
-              size: 20,
+            child: Icon(
+              Icons.badge_outlined,
+              color: ColorManger.workerprimary,
+              size: ScreenUtilsManager.s22,
             ),
           ),
-          const SizedBox(width: 16),
+          SizedBox(width: ScreenUtilsManager.s16),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Digital ID Issued',
+                  S.of(context).digitalIdIssued,
                   style: GoogleFonts.cairo(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
+                    fontSize: ScreenUtilsManager.s16,
+                    fontWeight: FontWeight.w700,
                     color: ColorManger.onSurface,
                   ),
                 ),
-                const SizedBox(height: 2),
+                const SizedBox(height: ScreenUtilsManager.s2),
                 Text(
-                  'Expires Oct 2025',
+                  S.of(context).expiresDate,
                   style: GoogleFonts.cairo(
-                    fontSize: 12,
+                    fontSize: ScreenUtilsManager.s12,
                     color: ColorManger.secondary,
                   ),
                 ),
@@ -281,138 +294,10 @@ class VerificationCompleteScreen extends StatelessWidget {
           ),
           Icon(
             Icons.chevron_right,
-            color: ColorManger.secondary.withOpacity(0.4),
+            color: ColorManger.secondary.withOpacity(0.5),
           ),
         ],
       ),
-    );
-  }
-
-  Widget _buildTransactionalIllustration() {
-    return Container(
-      height: 128,
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: ColorManger.surfaceContainerLow,
-        borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: ColorManger.surfaceVariant),
-      ),
-      child: Stack(
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(24),
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [
-                  ColorManger.primary.withOpacity(0.05),
-                  Colors.transparent,
-                ],
-              ),
-            ),
-          ),
-          Positioned(
-            right: -20,
-            bottom: -20,
-            child: Container(
-              width: 160,
-              height: 160,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(
-                  color: ColorManger.primary.withOpacity(0.05),
-                  width: 20,
-                ),
-              ),
-            ),
-          ),
-          // Top left pill accents
-          Positioned(
-            top: 16,
-            left: 24,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  width: 48,
-                  height: 4,
-                  decoration: BoxDecoration(
-                    color: ColorManger.primary.withOpacity(0.2),
-                    borderRadius: BorderRadius.circular(4),
-                  ),
-                ),
-                const SizedBox(height: 4),
-                Container(
-                  width: 96,
-                  height: 4,
-                  decoration: BoxDecoration(
-                    color: ColorManger.primary.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(4),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          // Center Icon
-          const Center(
-            child: Icon(
-              Icons.verified,
-              size: 72,
-              color: Color(0x1AFF7A00), 
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildActionButtons() {
-    return Column(
-      children: [
-        ElevatedButton(
-          onPressed: () {},
-          style: ElevatedButton.styleFrom(
-            backgroundColor: ColorManger.primary,
-            foregroundColor: Colors.white,
-            minimumSize: const Size(double.infinity, 56),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
-            ),
-            elevation: 4,
-            shadowColor: ColorManger.primary.withOpacity(0.5),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'Continue to App',
-                style: GoogleFonts.cairo(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(width: 8),
-              const Icon(Icons.arrow_forward, size: 20),
-            ],
-          ),
-        ),
-        const SizedBox(height: 16),
-        TextButton(
-          onPressed: () {},
-          style: TextButton.styleFrom(
-            foregroundColor: ColorManger.onSurface,
-            minimumSize: const Size(double.infinity, 48),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
-            ),
-          ),
-          child: Text(
-            'View Digital Badge',
-            style: GoogleFonts.cairo(fontSize: 14, fontWeight: FontWeight.w600),
-          ),
-        ),
-      ],
     );
   }
 }

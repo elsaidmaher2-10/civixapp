@@ -1,6 +1,7 @@
 import 'package:citifix/core/DI/getit.dart';
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/feature/workerFeature/verfication/Presentation/VerficationinitManger/VerificationInitCubit.dart';
+import 'package:citifix/feature/workerFeature/verfication/data/model/WorkerRequestModel.dart';
 import 'package:citifix/feature/workerFeature/verfication/data/repo/VerficationInitRepo.dart';
 import 'package:citifix/feature/workerFeature/verfication/verficationinit.dart';
 import 'package:flutter/material.dart';
@@ -8,8 +9,8 @@ import 'package:citifix/generated/l10n.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class VerificationFailedScreen extends StatelessWidget {
-  const VerificationFailedScreen({super.key});
-
+  const VerificationFailedScreen({super.key, required this.workerRequestModel});
+  final WorkerRequestModel workerRequestModel;
   @override
   Widget build(BuildContext context) {
     final s = S.of(context);
@@ -147,9 +148,9 @@ class VerificationFailedScreen extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 16),
-          _buildBulletPoint(s.errorIdNotClear),
-          const SizedBox(height: 12),
-          _buildBulletPoint(s.errorSelfieMismatch),
+          _buildBulletPoint(
+            workerRequestModel.rejectionReason ?? s.errorIdNotClear,
+          ),
         ],
       ),
     );

@@ -273,5 +273,27 @@
   "errorMissingData": "بعض المعلومات المطلوبة مفقودة من مستنداتك.",
   "errorSelfieMismatch": "الصورة الشخصية لا تتطابق مع صورة الهوية المقدمة.",
   "resubmit": "حاول مرة أخرى",
-  "needHelp": "التواصل مع الدعم"
+  "needHelp": "التواصل مع الدعم","viewAllRequests": "عرض كل الطلبات",
+  "verificationComplete": "اكتملت المصادقة",
+  "verificationSuccessDesc": "تمت مصادقة بيانات الاعتماد الرقمية الخاصة بك بنجاح.",
+  "confirmedZone": "المنطقة المؤكدة",
+  "zoneAlpha": "المنطقة ألفا",
+  "engineering": "هندسة",
+  "digitalIdIssued": "تم إصدار الهوية الرقمية",
+  "expiresDate": "صالح حتى أكتوبر 2025",
+  "continueToApp": "الاستمرار للتطبيق",
+  "viewDigitalBadge": "عرض الشارة الرقمية",
+  "verificationRequestsTitle": "طلبات التوثيق",
+  "idLabel": "المعرف",
+  "submittedAtLabel": "تاريخ التقديم",
+  "rejectionReasonLabel": "سبب الرفض",
+  "viewDetailsBtn": "عرض التفاصيل",
+  "quickApproveBtn": "موافقة سريعة",
+  "statusApproved": "مقبول",
+  "statusPending": "قيد المراجعة",
+  "statusRejected": "مرفوض",
+  "phoneNumber": "رقم الهاتف",
+  "nationalId": "الرقم القومي",
+  "notes": "ملاحظات"
+
 }

@@ -1,6 +1,6 @@
 import 'package:citifix/core/database/remote/error/failureResponse.dart';
 import 'package:citifix/feature/citzenFeature/Profile/data/repos/UserProfileRepos/LogOutRepos.dart';
-import 'package:citifix/feature/citzenFeature/Profile/presentation/manager/LogOut/LogOutState.dart';
+import 'package:citifix/core/cubit/LogOut/LogOutState.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

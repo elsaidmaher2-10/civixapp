@@ -7,8 +7,8 @@ import 'package:citifix/feature/Auth/otpverifcation/presentation/view/otpvrifica
 import 'package:citifix/feature/Auth/register/presentation/views/signupwidget.dart';
 import 'package:citifix/feature/citzenFeature/Profile/data/repos/UserProfileRepos/LogOutRepos.dart';
 import 'package:citifix/feature/citzenFeature/Profile/data/repos/UserProfileRepos/userprofileRepos.dart';
-import 'package:citifix/feature/citzenFeature/Profile/presentation/manager/LogOut/LogOutcubit.dart';
-import 'package:citifix/feature/citzenFeature/Profile/presentation/manager/userinfoManger/user_profile_info_cubit.dart';
+import 'package:citifix/core/cubit/LogOut/LogOutcubit.dart';
+import 'package:citifix/core/cubit/userinfoManger/user_profile_info_cubit.dart';
 import 'package:citifix/feature/citzenFeature/Profile/presentation/view/ProfileScreen.dart';
 import 'package:citifix/feature/citzenFeature/Profile/presentation/view/widget/HelpAndTermsPage.dart';
 import 'package:citifix/feature/citzenFeature/Profile/presentation/view/widget/editprofile.dart';

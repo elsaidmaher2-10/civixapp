@@ -60,6 +60,7 @@ class Citifix extends StatelessWidget {
               >(
                 builder: (context, state) {
                   String currentLang = "en";
+                  // todo use under
                   if (state is LocalizationControllerChanged) {
                     currentLang = state.lang;
                   }

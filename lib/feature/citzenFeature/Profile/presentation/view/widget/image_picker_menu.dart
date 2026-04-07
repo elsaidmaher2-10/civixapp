@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
-import 'package:citifix/feature/citzenFeature/Profile/presentation/manager/controller/imageController.dart';
+import 'package:citifix/core/cubit/controller/imageController.dart';
 import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';

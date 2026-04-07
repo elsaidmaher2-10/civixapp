@@ -202,7 +202,7 @@ class Constantmanger {
   static const String dropdownHint = "Select your service category";
   static const String verifyButtonText = "Verify Now";
 
-  static String VERIFIED = 'VERIFIED ✅';
+  static String VERIFIED = 'VERIFIED';
 
   static String Pending = 'PENDING ⚠️';
 

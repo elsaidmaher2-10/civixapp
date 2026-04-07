@@ -2,7 +2,7 @@ import 'package:citifix/core/resource/assetvaluemanger.dart';
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/core/routing/routes.dart';
-import 'package:citifix/feature/citzenFeature/Profile/presentation/manager/userinfoManger/user_profile_info_cubit.dart';
+import 'package:citifix/core/cubit/userinfoManger/user_profile_info_cubit.dart';
 import 'package:citifix/feature/citzenFeature/Profile/presentation/view/Function/ShowCitezenaCard.dart';
 import 'package:citifix/feature/citzenFeature/Profile/presentation/view/Function/showLanguagePicker.dart';
 import 'package:citifix/feature/citzenFeature/Profile/presentation/view/widget/ProfileMenu.dart';

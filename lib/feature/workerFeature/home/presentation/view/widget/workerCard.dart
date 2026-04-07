@@ -3,11 +3,11 @@ import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/core/widget/customShimerwidget.dart';
-import 'package:citifix/feature/workerFeature/verfication/verficationPending.dart';
-import 'package:citifix/feature/workerFeature/verfication/vericationField.dart';
-import 'package:citifix/feature/workerFeature/verfication/vericationSuccess.dart';
+import 'package:citifix/feature/workerFeature/verfication/GateVerificationInitPage.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../../core/DI/getit.dart';
@@ -60,13 +60,23 @@ class WorkerCard extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        name,
-                        style: GoogleFonts.cairo(
-                          fontSize: ScreenUtilsManager.s20,
-                          fontWeight: FontWeight.bold,
-                          color: ColorManger.onSurface,
-                        ),
+                      Row(
+                        children: [
+                          Text(
+                            name,
+                            style: GoogleFonts.cairo(
+                              fontSize: ScreenUtilsManager.s20,
+                              fontWeight: FontWeight.bold,
+                              color: ColorManger.onSurface,
+                            ),
+                          ),
+                          SizedBox(width: 5),
+                          if (isVerified)
+                            SvgPicture.asset(
+                              "assets/verified-symbol-icon.svg",
+                              width: 20,
+                            ),
+                        ],
                       ),
                       const SizedBox(height: 4),
                       _buildVerificationBadge(),
@@ -93,19 +103,19 @@ class WorkerCard extends StatelessWidget {
         horizontal: ScreenUtilsManager.h8,
         vertical: ScreenUtilsManager.w2,
       ),
-      decoration: BoxDecoration(
-        color: (isVerified ? ColorManger.green : ColorManger.orange)
-            .withOpacity(0.1),
-        borderRadius: BorderRadius.circular(4),
-      ),
-      child: Text(
-        isVerified ? Constantmanger.VERIFIED : Constantmanger.Pending,
-        style: GoogleFonts.cairo(
-          fontSize: ScreenUtilsManager.s10,
-          fontWeight: FontWeight.w700,
-          color: isVerified ? ColorManger.green : ColorManger.orange,
-          letterSpacing: 0.5,
-        ),
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(4)),
+      child: Row(
+        children: [
+          Text(
+            isVerified ? Constantmanger.VERIFIED : Constantmanger.Pending,
+            style: GoogleFonts.cairo(
+              fontSize: ScreenUtilsManager.s10,
+              fontWeight: FontWeight.w700,
+              color: isVerified ? ColorManger.green : ColorManger.orange,
+              letterSpacing: 0.5,
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -152,7 +162,7 @@ class WorkerCard extends StatelessWidget {
                 builder: (context) => BlocProvider(
                   create: (context) =>
                       VerificationInitCubit(getIt<VerficationInitRepo>()),
-                  child: VerificationCompleteScreen(),
+                  child: Gateverificationinitpage(),
                 ),
               ),
             );

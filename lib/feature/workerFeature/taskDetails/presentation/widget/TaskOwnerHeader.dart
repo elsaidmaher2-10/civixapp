@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -24,8 +25,8 @@ class TaskOwnerHeader extends StatelessWidget {
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadius.circular(24),
-                    child: Image.network(
-                      'https://i.pravatar.cc/150?img=5',
+                    child: CachedNetworkImage(
+                      imageUrl: 'https://i.pravatar.cc/150?img=5',
                       width: 48,
                       height: 48,
                       fit: BoxFit.cover,
@@ -37,7 +38,7 @@ class TaskOwnerHeader extends StatelessWidget {
                     child: Container(
                       padding: const EdgeInsets.all(2),
                       decoration: const BoxDecoration(
-                        color: Colors.blue,
+                        color: Colors.green,
                         shape: BoxShape.circle,
                       ),
                       child: const Icon(
@@ -61,27 +62,13 @@ class TaskOwnerHeader extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 2),
-                  Row(
-                    children: [
-                      Icon(Icons.star, color: Colors.amber, size: 14),
-                      SizedBox(width: 4),
-                      Text(
-                        '4.8',
-                        style: GoogleFonts.cairo(
-                          fontWeight: FontWeight.bold,
-                          color: ColorManger.onSurface,
-                          fontSize: 12,
-                        ),
-                      ),
-                      const SizedBox(width: 4),
-                      Text(
-                        '• Task Owner',
-                        style: GoogleFonts.cairo(
-                          color: ColorManger.onSurfaceVariant,
-                          fontSize: 12,
-                        ),
-                      ),
-                    ],
+
+                  Text(
+                    '• Task Owner',
+                    style: GoogleFonts.cairo(
+                      color: ColorManger.onSurfaceVariant,
+                      fontSize: 12,
+                    ),
                   ),
                 ],
               ),

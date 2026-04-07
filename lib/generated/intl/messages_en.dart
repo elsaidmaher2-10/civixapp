@@ -93,9 +93,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "confirmPasswordRequired": MessageLookupByLibrary.simpleMessage(
       "Please confirm your password",
     ),
+    "confirmedZone": MessageLookupByLibrary.simpleMessage("CONFIRMED ZONE"),
     "contactSupport": MessageLookupByLibrary.simpleMessage(
       "Still have questions? Contact Support",
     ),
+    "continueToApp": MessageLookupByLibrary.simpleMessage("Continue to App"),
     "dataSecurityNote": MessageLookupByLibrary.simpleMessage(
       "Your data is securely stored and encrypted.",
     ),
@@ -127,6 +129,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Description must be at least 10 characters",
     ),
     "details": MessageLookupByLibrary.simpleMessage("Details"),
+    "digitalIdIssued": MessageLookupByLibrary.simpleMessage(
+      "Digital ID Issued",
+    ),
     "documentNumber": MessageLookupByLibrary.simpleMessage("Document Number"),
     "dontHaveAccount": MessageLookupByLibrary.simpleMessage(
       "Don’t have an account?",
@@ -140,6 +145,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "emptyReportsSubtitle": MessageLookupByLibrary.simpleMessage(
       "Any new reports you create will appear here.",
     ),
+    "engineering": MessageLookupByLibrary.simpleMessage("Engineering"),
     "english": MessageLookupByLibrary.simpleMessage("English"),
     "enterConfirmPassword": MessageLookupByLibrary.simpleMessage(
       "Enter confirm password",
@@ -166,6 +172,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "errorTitle": MessageLookupByLibrary.simpleMessage(
       "Oops! Something went wrong.",
     ),
+    "expiresDate": MessageLookupByLibrary.simpleMessage("Expires Oct 2025"),
     "failedToLoadCategories": MessageLookupByLibrary.simpleMessage(
       "Failed to load categories",
     ),
@@ -226,6 +233,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "How do I report a maintenance issue?",
     ),
     "id": MessageLookupByLibrary.simpleMessage("ID"),
+    "idLabel": MessageLookupByLibrary.simpleMessage("ID"),
     "identity": MessageLookupByLibrary.simpleMessage("Identity"),
     "identityDocs": MessageLookupByLibrary.simpleMessage("IDENTITY DOCUMENTS"),
     "imageBlurry": MessageLookupByLibrary.simpleMessage("Image Blurry"),
@@ -273,6 +281,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Resetting password...",
     ),
     "nationalID": MessageLookupByLibrary.simpleMessage("National ID"),
+    "nationalId": MessageLookupByLibrary.simpleMessage("National ID"),
     "nationalIdDigits": MessageLookupByLibrary.simpleMessage(
       "National ID must contain only digits",
     ),
@@ -305,6 +314,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "No reports available currently",
     ),
     "noResult": MessageLookupByLibrary.simpleMessage("No results found"),
+    "notes": MessageLookupByLibrary.simpleMessage("Notes"),
     "notifications": MessageLookupByLibrary.simpleMessage("Notifications"),
     "numberMismatch": MessageLookupByLibrary.simpleMessage(
       "Number didn\'t match the image provided",
@@ -349,6 +359,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "pending": MessageLookupByLibrary.simpleMessage("Pending"),
     "phone": MessageLookupByLibrary.simpleMessage("Phone"),
+    "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone Number"),
     "phoneRequired": MessageLookupByLibrary.simpleMessage("Phone is required"),
     "photoGallery": MessageLookupByLibrary.simpleMessage("Photo Gallery"),
     "privacyPolicyDesc": MessageLookupByLibrary.simpleMessage(
@@ -364,8 +375,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "progressTracking": MessageLookupByLibrary.simpleMessage(
       "Progress Tracking",
     ),
+    "quickApproveBtn": MessageLookupByLibrary.simpleMessage("Quick Approve"),
     "recentReport": MessageLookupByLibrary.simpleMessage("My Recent Reports"),
     "reference": MessageLookupByLibrary.simpleMessage("Reference:"),
+    "rejectionReasonLabel": MessageLookupByLibrary.simpleMessage(
+      "Rejection Reason",
+    ),
     "rememberMe": MessageLookupByLibrary.simpleMessage("Remember me"),
     "reportDescription": MessageLookupByLibrary.simpleMessage(
       "Report Description",
@@ -459,6 +474,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "signUpNow": MessageLookupByLibrary.simpleMessage("Sign up now"),
     "skip": MessageLookupByLibrary.simpleMessage("Skip"),
     "status": MessageLookupByLibrary.simpleMessage("Status"),
+    "statusApproved": MessageLookupByLibrary.simpleMessage("Approved"),
+    "statusPending": MessageLookupByLibrary.simpleMessage("Pending"),
+    "statusRejected": MessageLookupByLibrary.simpleMessage("Rejected"),
     "submissionSummary": MessageLookupByLibrary.simpleMessage(
       "Submission Summary",
     ),
@@ -467,6 +485,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Submit Additional Info",
     ),
     "submitted": MessageLookupByLibrary.simpleMessage("Submitted:"),
+    "submittedAtLabel": MessageLookupByLibrary.simpleMessage("Submitted"),
     "success": MessageLookupByLibrary.simpleMessage("Success"),
     "support": MessageLookupByLibrary.simpleMessage("Support"),
     "termsCitizenCategory": MessageLookupByLibrary.simpleMessage(
@@ -493,6 +512,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "unread": MessageLookupByLibrary.simpleMessage("unread"),
     "updateDocuments": MessageLookupByLibrary.simpleMessage("Update Documents"),
     "verification": MessageLookupByLibrary.simpleMessage("Verification"),
+    "verificationComplete": MessageLookupByLibrary.simpleMessage(
+      "Verification Complete",
+    ),
     "verificationFailed": MessageLookupByLibrary.simpleMessage(
       "Verification Failed",
     ),
@@ -501,6 +523,19 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "verificationGuide": MessageLookupByLibrary.simpleMessage(
       "Verification Guide",
+    ),
+    "verificationRequestsTitle": MessageLookupByLibrary.simpleMessage(
+      "Verification Requests",
+    ),
+    "verificationSuccessDesc": MessageLookupByLibrary.simpleMessage(
+      "Your digital credentials have been successfully authenticated.",
+    ),
+    "viewAllRequests": MessageLookupByLibrary.simpleMessage(
+      "View All Requests",
+    ),
+    "viewDetailsBtn": MessageLookupByLibrary.simpleMessage("View Details"),
+    "viewDigitalBadge": MessageLookupByLibrary.simpleMessage(
+      "View Digital Badge",
     ),
     "weeksAgo": m4,
     "whatsNext": MessageLookupByLibrary.simpleMessage("What\'s next?"),
@@ -514,5 +549,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "workerConductTitle": MessageLookupByLibrary.simpleMessage(
       "Worker Standards & Conduct",
     ),
+    "zoneAlpha": MessageLookupByLibrary.simpleMessage("Zone Alpha"),
   };
 }
