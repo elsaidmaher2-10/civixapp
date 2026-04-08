@@ -120,7 +120,6 @@ class MapControllerCubit extends Cubit<MapControllerState> {
       }
 
       final coords = geometry.lineString!.coordinates;
-      print(coords);
       return coords.map<LatLng>((e) => LatLng(e.$2, e.$1)).toList();
     } catch (e) {
       return [];

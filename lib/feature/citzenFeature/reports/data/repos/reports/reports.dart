@@ -249,7 +249,7 @@ class ReportRepositoryT {
 Future<File?> _getCompressedVideo(String path) async {
   final MediaInfo? info = await VideoCompress.compressVideo(
     path,
-    quality: VideoQuality.DefaultQuality,
+    quality: VideoQuality.MediumQuality,
     deleteOrigin: false,
   );
   if (info != null && info.file != null) {

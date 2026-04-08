@@ -25,6 +25,12 @@ class Apiconstant {
   static String logout = "Account/logout";
 
   static String verifications = "Worker/verification-requests";
+
+  static String wokrkerReportDetails(int reportId) =>
+      "Worker/my-reports/$reportId";
+
+  static String changestatus(int reportId) =>
+      "Worker/my-reports/$reportId/status";
   static String get getdepartment => "Departments/list";
   static String getcomments(int reportId) => "/reports/$reportId/comments";
 }

@@ -55,9 +55,9 @@ class _VerificationRequestsScreenState
       body: BlocBuilder<VerificationInitCubit, VerificationInitState>(
         builder: (context, state) {
           if (state is VerificationRequestsLoading) {
-            return const Center(
+            return Center(
               child: CupertinoActivityIndicator(
-                radius: 15,
+                radius: ScreenUtilsManager.r12,
                 color: ColorManger.inProgressContainer,
               ),
             );

@@ -1,5 +1,7 @@
+import 'package:citifix/core/DI/getit.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/core/service/StatusReport.dart';
+import 'package:citifix/feature/workerFeature/taskDetails/data/repos/reportdetails.dart';
 import 'package:citifix/feature/workerFeature/tasks/controller/tasksController.dart';
 import 'package:citifix/feature/workerFeature/tasks/presentation/manager/cubit/task_report_cubit.dart';
 import 'package:citifix/feature/workerFeature/tasks/presentation/manager/cubit/task_report_state.dart';
@@ -75,9 +77,11 @@ class _TasksViewState extends State<TasksView> {
                       physics: const NeverScrollableScrollPhysics(),
                       itemBuilder: (context, index) {
                         final task = filteredTasks[index];
-                        final isResolved =
+                        bool isResolved =
                             StatusReport.fromString(task.status) ==
-                            StatusReport.resolved;
+                                StatusReport.resolved ||
+                            StatusReport.fromString(task.status) ==
+                                StatusReport.completed;
 
                         return Padding(
                           padding: EdgeInsets.only(

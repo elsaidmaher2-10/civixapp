@@ -19,4 +19,23 @@ class WorkerTasksCubit extends Cubit<WorkerTasksState> {
       },
     );
   }
+
+  Future<void> changeWorkerTaskStatus({
+    required String status,
+    required int reportId,
+  }) async {
+    emit(WorkerChangeTasksLoading());
+    final result = await _workerTaskRepo.workertaskChangeStatus(
+      status,
+      reportId,
+    );
+    result.fold(
+      (failure) {
+        emit(WorkerChangeTasksError(failure.errors.join(",")));
+      },
+      (reportResponse) {
+        emit(WorkerChangeTasksSuccess(true));
+      },
+    );
+  }
 }

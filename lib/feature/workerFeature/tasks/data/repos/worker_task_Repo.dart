@@ -40,4 +40,40 @@ class WorkerTaskRepo {
       );
     }
   }
+
+  Future<Either<FailureResponse, bool>> workertaskChangeStatus(
+    String status,
+    int reportid,
+  ) async {
+    if (!await internetChecker.checkInternet()) {
+      return left(
+        FailureResponse(errors: [Constantmanger.nointernet], statusCode: 1),
+      );
+    }
+    try {
+      final response = await service.put(
+        path: Apiconstant.changestatus(reportid),
+        body: {"status": status},
+      );
+      return right(true);
+    } on Serverexciptionmodel catch (e) {
+      final dynamic errorData = e.errors;
+      if (errorData is Map<String, dynamic>) {
+        return left(FailureResponse.fromJson(errorData));
+      }
+      return left(
+        FailureResponse(
+          errors: [errorData?.toString() ?? "Unknown server error"],
+          statusCode: e.statuscode,
+        ),
+      );
+    } catch (e) {
+      return left(
+        FailureResponse(
+          errors: ["Unknown Error${e.toString()}"],
+          statusCode: 500,
+        ),
+      );
+    }
+  }
 }

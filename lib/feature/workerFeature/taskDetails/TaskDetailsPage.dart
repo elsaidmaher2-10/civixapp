@@ -1,49 +1,185 @@
 import 'dart:async';
-import 'package:citifix/core/resource/colormanager.dart';
-import 'package:citifix/feature/workerFeature/taskDetails/data/TimelineStepModel.dart';
-import 'package:citifix/feature/workerFeature/taskDetails/presentation/widget/MapNavigationSection.dart';
-import 'package:citifix/feature/workerFeature/taskDetails/presentation/widget/timelineSection.dart';
+import 'dart:io';
+import 'package:citifix/core/resource/constantmanger.dart';
+import 'package:citifix/feature/workerFeature/taskDetails/presentation/manager/ReportDetailsState.dart';
+import 'package:citifix/feature/workerFeature/taskDetails/presentation/views/widget/IssuePhotosSection.dart';
+import 'package:citifix/feature/workerFeature/taskDetails/presentation/views/widget/MapNavigationSection.dart';
+import 'package:citifix/feature/workerFeature/taskDetails/presentation/views/widget/TaskInfoSection.dart';
+import 'package:citifix/feature/workerFeature/taskDetails/presentation/views/widget/TaskOwnerHeader.dart';
+import 'package:citifix/feature/workerFeature/taskDetails/presentation/views/widget/timelineSection.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:timeline_tile/timeline_tile.dart';
-import 'presentation/widget/IssuePhotosSection.dart';
-import 'presentation/widget/TaskInfoSection.dart';
-import 'presentation/widget/TaskOwnerHeader.dart';
 
-enum StepState { completed, active, pending }
+import 'package:citifix/core/resource/colormanager.dart';
+import 'package:citifix/feature/workerFeature/taskDetails/presentation/manager/reportdetailsManger.dart';
 
-class TaskDetailsPage extends StatelessWidget {
-  const TaskDetailsPage({super.key});
+import '../../../core/DI/getit.dart';
+import '../../../core/resource/screenutilsmaanger.dart';
+import '../../citzenFeature/Profile/presentation/view/widget/image_picker_menu.dart';
+import '../tasks/data/repos/worker_task_Repo.dart';
+import '../tasks/presentation/manager/cubit/task_report_cubit.dart';
+
+class TaskDetailsPage extends StatefulWidget {
+  const TaskDetailsPage({super.key, required this.reportid});
+  final int reportid;
+
+  @override
+  State<TaskDetailsPage> createState() => _TaskDetailsPageState();
+}
+
+class _TaskDetailsPageState extends State<TaskDetailsPage> {
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<ReportDetailsManager>().getReportDetails(
+        id: widget.reportid,
+      );
+    });
+  }
+
+  StreamController<File>? Controller = StreamController.broadcast();
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    Controller?.close();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorManger.background,
-      appBar: _buildAppBar(context),
-      bottomNavigationBar: _TaskBottomBar(),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            TaskOwnerHeader(),
-            SizedBox(height: 16),
-            TaskInfoSection(),
-            SizedBox(height: 16),
-            IssuePhotosSection(),
-            SizedBox(height: 16),
-            MapNavigationSection(),
-            SizedBox(height: 16),
-            ActivityTimelineSection(),
-            SizedBox(height: 16),
-            _CompletionDataSection(),
-          ],
-        ),
+      appBar: _buildAppBar(),
+      body: BlocBuilder<ReportDetailsManager, ReportDetailsState>(
+        builder: (context, state) {
+          if (state is ReportDetailsLoading) {
+            return Center(
+              child: CupertinoActivityIndicator(
+                radius: ScreenUtilsManager.r12,
+                color: ColorManger.workerprimary,
+              ),
+            );
+          }
+
+          if (state is ReportDetailsFailure) {
+            final isNoInternet = state.error.contains(
+              Constantmanger.nointernet,
+            );
+
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    isNoInternet ? Icons.wifi_off : Icons.error_outline,
+                    size: 60,
+                    color: Colors.grey,
+                  ),
+                  const SizedBox(height: 16),
+                  Text(
+                    isNoInternet
+                        ? "No Internet Connection"
+                        : "Something went wrong",
+                    style: GoogleFonts.cairo(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+
+                  const SizedBox(height: 8),
+
+                  Text(
+                    state.error,
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.cairo(color: Colors.grey),
+                  ),
+
+                  const SizedBox(height: 16),
+
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFFFF7B00),
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 32,
+                        vertical: 12,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      elevation: 2,
+                    ),
+                    onPressed: () {
+                      context.read<ReportDetailsManager>().getReportDetails(
+                        id: widget.reportid,
+                      );
+                    },
+                    child: Text(
+                      "Retry",
+                      style: GoogleFonts.cairo(fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }
+
+          if (state is ReportDetailsSuccess) {
+            final task = state.data;
+
+            return SingleChildScrollView(
+              padding: const EdgeInsets.all(16),
+              child: BlocProvider(
+                create: (context) => WorkerTasksCubit(getIt<WorkerTaskRepo>()),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    TaskOwnerHeader(task: task),
+                    const SizedBox(height: 16),
+
+                    TaskInfoSection(task: task),
+                    const SizedBox(height: 16),
+
+                    IssuePhotosSection(
+                      mediaItems: [...task.imagesUrls, ...task.videosUrls],
+                    ),
+                    const SizedBox(height: 16),
+
+                    MapNavigationSection(taskDetailsModel: task),
+                    const SizedBox(height: 16),
+
+                    ActivityTimelineSection(
+                      isCompleted: task.isCompleted,
+                      initialStatus: task.status,
+                      id: task.id,
+                    ),
+                    const SizedBox(height: 16),
+
+                    !task.isCompleted
+                        ? _CompletionDataSection(
+                            streamController: Controller,
+                            ontap: (image) async {},
+                          )
+                        : SizedBox.shrink(),
+                  ],
+                ),
+              ),
+            );
+          }
+
+          return const SizedBox();
+        },
       ),
     );
   }
 
-  PreferredSizeWidget _buildAppBar(BuildContext context) {
+  PreferredSizeWidget _buildAppBar() {
     return AppBar(
       backgroundColor: ColorManger.surface,
       elevation: 0,
@@ -57,26 +193,20 @@ class TaskDetailsPage extends StatelessWidget {
         style: GoogleFonts.cairo(
           color: ColorManger.onSurface,
           fontWeight: FontWeight.bold,
-          fontSize: 18,
         ),
       ),
-      actions: [
-        IconButton(
-          icon: Icon(Icons.more_vert, color: ColorManger.onSurfaceVariant),
-          onPressed: () {},
-        ),
-      ],
     );
   }
 }
 
 class _CompletionDataSection extends StatelessWidget {
-  const _CompletionDataSection();
-
+  _CompletionDataSection({required this.ontap, required this.streamController});
+  StreamController<File>? streamController;
+  Function(File?) ontap;
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(24),
+      padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
         color: ColorManger.surface,
         borderRadius: BorderRadius.circular(12),
@@ -88,7 +218,7 @@ class _CompletionDataSection extends StatelessWidget {
           Row(
             children: [
               Icon(Icons.task_alt, color: ColorManger.workerprimary, size: 16),
-              SizedBox(width: 8),
+              const SizedBox(width: 8),
               Text(
                 'COMPLETION DATA',
                 style: GoogleFonts.cairo(
@@ -98,125 +228,63 @@ class _CompletionDataSection extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 16),
-          Row(
-            children: [
-              Text(
-                'PROOF OF WORK ',
-                style: GoogleFonts.cairo(
-                  fontSize: 11,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.grey.shade400,
-                ),
-              ),
-              Text(
-                '*',
-                style: GoogleFonts.cairo(
-                  fontSize: 11,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.red,
-                ),
-              ),
-            ],
-          ),
-          SizedBox(height: 8),
+          const SizedBox(height: 16),
 
-          InkWell(
-            onTap: () {
-            },
-            borderRadius: BorderRadius.circular(12),
-            child: Container(
-              height: 120,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: ColorManger.surface,
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(
-                  color: Colors.grey.shade300,
-                  style: BorderStyle.solid,
-                  width: 2,
-                ),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.cloud_upload_outlined,
-                    color: Colors.grey.shade400,
-                    size: 32,
-                  ),
-                  SizedBox(height: 8),
-                  Text(
-                    'Tap to upload photos',
-                    style: GoogleFonts.cairo(
-                      color: Colors.grey.shade500,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ],
-              ),
+          Text(
+            'PROOF OF WORK *',
+            style: GoogleFonts.cairo(
+              fontSize: 12,
+              fontWeight: FontWeight.bold,
+              color: Colors.grey,
             ),
+          ),
+
+          const SizedBox(height: 10),
+
+          StreamBuilder<File>(
+            stream: streamController?.stream,
+            builder: (BuildContext context, AsyncSnapshot<File> snapshot) =>
+                InkWell(
+                  onTap: () async {
+                    final image = await ImagePickerMenu.show(context);
+                    if (image != null) {
+                      ontap(image);
+                      streamController?.add(image);
+                    }
+                  },
+                  child: Container(
+                    height: 200.h,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: Colors.grey.shade300, width: 2),
+                    ),
+                    child: snapshot.data != null
+                        ? ClipRRect(
+                            child: Image.file(
+                              snapshot.data!,
+                              fit: BoxFit.cover,
+                            ),
+                          )
+                        : Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.cloud_upload_outlined,
+                                size: 32,
+                                color: Colors.grey,
+                              ),
+                              const SizedBox(height: 8),
+                              Text(
+                                "Tap to upload photos",
+                                style: GoogleFonts.cairo(color: Colors.grey),
+                              ),
+                            ],
+                          ),
+                  ),
+                ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class _TaskBottomBar extends StatelessWidget {
-  const _TaskBottomBar();
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(24.0),
-      decoration: BoxDecoration(
-        color: ColorManger.surface,
-        border: Border(top: BorderSide(color: Colors.grey.shade200)),
-      ),
-      child: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Color(0xFFFF7A00), Color(0xFFFF9533)],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-          borderRadius: BorderRadius.circular(12),
-          boxShadow: [
-            BoxShadow(
-              color: ColorManger.workerprimary.withOpacity(0.3),
-              blurRadius: 15,
-              offset: Offset(0, 4),
-            ),
-          ],
-        ),
-        child: ElevatedButton(
-          onPressed: () {},
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.transparent,
-            shadowColor: Colors.transparent,
-            padding: EdgeInsets.symmetric(vertical: 16),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(Icons.verified, color: Colors.white),
-              SizedBox(width: 8),
-              Text(
-                'Mark as Completed',
-                style: GoogleFonts.cairo(
-                  color: Colors.white,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w800,
-                ),
-              ),
-            ],
-          ),
-        ),
       ),
     );
   }

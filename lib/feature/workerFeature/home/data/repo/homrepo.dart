@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:citifix/core/database/local/prefmanger.dart';
 import 'package:citifix/core/database/remote/api/ApiConstant.dart';
 import 'package:citifix/core/database/remote/api/ApiService.dart';
 import 'package:citifix/core/database/remote/error/ServerExciptionmodel.dart';
@@ -6,6 +9,7 @@ import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/service/networkchecker.dart';
 import 'package:citifix/feature/workerFeature/home/data/models/dashbroadmodel.dart';
 import 'package:dartz/dartz.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Homreposatory {
   final Apiservice service;
@@ -19,7 +23,15 @@ class Homreposatory {
     }
     try {
       final response = await service.get(path: Apiconstant.workerdashboard);
-      return right(DashBroadHome.fromJson(response));
+      final rightdata = DashBroadHome.fromJson(response);
+      String zoneData = jsonEncode(
+        rightdata.areaCoordinates
+            .map((e) => {"lat": e.latitude, "lang": e.longitude})
+            .toList(),
+      );
+
+      PrefrenceManager().setstring("zone", zoneData);
+      return right(rightdata);
     } on Serverexciptionmodel catch (e) {
       final dynamic errorData = e.errors;
       if (errorData is Map<String, dynamic>) {

@@ -1,3 +1,5 @@
+import 'package:latlong2/latlong.dart';
+
 class DashBroadHome {
   final int totalReports;
   final int assignedReports;
@@ -9,6 +11,7 @@ class DashBroadHome {
   final String areaName;
   final String departmentName;
   final List<RecentReportModel> recentReports;
+  final List<LatLng> areaCoordinates;
   DashBroadHome({
     required this.areaName,
     required this.departmentName,
@@ -20,6 +23,7 @@ class DashBroadHome {
     required this.resolvedReports,
     required this.recentReports,
     required this.verified,
+    required this.areaCoordinates,
   });
 
   factory DashBroadHome.fromJson(Map<String, dynamic> json) {
@@ -38,6 +42,16 @@ class DashBroadHome {
       profileImageUrl: json["profileImageUrl"],
       workerName: json["workerName"],
       verified: json["verified"],
+      areaCoordinates:
+          (json['areaCoordinates'] as List?)
+              ?.map(
+                (point) => LatLng(
+                  (point['latitude'] as num).toDouble(),
+                  (point['longitude'] as num).toDouble(),
+                ),
+              )
+              .toList() ??
+          [],
     );
   }
 }

@@ -9,6 +9,18 @@ allprojects {
         google()
         mavenCentral()
     }
+    subprojects {
+        plugins.whenPluginAdded {
+            if (this is com.android.build.gradle.LibraryPlugin) {
+                extensions.findByType(com.android.build.gradle.LibraryExtension::class.java)
+                    ?.apply {
+                        if (namespace == null) {
+                            namespace = project.group.toString()
+                        }
+                    }
+            }
+        }
+    }
 }
 
 val newBuildDir: Directory =

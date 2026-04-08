@@ -1,12 +1,17 @@
 import 'package:citifix/core/service/StatusReport.dart';
 import 'package:citifix/feature/workerFeature/taskDetails/TaskDetailsPage.dart';
 import 'package:citifix/feature/workerFeature/tasks/data/model/ReportResponse.dart';
+import 'package:dartz/dartz.dart' as task;
 import 'package:flutter/material.dart';
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../../core/DI/getit.dart';
 import '../../../../core/widget/stautsBageApp.dart';
+import '../../taskDetails/data/repos/reportdetails.dart';
+import '../../taskDetails/presentation/manager/reportdetailsManger.dart';
 
 class ActiveTaskCard extends StatelessWidget {
   final ReportModelWorker task;
@@ -84,8 +89,8 @@ class ActiveTaskCard extends StatelessWidget {
             padding: EdgeInsets.all(ScreenUtilsManager.w16),
             child:
                 StatusReport.fromString(task.status) == StatusReport.inProgress
-                ? const _InProgressActions()
-                : const _AvailableActions(),
+                ? _InProgressActions(id: task.id)
+                : _AvailableActions(id: task.id),
           ),
         ],
       ),
@@ -151,8 +156,8 @@ class StatusBadge extends StatelessWidget {
 }
 
 class _AvailableActions extends StatelessWidget {
-  const _AvailableActions();
-
+  const _AvailableActions({required this.id});
+  final int id;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -182,7 +187,14 @@ class _AvailableActions extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (C) => TaskDetailsPage()),
+                  MaterialPageRoute(
+                    builder: (_) => BlocProvider(
+                      create: (_) => ReportDetailsManager(
+                        reportdetailsRepo: getIt<ReportdetailsRepo>(),
+                      )..getReportDetails(id: id),
+                      child: TaskDetailsPage(reportid: id),
+                    ),
+                  ),
                 );
               },
               style: ElevatedButton.styleFrom(
@@ -209,13 +221,26 @@ class _AvailableActions extends StatelessWidget {
 }
 
 class _InProgressActions extends StatelessWidget {
-  const _InProgressActions();
+  _InProgressActions({required this.id});
+  final id;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) => BlocProvider(
+                create: (_) => ReportDetailsManager(
+                  reportdetailsRepo: getIt<ReportdetailsRepo>(),
+                )..getReportDetails(id: id),
+                child: TaskDetailsPage(reportid: id),
+              ),
+            ),
+          );
+        },
         style: ElevatedButton.styleFrom(
           backgroundColor: ColorManger.onSurface,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),

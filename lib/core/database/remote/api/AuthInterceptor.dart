@@ -12,8 +12,6 @@ class AuthInterceptor extends Interceptor {
   final Dio _refreshDio;
   Completer<bool>? _refreshCompleter;
 
-
-
   AuthInterceptor(this.dio)
     : _refreshDio = Dio(
         BaseOptions(
@@ -74,6 +72,7 @@ class AuthInterceptor extends Interceptor {
     }
 
     _refreshCompleter = Completer<bool>();
+
     final refreshed = await _fetchNewAccessToken(refreshToken);
     _refreshCompleter!.complete(refreshed);
     _refreshCompleter = null;

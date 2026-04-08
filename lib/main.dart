@@ -19,6 +19,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:logger/logger.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
@@ -29,11 +30,12 @@ Future<void> main() async {
 
   runApp(const MyAppWrapper());
 }
+
 Future<void> _initApp() async {
   SystemChrome.setSystemUIOverlayStyle(_statusBarStyle);
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown
+    DeviceOrientation.portraitDown,
   ]);
   setupgetit();
   if (Firebase.apps.isEmpty) {

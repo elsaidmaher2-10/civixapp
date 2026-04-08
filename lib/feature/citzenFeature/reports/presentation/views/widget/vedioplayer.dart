@@ -38,9 +38,7 @@ class _AppVideoPlayerState extends State<AppVideoPlayer> {
       if (mounted) {
         setState(() => _isInitialized = true);
       }
-    } catch (e) {
-      debugPrint("Video Error: $e");
-    }
+    } catch (e) {}
   }
 
   @override

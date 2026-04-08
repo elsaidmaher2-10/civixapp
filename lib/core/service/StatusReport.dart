@@ -6,7 +6,7 @@ enum StatusReport {
   pending("Pending", Color(0xFFFFB300)),
   inProgress("InProgress", ColorManger.kPrimary),
   resolved("Resolved", Colors.green),
-  completed("Completed", Colors.green),
+  completed("Resolved", Colors.green),
   rejected("Rejected", Colors.red);
 
   final String value;
@@ -18,6 +18,17 @@ enum StatusReport {
       (e) => e.value.toLowerCase() == status.toLowerCase(),
       orElse: () => StatusReport.pending,
     );
+  }
+
+  StatusReport getNextStatus(StatusReport currentStatus) {
+    return switch (currentStatus) {
+      StatusReport.pending => StatusReport.assigned,
+      StatusReport.assigned => StatusReport.inProgress,
+      StatusReport.inProgress => StatusReport.completed,
+      StatusReport.completed => StatusReport.completed,
+      StatusReport.resolved => StatusReport.completed,
+      StatusReport.rejected => StatusReport.rejected,
+    };
   }
 }
 

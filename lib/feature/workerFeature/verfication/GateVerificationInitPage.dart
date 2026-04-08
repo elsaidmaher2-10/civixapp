@@ -12,6 +12,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../core/resource/screenutilsmaanger.dart';
+
 class Gateverificationinitpage extends StatelessWidget {
   const Gateverificationinitpage({super.key});
 
@@ -48,7 +50,9 @@ class _GateVerificationBody extends StatelessWidget {
               break;
 
             case VerificationStatus.completed:
-              page =  VerificationCompleteScreen(workerRequestModel: state.workerRequest);
+              page = VerificationCompleteScreen(
+                workerRequestModel: state.workerRequest,
+              );
               break;
 
             case VerificationStatus.rejected:
@@ -76,7 +80,7 @@ class _GateVerificationBody extends StatelessWidget {
           backgroundColor: ColorManger.bgbackground,
           body: Center(
             child: CupertinoActivityIndicator(
-              radius: 10,
+              radius: ScreenUtilsManager.r12,
               color: ColorManger.workerprimary,
             ),
           ),

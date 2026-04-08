@@ -100,11 +100,7 @@ class Apiservice extends Apiconsumer {
     Object? body,
   }) async {
     try {
-      final response = await dio.put(
-        path,
-        data: body,
-        queryParameters: queryprams,
-      );
+      final response = await dio.put(path, data: body);
       return response.data;
     } on DioException catch (e) {
       throw handleDioException(e);

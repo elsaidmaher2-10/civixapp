@@ -7,6 +7,7 @@ import 'package:citifix/feature/citzenFeature/reports/data/repos/commentRepo/com
 import 'package:citifix/feature/citzenFeature/reports/data/repos/reports/reports.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/manager/reportManger/cubit/report_manager_cubit.dart';
 import 'package:citifix/feature/workerFeature/home/data/repo/homrepo.dart';
+import 'package:citifix/feature/workerFeature/taskDetails/data/repos/reportdetails.dart';
 import 'package:citifix/feature/workerFeature/tasks/data/repos/worker_task_Repo.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
@@ -55,6 +56,9 @@ void setupgetit() {
       apiservice: getIt<Apiservice>(),
       internetChecker: getIt<InternetChecker>(),
     ),
+  );
+  getIt.registerSingleton<ReportdetailsRepo>(
+    ReportdetailsRepo(getIt<InternetChecker>(), getIt<Apiservice>()),
   );
   getIt.registerSingleton<WorkerTaskRepo>(
     WorkerTaskRepo(

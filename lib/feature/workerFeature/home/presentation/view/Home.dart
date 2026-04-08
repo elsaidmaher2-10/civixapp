@@ -16,6 +16,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:latlong2/latlong.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -67,7 +68,10 @@ class HomePage extends StatelessWidget {
             SizedBox(height: ScreenUtilsManager.h16),
             WorkerDashboard(data: data),
             SizedBox(height: ScreenUtilsManager.h24),
-            const CustomMapSection(),
+            CustomMapSection(
+              zonemLevel: data.areaCoordinates,
+              areaname: data.areaName,
+            ),
             const SizedBox(height: 24),
 
             data.recentReports.isEmpty
