@@ -1,30 +1,27 @@
 import 'dart:async';
 import 'dart:io';
-
+import 'package:citifix/core/widget/mediapicker.dart';
 import 'package:flutter/material.dart';
-import 'package:wechat_assets_picker/wechat_assets_picker.dart' hide LatLng;
+import 'package:image_picker/image_picker.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:photo_manager/photo_manager.dart' hide LatLng;
 
 class ReportScreenController {
   final StreamController<List<File>> streamController =
       StreamController<List<File>>.broadcast();
-
   final StreamController<bool> btnController =
       StreamController<bool>.broadcast();
-
   final TextEditingController titleController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
 
   List<File> selectedFiles = [];
-
   int categoryItem = -1;
-
   bool isValid = false;
-
   String? selectedStreet;
   LatLng? selectedLatLng;
-
   bool isAnonymous = false;
+
+  final ImagePicker _imagePicker = ImagePicker();
 
   void init() {
     titleController.addListener(updateButtonStatus);
@@ -39,51 +36,53 @@ class ReportScreenController {
   }
 
   Future<void> pickImages(BuildContext context) async {
-    final provider = DefaultAssetPickerProvider(
-      maxAssets: 10,
-      requestType: RequestType.all,
-    );
     await showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      builder: (context) {
-        return SizedBox(
-          height: MediaQuery.of(context).size.height * 0.6,
-          child: AssetPicker<AssetEntity, AssetPathEntity>(
-            permissionRequestOption: const PermissionRequestOption(),
-            builder: DefaultAssetPickerBuilderDelegate(
-              specialPickerType: SpecialPickerType.wechatMoment,
-              keepScrollOffset: true,
-              shouldRevertGrid: true,
-              locale: Localizations.localeOf(context),
-              pickerTheme: ThemeData(
-                colorScheme: ColorScheme.light(),
-                useMaterial3: true,
-              ),
-              provider: provider,
-              initialPermission: PermissionState.authorized,
-              gridCount: 3,
-            ),
-          ),
-        );
-      },
+      backgroundColor: Colors.transparent,
+      useSafeArea: true,
+      builder: (context) => PickerBottomSheet(
+        onCameraPhoto: () async {
+          Navigator.pop(context);
+          await _pickFromCamera(isVideo: false);
+        },
+        onCameraVideo: () async {
+          Navigator.pop(context);
+          await _pickFromCamera(isVideo: true);
+        },
+        onFilesSelected: (files) {
+          selectedFiles = [...selectedFiles, ...files];
+          streamController.add(selectedFiles);
+          updateButtonStatus();
+        },
+      ),
     );
+  }
 
-    final selectedAssets = provider.selectedAssets;
-    if (selectedAssets.isNotEmpty) {
-      List<File> files = [];
-      for (final entity in selectedAssets) {
-        final file = await entity.file;
-        if (file != null) {
-          files.add(file);
+  Future<void> _pickFromCamera({required bool isVideo}) async {
+    try {
+      if (isVideo) {
+        final XFile? video = await _imagePicker.pickVideo(
+          source: ImageSource.camera,
+        );
+        if (video != null) {
+          selectedFiles = [...selectedFiles, File(video.path)];
+          streamController.add(selectedFiles);
+          updateButtonStatus();
+        }
+      } else {
+        final XFile? photo = await _imagePicker.pickImage(
+          source: ImageSource.camera,
+        );
+        if (photo != null) {
+          selectedFiles = [...selectedFiles, File(photo.path)];
+          streamController.add(selectedFiles);
+          updateButtonStatus();
         }
       }
-      selectedFiles = selectedFiles + files;
-    } else {
-      selectedFiles = [];
+    } catch (e) {
+      debugPrint('Camera error: $e');
     }
-    streamController.add(selectedFiles);
-    updateButtonStatus();
   }
 
   void removeImage(int index) {
@@ -105,7 +104,6 @@ class ReportScreenController {
         descriptionController.text.isNotEmpty &&
         categoryItem != -1 &&
         selectedFiles.isNotEmpty;
-
     if (!btnController.isClosed) {
       btnController.add(isValid);
     }

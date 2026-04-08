@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-void showLanguagePicker(BuildContext context) async {
+void showLanguagePicker(BuildContext context, bool isWorekr) async {
   await showDialog(
     context: context,
     builder: (context) => Dialog(
@@ -25,7 +25,9 @@ void showLanguagePicker(BuildContext context) async {
               style: GoogleFonts.cairo(
                 fontSize: ScreenUtilsManager.s20,
                 fontWeight: FontWeight.bold,
-                color: ColorManger.kPrimary,
+                color: isWorekr
+                    ? ColorManger.workerprimary
+                    : ColorManger.kPrimary,
               ),
             ),
             SizedBox(height: ScreenUtilsManager.h10),

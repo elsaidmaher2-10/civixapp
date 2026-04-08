@@ -44,7 +44,7 @@ class Profilesettings extends StatelessWidget {
                 ),
 
                 title: S.of(context).language,
-                onTap: () => showLanguagePicker(context),
+                onTap: () => showLanguagePicker(context, false),
               ),
               ProfileMenuItem(
                 iconPath: SvgPicture.asset(

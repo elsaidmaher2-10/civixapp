@@ -3,7 +3,6 @@ import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/feature/citzenFeature/Profile/data/Models/HelpModel.dart';
 import 'package:citifix/generated/l10n.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_faq/flutter_faq.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

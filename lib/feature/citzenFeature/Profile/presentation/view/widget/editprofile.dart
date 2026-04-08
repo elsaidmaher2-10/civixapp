@@ -26,12 +26,13 @@ class EditProfileScreen extends StatefulWidget {
 }
 
 class _WorkerEditProfileScreenState extends State<EditProfileScreen> {
-  final Userprofilecontroller userprofilecontroller = Userprofilecontroller();
+  late final Userprofilecontroller userprofilecontroller;
 
   @override
   void initState() {
-    userprofilecontroller.init();
     super.initState();
+    userprofilecontroller = Userprofilecontroller();
+    userprofilecontroller.init();
   }
 
   @override
@@ -63,6 +64,31 @@ class _WorkerEditProfileScreenState extends State<EditProfileScreen> {
         }
       },
       builder: (context, state) {
+        final role =
+            userprofilecontroller.userProfile?.role?.toLowerCase() ?? "";
+
+        if (userprofilecontroller.userProfile == null) {
+          return Scaffold(
+            backgroundColor: ColorManger.reportsPageBackground,
+            body: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  customloading(),
+                  SizedBox(height: ScreenUtilsManager.h16),
+                  Text(
+                    S.of(context).loading,
+                    style: GoogleFonts.cairo(
+                      fontSize: ScreenUtilsManager.s14,
+                      color: ColorManger.lightGrey2,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        }
+
         return ModalProgressHUD(
           progressIndicator: customloading(),
           inAsyncCall: state is EditUserProfileInfoLoading,
@@ -71,7 +97,7 @@ class _WorkerEditProfileScreenState extends State<EditProfileScreen> {
             body: SafeArea(
               child: Column(
                 children: [
-                  _buildAppBar(context),
+                  _buildAppBar(context, role),
                   Expanded(
                     child: SingleChildScrollView(
                       physics: const BouncingScrollPhysics(),
@@ -82,10 +108,12 @@ class _WorkerEditProfileScreenState extends State<EditProfileScreen> {
                               vertical: ScreenUtilsManager.h32,
                             ),
                             child: Customimagepicker(
+                              role: role == "worker",
                               userProfile: userprofilecontroller.userProfile,
                             ),
                           ),
                           Editfromprofile(
+                            role: role == "worker",
                             EmailCotroller:
                                 userprofilecontroller.emailController,
                             nameCotroller: userprofilecontroller.nameController,
@@ -94,43 +122,48 @@ class _WorkerEditProfileScreenState extends State<EditProfileScreen> {
                             addressCotroller:
                                 userprofilecontroller.addressController,
                           ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                              vertical: ScreenUtilsManager.p10,
-                              horizontal: ScreenUtilsManager.p23,
-                            ),
-                            child: const Chanagepassword(),
-                          ),
+                          role == "worker"
+                              ? SizedBox.shrink()
+                              : Padding(
+                                  padding: EdgeInsets.symmetric(
+                                    vertical: ScreenUtilsManager.p10,
+                                    horizontal: ScreenUtilsManager.p23,
+                                  ),
+                                  child: const Chanagepassword(),
+                                ),
                           SizedBox(height: ScreenUtilsManager.h24),
                           Saveeditprofile(
+                            role: role == "worker",
                             ontap: () {
-                              context
-                                  .read<UserProfileInfoCubit>()
-                                  .updateUserProfile(
-                                    UserProfile(
-                                      fullName: userprofilecontroller
-                                          .nameController
-                                          .text,
-                                      nationalId: userprofilecontroller
-                                          .userProfile
-                                          .nationalId,
-                                      address: userprofilecontroller
-                                          .addressController
-                                          .text,
-                                      phoneNumber: userprofilecontroller
-                                          .phoneController
-                                          .text,
-                                      email: userprofilecontroller
-                                          .emailController
-                                          .text,
-                                      username: userprofilecontroller
-                                          .userProfile
-                                          .username,
-                                      dateOfBirth: userprofilecontroller
-                                          .userProfile
-                                          .dateOfBirth,
-                                    ),
-                                  );
+                              if (userprofilecontroller.userProfile != null) {
+                                context
+                                    .read<UserProfileInfoCubit>()
+                                    .updateUserProfile(
+                                      UserProfile(
+                                        fullName: userprofilecontroller
+                                            .nameController
+                                            .text,
+                                        nationalId: userprofilecontroller
+                                            .userProfile!
+                                            .nationalId,
+                                        address: userprofilecontroller
+                                            .addressController
+                                            .text,
+                                        phoneNumber: userprofilecontroller
+                                            .phoneController
+                                            .text,
+                                        email: userprofilecontroller
+                                            .emailController
+                                            .text,
+                                        username: userprofilecontroller
+                                            .userProfile!
+                                            .username,
+                                        dateOfBirth: userprofilecontroller
+                                            .userProfile!
+                                            .dateOfBirth,
+                                      ),
+                                    );
+                              }
                             },
                             bntcontroller: userprofilecontroller.bntController,
                           ),
@@ -150,16 +183,25 @@ class _WorkerEditProfileScreenState extends State<EditProfileScreen> {
     );
   }
 
-  Widget _buildAppBar(BuildContext context) {
+  Widget _buildAppBar(BuildContext context, role) {
+    final iconColor = role == "worker"
+        ? ColorManger.workerprimary
+        : ColorManger.primary;
+
     return Padding(
       padding: EdgeInsetsDirectional.all(ScreenUtilsManager.w8),
       child: Row(
         children: [
           IconButton(
-            onPressed: () => Navigator.pop(context),
+            onPressed: () {
+              Navigator.pop(context);
+              if (context.mounted) {
+                context.read<UserProfileInfoCubit>().getUserProfleInfo();
+              }
+            },
             icon: Icon(
               CupertinoIcons.back,
-              color: ColorManger.primary,
+              color: iconColor,
               size: ScreenUtilsManager.s20,
             ),
           ),
@@ -170,7 +212,7 @@ class _WorkerEditProfileScreenState extends State<EditProfileScreen> {
               style: GoogleFonts.cairo(
                 fontSize: ScreenUtilsManager.s20,
                 fontWeight: FontWeight.w700,
-                color: ColorManger.primary,
+                color: iconColor,
               ),
             ),
           ),

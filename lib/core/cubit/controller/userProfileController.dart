@@ -12,17 +12,26 @@ class Userprofilecontroller {
   late final TextEditingController addressController;
   bool isvalid = false;
   StreamController<bool> bntController = StreamController.broadcast();
-  late UserProfile userProfile;
-  @override
+  UserProfile? userProfile; 
+
   void init() {
     String? userinfoStr = PrefrenceManager().getstring("user_profile_data");
     if (userinfoStr != null) {
       userProfile = UserProfile.fromJson(jsonDecode(userinfoStr));
     }
-    emailController = TextEditingController(text: userProfile.email);
-    phoneController = TextEditingController(text: userProfile.phoneNumber);
-    nameController = TextEditingController(text: userProfile.fullName);
-    addressController = TextEditingController(text: userProfile.address);
+
+    if (userProfile == null) {
+      emailController = TextEditingController(text: '');
+      phoneController = TextEditingController(text: '');
+      nameController = TextEditingController(text: '');
+      addressController = TextEditingController(text: '');
+      return;
+    }
+
+    emailController = TextEditingController(text: userProfile!.email);
+    phoneController = TextEditingController(text: userProfile!.phoneNumber);
+    nameController = TextEditingController(text: userProfile!.fullName);
+    addressController = TextEditingController(text: userProfile!.address);
 
     addressController.addListener(checkEditReqeust);
     phoneController.addListener(checkEditReqeust);
@@ -31,11 +40,17 @@ class Userprofilecontroller {
   }
 
   void checkEditReqeust() {
-     isvalid =
-        emailController.text != userProfile.email ||
-        phoneController.text != userProfile.phoneNumber ||
-        nameController.text != userProfile.fullName ||
-        addressController.text != userProfile.address;
+    if (userProfile == null) {
+      isvalid = false;
+      bntController.add(isvalid);
+      return;
+    }
+
+    isvalid =
+        emailController.text != userProfile!.email ||
+        phoneController.text != userProfile!.phoneNumber ||
+        nameController.text != userProfile!.fullName ||
+        addressController.text != userProfile!.address;
 
     bntController.add(isvalid);
   }
@@ -44,6 +59,7 @@ class Userprofilecontroller {
     nameController.dispose();
     emailController.dispose();
     phoneController.dispose();
+    addressController.dispose();
     bntController.close();
   }
 }

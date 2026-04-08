@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:citifix/feature/citzenFeature/reports/data/Models/GetReportModel.dart';
 import 'package:citifix/feature/citzenFeature/reports/data/Models/Report/CreateReportRequestModel.dart';
 import 'package:citifix/feature/citzenFeature/reports/data/Models/Report/CreateReportResponseModel.dart';
@@ -8,9 +10,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class ReportCubit extends Cubit<ReportManagerState> {
   final ReportRepositoryT reportRepository;
   ReportCubit(this.reportRepository) : super(ReportManagerInitial());
-
+  StreamSubscription<double>? _progressSub;
   List<ReportItem> _allReports = [];
-
   Future<void> fetchReports() async {
     if (isClosed) return;
     emit(GetReportsLoading());
@@ -29,10 +30,15 @@ class ReportCubit extends Cubit<ReportManagerState> {
 
   Future<void> createReport({required CreateReportRequest request}) async {
     if (isClosed) return;
-    emit(CreateReportLoading());
+    await _progressSub?.cancel();
+    _progressSub = reportRepository.onprogressStream.listen((onData) {
+      if (isClosed) return;
+      emit(CreateReportLoading(onData));
+    });
 
     final result = await reportRepository.addReport(request: request);
-
+    await _progressSub?.cancel();
+    _progressSub = null;
     if (isClosed) return;
 
     result.fold((failure) => emit(CreateReportFailure(failure.errors.first)), (
@@ -50,9 +56,7 @@ class ReportCubit extends Cubit<ReportManagerState> {
     if (isClosed) return;
     emit(GetReportsByidLoading());
 
-    final result = await reportRepository.getReportById(
-      reportId:  ReportID,
-    );
+    final result = await reportRepository.getReportById(reportId: ReportID);
 
     if (isClosed) return;
 
@@ -115,5 +119,11 @@ class ReportCubit extends Cubit<ReportManagerState> {
   void resetSearch() {
     if (isClosed) return;
     emit(GetReportsSuccess(List.from(_allReports)));
+  }
+
+  @override
+  Future<void> close() {
+    _progressSub?.cancel();
+    return super.close();
   }
 }

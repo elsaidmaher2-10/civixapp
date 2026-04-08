@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Editfromprofile extends StatelessWidget {
-  const Editfromprofile({
+  Editfromprofile({
+    required this.role,
     super.key,
     required this.EmailCotroller,
     required this.nameCotroller,
@@ -17,7 +18,7 @@ class Editfromprofile extends StatelessWidget {
   final TextEditingController EmailCotroller;
   final TextEditingController nameCotroller;
   final TextEditingController addressCotroller;
-
+  bool role;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -127,8 +128,11 @@ class Editfromprofile extends StatelessWidget {
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(ScreenUtilsManager.r14),
-                borderSide: const BorderSide(
-                  color: ColorManger.kPrimary,
+                borderSide: BorderSide(
+                  // ignore: unrelated_type_equality_checks
+                  color: role
+                      ? ColorManger.errorContainer
+                      : ColorManger.kPrimary,
                   width: 2,
                 ),
               ),

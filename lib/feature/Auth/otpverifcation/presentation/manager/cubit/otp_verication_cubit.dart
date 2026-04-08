@@ -1,5 +1,4 @@
 import 'package:citifix/core/database/remote/api/ApiService.dart';
-import 'package:citifix/feature/Auth/otpverifcation/data/models/otpSuccessModel.dart';
 import 'package:citifix/feature/Auth/otpverifcation/data/models/otpmodel.dart';
 import 'package:citifix/feature/Auth/otpverifcation/data/repo/OtpRepo.dart';
 import 'package:citifix/feature/Auth/otpverifcation/presentation/manager/cubit/otp_verication_state.dart';

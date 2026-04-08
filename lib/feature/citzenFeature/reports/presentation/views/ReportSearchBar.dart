@@ -1,6 +1,5 @@
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
-import 'package:citifix/core/widget/CustomAnimatedSearch.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../../../generated/l10n.dart'; // Ensure correct path

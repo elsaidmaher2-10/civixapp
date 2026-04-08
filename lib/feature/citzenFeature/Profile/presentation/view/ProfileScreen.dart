@@ -67,9 +67,9 @@ class ProfileScreen extends StatelessWidget {
                     context: context,
                     message: state.logs,
                   );
-                  PrefrenceManager().remove(Constantmanger.accessToken);
                   PrefrenceManager().remove(Constantmanger.refreshToken);
-                  PrefrenceManager().remove(Constantmanger.userid);
+                  PrefrenceManager().remove(Constantmanger.accessToken);
+                  PrefrenceManager().remove(Constantmanger.cacheKey);
                   Navigator.of(
                     context,
                   ).pushNamedAndRemoveUntil(Routes.login, (route) => false);

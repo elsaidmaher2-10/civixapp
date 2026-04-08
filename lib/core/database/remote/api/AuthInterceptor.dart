@@ -12,6 +12,8 @@ class AuthInterceptor extends Interceptor {
   final Dio _refreshDio;
   Completer<bool>? _refreshCompleter;
 
+
+
   AuthInterceptor(this.dio)
     : _refreshDio = Dio(
         BaseOptions(
@@ -29,7 +31,13 @@ class AuthInterceptor extends Interceptor {
     if (token != null) {
       options.headers['Authorization'] = 'Bearer $token';
     }
-    options.headers['Accept-Language'] = savedLang ?? 'en';
+    if (options.path == Apiconstant.report && options.method == 'POST') {
+      options.headers['Accept-Language'] = 'en';
+    } else {
+      if (options.headers['Accept-Language'] == null) {
+        options.headers['Accept-Language'] = savedLang ?? 'en';
+      }
+    }
 
     handler.next(options);
   }

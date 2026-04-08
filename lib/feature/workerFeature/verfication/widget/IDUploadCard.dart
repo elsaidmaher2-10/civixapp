@@ -13,7 +13,7 @@ class IDUploadCard extends StatelessWidget {
   final VoidCallback removeimagebtn;
   final StreamController<File?> imageController;
 
-  IDUploadCard({
+  const IDUploadCard({
     required this.ontap,
     required this.imageController,
     super.key,

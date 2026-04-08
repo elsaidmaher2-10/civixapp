@@ -41,7 +41,10 @@ class SearchReportsFailure extends ReportManagerState {
   SearchReportsFailure(this.errMessage);
 }
 
-class CreateReportLoading extends ReportManagerState {}
+class CreateReportLoading extends ReportManagerState {
+  double progress;
+  CreateReportLoading(this.progress);
+}
 
 class CreateReportSuccess extends ReportManagerState {
   final String message;

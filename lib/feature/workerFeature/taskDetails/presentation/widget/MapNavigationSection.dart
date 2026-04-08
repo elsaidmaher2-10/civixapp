@@ -2,7 +2,7 @@ import 'package:citifix/feature/workerFeature/home/presentation/view/widget/Cust
 import 'package:flutter/material.dart';
 
 class MapNavigationSection extends StatelessWidget {
-  MapNavigationSection();
+  const MapNavigationSection({super.key});
 
   @override
   Widget build(BuildContext context) {

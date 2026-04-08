@@ -16,7 +16,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../../../../generated/l10n.dart';
 
 class Commentsystem extends StatelessWidget {
-  const Commentsystem({
+  const Commentsystem({super.key, 
     required this.isComment,
     required this.comments,
     required this.controller,
@@ -54,7 +54,7 @@ class Commentsystem extends StatelessWidget {
 
         if (state is CommentsSuccess) {
           final currentComments = state.comments.isEmpty
-              ? this.comments
+              ? comments
               : state.comments;
 
           return SliverMainAxisGroup(

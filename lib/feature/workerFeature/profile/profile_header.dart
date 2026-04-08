@@ -1,33 +1,17 @@
 import 'package:citifix/feature/workerFeature/profile/color_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../managers/color_manager.dart';
 
 class ProfileHeader extends StatelessWidget {
-  const ProfileHeader({
-    super.key,
-    required this.name,
-    required this.rating,
-    required this.reviewCount,
-    required this.avatarUrl,
-  });
-
+  const ProfileHeader({super.key, required this.name, required this.avatarUrl});
   final String name;
-  final double rating;
-  final int reviewCount;
   final String avatarUrl;
-
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
       color: ColorManager.surfaceLowest,
-      padding: const EdgeInsets.only(
-        left: 24,
-        right: 24,
-        top: 64,
-        bottom: 40,
-      ),
+      padding: const EdgeInsets.only(left: 24, right: 24, top: 64, bottom: 40),
       child: Column(
         children: [
           _Avatar(avatarUrl: avatarUrl),
@@ -42,14 +26,11 @@ class ProfileHeader extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 8),
-          _RatingRow(rating: rating, reviewCount: reviewCount),
         ],
       ),
     );
   }
 }
-
-// ─── Private sub-widgets ────────────────────────────────────
 
 class _Avatar extends StatelessWidget {
   const _Avatar({required this.avatarUrl});
@@ -86,39 +67,6 @@ class _Avatar extends StatelessWidget {
               border: Border.all(color: Colors.white, width: 4),
             ),
             child: const Icon(Icons.check, color: Colors.white, size: 16),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class _RatingRow extends StatelessWidget {
-  const _RatingRow({required this.rating, required this.reviewCount});
-  final double rating;
-  final int reviewCount;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const Icon(Icons.star, color: ColorManager.primaryContainer, size: 20),
-        const SizedBox(width: 4),
-        Text(
-          rating.toString(),
-          style: GoogleFonts.cairo(
-            fontWeight: FontWeight.bold,
-            color: ColorManager.primary,
-            fontSize: 16,
-          ),
-        ),
-        const SizedBox(width: 4),
-        Text(
-          '($reviewCount reviews)',
-          style: GoogleFonts.cairo(
-            color: ColorManager.onSurfaceVariant,
-            fontSize: 14,
           ),
         ),
       ],

@@ -297,7 +297,20 @@
   "statusRejected": "Rejected",
   "phoneNumber": "Phone Number",
   "nationalId": "National ID",
-  "notes": "Notes"
+  "notes": "Notes",
+  "appName": "CitiFix",
+  "complianceDocuments": "Compliance Documents",
+  "areYouSureLogout": "Are you sure you want to logout?",
+  "nationalIdFront": "National ID Front",
+  "nationalIdBack": "National ID Back",
+  "loading": "Loading...",
+  "noInternetConnection": "No internet connection",
+  "logoutSuccess": "Logged out successfully",
+  "logoutFailed": "Logout failed",
+  "sessionExpired": "Session expired. Please login again",
+  "invalidRequest": "Invalid request. Please try again",
+
+"presonalPhoto" :"personal Photo"
 
 
 }

@@ -11,6 +11,7 @@ import 'package:citifix/feature/workerFeature/home/presentation/view/widget/Home
 import 'package:citifix/feature/workerFeature/home/presentation/view/widget/WorkAllertVrefication.dart';
 import 'package:citifix/feature/workerFeature/home/presentation/view/widget/WorkerDashBoard.dart';
 import 'package:citifix/feature/workerFeature/home/presentation/view/widget/workerCard.dart';
+import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -138,7 +139,7 @@ class HomePage extends StatelessWidget {
           TextButton(
             onPressed: () => context.read<HomeCubit>().getWorkerDashboard(),
             child: Text(
-              "Retry",
+              S.of(context).retry,
               style: GoogleFonts.cairo(color: ColorManger.kPrimaryDark),
             ),
           ),

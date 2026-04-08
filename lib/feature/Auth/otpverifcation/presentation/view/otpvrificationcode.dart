@@ -5,7 +5,6 @@ import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/core/routing/routes.dart';
 import 'package:citifix/core/widget/CustomSnackBar.dart';
 import 'package:citifix/core/widget/customloading.dart';
-import 'package:citifix/feature/Auth/otpverifcation/data/models/otpSuccessModel.dart';
 import 'package:citifix/feature/Auth/otpverifcation/data/models/otpmodel.dart';
 import 'package:citifix/feature/Auth/otpverifcation/presentation/manager/cubit/otp_verication_cubit.dart';
 import 'package:citifix/feature/Auth/otpverifcation/presentation/manager/cubit/otp_verication_state.dart';

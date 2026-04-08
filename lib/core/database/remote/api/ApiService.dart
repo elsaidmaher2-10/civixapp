@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:citifix/core/database/remote/api/ApiConstant.dart';
 import 'package:citifix/core/database/remote/api/ApiConsumer.dart';
 import 'package:citifix/core/database/remote/api/ApihanderDioExcp.dart';
@@ -8,6 +10,9 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class Apiservice extends Apiconsumer {
   final Dio dio;
+
+  final StreamController<double> onprogress =
+      StreamController<double>.broadcast();
 
   Apiservice(this.dio) {
     dio.options = BaseOptions(
@@ -48,10 +53,18 @@ class Apiservice extends Apiconsumer {
   Future<dynamic> post({
     required String path,
     required Object body,
+    Map<String, dynamic>? header,
     Map<String, dynamic>? queryprams,
   }) async {
     try {
       final response = await dio.post(
+        options: Options(headers: header),
+        onSendProgress: (count, total) {
+          if (total != -1) {
+            print(count / total);
+            onprogress.add(count / total);
+          }
+        },
         path,
         data: body,
         queryParameters: queryprams,

@@ -1,5 +1,6 @@
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
+import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -14,7 +15,7 @@ PreferredSizeWidget homeAppbar(context) {
         Icon(Icons.location_city, color: ColorManger.primaryColor),
         const SizedBox(width: 8),
         Text(
-          "City Fix",
+          S.of(context).appTitle,
           style: GoogleFonts.cairo(
             fontSize: 20,
             fontWeight: FontWeight.bold,

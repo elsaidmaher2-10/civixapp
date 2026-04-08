@@ -6,11 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Saveeditprofile extends StatelessWidget {
-  const Saveeditprofile({
+  Saveeditprofile({
+    required this.role,
     super.key,
     required this.ontap,
     required this.bntcontroller,
   });
+
+  bool role;
 
   final Function() ontap;
   final StreamController<bool> bntcontroller;
@@ -30,14 +33,18 @@ class Saveeditprofile extends StatelessWidget {
             return ElevatedButton(
               onPressed: isEnabled ? ontap : null,
               style: ElevatedButton.styleFrom(
-                backgroundColor: ColorManger.kPrimary,
+                backgroundColor: role
+                    ? ColorManger.workerprimary
+                    : ColorManger.kPrimary,
                 foregroundColor: Colors.white,
                 padding: EdgeInsets.symmetric(vertical: ScreenUtilsManager.h16),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(ScreenUtilsManager.r14),
                 ),
                 elevation: isEnabled ? 6 : 0,
-                shadowColor: ColorManger.kPrimary.withOpacity(0.35),
+                shadowColor: role
+                    ? ColorManger.workerprimary.withOpacity(0.35)
+                    : ColorManger.kPrimary.withOpacity(0.35),
               ),
               child: Text(
                 S.of(context).saveChanges,

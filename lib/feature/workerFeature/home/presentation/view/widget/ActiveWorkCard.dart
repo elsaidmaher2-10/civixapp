@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ActiveWorkCard extends StatelessWidget {
-  ActiveWorkCard({super.key});
+  const ActiveWorkCard({super.key});
 
   @override
   Widget build(BuildContext context) {

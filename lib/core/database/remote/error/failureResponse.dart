@@ -6,7 +6,7 @@ class FailureResponse {
 
   factory FailureResponse.fromJson(Map<String, dynamic> json) {
     return FailureResponse(
-      errors: List<String>.from(json["errors"]),
+      errors: List<String>.from(json["errors"] ?? json["error"]),
       statusCode: json["statusCode"],
     );
   }

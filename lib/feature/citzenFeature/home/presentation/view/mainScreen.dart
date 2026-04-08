@@ -9,7 +9,6 @@ import 'package:citifix/feature/citzenFeature/home/presentation/view/widget/Cust
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_snake_navigationbar/flutter_snake_navigationbar.dart';
 
 class CitizenMainScreen extends StatefulWidget {
   const CitizenMainScreen({super.key, CitizenMainScreenKey});

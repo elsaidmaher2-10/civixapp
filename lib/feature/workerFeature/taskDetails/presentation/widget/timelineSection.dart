@@ -8,7 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 
 class ActivityTimelineSection extends StatefulWidget {
-  ActivityTimelineSection({super.key});
+  const ActivityTimelineSection({super.key});
   @override
   State<ActivityTimelineSection> createState() =>
       _ActivityTimelineSectionState();

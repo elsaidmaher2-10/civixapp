@@ -265,7 +265,7 @@
   "fullNamea": "الاسم القانوني الكامل",
 
   "verificationGuide": "دليل التحقق",
-
+"presonalPhoto" : "الصوره الشخصيه",
 
   "numberMismatch": "الرقم لا يتطابق مع الصورة المقدمة",
   "enterNameHint": "أدخل الاسم كما هو في الهوية",
@@ -273,7 +273,8 @@
   "errorMissingData": "بعض المعلومات المطلوبة مفقودة من مستنداتك.",
   "errorSelfieMismatch": "الصورة الشخصية لا تتطابق مع صورة الهوية المقدمة.",
   "resubmit": "حاول مرة أخرى",
-  "needHelp": "التواصل مع الدعم","viewAllRequests": "عرض كل الطلبات",
+  "needHelp": "التواصل مع الدعم",
+  "viewAllRequests": "عرض كل الطلبات",
   "verificationComplete": "اكتملت المصادقة",
   "verificationSuccessDesc": "تمت مصادقة بيانات الاعتماد الرقمية الخاصة بك بنجاح.",
   "confirmedZone": "المنطقة المؤكدة",
@@ -294,6 +295,17 @@
   "statusRejected": "مرفوض",
   "phoneNumber": "رقم الهاتف",
   "nationalId": "الرقم القومي",
-  "notes": "ملاحظات"
+  "notes": "ملاحظات",
+  "complianceDocuments": "وثائق الامتثال",
 
+  "areYouSureLogout": "هل أنت متأكد من تسجيل الخروج؟",
+  "nationalIdFront": "البطاقة الوطنية الأمامية",
+  "nationalIdBack": "البطاقة الوطنية الخلفية",
+  "loading": "جاري التحميل...",
+  "noInternetConnection": "لا يوجد اتصال بالإنترنت",
+  "logoutSuccess": "تم تسجيل الخروج بنجاح",
+  "logoutFailed": "فشل تسجيل الخروج",
+  "sessionExpired": "انتهت الجلسة. يرجى تسجيل الدخول مرة أخرى",
+  "invalidRequest": "طلب غير صالح. يرجى المحاولة مرة أخرى"
 }
+

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:citifix/core/database/local/prefmanger.dart';
+import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/feature/citzenFeature/Profile/data/Models/UserProfileModel/userProfile.dart';
 import 'package:citifix/feature/citzenFeature/Profile/data/repos/UserProfileRepos/userprofileRepos.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,9 +14,8 @@ class UserProfileInfoCubit extends Cubit<UserProfileInfoState> {
     _loadInitialData();
   }
   final Userprofilerepos userprofilerepos;
-  static const String _cacheKey = "user_profile_data";
   void _loadInitialData() async {
-    String? cachedUser = PrefrenceManager().getstring(_cacheKey);
+    String? cachedUser = PrefrenceManager().getstring(Constantmanger.cacheKey);
     if (cachedUser != null) {
       emit(
         UserProfileInfoSuccess(UserProfile.fromJson(jsonDecode(cachedUser))),
@@ -62,7 +62,9 @@ class UserProfileInfoCubit extends Cubit<UserProfileInfoState> {
       (failure) => emit(EditUserProfileInfoError(failure.errors.join())),
       (response) {
         UserProfile finalProfile;
-        String? cachedUser = PrefrenceManager().getstring(_cacheKey);
+        String? cachedUser = PrefrenceManager().getstring(
+          Constantmanger.cacheKey,
+        );
 
         if (cachedUser != null) {
           UserProfile oldProfile = UserProfile.fromJson(jsonDecode(cachedUser));
@@ -85,7 +87,7 @@ class UserProfileInfoCubit extends Cubit<UserProfileInfoState> {
         }
 
         PrefrenceManager().setstring(
-          _cacheKey,
+          Constantmanger.cacheKey,
           jsonEncode(finalProfile.toJson()),
         );
 

@@ -1,6 +1,5 @@
 import 'package:citifix/core/database/remote/error/failureResponse.dart';
 import 'package:citifix/feature/Auth/otpverifcation/data/models/globalOtpModel.dart';
-import 'package:citifix/feature/Auth/otpverifcation/data/models/otpSuccessModel.dart';
 
 sealed class OtpVericationState {}
 

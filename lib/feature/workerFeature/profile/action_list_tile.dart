@@ -1,7 +1,6 @@
 import 'package:citifix/feature/workerFeature/profile/color_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../managers/color_manager.dart';
 
 class ActionListTile extends StatelessWidget {
   const ActionListTile({
@@ -19,16 +18,15 @@ class ActionListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(32),
+      borderRadius: BorderRadius.circular(16),
       child: Container(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
           color: ColorManager.surfaceLowest,
-          borderRadius: BorderRadius.circular(32),
+          borderRadius: BorderRadius.circular(16),
         ),
         child: Row(
           children: [
-            // ── Icon bubble ──────────────────────────────────────
             Container(
               width: 40,
               height: 40,
@@ -39,7 +37,6 @@ class ActionListTile extends StatelessWidget {
               child: Icon(icon, color: ColorManager.primaryContainer),
             ),
             const SizedBox(width: 16),
-            // ── Label ────────────────────────────────────────────
             Expanded(
               child: Text(
                 label,
@@ -50,7 +47,6 @@ class ActionListTile extends StatelessWidget {
                 ),
               ),
             ),
-            // ── Chevron ──────────────────────────────────────────
             const Icon(Icons.chevron_right, color: ColorManager.outlineVariant),
           ],
         ),

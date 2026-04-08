@@ -8,7 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 class VerificationCompleteScreen extends StatelessWidget {
   VerificationCompleteScreen({
     super.key,
-    required WorkerRequestModel this.workerRequestModel,
+    required this.workerRequestModel,
   });
   WorkerRequestModel workerRequestModel;
   @override

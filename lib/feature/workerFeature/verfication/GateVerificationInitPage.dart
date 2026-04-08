@@ -1,10 +1,8 @@
 import 'package:citifix/core/DI/getit.dart';
 import 'package:citifix/core/resource/colormanager.dart';
-import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/core/service/StatusReport.dart';
 import 'package:citifix/feature/workerFeature/verfication/Presentation/VerficationinitManger/VerificationInitCubit.dart';
 import 'package:citifix/feature/workerFeature/verfication/Presentation/VerficationinitManger/verficationinitState.dart';
-import 'package:citifix/feature/workerFeature/verfication/data/model/WorkerRequestModel.dart';
 import 'package:citifix/feature/workerFeature/verfication/data/repo/VerficationInitRepo.dart';
 import 'package:citifix/feature/workerFeature/verfication/verficationPending.dart';
 import 'package:citifix/feature/workerFeature/verfication/verficationinit.dart';

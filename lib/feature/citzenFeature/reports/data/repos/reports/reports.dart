@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:citifix/core/database/local/prefmanger.dart';
@@ -12,7 +13,6 @@ import 'package:citifix/feature/citzenFeature/reports/data/Models/Report/CreateR
 import 'package:citifix/feature/citzenFeature/reports/data/Models/Report/CreateReportResponseModel.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:video_compress/video_compress.dart';
 
 import '../../Models/Achievment/achievementModel.dart';
@@ -23,6 +23,7 @@ class ReportRepositoryT {
 
   ReportRepositoryT({required this.service, required this.internetChecker});
 
+  Stream<double> get onprogressStream => service.onprogress.stream;
   Future<Either<FailureResponse, String>> addReport({
     required CreateReportRequest request,
   }) async {
@@ -73,6 +74,7 @@ class ReportRepositoryT {
       });
 
       final response = await service.post(
+        header: {"Accept-Language": "en"},
         body: formData,
         path: Apiconstant.report,
       );
@@ -245,16 +247,12 @@ class ReportRepositoryT {
 }
 
 Future<File?> _getCompressedVideo(String path) async {
-  debugPrint("Starting compression for: $path");
-
   final MediaInfo? info = await VideoCompress.compressVideo(
     path,
     quality: VideoQuality.DefaultQuality,
     deleteOrigin: false,
   );
-
   if (info != null && info.file != null) {
-    debugPrint("Compression finished. New size: ${info.filesize} bytes");
     return info.file;
   }
   return null;

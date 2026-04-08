@@ -1,4 +1,3 @@
-import 'package:dartz/dartz.dart' as report;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';

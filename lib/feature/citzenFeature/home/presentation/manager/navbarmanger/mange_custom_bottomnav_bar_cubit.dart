@@ -1,8 +1,6 @@
-import 'package:bloc/bloc.dart';
 import 'package:citifix/core/DI/getit.dart';
 import 'package:citifix/core/database/local/prefmanger.dart';
 import 'package:citifix/feature/citzenFeature/Profile/presentation/view/ProfileScreen.dart';
-import 'package:citifix/feature/citzenFeature/home/data/Repos/reports/reports.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/views/achievment.dart';
 import 'package:citifix/feature/citzenFeature/home/presentation/view/Homeview.dart';
 import 'package:flutter/cupertino.dart';

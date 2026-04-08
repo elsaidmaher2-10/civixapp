@@ -2348,6 +2348,116 @@ class S {
   String get notes {
     return Intl.message('Notes', name: 'notes', desc: '', args: []);
   }
+
+  /// `CitiFix`
+  String get appName {
+    return Intl.message('CitiFix', name: 'appName', desc: '', args: []);
+  }
+
+  /// `Compliance Documents`
+  String get complianceDocuments {
+    return Intl.message(
+      'Compliance Documents',
+      name: 'complianceDocuments',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to logout?`
+  String get areYouSureLogout {
+    return Intl.message(
+      'Are you sure you want to logout?',
+      name: 'areYouSureLogout',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `National ID Front`
+  String get nationalIdFront {
+    return Intl.message(
+      'National ID Front',
+      name: 'nationalIdFront',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `National ID Back`
+  String get nationalIdBack {
+    return Intl.message(
+      'National ID Back',
+      name: 'nationalIdBack',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Loading...`
+  String get loading {
+    return Intl.message('Loading...', name: 'loading', desc: '', args: []);
+  }
+
+  /// `No internet connection`
+  String get noInternetConnection {
+    return Intl.message(
+      'No internet connection',
+      name: 'noInternetConnection',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Logged out successfully`
+  String get logoutSuccess {
+    return Intl.message(
+      'Logged out successfully',
+      name: 'logoutSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Logout failed`
+  String get logoutFailed {
+    return Intl.message(
+      'Logout failed',
+      name: 'logoutFailed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Session expired. Please login again`
+  String get sessionExpired {
+    return Intl.message(
+      'Session expired. Please login again',
+      name: 'sessionExpired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invalid request. Please try again`
+  String get invalidRequest {
+    return Intl.message(
+      'Invalid request. Please try again',
+      name: 'invalidRequest',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `personal Photo`
+  String get presonalPhoto {
+    return Intl.message(
+      'personal Photo',
+      name: 'presonalPhoto',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -13,7 +13,7 @@ import 'presentation/widget/TaskOwnerHeader.dart';
 enum StepState { completed, active, pending }
 
 class TaskDetailsPage extends StatelessWidget {
-  TaskDetailsPage({super.key});
+  const TaskDetailsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +71,7 @@ class TaskDetailsPage extends StatelessWidget {
 }
 
 class _CompletionDataSection extends StatelessWidget {
-  _CompletionDataSection();
+  const _CompletionDataSection();
 
   @override
   Widget build(BuildContext context) {
@@ -165,7 +165,7 @@ class _CompletionDataSection extends StatelessWidget {
 }
 
 class _TaskBottomBar extends StatelessWidget {
-  _TaskBottomBar();
+  const _TaskBottomBar();
 
   @override
   Widget build(BuildContext context) {

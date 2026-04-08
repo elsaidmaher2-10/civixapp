@@ -51,8 +51,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "address2": MessageLookupByLibrary.simpleMessage("العنوان"),
     "age": MessageLookupByLibrary.simpleMessage("العمر"),
     "all": MessageLookupByLibrary.simpleMessage("الكل"),
+    "appName": MessageLookupByLibrary.simpleMessage("البوابة العالمية"),
     "appTitle": MessageLookupByLibrary.simpleMessage("سيتيفيكس"),
     "arabic": MessageLookupByLibrary.simpleMessage("العربية"),
+    "areYouSureLogout": MessageLookupByLibrary.simpleMessage(
+      "هل أنت متأكد من تسجيل الخروج؟",
+    ),
     "assigned": MessageLookupByLibrary.simpleMessage("تم التعيين"),
     "attentionRequired": MessageLookupByLibrary.simpleMessage("يتطلب انتباه"),
     "camera": MessageLookupByLibrary.simpleMessage("الكاميرا"),
@@ -81,6 +85,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "صور وفيديوهات الإنجاز",
     ),
     "completionNote": MessageLookupByLibrary.simpleMessage("ملاحظات الإنجاز"),
+    "complianceDocuments": MessageLookupByLibrary.simpleMessage(
+      "وثائق الامتثال",
+    ),
     "confirm": MessageLookupByLibrary.simpleMessage("تأكيد"),
     "confirmDelete": MessageLookupByLibrary.simpleMessage("تأكيد الحذف"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage(
@@ -225,6 +232,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "كلمة المرور يجب أن تكون 6 أحرف على الأقل وتحتوي على أرقام وحروف ورموز",
     ),
     "invalidPhone": MessageLookupByLibrary.simpleMessage("رقم هاتف غير صالح"),
+    "invalidRequest": MessageLookupByLibrary.simpleMessage(
+      "طلب غير صالح. يرجى المحاولة مرة أخرى",
+    ),
     "isOnboardingViewed": MessageLookupByLibrary.simpleMessage(
       "is_show_on_board",
     ),
@@ -236,6 +246,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "الاسم الأخير مطلوب",
     ),
     "legalCategory": MessageLookupByLibrary.simpleMessage("القانون والخصوصية"),
+    "loading": MessageLookupByLibrary.simpleMessage("جاري التحميل..."),
     "loadingCategories": MessageLookupByLibrary.simpleMessage(
       "جاري تحميل الأقسام...",
     ),
@@ -245,6 +256,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "logout": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
     "logoutConfirmationMessage": MessageLookupByLibrary.simpleMessage(
       "هل أنت متأكد أنك تريد تسجيل الخروج من حسابك؟",
+    ),
+    "logoutFailed": MessageLookupByLibrary.simpleMessage("فشل تسجيل الخروج"),
+    "logoutSuccess": MessageLookupByLibrary.simpleMessage(
+      "تم تسجيل الخروج بنجاح",
     ),
     "markAllRead": MessageLookupByLibrary.simpleMessage("تحديد الكل كمقروء"),
     "messagesCount": m2,
@@ -263,8 +278,14 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "nationalID": MessageLookupByLibrary.simpleMessage("الرقم القومي"),
     "nationalId": MessageLookupByLibrary.simpleMessage("الرقم القومي"),
+    "nationalIdBack": MessageLookupByLibrary.simpleMessage(
+      "البطاقة الوطنية الخلفية",
+    ),
     "nationalIdDigits": MessageLookupByLibrary.simpleMessage(
       "يجب أن يحتوي الرقم القومي على أرقام فقط",
+    ),
+    "nationalIdFront": MessageLookupByLibrary.simpleMessage(
+      "البطاقة الوطنية الأمامية",
     ),
     "nationalIdLength": MessageLookupByLibrary.simpleMessage(
       "يجب أن يتكون الرقم القومي من 14 رقمًا",
@@ -281,6 +302,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "noData": MessageLookupByLibrary.simpleMessage("لا توجد بيانات حالياً"),
     "noInternet": MessageLookupByLibrary.simpleMessage(
+      "لا يوجد اتصال بالإنترنت",
+    ),
+    "noInternetConnection": MessageLookupByLibrary.simpleMessage(
       "لا يوجد اتصال بالإنترنت",
     ),
     "noNotifications": MessageLookupByLibrary.simpleMessage(
@@ -335,6 +359,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "phoneNumber": MessageLookupByLibrary.simpleMessage("رقم الهاتف"),
     "phoneRequired": MessageLookupByLibrary.simpleMessage("رقم الهاتف مطلوب"),
     "photoGallery": MessageLookupByLibrary.simpleMessage("معرض الصور"),
+    "presonalPhoto": MessageLookupByLibrary.simpleMessage("الصوره الشخصيه"),
     "privacyPolicyDesc": MessageLookupByLibrary.simpleMessage(
       "سيتيفيكس يحمي خصوصيتك. بيانات الاتصال الخاصة بالمواطن مخفية عن العمال؛ حيث يتلقون فقط الموقع ووصف المشكلة.",
     ),
@@ -432,6 +457,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "sendAnonymously": MessageLookupByLibrary.simpleMessage("أرسل بشكل مجهول"),
     "sendCode": MessageLookupByLibrary.simpleMessage("إرسال الكود"),
     "sendReport": MessageLookupByLibrary.simpleMessage("إرسال البلاغ"),
+    "sessionExpired": MessageLookupByLibrary.simpleMessage(
+      "انتهت الجلسة. يرجى تسجيل الدخول مرة أخرى",
+    ),
     "settings": MessageLookupByLibrary.simpleMessage("الإعدادات"),
     "signUp": MessageLookupByLibrary.simpleMessage("إنشاء حساب"),
     "signUpNow": MessageLookupByLibrary.simpleMessage("سجل الآن"),

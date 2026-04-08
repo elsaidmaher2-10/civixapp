@@ -55,8 +55,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "address2": MessageLookupByLibrary.simpleMessage("Address"),
     "age": MessageLookupByLibrary.simpleMessage("Age"),
     "all": MessageLookupByLibrary.simpleMessage("All"),
+    "appName": MessageLookupByLibrary.simpleMessage("CitiFix"),
     "appTitle": MessageLookupByLibrary.simpleMessage("CitiFix"),
     "arabic": MessageLookupByLibrary.simpleMessage("Arabic"),
+    "areYouSureLogout": MessageLookupByLibrary.simpleMessage(
+      "Are you sure you want to logout?",
+    ),
     "assigned": MessageLookupByLibrary.simpleMessage("Assigned"),
     "attentionRequired": MessageLookupByLibrary.simpleMessage(
       "Attention Required",
@@ -87,6 +91,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Completion Images",
     ),
     "completionNote": MessageLookupByLibrary.simpleMessage("Completion Note"),
+    "complianceDocuments": MessageLookupByLibrary.simpleMessage(
+      "Compliance Documents",
+    ),
     "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
     "confirmDelete": MessageLookupByLibrary.simpleMessage("Confirm Delete"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage("Confirm Password"),
@@ -244,6 +251,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Password must be at least 6 characters and include letters and numbers and special characters",
     ),
     "invalidPhone": MessageLookupByLibrary.simpleMessage("Invalid phone"),
+    "invalidRequest": MessageLookupByLibrary.simpleMessage(
+      "Invalid request. Please try again",
+    ),
     "isOnboardingViewed": MessageLookupByLibrary.simpleMessage(
       "is_show_on_board",
     ),
@@ -255,6 +265,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Last name is required",
     ),
     "legalCategory": MessageLookupByLibrary.simpleMessage("Legal & Privacy"),
+    "loading": MessageLookupByLibrary.simpleMessage("Loading..."),
     "loadingCategories": MessageLookupByLibrary.simpleMessage(
       "Loading Categories...",
     ),
@@ -264,6 +275,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "logout": MessageLookupByLibrary.simpleMessage("Log out"),
     "logoutConfirmationMessage": MessageLookupByLibrary.simpleMessage(
       "Are you sure you want to log out of your account?",
+    ),
+    "logoutFailed": MessageLookupByLibrary.simpleMessage("Logout failed"),
+    "logoutSuccess": MessageLookupByLibrary.simpleMessage(
+      "Logged out successfully",
     ),
     "markAllRead": MessageLookupByLibrary.simpleMessage("Mark all read"),
     "messagesCount": m2,
@@ -282,8 +297,12 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "nationalID": MessageLookupByLibrary.simpleMessage("National ID"),
     "nationalId": MessageLookupByLibrary.simpleMessage("National ID"),
+    "nationalIdBack": MessageLookupByLibrary.simpleMessage("National ID Back"),
     "nationalIdDigits": MessageLookupByLibrary.simpleMessage(
       "National ID must contain only digits",
+    ),
+    "nationalIdFront": MessageLookupByLibrary.simpleMessage(
+      "National ID Front",
     ),
     "nationalIdLength": MessageLookupByLibrary.simpleMessage(
       "National ID must be exactly 14 digits",
@@ -302,6 +321,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "No data available at the moment",
     ),
     "noInternet": MessageLookupByLibrary.simpleMessage(
+      "No internet connection",
+    ),
+    "noInternetConnection": MessageLookupByLibrary.simpleMessage(
       "No internet connection",
     ),
     "noNotifications": MessageLookupByLibrary.simpleMessage(
@@ -362,6 +384,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone Number"),
     "phoneRequired": MessageLookupByLibrary.simpleMessage("Phone is required"),
     "photoGallery": MessageLookupByLibrary.simpleMessage("Photo Gallery"),
+    "presonalPhoto": MessageLookupByLibrary.simpleMessage("personal Photo"),
     "privacyPolicyDesc": MessageLookupByLibrary.simpleMessage(
       "Citifix protects your privacy. Citizen contact details are hidden from workers; they only receive the location and issue description.",
     ),
@@ -469,6 +492,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "sendAnonymously": MessageLookupByLibrary.simpleMessage("Send Anonymously"),
     "sendCode": MessageLookupByLibrary.simpleMessage("Send Code"),
     "sendReport": MessageLookupByLibrary.simpleMessage("Submit Report"),
+    "sessionExpired": MessageLookupByLibrary.simpleMessage(
+      "Session expired. Please login again",
+    ),
     "settings": MessageLookupByLibrary.simpleMessage("SETTINGS"),
     "signUp": MessageLookupByLibrary.simpleMessage("Sign Up"),
     "signUpNow": MessageLookupByLibrary.simpleMessage("Sign up now"),

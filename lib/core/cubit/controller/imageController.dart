@@ -8,20 +8,49 @@ class ImagePickerController {
   factory ImagePickerController() => _instance;
   ImagePickerController._internal();
 
-  final StreamController<File?> streamController =
+  final StreamController<File?> _streamController =
       StreamController.broadcast();
+  final StreamController<bool> _loadingController =
+      StreamController<bool>.broadcast();
   final ImagePicker _picker = ImagePicker();
-  Stream<File?> get stream => streamController.stream;
+
+  Stream<File?> get stream => _streamController.stream;
+  Stream<bool> get loadingStream => _loadingController.stream;
+
+  bool _isLoading = false;
+  bool get isLoading => _isLoading;
+
   Future<File?> pickImage(ImageSource source) async {
-    final XFile? pickedFile = await _picker.pickImage(source: source);
-    if (pickedFile != null) {
-      final imageFile = File(pickedFile.path);
-      streamController.add(imageFile);
-      return imageFile;
+    _setLoading(true);
+
+    try {
+      final XFile? pickedFile = await _picker.pickImage(source: source);
+      if (pickedFile != null) {
+        final imageFile = File(pickedFile.path);
+        _streamController.add(imageFile);
+        _setLoading(false);
+        return imageFile;
+      }
+      _setLoading(false);
+      return null;
+    } catch (e) {
+      _setLoading(false);
+      rethrow;
     }
-    return null;
   }
 
-  void reset() => streamController.add(null);
-  void dispose() => streamController.close();
+  void _setLoading(bool loading) {
+    _isLoading = loading;
+    _loadingController.add(loading);
+  }
+
+  void reset() {
+    _streamController.add(null);
+    _setLoading(false);
+  }
+
+  void dispose() {
+    _streamController.close();
+    _loadingController.close();
+  }
 }

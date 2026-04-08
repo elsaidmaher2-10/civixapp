@@ -213,4 +213,7 @@ class Constantmanger {
   static String alertrequired = 'Verification required';
 
   static String updateYourID = 'Update your ID by EOD to keep access.';
+
+    static const String cacheKey = "user_profile_data";
+
 }

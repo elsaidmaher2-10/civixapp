@@ -39,6 +39,7 @@ class _AddReportScreenState extends State<AddReportScreen> {
   @override
   void dispose() {
     reportscreencontroller.dispose();
+
     super.dispose();
   }
 
@@ -67,7 +68,38 @@ class _AddReportScreenState extends State<AddReportScreen> {
         return ModalProgressHUD(
           inAsyncCall: inAsyncCall,
           blur: 7,
-          progressIndicator: customloading(),
+          progressIndicator: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              if (state is CreateReportLoading) ...[
+                customloading(),
+
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                  child: TweenAnimationBuilder<double>(
+                    tween: Tween<double>(end: state.progress.clamp(0.0, 1.0)),
+                    duration: Duration(milliseconds: 300),
+                    builder: (context, value, child) {
+                      return LinearProgressIndicator(
+                        backgroundColor: Colors.white,
+                        minHeight: 10,
+                        value: value,
+                        color: ColorManger.primary,
+                      );
+                    },
+                  ),
+                ),
+
+                SizedBox(height: 10),
+
+                Text(
+                  "${(state.progress * 100).toInt()}%",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ],
+          ),
           child: Scaffold(
             backgroundColor: ColorManger.white,
             appBar: AddReportAppbar(context),
@@ -87,7 +119,6 @@ class _AddReportScreenState extends State<AddReportScreen> {
                             reportscreencontroller.descriptionController,
                         onCategoryChanged: (p1) {
                           reportscreencontroller.categoryItem = p1?.id ?? -1;
-                          print(p1?.id);
                           reportscreencontroller.updateButtonStatus();
                         },
                       ),
@@ -108,7 +139,6 @@ class _AddReportScreenState extends State<AddReportScreen> {
                           reportscreencontroller.updateButtonStatus();
                         },
                       ),
-
                       SizedBox(height: ScreenUtilsManager.h16),
                       Text(
                         S.of(context).location,

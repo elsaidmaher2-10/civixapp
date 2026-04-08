@@ -3,6 +3,7 @@ import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/feature/workerFeature/home/data/models/dashbroadmodel.dart';
 import 'package:citifix/feature/workerFeature/home/presentation/controller/homecontroller.dart';
 import 'package:citifix/feature/workerFeature/home/presentation/view/widget/workercardDashborad.dart';
+import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -69,14 +70,14 @@ class _WorkerDashboardState extends State<WorkerDashboard>
         Row(
           children: [
             buildWorkerCard(
-              label: 'RESOLVED',
+              label: S.of(context).resolved,
               value: HomeDashboardLogic.formatNumber(
                 widget.data.resolvedReports,
               ),
             ),
             SizedBox(width: ScreenUtilsManager.w16),
             buildWorkerCard(
-              label: 'ASSIGNED',
+              label: S.of(context).assigned,
               value: HomeDashboardLogic.formatNumber(
                 widget.data.assignedReports,
               ),
@@ -107,7 +108,7 @@ class _WorkerDashboardState extends State<WorkerDashboard>
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'IN PROGRESS',
+                        S.of(context).inProgress,
                         style: GoogleFonts.cairo(
                           fontSize: ScreenUtilsManager.s11,
                           fontWeight: FontWeight.bold,

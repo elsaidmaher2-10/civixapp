@@ -48,7 +48,7 @@ class DocumentTile extends StatelessWidget {
   });
 
   final String title;
-  final IconData icon;
+  final Widget icon;
   final DocumentStatus status;
 
   @override
@@ -62,7 +62,6 @@ class DocumentTile extends StatelessWidget {
         ),
         child: Column(
           children: [
-            // ── Thumbnail ──────────────────────────────────
             Container(
               height: 80,
               width: double.infinity,
@@ -70,10 +69,9 @@ class DocumentTile extends StatelessWidget {
                 color: ColorManager.surfaceContainerLow,
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: Icon(icon, color: ColorManager.outlineVariant, size: 32),
+              child:icon,
             ),
             const SizedBox(height: 16),
-            // ── Title ──────────────────────────────────────
             Text(
               title,
               style: GoogleFonts.cairo(
@@ -84,7 +82,6 @@ class DocumentTile extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 4),
-            // ── Status badge ───────────────────────────────
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -139,6 +136,6 @@ class DocumentTileData {
   });
 
   final String title;
-  final IconData icon;
+  final Widget icon;
   final DocumentStatus status;
 }

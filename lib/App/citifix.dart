@@ -74,7 +74,7 @@ class Citifix extends StatelessWidget {
                     ],
                     supportedLocales: S.delegate.supportedLocales,
                     initialRoute: _initialRoute,
-                    locale: Locale("en"),
+                    locale: Locale(currentLang),
                     onGenerateRoute: Routingmanger.onGenerateRoute,
                     title: Constantmanger.apptitle,
                     debugShowCheckedModeBanner: false,
