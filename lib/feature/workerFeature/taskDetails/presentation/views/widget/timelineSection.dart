@@ -47,7 +47,7 @@ class _ActivityTimelineSectionState extends State<ActivityTimelineSection> {
   void _onStepTap(int index) {
     final tappedStatus = _stepsOrder[index];
 
-    if (tappedStatus == StatusReport.completed) {
+    if (tappedStatus == StatusReport.resolved) {
       if (widget.isCompleted == false) {
         Customsnackbar.show(
           context: context,

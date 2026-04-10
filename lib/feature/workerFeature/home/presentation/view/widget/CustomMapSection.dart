@@ -136,7 +136,6 @@ class _CustomMapSectionState extends State<CustomMapSection> {
                               color: const Color(0xFFFF7B00).withOpacity(0.1),
                               borderColor: const Color(0xFFFF7B00),
                               borderStrokeWidth: 2,
-                              isFilled: true,
                             ),
                           ],
                         ),

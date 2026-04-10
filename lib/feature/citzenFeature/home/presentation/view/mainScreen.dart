@@ -6,9 +6,12 @@ import 'package:citifix/feature/citzenFeature/reports/presentation/manager/repor
 import 'package:citifix/core/cubit/userinfoManger/user_profile_info_cubit.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/views/widget/AddReportScreen.dart';
 import 'package:citifix/feature/citzenFeature/home/presentation/view/widget/Customnavarbar.dart';
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:package_info_plus/package_info_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CitizenMainScreen extends StatefulWidget {
   const CitizenMainScreen({super.key, CitizenMainScreenKey});
@@ -23,6 +26,64 @@ class _CitizenMainScreenState extends State<CitizenMainScreen> {
   void initState() {
     super.initState();
     Future.microtask(() => context.read<ReportCubit>().fetchReports());
+    _checkForUpdates();
+  }
+
+  Future<void> _checkForUpdates() async {
+    try {
+      final remoteConfig = FirebaseRemoteConfig.instance;
+
+      await remoteConfig.setConfigSettings(
+        RemoteConfigSettings(
+          fetchTimeout: const Duration(minutes: 1),
+          minimumFetchInterval: const Duration(seconds: 0),
+        ),
+      );
+
+      await remoteConfig.fetchAndActivate();
+
+      String requiredVersion = remoteConfig.getString('min_version');
+      String updateUrl = remoteConfig.getString('update_url');
+
+      PackageInfo packageInfo = await PackageInfo.fromPlatform();
+      String currentVersion = packageInfo.version;
+
+      if (requiredVersion.isNotEmpty && currentVersion != requiredVersion) {
+        _showForceUpdateDialog(updateUrl);
+      }
+    } catch (e) {
+      print("Error checking updates: $e");
+    }
+  }
+
+  void _showForceUpdateDialog(String url) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => PopScope(
+        canPop: false,
+        child: AlertDialog(
+          title: const Text("تحديث هام متاح! 🚀"),
+          content: const Text(
+            "تم إطلاق نسخة جديدة من التطبيق. يجب عليك التحديث للاستمرار في الاستخدام.",
+          ),
+          actions: [
+            ElevatedButton(
+              child: const Text("تحميل التحديث"),
+              onPressed: () async {
+                final Uri updateUri = Uri.parse(url);
+                if (await canLaunchUrl(updateUri)) {
+                  await launchUrl(
+                    updateUri,
+                    mode: LaunchMode.externalApplication,
+                  );
+                }
+              },
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   @override

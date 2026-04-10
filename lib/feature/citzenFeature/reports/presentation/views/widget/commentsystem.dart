@@ -16,7 +16,8 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../../../../generated/l10n.dart';
 
 class Commentsystem extends StatelessWidget {
-  const Commentsystem({super.key, 
+  const Commentsystem({
+    super.key,
     required this.isComment,
     required this.comments,
     required this.controller,
@@ -123,6 +124,7 @@ class Commentsystem extends StatelessWidget {
                     : Padding(
                         padding: EdgeInsets.fromLTRB(16.w, 8.h, 16.w, 16.h),
                         child: CustomTextfromfield(
+                          maxLines: null,
                           suffix: IconButton(
                             icon: Icon(
                               Icons.send_rounded,

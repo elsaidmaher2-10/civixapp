@@ -1,8 +1,10 @@
-import 'package:citifix/core/function/imagebutton.dart';
+import 'package:citifix/core/function/imagebutton.dart' hide AppButton;
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'customButton.dart';
 
 void showSignupImageBottomSheet(BuildContext context) {
   showModalBottomSheet(
@@ -12,7 +14,7 @@ void showSignupImageBottomSheet(BuildContext context) {
     context: context,
     builder: (ctx) => Wrap(
       children: [
-        Appbutton(
+        AppButton(
           onPressed: () async {
             Navigator.pop(ctx);
           },
@@ -21,7 +23,7 @@ void showSignupImageBottomSheet(BuildContext context) {
 
         Divider(height: 2, color: ColorManger.white, thickness: 2),
 
-        Appbutton(
+        AppButton(
           onPressed: () async {
             Navigator.pop(ctx);
           },
@@ -30,9 +32,8 @@ void showSignupImageBottomSheet(BuildContext context) {
 
         SizedBox(height: 10.h),
 
-        Appbutton(
+        AppButton(
           onPressed: () => Navigator.pop(ctx),
-          color: ColorManger.white,
           text: Constantmanger.cancel,
         ),
       ],

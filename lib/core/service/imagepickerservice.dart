@@ -13,13 +13,20 @@ Future<File?> imagepickerservice(
   XFile? file = await ImagePicker().pickImage(source: source);
 
   if (file != null) {
-    BlocProvider.of<SingupCubit>(context).imagepickerstate(File(file.path));
     return File(file.path);
   } else {
     {
-      BlocProvider.of<SingupCubit>(context).imagepickerstate(null);
       return null;
     }
   }
 }
 
+Future<List<File>?> imagepickerMultiimage(BuildContext context) async {
+  List<XFile>? file = await ImagePicker().pickMultipleMedia();
+  if (file.isNotEmpty) {
+    final files = file.map((e) => File(e.path)).toList();
+    return files;
+  } else {
+    return null;
+  }
+}
