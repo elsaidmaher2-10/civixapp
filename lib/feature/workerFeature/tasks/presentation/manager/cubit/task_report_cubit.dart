@@ -20,6 +20,21 @@ class WorkerTasksCubit extends Cubit<WorkerTasksState> {
     );
   }
 
+  Future<void> searchTasks(String query) async {
+    emit(WorkerTasksLoading());
+    final data = await _workerTaskRepo.getFilterdreports(query: query);
+    data.fold(
+      (ifLeft) {
+        if (isClosed) return;
+        emit(ReportNotFound(ifLeft.errors.join()));
+      },
+      (ifRight) {
+        if (isClosed) return;
+        emit(WorkerTasksSuccess(ifRight));
+      },
+    );
+  }
+
   Future<void> changeWorkerTaskStatus({
     required String status,
     required int reportId,

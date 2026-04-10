@@ -1,4 +1,4 @@
-import 'package:citifix/feature/workerFeature/profile/color_manager.dart';
+import 'package:citifix/core/resource/colormanager.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -8,11 +8,11 @@ extension DocumentStatusExt on DocumentStatus {
   Color get color {
     switch (this) {
       case DocumentStatus.approved:
-        return ColorManager.success;
+        return ColorManger.success;
       case DocumentStatus.pending:
-        return ColorManager.primaryContainer;
+        return ColorManger.bgLight;
       case DocumentStatus.rejected:
-        return ColorManager.error;
+        return ColorManger.error;
     }
   }
 
@@ -57,7 +57,7 @@ class DocumentTile extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: ColorManager.surfaceLowest,
+          color: ColorManger.surfaceLowest,
           borderRadius: BorderRadius.circular(12),
         ),
         child: Column(
@@ -66,10 +66,10 @@ class DocumentTile extends StatelessWidget {
               height: 80,
               width: double.infinity,
               decoration: BoxDecoration(
-                color: ColorManager.surfaceContainerLow,
+                color: ColorManger.surfaceContainerLow,
                 borderRadius: BorderRadius.circular(8),
               ),
-              child:icon,
+              child: icon,
             ),
             const SizedBox(height: 16),
             Text(
@@ -77,7 +77,7 @@ class DocumentTile extends StatelessWidget {
               style: GoogleFonts.cairo(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
-                color: ColorManager.onSurface,
+                color: ColorManger.onSurface,
               ),
               textAlign: TextAlign.center,
             ),

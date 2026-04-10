@@ -1,7 +1,9 @@
 import 'dart:async';
+import 'package:citifix/core/database/local/prefmanger.dart';
 import 'package:citifix/core/database/remote/api/ApiService.dart';
 import 'package:citifix/core/function/passvlidatorrules.dart';
 import 'package:citifix/core/resource/colormanager.dart';
+import 'package:citifix/core/resource/constantmanagerAr.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/core/routing/routes.dart';
 import 'package:citifix/core/service/networkchecker.dart';
@@ -171,11 +173,13 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
               backgroundColor: ColorManger.green,
               message: state.message,
             );
+
+            final role = PrefrenceManager().getstring(Constantmanger.role);
             await Future.delayed(
               const Duration(seconds: 2),
               () => Navigator.pushNamedAndRemoveUntil(
                 context,
-                Routes.citizenMain,
+                role == "Worker" ? Routes.workerMain : Routes.citizenMain,
                 (Route route) => false,
               ),
             );

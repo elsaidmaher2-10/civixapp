@@ -1,23 +1,32 @@
 import 'dart:async';
 import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+
+import 'package:citifix/core/DI/getit.dart';
+import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
+import 'package:citifix/core/resource/screenutilsmaanger.dart';
+import 'package:citifix/core/widget/CustomSnackBar.dart';
+import 'package:citifix/generated/l10n.dart';
+
+import 'package:citifix/feature/citzenFeature/reports/data/repos/commentRepo/commentRepo.dart';
+import 'package:citifix/feature/citzenFeature/reports/presentation/manager/comment/commentmanger_cubit.dart';
 import 'package:citifix/feature/workerFeature/taskDetails/presentation/manager/ReportDetailsState.dart';
+import 'package:citifix/feature/workerFeature/taskDetails/presentation/manager/reportdetailsManger.dart';
 import 'package:citifix/feature/workerFeature/taskDetails/presentation/views/widget/CompletionDataSection.dart';
 import 'package:citifix/feature/workerFeature/taskDetails/presentation/views/widget/IssuePhotosSection.dart';
 import 'package:citifix/feature/workerFeature/taskDetails/presentation/views/widget/MapNavigationSection.dart';
 import 'package:citifix/feature/workerFeature/taskDetails/presentation/views/widget/TaskInfoSection.dart';
 import 'package:citifix/feature/workerFeature/taskDetails/presentation/views/widget/TaskOwnerHeader.dart';
 import 'package:citifix/feature/workerFeature/taskDetails/presentation/views/widget/timelineSection.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:citifix/core/resource/colormanager.dart';
-import 'package:citifix/feature/workerFeature/taskDetails/presentation/manager/reportdetailsManger.dart';
-import '../../../core/DI/getit.dart';
-import '../../../core/resource/screenutilsmaanger.dart';
-import '../tasks/data/repos/worker_task_Repo.dart';
-import '../tasks/presentation/manager/cubit/task_report_cubit.dart';
+import 'package:citifix/feature/workerFeature/taskDetails/presentation/views/widget/workerComments.dart';
+import 'package:citifix/feature/workerFeature/tasks/data/repos/worker_task_Repo.dart';
+import 'package:citifix/feature/workerFeature/tasks/presentation/manager/cubit/task_report_cubit.dart';
 
 class TaskDetailsPage extends StatefulWidget {
   const TaskDetailsPage({super.key, required this.reportid});
@@ -28,202 +37,250 @@ class TaskDetailsPage extends StatefulWidget {
 }
 
 class _TaskDetailsPageState extends State<TaskDetailsPage> {
+  final StreamController<List<File>> _imagesController =
+      StreamController.broadcast();
+  final StreamController<bool> _buttonStatusController =
+      StreamController.broadcast();
+  final List<File> _pickedFiles = [];
+  final TextEditingController notesController = TextEditingController();
+  final TextEditingController _commentController = TextEditingController();
+
+  dynamic _currentTask;
+
   @override
   void initState() {
     super.initState();
+    _fetchReportDetails();
+    notesController.addListener(_checkButtonStatus);
+  }
 
+  void _fetchReportDetails() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<ReportDetailsManager>().getReportDetails(
-        id: widget.reportid,
-      );
+      if (mounted) {
+        context.read<ReportDetailsManager>().getReportDetails(
+          id: widget.reportid,
+        );
+      }
     });
   }
 
-  StreamController<List<File>> Controller = StreamController.broadcast();
-  bool _isScrolling = false;
-  final List<File> _pickedFiles = [];
-
-  bool _onScrollNotification(ScrollNotification notification) {
-    if (notification is ScrollStartNotification) {
-      setState(() => _isScrolling = true);
-    } else if (notification is ScrollEndNotification) {
-      setState(() => _isScrolling = false);
+  void _checkButtonStatus() {
+    if (_pickedFiles.isNotEmpty && notesController.text.trim().isNotEmpty) {
+      _buttonStatusController.add(true);
+    } else {
+      _buttonStatusController.add(false);
     }
-    return true;
   }
 
   @override
   void dispose() {
+    _imagesController.close();
+    _buttonStatusController.close();
+    notesController.dispose();
+    _commentController.dispose();
     super.dispose();
-    Controller.close();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: ColorManger.background,
-      appBar: _buildAppBar(),
-      bottomNavigationBar: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.all(16.0),
-          child: MarkAsCompletedButton(onTap: () {}),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => CommentsCubit(getIt<Commentrepo>())),
+        BlocProvider(
+          create: (context) => WorkerTasksCubit(getIt<WorkerTaskRepo>()),
         ),
-      ),
-      body: BlocBuilder<ReportDetailsManager, ReportDetailsState>(
+      ],
+      child: BlocConsumer<ReportDetailsManager, ReportDetailsState>(
+        listener: _handleStateListener,
         builder: (context, state) {
-          if (state is ReportDetailsLoading) {
-            return Center(
-              child: CupertinoActivityIndicator(
-                radius: ScreenUtilsManager.r12,
-                color: ColorManger.workerprimary,
-              ),
-            );
-          }
-
-          if (state is ReportDetailsFailure) {
-            final isNoInternet = state.error.contains(
-              Constantmanger.nointernet,
-            );
-
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    isNoInternet ? Icons.wifi_off : Icons.error_outline,
-                    size: 60,
-                    color: Colors.grey,
-                  ),
-                  const SizedBox(height: 16),
-                  Text(
-                    isNoInternet
-                        ? "No Internet Connection"
-                        : "Something went wrong",
-                    style: GoogleFonts.cairo(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-
-                  const SizedBox(height: 8),
-
-                  Text(
-                    state.error,
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.cairo(color: Colors.grey),
-                  ),
-
-                  const SizedBox(height: 16),
-
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFFFF7B00),
-                      foregroundColor: Colors.white,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 32,
-                        vertical: 12,
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      elevation: 2,
-                    ),
-                    onPressed: () {
-                      context.read<ReportDetailsManager>().getReportDetails(
-                        id: widget.reportid,
-                      );
-                    },
-                    child: Text(
-                      "Retry",
-                      style: GoogleFonts.cairo(fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                ],
-              ),
-            );
-          }
-
           if (state is ReportDetailsSuccess) {
-            final task = state.data;
-
-            return NotificationListener(
-              onNotification: _onScrollNotification,
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.all(16),
-                child: BlocProvider(
-                  create: (context) =>
-                      WorkerTasksCubit(getIt<WorkerTaskRepo>()),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      TaskOwnerHeader(task: task),
-                      const SizedBox(height: 16),
-
-                      TaskInfoSection(task: task),
-                      const SizedBox(height: 16),
-
-                      IssuePhotosSection(
-                        mediaItems: [...task.imagesUrls, ...task.videosUrls],
-                      ),
-                      const SizedBox(height: 16),
-
-                      MapNavigationSection(taskDetailsModel: task),
-                      const SizedBox(height: 16),
-
-                      ActivityTimelineSection(
-                        isCompleted: task.isCompleted,
-                        initialStatus: task.status,
-                        id: task.id,
-                      ),
-                      const SizedBox(height: 16),
-
-                      !task.isCompleted
-                          ? CompletionDataSection(
-                              streamController: Controller,
-                              notesController: TextEditingController(),
-                              onFilesChanged: (List<File> p1) {},
-                              addimage: (iamge) {
-                                setState(() {
-                                  _pickedFiles.addAll(iamge);
-                                });
-                                Controller.add(_pickedFiles);
-                              },
-                              removeImage: (index) {
-                                setState(() {
-                                  _pickedFiles.removeAt(index);
-                                });
-                                Controller.add(_pickedFiles);
-                              },
-                            )
-                          : SizedBox.shrink(),
-                    ],
-                  ),
-                ),
-              ),
-            );
+            _currentTask = state.data;
           }
 
-          return const SizedBox();
+          return ModalProgressHUD(
+            inAsyncCall: state is MarkAsCompeleteLoading,
+            opacity: 0.5,
+            color: Colors.black54,
+            progressIndicator: CupertinoActivityIndicator(
+              radius: ScreenUtilsManager.r12,
+              color: ColorManger.workerprimary,
+            ),
+            child: Scaffold(
+              backgroundColor: ColorManger.background,
+              appBar: _buildAppBar(context),
+              bottomNavigationBar: _buildBottomAction(context),
+              body: _buildScaffoldBody(context, state),
+            ),
+          );
         },
       ),
     );
   }
 
-  PreferredSizeWidget _buildAppBar() {
+  Widget _buildScaffoldBody(BuildContext context, ReportDetailsState state) {
+    if (state is ReportDetailsLoading && _currentTask == null) {
+      return const Center(child: CupertinoActivityIndicator(radius: 12));
+    }
+    if (state is ReportDetailsFailure && _currentTask == null) {
+      return _buildErrorWidget(context, state.error);
+    }
+    if (_currentTask != null) {
+      return _buildMainContent(context, _currentTask);
+    }
+
+    return const SizedBox.shrink();
+  }
+
+  Widget _buildBottomAction(BuildContext context) {
+    if (_currentTask != null && !_currentTask.isCompleted) {
+      return SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: StreamBuilder<bool>(
+            initialData: false,
+            stream: _buttonStatusController.stream,
+            builder: (context, snapshot) {
+              final isFormValid = snapshot.data ?? false;
+              return MarkAsCompletedButton(
+                onTap: isFormValid
+                    ? () =>
+                          context.read<ReportDetailsManager>().markAsCompleted(
+                            id: widget.reportid,
+                            notes: notesController.text,
+                            images: _pickedFiles,
+                          )
+                    : null,
+              );
+            },
+          ),
+        ),
+      );
+    }
+    return const SizedBox.shrink();
+  }
+
+  Widget _buildMainContent(BuildContext context, dynamic task) {
+    return RefreshIndicator(
+      color: ColorManger.workerprimary,
+      backgroundColor: ColorManger.white,
+      onRefresh: () async => context
+          .read<ReportDetailsManager>()
+          .getReportDetails(id: widget.reportid),
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            TaskOwnerHeader(task: task),
+            const SizedBox(height: 16),
+            TaskInfoSection(task: task),
+            const SizedBox(height: 16),
+            IssuePhotosSection(
+              mediaItems: [...task.imagesUrls, ...task.videosUrls],
+            ),
+            const SizedBox(height: 16),
+            MapNavigationSection(taskDetailsModel: task),
+            const SizedBox(height: 16),
+            ActivityTimelineSection(
+              timeline: task.timeline,
+              isCompleted: task.isCompleted,
+              initialStatus: task.status,
+              id: task.id,
+            ),
+            const SizedBox(height: 16),
+            if (!task.isCompleted)
+              CompletionDataSection(
+                streamController: _imagesController,
+                notesController: notesController,
+                onFilesChanged: (_) {},
+                addimage: (images) {
+                  setState(() => _pickedFiles.addAll(images));
+                  _imagesController.add(_pickedFiles);
+                  _checkButtonStatus();
+                },
+                removeImage: (index) {
+                  setState(() => _pickedFiles.removeAt(index));
+                  _imagesController.add(_pickedFiles);
+                  _checkButtonStatus();
+                },
+              ),
+            const SizedBox(height: 16),
+            Workercomments(
+              isComment: false,
+              comments: task.comments,
+              controller: _commentController,
+              reporID: task.id,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _handleStateListener(BuildContext context, ReportDetailsState state) {
+    if (state is MarkAsCompeleteFailure) {
+      Customsnackbar.show(
+        context: context,
+        backgroundColor: ColorManger.red,
+        message: state.error,
+      );
+    }
+    if (state is MarkAsCompeleteSuccess) {
+      Customsnackbar.show(
+        context: context,
+        backgroundColor: ColorManger.green,
+        message: S.of(context).markasCompeleted,
+      );
+      context.read<ReportDetailsManager>().getReportDetails(
+        id: widget.reportid,
+      );
+    }
+  }
+
+  PreferredSizeWidget _buildAppBar(BuildContext context) {
     return AppBar(
       backgroundColor: ColorManger.surface,
       elevation: 0,
-      scrolledUnderElevation: 0,
       leading: IconButton(
-        icon: Icon(Icons.arrow_back, color: ColorManger.onSurface),
+        icon: Icon(Icons.arrow_back_ios_outlined, color: ColorManger.onSurface),
         onPressed: () => Navigator.pop(context),
       ),
+      centerTitle: true,
       title: Text(
         'Task Details',
-        style: GoogleFonts.cairo(
-          color: ColorManger.onSurface,
-          fontWeight: FontWeight.bold,
-        ),
+        style: GoogleFonts.cairo(fontWeight: FontWeight.bold),
+      ),
+    );
+  }
+
+  Widget _buildErrorWidget(BuildContext context, String error) {
+    final isNoInternet = error.contains(Constantmanger.nointernet);
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            isNoInternet ? Icons.wifi_off : Icons.error_outline,
+            size: 60,
+            color: Colors.grey,
+          ),
+          const SizedBox(height: 16),
+          Text(
+            isNoInternet ? "No Internet Connection" : "Something went wrong",
+            style: GoogleFonts.cairo(fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 16),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: ColorManger.workerprimary,
+              foregroundColor: ColorManger.white,
+            ),
+            onPressed: () => context
+                .read<ReportDetailsManager>()
+                .getReportDetails(id: widget.reportid),
+            child: const Text("Retry"),
+          ),
+        ],
       ),
     );
   }

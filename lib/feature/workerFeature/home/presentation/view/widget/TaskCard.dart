@@ -35,18 +35,23 @@ class TaskCard extends StatelessWidget {
         children: [
           Stack(
             children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(12),
-                child: CachedNetworkImage(
-                  placeholder: (context, url) {
-                    return customShimer(150);
-                  },
-                  height: 130,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                  imageUrl: report.imageUrls.isNotEmpty
-                      ? report.imageUrls.first
-                      : Constantmanger.defualtImage,
+              InkWell(
+                onTap: () {
+                  print(report.imageUrls);
+                },
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(12),
+                  child: CachedNetworkImage(
+                    placeholder: (context, url) {
+                      return customShimer(150);
+                    },
+                    height: 130,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                    imageUrl: report.imageUrls.isNotEmpty
+                        ? report.imageUrls.first
+                        : Constantmanger.defualtImage,
+                  ),
                 ),
               ),
               Positioned(

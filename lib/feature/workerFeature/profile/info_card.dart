@@ -1,6 +1,7 @@
-import 'package:citifix/feature/workerFeature/profile/color_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../../../core/resource/colormanager.dart';
 
 class InfoCard extends StatelessWidget {
   const InfoCard({
@@ -20,29 +21,27 @@ class InfoCard extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.all(32),
       decoration: BoxDecoration(
-        color: ColorManager.surfaceLowest,
+        color: ColorManger.surfaceLowest,
         borderRadius: BorderRadius.circular(32),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // ── Header ──────────────────────────────────────────
           Row(
             children: [
-              Icon(icon, color: ColorManager.primary, size: 24),
+              Icon(icon, color: ColorManger.workerprimary, size: 24),
               const SizedBox(width: 8),
               Text(
                 title,
                 style: GoogleFonts.cairo(
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
-                  color: ColorManager.onSurface,
+                  color: ColorManger.onSurface,
                 ),
               ),
             ],
           ),
           const SizedBox(height: 24),
-          // ── Body ────────────────────────────────────────────
           ...children,
         ],
       ),
@@ -50,7 +49,6 @@ class InfoCard extends StatelessWidget {
   }
 }
 
-/// A labeled field row used inside [InfoCard].
 class InfoField extends StatelessWidget {
   const InfoField({super.key, required this.label, required this.value});
 
@@ -67,7 +65,7 @@ class InfoField extends StatelessWidget {
           style: GoogleFonts.cairo(
             fontSize: 11,
             fontWeight: FontWeight.w600,
-            color: ColorManager.onSurfaceVariant,
+            color: ColorManger.onSurfaceVariant,
             letterSpacing: 0.5,
           ),
         ),
@@ -77,7 +75,7 @@ class InfoField extends StatelessWidget {
           style: GoogleFonts.cairo(
             fontSize: 16,
             fontWeight: FontWeight.w600,
-            color: ColorManager.onSurface,
+            color: ColorManger.onSurface,
           ),
         ),
       ],
@@ -85,7 +83,6 @@ class InfoField extends StatelessWidget {
   }
 }
 
-/// Highlighted vehicle chip used inside the Vehicle card.
 class VehicleChip extends StatelessWidget {
   const VehicleChip({
     super.key,
@@ -104,7 +101,7 @@ class VehicleChip extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        color: ColorManager.surfaceContainerLow,
+        color: ColorManger.surfaceContainerLow,
         borderRadius: BorderRadius.circular(12),
       ),
       child: Column(
@@ -115,7 +112,7 @@ class VehicleChip extends StatelessWidget {
             style: GoogleFonts.cairo(
               fontSize: 11,
               fontWeight: FontWeight.w600,
-              color: ColorManager.onSurfaceVariant,
+              color: ColorManger.onSurfaceVariant,
               letterSpacing: 0.5,
             ),
           ),
@@ -125,7 +122,7 @@ class VehicleChip extends StatelessWidget {
             style: GoogleFonts.cairo(
               fontSize: 20,
               fontWeight: FontWeight.bold,
-              color: ColorManager.primary,
+              color: ColorManger.primary,
             ),
           ),
           const SizedBox(height: 4),
@@ -134,7 +131,7 @@ class VehicleChip extends StatelessWidget {
             style: GoogleFonts.cairo(
               fontSize: 14,
               fontWeight: FontWeight.w500,
-              color: ColorManager.onSurfaceVariant,
+              color: ColorManger.onSurfaceVariant,
             ),
           ),
         ],
@@ -154,13 +151,13 @@ class IconTextRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Icon(icon, size: 20, color: ColorManager.onSurfaceVariant),
+        Icon(icon, size: 20, color: ColorManger.onSurfaceVariant),
         const SizedBox(width: 16),
         Text(
           text,
           style: GoogleFonts.cairo(
             fontSize: 14,
-            color: ColorManager.onSurfaceVariant,
+            color: ColorManger.onSurfaceVariant,
           ),
         ),
       ],

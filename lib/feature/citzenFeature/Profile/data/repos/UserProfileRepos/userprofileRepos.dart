@@ -17,11 +17,6 @@ class Userprofilerepos {
   InternetChecker internetChecker;
   Future<Either<FailureResponse, UserProfile>> getuserInfo() async {
     try {
-      String? cachedUser = PrefrenceManager().getstring("user_profile_data");
-      if (cachedUser != null) {
-        return Right(UserProfile.fromJson(jsonDecode(cachedUser)));
-      }
-
       if (!await internetChecker.checkInternet()) {
         return left(
           FailureResponse(errors: [Constantmanger.nointernet], statusCode: 1),

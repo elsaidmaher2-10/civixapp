@@ -191,7 +191,7 @@ class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
                       controller: controller,
                       reporID: report.id,
                       comments: report.comments,
-                      isComment: report.status == "Resolved",
+                      isComment: false,
                     ),
                     SliverToBoxAdapter(child: SizedBox(height: 50.h)),
                   ],

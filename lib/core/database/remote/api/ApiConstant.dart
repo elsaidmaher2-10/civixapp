@@ -33,4 +33,6 @@ class Apiconstant {
       "Worker/my-reports/$reportId/status";
   static String get getdepartment => "Departments/list";
   static String getcomments(int reportId) => "/reports/$reportId/comments";
+  static String markasCompeleted(int reportId) =>
+      "Worker/my-reports/$reportId/completion";
 }

@@ -9,11 +9,11 @@ class AppButton extends StatelessWidget {
     required this.onPressed,
     required this.text,
     this.icon,
-    this.backgroundColor, // هيستخدم الـ workerprimary لو مبعتلوش لون
-    this.foregroundColor = Colors.white, // لون النص والأيقونة
-    this.radius = 12.0, // حواف دائرية مناسبة للتصميم الحديث
-    this.height = 56.0, // الارتفاع المثالي
-    this.isLoading = false, // حالة التحميل
+    this.backgroundColor,
+    this.foregroundColor = Colors.white,
+    this.radius = 12.0,
+    this.height = 56.0,
+    this.isLoading = false,
   });
 
   final VoidCallback? onPressed;
@@ -27,7 +27,6 @@ class AppButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // تحديد لون الخلفية الافتراضي
     final bgColor = backgroundColor ?? ColorManger.workerprimary;
 
     return SizedBox(

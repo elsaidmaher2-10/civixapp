@@ -310,7 +310,9 @@
   "sessionExpired": "Session expired. Please login again",
   "invalidRequest": "Invalid request. Please try again",
 
-"presonalPhoto" :"personal Photo"
+"presonalPhoto" :"personal Photo",
+  "markasCompeleted": "You can solve the problem now.",
+  "markasCompeleteds": "You can solve the problem now."
 
 
 }

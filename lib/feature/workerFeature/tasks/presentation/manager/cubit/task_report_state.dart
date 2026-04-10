@@ -8,6 +8,11 @@ class WorkerTasksInitial extends WorkerTasksState {}
 
 class WorkerTasksLoading extends WorkerTasksState {}
 
+class ReportNotFound extends WorkerTasksState {
+  final String error;
+  ReportNotFound(this.error);
+}
+
 class WorkerTasksSuccess extends WorkerTasksState {
   final ReportResponse response;
   const WorkerTasksSuccess(this.response);

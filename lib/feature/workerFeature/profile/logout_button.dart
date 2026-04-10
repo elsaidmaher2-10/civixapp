@@ -1,7 +1,8 @@
-import 'package:citifix/feature/workerFeature/profile/color_manager.dart';
 import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../../../core/resource/colormanager.dart';
 
 class LogoutButton extends StatelessWidget {
   const LogoutButton({super.key, required this.onTap, this.isLoading = false});
@@ -16,12 +17,12 @@ class LogoutButton extends StatelessWidget {
       style: OutlinedButton.styleFrom(
         minimumSize: const Size(double.infinity, 64),
         side: BorderSide(
-          color: ColorManager.error.withOpacity(isLoading ? 0.1 : 0.2),
+          color: ColorManger.error.withOpacity(isLoading ? 0.1 : 0.2),
           width: 2,
         ),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        foregroundColor: ColorManager.error,
-        disabledForegroundColor: ColorManager.error.withOpacity(0.5),
+        foregroundColor: ColorManger.error,
+        disabledForegroundColor: ColorManger.error.withOpacity(0.5),
       ),
       child: isLoading
           ? const SizedBox(
@@ -29,7 +30,7 @@ class LogoutButton extends StatelessWidget {
               width: 24,
               child: CircularProgressIndicator(
                 strokeWidth: 2,
-                color: ColorManager.error,
+                color: ColorManger.error,
               ),
             )
           : Row(

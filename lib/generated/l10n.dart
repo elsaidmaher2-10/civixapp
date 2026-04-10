@@ -2458,6 +2458,26 @@ class S {
       args: [],
     );
   }
+
+  /// `You can solve the problem now.`
+  String get markasCompeleted {
+    return Intl.message(
+      'You can solve the problem now.',
+      name: 'markasCompeleted',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You can solve the problem now.`
+  String get markasCompeleteds {
+    return Intl.message(
+      'You can solve the problem now.',
+      name: 'markasCompeleteds',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -1,7 +1,12 @@
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
+import 'package:citifix/feature/workerFeature/main/Manager/cubit/worker_cubit_cubit.dart';
+import 'package:citifix/feature/workerFeature/tasks/presentation/manager/cubit/task_report_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../taskDetails/presentation/manager/reportdetailsManger.dart';
 
 class TaskSearchBar extends StatelessWidget {
   const TaskSearchBar({super.key});
@@ -20,6 +25,9 @@ class TaskSearchBar extends StatelessWidget {
         ],
       ),
       child: TextField(
+        onChanged: (value) {
+          context.read<WorkerTasksCubit>().searchTasks(value);
+        },
         decoration: InputDecoration(
           hintText: 'Search for tasks...',
           hintStyle: GoogleFonts.cairo(

@@ -1,27 +1,34 @@
-import 'package:citifix/feature/workerFeature/profile/color_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../core/resource/colormanager.dart';
+
 class ProfileHeader extends StatelessWidget {
-  const ProfileHeader({super.key, required this.name, required this.avatarUrl});
+  const ProfileHeader({
+    super.key,
+    required this.name,
+    required this.avatarUrl,
+    required this.isvrified,
+  });
   final String name;
+  final bool isvrified;
   final String avatarUrl;
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      color: ColorManager.surfaceLowest,
-      padding: const EdgeInsets.only(left: 24, right: 24, top: 64, bottom: 40),
+      color: ColorManger.surfaceLowest,
+      padding: const EdgeInsets.only(left: 24, right: 24, top: 64, bottom: 20),
       child: Column(
         children: [
-          _Avatar(avatarUrl: avatarUrl),
+          _Avatar(avatarUrl: avatarUrl, isvrified: isvrified),
           const SizedBox(height: 24),
           Text(
             name,
             style: GoogleFonts.cairo(
               fontWeight: FontWeight.w800,
               fontSize: 30,
-              color: ColorManager.onSurface,
+              color: ColorManger.onSurface,
               letterSpacing: -0.5,
             ),
           ),
@@ -33,8 +40,9 @@ class ProfileHeader extends StatelessWidget {
 }
 
 class _Avatar extends StatelessWidget {
-  const _Avatar({required this.avatarUrl});
+  const _Avatar({required this.avatarUrl, required this.isvrified});
   final String avatarUrl;
+  final bool isvrified;
 
   @override
   Widget build(BuildContext context) {
@@ -46,29 +54,30 @@ class _Avatar extends StatelessWidget {
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             border: Border.all(
-              color: ColorManager.primaryContainer.withOpacity(0.2),
+              color: ColorManger.bgLight.withOpacity(0.2),
               width: 4,
             ),
-            color: ColorManager.surfaceContainer,
+            color: ColorManger.surfaceContainer,
             image: DecorationImage(
               image: NetworkImage(avatarUrl),
               fit: BoxFit.cover,
             ),
           ),
         ),
-        Positioned(
-          bottom: 4,
-          right: 4,
-          child: Container(
-            padding: const EdgeInsets.all(2),
-            decoration: BoxDecoration(
-              color: ColorManager.success,
-              shape: BoxShape.circle,
-              border: Border.all(color: Colors.white, width: 4),
+        if (isvrified)
+          Positioned(
+            bottom: 4,
+            right: 4,
+            child: Container(
+              padding: const EdgeInsets.all(2),
+              decoration: BoxDecoration(
+                color: ColorManger.success,
+                shape: BoxShape.circle,
+                border: Border.all(color: Colors.white, width: 4),
+              ),
+              child: const Icon(Icons.check, color: Colors.white, size: 16),
             ),
-            child: const Icon(Icons.check, color: Colors.white, size: 16),
           ),
-        ),
       ],
     );
   }

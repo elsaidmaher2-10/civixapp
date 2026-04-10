@@ -281,6 +281,12 @@ class MessageLookup extends MessageLookupByLibrary {
       "Logged out successfully",
     ),
     "markAllRead": MessageLookupByLibrary.simpleMessage("Mark all read"),
+    "markasCompeleted": MessageLookupByLibrary.simpleMessage(
+      "You can solve the problem now.",
+    ),
+    "markasCompeleteds": MessageLookupByLibrary.simpleMessage(
+      "You can solve the problem now.",
+    ),
     "messagesCount": m2,
     "minutesAgo": m3,
     "msgRegister": MessageLookupByLibrary.simpleMessage(

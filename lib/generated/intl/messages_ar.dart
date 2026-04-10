@@ -262,6 +262,12 @@ class MessageLookup extends MessageLookupByLibrary {
       "تم تسجيل الخروج بنجاح",
     ),
     "markAllRead": MessageLookupByLibrary.simpleMessage("تحديد الكل كمقروء"),
+    "markasCompeleted": MessageLookupByLibrary.simpleMessage(
+      "انت تستطيع جعل المشكله الان محلوله",
+    ),
+    "markasCompeleteds": MessageLookupByLibrary.simpleMessage(
+      "انت تستطيع جعل المشكله الان محلوله",
+    ),
     "messagesCount": m2,
     "minutesAgo": m3,
     "msgRegister": MessageLookupByLibrary.simpleMessage(

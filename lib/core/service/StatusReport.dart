@@ -20,7 +20,7 @@ enum StatusReport {
     );
   }
 
-  StatusReport getNextStatus(StatusReport currentStatus) {
+  static StatusReport getNextStatus(StatusReport currentStatus) {
     return switch (currentStatus) {
       StatusReport.pending => StatusReport.assigned,
       StatusReport.assigned => StatusReport.inProgress,

@@ -1,3 +1,5 @@
+import '../../../../citzenFeature/reports/data/Models/commentmodel/commentmodel.dart';
+
 class TaskDetailsModel {
   final int id;
   final String areaName;
@@ -12,8 +14,11 @@ class TaskDetailsModel {
   final String createdAt;
   final List<String> imagesUrls;
   final List<String> videosUrls;
+  final List<TimelineModel> timeline;
   final double latitude;
   final String location;
+  final List<CommentModel> comments;
+
   final double longitude;
 
   TaskDetailsModel({
@@ -33,6 +38,8 @@ class TaskDetailsModel {
     required this.location,
     required this.isCompleted,
     required this.citizenProfileImageUrl,
+    required this.timeline,
+    required this.comments,
   });
 
   factory TaskDetailsModel.fromJson(Map<String, dynamic> json) {
@@ -71,6 +78,28 @@ class TaskDetailsModel {
       location: json["location"],
       isCompleted: json["isCompleted"],
       citizenProfileImageUrl: json['citizenProfileImageUrl'],
+      timeline: (json["timeline"] as List<dynamic>)
+          .map((e) => TimelineModel.fromJson(e))
+          .toList(),
+      comments:
+          (json['comments'] as List?)
+              ?.map((e) => CommentModel.fromJson(e))
+              .toList() ??
+          [],
+    );
+  }
+}
+
+class TimelineModel {
+  final String date;
+  final String status;
+
+  TimelineModel({required this.date, required this.status});
+
+  factory TimelineModel.fromJson(Map<String, dynamic> json) {
+    return TimelineModel(
+      date: json["date"] ?? "",
+      status: json["status"] ?? "",
     );
   }
 }

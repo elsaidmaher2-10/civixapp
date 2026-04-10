@@ -46,7 +46,6 @@ class _CustomMapSectionState extends State<CustomMapSection> {
           if (_mapReady) {
             if (state is WorkerOutSideZone) {
               _currLocation = state.curpoint;
-
               List<LatLng> allPoints = [
                 _currLocation!,
                 if (widget.taskLocation != null) widget.taskLocation!,
@@ -72,7 +71,6 @@ class _CustomMapSectionState extends State<CustomMapSection> {
           if (state is WorkerOutSideZone) {
             distanceValue = (state.distance / 1000).toStringAsFixed(1);
           }
-
           return Column(
             children: [
               Stack(
@@ -95,7 +93,6 @@ class _CustomMapSectionState extends State<CustomMapSection> {
                         initialZoom: 14.0,
                         onMapReady: () {
                           setState(() => _mapReady = true);
-                          // تشغيل تتبع الموقع الجغرافي (Geofencing)
                           context.read<MapControllerCubit>().trackUserLocation(
                             points: widget.zonemLevel
                                 .map(
@@ -114,7 +111,6 @@ class _CustomMapSectionState extends State<CustomMapSection> {
                               'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
                           userAgentPackageName: 'com.globalgate.worker',
                         ),
-
                         if (state is WorkerOutSideZone &&
                             state.routePoints.isNotEmpty)
                           PolylineLayer(

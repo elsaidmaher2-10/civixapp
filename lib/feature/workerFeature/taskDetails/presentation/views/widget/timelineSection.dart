@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:citifix/core/extenstion/datetimeextension.dart';
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/widget/CustomSnackBar.dart';
 import 'package:flutter/material.dart';
@@ -6,20 +9,20 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 
 import '../../../../../../core/service/StatusReport.dart';
-import '../../../../tasks/data/repos/worker_task_Repo.dart';
 import '../../../../tasks/presentation/manager/cubit/task_report_cubit.dart';
 import '../../../../tasks/presentation/manager/cubit/task_report_state.dart';
-import '../../manager/reportdetailsManger.dart';
+import '../../../data/model/taskdetailsmodel.dart';
 
 class ActivityTimelineSection extends StatefulWidget {
   final String initialStatus;
   final int id;
+  final List<TimelineModel> timeline;
   final bool isCompleted;
-
   const ActivityTimelineSection({
     super.key,
     required this.initialStatus,
     required this.isCompleted,
+    required this.timeline,
     required this.id,
   });
 
@@ -30,22 +33,37 @@ class ActivityTimelineSection extends StatefulWidget {
 
 class _ActivityTimelineSectionState extends State<ActivityTimelineSection> {
   final List<StatusReport> _stepsOrder = [
+    StatusReport.pending,
     StatusReport.assigned,
     StatusReport.inProgress,
     StatusReport.resolved,
   ];
 
   late StatusReport _currentStatus;
-
+  late StatusReport _previousStatus;
   @override
   void initState() {
     super.initState();
+
     _currentStatus = StatusReport.fromString(widget.initialStatus);
-    print("_currentStatus $_currentStatus");
+    _previousStatus = _currentStatus;
   }
 
   void _onStepTap(int index) {
     final tappedStatus = _stepsOrder[index];
+    final currentIndex = _stepsOrder.indexOf(_currentStatus);
+    if (index <= currentIndex) {
+      return;
+    }
+
+    if (index > currentIndex + 1) {
+      Customsnackbar.show(
+        context: context,
+        backgroundColor: ColorManger.red,
+        message: "Next step: ${_stepsOrder[currentIndex + 1].value}",
+      );
+      return;
+    }
 
     if (tappedStatus == StatusReport.resolved) {
       if (widget.isCompleted == false) {
@@ -59,28 +77,15 @@ class _ActivityTimelineSectionState extends State<ActivityTimelineSection> {
       }
     }
 
-    if (tappedStatus == _currentStatus.getNextStatus(_currentStatus)) {
-      setState(() {
-        _currentStatus = tappedStatus;
-      });
+    setState(() {
+      _previousStatus = _currentStatus;
+      _currentStatus = tappedStatus;
+    });
 
-      context.read<WorkerTasksCubit>().changeWorkerTaskStatus(
-        status: tappedStatus.value,
-        reportId: widget.id,
-      );
-    } else {
-      if (_stepsOrder.indexOf(tappedStatus) <=
-          _stepsOrder.indexOf(_currentStatus)) {
-        return;
-      }
-
-      Customsnackbar.show(
-        context: context,
-        backgroundColor: ColorManger.red,
-        message:
-            "Next step: ${_currentStatus.getNextStatus(_currentStatus).value}",
-      );
-    }
+    context.read<WorkerTasksCubit>().changeWorkerTaskStatus(
+      status: tappedStatus.value,
+      reportId: widget.id,
+    );
   }
 
   @override
@@ -93,6 +98,9 @@ class _ActivityTimelineSectionState extends State<ActivityTimelineSection> {
             backgroundColor: ColorManger.red,
             message: state.message,
           );
+          setState(() {
+            _currentStatus = _previousStatus;
+          });
         }
       },
       child: Container(
@@ -130,8 +138,15 @@ class _ActivityTimelineSectionState extends State<ActivityTimelineSection> {
               itemBuilder: (context, index) {
                 final stepStatus = _stepsOrder[index];
                 final int currentIndex = _stepsOrder.indexOf(_currentStatus);
-                final bool isCompleted = currentIndex >= index;
-                final bool isCurrent = currentIndex == index;
+                final bool isCompletedStatus = currentIndex >= index;
+
+                String curdate = "";
+                if (index <= widget.timeline.length - 1) {
+                  final parsedDate = DateTime.tryParse(
+                    widget.timeline[index].date,
+                  );
+                  curdate = parsedDate?.timeAgo(context) ?? "";
+                }
 
                 return TimelineTile(
                   alignment: TimelineAlign.start,
@@ -144,18 +159,18 @@ class _ActivityTimelineSectionState extends State<ActivityTimelineSection> {
                       onTap: () => _onStepTap(index),
                       child: Container(
                         decoration: BoxDecoration(
-                          color: isCompleted
+                          color: isCompletedStatus
                               ? ColorManger.workerprimary
                               : Colors.white,
                           shape: BoxShape.circle,
                           border: Border.all(
-                            color: isCompleted
+                            color: isCompletedStatus
                                 ? ColorManger.workerprimary
                                 : Colors.grey.shade300,
                             width: 2,
                           ),
                         ),
-                        child: isCompleted
+                        child: isCompletedStatus
                             ? const Icon(
                                 Icons.check,
                                 color: Colors.white,
@@ -166,7 +181,7 @@ class _ActivityTimelineSectionState extends State<ActivityTimelineSection> {
                     ),
                   ),
                   beforeLineStyle: LineStyle(
-                    color: isCompleted
+                    color: isCompletedStatus
                         ? ColorManger.workerprimary
                         : Colors.grey.shade200,
                     thickness: 2,
@@ -193,17 +208,19 @@ class _ActivityTimelineSectionState extends State<ActivityTimelineSection> {
                             style: GoogleFonts.cairo(
                               fontSize: 14,
                               fontWeight: FontWeight.bold,
-                              color: isCompleted ? Colors.black87 : Colors.grey,
+                              color: isCompletedStatus
+                                  ? Colors.black87
+                                  : Colors.grey,
                             ),
                           ),
-                          if (isCurrent)
-                            Text(
-                              "Current Stage",
-                              style: GoogleFonts.cairo(
-                                fontSize: 10,
-                                color: ColorManger.workerprimary,
-                              ),
+
+                          Text(
+                            curdate.toString(),
+                            style: GoogleFonts.cairo(
+                              fontSize: 12,
+                              color: ColorManger.lightGrey6,
                             ),
+                          ),
                         ],
                       ),
                     ),

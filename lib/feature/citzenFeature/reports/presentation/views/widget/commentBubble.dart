@@ -11,7 +11,6 @@ import '../../../../../../generated/l10n.dart';
 class CommentBubble extends StatelessWidget {
   final CommentModel comment;
   const CommentBubble({super.key, required this.comment});
-
   @override
   Widget build(BuildContext context) {
     bool isWorker = comment.userRole == UserType.worker;
@@ -36,8 +35,8 @@ class CommentBubble extends StatelessWidget {
                   fontSize: 10.sp,
                   fontWeight: FontWeight.bold,
                   color: isWorker
-                      ? ColorManger.kPrimary
-                      : const Color(0xff434652),
+                      ? ColorManger.workerprimary
+                      : ColorManger.primary,
                 ),
               ),
               SizedBox(width: 8.w),
@@ -58,7 +57,9 @@ class CommentBubble extends StatelessWidget {
                 child: Container(
                   padding: EdgeInsets.all(12.r),
                   decoration: BoxDecoration(
-                    color: isWorker ? ColorManger.kPrimary : Colors.white,
+                    color: isWorker
+                        ? ColorManger.workerprimary
+                        : ColorManger.primary,
                     boxShadow: const [
                       BoxShadow(
                         offset: Offset(0, 2),
@@ -87,7 +88,10 @@ class CommentBubble extends StatelessWidget {
               ),
               SizedBox(width: 8.w),
               if (isWorker)
-                _buildAvatar(comment.userProfileImageUrl, ColorManger.kPrimary),
+                _buildAvatar(
+                  comment.userProfileImageUrl,
+                  ColorManger.workerprimary,
+                ),
             ],
           ),
         ],
@@ -112,7 +116,8 @@ class CommentBubble extends StatelessWidget {
               const CupertinoActivityIndicator(radius: 8),
           errorWidget: (c, e, s) => Icon(Icons.person, size: 18, color: color),
           imageUrl: url,
-          fit: BoxFit.cover,
+          width: double.infinity,
+          fit: BoxFit.fill,
         ),
       ),
     );

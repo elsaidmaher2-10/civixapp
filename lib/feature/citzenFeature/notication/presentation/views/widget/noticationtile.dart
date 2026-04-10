@@ -1,4 +1,6 @@
+import 'package:citifix/core/database/local/prefmanger.dart';
 import 'package:citifix/core/resource/colormanager.dart';
+import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/feature/citzenFeature/notication/data/model/notifavtionmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -17,101 +19,111 @@ class NotificationTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 6.0),
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          borderRadius: BorderRadius.circular(16),
-          onTap: onTap,
-          highlightColor: ColorManger.primary.withOpacity(0.05),
-          splashColor: ColorManger.primary.withOpacity(0.1),
-          child: AnimatedContainer(
-            duration: const Duration(milliseconds: 300),
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
+    final bool isWorker =
+        PrefrenceManager().getstring("role")?.toLowerCase() == "worker";
+    final Color primaryColor = isWorker
+        ? ColorManger.workerprimary
+        : ColorManger.primary;
+
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        borderRadius: BorderRadius.circular(ScreenUtilsManager.r15),
+        onTap: onTap,
+        highlightColor: primaryColor.withOpacity(0.05),
+        splashColor: primaryColor.withOpacity(0.1),
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeInOut,
+          padding: EdgeInsets.all(ScreenUtilsManager.w16),
+          decoration: BoxDecoration(
+            color: item.isRead
+                ? Theme.of(context).scaffoldBackgroundColor
+                : primaryColor.withOpacity(0.03),
+            borderRadius: BorderRadius.circular(ScreenUtilsManager.r15),
+            border: Border.all(
               color: item.isRead
-                  ? Theme.of(context).scaffoldBackgroundColor
-                  : ColorManger.surfaceContainerLowest,
-              borderRadius: BorderRadius.circular(16),
-              border: Border.all(
-                color: item.isRead
-                    ? Colors.grey.shade200
-                    : ColorManger.primary.withOpacity(0.3),
-                width: 1,
-              ),
-              boxShadow: item.isRead
-                  ? []
-                  : [
-                      BoxShadow(
-                        color: ColorManger.primary.withOpacity(0.05),
-                        blurRadius: 10,
-                        offset: const Offset(0, 4),
-                      ),
-                    ],
+                  ? Colors.grey.shade200
+                  : primaryColor.withOpacity(0.3),
+              width: 1,
             ),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildIconContainer(),
+            boxShadow: item.isRead
+                ? []
+                : [
+                    BoxShadow(
+                      color: primaryColor.withOpacity(0.05),
+                      blurRadius: 10,
+                      offset: const Offset(0, 4),
+                    ),
+                  ],
+          ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _buildIconContainer(primaryColor),
 
-                const SizedBox(width: 16),
+              SizedBox(width: ScreenUtilsManager.w12),
 
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        item.title,
-                        style: GoogleFonts.cairo(
-                          fontSize: 16,
-                          fontWeight: item.isRead
-                              ? FontWeight.w600
-                              : FontWeight.bold,
-                          color: item.isRead ? Colors.black87 : Colors.black,
-                        ),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      item.title,
+                      style: GoogleFonts.cairo(
+                        fontSize: ScreenUtilsManager.s16,
+                        fontWeight: item.isRead
+                            ? FontWeight.w600
+                            : FontWeight.w800,
+                        color: item.isRead ? Colors.black87 : Colors.black,
                       ),
-                      const SizedBox(height: 6),
-                      Text(
-                        item.message,
-                        style: GoogleFonts.cairo(
-                          fontSize: 14,
-                          color: item.isRead
-                              ? Colors.grey.shade600
-                              : Colors.grey.shade800,
-                          height: 1.4,
-                        ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    SizedBox(height: ScreenUtilsManager.h4),
+                    Text(
+                      item.message,
+                      style: GoogleFonts.cairo(
+                        fontSize: ScreenUtilsManager.s14,
+                        color: item.isRead
+                            ? Colors.grey.shade500
+                            : Colors.grey.shade800,
+                        height: 1.4,
                       ),
-                    ],
-                  ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
                 ),
+              ),
 
-                const SizedBox(width: 12),
+              SizedBox(width: ScreenUtilsManager.w8),
 
-                _buildDeleteButton(),
-              ],
-            ),
+              _buildDeleteButton(),
+            ],
           ),
         ),
       ),
     );
   }
 
-  Widget _buildIconContainer() {
+  Widget _buildIconContainer(Color primaryColor) {
     return Stack(
       children: [
         Container(
-          padding: const EdgeInsets.all(10),
+          padding: EdgeInsets.all(ScreenUtilsManager.w10),
           decoration: BoxDecoration(
             color: item.isRead
                 ? Colors.grey.shade100
-                : ColorManger.primaryFixed,
+                : primaryColor.withOpacity(0.1),
             shape: BoxShape.circle,
           ),
           child: Icon(
-            Icons.notifications_rounded,
-            color: item.isRead ? Colors.grey.shade500 : ColorManger.primary,
-            size: 24,
+            item.isRead
+                ? Icons.notifications_none_rounded
+                : Icons.notifications_active_rounded,
+            color: item.isRead ? Colors.grey.shade400 : primaryColor,
+            size: ScreenUtilsManager.s20,
           ),
         ),
         if (!item.isRead)
@@ -119,8 +131,8 @@ class NotificationTile extends StatelessWidget {
             right: 2,
             top: 2,
             child: Container(
-              width: 12,
-              height: 12,
+              width: ScreenUtilsManager.w12,
+              height: ScreenUtilsManager.h12,
               decoration: BoxDecoration(
                 color: Colors.redAccent,
                 shape: BoxShape.circle,
@@ -138,12 +150,16 @@ class NotificationTile extends StatelessWidget {
       child: InkWell(
         borderRadius: BorderRadius.circular(50),
         onTap: onDelete,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
+        child: Container(
+          padding: EdgeInsets.all(ScreenUtilsManager.w8),
+          decoration: BoxDecoration(
+            color: Colors.red.shade50.withOpacity(0.5),
+            shape: BoxShape.circle,
+          ),
           child: Icon(
-            Icons.delete_outline_rounded,
-            color: Colors.red.shade300,
-            size: 22,
+            Icons.close_rounded,
+            color: Colors.red.shade400,
+            size: ScreenUtilsManager.s18,
           ),
         ),
       ),

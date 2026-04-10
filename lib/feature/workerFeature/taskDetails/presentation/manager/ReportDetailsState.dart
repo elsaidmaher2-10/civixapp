@@ -17,3 +17,16 @@ class ReportDetailsSuccess extends ReportDetailsState {
 
   ReportDetailsSuccess(this.data);
 }
+
+class MarkAsCompeleteLoading extends ReportDetailsState {}
+
+class MarkAsCompeleteFailure extends ReportDetailsState {
+  final String error;
+
+  MarkAsCompeleteFailure(this.error);
+}
+
+class MarkAsCompeleteSuccess extends ReportDetailsState {
+  final bool data;
+  MarkAsCompeleteSuccess(this.data);
+}

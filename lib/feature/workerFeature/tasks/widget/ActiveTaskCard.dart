@@ -1,7 +1,7 @@
 import 'package:citifix/core/service/StatusReport.dart';
 import 'package:citifix/feature/workerFeature/taskDetails/TaskDetailsPage.dart';
 import 'package:citifix/feature/workerFeature/tasks/data/model/ReportResponse.dart';
-import 'package:dartz/dartz.dart' as task;
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
@@ -9,9 +9,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../core/DI/getit.dart';
+import '../../../../core/widget/CustomSnackBar.dart';
 import '../../../../core/widget/stautsBageApp.dart';
 import '../../taskDetails/data/repos/reportdetails.dart';
 import '../../taskDetails/presentation/manager/reportdetailsManger.dart';
+import '../presentation/manager/cubit/task_report_cubit.dart';
+import '../presentation/manager/cubit/task_report_state.dart';
 
 class ActiveTaskCard extends StatelessWidget {
   final ReportModelWorker task;
@@ -90,7 +93,7 @@ class ActiveTaskCard extends StatelessWidget {
             child:
                 StatusReport.fromString(task.status) == StatusReport.inProgress
                 ? _InProgressActions(id: task.id)
-                : _AvailableActions(id: task.id),
+                : _AvailableActions(id: task.id, initstates: task.status),
           ),
         ],
       ),
@@ -156,66 +159,93 @@ class StatusBadge extends StatelessWidget {
 }
 
 class _AvailableActions extends StatelessWidget {
-  const _AvailableActions({required this.id});
+  const _AvailableActions({required this.id, required this.initstates});
+  final String initstates;
   final int id;
+
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        SizedBox(width: ScreenUtilsManager.w12),
-        Expanded(
-          child: Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  ColorManger.workerprimary,
-                  ColorManger.workerprimary.withAlpha(200),
-                ],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
+    return BlocConsumer<WorkerTasksCubit, WorkerTasksState>(
+      listener: (BuildContext context, WorkerTasksState state) {
+        if (state is WorkerChangeTasksSuccess) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) => BlocProvider(
+                create: (_) => ReportDetailsManager(
+                  reportdetailsRepo: getIt<ReportdetailsRepo>(),
+                )..getReportDetails(id: id),
+                child: TaskDetailsPage(reportid: id),
               ),
-              borderRadius: BorderRadius.circular(ScreenUtilsManager.r8),
-              boxShadow: [
-                BoxShadow(
-                  color: ColorManger.workerprimary.withOpacity(0.3),
-                  blurRadius: 10,
-                  offset: const Offset(0, 4),
-                ),
-              ],
             ),
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => BlocProvider(
-                      create: (_) => ReportDetailsManager(
-                        reportdetailsRepo: getIt<ReportdetailsRepo>(),
-                      )..getReportDetails(id: id),
-                      child: TaskDetailsPage(reportid: id),
+          );
+        } else if (state is WorkerChangeTasksError) {
+          Customsnackbar.show(
+            context: context,
+            backgroundColor: ColorManger.red,
+            message: state.message,
+          );
+        }
+      },
+      builder: (BuildContext context, WorkerTasksState state) {
+        return Row(
+          children: [
+            Expanded(
+              child: Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      ColorManger.workerprimary,
+                      ColorManger.workerprimary.withAlpha(200),
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                  borderRadius: BorderRadius.circular(ScreenUtilsManager.r8),
+                  boxShadow: [
+                    BoxShadow(
+                      color: ColorManger.workerprimary.withOpacity(0.3),
+                      blurRadius: 10,
+                      offset: const Offset(0, 4),
+                    ),
+                  ],
+                ),
+                child: ElevatedButton(
+                  onPressed: () {
+                    context.read<WorkerTasksCubit>().changeWorkerTaskStatus(
+                      status: StatusReport.getNextStatus(
+                        StatusReport.fromString(initstates),
+                      ).value,
+                      reportId: id,
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.transparent,
+                    shadowColor: Colors.transparent,
+                    padding: EdgeInsets.symmetric(
+                      vertical: ScreenUtilsManager.h12,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(
+                        ScreenUtilsManager.r8,
+                      ),
                     ),
                   ),
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.transparent,
-                shadowColor: Colors.transparent,
-                padding: EdgeInsets.symmetric(vertical: ScreenUtilsManager.h12),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(ScreenUtilsManager.r8),
-                ),
-              ),
-              child: Text(
-                'Start Task',
-                style: GoogleFonts.cairo(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w700,
+                  child: state is WorkerTasksLoading
+                      ? const CupertinoActivityIndicator(color: Colors.white)
+                      : Text(
+                          'Start Task',
+                          style: GoogleFonts.cairo(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
                 ),
               ),
             ),
-          ),
-        ),
-      ],
+          ],
+        );
+      },
     );
   }
 }

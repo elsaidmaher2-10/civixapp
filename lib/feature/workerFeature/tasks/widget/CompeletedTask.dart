@@ -1,3 +1,4 @@
+import 'package:citifix/core/extenstion/datetimeextension.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/feature/workerFeature/tasks/data/model/ReportResponse.dart';
 import 'package:flutter/material.dart';
@@ -59,7 +60,7 @@ class CompletedTaskCard extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    'Completed on ${task.createdAt}',
+                    'Completed from ${task.createdAt.timeAgo(context)}',
                     style: GoogleFonts.cairo(
                       fontSize: ScreenUtilsManager.s12,
                       color: Colors.grey,

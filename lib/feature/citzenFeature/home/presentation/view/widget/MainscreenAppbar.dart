@@ -60,17 +60,14 @@ class MainscreenAppbar extends StatelessWidget implements PreferredSizeWidget {
           ),
         ],
       ),
-
       actions: [
         BlocBuilder<NotificationCubit, NotificationState>(
-          // Rebuild only if notifications list length or read status changes
           buildWhen: (previous, current) => current is NotificationLoaded,
           builder: (context, state) {
             int unreadCount = 0;
             if (state is NotificationLoaded) {
               unreadCount = state.notifications.where((e) => !e.isRead).length;
             }
-
             return Padding(
               padding: EdgeInsets.only(right: ScreenUtilsManager.w12),
               child: Material(
@@ -88,7 +85,6 @@ class MainscreenAppbar extends StatelessWidget implements PreferredSizeWidget {
                     child: Stack(
                       clipBehavior: Clip.none,
                       children: [
-                        /// 🔔 Icon / Lottie Logic
                         AnimatedSwitcher(
                           duration: const Duration(milliseconds: 300),
                           transitionBuilder: (child, animation) =>

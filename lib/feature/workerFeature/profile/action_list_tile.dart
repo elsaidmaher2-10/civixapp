@@ -1,6 +1,7 @@
-import 'package:citifix/feature/workerFeature/profile/color_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../../../core/resource/colormanager.dart';
 
 class ActionListTile extends StatelessWidget {
   const ActionListTile({
@@ -22,7 +23,7 @@ class ActionListTile extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: ColorManager.surfaceLowest,
+          color: ColorManger.surfaceLowest,
           borderRadius: BorderRadius.circular(16),
         ),
         child: Row(
@@ -31,10 +32,10 @@ class ActionListTile extends StatelessWidget {
               width: 40,
               height: 40,
               decoration: BoxDecoration(
-                color: ColorManager.primaryContainer.withOpacity(0.1),
+                color: ColorManger.workerprimary.withOpacity(0.1),
                 shape: BoxShape.circle,
               ),
-              child: Icon(icon, color: ColorManager.primaryContainer),
+              child: Icon(icon, color: ColorManger.workerprimary),
             ),
             const SizedBox(width: 16),
             Expanded(
@@ -43,11 +44,14 @@ class ActionListTile extends StatelessWidget {
                 style: GoogleFonts.cairo(
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
-                  color: ColorManager.onSurface,
+                  color: ColorManger.onSurface,
                 ),
               ),
             ),
-            const Icon(Icons.chevron_right, color: ColorManager.outlineVariant),
+            const Icon(
+              Icons.chevron_right,
+              color: ColorManger.onSurfaceVariant,
+            ),
           ],
         ),
       ),

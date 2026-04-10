@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:citifix/core/widget/customtextfromfield.dart';
 import 'package:citifix/feature/workerFeature/taskDetails/presentation/views/widget/showmodalbottomsheetimage.dart';
 import 'package:citifix/feature/workerFeature/taskDetails/presentation/views/widget/workerimagePicker.dart';
 import 'package:dotted_border/dotted_border.dart';
@@ -172,32 +173,10 @@ class CompletionDataSectionState extends State<CompletionDataSection> {
             ),
           ),
           const SizedBox(height: 12),
-          TextFormField(
+          CustomTextfromfield(
             controller: widget.notesController,
-            maxLines: 4,
-            style: GoogleFonts.cairo(fontSize: 14),
-            decoration: InputDecoration(
-              hintText: 'Describe the resolution...',
-              hintStyle: GoogleFonts.cairo(color: Colors.grey.shade400),
-              filled: true,
-              fillColor: Colors.grey.shade100,
-              contentPadding: const EdgeInsets.all(16),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide.none,
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide.none,
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: const BorderSide(
-                  color: ColorManger.workerprimary,
-                  width: 1,
-                ),
-              ),
-            ),
+            hinttext: "add Notes",
+            lable: "Notes",
           ),
         ],
       ),
@@ -212,7 +191,7 @@ class MarkAsCompletedButton extends StatelessWidget {
     this.isLoading = false,
   });
 
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
   final bool isLoading;
 
   @override
