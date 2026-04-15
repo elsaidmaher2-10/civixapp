@@ -11,7 +11,6 @@ import 'package:citifix/feature/workerFeature/verfication/vericationSuccess.dart
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../../core/resource/screenutilsmaanger.dart';
 
 class Gateverificationinitpage extends StatelessWidget {
@@ -39,22 +38,24 @@ class _GateVerificationBody extends StatelessWidget {
           final status = VerificationStatus.fromString(
             state.workerRequest.status,
           );
+
           Widget page;
           switch (status) {
             case VerificationStatus.initial:
-              page = const GlobalGateVerificationInitPage();
+              page = BlocProvider(
+                create: (context) =>
+                    VerificationInitCubit(getIt<VerficationInitRepo>()),
+                child: const GlobalGateVerificationInitPage(),
+              );
               break;
-
             case VerificationStatus.pending:
               page = UnderReviewScreen(workerRequestModel: state.workerRequest);
               break;
-
             case VerificationStatus.completed:
               page = VerificationCompleteScreen(
                 workerRequestModel: state.workerRequest,
               );
               break;
-
             case VerificationStatus.rejected:
               page = VerificationFailedScreen(
                 workerRequestModel: state.workerRequest,
@@ -62,19 +63,41 @@ class _GateVerificationBody extends StatelessWidget {
               break;
           }
 
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (_) => page),
-          );
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            if (context.mounted) {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (_) => page),
+              );
+            }
+          });
         }
 
-        if (state is VerificationError) {
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(SnackBar(content: Text(state.errorMessage)));
+        if (state is VerificationInitError) {
+          if (state.message.contains("No verification request")) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              if (context.mounted) {
+                MaterialPageRoute(
+                  builder: (_) => BlocProvider(
+                    create: (context) =>
+                        VerificationInitCubit(getIt<VerficationInitRepo>()),
+                    child: const GlobalGateVerificationInitPage(),
+                  ),
+                );
+              }
+            });
+            return;
+          }
+
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            if (context.mounted) {
+              ScaffoldMessenger.of(
+                context,
+              ).showSnackBar(SnackBar(content: Text(state.message)));
+            }
+          });
         }
       },
-
       builder: (context, state) {
         return Scaffold(
           backgroundColor: ColorManger.bgbackground,
