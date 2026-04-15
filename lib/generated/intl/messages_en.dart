@@ -20,23 +20,29 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
-  static String m0(count) =>
-      "${count} ${Intl.plural(count, one: 'day', other: 'days')} ago";
+  static String m0(time) => "Completed from ${time}";
 
   static String m1(count) =>
+      "${count} ${Intl.plural(count, one: 'day', other: 'days')} ago";
+
+  static String m2(count) =>
       "${count} ${Intl.plural(count, one: 'hour', other: 'hours')} ago";
 
-  static String m2(count) => "${count} Messages";
-
-  static String m3(count) =>
-      "${count} ${Intl.plural(count, one: 'minute', other: 'minutes')} ago";
+  static String m3(count) => "${count} Messages";
 
   static String m4(count) =>
+      "${count} ${Intl.plural(count, one: 'minute', other: 'minutes')} ago";
+
+  static String m5(step) => "Next step: ${step}";
+
+  static String m6(filter) => "No tasks found for \'${filter}\'";
+
+  static String m7(count) =>
       "${count} ${Intl.plural(count, one: 'week', other: 'weeks')} ago";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-    "accessZone": MessageLookupByLibrary.simpleMessage("ACCESS ZONE"),
+    "accessZone": MessageLookupByLibrary.simpleMessage("Access Zone"),
     "accountInformation": MessageLookupByLibrary.simpleMessage(
       "Account information",
     ),
@@ -45,15 +51,23 @@ class MessageLookup extends MessageLookupByLibrary {
       "Achievement Details",
     ),
     "active": MessageLookupByLibrary.simpleMessage("Active"),
+    "activityTimeline": MessageLookupByLibrary.simpleMessage(
+      "ACTIVITY TIMELINE",
+    ),
+    "add": MessageLookupByLibrary.simpleMessage("Add"),
     "addCommentHint": MessageLookupByLibrary.simpleMessage(
       "Add a reply or a new inquiry...",
     ),
     "addCommentLabel": MessageLookupByLibrary.simpleMessage("Add Comment"),
+    "addNotesHint": MessageLookupByLibrary.simpleMessage("Add Notes"),
     "addPhoto": MessageLookupByLibrary.simpleMessage("Add Photo or Vedio"),
     "addReport": MessageLookupByLibrary.simpleMessage("Add Report"),
     "address": MessageLookupByLibrary.simpleMessage("Address"),
     "address2": MessageLookupByLibrary.simpleMessage("Address"),
     "age": MessageLookupByLibrary.simpleMessage("Age"),
+    "alertRequired": MessageLookupByLibrary.simpleMessage(
+      "Verification required",
+    ),
     "all": MessageLookupByLibrary.simpleMessage("All"),
     "appName": MessageLookupByLibrary.simpleMessage("CitiFix"),
     "appTitle": MessageLookupByLibrary.simpleMessage("CitiFix"),
@@ -65,13 +79,18 @@ class MessageLookup extends MessageLookupByLibrary {
     "attentionRequired": MessageLookupByLibrary.simpleMessage(
       "Attention Required",
     ),
+    "available_tasks": MessageLookupByLibrary.simpleMessage("Available Tasks"),
     "camera": MessageLookupByLibrary.simpleMessage("Camera"),
     "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
     "cancelApp": MessageLookupByLibrary.simpleMessage("Cancel Application"),
+    "category": MessageLookupByLibrary.simpleMessage("Category"),
     "caughtUpMessage": MessageLookupByLibrary.simpleMessage(
       "You are all caught up! Check back later.",
     ),
     "changePassword": MessageLookupByLibrary.simpleMessage("Change Password"),
+    "checking_account_status": MessageLookupByLibrary.simpleMessage(
+      "Checking account status...",
+    ),
     "choosePreferredLanguage": MessageLookupByLibrary.simpleMessage(
       "Choose your preferred language",
     ),
@@ -87,10 +106,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "comments": MessageLookupByLibrary.simpleMessage("Comments"),
     "completed": MessageLookupByLibrary.simpleMessage("Resolved"),
     "completedBy": MessageLookupByLibrary.simpleMessage("Completed By"),
+    "completedFrom": m0,
+    "completionData": MessageLookupByLibrary.simpleMessage("COMPLETION DATA"),
     "completionImages": MessageLookupByLibrary.simpleMessage(
       "Completion Images",
     ),
     "completionNote": MessageLookupByLibrary.simpleMessage("Completion Note"),
+    "completionNotes": MessageLookupByLibrary.simpleMessage("COMPLETION NOTES"),
     "complianceDocuments": MessageLookupByLibrary.simpleMessage(
       "Compliance Documents",
     ),
@@ -105,6 +127,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Still have questions? Contact Support",
     ),
     "continueToApp": MessageLookupByLibrary.simpleMessage("Continue to App"),
+    "created": MessageLookupByLibrary.simpleMessage("CREATED"),
     "dataSecurityNote": MessageLookupByLibrary.simpleMessage(
       "Your data is securely stored and encrypted.",
     ),
@@ -114,7 +137,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "dateRequired": MessageLookupByLibrary.simpleMessage(
       "Please choose date of birth",
     ),
-    "daysAgo": m0,
+    "daysAgo": m1,
     "delete": MessageLookupByLibrary.simpleMessage("Delete"),
     "deleteConfirmationMessage": MessageLookupByLibrary.simpleMessage(
       "Are you sure you want to delete this report?",
@@ -138,6 +161,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "details": MessageLookupByLibrary.simpleMessage("Details"),
     "digitalIdIssued": MessageLookupByLibrary.simpleMessage(
       "Digital ID Issued",
+    ),
+    "distance_to_task": MessageLookupByLibrary.simpleMessage(
+      "DISTANCE TO TASK",
     ),
     "documentNumber": MessageLookupByLibrary.simpleMessage("Document Number"),
     "dontHaveAccount": MessageLookupByLibrary.simpleMessage(
@@ -163,9 +189,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "enterNewPassword": MessageLookupByLibrary.simpleMessage(
       "Enter new password",
     ),
+    "enterNotes": MessageLookupByLibrary.simpleMessage("Enter your notes here"),
     "error": MessageLookupByLibrary.simpleMessage("Error"),
     "errorIdNotClear": MessageLookupByLibrary.simpleMessage(
-      "The uploaded ID image is blurry or unreadable.",
+      "The ID image is not clear or has expired.",
     ),
     "errorMissingData": MessageLookupByLibrary.simpleMessage(
       "Some required information is missing from your documents.",
@@ -198,6 +225,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "fixTimeQuestion": MessageLookupByLibrary.simpleMessage(
       "How long does it take to fix a problem?",
     ),
+    "fix_water_leak": MessageLookupByLibrary.simpleMessage("Fix Water Leak"),
     "forgetPassword": MessageLookupByLibrary.simpleMessage(
       "Forget Password....?",
     ),
@@ -214,6 +242,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "haveAccount": MessageLookupByLibrary.simpleMessage(
       "Have an account already?",
     ),
+    "heading_to_task": MessageLookupByLibrary.simpleMessage("Heading to Task"),
     "help": MessageLookupByLibrary.simpleMessage("Help & Terms"),
     "helpAndLegal": MessageLookupByLibrary.simpleMessage("Help & Legal"),
     "hintAddress": MessageLookupByLibrary.simpleMessage("Enter your address"),
@@ -232,7 +261,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "hintPassword": MessageLookupByLibrary.simpleMessage("********"),
     "hintPhone": MessageLookupByLibrary.simpleMessage("Enter your Phone"),
     "home": MessageLookupByLibrary.simpleMessage("Home"),
-    "hoursAgo": m1,
+    "hoursAgo": m2,
     "howToReportAnswer": MessageLookupByLibrary.simpleMessage(
       "Open the app, tap the \'+\' button, take a photo, and pin the location. Our system will automatically notify the nearest worker.",
     ),
@@ -240,12 +269,17 @@ class MessageLookup extends MessageLookupByLibrary {
       "How do I report a maintenance issue?",
     ),
     "id": MessageLookupByLibrary.simpleMessage("ID"),
+    "idBack": MessageLookupByLibrary.simpleMessage("ID Back"),
+    "idFront": MessageLookupByLibrary.simpleMessage("ID Front"),
     "idLabel": MessageLookupByLibrary.simpleMessage("ID"),
     "identity": MessageLookupByLibrary.simpleMessage("Identity"),
-    "identityDocs": MessageLookupByLibrary.simpleMessage("IDENTITY DOCUMENTS"),
+    "identityDocs": MessageLookupByLibrary.simpleMessage("Identity Docs"),
     "imageBlurry": MessageLookupByLibrary.simpleMessage("Image Blurry"),
     "imageRequired": MessageLookupByLibrary.simpleMessage("Image is required"),
-    "inProgress": MessageLookupByLibrary.simpleMessage("In Progress"),
+    "inProgress": MessageLookupByLibrary.simpleMessage("IN PROGRESS"),
+    "inside_work_zone": MessageLookupByLibrary.simpleMessage(
+      "Inside Work Zone",
+    ),
     "invalidEmail": MessageLookupByLibrary.simpleMessage("Invalid email"),
     "invalidPassword": MessageLookupByLibrary.simpleMessage(
       "Password must be at least 6 characters and include letters and numbers and special characters",
@@ -257,8 +291,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "isOnboardingViewed": MessageLookupByLibrary.simpleMessage(
       "is_show_on_board",
     ),
+    "issueMedia": MessageLookupByLibrary.simpleMessage("ISSUE MEDIA"),
     "job": MessageLookupByLibrary.simpleMessage("Job"),
     "justNow": MessageLookupByLibrary.simpleMessage("Just now"),
+    "km": MessageLookupByLibrary.simpleMessage("KM"),
     "language": MessageLookupByLibrary.simpleMessage("Language"),
     "lastName": MessageLookupByLibrary.simpleMessage("Last Name"),
     "lastNameRequired": MessageLookupByLibrary.simpleMessage(
@@ -281,14 +317,18 @@ class MessageLookup extends MessageLookupByLibrary {
       "Logged out successfully",
     ),
     "markAllRead": MessageLookupByLibrary.simpleMessage("Mark all read"),
+    "markAsCompletedBtn": MessageLookupByLibrary.simpleMessage(
+      "Mark as Completed",
+    ),
     "markasCompeleted": MessageLookupByLibrary.simpleMessage(
       "You can solve the problem now.",
     ),
     "markasCompeleteds": MessageLookupByLibrary.simpleMessage(
       "You can solve the problem now.",
     ),
-    "messagesCount": m2,
-    "minutesAgo": m3,
+    "messagesCount": m3,
+    "minutesAgo": m4,
+    "monitoring_area": MessageLookupByLibrary.simpleMessage("Monitoring Area"),
     "msgRegister": MessageLookupByLibrary.simpleMessage(
       "we have sent a 6-digit code to your registered email address/phone number",
     ),
@@ -300,6 +340,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "msgResettingPassword": MessageLookupByLibrary.simpleMessage(
       "Resetting password...",
+    ),
+    "mustCompleteReportImages": MessageLookupByLibrary.simpleMessage(
+      "You must complete the required report\nimages before finishing the task.",
     ),
     "nationalID": MessageLookupByLibrary.simpleMessage("National ID"),
     "nationalId": MessageLookupByLibrary.simpleMessage("National ID"),
@@ -317,14 +360,18 @@ class MessageLookup extends MessageLookupByLibrary {
       "Please enter national ID",
     ),
     "nationalNumber": MessageLookupByLibrary.simpleMessage("National number"),
-    "needHelp": MessageLookupByLibrary.simpleMessage("Need help? Visit our "),
+    "needHelp": MessageLookupByLibrary.simpleMessage("Need help?"),
     "newPassword": MessageLookupByLibrary.simpleMessage("New Password"),
     "next": MessageLookupByLibrary.simpleMessage("Next"),
+    "nextStep": m5,
     "noCommentsYet": MessageLookupByLibrary.simpleMessage(
       "No comments yet. Be the first to reply!",
     ),
     "noData": MessageLookupByLibrary.simpleMessage(
       "No data available at the moment",
+    ),
+    "noDescription": MessageLookupByLibrary.simpleMessage(
+      "No Description provided.",
     ),
     "noInternet": MessageLookupByLibrary.simpleMessage(
       "No internet connection",
@@ -342,12 +389,22 @@ class MessageLookup extends MessageLookupByLibrary {
       "No reports available currently",
     ),
     "noResult": MessageLookupByLibrary.simpleMessage("No results found"),
+    "noTasksFound": m6,
+    "noTitle": MessageLookupByLibrary.simpleMessage("No Title"),
+    "no_tasks_available": MessageLookupByLibrary.simpleMessage(
+      "No tasks available right now",
+    ),
     "notes": MessageLookupByLibrary.simpleMessage("Notes"),
+    "notesLabel": MessageLookupByLibrary.simpleMessage("Additional Notes"),
     "notifications": MessageLookupByLibrary.simpleMessage("Notifications"),
+    "notify_new_tasks": MessageLookupByLibrary.simpleMessage(
+      "We\'ll notify you when new tasks arrive.",
+    ),
     "numberMismatch": MessageLookupByLibrary.simpleMessage(
       "Number didn\'t match the image provided",
     ),
     "oldPassword": MessageLookupByLibrary.simpleMessage("Old Password"),
+    "online": MessageLookupByLibrary.simpleMessage("Online"),
     "otpMsgRegister": MessageLookupByLibrary.simpleMessage(
       "Enter the code sent to your email",
     ),
@@ -401,9 +458,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "profileUpdatedSuccess": MessageLookupByLibrary.simpleMessage(
       "Profile updated successfully",
     ),
+    "progress": MessageLookupByLibrary.simpleMessage("PROGRESS"),
     "progressTracking": MessageLookupByLibrary.simpleMessage(
       "Progress Tracking",
     ),
+    "proofOfWork": MessageLookupByLibrary.simpleMessage("PROOF OF WORK *"),
     "quickApproveBtn": MessageLookupByLibrary.simpleMessage("Quick Approve"),
     "recentReport": MessageLookupByLibrary.simpleMessage("My Recent Reports"),
     "reference": MessageLookupByLibrary.simpleMessage("Reference:"),
@@ -437,14 +496,20 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "resolved": MessageLookupByLibrary.simpleMessage("Resolved"),
     "resolvedReports": MessageLookupByLibrary.simpleMessage("Resolved Reports"),
-    "resubmit": MessageLookupByLibrary.simpleMessage("Resubmit Verification"),
+    "resubmit": MessageLookupByLibrary.simpleMessage("Resubmit Request"),
     "retry": MessageLookupByLibrary.simpleMessage("Retry"),
     "reupload": MessageLookupByLibrary.simpleMessage("Re-upload"),
     "reviewDesc": MessageLookupByLibrary.simpleMessage(
-      "Your documents are being reviewed by our security team. This usually takes between 2-4 business hours.",
+      "Your request is currently being reviewed by our team. We will notify you once the status is updated.",
     ),
     "reviewInformation": MessageLookupByLibrary.simpleMessage(
       "Review Information",
+    ),
+    "sample_address": MessageLookupByLibrary.simpleMessage(
+      "842 Riverside Dr, Apt 4B",
+    ),
+    "sample_description": MessageLookupByLibrary.simpleMessage(
+      "Emergency pipe burst reported in the main bathroom. High priority. Residents are currently on-site and have shut off the main valve.",
     ),
     "saveChanges": MessageLookupByLibrary.simpleMessage("Save Changes"),
     "search": MessageLookupByLibrary.simpleMessage("Search"),
@@ -476,6 +541,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "searchStreetlight": MessageLookupByLibrary.simpleMessage(
       "Search for \"Broken streetlight\"",
     ),
+    "searchTasksHint": MessageLookupByLibrary.simpleMessage(
+      "Search for tasks...",
+    ),
     "searchWaste": MessageLookupByLibrary.simpleMessage(
       "Search for \"Waste accumulation\"",
     ),
@@ -486,6 +554,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "SECURE SESSION • 08:42:11 REMAINING",
     ),
     "seeAll": MessageLookupByLibrary.simpleMessage("See all"),
+    "see_all": MessageLookupByLibrary.simpleMessage("See All"),
     "selectCategory": MessageLookupByLibrary.simpleMessage("Select Category"),
     "selectCategoryHint": MessageLookupByLibrary.simpleMessage(
       "Select Category",
@@ -502,13 +571,22 @@ class MessageLookup extends MessageLookupByLibrary {
       "Session expired. Please login again",
     ),
     "settings": MessageLookupByLibrary.simpleMessage("SETTINGS"),
+    "showAllTasks": MessageLookupByLibrary.simpleMessage("Show all tasks"),
     "signUp": MessageLookupByLibrary.simpleMessage("Sign Up"),
     "signUpNow": MessageLookupByLibrary.simpleMessage("Sign up now"),
     "skip": MessageLookupByLibrary.simpleMessage("Skip"),
+    "somethingWentWrong": MessageLookupByLibrary.simpleMessage(
+      "Something went wrong",
+    ),
+    "startTask": MessageLookupByLibrary.simpleMessage("Start Task"),
     "status": MessageLookupByLibrary.simpleMessage("Status"),
     "statusApproved": MessageLookupByLibrary.simpleMessage("Approved"),
     "statusPending": MessageLookupByLibrary.simpleMessage("Pending"),
     "statusRejected": MessageLookupByLibrary.simpleMessage("Rejected"),
+    "stay_focused": MessageLookupByLibrary.simpleMessage(
+      "Stay focused and let\'s get to work!",
+    ),
+    "step": MessageLookupByLibrary.simpleMessage("Step"),
     "submissionSummary": MessageLookupByLibrary.simpleMessage(
       "Submission Summary",
     ),
@@ -520,6 +598,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "submittedAtLabel": MessageLookupByLibrary.simpleMessage("Submitted"),
     "success": MessageLookupByLibrary.simpleMessage("Success"),
     "support": MessageLookupByLibrary.simpleMessage("Support"),
+    "tapToScan": MessageLookupByLibrary.simpleMessage("Tap to scan"),
+    "taskDetails": MessageLookupByLibrary.simpleMessage("Task Details"),
+    "taskOwnerLabel": MessageLookupByLibrary.simpleMessage("• Task Owner"),
+    "tasks": MessageLookupByLibrary.simpleMessage("Tasks"),
+    "tasksSubtitle": MessageLookupByLibrary.simpleMessage(
+      "Keep track of your daily progress",
+    ),
     "termsCitizenCategory": MessageLookupByLibrary.simpleMessage(
       "Terms for Citizens",
     ),
@@ -535,14 +620,21 @@ class MessageLookup extends MessageLookupByLibrary {
     "topAchievements": MessageLookupByLibrary.simpleMessage(
       "Top Achievement Reports",
     ),
+    "totalReports": MessageLookupByLibrary.simpleMessage("TOTAL REPORTS"),
     "tryAgain": MessageLookupByLibrary.simpleMessage("Try Again"),
-    "underReview": MessageLookupByLibrary.simpleMessage(
-      "Documents Under Review",
-    ),
+    "underReview": MessageLookupByLibrary.simpleMessage("Under Review"),
+    "unknown": MessageLookupByLibrary.simpleMessage("Unknown"),
     "unknownLocation": MessageLookupByLibrary.simpleMessage("Unknown Location"),
     "unknownStatus": MessageLookupByLibrary.simpleMessage("Unknown"),
     "unread": MessageLookupByLibrary.simpleMessage("unread"),
     "updateDocuments": MessageLookupByLibrary.simpleMessage("Update Documents"),
+    "updateYourId": MessageLookupByLibrary.simpleMessage(
+      "Update your ID by EOD to keep access.",
+    ),
+    "uploadCompletionImages": MessageLookupByLibrary.simpleMessage(
+      "Upload Completion Images",
+    ),
+    "urgent": MessageLookupByLibrary.simpleMessage("URGENT"),
     "verification": MessageLookupByLibrary.simpleMessage("Verification"),
     "verificationComplete": MessageLookupByLibrary.simpleMessage(
       "Verification Complete",
@@ -551,7 +643,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Verification Failed",
     ),
     "verificationFailedDesc": MessageLookupByLibrary.simpleMessage(
-      "We couldn\'t verify your identity based on the documents provided. Please review the details below.",
+      "Unfortunately, we couldn\'t verify your account based on the information provided.",
     ),
     "verificationGuide": MessageLookupByLibrary.simpleMessage(
       "Verification Guide",
@@ -559,9 +651,17 @@ class MessageLookup extends MessageLookupByLibrary {
     "verificationRequestsTitle": MessageLookupByLibrary.simpleMessage(
       "Verification Requests",
     ),
+    "verificationSubTitle": MessageLookupByLibrary.simpleMessage(
+      "Please complete the following data to verify your account as a professional worker",
+    ),
     "verificationSuccessDesc": MessageLookupByLibrary.simpleMessage(
       "Your digital credentials have been successfully authenticated.",
     ),
+    "verificationTitle": MessageLookupByLibrary.simpleMessage(
+      "Account Verification",
+    ),
+    "verified": MessageLookupByLibrary.simpleMessage("VERIFIED"),
+    "verifyNow": MessageLookupByLibrary.simpleMessage("Verify Now"),
     "viewAllRequests": MessageLookupByLibrary.simpleMessage(
       "View All Requests",
     ),
@@ -569,10 +669,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "viewDigitalBadge": MessageLookupByLibrary.simpleMessage(
       "View Digital Badge",
     ),
-    "weeksAgo": m4,
-    "whatsNext": MessageLookupByLibrary.simpleMessage("What\'s next?"),
+    "viewDirectionsUpdate": MessageLookupByLibrary.simpleMessage(
+      "View Directions & Update",
+    ),
+    "view_details": MessageLookupByLibrary.simpleMessage("View Details"),
+    "weeksAgo": m7,
+    "welcome_message": MessageLookupByLibrary.simpleMessage("Welcome, "),
+    "whatsNext": MessageLookupByLibrary.simpleMessage("What\'s Next?"),
     "whatsNextDesc": MessageLookupByLibrary.simpleMessage(
-      "Once verified, you will receive a notification via the CitiFix app and a secure token will be issued for your mobile device.",
+      "Your data and ID photos will be carefully checked. This process usually takes 24 to 48 business hours.",
     ),
     "worker": MessageLookupByLibrary.simpleMessage("Worker"),
     "workerConductDesc": MessageLookupByLibrary.simpleMessage(
@@ -581,6 +686,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "workerConductTitle": MessageLookupByLibrary.simpleMessage(
       "Worker Standards & Conduct",
     ),
+    "zone": MessageLookupByLibrary.simpleMessage("Zone"),
     "zoneAlpha": MessageLookupByLibrary.simpleMessage("Zone Alpha"),
   };
 }

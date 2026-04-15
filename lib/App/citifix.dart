@@ -40,6 +40,19 @@ class Citifix extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData _lightTheme = ThemeData(
+      brightness: Brightness.light,
+      textSelectionTheme: TextSelectionThemeData(
+        selectionHandleColor: role == AppRole.worker
+            ? ColorManger.workerprimary
+            : ColorManger.kPrimary,
+        selectionColor: role == AppRole.worker
+            ? ColorManger.workerprimary
+            : ColorManger.kPrimary,
+        cursorColor: Colors.black,
+      ),
+    );
+
     return ScreenUtilInit(
       designSize: const Size(393, 852),
       minTextAdapt: true,
@@ -88,12 +101,3 @@ class Citifix extends StatelessWidget {
     );
   }
 }
-
-final ThemeData _lightTheme = ThemeData(
-  brightness: Brightness.light,
-  textSelectionTheme: TextSelectionThemeData(
-    selectionHandleColor: ColorManger.kPrimary,
-    selectionColor: ColorManger.kPrimary.withOpacity(0.2),
-    cursorColor: Colors.black,
-  ),
-);

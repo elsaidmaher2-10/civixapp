@@ -93,8 +93,8 @@ class _WorkerDashboardState extends State<WorkerDashboard>
             boxShadow: [
               BoxShadow(
                 color: ColorManger.onSurface.withOpacity(0.04),
-                blurRadius: 32,
-                offset: const Offset(0, 12),
+                blurRadius: ScreenUtilsManager.s32,
+                offset: Offset(ScreenUtilsManager.w0, ScreenUtilsManager.h12),
               ),
             ],
           ),
@@ -113,7 +113,7 @@ class _WorkerDashboardState extends State<WorkerDashboard>
                           fontSize: ScreenUtilsManager.s11,
                           fontWeight: FontWeight.bold,
                           color: ColorManger.onSurfaceVariant,
-                          letterSpacing: 1,
+                          letterSpacing: ScreenUtilsManager.s1,
                         ),
                       ),
                       Text(
@@ -139,10 +139,9 @@ class _WorkerDashboardState extends State<WorkerDashboard>
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'TOTAL REPORTS: ${widget.data.totalReports}',
+                    '${S.of(context).totalReports}: ${widget.data.totalReports}',
                     style: GoogleFonts.cairo(
                       fontSize: ScreenUtilsManager.s11,
-
                       fontWeight: FontWeight.bold,
                       color: ColorManger.onSurfaceVariant,
                     ),
@@ -150,7 +149,7 @@ class _WorkerDashboardState extends State<WorkerDashboard>
                   AnimatedBuilder(
                     animation: animation,
                     builder: (context, _) => Text(
-                      'PROGRESS: ${(animation.value * 100).toInt()}%',
+                      '${S.of(context).progress}: ${(animation.value * 100).toInt()}%',
                       style: GoogleFonts.cairo(
                         fontSize: ScreenUtilsManager.s11,
                         fontWeight: FontWeight.bold,

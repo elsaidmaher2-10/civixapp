@@ -1,6 +1,7 @@
 import 'package:citifix/core/service/StatusReport.dart';
 import 'package:citifix/feature/workerFeature/taskDetails/TaskDetailsPage.dart';
 import 'package:citifix/feature/workerFeature/tasks/data/model/ReportResponse.dart';
+import 'package:citifix/generated/l10n.dart'; 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:citifix/core/resource/colormanager.dart';
@@ -26,14 +27,14 @@ class ActiveTaskCard extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(bottom: ScreenUtilsManager.h16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: ColorManger.white,
         borderRadius: BorderRadius.circular(ScreenUtilsManager.r16),
-        border: Border.all(color: Colors.grey.shade100),
+        border: Border.all(color: ColorManger.grey200.withOpacity(0.5)),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.04),
-            blurRadius: 20,
-            offset: const Offset(0, 10),
+            color: ColorManger.black.withOpacity(0.04),
+            blurRadius: ScreenUtilsManager.r20,
+            offset: Offset(0, ScreenUtilsManager.h10),
           ),
         ],
       ),
@@ -66,8 +67,8 @@ class ActiveTaskCard extends StatelessWidget {
                     Text(
                       "#${task.id}",
                       style: GoogleFonts.cairo(
-                        color: Colors.grey.shade400,
-                        fontSize: 12,
+                        color: ColorManger.grey400,
+                        fontSize: ScreenUtilsManager.s12,
                       ),
                     ),
                   ],
@@ -111,7 +112,7 @@ class _LocationRow extends StatelessWidget {
       children: [
         Icon(
           Icons.location_on_rounded,
-          size: 14,
+          size: ScreenUtilsManager.s14,
           color: ColorManger.primaryColor,
         ),
         SizedBox(width: ScreenUtilsManager.w4),
@@ -120,40 +121,13 @@ class _LocationRow extends StatelessWidget {
             address,
             style: GoogleFonts.cairo(
               fontSize: ScreenUtilsManager.s13,
-              color: Colors.grey.shade600,
+              color: ColorManger.grey600,
             ),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
         ),
       ],
-    );
-  }
-}
-
-class StatusBadge extends StatelessWidget {
-  final StatusReport status;
-  const StatusBadge({super.key, required this.status});
-  @override
-  Widget build(BuildContext context) {
-    Color color = status == StatusReport.assigned
-        ? Colors.orange
-        : ColorManger.primaryColor;
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-      decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
-        borderRadius: BorderRadius.circular(6),
-      ),
-      child: Text(
-        status.name.toUpperCase(),
-        style: GoogleFonts.cairo(
-          color: color,
-          fontSize: 10,
-          fontWeight: FontWeight.w800,
-          letterSpacing: 0.5,
-        ),
-      ),
     );
   }
 }
@@ -205,8 +179,8 @@ class _AvailableActions extends StatelessWidget {
                   boxShadow: [
                     BoxShadow(
                       color: ColorManger.workerprimary.withOpacity(0.3),
-                      blurRadius: 10,
-                      offset: const Offset(0, 4),
+                      blurRadius: ScreenUtilsManager.s10,
+                      offset: Offset(0, ScreenUtilsManager.h4),
                     ),
                   ],
                 ),
@@ -232,11 +206,11 @@ class _AvailableActions extends StatelessWidget {
                     ),
                   ),
                   child: state is WorkerTasksLoading
-                      ? const CupertinoActivityIndicator(color: Colors.white)
+                      ? CupertinoActivityIndicator(color: ColorManger.white)
                       : Text(
-                          'Start Task',
+                          S.of(context).startTask,
                           style: GoogleFonts.cairo(
-                            color: Colors.white,
+                            color: ColorManger.white,
                             fontWeight: FontWeight.w700,
                           ),
                         ),
@@ -251,8 +225,8 @@ class _AvailableActions extends StatelessWidget {
 }
 
 class _InProgressActions extends StatelessWidget {
-  _InProgressActions({required this.id});
-  final id;
+  const _InProgressActions({required this.id});
+  final int id;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -273,11 +247,17 @@ class _InProgressActions extends StatelessWidget {
         },
         style: ElevatedButton.styleFrom(
           backgroundColor: ColorManger.onSurface,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(ScreenUtilsManager.r8),
+          ),
+          padding: EdgeInsets.symmetric(vertical: ScreenUtilsManager.h12),
         ),
         child: Text(
-          'View Directions & Update',
-          style: GoogleFonts.cairo(color: Colors.white),
+          S.of(context).viewDirectionsUpdate,
+          style: GoogleFonts.cairo(
+            color: ColorManger.white,
+            fontWeight: FontWeight.w700,
+          ),
         ),
       ),
     );

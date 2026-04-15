@@ -11,6 +11,8 @@ class UserProfile {
   String? address;
   bool? verified;
   String? profileImage;
+  String? frontNationalIdImage;
+  String? backNationalIdImage;
 
   UserProfile({
     this.id,
@@ -24,6 +26,8 @@ class UserProfile {
     this.address,
     this.verified,
     this.userId,
+    this.frontNationalIdImage,
+    this.backNationalIdImage,
     this.profileImage,
   });
   Map<String, dynamic> toJson() {
@@ -40,6 +44,8 @@ class UserProfile {
       'address': address,
       'verified': verified,
       'profileImage': profileImage,
+      'frontNationalIdImage': frontNationalIdImage,
+      'backNationalIdImage': backNationalIdImage,
     };
   }
 
@@ -57,6 +63,8 @@ class UserProfile {
       address: json['address'],
       verified: json['verified'],
       profileImage: json['profileImage'],
+      frontNationalIdImage: json['frontNationalIdImage'],
+      backNationalIdImage: json['backNationalIdImage'],
     );
   }
 }

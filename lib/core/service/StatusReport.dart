@@ -2,8 +2,8 @@ import 'package:citifix/core/resource/colormanager.dart';
 import 'package:flutter/material.dart';
 
 enum StatusReport {
-  assigned("Assigned", Color(0xFF3F51B5)),
   pending("Pending", Color(0xFFFFB300)),
+  assigned("Assigned", Color(0xFF3F51B5)),
   inProgress("InProgress", ColorManger.kPrimary),
   resolved("Resolved", Colors.green),
   completed("Resolved", Colors.green),

@@ -27,14 +27,15 @@ class Reportcard extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => ReportDetailsScreen(reportId: report.id),
+            builder: (context) =>
+                ReportDetailsScreen(reportId: report.id, isachivement: false),
           ),
         );
       },
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 8.h),
         child: Slidable(
-          key: ValueKey(report.id), 
+          key: ValueKey(report.id),
           startActionPane: ActionPane(
             motion: const ScrollMotion(),
             children: [

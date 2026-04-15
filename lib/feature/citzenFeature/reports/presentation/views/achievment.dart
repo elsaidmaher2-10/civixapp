@@ -1,4 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -200,7 +201,9 @@ class _AchievemrntReportScreenState extends State<AchievemrntReportScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(Icons.cloud_off, size: 64.w, color: Colors.grey),
+          message.contains(Constantmanger.nointernet)
+              ? Icon(Icons.cloud_off, size: 64.w, color: Colors.grey)
+              : Icon(Icons.error, size: 64.w, color: Colors.grey),
           SizedBox(height: 16.h),
           Text(
             l10n.errorOccurred,

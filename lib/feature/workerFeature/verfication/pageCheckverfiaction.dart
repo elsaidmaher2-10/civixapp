@@ -11,10 +11,12 @@ import 'package:citifix/feature/workerFeature/verfication/vericationSuccess.dart
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../../../core/resource/screenutilsmaanger.dart';
+import '../../../generated/l10n.dart';
 
-class Gateverificationinitpage extends StatelessWidget {
-  const Gateverificationinitpage({super.key});
+class pageCheckVerication extends StatelessWidget {
+  const pageCheckVerication({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +47,7 @@ class _GateVerificationBody extends StatelessWidget {
               page = BlocProvider(
                 create: (context) =>
                     VerificationInitCubit(getIt<VerficationInitRepo>()),
-                child: const GlobalGateVerificationInitPage(),
+                child: const VerificationInit(),
               );
               break;
             case VerificationStatus.pending:
@@ -77,34 +79,46 @@ class _GateVerificationBody extends StatelessWidget {
           if (state.message.contains("No verification request")) {
             WidgetsBinding.instance.addPostFrameCallback((_) {
               if (context.mounted) {
-                MaterialPageRoute(
-                  builder: (_) => BlocProvider(
-                    create: (context) =>
-                        VerificationInitCubit(getIt<VerficationInitRepo>()),
-                    child: const GlobalGateVerificationInitPage(),
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => BlocProvider(
+                      create: (context) =>
+                          VerificationInitCubit(getIt<VerficationInitRepo>()),
+                      child: const VerificationInit(),
+                    ),
                   ),
                 );
               }
             });
-            return;
+          } else {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              if (context.mounted) {
+                ScaffoldMessenger.of(
+                  context,
+                ).showSnackBar(SnackBar(content: Text(state.message)));
+              }
+            });
           }
-
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            if (context.mounted) {
-              ScaffoldMessenger.of(
-                context,
-              ).showSnackBar(SnackBar(content: Text(state.message)));
-            }
-          });
         }
       },
       builder: (context, state) {
         return Scaffold(
           backgroundColor: ColorManger.bgbackground,
           body: Center(
-            child: CupertinoActivityIndicator(
-              radius: ScreenUtilsManager.r12,
-              color: ColorManger.workerprimary,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CupertinoActivityIndicator(
+                  radius: ScreenUtilsManager.r12,
+                  color: ColorManger.workerprimary,
+                ),
+                SizedBox(height: ScreenUtilsManager.h16),
+                Text(
+                  S.of(context).checking_account_status,
+                  style: GoogleFonts.cairo(),
+                ),
+              ],
             ),
           ),
         );

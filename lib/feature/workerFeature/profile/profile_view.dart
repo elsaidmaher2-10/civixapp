@@ -4,6 +4,7 @@ import 'package:citifix/core/cubit/LogOut/LogOutState.dart';
 import 'package:citifix/core/cubit/LogOut/LogOutcubit.dart';
 import 'package:citifix/core/cubit/userinfoManger/user_profile_info_cubit.dart';
 import 'package:citifix/core/database/local/prefmanger.dart';
+import 'package:citifix/core/resource/assetvaluemanger.dart';
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/routing/routes.dart';
@@ -151,7 +152,7 @@ class _ProfileViewState extends State<ProfileView> {
                               name: userProfile?.fullName ?? "",
                               avatarUrl:
                                   userProfile?.profileImage ??
-                                  Constantmanger.defualtImageProfile,
+                                  AssetValueManager.defualtimage1,
                               isvrified: userProfile?.verified ?? false,
                             ),
                             const SizedBox(height: 16),
@@ -209,12 +210,42 @@ class _ProfileViewState extends State<ProfileView> {
                                       documents: [
                                         DocumentTileData(
                                           title: S.of(context).nationalIdFront,
-                                          icon: Icon(Icons.badge_outlined),
+                                          icon: ClipOval(
+                                            child: CachedNetworkImage(
+                                              imageUrl:
+                                                  userProfile
+                                                      ?.frontNationalIdImage ??
+                                                  'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200',
+                                              width: 40,
+                                              height: 40,
+                                              fit: BoxFit.cover,
+                                              placeholder: (context, url) =>
+                                                  CupertinoActivityIndicator(),
+                                              errorWidget:
+                                                  (context, url, error) =>
+                                                      const Icon(Icons.error),
+                                            ),
+                                          ),
                                           status: DocumentStatus.approved,
                                         ),
                                         DocumentTileData(
                                           title: S.of(context).nationalIdBack,
-                                          icon: Icon(Icons.badge_outlined),
+                                          icon: ClipOval(
+                                            child: CachedNetworkImage(
+                                              imageUrl:
+                                                  userProfile
+                                                      ?.backNationalIdImage ??
+                                                  'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200',
+                                              width: 40,
+                                              height: 40,
+                                              fit: BoxFit.cover,
+                                              placeholder: (context, url) =>
+                                                  CupertinoActivityIndicator(),
+                                              errorWidget:
+                                                  (context, url, error) =>
+                                                      const Icon(Icons.error),
+                                            ),
+                                          ),
                                           status: DocumentStatus.approved,
                                         ),
                                         DocumentTileData(

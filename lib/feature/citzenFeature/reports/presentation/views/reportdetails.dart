@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:citifix/core/DI/getit.dart';
 import 'package:citifix/core/extenstion/datetimeextension.dart';
 import 'package:citifix/core/resource/colormanager.dart';
@@ -5,6 +7,7 @@ import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/core/service/StatusReport.dart';
 import 'package:citifix/core/widget/stautsBageApp.dart';
 import 'package:citifix/feature/citzenFeature/home/presentation/view/widget/CustomMap.dart';
+import 'package:citifix/feature/citzenFeature/reports/data/Models/Report/CreateReportResponseModel.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/manager/comment/commentmanger_cubit.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/manager/reportManger/cubit/report_manager_cubit.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/manager/reportManger/cubit/report_manager_state.dart';
@@ -20,11 +23,17 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
+import '../../../../../core/resource/constantmanger.dart';
 import '../../data/repos/commentRepo/commentRepo.dart';
 
 class ReportDetailsScreen extends StatefulWidget {
   final int reportId;
-  const ReportDetailsScreen({super.key, required this.reportId});
+  final bool isachivement;
+  const ReportDetailsScreen({
+    super.key,
+    required this.reportId,
+    required this.isachivement,
+  });
 
   @override
   State<ReportDetailsScreen> createState() => _ReportDetailsScreenState();
@@ -180,7 +189,11 @@ class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
                             SizedBox(height: 24.h),
                             _sectionTitle(S.of(context).progressTracking),
                             SizedBox(height: 12.h),
-                            _buildTimeline(context, report.status),
+                            _buildTimeline(
+                              context,
+                              report.status,
+                              report.timeline,
+                            ),
                             SizedBox(height: 24.h),
                             const Divider(),
                           ],
@@ -191,13 +204,13 @@ class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
                       controller: controller,
                       reporID: report.id,
                       comments: report.comments,
-                      isComment: false,
+                      isComment: widget.isachivement ? true : false,
                     ),
                     SliverToBoxAdapter(child: SizedBox(height: 50.h)),
                   ],
                 );
               } else if (state is GetReportsByidFailure) {
-                return _buildErrorState(context, state.errMessage);
+                return Center(child: _buildErrorWidget(state.errMessage));
               }
               return const SizedBox.shrink();
             },
@@ -304,15 +317,25 @@ class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
     );
   }
 
-  Widget _buildTimeline(BuildContext context, String currentStatus) {
+  Widget _buildTimeline(
+    BuildContext context,
+    String currentStatus,
+
+    List<TimelineModel> timeline,
+  ) {
     int currentIndex = StatusReport.fromString(currentStatus).index;
     return Column(
       children: List.generate(4, (index) {
+        String dateText = "";
+        if (index < timeline.length) {
+          dateText = DateTime.parse(timeline[index].date).timeAgo(context);
+        }
         return CustomTimelineTile(
           title: _getStepTitle(context, index),
           isFirst: index == 0,
-          isDone: currentIndex >= index,
           isLast: index == 3,
+          isDone: currentIndex >= index,
+          timeline: dateText,
         );
       }),
     );
@@ -320,9 +343,9 @@ class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
 
   String _getStepTitle(BuildContext context, int index) {
     switch (index) {
-      case 1:
-        return S.of(context).pending;
       case 0:
+        return S.of(context).pending;
+      case 1:
         return S.of(context).assigned;
       case 2:
         return S.of(context).inProgress;
@@ -346,19 +369,41 @@ class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
     );
   }
 
-  Widget _buildErrorState(BuildContext context, String message) {
-    return Center(
+  Widget _buildErrorWidget(String message) {
+    return Padding(
+      padding: EdgeInsets.all(20.w),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(Icons.error_outline, size: 60.sp, color: Colors.red[300]),
+          message.contains(Constantmanger.nointernet)
+              ? Icon(Icons.cloud_off, size: 64.w, color: Colors.grey)
+              : Icon(Icons.error, size: 64.w, color: Colors.grey),
           SizedBox(height: 16.h),
-          Text(message),
-          TextButton(
+          Text(
+            S.of(context).errorOccurred,
+            style: GoogleFonts.cairo(
+              fontSize: 18.sp,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            message,
+            textAlign: TextAlign.center,
+            style: GoogleFonts.cairo(color: Colors.grey),
+          ),
+          SizedBox(height: 16.h),
+          ElevatedButton(
             onPressed: () => context.read<ReportCubit>().GetReportByID(
               ReportID: widget.reportId,
             ),
-            child: Text(S.of(context).tryAgain),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: ColorManger.primary,
+              foregroundColor: Colors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8.r),
+              ),
+            ),
+            child: Text(S.of(context).retry),
           ),
         ],
       ),

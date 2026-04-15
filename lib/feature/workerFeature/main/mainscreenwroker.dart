@@ -16,11 +16,7 @@ class Mainscreenwroker extends StatefulWidget {
 }
 
 class _MainscreenwrokerState extends State<Mainscreenwroker> {
-  final List<Widget> _pages = [
-    const HomePage(),
-    const TasksView(),
-    ProfileView(),
-  ];
+  final List<Widget> _pages = [HomePage(), const TasksView(), ProfileView()];
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<WorkerCubit, int>(

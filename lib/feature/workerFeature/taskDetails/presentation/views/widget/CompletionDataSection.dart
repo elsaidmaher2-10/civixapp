@@ -5,9 +5,11 @@ import 'package:citifix/feature/workerFeature/taskDetails/presentation/views/wid
 import 'package:citifix/feature/workerFeature/taskDetails/presentation/views/widget/workerimagePicker.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import '../../../../../../core/resource/colormanager.dart';
+import '../../../../../../core/resource/screenutilsmaanger.dart';
+import '../../../../../../generated/l10n.dart'; // تم إضافة ملف الترجمة
 
 class CompletionDataSection extends StatefulWidget {
   const CompletionDataSection({
@@ -33,10 +35,10 @@ class CompletionDataSectionState extends State<CompletionDataSection> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(24),
+      padding: EdgeInsets.all(ScreenUtilsManager.w24),
       decoration: BoxDecoration(
         color: ColorManger.surface,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(ScreenUtilsManager.r12),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -47,28 +49,28 @@ class CompletionDataSectionState extends State<CompletionDataSection> {
               Icon(
                 Icons.check_circle,
                 color: ColorManger.workerprimary,
-                size: 20,
+                size: ScreenUtilsManager.s20,
               ),
-              const SizedBox(width: 8),
+              SizedBox(width: ScreenUtilsManager.w8),
               Text(
-                'COMPLETION DATA',
+                S.of(context).completionData,
                 style: GoogleFonts.cairo(
-                  fontSize: 14,
+                  fontSize: ScreenUtilsManager.s14,
                   fontWeight: FontWeight.bold,
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 24),
+          SizedBox(height: ScreenUtilsManager.h24),
           Text(
-            'PROOF OF WORK *',
+            S.of(context).proofOfWork,
             style: GoogleFonts.cairo(
-              fontSize: 12,
+              fontSize: ScreenUtilsManager.s12,
               fontWeight: FontWeight.bold,
-              color: Colors.grey.shade700,
+              color: ColorManger.grey700,
             ),
           ),
-          const SizedBox(height: 12),
+          SizedBox(height: ScreenUtilsManager.h12),
           StreamBuilder<List<File>>(
             stream: widget.streamController.stream,
             builder:
@@ -85,26 +87,28 @@ class CompletionDataSectionState extends State<CompletionDataSection> {
                               widget.addimage(images);
                             }
                           },
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius: BorderRadius.circular(
+                            ScreenUtilsManager.r12,
+                          ),
                           child: DottedBorder(
                             child: Container(
-                              height: 105.h,
-                              width: 80.w,
-                              padding: const EdgeInsets.all(8),
+                              height: ScreenUtilsManager.h105,
+                              width: ScreenUtilsManager.w80,
+                              padding: EdgeInsets.all(ScreenUtilsManager.w8),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Icon(
                                     Icons.add_a_photo_outlined,
-                                    size: 28,
-                                    color: Colors.grey.shade600,
+                                    size: ScreenUtilsManager.s28,
+                                    color: ColorManger.grey600,
                                   ),
-                                  const SizedBox(height: 4),
+                                  SizedBox(height: ScreenUtilsManager.h4),
                                   Text(
-                                    "Add",
+                                    S.of(context).add,
                                     style: GoogleFonts.cairo(
-                                      color: Colors.grey.shade700,
-                                      fontSize: 13,
+                                      color: ColorManger.grey700,
+                                      fontSize: ScreenUtilsManager.s13,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
@@ -113,7 +117,7 @@ class CompletionDataSectionState extends State<CompletionDataSection> {
                             ),
                           ),
                         ),
-                        const SizedBox(width: 12),
+                        SizedBox(width: ScreenUtilsManager.w12),
                         Expanded(
                           child: ImageWorkerPickerList(
                             files: snapshot.data!,
@@ -132,26 +136,28 @@ class CompletionDataSectionState extends State<CompletionDataSection> {
                           widget.addimage(images);
                         }
                       },
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(
+                        ScreenUtilsManager.r12,
+                      ),
                       child: DottedBorder(
                         child: Container(
-                          height: 120.h,
+                          height: ScreenUtilsManager.h120,
                           width: double.infinity,
-                          padding: const EdgeInsets.all(8),
+                          padding: EdgeInsets.all(ScreenUtilsManager.w8),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Icon(
                                 Icons.camera_alt_outlined,
-                                size: 28,
-                                color: Colors.grey.shade600,
+                                size: ScreenUtilsManager.s28,
+                                color: ColorManger.grey600,
                               ),
-                              const SizedBox(height: 8),
+                              SizedBox(height: ScreenUtilsManager.h8),
                               Text(
-                                "Upload Completion Images",
+                                S.of(context).uploadCompletionImages,
                                 style: GoogleFonts.cairo(
-                                  color: Colors.grey.shade700,
-                                  fontSize: 14,
+                                  color: ColorManger.grey700,
+                                  fontSize: ScreenUtilsManager.s14,
                                 ),
                               ),
                             ],
@@ -162,21 +168,21 @@ class CompletionDataSectionState extends State<CompletionDataSection> {
                   }
                 },
           ),
-          const SizedBox(height: 24),
+          SizedBox(height: ScreenUtilsManager.h24),
 
           Text(
-            'COMPLETION NOTES',
+            S.of(context).completionNotes,
             style: GoogleFonts.cairo(
-              fontSize: 12,
+              fontSize: ScreenUtilsManager.s12,
               fontWeight: FontWeight.bold,
-              color: Colors.grey.shade700,
+              color: ColorManger.grey700,
             ),
           ),
-          const SizedBox(height: 12),
+          SizedBox(height: ScreenUtilsManager.h12),
           CustomTextfromfield(
             controller: widget.notesController,
-            hinttext: "add Notes",
-            lable: "Notes",
+            hinttext: S.of(context).addNotesHint,
+            lable: S.of(context).notesLabel,
           ),
         ],
       ),
@@ -199,33 +205,35 @@ class MarkAsCompletedButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: isLoading ? null : onTap,
       style: ElevatedButton.styleFrom(
-        backgroundColor: const Color(0xFFFF8A00),
-        foregroundColor: Colors.white,
-        elevation: 4,
-        shadowColor: const Color(0xFFFF8A00).withOpacity(0.4),
-        minimumSize: const Size(double.infinity, 56),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        backgroundColor: ColorManger.completedButton,
+        foregroundColor: ColorManger.white,
+        elevation: ScreenUtilsManager.s4,
+        shadowColor: ColorManger.completedButton.withOpacity(0.4),
+        minimumSize: Size(double.infinity, ScreenUtilsManager.h56),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(ScreenUtilsManager.r12),
+        ),
       ),
       child: isLoading
-          ? const SizedBox(
-              height: 24,
-              width: 24,
+          ? SizedBox(
+              height: ScreenUtilsManager.h24,
+              width: ScreenUtilsManager.w24,
               child: CircularProgressIndicator(
-                color: Colors.white,
-                strokeWidth: 2.5,
+                color: ColorManger.white,
+                strokeWidth: ScreenUtilsManager.s2_5,
               ),
             )
           : Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(Icons.verified, size: 24),
-                const SizedBox(width: 10),
+                Icon(Icons.verified, size: ScreenUtilsManager.s24),
+                SizedBox(width: ScreenUtilsManager.w10),
                 Text(
-                  'Mark as Completed',
+                  S.of(context).markAsCompletedBtn,
                   style: GoogleFonts.cairo(
-                    fontSize: 16,
+                    fontSize: ScreenUtilsManager.s16,
                     fontWeight: FontWeight.bold,
-                    letterSpacing: 0.3,
+                    letterSpacing: ScreenUtilsManager.s0_3,
                   ),
                 ),
               ],

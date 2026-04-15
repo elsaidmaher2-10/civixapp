@@ -7,7 +7,7 @@ class DashBroadHome {
   final int resolvedReports;
   final String workerName;
   final bool verified;
-  final String profileImageUrl;
+  final String? profileImageUrl;
   final String areaName;
   final String departmentName;
   final List<RecentReportModel> recentReports;
@@ -15,7 +15,7 @@ class DashBroadHome {
   DashBroadHome({
     required this.areaName,
     required this.departmentName,
-    required this.profileImageUrl,
+    this.profileImageUrl,
     required this.workerName,
     required this.totalReports,
     required this.assignedReports,

@@ -100,7 +100,7 @@ class _TaskDetailsPageState extends State<TaskDetailsPage> {
           return ModalProgressHUD(
             inAsyncCall: state is MarkAsCompeleteLoading,
             opacity: 0.5,
-            color: Colors.black54,
+            color: ColorManger.black54,
             progressIndicator: CupertinoActivityIndicator(
               radius: ScreenUtilsManager.r12,
               color: ColorManger.workerprimary,
@@ -119,7 +119,9 @@ class _TaskDetailsPageState extends State<TaskDetailsPage> {
 
   Widget _buildScaffoldBody(BuildContext context, ReportDetailsState state) {
     if (state is ReportDetailsLoading && _currentTask == null) {
-      return const Center(child: CupertinoActivityIndicator(radius: 12));
+      return Center(
+        child: CupertinoActivityIndicator(radius: ScreenUtilsManager.r12),
+      );
     }
     if (state is ReportDetailsFailure && _currentTask == null) {
       return _buildErrorWidget(context, state.error);
@@ -135,7 +137,7 @@ class _TaskDetailsPageState extends State<TaskDetailsPage> {
     if (_currentTask != null && !_currentTask.isCompleted) {
       return SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: EdgeInsets.all(ScreenUtilsManager.w16),
           child: StreamBuilder<bool>(
             initialData: false,
             stream: _buttonStatusController.stream,
@@ -167,27 +169,27 @@ class _TaskDetailsPageState extends State<TaskDetailsPage> {
           .read<ReportDetailsManager>()
           .getReportDetails(id: widget.reportid),
       child: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
+        padding: EdgeInsets.all(ScreenUtilsManager.w16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TaskOwnerHeader(task: task),
-            const SizedBox(height: 16),
+            SizedBox(height: ScreenUtilsManager.h16),
             TaskInfoSection(task: task),
-            const SizedBox(height: 16),
+            SizedBox(height: ScreenUtilsManager.h16),
             IssuePhotosSection(
               mediaItems: [...task.imagesUrls, ...task.videosUrls],
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: ScreenUtilsManager.h16),
             MapNavigationSection(taskDetailsModel: task),
-            const SizedBox(height: 16),
+            SizedBox(height: ScreenUtilsManager.h16),
             ActivityTimelineSection(
               timeline: task.timeline,
               isCompleted: task.isCompleted,
               initialStatus: task.status,
               id: task.id,
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: ScreenUtilsManager.h16),
             if (!task.isCompleted)
               CompletionDataSection(
                 streamController: _imagesController,
@@ -204,7 +206,7 @@ class _TaskDetailsPageState extends State<TaskDetailsPage> {
                   _checkButtonStatus();
                 },
               ),
-            const SizedBox(height: 16),
+            SizedBox(height: ScreenUtilsManager.h16),
             Workercomments(
               isComment: false,
               comments: task.comments,
@@ -247,7 +249,7 @@ class _TaskDetailsPageState extends State<TaskDetailsPage> {
       ),
       centerTitle: true,
       title: Text(
-        'Task Details',
+        S.of(context).taskDetails,
         style: GoogleFonts.cairo(fontWeight: FontWeight.bold),
       ),
     );
@@ -261,15 +263,17 @@ class _TaskDetailsPageState extends State<TaskDetailsPage> {
         children: [
           Icon(
             isNoInternet ? Icons.wifi_off : Icons.error_outline,
-            size: 60,
-            color: Colors.grey,
+            size: ScreenUtilsManager.s60,
+            color: ColorManger.grey,
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: ScreenUtilsManager.h16),
           Text(
-            isNoInternet ? "No Internet Connection" : "Something went wrong",
+            isNoInternet
+                ? S.of(context).noInternetConnection
+                : S.of(context).somethingWentWrong,
             style: GoogleFonts.cairo(fontWeight: FontWeight.bold),
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: ScreenUtilsManager.h16),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               backgroundColor: ColorManger.workerprimary,
@@ -278,7 +282,7 @@ class _TaskDetailsPageState extends State<TaskDetailsPage> {
             onPressed: () => context
                 .read<ReportDetailsManager>()
                 .getReportDetails(id: widget.reportid),
-            child: const Text("Retry"),
+            child: Text(S.of(context).retry),
           ),
         ],
       ),

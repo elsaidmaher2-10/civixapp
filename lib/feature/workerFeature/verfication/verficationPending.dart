@@ -7,19 +7,22 @@ import 'package:citifix/feature/workerFeature/verfication/data/model/WorkerReque
 import 'package:citifix/feature/workerFeature/verfication/data/repo/VerficationInitRepo.dart';
 import 'package:citifix/feature/workerFeature/verfication/verificationreqeusts.dart';
 import 'package:citifix/generated/l10n.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class UnderReviewScreen extends StatelessWidget {
-  UnderReviewScreen({super.key, required this.workerRequestModel});
-  WorkerRequestModel workerRequestModel;
+  final WorkerRequestModel workerRequestModel;
+
+  const UnderReviewScreen({super.key, required this.workerRequestModel});
+
   @override
   Widget build(BuildContext context) {
     final s = S.of(context);
 
     return Scaffold(
-      backgroundColor: ColorManger.bgBackground,
+      backgroundColor: ColorManger.bgbackground,
       appBar: _buildAppBar(context, s),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -54,7 +57,10 @@ class UnderReviewScreen extends StatelessWidget {
       scrolledUnderElevation: 0,
       bottom: PreferredSize(
         preferredSize: const Size.fromHeight(1),
-        child: Container(color: ColorManger.border, height: 1),
+        child: Container(
+          color: ColorManger.outline.withOpacity(0.1),
+          height: 1,
+        ),
       ),
       title: Row(
         children: [
@@ -63,7 +69,7 @@ class UnderReviewScreen extends StatelessWidget {
           Text(
             s.appTitle,
             style: GoogleFonts.cairo(
-              color: ColorManger.textDark,
+              color: ColorManger.onSurface,
               fontWeight: FontWeight.bold,
               fontSize: ScreenUtilsManager.s18,
             ),
@@ -72,7 +78,7 @@ class UnderReviewScreen extends StatelessWidget {
       ),
       actions: [
         Padding(
-          padding: EdgeInsets.only(right: ScreenUtilsManager.p24),
+          padding: EdgeInsets.symmetric(horizontal: ScreenUtilsManager.p16),
           child: TextButton(
             onPressed: () {
               Navigator.of(context).push(
@@ -111,7 +117,7 @@ class UnderReviewScreen extends StatelessWidget {
           ),
           child: Icon(
             Icons.schedule,
-            size: ScreenUtilsManager.icon48,
+            size: 48,
             color: ColorManger.workerprimary,
           ),
         ),
@@ -122,7 +128,7 @@ class UnderReviewScreen extends StatelessWidget {
           style: GoogleFonts.cairo(
             fontSize: ScreenUtilsManager.s32,
             fontWeight: FontWeight.w800,
-            color: ColorManger.textDark,
+            color: ColorManger.onSurface,
           ),
         ),
         SizedBox(height: ScreenUtilsManager.p12),
@@ -131,7 +137,7 @@ class UnderReviewScreen extends StatelessWidget {
           textAlign: TextAlign.center,
           style: GoogleFonts.cairo(
             fontSize: ScreenUtilsManager.s16,
-            color: ColorManger.textGrey,
+            color: ColorManger.secondary,
             height: 1.5,
           ),
         ),
@@ -144,124 +150,84 @@ class UnderReviewScreen extends StatelessWidget {
     S s,
     WorkerRequestModel workerRequestModel,
   ) {
-    return Stack(
-      children: [
-        Container(
-          padding: EdgeInsets.all(ScreenUtilsManager.p32),
-          decoration: BoxDecoration(
-            color: ColorManger.white,
-            borderRadius: BorderRadius.circular(ScreenUtilsManager.r24),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.04),
-                blurRadius: 24,
-                offset: const Offset(0, 8),
-              ),
-            ],
+    return Container(
+      padding: EdgeInsets.all(ScreenUtilsManager.p32),
+      decoration: BoxDecoration(
+        color: ColorManger.white,
+        borderRadius: BorderRadius.circular(ScreenUtilsManager.r24),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.04),
+            blurRadius: 24,
+            offset: const Offset(0, 8),
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    s.submissionSummary,
-                    style: GoogleFonts.cairo(
-                      fontSize: ScreenUtilsManager.s20,
-                      fontWeight: FontWeight.bold,
-                      color: ColorManger.textDark,
-                    ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: ScreenUtilsManager.p12,
-                      vertical: ScreenUtilsManager.p8 / 2,
-                    ),
-                    decoration: BoxDecoration(
-                      color: ColorManger.workerprimary.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(
-                        ScreenUtilsManager.r16,
-                      ),
-                    ),
-                    child: Text(
-                      s.inProgress,
-                      style: GoogleFonts.cairo(
-                        fontSize: ScreenUtilsManager.s10,
-                        fontWeight: FontWeight.bold,
-                        color: ColorManger.workerprimary,
-                        letterSpacing: 1.2,
-                      ),
-                    ),
-                  ),
-                ],
+              Text(
+                s.submissionSummary,
+                style: GoogleFonts.cairo(
+                  fontSize: ScreenUtilsManager.s20,
+                  fontWeight: FontWeight.bold,
+                  color: ColorManger.onSurface,
+                ),
               ),
-
-              SizedBox(height: ScreenUtilsManager.p32),
-
-              Wrap(
-                spacing: ScreenUtilsManager.p24,
-                runSpacing: ScreenUtilsManager.p24,
-                children: [
-                  SizedBox(
-                    width: 250,
-                    child: Column(
-                      children: [
-                        _buildInfoField(
-                          s.accessZone,
-                          workerRequestModel.areaName,
-                        ),
-                        SizedBox(height: ScreenUtilsManager.p16),
-                        _buildInfoField(
-                          s.department,
-                          workerRequestModel.departmentName,
-                        ),
-                      ],
-                    ),
+              Container(
+                padding: EdgeInsets.symmetric(
+                  horizontal: ScreenUtilsManager.p12,
+                  vertical: 4,
+                ),
+                decoration: BoxDecoration(
+                  color: ColorManger.workerprimary.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(ScreenUtilsManager.r16),
+                ),
+                child: Text(
+                  s.inProgress,
+                  style: GoogleFonts.cairo(
+                    fontSize: 10,
+                    fontWeight: FontWeight.bold,
+                    color: ColorManger.workerprimary,
                   ),
-                  SizedBox(
-                    width: 250,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          s.identityDocs,
-                          style: GoogleFonts.cairo(
-                            fontSize: ScreenUtilsManager.s10,
-                            fontWeight: FontWeight.bold,
-                            color: ColorManger.textGrey,
-                            letterSpacing: 1.2,
-                          ),
-                        ),
-                        SizedBox(height: ScreenUtilsManager.p8),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: _buildDocumentPlaceholder(
-                                workerRequestModel.nationalIdFrontImageUrl,
-                              ),
-                            ),
-                            SizedBox(width: ScreenUtilsManager.p12),
-                            Expanded(
-                              child: _buildDocumentPlaceholder(
-                                workerRequestModel.nationalIdBackImageUrl,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+                ),
               ),
             ],
           ),
-        ),
-
-        Positioned.fill(
-          child: Container(color: ColorManger.bgbackground.withOpacity(0.5)),
-        ),
-      ],
+          SizedBox(height: ScreenUtilsManager.p32),
+          _buildInfoField(s.accessZone, workerRequestModel.areaName),
+          SizedBox(height: ScreenUtilsManager.p16),
+          _buildInfoField(s.department, workerRequestModel.departmentName),
+          SizedBox(height: ScreenUtilsManager.p24),
+          Text(
+            s.identityDocs,
+            style: GoogleFonts.cairo(
+              fontSize: 10,
+              fontWeight: FontWeight.bold,
+              color: ColorManger.secondary,
+            ),
+          ),
+          SizedBox(height: ScreenUtilsManager.p8),
+          Row(
+            children: [
+              Expanded(
+                child: _buildDocumentPlaceholder(
+                  workerRequestModel.nationalIdFrontImageUrl,
+                ),
+              ),
+              SizedBox(width: ScreenUtilsManager.p12),
+              Expanded(
+                child: _buildDocumentPlaceholder(
+                  workerRequestModel.nationalIdBackImageUrl,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 
@@ -272,9 +238,9 @@ class UnderReviewScreen extends StatelessWidget {
         Text(
           label,
           style: GoogleFonts.cairo(
-            fontSize: ScreenUtilsManager.s10,
+            fontSize: 10,
             fontWeight: FontWeight.bold,
-            color: ColorManger.textGrey,
+            color: ColorManger.secondary,
           ),
         ),
         SizedBox(height: ScreenUtilsManager.p8),
@@ -282,15 +248,15 @@ class UnderReviewScreen extends StatelessWidget {
           width: double.infinity,
           padding: EdgeInsets.all(ScreenUtilsManager.p16),
           decoration: BoxDecoration(
-            color: ColorManger.white,
+            color: ColorManger.background,
             borderRadius: BorderRadius.circular(ScreenUtilsManager.r12),
-            border: Border.all(color: ColorManger.border),
+            border: Border.all(color: ColorManger.outline.withOpacity(0.2)),
           ),
           child: Text(
             value,
             style: GoogleFonts.cairo(
               fontWeight: FontWeight.w600,
-              color: ColorManger.textDark,
+              color: ColorManger.onSurface,
             ),
           ),
         ),
@@ -298,16 +264,23 @@ class UnderReviewScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildDocumentPlaceholder(imgurl) {
+  Widget _buildDocumentPlaceholder(String imgurl) {
     return AspectRatio(
       aspectRatio: 4 / 3,
       child: Container(
+        clipBehavior: Clip.antiAlias,
         decoration: BoxDecoration(
-          color: ColorManger.white,
+          color: ColorManger.background,
           borderRadius: BorderRadius.circular(ScreenUtilsManager.r12),
-          border: Border.all(color: ColorManger.border),
+          border: Border.all(color: ColorManger.outline.withOpacity(0.2)),
         ),
-        child: CachedNetworkImage(fit: BoxFit.fill, imageUrl: imgurl),
+        child: CachedNetworkImage(
+          fit: BoxFit.cover,
+          imageUrl: imgurl,
+          placeholder: (context, url) =>
+              const Center(child: CupertinoActivityIndicator()),
+          errorWidget: (context, url, error) => const Icon(Icons.error_outline),
+        ),
       ),
     );
   }
@@ -318,7 +291,7 @@ class UnderReviewScreen extends StatelessWidget {
       decoration: BoxDecoration(
         color: ColorManger.white,
         borderRadius: BorderRadius.circular(ScreenUtilsManager.r24),
-        border: Border.all(color: ColorManger.border),
+        border: Border.all(color: ColorManger.outline.withOpacity(0.1)),
       ),
       child: Row(
         children: [
@@ -340,15 +313,15 @@ class UnderReviewScreen extends StatelessWidget {
                   style: GoogleFonts.cairo(
                     fontSize: ScreenUtilsManager.s16,
                     fontWeight: FontWeight.bold,
-                    color: ColorManger.textDark,
+                    color: ColorManger.onSurface,
                   ),
                 ),
-                SizedBox(height: ScreenUtilsManager.p8 / 2),
+                SizedBox(height: 4),
                 Text(
                   s.whatsNextDesc,
                   style: GoogleFonts.cairo(
                     fontSize: ScreenUtilsManager.s14,
-                    color: ColorManger.textGrey,
+                    color: ColorManger.secondary,
                     height: 1.5,
                   ),
                 ),

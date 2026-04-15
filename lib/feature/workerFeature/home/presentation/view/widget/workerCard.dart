@@ -1,18 +1,16 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:citifix/core/DI/getit.dart';
 import 'package:citifix/core/resource/colormanager.dart';
-import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/core/widget/customShimerwidget.dart';
-import 'package:citifix/feature/workerFeature/verfication/GateVerificationInitPage.dart';
-
+import 'package:citifix/feature/workerFeature/verfication/Presentation/VerficationinitManger/VerificationInitCubit.dart';
+import 'package:citifix/feature/workerFeature/verfication/data/repo/VerficationInitRepo.dart';
+import 'package:citifix/feature/workerFeature/verfication/pageCheckverfiaction.dart';
+import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import '../../../../../../core/DI/getit.dart';
-import '../../../../verfication/Presentation/VerficationinitManger/VerificationInitCubit.dart';
-import '../../../../verfication/data/repo/VerficationInitRepo.dart';
 
 class WorkerCard extends StatelessWidget {
   final bool isVerified;
@@ -38,51 +36,24 @@ class WorkerCard extends StatelessWidget {
           side: BorderSide(color: ColorManger.onSurface.withOpacity(0.05)),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: EdgeInsets.all(ScreenUtilsManager.w16),
           child: Column(
             children: [
               Row(
                 children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(ScreenUtilsManager.r12),
-                    child: CachedNetworkImage(
-                      imageUrl: imageUrl,
-                      width: ScreenUtilsManager.w64,
-                      height: ScreenUtilsManager.h64,
-                      fit: BoxFit.cover,
-                      placeholder: (context, url) =>
-                          customShimer(ScreenUtilsManager.h64),
-                      errorWidget: (context, url, error) =>
-                          Icon(Icons.person, size: ScreenUtilsManager.s40),
-                    ),
-                  ),
+                  _buildWorkerImage(),
                   SizedBox(width: ScreenUtilsManager.w16),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Text(
-                            name,
-                            style: GoogleFonts.cairo(
-                              fontSize: ScreenUtilsManager.s20,
-                              fontWeight: FontWeight.bold,
-                              color: ColorManger.onSurface,
-                            ),
-                          ),
-                          SizedBox(width: 5),
-                          if (isVerified)
-                            SvgPicture.asset(
-                              "assets/verified-symbol-icon.svg",
-                              width: 20,
-                            ),
-                        ],
-                      ),
-                      const SizedBox(height: 4),
-                      _buildVerificationBadge(),
-                      const SizedBox(height: 6),
-                      _buildOnlineStatus(),
-                    ],
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _buildNameAndBadge(context),
+                        SizedBox(height: ScreenUtilsManager.h4),
+                        _buildVerificationBadge(context),
+                        SizedBox(height: ScreenUtilsManager.h6),
+                        _buildOnlineStatus(context),
+                      ],
+                    ),
                   ),
                 ],
               ),
@@ -97,43 +68,80 @@ class WorkerCard extends StatelessWidget {
     );
   }
 
-  Widget _buildVerificationBadge() {
+  Widget _buildWorkerImage() {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(ScreenUtilsManager.r12),
+      child: CachedNetworkImage(
+        imageUrl: imageUrl,
+        width: ScreenUtilsManager.w64,
+        height: ScreenUtilsManager.h64,
+        fit: BoxFit.cover,
+        placeholder: (context, url) => customShimer(ScreenUtilsManager.h64),
+        errorWidget: (context, url, error) =>
+            Icon(Icons.person, size: ScreenUtilsManager.s40),
+      ),
+    );
+  }
+
+  Widget _buildNameAndBadge(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Flexible(
+          child: Text(
+            name,
+            textScaler: TextScaler.noScaling,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: GoogleFonts.cairo(
+              fontSize: ScreenUtilsManager.s20,
+              fontWeight: FontWeight.bold,
+              color: ColorManger.onSurface,
+            ),
+          ),
+        ),
+        if (isVerified) ...[
+          SizedBox(width: ScreenUtilsManager.w5),
+          SvgPicture.asset(
+            "assets/verified-symbol-icon.svg",
+            width: ScreenUtilsManager.w20,
+          ),
+        ],
+      ],
+    );
+  }
+
+  Widget _buildVerificationBadge(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(
         horizontal: ScreenUtilsManager.h8,
         vertical: ScreenUtilsManager.w2,
       ),
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(4)),
-      child: Row(
-        children: [
-          Text(
-            isVerified ? Constantmanger.VERIFIED : Constantmanger.Pending,
-            style: GoogleFonts.cairo(
-              fontSize: ScreenUtilsManager.s10,
-              fontWeight: FontWeight.w700,
-              color: isVerified ? ColorManger.green : ColorManger.orange,
-              letterSpacing: 0.5,
-            ),
-          ),
-        ],
+      child: Text(
+        isVerified ? S.of(context).verified : S.of(context).pending,
+        style: GoogleFonts.cairo(
+          fontSize: ScreenUtilsManager.s10,
+          fontWeight: FontWeight.w700,
+          color: isVerified ? ColorManger.green : ColorManger.orange,
+        ),
       ),
     );
   }
 
-  Widget _buildOnlineStatus() {
+  Widget _buildOnlineStatus(BuildContext context) {
     return Row(
       children: [
         Container(
           width: ScreenUtilsManager.w8,
           height: ScreenUtilsManager.h8,
           decoration: const BoxDecoration(
-            color: Colors.green,
+            color: ColorManger.green,
             shape: BoxShape.circle,
           ),
         ),
         SizedBox(width: ScreenUtilsManager.w6),
         Text(
-          Constantmanger.Online,
+          S.of(context).online,
           style: GoogleFonts.cairo(
             fontSize: ScreenUtilsManager.s14,
             color: ColorManger.onSurfaceVariant,
@@ -162,7 +170,7 @@ class WorkerCard extends StatelessWidget {
                 builder: (context) => BlocProvider(
                   create: (context) =>
                       VerificationInitCubit(getIt<VerficationInitRepo>()),
-                  child: Gateverificationinitpage(),
+                  child: const pageCheckVerication(),
                 ),
               ),
             );
@@ -175,7 +183,7 @@ class WorkerCard extends StatelessWidget {
             ),
           ),
           child: Text(
-            Constantmanger.verifynow,
+            S.of(context).verifyNow,
             style: GoogleFonts.cairo(
               fontSize: ScreenUtilsManager.s16,
               color: Colors.white,

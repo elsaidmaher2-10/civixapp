@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:io';
-
 import 'package:animated_custom_dropdown/custom_dropdown.dart';
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
@@ -24,16 +23,14 @@ import 'Presentation/VerficationinitManger/VerificationInitCubit.dart';
 import 'Presentation/VerficationinitManger/verficationinitState.dart';
 import 'data/model/VerificationrequestModel.dart';
 
-class GlobalGateVerificationInitPage extends StatefulWidget {
-  const GlobalGateVerificationInitPage({super.key});
+class VerificationInit extends StatefulWidget {
+  const VerificationInit({super.key});
 
   @override
-  State<GlobalGateVerificationInitPage> createState() =>
-      _GlobalGateVerificationPageState();
+  State<VerificationInit> createState() => _GlobalGateVerificationPageState();
 }
 
-class _GlobalGateVerificationPageState
-    extends State<GlobalGateVerificationInitPage> {
+class _GlobalGateVerificationPageState extends State<VerificationInit> {
   int? selectedZone;
   int? selectedCategory;
 
@@ -93,7 +90,7 @@ class _GlobalGateVerificationPageState
       inAsyncCall: isasync,
       child: Scaffold(
         backgroundColor: ColorManger.background,
-        appBar: buildAppBar(),
+        appBar: buildAppBar(context),
         body: BlocConsumer<VerificationInitCubit, VerificationInitState>(
           listener: (BuildContext context, VerificationInitState state) {
             if (state is VerificationRequestLoading) {
@@ -143,15 +140,9 @@ class _GlobalGateVerificationPageState
                   ],
                 ),
               );
-            } else if (state is VerificationInitSuccess ||
-                state is VerificationRequestLoading ||
-                state is VerificationRequestError) {
-              return _buildPageContent(
-                context.read<VerificationInitCubit>(),
-                isasync,
-              );
+            } else {
+              return _buildPageContent(context.read<VerificationInitCubit>());
             }
-            return const SizedBox.shrink();
           },
         ),
         bottomNavigationBar: buildBottomBar(
@@ -170,9 +161,10 @@ class _GlobalGateVerificationPageState
     );
   }
 
-  Widget _buildPageContent(VerificationInitCubit cubit, bool isloading) {
+  Widget _buildPageContent(VerificationInitCubit cubit) {
     final departments = cubit.departmentsList?.info ?? [];
     final areas = cubit.areasList?.info ?? [];
+
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
       padding: ScreenUtilsManager.pagePadding,
@@ -182,10 +174,9 @@ class _GlobalGateVerificationPageState
           _buildMainHeader(),
           const SizedBox(height: ScreenUtilsManager.sectionSpacing),
 
-          // الخطوة 1: رفع الهوية
           StepHeader(
-            title: Constantmanger.step1Title,
-            stepLabel: Constantmanger.step1Label,
+            title: "${S.of(context).idFront} & ${S.of(context).idBack}",
+            stepLabel: "${S.of(context).step} 1",
           ),
           const SizedBox(height: ScreenUtilsManager.itemSpacing),
           _buildIDSection(),
@@ -193,28 +184,34 @@ class _GlobalGateVerificationPageState
           const SizedBox(height: ScreenUtilsManager.sectionSpacing),
 
           StepHeader(
-            title: Constantmanger.step3Title,
-            stepLabel: Constantmanger.step3Label,
+            title: S.of(context).category,
+            stepLabel: "${S.of(context).step} 2",
           ),
           const SizedBox(height: ScreenUtilsManager.itemSpacing),
           _buildZoneDropdown(departments),
+
           const SizedBox(height: ScreenUtilsManager.sectionSpacing),
 
           StepHeader(
-            title: Constantmanger.step2Title,
-            stepLabel: Constantmanger.step2Label,
+            title: S.of(context).zone,
+            stepLabel: "${S.of(context).step} 3",
           ),
           const SizedBox(height: ScreenUtilsManager.itemSpacing),
           _buildCategoryGrid(areas),
+
           const SizedBox(height: ScreenUtilsManager.sectionSpacing),
-          StepHeader(title: "", stepLabel: Constantmanger.step4Label),
+
+          StepHeader(
+            title: S.of(context).notesLabel,
+            stepLabel: "${S.of(context).step} 4",
+          ),
           const SizedBox(height: ScreenUtilsManager.itemSpacing),
           CustomTextfromfield(
             color: ColorManger.surface,
             maxLines: 3,
             controller: notes,
-            hinttext: "Enter your notes",
-            lable: "Notes",
+            hinttext: S.of(context).enterNotes,
+            lable: S.of(context).notesLabel,
             onChanged: (v) => check(),
           ),
           const SizedBox(height: 100),
@@ -229,8 +226,8 @@ class _GlobalGateVerificationPageState
         Expanded(
           child: IDUploadCard(
             imageController: idfront,
-            title: 'ID Front',
-            subtitle: 'Tap to scan',
+            title: S.of(context).idFront,
+            subtitle: S.of(context).tapToScan,
             icon: Icons.camera_front,
             ontap: () async {
               XFile? file = await _pickImage();
@@ -251,8 +248,8 @@ class _GlobalGateVerificationPageState
         Expanded(
           child: IDUploadCard(
             imageController: idback,
-            title: 'ID Back',
-            subtitle: 'Tap to scan',
+            title: S.of(context).idBack,
+            subtitle: S.of(context).tapToScan,
             icon: Icons.camera_rear,
             ontap: () async {
               XFile? file = await _pickImage();
@@ -275,15 +272,12 @@ class _GlobalGateVerificationPageState
 
   Widget _buildZoneDropdown(List<Verficationmodel> items) {
     return CustomDropdown<String>.search(
-      hintText: Constantmanger.dropdownHint,
+      hintText: S.of(context).category,
       items: items.map((e) => e.name).toList(),
       onChanged: (value) {
-        setState(
-          () => selectedCategory = items.firstWhere((e) => e.name == value).id,
-        );
-
-        print(selectedCategory);
-
+        setState(() {
+          selectedCategory = items.firstWhere((e) => e.name == value).id;
+        });
         check();
       },
       decoration: CustomDropdownDecoration(
@@ -343,7 +337,7 @@ class _GlobalGateVerificationPageState
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Icon(
-            Icons.category_outlined,
+            Icons.location_on_outlined,
             color: isSelected ? Colors.white : ColorManger.workerprimary,
           ),
           const SizedBox(height: 10),
@@ -365,7 +359,7 @@ class _GlobalGateVerificationPageState
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          Constantmanger.mainTitle,
+          S.of(context).verificationTitle,
           style: GoogleFonts.cairo(
             fontSize: ScreenUtilsManager.headerFontSize,
             fontWeight: FontWeight.w900,
@@ -374,7 +368,7 @@ class _GlobalGateVerificationPageState
         ),
         const SizedBox(height: 8),
         Text(
-          Constantmanger.subTitle,
+          S.of(context).verificationSubTitle,
           style: GoogleFonts.cairo(
             fontSize: ScreenUtilsManager.subHeaderFontSize,
             color: ColorManger.secondary,

@@ -33,6 +33,11 @@ class _VerificationRequestsScreenState
     return Scaffold(
       backgroundColor: const Color(0xFFF8F9FD),
       appBar: AppBar(
+        leading: IconButton(
+          color: ColorManger.workerprimary,
+          onPressed: () => Navigator.of(context).pop(),
+          icon: const Icon(Icons.arrow_back_ios_new_rounded),
+        ),
         surfaceTintColor: Colors.transparent,
         elevation: 0,
         backgroundColor: Colors.white,
@@ -40,15 +45,14 @@ class _VerificationRequestsScreenState
           s.verificationRequestsTitle,
           style: GoogleFonts.cairo(
             fontWeight: FontWeight.bold,
-            color: Colors.black,
+            color: ColorManger.workerprimary,
           ),
         ),
-        centerTitle: true,
         actions: [
           IconButton(
             onPressed: () =>
                 context.read<VerificationInitCubit>().fetchRequests(),
-            icon: const Icon(Icons.refresh, color: Colors.black),
+            icon: const Icon(Icons.refresh, color: ColorManger.workerprimary),
           ),
         ],
       ),

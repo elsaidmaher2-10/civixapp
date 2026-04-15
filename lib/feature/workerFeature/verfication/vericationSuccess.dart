@@ -6,10 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class VerificationCompleteScreen extends StatelessWidget {
-  VerificationCompleteScreen({
-    super.key,
-    required this.workerRequestModel,
-  });
+  VerificationCompleteScreen({super.key, required this.workerRequestModel});
   WorkerRequestModel workerRequestModel;
   @override
   Widget build(BuildContext context) {
@@ -59,7 +56,6 @@ class VerificationCompleteScreen extends StatelessWidget {
       ),
       title: Row(
         children: [
-          const Icon(Icons.location_city, color: ColorManger.workerprimary),
           SizedBox(width: ScreenUtilsManager.s12),
           Text(
             S.of(context).appTitle,

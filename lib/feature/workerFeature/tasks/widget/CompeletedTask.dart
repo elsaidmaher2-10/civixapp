@@ -1,6 +1,8 @@
 import 'package:citifix/core/extenstion/datetimeextension.dart';
+import 'package:citifix/core/resource/colormanager.dart'; 
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/feature/workerFeature/tasks/data/model/ReportResponse.dart';
+import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -13,6 +15,7 @@ import '../../taskDetails/presentation/manager/reportdetailsManger.dart';
 class CompletedTaskCard extends StatelessWidget {
   final ReportModelWorker task;
   const CompletedTaskCard({super.key, required this.task});
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -32,19 +35,23 @@ class CompletedTaskCard extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.all(ScreenUtilsManager.w16),
         decoration: BoxDecoration(
-          color: Colors.grey.shade50.withOpacity(0.8),
+          color: ColorManger.grey50.withOpacity(0.8),
           borderRadius: BorderRadius.circular(ScreenUtilsManager.r16),
-          border: Border.all(color: Colors.grey.shade200),
+          border: Border.all(color: ColorManger.grey200),
         ),
         child: Row(
           children: [
             Container(
-              padding: const EdgeInsets.all(8),
-              decoration: const BoxDecoration(
-                color: Colors.green,
+              padding: EdgeInsets.all(ScreenUtilsManager.w8),
+              decoration: BoxDecoration(
+                color: ColorManger.green,
                 shape: BoxShape.circle,
               ),
-              child: const Icon(Icons.check, color: Colors.white, size: 16),
+              child: Icon(
+                Icons.check,
+                color: ColorManger.white,
+                size: ScreenUtilsManager.s16,
+              ),
             ),
             SizedBox(width: ScreenUtilsManager.w12),
             Expanded(
@@ -55,15 +62,17 @@ class CompletedTaskCard extends StatelessWidget {
                     task.title,
                     style: GoogleFonts.cairo(
                       decoration: TextDecoration.lineThrough,
-                      color: Colors.grey.shade600,
+                      color: ColorManger.grey600,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
                   Text(
-                    'Completed from ${task.createdAt.timeAgo(context)}',
+                    S
+                        .of(context)
+                        .completedFrom(task.createdAt.timeAgo(context)),
                     style: GoogleFonts.cairo(
                       fontSize: ScreenUtilsManager.s12,
-                      color: Colors.grey,
+                      color: ColorManger.grey,
                     ),
                   ),
                 ],
@@ -71,8 +80,8 @@ class CompletedTaskCard extends StatelessWidget {
             ),
             Icon(
               Icons.arrow_forward_ios,
-              size: 14,
-              color: Colors.grey.shade400,
+              size: ScreenUtilsManager.s14,
+              color: ColorManger.grey400,
             ),
           ],
         ),

@@ -43,7 +43,7 @@ class _NotificationCenterState extends State<NotificationCenter> {
       leading: IconButton(
         color: primaryColor,
         onPressed: () => Navigator.of(context).pop(),
-        icon: const Icon(Icons.arrow_back_ios_new_rounded), // Modern back icon
+        icon: const Icon(Icons.arrow_back_ios_new_rounded),
       ),
       backgroundColor: ColorManger.surface,
       scrolledUnderElevation: 0, // Prevents tinting when scrolling

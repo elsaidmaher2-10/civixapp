@@ -1,7 +1,9 @@
 import 'package:citifix/core/resource/assetvaluemanger.dart';
 import 'package:citifix/core/resource/colormanager.dart';
+import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/feature/workerFeature/home/presentation/manager/mapController/cubit/map_controller_cubit.dart';
 import 'package:citifix/feature/workerFeature/home/presentation/manager/mapController/cubit/map_controller_state.dart';
+import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:geo_fence_utils/models/geo_point.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,7 +17,7 @@ class CustomMapSection extends StatefulWidget {
   final String areaname;
   final List<LatLng> zonemLevel;
 
-  const CustomMapSection({
+  CustomMapSection({
     super.key,
     this.taskLocation,
     required this.areaname,
@@ -53,33 +55,45 @@ class _CustomMapSectionState extends State<CustomMapSection> {
                 ...state.routePoints,
               ];
 
-              final bounds = LatLngBounds.fromPoints(allPoints);
-              _mapController.fitCamera(
-                CameraFit.bounds(
-                  bounds: bounds,
-                  padding: const EdgeInsets.all(70.0),
-                ),
-              );
+              if (allPoints.length >= 2) {
+                final bounds = LatLngBounds.fromPoints(allPoints);
+                _mapController.fitCamera(
+                  CameraFit.bounds(
+                    bounds: bounds,
+                    padding: EdgeInsets.all(ScreenUtilsManager.s70),
+                  ),
+                );
+              }
             } else if (state is WorkerInsideZone) {
               _currLocation = state.curlocation;
-              _mapController.move(_currLocation!, 17.0);
+              _mapController.move(_currLocation!, ScreenUtilsManager.s17);
+            } else if (state is WorkerNoZone) {
+              _currLocation = state.curlocation;
+              _mapController.move(_currLocation!, ScreenUtilsManager.s17);
             }
           }
         },
         builder: (context, state) {
+          if (state is WorkerNoZone) {
+            _currLocation = state.curlocation;
+          }
+
           String distanceValue = "0.0";
           if (state is WorkerOutSideZone) {
             distanceValue = (state.distance / 1000).toStringAsFixed(1);
           }
+
           return Column(
             children: [
               Stack(
                 children: [
                   Container(
-                    height: 450,
+                    height: ScreenUtilsManager.h450,
                     decoration: BoxDecoration(
                       color: ColorManger.surfaceContainerLowest,
-                      borderRadius: BorderRadius.circular(24),
+                      borderRadius: BorderRadius.circular(
+                        ScreenUtilsManager.s24,
+                      ),
                     ),
                     clipBehavior: Clip.antiAlias,
                     child: FlutterMap(
@@ -89,19 +103,21 @@ class _CustomMapSectionState extends State<CustomMapSection> {
                             widget.taskLocation ??
                             (widget.zonemLevel.isNotEmpty
                                 ? widget.zonemLevel.first
-                                : const LatLng(0, 0)),
-                        initialZoom: 14.0,
+                                : LatLng(30.0444, 31.2357)),
+                        initialZoom: ScreenUtilsManager.s14,
                         onMapReady: () {
                           setState(() => _mapReady = true);
                           context.read<MapControllerCubit>().trackUserLocation(
-                            points: widget.zonemLevel
-                                .map(
-                                  (e) => GeoPoint(
-                                    latitude: e.latitude,
-                                    longitude: e.longitude,
-                                  ),
-                                )
-                                .toList(),
+                            points: widget.zonemLevel.length >= 3
+                                ? widget.zonemLevel
+                                      .map(
+                                        (e) => GeoPoint(
+                                          latitude: e.latitude,
+                                          longitude: e.longitude,
+                                        ),
+                                      )
+                                      .toList()
+                                : [],
                           );
                         },
                       ),
@@ -117,44 +133,42 @@ class _CustomMapSectionState extends State<CustomMapSection> {
                             polylines: [
                               Polyline(
                                 points: state.routePoints,
-                                strokeWidth: 5.0,
-                                color: const Color(0xFFFF7B00),
-                                borderStrokeWidth: 2.0,
+                                strokeWidth: ScreenUtilsManager.s5,
+                                color: Color(0xFFFF7B00),
+                                borderStrokeWidth: ScreenUtilsManager.s2,
                                 borderColor: Colors.white,
                               ),
                             ],
                           ),
-
-                        PolygonLayer(
-                          polygons: [
-                            Polygon(
-                              points: widget.zonemLevel,
-                              color: const Color(0xFFFF7B00).withOpacity(0.1),
-                              borderColor: const Color(0xFFFF7B00),
-                              borderStrokeWidth: 2,
-                            ),
-                          ],
-                        ),
-
+                        if (widget.zonemLevel.length >= 3)
+                          PolygonLayer(
+                            polygons: [
+                              Polygon(
+                                points: widget.zonemLevel,
+                                color: Color(0xFFFF7B00).withOpacity(0.1),
+                                borderColor: Color(0xFFFF7B00),
+                                borderStrokeWidth: ScreenUtilsManager.s2,
+                              ),
+                            ],
+                          ),
                         MarkerLayer(
                           markers: [
                             if (widget.taskLocation != null)
                               Marker(
                                 point: widget.taskLocation!,
-                                width: 50,
-                                height: 50,
-                                child: const Icon(
+                                width: ScreenUtilsManager.s50,
+                                height: ScreenUtilsManager.s50,
+                                child: Icon(
                                   Icons.location_on,
                                   color: Colors.blueGrey,
-                                  size: 45,
+                                  size: ScreenUtilsManager.s45,
                                 ),
                               ),
-
                             if (_currLocation != null)
                               Marker(
                                 point: _currLocation!,
-                                width: 65,
-                                height: 65,
+                                width: ScreenUtilsManager.s65,
+                                height: ScreenUtilsManager.s65,
                                 child: Lottie.asset(AssetValueManager.location),
                               ),
                           ],
@@ -165,19 +179,24 @@ class _CustomMapSectionState extends State<CustomMapSection> {
 
                   if (state is WorkerOutSideZone && widget.taskLocation != null)
                     Positioned(
-                      top: 20,
-                      left: 20,
-                      right: 20,
+                      top: ScreenUtilsManager.s20,
+                      left: ScreenUtilsManager.s20,
+                      right: ScreenUtilsManager.s20,
                       child: Container(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 12,
-                          horizontal: 20,
+                        padding: EdgeInsets.symmetric(
+                          vertical: ScreenUtilsManager.s12,
+                          horizontal: ScreenUtilsManager.s20,
                         ),
                         decoration: BoxDecoration(
-                          color: const Color(0xFFFF7B00).withOpacity(0.9),
-                          borderRadius: BorderRadius.circular(12),
-                          boxShadow: const [
-                            BoxShadow(color: Colors.black26, blurRadius: 10),
+                          color: Color(0xFFFF7B00).withOpacity(0.9),
+                          borderRadius: BorderRadius.circular(
+                            ScreenUtilsManager.s12,
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black26,
+                              blurRadius: ScreenUtilsManager.s10,
+                            ),
                           ],
                         ),
                         child: Row(
@@ -187,67 +206,108 @@ class _CustomMapSectionState extends State<CustomMapSection> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "DISTANCE TO TASK",
+                                  S.of(context).distance_to_task,
                                   style: GoogleFonts.cairo(
                                     color: Colors.white70,
-                                    fontSize: 10,
+                                    fontSize: ScreenUtilsManager.s10,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
                                 Text(
-                                  "$distanceValue KM",
+                                  "$distanceValue ${S.of(context).km}",
                                   style: GoogleFonts.cairo(
                                     color: Colors.white,
-                                    fontSize: 18,
+                                    fontSize: ScreenUtilsManager.s18,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
                               ],
                             ),
-                            const Icon(
+                            Icon(
                               Icons.directions_run,
                               color: Colors.white,
-                              size: 30,
+                              size: ScreenUtilsManager.s30,
                             ),
                           ],
                         ),
                       ),
                     ),
+
+                  Positioned(
+                    bottom: ScreenUtilsManager.s20,
+                    right: ScreenUtilsManager.s20,
+                    child: Column(
+                      children: [
+                        _MapButton(
+                          icon: Icons.add,
+                          onTap: () {
+                            final currentZoom = _mapController.camera.zoom;
+                            _mapController.move(
+                              _mapController.camera.center,
+                              currentZoom + 1,
+                            );
+                          },
+                        ),
+                        SizedBox(height: ScreenUtilsManager.s8),
+                        _MapButton(
+                          icon: Icons.remove,
+                          onTap: () {
+                            final currentZoom = _mapController.camera.zoom;
+                            _mapController.move(
+                              _mapController.camera.center,
+                              currentZoom - 1,
+                            );
+                          },
+                        ),
+                        SizedBox(height: ScreenUtilsManager.s8),
+                        _MapButton(
+                          icon: Icons.my_location,
+                          onTap: () {
+                            if (_currLocation != null) {
+                              _mapController.move(
+                                _currLocation!,
+                                ScreenUtilsManager.s17,
+                              );
+                            }
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
 
               Padding(
-                padding: const EdgeInsets.all(20.0),
+                padding: EdgeInsets.all(ScreenUtilsManager.s20),
                 child: Row(
                   children: [
                     CircleAvatar(
-                      radius: 25,
-                      backgroundColor: const Color(0xFFFF7B00).withOpacity(0.1),
-                      child: const Icon(
-                        Icons.my_location,
-                        color: Color(0xFFFF7B00),
-                      ),
+                      radius: ScreenUtilsManager.s25,
+                      backgroundColor: Color(0xFFFF7B00).withOpacity(0.1),
+                      child: Icon(Icons.my_location, color: Color(0xFFFF7B00)),
                     ),
-                    const SizedBox(width: 15),
+                    SizedBox(width: ScreenUtilsManager.w15),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             state is WorkerInsideZone
-                                ? "Inside Work Zone"
+                                ? S.of(context).inside_work_zone
+                                : state is WorkerNoZone
+                                ? S.of(context).monitoring_area
                                 : (widget.taskLocation != null
-                                      ? "Heading to Task"
-                                      : "Monitoring Area"),
+                                      ? S.of(context).heading_to_task
+                                      : S.of(context).monitoring_area),
                             style: GoogleFonts.cairo(
                               fontWeight: FontWeight.bold,
-                              fontSize: 18,
+                              fontSize: ScreenUtilsManager.s18,
                             ),
                           ),
                           Text(
                             widget.areaname,
                             style: GoogleFonts.cairo(
-                              fontSize: 14,
+                              fontSize: ScreenUtilsManager.s14,
                               color: Colors.grey[600],
                             ),
                           ),
@@ -260,6 +320,36 @@ class _CustomMapSectionState extends State<CustomMapSection> {
             ],
           );
         },
+      ),
+    );
+  }
+}
+
+class _MapButton extends StatelessWidget {
+  final IconData icon;
+  final VoidCallback onTap;
+
+  const _MapButton({required this.icon, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: 40,
+        height: 40,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(8),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black26,
+              blurRadius: 4,
+              offset: Offset(0, 2),
+            ),
+          ],
+        ),
+        child: Icon(icon, color: Color(0xFFFF7B00), size: 22),
       ),
     );
   }

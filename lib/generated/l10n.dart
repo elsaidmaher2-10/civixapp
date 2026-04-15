@@ -1209,9 +1209,9 @@ class S {
     return Intl.message('All', name: 'all', desc: '', args: []);
   }
 
-  /// `In Progress`
+  /// `IN PROGRESS`
   String get inProgress {
-    return Intl.message('In Progress', name: 'inProgress', desc: '', args: []);
+    return Intl.message('IN PROGRESS', name: 'inProgress', desc: '', args: []);
   }
 
   /// `No reports available currently`
@@ -1285,7 +1285,7 @@ class S {
   }
 
   /// `{count} {count, plural, =1{minute} other{minutes}} ago`
-  String minutesAgo(num count) {
+  String minutesAgo(int count) {
     return Intl.message(
       '$count ${Intl.plural(count, one: 'minute', other: 'minutes')} ago',
       name: 'minutesAgo',
@@ -1295,7 +1295,7 @@ class S {
   }
 
   /// `{count} {count, plural, =1{hour} other{hours}} ago`
-  String hoursAgo(num count) {
+  String hoursAgo(int count) {
     return Intl.message(
       '$count ${Intl.plural(count, one: 'hour', other: 'hours')} ago',
       name: 'hoursAgo',
@@ -1305,7 +1305,7 @@ class S {
   }
 
   /// `{count} {count, plural, =1{day} other{days}} ago`
-  String daysAgo(num count) {
+  String daysAgo(int count) {
     return Intl.message(
       '$count ${Intl.plural(count, one: 'day', other: 'days')} ago',
       name: 'daysAgo',
@@ -1904,20 +1904,20 @@ class S {
     );
   }
 
-  /// `Documents Under Review`
+  /// `Under Review`
   String get underReview {
     return Intl.message(
-      'Documents Under Review',
+      'Under Review',
       name: 'underReview',
       desc: '',
       args: [],
     );
   }
 
-  /// `Your documents are being reviewed by our security team. This usually takes between 2-4 business hours.`
+  /// `Your request is currently being reviewed by our team. We will notify you once the status is updated.`
   String get reviewDesc {
     return Intl.message(
-      'Your documents are being reviewed by our security team. This usually takes between 2-4 business hours.',
+      'Your request is currently being reviewed by our team. We will notify you once the status is updated.',
       name: 'reviewDesc',
       desc: '',
       args: [],
@@ -1934,30 +1934,30 @@ class S {
     );
   }
 
-  /// `ACCESS ZONE`
+  /// `Access Zone`
   String get accessZone {
-    return Intl.message('ACCESS ZONE', name: 'accessZone', desc: '', args: []);
+    return Intl.message('Access Zone', name: 'accessZone', desc: '', args: []);
   }
 
-  /// `IDENTITY DOCUMENTS`
+  /// `Identity Docs`
   String get identityDocs {
     return Intl.message(
-      'IDENTITY DOCUMENTS',
+      'Identity Docs',
       name: 'identityDocs',
       desc: '',
       args: [],
     );
   }
 
-  /// `What's next?`
+  /// `What's Next?`
   String get whatsNext {
-    return Intl.message('What\'s next?', name: 'whatsNext', desc: '', args: []);
+    return Intl.message('What\'s Next?', name: 'whatsNext', desc: '', args: []);
   }
 
-  /// `Once verified, you will receive a notification via the CitiFix app and a secure token will be issued for your mobile device.`
+  /// `Your data and ID photos will be carefully checked. This process usually takes 24 to 48 business hours.`
   String get whatsNextDesc {
     return Intl.message(
-      'Once verified, you will receive a notification via the CitiFix app and a secure token will be issued for your mobile device.',
+      'Your data and ID photos will be carefully checked. This process usually takes 24 to 48 business hours.',
       name: 'whatsNextDesc',
       desc: '',
       args: [],
@@ -2004,10 +2004,10 @@ class S {
     );
   }
 
-  /// `We couldn't verify your identity based on the documents provided. Please review the details below.`
+  /// `Unfortunately, we couldn't verify your account based on the information provided.`
   String get verificationFailedDesc {
     return Intl.message(
-      'We couldn\'t verify your identity based on the documents provided. Please review the details below.',
+      'Unfortunately, we couldn\'t verify your account based on the information provided.',
       name: 'verificationFailedDesc',
       desc: '',
       args: [],
@@ -2089,24 +2089,19 @@ class S {
     );
   }
 
-  /// `Resubmit Verification`
+  /// `Resubmit Request`
   String get resubmit {
     return Intl.message(
-      'Resubmit Verification',
+      'Resubmit Request',
       name: 'resubmit',
       desc: '',
       args: [],
     );
   }
 
-  /// `Need help? Visit our `
+  /// `Need help?`
   String get needHelp {
-    return Intl.message(
-      'Need help? Visit our ',
-      name: 'needHelp',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Need help?', name: 'needHelp', desc: '', args: []);
   }
 
   /// `Verification Guide`
@@ -2139,10 +2134,10 @@ class S {
     );
   }
 
-  /// `The uploaded ID image is blurry or unreadable.`
+  /// `The ID image is not clear or has expired.`
   String get errorIdNotClear {
     return Intl.message(
-      'The uploaded ID image is blurry or unreadable.',
+      'The ID image is not clear or has expired.',
       name: 'errorIdNotClear',
       desc: '',
       args: [],
@@ -2477,6 +2472,501 @@ class S {
       desc: '',
       args: [],
     );
+  }
+
+  /// `Welcome, `
+  String get welcome_message {
+    return Intl.message(
+      'Welcome, ',
+      name: 'welcome_message',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Stay focused and let's get to work!`
+  String get stay_focused {
+    return Intl.message(
+      'Stay focused and let\'s get to work!',
+      name: 'stay_focused',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No tasks available right now`
+  String get no_tasks_available {
+    return Intl.message(
+      'No tasks available right now',
+      name: 'no_tasks_available',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We'll notify you when new tasks arrive.`
+  String get notify_new_tasks {
+    return Intl.message(
+      'We\'ll notify you when new tasks arrive.',
+      name: 'notify_new_tasks',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Available Tasks`
+  String get available_tasks {
+    return Intl.message(
+      'Available Tasks',
+      name: 'available_tasks',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `See All`
+  String get see_all {
+    return Intl.message('See All', name: 'see_all', desc: '', args: []);
+  }
+
+  /// `Fix Water Leak`
+  String get fix_water_leak {
+    return Intl.message(
+      'Fix Water Leak',
+      name: 'fix_water_leak',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `URGENT`
+  String get urgent {
+    return Intl.message('URGENT', name: 'urgent', desc: '', args: []);
+  }
+
+  /// `842 Riverside Dr, Apt 4B`
+  String get sample_address {
+    return Intl.message(
+      '842 Riverside Dr, Apt 4B',
+      name: 'sample_address',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Emergency pipe burst reported in the main bathroom. High priority. Residents are currently on-site and have shut off the main valve.`
+  String get sample_description {
+    return Intl.message(
+      'Emergency pipe burst reported in the main bathroom. High priority. Residents are currently on-site and have shut off the main valve.',
+      name: 'sample_description',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `View Details`
+  String get view_details {
+    return Intl.message(
+      'View Details',
+      name: 'view_details',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `DISTANCE TO TASK`
+  String get distance_to_task {
+    return Intl.message(
+      'DISTANCE TO TASK',
+      name: 'distance_to_task',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `KM`
+  String get km {
+    return Intl.message('KM', name: 'km', desc: '', args: []);
+  }
+
+  /// `Inside Work Zone`
+  String get inside_work_zone {
+    return Intl.message(
+      'Inside Work Zone',
+      name: 'inside_work_zone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Heading to Task`
+  String get heading_to_task {
+    return Intl.message(
+      'Heading to Task',
+      name: 'heading_to_task',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Monitoring Area`
+  String get monitoring_area {
+    return Intl.message(
+      'Monitoring Area',
+      name: 'monitoring_area',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `TOTAL REPORTS`
+  String get totalReports {
+    return Intl.message(
+      'TOTAL REPORTS',
+      name: 'totalReports',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `PROGRESS`
+  String get progress {
+    return Intl.message('PROGRESS', name: 'progress', desc: '', args: []);
+  }
+
+  /// `VERIFIED`
+  String get verified {
+    return Intl.message('VERIFIED', name: 'verified', desc: '', args: []);
+  }
+
+  /// `Online`
+  String get online {
+    return Intl.message('Online', name: 'online', desc: '', args: []);
+  }
+
+  /// `Verify Now`
+  String get verifyNow {
+    return Intl.message('Verify Now', name: 'verifyNow', desc: '', args: []);
+  }
+
+  /// `Verification required`
+  String get alertRequired {
+    return Intl.message(
+      'Verification required',
+      name: 'alertRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Update your ID by EOD to keep access.`
+  String get updateYourId {
+    return Intl.message(
+      'Update your ID by EOD to keep access.',
+      name: 'updateYourId',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Task Details`
+  String get taskDetails {
+    return Intl.message(
+      'Task Details',
+      name: 'taskDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Something went wrong`
+  String get somethingWentWrong {
+    return Intl.message(
+      'Something went wrong',
+      name: 'somethingWentWrong',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `COMPLETION DATA`
+  String get completionData {
+    return Intl.message(
+      'COMPLETION DATA',
+      name: 'completionData',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `PROOF OF WORK *`
+  String get proofOfWork {
+    return Intl.message(
+      'PROOF OF WORK *',
+      name: 'proofOfWork',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add`
+  String get add {
+    return Intl.message('Add', name: 'add', desc: '', args: []);
+  }
+
+  /// `Upload Completion Images`
+  String get uploadCompletionImages {
+    return Intl.message(
+      'Upload Completion Images',
+      name: 'uploadCompletionImages',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `COMPLETION NOTES`
+  String get completionNotes {
+    return Intl.message(
+      'COMPLETION NOTES',
+      name: 'completionNotes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Notes`
+  String get addNotesHint {
+    return Intl.message('Add Notes', name: 'addNotesHint', desc: '', args: []);
+  }
+
+  /// `Additional Notes`
+  String get notesLabel {
+    return Intl.message(
+      'Additional Notes',
+      name: 'notesLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Mark as Completed`
+  String get markAsCompletedBtn {
+    return Intl.message(
+      'Mark as Completed',
+      name: 'markAsCompletedBtn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ISSUE MEDIA`
+  String get issueMedia {
+    return Intl.message('ISSUE MEDIA', name: 'issueMedia', desc: '', args: []);
+  }
+
+  /// `No Title`
+  String get noTitle {
+    return Intl.message('No Title', name: 'noTitle', desc: '', args: []);
+  }
+
+  /// `Unknown`
+  String get unknown {
+    return Intl.message('Unknown', name: 'unknown', desc: '', args: []);
+  }
+
+  /// `• Task Owner`
+  String get taskOwnerLabel {
+    return Intl.message(
+      '• Task Owner',
+      name: 'taskOwnerLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `CREATED`
+  String get created {
+    return Intl.message('CREATED', name: 'created', desc: '', args: []);
+  }
+
+  /// `No Description provided.`
+  String get noDescription {
+    return Intl.message(
+      'No Description provided.',
+      name: 'noDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Next step: {step}`
+  String nextStep(String step) {
+    return Intl.message(
+      'Next step: $step',
+      name: 'nextStep',
+      desc: '',
+      args: [step],
+    );
+  }
+
+  /// `You must complete the required report\nimages before finishing the task.`
+  String get mustCompleteReportImages {
+    return Intl.message(
+      'You must complete the required report\nimages before finishing the task.',
+      name: 'mustCompleteReportImages',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ACTIVITY TIMELINE`
+  String get activityTimeline {
+    return Intl.message(
+      'ACTIVITY TIMELINE',
+      name: 'activityTimeline',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No tasks found for '{filter}'`
+  String noTasksFound(String filter) {
+    return Intl.message(
+      'No tasks found for \'$filter\'',
+      name: 'noTasksFound',
+      desc: '',
+      args: [filter],
+    );
+  }
+
+  /// `Show all tasks`
+  String get showAllTasks {
+    return Intl.message(
+      'Show all tasks',
+      name: 'showAllTasks',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search for tasks...`
+  String get searchTasksHint {
+    return Intl.message(
+      'Search for tasks...',
+      name: 'searchTasksHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Start Task`
+  String get startTask {
+    return Intl.message('Start Task', name: 'startTask', desc: '', args: []);
+  }
+
+  /// `View Directions & Update`
+  String get viewDirectionsUpdate {
+    return Intl.message(
+      'View Directions & Update',
+      name: 'viewDirectionsUpdate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Completed from {time}`
+  String completedFrom(Object time) {
+    return Intl.message(
+      'Completed from $time',
+      name: 'completedFrom',
+      desc: '',
+      args: [time],
+    );
+  }
+
+  /// `Tasks`
+  String get tasks {
+    return Intl.message('Tasks', name: 'tasks', desc: '', args: []);
+  }
+
+  /// `Keep track of your daily progress`
+  String get tasksSubtitle {
+    return Intl.message(
+      'Keep track of your daily progress',
+      name: 'tasksSubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Checking account status...`
+  String get checking_account_status {
+    return Intl.message(
+      'Checking account status...',
+      name: 'checking_account_status',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account Verification`
+  String get verificationTitle {
+    return Intl.message(
+      'Account Verification',
+      name: 'verificationTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please complete the following data to verify your account as a professional worker`
+  String get verificationSubTitle {
+    return Intl.message(
+      'Please complete the following data to verify your account as a professional worker',
+      name: 'verificationSubTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ID Front`
+  String get idFront {
+    return Intl.message('ID Front', name: 'idFront', desc: '', args: []);
+  }
+
+  /// `ID Back`
+  String get idBack {
+    return Intl.message('ID Back', name: 'idBack', desc: '', args: []);
+  }
+
+  /// `Tap to scan`
+  String get tapToScan {
+    return Intl.message('Tap to scan', name: 'tapToScan', desc: '', args: []);
+  }
+
+  /// `Enter your notes here`
+  String get enterNotes {
+    return Intl.message(
+      'Enter your notes here',
+      name: 'enterNotes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Category`
+  String get category {
+    return Intl.message('Category', name: 'category', desc: '', args: []);
+  }
+
+  /// `Zone`
+  String get zone {
+    return Intl.message('Zone', name: 'zone', desc: '', args: []);
+  }
+
+  /// `Step`
+  String get step {
+    return Intl.message('Step', name: 'step', desc: '', args: []);
   }
 }
 

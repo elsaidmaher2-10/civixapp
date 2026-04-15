@@ -2,7 +2,9 @@ import 'dart:developer';
 
 import 'package:citifix/core/extenstion/datetimeextension.dart';
 import 'package:citifix/core/resource/colormanager.dart';
+import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/core/widget/CustomSnackBar.dart';
+import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -32,6 +34,7 @@ class ActivityTimelineSection extends StatefulWidget {
 }
 
 class _ActivityTimelineSectionState extends State<ActivityTimelineSection> {
+  // رجعناها زي ما كانت عشان تحافظ على الـ Logic والـ indexOf يشتغل صح
   final List<StatusReport> _stepsOrder = [
     StatusReport.pending,
     StatusReport.assigned,
@@ -41,12 +44,20 @@ class _ActivityTimelineSectionState extends State<ActivityTimelineSection> {
 
   late StatusReport _currentStatus;
   late StatusReport _previousStatus;
+
   @override
   void initState() {
     super.initState();
-
     _currentStatus = StatusReport.fromString(widget.initialStatus);
     _previousStatus = _currentStatus;
+  }
+
+  String _getLocalizedStepName(BuildContext context, StatusReport status) {
+    if (status == StatusReport.pending) return S.of(context).pending;
+    if (status == StatusReport.assigned) return S.of(context).assigned;
+    if (status == StatusReport.inProgress) return S.of(context).inProgress;
+    if (status == StatusReport.resolved) return S.of(context).resolved;
+    return status.value;
   }
 
   void _onStepTap(int index) {
@@ -57,10 +68,14 @@ class _ActivityTimelineSectionState extends State<ActivityTimelineSection> {
     }
 
     if (index > currentIndex + 1) {
+      final nextStepName = _getLocalizedStepName(
+        context,
+        _stepsOrder[currentIndex + 1],
+      );
       Customsnackbar.show(
         context: context,
         backgroundColor: ColorManger.red,
-        message: "Next step: ${_stepsOrder[currentIndex + 1].value}",
+        message: S.of(context).nextStep(nextStepName),
       );
       return;
     }
@@ -70,8 +85,7 @@ class _ActivityTimelineSectionState extends State<ActivityTimelineSection> {
         Customsnackbar.show(
           context: context,
           backgroundColor: ColorManger.red,
-          message:
-              "You must complete the required report\nimages before finishing the task.",
+          message: S.of(context).mustCompleteReportImages,
         );
         return;
       }
@@ -104,11 +118,11 @@ class _ActivityTimelineSectionState extends State<ActivityTimelineSection> {
         }
       },
       child: Container(
-        padding: const EdgeInsets.all(24),
+        padding: EdgeInsets.all(ScreenUtilsManager.w24),
         decoration: BoxDecoration(
           color: ColorManger.surface,
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: Colors.grey.shade200),
+          borderRadius: BorderRadius.circular(ScreenUtilsManager.r12),
+          border: Border.all(color: ColorManger.grey200),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -118,19 +132,19 @@ class _ActivityTimelineSectionState extends State<ActivityTimelineSection> {
                 Icon(
                   Icons.event_repeat,
                   color: ColorManger.workerprimary,
-                  size: 16,
+                  size: ScreenUtilsManager.s16,
                 ),
-                const SizedBox(width: 8),
+                SizedBox(width: ScreenUtilsManager.w8),
                 Text(
-                  'ACTIVITY TIMELINE',
+                  S.of(context).activityTimeline,
                   style: GoogleFonts.cairo(
-                    fontSize: 14,
+                    fontSize: ScreenUtilsManager.s14,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ],
             ),
-            const SizedBox(height: 24),
+            SizedBox(height: ScreenUtilsManager.h24),
             ListView.builder(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
@@ -153,28 +167,28 @@ class _ActivityTimelineSectionState extends State<ActivityTimelineSection> {
                   isFirst: index == 0,
                   isLast: index == _stepsOrder.length - 1,
                   indicatorStyle: IndicatorStyle(
-                    width: 26,
-                    height: 26,
+                    width: ScreenUtilsManager.w26,
+                    height: ScreenUtilsManager.h26,
                     indicator: GestureDetector(
                       onTap: () => _onStepTap(index),
                       child: Container(
                         decoration: BoxDecoration(
                           color: isCompletedStatus
                               ? ColorManger.workerprimary
-                              : Colors.white,
+                              : ColorManger.white,
                           shape: BoxShape.circle,
                           border: Border.all(
                             color: isCompletedStatus
                                 ? ColorManger.workerprimary
-                                : Colors.grey.shade300,
-                            width: 2,
+                                : ColorManger.grey300,
+                            width: ScreenUtilsManager.w2,
                           ),
                         ),
                         child: isCompletedStatus
-                            ? const Icon(
+                            ? Icon(
                                 Icons.check,
-                                color: Colors.white,
-                                size: 14,
+                                color: ColorManger.white,
+                                size: ScreenUtilsManager.s14,
                               )
                             : null,
                       ),
@@ -183,41 +197,41 @@ class _ActivityTimelineSectionState extends State<ActivityTimelineSection> {
                   beforeLineStyle: LineStyle(
                     color: isCompletedStatus
                         ? ColorManger.workerprimary
-                        : Colors.grey.shade200,
-                    thickness: 2,
+                        : ColorManger.grey200,
+                    thickness: ScreenUtilsManager.w2,
                   ),
                   afterLineStyle: LineStyle(
                     color:
                         (index < _stepsOrder.length - 1 && currentIndex > index)
                         ? ColorManger.workerprimary
-                        : Colors.grey.shade200,
-                    thickness: 2,
+                        : ColorManger.grey200,
+                    thickness: ScreenUtilsManager.w2,
                   ),
                   endChild: GestureDetector(
                     onTap: () => _onStepTap(index),
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 12,
+                      padding: EdgeInsets.symmetric(
+                        horizontal: ScreenUtilsManager.w16,
+                        vertical: ScreenUtilsManager.h12,
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            stepStatus.value,
+                            _getLocalizedStepName(context, stepStatus),
                             style: GoogleFonts.cairo(
-                              fontSize: 14,
+                              fontSize: ScreenUtilsManager.s14,
                               fontWeight: FontWeight.bold,
                               color: isCompletedStatus
-                                  ? Colors.black87
-                                  : Colors.grey,
+                                  ? ColorManger.black87
+                                  : ColorManger.grey,
                             ),
                           ),
 
                           Text(
                             curdate.toString(),
                             style: GoogleFonts.cairo(
-                              fontSize: 12,
+                              fontSize: ScreenUtilsManager.s12,
                               color: ColorManger.lightGrey6,
                             ),
                           ),

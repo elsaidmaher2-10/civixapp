@@ -2,44 +2,70 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ScreenUtilsManager {
-  // To prevent instantiation
+  static double get h192 => 192.h;
   ScreenUtilsManager._();
-
+  static double get h105 => 105.h;
+  static double get s32 => 32.sp;
+  static double get w12 => 12.w;
+  static double get w8 => 8.w;
+  static double get s28 => 28.sp;
+  static double get s26 => 26.sp;
+  static double get s9 => 9.sp;
+  static double get r18 => 18.r;
+  static double get r10 => 10.r;
+  static double get w80 => 80.w;
+  static double get h150 => 150.h;
+  static double get r64 => 64.r;
+  static double get h100 => 100.h;
+  static double get h48 => 48.h;
+  static double get w26 => 26.w;
+  static double get h26 => 26.h;
+  static double get h120 => 120.h;
+  static double get s13 => 13.sp;
+  static double get s0_3 => 0.3.sp;
+  static double get s2_5 => 2.5;
+  static double get h56 => 56.h;
+  static double get h220 => 220.h;
+  static double get s10 => 10.sp;
+  static double get h5 => 5.h;
+  static double get r50 => 50.r;
+  static double get w60 => 60.w;
+  static double get h60 => 60.h;
+  static double get w2 => 2.w;
+  static double get h2 => 2.h;
+  static double get s0_5 => 0.5.sp;
+  static double get w20 => 20.w;
+  static double get h1_5 => 1.5;
   static double get screenWidth => ScreenUtil().screenWidth;
   static double get screenHeight => ScreenUtil().screenHeight;
   static double get statusBarHeight => ScreenUtil().statusBarHeight;
   static double get bottomBarHeight => ScreenUtil().bottomBarHeight;
-
-  // --- Widths (.w) ---
+  static double get r4 => 4.r;
+  static double get h130 => 130.h;
   static double get w1 => 1.w;
-  static double get w2 => 2.w;
   static double get w3 => 3.w;
   static double get w4 => 4.w;
   static double get w5 => 5.w;
   static double get w6 => 6.w;
   static double get w7 => 7.w;
-  static double get w8 => 8.w;
   static double get w9 => 9.w;
   static double get w10 => 10.w;
-  static double get w12 => 12.w;
   static double get w14 => 14.w;
   static double get w16 => 16.w;
   static double get w18 => 18.w;
-  static double get w20 => 20.w;
   static double get w24 => 24.w;
   static double get w32 => 32.w;
   static double get w40 => 40.w;
   static double get w48 => 48.w;
   static double get w64 => 64.w;
   static double get w72 => 72.w;
-  static double get w80 => 80.w;
   static double get w90 => 90.w;
   static double get w100 => 100.w;
   static double get w128 => 128.w;
   static double get w280 => 280.w;
-  static double get w400 => 400.w; // Fixed and moved inside
-
-  // --- Heights (.h) ---
+  static double get w400 => 400.w;
+  static double w0 = 0.0;
+  static double h240 = 240.h;
   static double get h4 => 4.h;
   static double get h6 => 6.h;
   static double get h8 => 8.h;
@@ -58,19 +84,32 @@ class ScreenUtilsManager {
   static double get h36 => 36.h;
   static double get h40 => 40.h;
   static double get h44 => 44.h;
-  static double get h48 => 48.h;
   static double get h61 => 61.h;
   static double get h64 => 64.h;
   static double get h68 => 68.h;
   static double get h80 => 80.h;
-  static double get h100 => 100.h;
-  static double get h120 => 120.h;
   static double get h128 => 128.h;
-  static double get h150 => 150.h;
   static double get h200 => 200.h;
   static double get h250 => 250.h;
 
-  // --- Padding / Margins (Mapped to .w or .h depending on your preference) ---
+  static const double w15 = 15.0;
+
+  static const double h450 = 450.0;
+
+  static const double s2 = 2.0;
+  static const double s5 = 5.0;
+  static const double s12 = 12.0;
+  static const double s14 = 14.0;
+  static const double s17 = 17.0;
+  static const double s18 = 18.0;
+  static const double s20 = 20.0;
+  static const double s24 = 24.0;
+  static const double s25 = 25.0;
+  static const double s30 = 30.0;
+  static const double s45 = 45.0;
+  static const double s50 = 50.0;
+  static const double s65 = 65.0;
+  static const double s70 = 70.0;
   static double get p8 => 8.w;
   static double get p10 => 10.h;
   static double get p12 => 12.w;
@@ -81,7 +120,6 @@ class ScreenUtilsManager {
 
   // --- Border Radius (.r) ---
   static double get r8 => 8.r;
-  static double get r10 => 10.r;
   static double get r12 => 12.r;
   static double get r14 => 14.r;
   static double get r15 => 15.r;
@@ -89,21 +127,10 @@ class ScreenUtilsManager {
   static double get r20 => 20.r;
   static double get r24 => 24.r;
 
-  // --- Font Sizes (.sp) ---
-  static double get s5 => 5.sp;
-  static double get s9 => 9.sp;
-  static double get s10 => 10.sp;
   static double get s11 => 11.sp;
-  static double get s12 => 12.sp;
-  static double get s13 => 13.sp; // Fixed from static double? s13
-  static double get s14 => 14.sp;
-  static double get s15 => 15.sp; // Fixed from static double? s15
+  static double get s15 => 15.sp;
   static double get s16 => 16.sp;
-  static double get s18 => 18.sp;
-  static double get s20 => 20.sp;
   static double get s22 => 22.sp;
-  static double get s24 => 24.sp;
-  static double get s32 => 32.sp;
   static double get s34 => 34.sp;
   static double get s40 => 40.sp;
   static double get s64 => 64.sp;
@@ -129,14 +156,11 @@ class ScreenUtilsManager {
 
   static const EdgeInsets pagePadding = EdgeInsets.fromLTRB(24, 20, 24, 120);
 
-  // --- Hardcoded Scale Constants (Non-responsive) ---
   static const double s0 = 0.0;
   static const double s1 = 1.0;
-  static const double s2 = 2.0;
   static const double s4 = 4.0;
   static const double s6 = 6.0;
   static const double s8 = 8.0;
-  static const double s28 = 28.0;
   static const double s36 = 36.0;
   static const double s44 = 44.0;
   static const double s48 = 48.0;
@@ -149,4 +173,8 @@ class ScreenUtilsManager {
   static const double s120 = 120.0;
   static const double s160 = 160.0;
   static const double s200 = 200.0;
+
+  static double r60 = 60.r;
+  static double get w28 => 28.w;
+  static double get w1_5 => 1.5.w;
 }

@@ -1,5 +1,6 @@
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
+import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -21,7 +22,7 @@ class TasksHeader extends StatelessWidget {
         Row(
           children: [
             Text(
-              'Tasks',
+              S.of(context).tasks,
               style: GoogleFonts.cairo(
                 fontWeight: FontWeight.w800,
                 fontSize: ScreenUtilsManager.s32,
@@ -50,7 +51,9 @@ class TasksHeader extends StatelessWidget {
                           builder: (_) => const NotificationCenter(),
                         ),
                       ),
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(
+                        ScreenUtilsManager.r12,
+                      ),
                       child: Container(
                         padding: EdgeInsets.all(ScreenUtilsManager.w8),
                         child: Stack(
@@ -67,13 +70,13 @@ class TasksHeader extends StatelessWidget {
                                   ? Lottie.asset(
                                       AssetValueManager.Notificationbell,
                                       key: const ValueKey('lottie_bell'),
-                                      width: 28,
-                                      height: 28,
+                                      width: ScreenUtilsManager.s28,
+                                      height: ScreenUtilsManager.s28,
                                     )
                                   : Icon(
                                       Icons.notifications_none_rounded,
                                       key: const ValueKey('icon_bell'),
-                                      size: 26,
+                                      size: ScreenUtilsManager.s26,
                                       color: ColorManger.kPrimaryDark
                                           .withOpacity(0.7),
                                     ),
@@ -95,31 +98,30 @@ class TasksHeader extends StatelessWidget {
                                           horizontal: 5,
                                           vertical: 2,
                                         ),
-                                        constraints: const BoxConstraints(
-                                          minWidth: 18,
-                                          minHeight: 18,
+                                        constraints: BoxConstraints(
+                                          minWidth: ScreenUtilsManager.r18,
+                                          minHeight: ScreenUtilsManager.r18,
                                         ),
                                         decoration: BoxDecoration(
-                                          gradient: const LinearGradient(
+                                          gradient: LinearGradient(
                                             colors: [
-                                              Color(0xffFF5252),
-                                              Color(0xffFF1744),
+                                              ColorManger.notificationRedStart,
+                                              ColorManger.notificationRedEnd,
                                             ],
                                             begin: Alignment.topLeft,
                                             end: Alignment.bottomRight,
                                           ),
                                           borderRadius: BorderRadius.circular(
-                                            10,
+                                            ScreenUtilsManager.r10,
                                           ),
                                           border: Border.all(
-                                            color: Colors.white,
+                                            color: ColorManger.white,
                                             width: 1.5,
                                           ),
                                           boxShadow: [
                                             BoxShadow(
-                                              color: Colors.black.withOpacity(
-                                                0.15,
-                                              ),
+                                              color: ColorManger.black
+                                                  .withOpacity(0.15),
                                               blurRadius: 4,
                                               offset: const Offset(0, 2),
                                             ),
@@ -131,8 +133,8 @@ class TasksHeader extends StatelessWidget {
                                                 ? '9+'
                                                 : '$unreadCount',
                                             style: GoogleFonts.cairo(
-                                              color: Colors.white,
-                                              fontSize: 9,
+                                              color: ColorManger.white,
+                                              fontSize: ScreenUtilsManager.s9,
                                               fontWeight: FontWeight.bold,
                                               height: 1.1,
                                             ),
@@ -154,7 +156,7 @@ class TasksHeader extends StatelessWidget {
           ],
         ),
         Text(
-          'Keep track of your daily progress',
+          S.of(context).tasksSubtitle,
           style: GoogleFonts.cairo(
             fontSize: ScreenUtilsManager.s15,
             color: ColorManger.onSurfaceVariant.withOpacity(0.7),

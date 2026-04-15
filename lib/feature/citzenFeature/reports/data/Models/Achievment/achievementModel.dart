@@ -8,7 +8,7 @@ class Achievementmodel {
   final String workerName;
   final DateTime resolvedAt;
   final DateTime completedAt;
-  final String completionNote;
+  String? completionNote;
   final List<String> completionImageUrls;
 
   Achievementmodel({
@@ -21,7 +21,7 @@ class Achievementmodel {
     required this.workerName,
     required this.resolvedAt,
     required this.completedAt,
-    required this.completionNote,
+    this.completionNote,
     required this.completionImageUrls,
   });
 
@@ -47,7 +47,6 @@ class AchievementmodelReportsResponse {
   final int limit;
   final int totalCount;
   final List<Achievementmodel> items;
-
   AchievementmodelReportsResponse({
     required this.offset,
     required this.limit,

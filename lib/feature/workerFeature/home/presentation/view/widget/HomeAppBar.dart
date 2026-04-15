@@ -11,6 +11,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lottie/lottie.dart';
 
+import '../../../../../../core/DI/getit.dart';
+import '../../../../verfication/Presentation/VerficationinitManger/VerificationInitCubit.dart';
+import '../../../../verfication/data/repo/VerficationInitRepo.dart';
+import '../../../../verfication/verificationreqeusts.dart';
+
 class WorkerMainscreenAppbar extends StatelessWidget
     implements PreferredSizeWidget {
   const WorkerMainscreenAppbar({super.key});
@@ -20,12 +25,11 @@ class WorkerMainscreenAppbar extends StatelessWidget
     return AppBar(
       backgroundColor: ColorManger.reportsPageBackground.withOpacity(0.95),
       surfaceTintColor: Colors.transparent,
-      elevation: 2,
+      elevation: ScreenUtilsManager.s2,
       shadowColor: Colors.black12,
       automaticallyImplyLeading: false,
       toolbarHeight: ScreenUtilsManager.h61,
       titleSpacing: ScreenUtilsManager.w16,
-
       title: Row(
         children: [
           SvgPicture.asset(
@@ -33,9 +37,7 @@ class WorkerMainscreenAppbar extends StatelessWidget
             width: ScreenUtilsManager.w24,
             height: ScreenUtilsManager.w24,
           ),
-
           SizedBox(width: ScreenUtilsManager.w12),
-
           Text(
             S.of(context).appTitle,
             style: GoogleFonts.cairo(
@@ -66,7 +68,7 @@ class WorkerMainscreenAppbar extends StatelessWidget
                       builder: (_) => const NotificationCenter(),
                     ),
                   ),
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(ScreenUtilsManager.r12),
                   child: Container(
                     padding: EdgeInsets.all(ScreenUtilsManager.w8),
                     child: Stack(
@@ -80,23 +82,22 @@ class WorkerMainscreenAppbar extends StatelessWidget
                               ? Lottie.asset(
                                   AssetValueManager.Notificationbell,
                                   key: const ValueKey('lottie_bell'),
-                                  width: 28,
-                                  height: 28,
+                                  width: ScreenUtilsManager.w28,
+                                  height: ScreenUtilsManager.h28,
                                 )
                               : Icon(
                                   Icons.notifications_none_rounded,
                                   key: const ValueKey('icon_bell'),
-                                  size: 26,
+                                  size: ScreenUtilsManager.s26,
                                   color: ColorManger.kPrimaryDark.withOpacity(
                                     0.7,
                                   ),
                                 ),
                         ),
-
                         if (unreadCount > 0)
                           Positioned(
-                            right: -4,
-                            top: -4,
+                            right: -ScreenUtilsManager.w4,
+                            top: -ScreenUtilsManager.h4,
                             child: TweenAnimationBuilder<double>(
                               tween: Tween(begin: 0.0, end: 1.0),
                               duration: const Duration(milliseconds: 400),
@@ -105,13 +106,13 @@ class WorkerMainscreenAppbar extends StatelessWidget
                                 return Transform.scale(
                                   scale: scale,
                                   child: Container(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 5,
-                                      vertical: 2,
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: ScreenUtilsManager.w5,
+                                      vertical: ScreenUtilsManager.h2,
                                     ),
-                                    constraints: const BoxConstraints(
-                                      minWidth: 18,
-                                      minHeight: 18,
+                                    constraints: BoxConstraints(
+                                      minWidth: ScreenUtilsManager.w18,
+                                      minHeight: ScreenUtilsManager.h18,
                                     ),
                                     decoration: BoxDecoration(
                                       gradient: const LinearGradient(
@@ -122,16 +123,21 @@ class WorkerMainscreenAppbar extends StatelessWidget
                                         begin: Alignment.topLeft,
                                         end: Alignment.bottomRight,
                                       ),
-                                      borderRadius: BorderRadius.circular(10),
+                                      borderRadius: BorderRadius.circular(
+                                        ScreenUtilsManager.r10,
+                                      ),
                                       border: Border.all(
                                         color: Colors.white,
-                                        width: 1.5,
+                                        width: ScreenUtilsManager.w1_5,
                                       ),
                                       boxShadow: [
                                         BoxShadow(
                                           color: Colors.black.withOpacity(0.15),
-                                          blurRadius: 4,
-                                          offset: const Offset(0, 2),
+                                          blurRadius: ScreenUtilsManager.s4,
+                                          offset: Offset(
+                                            ScreenUtilsManager.w0,
+                                            ScreenUtilsManager.h2,
+                                          ),
                                         ),
                                       ],
                                     ),
@@ -140,7 +146,7 @@ class WorkerMainscreenAppbar extends StatelessWidget
                                         unreadCount > 9 ? '9+' : '$unreadCount',
                                         style: GoogleFonts.cairo(
                                           color: Colors.white,
-                                          fontSize: 9,
+                                          fontSize: ScreenUtilsManager.s9,
                                           fontWeight: FontWeight.bold,
                                           height: 1.1,
                                         ),
@@ -159,6 +165,23 @@ class WorkerMainscreenAppbar extends StatelessWidget
             );
           },
         ),
+
+        InkWell(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => BlocProvider(
+                  create: (context) =>
+                      VerificationInitCubit(getIt<VerficationInitRepo>()),
+                  child: const VerificationRequestsScreen(),
+                ),
+              ),
+            );
+          },
+          child: Icon(Icons.menu, size: ScreenUtilsManager.s20),
+        ),
+        SizedBox(width: ScreenUtilsManager.w8),
       ],
     );
   }

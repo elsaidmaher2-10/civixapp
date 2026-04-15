@@ -1,5 +1,6 @@
 import 'package:citifix/core/resource/colormanager.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:citifix/core/resource/screenutilsmaanger.dart';
+import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MetaInfoItem extends StatelessWidget {
@@ -13,18 +14,20 @@ class MetaInfoItem extends StatelessWidget {
     required this.label,
     this.muted = false,
   });
+
   @override
   Widget build(BuildContext context) {
     final color = ColorManger.onSurfaceVariant.withOpacity(muted ? 0.6 : 1.0);
+
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Icon(icon, size: 16, color: color),
-        const SizedBox(width: 4),
+        Icon(icon, size: ScreenUtilsManager.s16, color: color),
+        SizedBox(width: ScreenUtilsManager.w4),
         Text(
           label,
           style: GoogleFonts.cairo(
-            fontSize: 12,
+            fontSize: ScreenUtilsManager.s12,
             fontWeight: FontWeight.w600,
             color: color,
           ),

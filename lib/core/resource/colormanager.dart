@@ -1,6 +1,21 @@
-import 'package:flutter/painting.dart';
+import 'package:flutter/material.dart';
 
 class ColorManger {
+  static Color get grey50 => Colors.grey.shade50;
+  static const Color black = Colors.black;
+  static Color get grey500 => Colors.grey.shade500;
+  static Color get grey200 => Colors.grey.shade200;
+  static Color get grey700 => Colors.grey.shade700;
+  static Color get grey600 => Colors.grey.shade600;
+  static const Color notificationRedStart = Color(0xffFF5252);
+  static const Color notificationRedEnd = Color(0xffFF1744);
+  static Color get grey300 => Colors.grey.shade300;
+  static Color get primaryOpacity20 =>
+      ColorManger.workerprimary.withOpacity(0.2);
+  static const Color black87 = Colors.black87;
+  static const Color completedButton = Color(0xFFFF8A00);
+  static const Color black54 = Colors.black54;
+  static const Color grey = Colors.grey;
   static const Color kPrimary = Color(0xff003366);
   static const Color kPrimaryDark = Color(0xff0F172A);
   static const Color kPrimaryLight = Color.fromARGB(204, 112, 167, 222);
@@ -20,11 +35,14 @@ class ColorManger {
   static const Color lightBlue = Color(0xff1162D4);
   static const Color red = Color(0xffFC1B1A);
   static const Color redLight = Color(0xffFEE2E2);
+  static const Color tasksBackground = Color(0xFFF8F9FB);
+
   static const Color green = Color(0xff08A43A);
   static const Color orange = Color(0xffF59E0B);
   static const Color lightColor = Color(0xff2A4D8B);
   static const Color textBlack = Color(0xff111827);
   static const Color white = Color(0xffFFFFFF);
+  static Color get grey400 => Colors.grey.shade400;
   static const Color reportsPageBackground = Color(0xFFF6F7F8);
   static const Color searchFieldFill = Color(0xffF1F5F9);
   static const Color searchIconColor = Color(0xff475569);

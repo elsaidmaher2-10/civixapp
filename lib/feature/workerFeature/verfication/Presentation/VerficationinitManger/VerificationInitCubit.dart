@@ -70,12 +70,10 @@ class VerificationInitCubit extends Cubit<VerificationInitState> {
 
   Future<void> getVerificationRequestData() async {
     emit(VerificationInitLoading());
-
     final result = await repo.getvrificationRequest();
-
     result.fold(
       (failure) {
-        emit(VerificationInitError(failure.errors.first));
+        emit(VerificationInitError(failure.errors.join()));
       },
       (workerRequestModel) {
         emit(VerificationSuccess(workerRequest: workerRequestModel));

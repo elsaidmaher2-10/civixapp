@@ -189,7 +189,10 @@ class AchievementReportCard extends StatelessWidget {
             onTap: () => Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (_) => ReportDetailsScreen(reportId: report.reportId),
+                builder: (_) => ReportDetailsScreen(
+                  reportId: report.reportId,
+                  isachivement: true,
+                ),
               ),
             ),
             child: Row(

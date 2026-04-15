@@ -1,4 +1,5 @@
 import 'package:citifix/feature/citzenFeature/reports/data/Models/commentmodel/commentmodel.dart';
+
 class ReportResponseModelByid {
   final int id;
   final String title;
@@ -18,6 +19,8 @@ class ReportResponseModelByid {
   final String userId;
   final int? workerId;
   final String workerName;
+  final List<TimelineModel> timeline;
+
   final String workerProfileImageUrl;
   final List<CommentModel> comments;
   final DateTime createdAt;
@@ -48,6 +51,7 @@ class ReportResponseModelByid {
     required this.createdAt,
     required this.imagesUrls,
     required this.videosUrls,
+    required this.timeline,
   });
 
   factory ReportResponseModelByid.fromJson(Map<String, dynamic> json) {
@@ -55,7 +59,7 @@ class ReportResponseModelByid {
       id: json['id'] ?? 0,
       title: json['title'] ?? '',
       description: json['description'] ?? '',
-      areaId: json['areaId'], 
+      areaId: json['areaId'],
       areaName: json['areaName'] ?? '',
       categoryName: json['categoryName'] ?? '',
       departmentName: json['departmentName'] ?? '',
@@ -68,7 +72,7 @@ class ReportResponseModelByid {
       citizenName: json['citizenName'] ?? '',
       citizenProfileImageUrl: json['citizenProfileImageUrl'] ?? '',
       userId: json['userId'] ?? '',
-      workerId: json['workerId'], 
+      workerId: json['workerId'],
       workerName: json['workerName'] ?? '',
       workerProfileImageUrl: json['workerProfileImageUrl'] ?? '',
       comments:
@@ -85,6 +89,25 @@ class ReportResponseModelByid {
       videosUrls:
           (json['videosUrls'] as List?)?.map((e) => e.toString()).toList() ??
           [],
+      timeline:
+          (json['timeline'] as List?)
+              ?.map((e) => TimelineModel.fromJson(e))
+              .toList() ??
+          [],
+    );
+  }
+}
+
+class TimelineModel {
+  final String date;
+  final String status;
+
+  TimelineModel({required this.date, required this.status});
+
+  factory TimelineModel.fromJson(Map<String, dynamic> json) {
+    return TimelineModel(
+      date: json["date"] ?? "",
+      status: json["status"] ?? "",
     );
   }
 }

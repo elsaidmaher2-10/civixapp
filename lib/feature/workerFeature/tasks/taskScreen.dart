@@ -3,8 +3,6 @@ import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/core/service/StatusReport.dart';
-import 'package:citifix/feature/workerFeature/taskDetails/data/repos/reportdetails.dart';
-import 'package:citifix/feature/workerFeature/taskDetails/presentation/manager/reportdetailsManger.dart';
 import 'package:citifix/feature/workerFeature/tasks/controller/tasksController.dart';
 import 'package:citifix/feature/workerFeature/tasks/data/repos/worker_task_Repo.dart';
 import 'package:citifix/feature/workerFeature/tasks/presentation/manager/cubit/task_report_cubit.dart';
@@ -14,9 +12,9 @@ import 'package:citifix/feature/workerFeature/tasks/widget/ActiveTaskCard.dart';
 import 'package:citifix/feature/workerFeature/tasks/widget/CompeletedTask.dart';
 import 'package:citifix/feature/workerFeature/tasks/widget/TasksHeader.dart';
 import 'package:citifix/feature/workerFeature/tasks/widget/taskFilter.dart';
+import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -29,6 +27,7 @@ class TasksView extends StatefulWidget {
 
 class _TasksViewState extends State<TasksView> {
   late WorkerTasksCubit _cubit;
+
   @override
   void initState() {
     super.initState();
@@ -40,7 +39,7 @@ class _TasksViewState extends State<TasksView> {
     return BlocProvider.value(
       value: _cubit,
       child: Scaffold(
-        backgroundColor: const Color(0xFFF8F9FB),
+        backgroundColor: ColorManger.tasksBackground,
         body: RefreshIndicator(
           color: ColorManger.workerprimary,
           backgroundColor: ColorManger.white,
@@ -70,14 +69,19 @@ class _TasksViewState extends State<TasksView> {
                 ),
                 SizedBox(height: ScreenUtilsManager.h16),
                 BlocBuilder<WorkerTasksCubit, WorkerTasksState>(
+                  buildWhen: (currnet, prevous) =>
+                      currnet is WorkerTasksLoading ||
+                      currnet is WorkerTasksSuccess ||
+                      currnet is WorkerTasksError,
                   builder: (context, state) {
                     if (state is WorkerTasksLoading) {
                       return const TasksLoadingSkeleton();
                     }
-
                     if (state is WorkerTasksSuccess) {
                       final filteredTasks = state.response.items.where((task) {
-                        if (Taskscontroller.selectedFilter == 'All') {
+                        if (Taskscontroller.selectedFilter ==
+                                S.of(context).all ||
+                            Taskscontroller.selectedFilter == 'All') {
                           return true;
                         }
                         return task.status.trim().toLowerCase() ==
@@ -88,7 +92,9 @@ class _TasksViewState extends State<TasksView> {
                         return _EmptyState(
                           filterName: Taskscontroller.selectedFilter,
                           onReset: () => setState(
-                            () => Taskscontroller.selectedFilter = 'All',
+                            () => Taskscontroller.selectedFilter = S
+                                .of(context)
+                                .all,
                           ),
                         );
                       }
@@ -147,39 +153,47 @@ class _ErrorState extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SizedBox(height: 40.h),
+          SizedBox(height: ScreenUtilsManager.h40),
           Icon(
             isNoInternet ? Icons.wifi_off : Icons.error_outline,
-            size: 60.r,
-            color: Colors.grey,
+            size: ScreenUtilsManager.r60,
+            color: ColorManger.grey,
           ),
-          SizedBox(height: 16.h),
+          SizedBox(height: ScreenUtilsManager.h16),
           Text(
-            isNoInternet ? "No Internet Connection" : "Something went wrong",
+            isNoInternet
+                ? S.of(context).noInternetConnection
+                : S.of(context).somethingWentWrong,
             style: GoogleFonts.cairo(
-              fontSize: 16.sp,
+              fontSize: ScreenUtilsManager.s16,
               fontWeight: FontWeight.bold,
             ),
           ),
-          SizedBox(height: 8.h),
+          SizedBox(height: ScreenUtilsManager.h8),
           Text(
             errorMessage,
             textAlign: TextAlign.center,
-            style: GoogleFonts.cairo(color: Colors.grey, fontSize: 13.sp),
+            style: GoogleFonts.cairo(
+              color: ColorManger.grey,
+              fontSize: ScreenUtilsManager.s13,
+            ),
           ),
-          SizedBox(height: 16.h),
+          SizedBox(height: ScreenUtilsManager.h16),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               backgroundColor: ColorManger.workerprimary,
-              foregroundColor: Colors.white,
-              padding: EdgeInsets.symmetric(horizontal: 32.w, vertical: 12.h),
+              foregroundColor: ColorManger.white,
+              padding: EdgeInsets.symmetric(
+                horizontal: ScreenUtilsManager.w32,
+                vertical: ScreenUtilsManager.h12,
+              ),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12.r),
+                borderRadius: BorderRadius.circular(ScreenUtilsManager.r12),
               ),
             ),
             onPressed: onRetry,
             child: Text(
-              "Retry",
+              S.of(context).retry,
               style: GoogleFonts.cairo(fontWeight: FontWeight.bold),
             ),
           ),
@@ -204,22 +218,22 @@ class _EmptyState extends StatelessWidget {
         children: [
           Icon(
             Icons.assignment_late_outlined,
-            size: 64.r,
-            color: Colors.grey.shade300,
+            size: ScreenUtilsManager.r64,
+            color: ColorManger.grey300,
           ),
           SizedBox(height: ScreenUtilsManager.h16),
           Text(
-            "No tasks found for '$filterName'",
+            S.of(context).noTasksFound(filterName),
             style: GoogleFonts.cairo(
               fontSize: ScreenUtilsManager.s16,
-              color: Colors.grey.shade600,
+              color: ColorManger.grey600,
               fontWeight: FontWeight.w600,
             ),
           ),
           TextButton(
             onPressed: onReset,
             child: Text(
-              "Show all tasks",
+              S.of(context).showAllTasks,
               style: GoogleFonts.cairo(color: ColorManger.workerprimary),
             ),
           ),
@@ -235,8 +249,8 @@ class TasksLoadingSkeleton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
-      baseColor: Colors.grey[300]!,
-      highlightColor: Colors.grey[100]!,
+      baseColor: ColorManger.grey300,
+      highlightColor: ColorManger.grey200,
       child: Column(
         children: List.generate(
           3,
@@ -245,7 +259,7 @@ class TasksLoadingSkeleton extends StatelessWidget {
             height: ScreenUtilsManager.h150,
             width: double.infinity,
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: ColorManger.white,
               borderRadius: BorderRadius.circular(ScreenUtilsManager.r16),
             ),
           ),

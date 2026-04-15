@@ -23,6 +23,8 @@ import 'package:citifix/core/widget/customtextfromfield.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../../../core/resource/constantmanger.dart';
+
 class Loginpage extends StatefulWidget {
   const Loginpage({super.key});
 
@@ -125,6 +127,24 @@ class _LoginpageState extends State<Loginpage> {
           return BlocConsumer<LoginmangerCubit, LogincontrollerState>(
             listener: (context, state) async {
               if (state is LogincontrollerFailure) {
+                if (state.message.contains(
+                  "Email not confirmed. Please check your email to confirm your account.",
+                )) {
+                  Navigator.pushNamed(
+                    context,
+                    Routes.otpverficationc,
+                    arguments: {
+                      Constantmanger.email: email.text.trim(),
+                      Constantmanger.screen: Constantmanger.logIn,
+                    },
+                  );
+
+                  Customsnackbar.show(
+                    context: context,
+                    backgroundColor: ColorManger.red,
+                    message: state.message,
+                  );
+                }
                 Customsnackbar.show(
                   context: context,
                   backgroundColor: ColorManger.red,

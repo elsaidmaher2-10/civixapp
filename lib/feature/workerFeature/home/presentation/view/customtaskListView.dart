@@ -1,7 +1,9 @@
 import 'package:citifix/core/resource/colormanager.dart';
+import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/feature/workerFeature/home/data/models/dashbroadmodel.dart';
 import 'package:citifix/feature/workerFeature/home/presentation/view/widget/TaskCard.dart';
 import 'package:citifix/feature/workerFeature/main/Manager/cubit/worker_cubit_cubit.dart';
+import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -17,24 +19,24 @@ class CustomTaskListView extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 4.0),
+          padding: EdgeInsets.symmetric(horizontal: ScreenUtilsManager.w4),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
                 children: [
                   Text(
-                    'Available Tasks',
+                    S.of(context).available_tasks,
                     style: GoogleFonts.cairo(
-                      fontSize: 20,
+                      fontSize: ScreenUtilsManager.s20,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(width: 8),
+                  SizedBox(width: ScreenUtilsManager.w8),
                   Text(
                     '(${reports.length})',
                     style: GoogleFonts.cairo(
-                      fontSize: 14,
+                      fontSize: ScreenUtilsManager.s14,
                       color: ColorManger.onSurfaceVariant,
                     ),
                   ),
@@ -45,19 +47,19 @@ class CustomTaskListView extends StatelessWidget {
                   context.read<WorkerCubit>().changeCurrentIndex(1);
                 },
                 child: Text(
-                  "See All",
+                  S.of(context).see_all,
                   style: GoogleFonts.cairo(color: ColorManger.primaryColor),
                 ),
               ),
             ],
           ),
         ),
-        const SizedBox(height: 8),
+        SizedBox(height: ScreenUtilsManager.h8),
         SizedBox(
-          height: 240,
+          height: ScreenUtilsManager.h240,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            physics: const BouncingScrollPhysics(),
+            physics: BouncingScrollPhysics(),
             itemCount: reports.length,
             itemBuilder: (context, index) {
               return TaskCard(report: reports[index]);

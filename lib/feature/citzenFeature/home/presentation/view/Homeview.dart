@@ -1,5 +1,6 @@
 import 'package:citifix/core/resource/assetvaluemanger.dart';
 import 'package:citifix/core/resource/colormanager.dart';
+import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/feature/citzenFeature/reports/data/Models/GetReportModel.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/manager/reportManger/cubit/report_manager_cubit.dart';
@@ -32,30 +33,7 @@ class HomeScreen extends StatelessWidget {
             );
           }
           if (state is GetReportsFailure) {
-            return Center(
-              child: Padding(
-                padding: EdgeInsets.all(ScreenUtilsManager.w24),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.error_outline_rounded,
-                      size: 50.r,
-                      color: Colors.red,
-                    ),
-                    SizedBox(height: ScreenUtilsManager.h16),
-                    Text(
-                      state.errMessage,
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.cairo(
-                        fontSize: ScreenUtilsManager.s16,
-                        color: ColorManger.kPrimaryDark,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            );
+            return Center(child: _buildErrorWidget(context, state.errMessage));
           }
           List<ReportItem> reports = [];
           if (state is GetReportsSuccess) {
@@ -274,4 +252,43 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+Widget _buildErrorWidget(context, String message) {
+  return Padding(
+    padding: EdgeInsets.all(20.w),
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        message.contains(Constantmanger.nointernet)
+            ? Icon(Icons.cloud_off, size: 64.w, color: Colors.grey)
+            : Icon(Icons.error, size: 64.w, color: Colors.grey),
+        SizedBox(height: 16.h),
+        Text(
+          S.of(context).errorOccurred,
+          style: GoogleFonts.cairo(
+            fontSize: 18.sp,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        Text(
+          message,
+          textAlign: TextAlign.center,
+          style: GoogleFonts.cairo(color: Colors.grey),
+        ),
+        SizedBox(height: 16.h),
+        ElevatedButton(
+          onPressed: () => context.read<ReportCubit>().fetchReports(),
+          style: ElevatedButton.styleFrom(
+            backgroundColor: ColorManger.primary,
+            foregroundColor: Colors.white,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8.r),
+            ),
+          ),
+          child: Text(S.of(context).retry),
+        ),
+      ],
+    ),
+  );
 }

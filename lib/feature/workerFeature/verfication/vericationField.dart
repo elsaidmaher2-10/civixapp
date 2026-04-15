@@ -203,7 +203,7 @@ class VerificationFailedScreen extends StatelessWidget {
                     builder: (context) => BlocProvider(
                       create: (context) =>
                           VerificationInitCubit(getIt<VerficationInitRepo>()),
-                      child: const GlobalGateVerificationInitPage(),
+                      child: const VerificationInit(),
                     ),
                   ),
                 );

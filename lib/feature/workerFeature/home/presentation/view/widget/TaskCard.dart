@@ -20,13 +20,13 @@ class TaskCard extends StatelessWidget {
       padding: EdgeInsets.all(ScreenUtilsManager.w12),
       decoration: BoxDecoration(
         color: ColorManger.white,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(ScreenUtilsManager.r20),
         border: Border.all(color: Colors.grey.shade100),
         boxShadow: [
           BoxShadow(
             color: ColorManger.textBlack.withOpacity(0.03),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
+            blurRadius: ScreenUtilsManager.s10,
+            offset: Offset(ScreenUtilsManager.w0, ScreenUtilsManager.h4),
           ),
         ],
       ),
@@ -36,16 +36,14 @@ class TaskCard extends StatelessWidget {
           Stack(
             children: [
               InkWell(
-                onTap: () {
-                  print(report.imageUrls);
-                },
+                onTap: () {},
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(ScreenUtilsManager.r12),
                   child: CachedNetworkImage(
                     placeholder: (context, url) {
-                      return customShimer(150);
+                      return customShimer(ScreenUtilsManager.h150);
                     },
-                    height: 130,
+                    height: ScreenUtilsManager.h130,
                     width: double.infinity,
                     fit: BoxFit.cover,
                     imageUrl: report.imageUrls.isNotEmpty
@@ -55,22 +53,22 @@ class TaskCard extends StatelessWidget {
                 ),
               ),
               Positioned(
-                top: 8,
-                right: 8,
+                top: ScreenUtilsManager.h8,
+                right: ScreenUtilsManager.w8,
                 child: Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 10,
-                    vertical: 4,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: ScreenUtilsManager.w10,
+                    vertical: ScreenUtilsManager.h4,
                   ),
                   decoration: BoxDecoration(
                     color: ColorManger.primaryColor.withOpacity(0.9),
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(ScreenUtilsManager.r20),
                   ),
                   child: Text(
                     report.status,
                     style: GoogleFonts.cairo(
                       color: Colors.white,
-                      fontSize: 10,
+                      fontSize: ScreenUtilsManager.s10,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -78,37 +76,40 @@ class TaskCard extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 12),
+          SizedBox(height: ScreenUtilsManager.h12),
           Text(
             report.categoryName.toUpperCase(),
             style: GoogleFonts.cairo(
               color: ColorManger.primaryColor,
-              fontSize: 10,
+              fontSize: ScreenUtilsManager.s10,
               fontWeight: FontWeight.bold,
               letterSpacing: 0.5,
             ),
           ),
-          const SizedBox(height: 4),
+          SizedBox(height: ScreenUtilsManager.h4),
           Text(
             report.title,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: GoogleFonts.cairo(fontWeight: FontWeight.bold, fontSize: 16),
+            style: GoogleFonts.cairo(
+              fontWeight: FontWeight.bold,
+              fontSize: ScreenUtilsManager.s16,
+            ),
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: ScreenUtilsManager.h8),
           Row(
             children: [
               Icon(
                 Icons.location_on_outlined,
-                size: 14,
+                size: ScreenUtilsManager.s14,
                 color: ColorManger.onSurfaceVariant,
               ),
-              const SizedBox(width: 4),
+              SizedBox(width: ScreenUtilsManager.w4),
               Expanded(
                 child: Text(
                   report.areaName,
                   style: GoogleFonts.cairo(
-                    fontSize: 12,
+                    fontSize: ScreenUtilsManager.s12,
                     color: ColorManger.onSurfaceVariant,
                   ),
                 ),
@@ -116,7 +117,7 @@ class TaskCard extends StatelessWidget {
               Text(
                 "${report.createdAt.day}/${report.createdAt.month}",
                 style: GoogleFonts.cairo(
-                  fontSize: 11,
+                  fontSize: ScreenUtilsManager.s11,
                   color: Colors.grey.shade400,
                 ),
               ),

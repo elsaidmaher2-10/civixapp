@@ -1,19 +1,20 @@
 import 'package:citifix/core/resource/colormanager.dart';
+import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 Widget buildWorkerCard({required String label, required String value}) {
   return Expanded(
     child: Container(
-      padding: const EdgeInsets.all(20),
+      padding: EdgeInsets.all(ScreenUtilsManager.w20),
       decoration: BoxDecoration(
         color: ColorManger.surfaceContainerLowest,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(ScreenUtilsManager.r16),
         boxShadow: [
           BoxShadow(
             color: ColorManger.onSurface.withOpacity(0.04),
-            blurRadius: 32,
-            offset: const Offset(0, 12),
+            blurRadius: ScreenUtilsManager.s32,
+            offset: Offset(ScreenUtilsManager.w0, ScreenUtilsManager.h12),
           ),
         ],
       ),
@@ -23,16 +24,19 @@ Widget buildWorkerCard({required String label, required String value}) {
           Text(
             label,
             style: GoogleFonts.cairo(
-              fontSize: 11,
+              fontSize: ScreenUtilsManager.s11,
               fontWeight: FontWeight.bold,
               color: ColorManger.onSurfaceVariant,
-              letterSpacing: 1,
+              letterSpacing: ScreenUtilsManager.s1,
             ),
           ),
-          const SizedBox(height: 4),
+          SizedBox(height: ScreenUtilsManager.h4),
           Text(
             value,
-            style: GoogleFonts.cairo(fontSize: 32, fontWeight: FontWeight.bold),
+            style: GoogleFonts.cairo(
+              fontSize: ScreenUtilsManager.s32,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ],
       ),

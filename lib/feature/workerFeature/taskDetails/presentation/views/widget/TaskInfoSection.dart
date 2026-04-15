@@ -1,4 +1,6 @@
 import 'package:citifix/core/resource/colormanager.dart';
+import 'package:citifix/core/resource/screenutilsmaanger.dart'; // تم الإضافة
+import 'package:citifix/generated/l10n.dart'; // تم الإضافة
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -12,11 +14,11 @@ class TaskInfoSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(20),
+      padding: EdgeInsets.all(ScreenUtilsManager.w20),
       decoration: BoxDecoration(
         color: ColorManger.surface,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.grey.shade200),
+        borderRadius: BorderRadius.circular(ScreenUtilsManager.r12),
+        border: Border.all(color: ColorManger.grey200),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -25,31 +27,31 @@ class TaskInfoSection extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'ID: #${task.id}',
+                '${S.of(context).idLabel}: #${task.id}',
                 style: GoogleFonts.cairo(
-                  fontSize: 10,
+                  fontSize: ScreenUtilsManager.s10,
                   fontWeight: FontWeight.w500,
-                  color: Colors.grey.shade500,
+                  color: ColorManger.grey500,
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 12),
+          SizedBox(height: ScreenUtilsManager.h12),
           Text(
-            task.title ?? 'No Title',
+            task.title ?? S.of(context).noTitle,
             style: GoogleFonts.cairo(
-              fontSize: 20,
+              fontSize: ScreenUtilsManager.s20,
               fontWeight: FontWeight.w800,
               color: ColorManger.onSurface,
             ),
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: ScreenUtilsManager.h8),
           Text(
-            task.description ?? 'No Description provided.',
+            task.description ?? S.of(context).noDescription,
             style: GoogleFonts.cairo(
-              fontSize: 14,
+              fontSize: ScreenUtilsManager.s14,
               color: ColorManger.onSurfaceVariant,
-              height: 1.5,
+              height: ScreenUtilsManager.h1_5,
             ),
           ),
         ],

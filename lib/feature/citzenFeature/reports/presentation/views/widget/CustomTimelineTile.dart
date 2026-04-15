@@ -9,10 +9,12 @@ class CustomTimelineTile extends StatelessWidget {
   final bool isFirst;
   final bool isLast;
   final bool isDone;
+  final String timeline;
 
   const CustomTimelineTile({
     super.key,
     required this.title,
+    required this.timeline,
     this.isFirst = false,
     this.isLast = false,
     this.isDone = false,
@@ -21,42 +23,62 @@ class CustomTimelineTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 80.h,
+      height: 90.h,
       child: TimelineTile(
         alignment: TimelineAlign.start,
-        lineXY: 0,
         isFirst: isFirst,
         isLast: isLast,
         indicatorStyle: IndicatorStyle(
           width: 24.w,
           height: 24.w,
-          padding: EdgeInsets.zero,
-          color: isDone ? ColorManger.kPrimary : Colors.grey[300]!,
+          indicator: _buildIndicator(),
+          padding: EdgeInsets.symmetric(horizontal: 4.w),
         ),
-
-        endChild: Container(
-          padding: EdgeInsetsDirectional.only(
-            start: 12.w,
-            top: 20.h,
-            bottom: 20.h,
-          ),
-          alignment: AlignmentDirectional.centerStart,
-          child: Text(
-            title,
-            textAlign: TextAlign.start,
-            style: GoogleFonts.cairo(
-              fontSize: 16.sp,
-              color: isDone ? Colors.black : Colors.grey[600],
-              // ...
-            ),
-          ),
-        ),
-
         beforeLineStyle: LineStyle(
           color: isDone ? ColorManger.kPrimary : Colors.grey[300]!,
-          thickness: 2,
+          thickness: 3,
+        ),
+        endChild: Padding(
+          padding: EdgeInsetsDirectional.only(start: 16.w),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: GoogleFonts.cairo(
+                  fontSize: 16.sp,
+                  fontWeight: isDone ? FontWeight.bold : FontWeight.normal,
+                  color: isDone ? Colors.black : Colors.grey[600],
+                ),
+              ),
+              Text(
+                timeline,
+                style: GoogleFonts.cairo(
+                  fontSize: 12.sp,
+                  color: Colors.grey[500],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
+    );
+  }
+
+  Widget _buildIndicator() {
+    return Container(
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: isDone ? ColorManger.kPrimary : Colors.white,
+        border: Border.all(
+          color: isDone ? ColorManger.kPrimary : Colors.grey[300]!,
+          width: 2,
+        ),
+      ),
+      child: isDone ? Icon(Icons.check, size: 14.w, color: Colors.white) : null,
     );
   }
 }

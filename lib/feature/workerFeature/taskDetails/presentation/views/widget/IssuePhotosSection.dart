@@ -4,6 +4,7 @@ import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/feature/citzenFeature/onbroading/widget/indicator.dart'; // تأكد من المسار
 import 'package:citifix/feature/citzenFeature/reports/presentation/views/widget/vedioplayer.dart'; // تأكد من المسار
+import 'package:citifix/generated/l10n.dart'; // تم إضافة ملف الترجمة
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -31,25 +32,25 @@ class _IssuePhotosSectionState extends State<IssuePhotosSection> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'ISSUE MEDIA',
+          S.of(context).issueMedia,
           style: GoogleFonts.cairo(
-            fontSize: 12,
+            fontSize: ScreenUtilsManager.s12,
             fontWeight: FontWeight.bold,
             color: ColorManger.onSurfaceVariant,
-            letterSpacing: 1,
+            letterSpacing: ScreenUtilsManager.s1,
           ),
         ),
-        const SizedBox(height: 12),
+        SizedBox(height: ScreenUtilsManager.h12),
         Container(
-          height: 220,
+          height: ScreenUtilsManager.h220,
           width: double.infinity,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(ScreenUtilsManager.r16),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.05),
-                blurRadius: 10,
-                offset: const Offset(0, 5),
+                color: ColorManger.black.withOpacity(0.05),
+                blurRadius: ScreenUtilsManager.s10,
+                offset: Offset(0, ScreenUtilsManager.h5),
               ),
             ],
           ),
@@ -57,7 +58,7 @@ class _IssuePhotosSectionState extends State<IssuePhotosSection> {
             alignment: Alignment.bottomCenter,
             children: [
               ClipRRect(
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(ScreenUtilsManager.r16),
                 child: PageView.builder(
                   controller: _pageController,
                   itemCount: widget.mediaItems.length,
@@ -72,7 +73,7 @@ class _IssuePhotosSectionState extends State<IssuePhotosSection> {
                       imageUrl: item,
                       fit: BoxFit.cover,
                       placeholder: (context, url) => Container(
-                        color: Colors.grey[200],
+                        color: ColorManger.grey200,
                         child: Center(
                           child: CupertinoActivityIndicator(
                             radius: ScreenUtilsManager.r12,
@@ -91,12 +92,12 @@ class _IssuePhotosSectionState extends State<IssuePhotosSection> {
 
               if (widget.mediaItems.length > 1)
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 12),
+                  padding: EdgeInsets.only(bottom: ScreenUtilsManager.h12),
                   child: CustomIndicator(
                     controller: _pageController,
                     count: widget.mediaItems.length,
                     activeColor: ColorManger.kPrimary,
-                    dotColor: Colors.white.withOpacity(0.7),
+                    dotColor: ColorManger.white.withOpacity(0.7),
                   ),
                 ),
             ],

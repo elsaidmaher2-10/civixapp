@@ -1,6 +1,6 @@
 import 'package:citifix/core/resource/colormanager.dart';
-import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
+import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -14,7 +14,7 @@ class WorkerAlertVrefication extends StatelessWidget {
       decoration: BoxDecoration(
         color: ColorManger.primaryColor.withValues(alpha: 0.05),
         border: Border.all(color: ColorManger.primaryColor.withOpacity(0.1)),
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(ScreenUtilsManager.r16),
       ),
       child: Row(
         children: [
@@ -33,7 +33,7 @@ class WorkerAlertVrefication extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  Constantmanger.alertrequired,
+                  S.of(context).alertRequired,
                   style: GoogleFonts.cairo(
                     fontWeight: FontWeight.bold,
                     color: ColorManger.primaryColor,
@@ -41,7 +41,7 @@ class WorkerAlertVrefication extends StatelessWidget {
                 ),
                 SizedBox(height: ScreenUtilsManager.h4),
                 Text(
-                  Constantmanger.updateYourID,
+                  S.of(context).updateYourId,
                   style: GoogleFonts.cairo(
                     fontSize: ScreenUtilsManager.s14,
                     color: ColorManger.onInProgressContainer,

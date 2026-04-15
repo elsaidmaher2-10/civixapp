@@ -1,26 +1,25 @@
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
-import 'package:citifix/feature/workerFeature/main/Manager/cubit/worker_cubit_cubit.dart';
 import 'package:citifix/feature/workerFeature/tasks/presentation/manager/cubit/task_report_cubit.dart';
+import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../taskDetails/presentation/manager/reportdetailsManger.dart';
-
 class TaskSearchBar extends StatelessWidget {
   const TaskSearchBar({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: ColorManger.white,
         borderRadius: BorderRadius.circular(ScreenUtilsManager.r12),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.03),
-            blurRadius: 15,
-            offset: const Offset(0, 8),
+            color: ColorManger.black.withOpacity(0.03),
+            blurRadius: ScreenUtilsManager.s15,
+            offset: Offset(0, ScreenUtilsManager.h8),
           ),
         ],
       ),
@@ -29,9 +28,9 @@ class TaskSearchBar extends StatelessWidget {
           context.read<WorkerTasksCubit>().searchTasks(value);
         },
         decoration: InputDecoration(
-          hintText: 'Search for tasks...',
+          hintText: S.of(context).searchTasksHint,
           hintStyle: GoogleFonts.cairo(
-            color: Colors.grey.shade400,
+            color: ColorManger.grey400,
             fontSize: ScreenUtilsManager.s14,
           ),
           prefixIcon: Icon(

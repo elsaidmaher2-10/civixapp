@@ -51,9 +51,7 @@ class VerficationInitRepo {
 
     try {
       final response = await apiservice.get(path: Apiconstant.verification);
-
       final updatedUser = WorkerRequestModel.fromJson(response);
-
       return right(updatedUser);
     } on Serverexciptionmodel catch (e) {
       return left(_handleServerException(e));

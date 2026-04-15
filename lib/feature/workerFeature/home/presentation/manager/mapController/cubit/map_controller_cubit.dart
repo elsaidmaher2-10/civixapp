@@ -1,8 +1,10 @@
+import 'dart:async';
 import 'package:citifix/core/service/LocationService.dart';
 import 'package:citifix/feature/workerFeature/home/presentation/manager/mapController/cubit/map_controller_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geo_fence_utils/geo_fence_utils.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:location/location.dart';
 import 'package:osrm/osrm.dart';
 
 class MapControllerCubit extends Cubit<MapControllerState> {
@@ -10,15 +12,39 @@ class MapControllerCubit extends Cubit<MapControllerState> {
 
   final Locationservice _location = Locationservice();
   final Osrm _osrm = Osrm();
+  StreamSubscription? _locationSubscription;
 
-  void trackUserLocation({required List<GeoPoint> points}) {
-    _location.getLocationData((onData) async {
+  Future<void> trackUserLocation({required List<GeoPoint> points}) async {
+    await _locationSubscription?.cancel();
+
+    final ready = await _location.init();
+    if (!ready) {
+      emit(
+        MapControllerError(
+          message: "Location permission denied or service disabled",
+        ),
+      );
+      return;
+    }
+
+    _location.location.changeSettings(
+      accuracy: LocationAccuracy.high,
+      distanceFilter: 10,
+      interval: 10000,
+    );
+
+    _locationSubscription = _location.location.onLocationChanged.listen((
+      onData,
+    ) async {
       final lat = onData.latitude;
       final lng = onData.longitude;
 
       if (lat == null || lng == null) return;
-
       final curLocation = LatLng(lat, lng);
+      if (points.length < 3) {
+        emit(WorkerNoZone(curlocation: curLocation));
+        return;
+      }
 
       final isInside = insideZone(points: points, curLocation: curLocation);
 
@@ -41,7 +67,6 @@ class MapControllerCubit extends Cubit<MapControllerState> {
         );
 
         List<LatLng> routePoints = [];
-
         if (closest != null) {
           if (isClosed) return;
           routePoints = await getRoute(
@@ -68,7 +93,6 @@ class MapControllerCubit extends Cubit<MapControllerState> {
     required LatLng curLocation,
   }) {
     final polygon = GeoPolygon(points: points);
-
     return GeoPolygonService.isInsidePolygon(
       point: GeoPoint(
         latitude: curLocation.latitude,
@@ -84,7 +108,6 @@ class MapControllerCubit extends Cubit<MapControllerState> {
       origin,
       destinations,
     );
-
     return distances.isNotEmpty ? distances[0] : 0.0;
   }
 
@@ -114,15 +137,19 @@ class MapControllerCubit extends Cubit<MapControllerState> {
       if (response.routes.isEmpty) return [];
 
       final geometry = response.routes.first.geometry;
-
-      if (geometry == null || geometry.lineString?.coordinates == null) {
+      if (geometry == null || geometry.lineString?.coordinates == null)
         return [];
-      }
 
       final coords = geometry.lineString!.coordinates;
       return coords.map<LatLng>((e) => LatLng(e.$2, e.$1)).toList();
     } catch (e) {
       return [];
     }
+  }
+
+  @override
+  Future<void> close() async {
+    await _locationSubscription?.cancel();
+    super.close();
   }
 }

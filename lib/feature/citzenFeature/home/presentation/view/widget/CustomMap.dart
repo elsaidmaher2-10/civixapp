@@ -39,6 +39,7 @@ class _CustomMapState extends State<CustomMap> with TickerProviderStateMixin {
   LatLng? _currentPosition;
   String _street = "";
   bool _isLoading = true;
+  bool _mapReady = false;
 
   @override
   void initState() {
@@ -54,9 +55,19 @@ class _CustomMapState extends State<CustomMap> with TickerProviderStateMixin {
       if (widget.initialPosition != null) {
         targetPosition = widget.initialPosition;
       } else {
-        LocationData newLocation = await _locationservice.getLocationOce();
-        targetPosition = LatLng(newLocation.latitude!, newLocation.longitude!);
+        final isReady = await _locationservice.init();
+        if (isReady) {
+          LocationData? newLocation = await _locationservice.getLocationOce();
+          if (newLocation != null) {
+            targetPosition = LatLng(
+              newLocation.latitude!,
+              newLocation.longitude!,
+            );
+          }
+        }
       }
+
+      targetPosition ??= const LatLng(31.4106, 31.8159);
 
       if (mounted) {
         setState(() {
@@ -68,7 +79,9 @@ class _CustomMapState extends State<CustomMap> with TickerProviderStateMixin {
           await _updateStreet(targetPosition);
         }
 
-        _mapController.move(_currentPosition!, 14);
+        if (_mapReady && _currentPosition != null) {
+          _mapController.move(_currentPosition!, 14);
+        }
 
         widget.onmapCreated(_street, _currentPosition!);
       }
@@ -123,6 +136,7 @@ class _CustomMapState extends State<CustomMap> with TickerProviderStateMixin {
                               const LatLng(31.4106, 31.8159),
                           initialZoom: 14,
                           onMapReady: () {
+                            _mapReady = true;
                             if (_currentPosition != null) {
                               _mapController.move(_currentPosition!, 14);
                             }

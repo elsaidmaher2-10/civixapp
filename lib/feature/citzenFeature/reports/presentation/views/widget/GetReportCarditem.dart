@@ -163,8 +163,10 @@ class ReportCardIem extends StatelessWidget {
                         await Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) =>
-                                ReportDetailsScreen(reportId: report.id),
+                            builder: (context) => ReportDetailsScreen(
+                              reportId: report.id,
+                              isachivement: false,
+                            ),
                           ),
                         );
                         if (context.mounted) {

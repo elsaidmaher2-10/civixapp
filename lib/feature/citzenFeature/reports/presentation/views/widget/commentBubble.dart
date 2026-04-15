@@ -80,7 +80,7 @@ class CommentBubble extends StatelessWidget {
                     comment.commentText,
                     style: GoogleFonts.cairo(
                       fontSize: 13.sp,
-                      color: isWorker ? Colors.white : Colors.black87,
+                      color: isWorker ? Colors.white : Colors.white,
                       height: 1.4,
                     ),
                   ),

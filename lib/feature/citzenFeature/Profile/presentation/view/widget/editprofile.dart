@@ -1,5 +1,3 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/core/widget/CustomSnackBar.dart';
@@ -59,38 +57,26 @@ class _WorkerEditProfileScreenState extends State<EditProfileScreen> {
             message: S.of(context).profileUpdatedSuccess,
           );
           Future.delayed(const Duration(seconds: 1), () {
-            if (context.mounted) Navigator.of(context).pop();
+            if (mounted) Navigator.of(context).pop();
           });
         }
       },
       builder: (context, state) {
         final role =
             userprofilecontroller.userProfile?.role?.toLowerCase() ?? "";
+        final isWorker = role == "worker";
 
         if (userprofilecontroller.userProfile == null) {
-          return Scaffold(
-            backgroundColor: ColorManger.reportsPageBackground,
-            body: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  customloading(),
-                  SizedBox(height: ScreenUtilsManager.h16),
-                  Text(
-                    S.of(context).loading,
-                    style: GoogleFonts.cairo(
-                      fontSize: ScreenUtilsManager.s14,
-                      color: ColorManger.lightGrey2,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          );
+          return _buildLoadingState(context, isWorker);
         }
 
         return ModalProgressHUD(
-          progressIndicator: customloading(),
+          progressIndicator: isWorker
+              ? CupertinoActivityIndicator(
+                  color: ColorManger.workerprimary,
+                  radius: ScreenUtilsManager.r12,
+                )
+              : customloading(),
           inAsyncCall: state is EditUserProfileInfoLoading,
           child: Scaffold(
             backgroundColor: ColorManger.reportsPageBackground,
@@ -108,12 +94,12 @@ class _WorkerEditProfileScreenState extends State<EditProfileScreen> {
                               vertical: ScreenUtilsManager.h32,
                             ),
                             child: Customimagepicker(
-                              role: role == "worker",
+                              role: isWorker,
                               userProfile: userprofilecontroller.userProfile,
                             ),
                           ),
                           Editfromprofile(
-                            role: role == "worker",
+                            role: isWorker,
                             EmailCotroller:
                                 userprofilecontroller.emailController,
                             nameCotroller: userprofilecontroller.nameController,
@@ -122,49 +108,18 @@ class _WorkerEditProfileScreenState extends State<EditProfileScreen> {
                             addressCotroller:
                                 userprofilecontroller.addressController,
                           ),
-                          role == "worker"
-                              ? SizedBox.shrink()
-                              : Padding(
-                                  padding: EdgeInsets.symmetric(
-                                    vertical: ScreenUtilsManager.p10,
-                                    horizontal: ScreenUtilsManager.p23,
-                                  ),
-                                  child: const Chanagepassword(),
-                                ),
+                          if (!isWorker)
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                vertical: ScreenUtilsManager.p10,
+                                horizontal: ScreenUtilsManager.p23,
+                              ),
+                              child: const Chanagepassword(),
+                            ),
                           SizedBox(height: ScreenUtilsManager.h24),
                           Saveeditprofile(
-                            role: role == "worker",
-                            ontap: () {
-                              if (userprofilecontroller.userProfile != null) {
-                                context
-                                    .read<UserProfileInfoCubit>()
-                                    .updateUserProfile(
-                                      UserProfile(
-                                        fullName: userprofilecontroller
-                                            .nameController
-                                            .text,
-                                        nationalId: userprofilecontroller
-                                            .userProfile!
-                                            .nationalId,
-                                        address: userprofilecontroller
-                                            .addressController
-                                            .text,
-                                        phoneNumber: userprofilecontroller
-                                            .phoneController
-                                            .text,
-                                        email: userprofilecontroller
-                                            .emailController
-                                            .text,
-                                        username: userprofilecontroller
-                                            .userProfile!
-                                            .username,
-                                        dateOfBirth: userprofilecontroller
-                                            .userProfile!
-                                            .dateOfBirth,
-                                      ),
-                                    );
-                              }
-                            },
+                            role: isWorker,
+                            ontap: () => _handleSave(context),
                             bntcontroller: userprofilecontroller.bntController,
                           ),
                           SizedBox(height: ScreenUtilsManager.h12),
@@ -183,7 +138,50 @@ class _WorkerEditProfileScreenState extends State<EditProfileScreen> {
     );
   }
 
-  Widget _buildAppBar(BuildContext context, role) {
+  void _handleSave(BuildContext context) {
+    if (userprofilecontroller.userProfile != null) {
+      context.read<UserProfileInfoCubit>().updateUserProfile(
+        UserProfile(
+          fullName: userprofilecontroller.nameController.text,
+          nationalId: userprofilecontroller.userProfile!.nationalId,
+          address: userprofilecontroller.addressController.text,
+          phoneNumber: userprofilecontroller.phoneController.text,
+          email: userprofilecontroller.emailController.text,
+          username: userprofilecontroller.userProfile!.username,
+          dateOfBirth: userprofilecontroller.userProfile!.dateOfBirth,
+        ),
+      );
+    }
+  }
+
+  Widget _buildLoadingState(BuildContext context, bool isWorker) {
+    return Scaffold(
+      backgroundColor: ColorManger.reportsPageBackground,
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            isWorker
+                ? CupertinoActivityIndicator(
+                    color: ColorManger.workerprimary,
+                    radius: ScreenUtilsManager.r12,
+                  )
+                : customloading(),
+            SizedBox(height: ScreenUtilsManager.h16),
+            Text(
+              S.of(context).loading,
+              style: GoogleFonts.cairo(
+                fontSize: ScreenUtilsManager.s14,
+                color: ColorManger.lightGrey2,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildAppBar(BuildContext context, String role) {
     final iconColor = role == "worker"
         ? ColorManger.workerprimary
         : ColorManger.primary;
@@ -195,9 +193,7 @@ class _WorkerEditProfileScreenState extends State<EditProfileScreen> {
           IconButton(
             onPressed: () {
               Navigator.pop(context);
-              if (context.mounted) {
-                context.read<UserProfileInfoCubit>().getUserProfleInfo();
-              }
+              context.read<UserProfileInfoCubit>().getUserProfleInfo();
             },
             icon: Icon(
               CupertinoIcons.back,
@@ -222,13 +218,18 @@ class _WorkerEditProfileScreenState extends State<EditProfileScreen> {
     );
   }
 
+  // ملاحظة الأمان
   Widget _buildSecurityNote(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: ScreenUtilsManager.w24),
       child: Text(
         S.of(context).dataSecurityNote,
         textAlign: TextAlign.center,
-        style: GoogleFonts.cairo(fontSize: 12, color: const Color(0xFF94A3B8)),
+        style: GoogleFonts.cairo(
+          fontSize: 12,
+          color: const Color(0xFF94A3B8),
+          height: 1.4,
+        ),
       ),
     );
   }

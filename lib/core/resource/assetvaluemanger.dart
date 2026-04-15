@@ -29,4 +29,7 @@ abstract class AssetValueManager {
   static String location = "assets/animation/location loading(1).json";
   static String pinLocaation = "assets/animation/Location Pin(2).json";
   static String Notificationbell = "assets/animation/Notificationbell.json";
+
+  static String defualtimage1 =
+      "https://upload.wikimedia.org/wikipedia/commons/f/f4/Aboutrika2011.jpg";
 }

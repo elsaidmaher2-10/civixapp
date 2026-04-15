@@ -27,24 +27,10 @@ class MainscreenAppbar extends StatelessWidget implements PreferredSizeWidget {
 
       title: Row(
         children: [
-          Container(
-            padding: const EdgeInsets.all(6),
-            decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.85),
-              borderRadius: BorderRadius.circular(10),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.05),
-                  blurRadius: 6,
-                  offset: const Offset(0, 2),
-                ),
-              ],
-            ),
-            child: SvgPicture.asset(
-              AssetValueManager.citifixicon,
-              width: ScreenUtilsManager.w24,
-              height: ScreenUtilsManager.w24,
-            ),
+          SvgPicture.asset(
+            AssetValueManager.Klog,
+            width: ScreenUtilsManager.w24,
+            height: ScreenUtilsManager.w24,
           ),
 
           SizedBox(width: ScreenUtilsManager.w12),
