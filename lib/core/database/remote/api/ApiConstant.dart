@@ -17,6 +17,7 @@ class Apiconstant {
   static String clearallnotification = "notifications/clear";
   static String workerdashboard = "Worker/dashboard";
   static String workertasks = "Worker/my-reports";
+  static String lang = "Account/update-language";
   static String markallread = "notifications/mark-all-read";
   static var achievemnent = "Achievements";
   static String getareas = "Areas/list";

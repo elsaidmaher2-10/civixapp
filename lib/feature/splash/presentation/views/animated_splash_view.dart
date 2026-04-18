@@ -46,7 +46,7 @@ class _AnimatedSplashViewState extends State<AnimatedSplashView>
     );
 
     _controller.forward();
-    _navigationTimer = Timer(const Duration(seconds: 3), () {
+    _navigationTimer = Timer(const Duration(seconds: 4), () {
       if (!mounted) return;
       Navigator.pushReplacementNamed(context, _resolveInitialRoute());
     });
@@ -100,71 +100,75 @@ class _AnimatedSplashViewState extends State<AnimatedSplashView>
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: DecoratedBox(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [Color(0xFFFFFFFF), Color(0xFFF4F8FE)],
+      body: Directionality(
+        textDirection: TextDirection.ltr,
+
+        child: DecoratedBox(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [Color(0xFFFFFFFF), Color(0xFFF4F8FE)],
+            ),
           ),
-        ),
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                FadeTransition(
-                  opacity: _logoOpacity,
-                  child: ScaleTransition(
-                    scale: _logoScale,
-                    child: SvgPicture.asset(
-                      AssetValueManager.Klog,
-                      width: 140,
-                      height: 140,
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  FadeTransition(
+                    opacity: _logoOpacity,
+                    child: ScaleTransition(
+                      scale: _logoScale,
+                      child: SvgPicture.asset(
+                        AssetValueManager.Klog,
+                        width: 140,
+                        height: 140,
+                      ),
                     ),
                   ),
-                ),
-                const SizedBox(height: 22),
-                AnimatedBuilder(
-                  animation: _controller,
-                  builder: (context, child) {
-                    final String title = Constantmanger.apptitle;
-                    final int n = title.length;
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.min,
-                      children: List<Widget>.generate(n, (int i) {
-                        final double reveal = _letterReveal(
-                          i,
-                          n,
-                          _controller.value,
-                        );
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 1),
-                          child: Opacity(
-                            opacity: reveal,
-                            child: Transform.translate(
-                              offset: Offset(0, (1 - reveal) * 14),
-                              child: Text(
-                                locale: Locale("en"),
-                                title[i],
-                                style: TextStyle(
-                                  color: _titleLetterColor(i),
-                                  fontSize: 34,
-                                  fontWeight: FontWeight.w800,
-                                  letterSpacing: 0.5,
-                                  height: 1.0,
+                  const SizedBox(height: 22),
+                  AnimatedBuilder(
+                    animation: _controller,
+                    builder: (context, child) {
+                      final String title = Constantmanger.apptitle;
+                      final int n = title.length;
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
+                        children: List<Widget>.generate(n, (int i) {
+                          final double reveal = _letterReveal(
+                            i,
+                            n,
+                            _controller.value,
+                          );
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 1),
+                            child: Opacity(
+                              opacity: reveal,
+                              child: Transform.translate(
+                                offset: Offset(0, (1 - reveal) * 14),
+                                child: Text(
+                                  locale: Locale("en"),
+                                  title[i],
+                                  style: TextStyle(
+                                    color: _titleLetterColor(i),
+                                    fontSize: 34,
+                                    fontWeight: FontWeight.w800,
+                                    letterSpacing: 0.5,
+                                    height: 1.0,
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        );
-                      }),
-                    );
-                  },
-                ),
-              ],
+                          );
+                        }),
+                      );
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
         ),

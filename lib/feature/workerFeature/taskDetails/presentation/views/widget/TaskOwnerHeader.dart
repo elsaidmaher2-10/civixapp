@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:citifix/core/extenstion/datetimeextension.dart';
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart'; // تم الإضافة
@@ -71,7 +72,7 @@ class TaskOwnerHeader extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    task.citizenName ?? S.of(context).unknown,
+                    task.citizenName,
                     style: GoogleFonts.cairo(
                       fontWeight: FontWeight.bold,
                       fontSize: ScreenUtilsManager.s14,
@@ -91,7 +92,6 @@ class TaskOwnerHeader extends StatelessWidget {
             ],
           ),
 
-          // 📅 DATE
           Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
@@ -107,7 +107,7 @@ class TaskOwnerHeader extends StatelessWidget {
               SizedBox(height: ScreenUtilsManager.h2),
 
               Text(
-                _formatDate(task.createdAt, context),
+                DateTime.parse(task.createdAt).timeAgo(context),
                 style: GoogleFonts.cairo(
                   fontSize: ScreenUtilsManager.s12,
                   fontWeight: FontWeight.w500,

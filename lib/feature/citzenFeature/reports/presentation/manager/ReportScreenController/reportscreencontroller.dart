@@ -4,7 +4,6 @@ import 'package:citifix/core/widget/mediapicker.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:photo_manager/photo_manager.dart' hide LatLng;
 
 class ReportScreenController {
   final StreamController<List<File>> streamController =

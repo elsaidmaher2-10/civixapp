@@ -9,7 +9,6 @@ const Color kPrimary = Color(0xFF003366);
 const Color kPrimaryLight = Color(0xFF1A4D8F);
 const Color kPrimaryFaint = Color(0xFFE8EEF6);
 
-
 class PickerBottomSheet extends StatefulWidget {
   final VoidCallback onCameraPhoto;
   final VoidCallback onCameraVideo;
@@ -38,7 +37,6 @@ class _PickerBottomSheetState extends State<PickerBottomSheet> {
     _loadGallery();
   }
 
-
   Future<void> _loadGallery() async {
     final permission = await PhotoManager.requestPermissionExtend();
     if (!permission.isAuth) {
@@ -50,8 +48,14 @@ class _PickerBottomSheetState extends State<PickerBottomSheet> {
     }
 
     final albums = await PhotoManager.getAssetPathList(
-      type: RequestType.common, 
+      type: RequestType.common,
       onlyAll: true,
+
+      filterOption: FilterOptionGroup(
+        orders: [
+          const OrderOption(type: OrderOptionType.createDate, asc: true),
+        ],
+      ),
     );
 
     if (albums.isEmpty) {
@@ -59,8 +63,7 @@ class _PickerBottomSheetState extends State<PickerBottomSheet> {
       return;
     }
 
-    final assets =
-        await albums.first.getAssetListRange(start: 0, end: 500);
+    final assets = await albums.first.getAssetListRange(start: 0, end: 500);
     setState(() {
       _assets = assets;
       _loading = false;
@@ -93,7 +96,6 @@ class _PickerBottomSheetState extends State<PickerBottomSheet> {
     widget.onFilesSelected(files);
     if (mounted) Navigator.pop(context);
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -143,7 +145,6 @@ class _PickerBottomSheetState extends State<PickerBottomSheet> {
   }
 }
 
-
 class _DragHandle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -158,7 +159,6 @@ class _DragHandle extends StatelessWidget {
     );
   }
 }
-
 
 class _CameraRow extends StatelessWidget {
   final VoidCallback onPhoto;
@@ -192,7 +192,6 @@ class _CameraRow extends StatelessWidget {
     );
   }
 }
-
 
 class _CameraButton extends StatelessWidget {
   final IconData icon;
@@ -239,15 +238,11 @@ class _CameraButton extends StatelessWidget {
   }
 }
 
-
 class _GalleryHeader extends StatelessWidget {
   final int selectedCount;
   final VoidCallback onAdd;
 
-  const _GalleryHeader({
-    required this.selectedCount,
-    required this.onAdd,
-  });
+  const _GalleryHeader({required this.selectedCount, required this.onAdd});
 
   @override
   Widget build(BuildContext context) {
@@ -269,7 +264,9 @@ class _GalleryHeader extends StatelessWidget {
               onTap: onAdd,
               child: Container(
                 padding: const EdgeInsets.symmetric(
-                    horizontal: 18, vertical: 7),
+                  horizontal: 18,
+                  vertical: 7,
+                ),
                 decoration: BoxDecoration(
                   color: kPrimary,
                   borderRadius: BorderRadius.circular(20),
@@ -289,7 +286,6 @@ class _GalleryHeader extends StatelessWidget {
     );
   }
 }
-
 
 class _GalleryBody extends StatelessWidget {
   final bool loading;
@@ -311,9 +307,7 @@ class _GalleryBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (loading) {
-      return const Center(
-        child: CircularProgressIndicator(color: kPrimary),
-      );
+      return const Center(child: CircularProgressIndicator(color: kPrimary));
     }
 
     if (permissionDenied) {
@@ -353,15 +347,11 @@ class _GalleryBody extends StatelessWidget {
   }
 }
 
-
 class _SelectedStrip extends StatelessWidget {
   final List<AssetEntity> selectedAssets;
   final void Function(AssetEntity) onRemove;
 
-  const _SelectedStrip({
-    required this.selectedAssets,
-    required this.onRemove,
-  });
+  const _SelectedStrip({required this.selectedAssets, required this.onRemove});
 
   @override
   Widget build(BuildContext context) {
@@ -417,7 +407,6 @@ class _SelectedStrip extends StatelessWidget {
   }
 }
 
-
 class _GalleryTile extends StatelessWidget {
   final AssetEntity asset;
   final bool isSelected;
@@ -452,8 +441,7 @@ class _GalleryTile extends StatelessWidget {
             ),
           ),
 
-          if (isSelected)
-            Container(color: kPrimary.withOpacity(0.28)),
+          if (isSelected) Container(color: kPrimary.withOpacity(0.28)),
 
           if (asset.type == AssetType.video)
             Positioned(
@@ -461,8 +449,11 @@ class _GalleryTile extends StatelessWidget {
               left: 4,
               child: Row(
                 children: [
-                  const Icon(Icons.videocam_rounded,
-                      color: Colors.white, size: 13),
+                  const Icon(
+                    Icons.videocam_rounded,
+                    color: Colors.white,
+                    size: 13,
+                  ),
                   const SizedBox(width: 2),
                   Text(
                     _fmt(asset.duration),
@@ -471,7 +462,7 @@ class _GalleryTile extends StatelessWidget {
                       fontSize: 11,
                       fontWeight: FontWeight.w600,
                       shadows: const [
-                        Shadow(color: Colors.black54, blurRadius: 4)
+                        Shadow(color: Colors.black54, blurRadius: 4),
                       ],
                     ),
                   ),
@@ -523,7 +514,6 @@ class _GalleryTile extends StatelessWidget {
   }
 }
 
-
 class _PermissionDeniedView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -535,10 +525,7 @@ class _PermissionDeniedView extends StatelessWidget {
           const SizedBox(height: 10),
           Text(
             'Gallery permission denied',
-            style: GoogleFonts.cairo(
-              color: Colors.grey[600],
-              fontSize: 15,
-            ),
+            style: GoogleFonts.cairo(color: Colors.grey[600], fontSize: 15),
           ),
           const SizedBox(height: 8),
           ElevatedButton(

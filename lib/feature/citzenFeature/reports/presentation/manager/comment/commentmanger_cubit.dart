@@ -13,12 +13,18 @@ class CommentsCubit extends Cubit<CommentsState> {
 
     final result = await commentRepo.getAllCommentByID(id);
 
-    result.fold((failure) {
-      final errorMsg = failure.errors.isNotEmpty
-          ? failure.errors[0]
-          : "An unexpected error occurred";
-      emit(CommentsFailure(errorMsg));
-    }, (comments) => emit(CommentsSuccess(comments)));
+    result.fold(
+      (failure) {
+        final errorMsg = failure.errors.isNotEmpty
+            ? failure.errors[0]
+            : "An unexpected error occurred";
+        emit(CommentsFailure(errorMsg));
+      },
+      (comments) {
+        if (isClosed) return;
+        emit(CommentsSuccess(comments));
+      },
+    );
   }
 
   Future<void> makeComments(int id, {required String content}) async {

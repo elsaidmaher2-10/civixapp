@@ -74,7 +74,6 @@ class _AddReportScreenState extends State<AddReportScreen> {
             children: [
               if (state is CreateReportLoading) ...[
                 customloading(),
-
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15.0),
                   child: TweenAnimationBuilder<double>(

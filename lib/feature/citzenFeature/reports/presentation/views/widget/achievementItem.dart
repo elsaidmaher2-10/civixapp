@@ -19,87 +19,98 @@ class AchievementReportCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool isRtl = Directionality.of(context) == TextDirection.rtl;
-    return Container(
-      margin: EdgeInsets.only(bottom: 16.h, left: 16.w, right: 16.w),
-      decoration: BoxDecoration(
-        color: context.palette.surfaceContainerLowest,
-        borderRadius: BorderRadius.circular(16.r),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.12),
-            blurRadius: 15,
-            offset: const Offset(0, 5),
+    return InkWell(
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => ReportDetailsScreen(
+            reportId: report.reportId,
+            isachivement: true,
           ),
-        ],
+        ),
       ),
-      clipBehavior: Clip.antiAlias,
-      child: Column(
-        children: [
-          Padding(
-            padding: EdgeInsets.all(12.w),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildReportImage(),
-                SizedBox(width: 12.w),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _buildStatusBadge(context),
-                      SizedBox(height: 4.h),
-                      Text(
-                        report.title,
-                        style: GoogleFonts.cairo(
-                          fontSize: 15.sp,
-                          fontWeight: FontWeight.bold,
-                          color: context.palette.onSurface,
-                          height: 1.2,
-                        ),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-
-                      _buildInfoRow(
-                        context,
-                        Icons.location_on_rounded,
-                        report.areaName,
-                        Colors.redAccent,
-                      ),
-                      _buildInfoRow(
-                        context,
-                        Icons.business_rounded,
-                        report.departmentName,
-                        Colors.blueGrey,
-                      ),
-                      SizedBox(height: 8.h),
-
-                      Text(
-                        "${S.of(context).worker}: ${report.workerName}",
-                        style: GoogleFonts.cairo(
-                          fontSize: 11.sp,
-                          fontWeight: FontWeight.w500,
-                          color: context.palette.onSurface,
-                        ),
-                      ),
-
-                      Text(
-                        "${S.of(context).completed} ${report.resolvedAt.timeAgo(context)}",
-                        style: GoogleFonts.cairo(
-                          fontSize: 10.sp,
-                          color: context.palette.onSurfaceVariant,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+      child: Container(
+        margin: EdgeInsets.only(bottom: 16.h, left: 16.w, right: 16.w),
+        decoration: BoxDecoration(
+          color: context.palette.surfaceContainerLowest,
+          borderRadius: BorderRadius.circular(16.r),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.12),
+              blurRadius: 15,
+              offset: const Offset(0, 5),
             ),
-          ),
+          ],
+        ),
+        clipBehavior: Clip.antiAlias,
+        child: Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.all(12.w),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildReportImage(),
+                  SizedBox(width: 12.w),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _buildStatusBadge(context),
+                        SizedBox(height: 4.h),
+                        Text(
+                          report.title,
+                          style: GoogleFonts.cairo(
+                            fontSize: 15.sp,
+                            fontWeight: FontWeight.bold,
+                            color: context.palette.onSurface,
+                            height: 1.2,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
 
-          // Bottom Bar
-          _buildBottomBar(context, isRtl),
-        ],
+                        _buildInfoRow(
+                          context,
+                          Icons.location_on_rounded,
+                          report.areaName,
+                          Colors.redAccent,
+                        ),
+                        _buildInfoRow(
+                          context,
+                          Icons.business_rounded,
+                          report.departmentName,
+                          Colors.blueGrey,
+                        ),
+                        SizedBox(height: 8.h),
+
+                        Text(
+                          "${S.of(context).worker}: ${report.workerName}",
+                          style: GoogleFonts.cairo(
+                            fontSize: 11.sp,
+                            fontWeight: FontWeight.w500,
+                            color: context.palette.onSurface,
+                          ),
+                        ),
+
+                        Text(
+                          "${S.of(context).completed} ${report.resolvedAt.timeAgo(context)}",
+                          style: GoogleFonts.cairo(
+                            fontSize: 10.sp,
+                            color: context.palette.onSurfaceVariant,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            // Bottom Bar
+            _buildBottomBar(context, isRtl),
+          ],
+        ),
       ),
     );
   }

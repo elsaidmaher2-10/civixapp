@@ -458,7 +458,10 @@ class _LoginpageState extends State<Loginpage> {
                                                   );
                                             }
                                           : null,
-                                      child: Text(S.of(context).logIn),
+                                      child: Text(
+                                        S.of(context).logIn,
+                                        style: GoogleFonts.cairo(),
+                                      ),
                                     ),
                               ),
                             ),

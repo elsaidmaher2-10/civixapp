@@ -1,4 +1,5 @@
 import 'package:citifix/core/database/local/prefmanger.dart';
+import 'package:citifix/core/extenstion/datetimeextension.dart';
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/feature/citzenFeature/notication/data/model/notifavtionmodel.dart';
@@ -68,17 +69,34 @@ class NotificationTile extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      item.title,
-                      style: GoogleFonts.cairo(
-                        fontSize: ScreenUtilsManager.s16,
-                        fontWeight: item.isRead
-                            ? FontWeight.w600
-                            : FontWeight.w800,
-                        color: item.isRead ? Colors.black87 : Colors.black,
-                      ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
+                    Row(
+                      children: [
+                        Text(
+                          item.title,
+                          style: GoogleFonts.cairo(
+                            fontSize: ScreenUtilsManager.s16,
+                            fontWeight: item.isRead
+                                ? FontWeight.w600
+                                : FontWeight.w800,
+                            color: item.isRead ? Colors.black87 : Colors.black,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        SizedBox(width: 5),
+                        Text(
+                          DateTime.parse(item.createdAt).timeAgo(context),
+                          style: GoogleFonts.cairo(
+                            fontSize: ScreenUtilsManager.s10,
+                            fontWeight: item.isRead
+                                ? FontWeight.w400
+                                : FontWeight.w300,
+                            color: item.isRead ? Colors.black87 : Colors.black,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
                     ),
                     SizedBox(height: ScreenUtilsManager.h4),
                     Text(

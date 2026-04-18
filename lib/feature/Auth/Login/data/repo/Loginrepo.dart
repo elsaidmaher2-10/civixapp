@@ -43,6 +43,7 @@ class Loginrepo {
         Constantmanger.refreshTokenExpiration,
         loginResponse.refreshTokenExpiration,
       );
+      String? lang = PrefrenceManager().getstring("Lang");
       PrefrenceManager().setstring(Constantmanger.role, loginResponse.role);
 
       final String? fcmtoken = PrefrenceManager().getstring(Constantmanger.fcm);
@@ -51,6 +52,13 @@ class Loginrepo {
         final result = await getIt<NotificationRepo>().registerDevice(
           deviceToken: fcmtoken,
           platform: "Android",
+        );
+      }
+
+      if (lang != null) {
+        await apiservice.patch(
+          path: Apiconstant.lang,
+          body: {"language": lang},
         );
       }
 

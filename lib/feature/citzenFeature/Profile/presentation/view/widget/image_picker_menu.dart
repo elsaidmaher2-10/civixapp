@@ -11,89 +11,111 @@ class ImagePickerMenu {
   const ImagePickerMenu._();
 
   static Future<File?> show(BuildContext context) async {
-    final selected = await showMenu<String>(
-      shadowColor: context.palette.white,
-      color: context.palette.white,
+    return await showModalBottomSheet<File?>(
       context: context,
-      position: RelativeRect.fromLTRB(
-        ScreenUtilsManager.menuLeft,
-        ScreenUtilsManager.menuTop,
-        ScreenUtilsManager.menuRight,
-        ScreenUtilsManager.menuBottom,
+      backgroundColor: context.palette.white,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(ScreenUtilsManager.r20),
+        ),
       ),
-      surfaceTintColor: Colors.transparent,
-      items: [
-        _buildMenuItem(
-          context,
-          value: 'camera',
-          label: S.of(context).camera,
-          icon: Icons.camera_alt,
-        ),
-        _buildMenuItem(
-          context,
-          value: 'gallery',
-          label: S.of(context).photoGallery,
-          icon: Icons.photo_library,
-        ),
-        _buildMenuItem(
-          context,
-          value: 'cancel',
-          label: S.of(context).cancel,
-          icon: Icons.close,
-          iconBgColor: context.palette.lightGrey2,
-        ),
-      ],
-    );
+      builder: (BuildContext context) {
+        return SafeArea(
+          child: Padding(
+            padding: EdgeInsets.symmetric(vertical: ScreenUtilsManager.h16),
+            child: Column(
+              mainAxisSize: MainAxisSize.min, 
+              children: [
+                Container(
+                  width: ScreenUtilsManager.w40,
+                  height: ScreenUtilsManager.h4,
+                  decoration: BoxDecoration(
+                    color: context.palette.lightGrey2,
+                    borderRadius: BorderRadius.circular(ScreenUtilsManager.r8),
+                  ),
+                ),
+                SizedBox(height: ScreenUtilsManager.h20),
 
-    if (selected == 'camera') {
-      return ImagePickerController().pickImage(ImageSource.camera);
-    }
-    if (selected == 'gallery') {
-      return ImagePickerController().pickImage(ImageSource.gallery);
-    }
-    return null;
+                _buildListTile(
+                  context,
+                  label: S.of(context).camera,
+                  icon: Icons.camera_alt,
+                  onTap: () async {
+                    final file = await ImagePickerController().pickImage(
+                      ImageSource.camera,
+                    );
+                    Navigator.pop(context, file);
+                  },
+                ),
+                _buildListTile(
+                  context,
+                  label: S.of(context).photoGallery,
+                  icon: Icons.photo_library,
+                  onTap: () async {
+                    final file = await ImagePickerController().pickImage(
+                      ImageSource.gallery,
+                    );
+                    Navigator.pop(context, file);
+                  },
+                ),
+                _buildListTile(
+                  context,
+                  label: S.of(context).cancel,
+                  icon: Icons.close,
+                  iconBgColor: context.palette.lightGrey2,
+                  onTap: () => Navigator.pop(context),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
   }
 
-  static PopupMenuItem<String> _buildMenuItem(
+  static Widget _buildListTile(
     BuildContext context, {
-    required String value,
     required String label,
+    required VoidCallback onTap,
     IconData? icon,
     Color? iconColor,
     Color? iconBgColor,
   }) {
-    return PopupMenuItem<String>(
-      value: value,
-      child: Container(
-        decoration: BoxDecoration(
-          color: context.palette.lightGrey5,
-          borderRadius: BorderRadius.circular(ScreenUtilsManager.r8),
+    return Container(
+      margin: EdgeInsets.symmetric(
+        horizontal: ScreenUtilsManager.w16,
+        vertical: ScreenUtilsManager.h4,
+      ),
+      decoration: BoxDecoration(
+        color: context.palette.lightGrey5,
+        borderRadius: BorderRadius.circular(ScreenUtilsManager.r12),
+      ),
+      child: ListTile(
+        onTap: onTap,
+        leading: icon != null
+            ? CircleAvatar(
+                radius: ScreenUtilsManager.r18,
+                backgroundColor:
+                    iconBgColor ?? context.palette.lightBlue.withOpacity(0.5),
+                child: Icon(
+                  icon,
+                  color: iconColor ?? context.palette.white,
+                  size: ScreenUtilsManager.s18,
+                ),
+              )
+            : null,
+        title: Text(
+          label,
+          style: GoogleFonts.cairo(
+            fontSize: ScreenUtilsManager.s16,
+            fontWeight: FontWeight.w600,
+            color: context.palette.textBlack,
+          ),
         ),
-        margin: EdgeInsets.all(ScreenUtilsManager.h4),
-        child: ListTile(
-          horizontalTitleGap: ScreenUtilsManager.w8,
-          contentPadding: EdgeInsets.symmetric(
-            horizontal: ScreenUtilsManager.w4,
-          ),
-          leading: icon != null
-              ? CircleAvatar(
-                  radius: ScreenUtilsManager.r12,
-                  backgroundColor:
-                      iconBgColor ?? context.palette.lightBlue.withOpacity(0.5),
-                  child: Icon(
-                    icon,
-                    color: iconColor ?? context.palette.white,
-                    size: ScreenUtilsManager.s12,
-                  ),
-                )
-              : null,
-          title: Text(
-            label,
-            style: GoogleFonts.cairo(
-              fontSize: ScreenUtilsManager.s14,
-              color: context.palette.textBlack,
-            ),
-          ),
+        trailing: Icon(
+          Icons.arrow_forward_ios_rounded,
+          size: ScreenUtilsManager.s14,
+          color: context.palette.lightGrey2,
         ),
       ),
     );

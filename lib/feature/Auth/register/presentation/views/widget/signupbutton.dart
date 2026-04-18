@@ -4,6 +4,7 @@ import 'package:citifix/feature/Auth/register/presentation/manager/Validatebutto
 import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SignUPButton extends StatelessWidget {
   const SignUPButton({super.key, required this.onPressed});
@@ -25,7 +26,7 @@ class SignUPButton extends StatelessWidget {
               ),
             ),
             onPressed: state == true ? onPressed : null,
-            child: Text(S.of(context).signUp),
+            child: Text(S.of(context).signUp, style: GoogleFonts.cairo()),
           );
         },
       ),
