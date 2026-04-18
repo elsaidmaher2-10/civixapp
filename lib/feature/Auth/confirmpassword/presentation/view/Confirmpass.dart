@@ -144,19 +144,19 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
           if (state is ConfirmPasswordControllerFailure) {
             Customsnackbar.show(
               context: context,
-              backgroundColor: ColorManger.red,
+              backgroundColor: context.palette.red,
               message: state.message,
             );
           } else if (state is ChangePasswordFailure) {
             Customsnackbar.show(
               context: context,
-              backgroundColor: ColorManger.red,
+              backgroundColor: context.palette.red,
               message: state.message,
             );
           } else if (state is ConfirmPasswordControllerSuccess) {
             Customsnackbar.show(
               context: context,
-              backgroundColor: ColorManger.green,
+              backgroundColor: context.palette.green,
               message: state.message,
             );
             await Future.delayed(
@@ -170,7 +170,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
           } else if (state is ChangePasswordSuccess) {
             Customsnackbar.show(
               context: context,
-              backgroundColor: ColorManger.green,
+              backgroundColor: context.palette.green,
               message: state.message,
             );
 
@@ -251,7 +251,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                                       }
                                     : null,
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: ColorManger.kPrimary,
+                                  backgroundColor: context.palette.kPrimary,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(12),
                                   ),

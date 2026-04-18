@@ -1,6 +1,7 @@
 import 'package:citifix/App/manager/cubit/localization_controller_cubit.dart';
+import 'package:citifix/core/cubit/theme/theme_cubit.dart';
 import 'package:citifix/core/DI/getit.dart';
-import 'package:citifix/core/resource/colormanager.dart';
+import 'package:citifix/core/theme/app_theme.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/routing/appRoutingRole.dart';
 import 'package:citifix/core/routing/routes.dart';
@@ -25,34 +26,8 @@ class Citifix extends StatelessWidget {
   final bool isAuth;
   final AppRole role;
 
-  String get _initialRoute {
-    if (!isOnboardingViewed) return Routes.onbroading;
-    if (!isAuth) return Routes.login;
-    switch (role) {
-      case AppRole.citizen:
-        return Routes.citizenMain;
-      case AppRole.worker:
-        return Routes.workerMain;
-      case AppRole.unknown:
-        return Routes.login;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
-    final ThemeData _lightTheme = ThemeData(
-      brightness: Brightness.light,
-      textSelectionTheme: TextSelectionThemeData(
-        selectionHandleColor: role == AppRole.worker
-            ? ColorManger.workerprimary
-            : ColorManger.kPrimary,
-        selectionColor: role == AppRole.worker
-            ? ColorManger.workerprimary
-            : ColorManger.kPrimary,
-        cursorColor: Colors.black,
-      ),
-    );
-
     return ScreenUtilInit(
       designSize: const Size(393, 852),
       minTextAdapt: true,
@@ -71,28 +46,33 @@ class Citifix extends StatelessWidget {
                 LocalizationControllerCubit,
                 LocalizationControllerState
               >(
-                builder: (context, state) {
+                builder: (context, locState) {
                   String currentLang = "en";
 
-                  if (state is LocalizationControllerChanged) {
-                    currentLang = state.lang;
+                  if (locState is LocalizationControllerChanged) {
+                    currentLang = locState.lang;
                   }
-                  return MaterialApp(
-                    key: navigatorKey,
-                    localizationsDelegates: const [
-                      S.delegate,
-                      GlobalMaterialLocalizations.delegate,
-                      GlobalWidgetsLocalizations.delegate,
-                      GlobalCupertinoLocalizations.delegate,
-                    ],
-                    supportedLocales: S.delegate.supportedLocales,
-                    initialRoute: _initialRoute,
-                    locale: Locale(currentLang),
-                    onGenerateRoute: Routingmanger.onGenerateRoute,
-                    title: Constantmanger.apptitle,
-                    debugShowCheckedModeBanner: false,
-                    themeMode: ThemeMode.light,
-                    theme: _lightTheme,
+                  return BlocBuilder<ThemeCubit, ThemeMode>(
+                    builder: (context, themeMode) {
+                      return MaterialApp(
+                        key: navigatorKey,
+                        localizationsDelegates: const [
+                          S.delegate,
+                          GlobalMaterialLocalizations.delegate,
+                          GlobalWidgetsLocalizations.delegate,
+                          GlobalCupertinoLocalizations.delegate,
+                        ],
+                        supportedLocales: S.delegate.supportedLocales,
+                        initialRoute: Routes.animatedSplash,
+                        locale: Locale(currentLang),
+                        onGenerateRoute: Routingmanger.onGenerateRoute,
+                        title: Constantmanger.apptitle,
+                        debugShowCheckedModeBanner: false,
+                        themeMode: themeMode,
+                        theme: AppTheme.light(role),
+                        darkTheme: AppTheme.dark(role),
+                      );
+                    },
                   );
                 },
               ),

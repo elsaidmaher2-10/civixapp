@@ -12,7 +12,7 @@ class VerificationCompleteScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppBar(context),
-      backgroundColor: ColorManger.background,
+      backgroundColor: context.palette.background,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(
@@ -44,13 +44,13 @@ class VerificationCompleteScreen extends StatelessWidget {
 
   PreferredSizeWidget _buildAppBar(BuildContext context) {
     return AppBar(
-      backgroundColor: ColorManger.background.withOpacity(0.9),
+      backgroundColor: context.palette.background.withOpacity(0.9),
       elevation: ScreenUtilsManager.s0,
       surfaceTintColor: Colors.transparent,
       bottom: PreferredSize(
         preferredSize: const Size.fromHeight(ScreenUtilsManager.s1),
         child: Container(
-          color: ColorManger.surfaceVariant,
+          color: context.palette.surfaceVariant,
           height: ScreenUtilsManager.s1,
         ),
       ),
@@ -60,7 +60,7 @@ class VerificationCompleteScreen extends StatelessWidget {
           Text(
             S.of(context).appTitle,
             style: GoogleFonts.cairo(
-              color: ColorManger.onSurface,
+              color: context.palette.onSurface,
               fontWeight: FontWeight.bold,
               fontSize: ScreenUtilsManager.s18,
               letterSpacing: -0.5,
@@ -73,14 +73,14 @@ class VerificationCompleteScreen extends StatelessWidget {
           width: ScreenUtilsManager.s36,
           height: ScreenUtilsManager.s36,
           margin: EdgeInsets.all(8),
-          decoration: const BoxDecoration(
-            color: ColorManger.surfaceContainerHigh,
+          decoration: BoxDecoration(
+            color: context.palette.surfaceContainerHigh,
             shape: BoxShape.circle,
           ),
           child: Icon(
             Icons.menu,
             size: ScreenUtilsManager.s20,
-            color: ColorManger.workerprimary,
+            color: context.palette.workerprimary,
           ),
         ),
       ],
@@ -98,10 +98,10 @@ class VerificationCompleteScreen extends StatelessWidget {
               height: ScreenUtilsManager.s120,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: ColorManger.success.withOpacity(0.4),
+                color: context.palette.success.withOpacity(0.4),
                 boxShadow: [
                   BoxShadow(
-                    color: ColorManger.success.withOpacity(0.2),
+                    color: context.palette.success.withOpacity(0.2),
                     blurRadius: ScreenUtilsManager.s40,
                     spreadRadius: ScreenUtilsManager.s20,
                   ),
@@ -112,7 +112,7 @@ class VerificationCompleteScreen extends StatelessWidget {
               width: ScreenUtilsManager.s96,
               height: ScreenUtilsManager.s96,
               decoration: BoxDecoration(
-                color: ColorManger.success.withOpacity(1),
+                color: context.palette.success.withOpacity(1),
                 shape: BoxShape.circle,
                 boxShadow: [
                   BoxShadow(
@@ -122,9 +122,9 @@ class VerificationCompleteScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              child: const Icon(
+              child: Icon(
                 Icons.check_circle,
-                color: ColorManger.white,
+                color: context.palette.white,
                 size: ScreenUtilsManager.s56,
               ),
             ),
@@ -137,7 +137,7 @@ class VerificationCompleteScreen extends StatelessWidget {
           style: GoogleFonts.cairo(
             fontSize: ScreenUtilsManager.s32,
             fontWeight: FontWeight.w800,
-            color: ColorManger.onSurface,
+            color: context.palette.onSurface,
             height: 1.2,
             letterSpacing: -0.5,
           ),
@@ -150,7 +150,7 @@ class VerificationCompleteScreen extends StatelessWidget {
             textAlign: TextAlign.center,
             style: GoogleFonts.cairo(
               fontSize: ScreenUtilsManager.s16,
-              color: ColorManger.secondary,
+              color: context.palette.secondary,
               height: 1.5,
             ),
           ),
@@ -164,6 +164,7 @@ class VerificationCompleteScreen extends StatelessWidget {
       children: [
         Expanded(
           child: _buildInfoCard(
+            context,
             label: S.of(context).confirmedZone,
             value: workerRequestModel.areaName,
 
@@ -173,6 +174,7 @@ class VerificationCompleteScreen extends StatelessWidget {
         SizedBox(width: ScreenUtilsManager.s16),
         Expanded(
           child: _buildInfoCard(
+            context,
             label: S.of(context).department,
             value: workerRequestModel.departmentName,
             icon: Icons.domain,
@@ -182,7 +184,8 @@ class VerificationCompleteScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildInfoCard({
+  Widget _buildInfoCard(
+    BuildContext context, {
     required String label,
     required String value,
     required IconData icon,
@@ -190,9 +193,9 @@ class VerificationCompleteScreen extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(ScreenUtilsManager.s20),
       decoration: BoxDecoration(
-        color: ColorManger.surfaceContainerLowest,
+        color: context.palette.surfaceContainerLowest,
         borderRadius: BorderRadius.circular(ScreenUtilsManager.s16),
-        border: Border.all(color: ColorManger.surfaceVariant.withOpacity(0.5)),
+        border: Border.all(color: context.palette.surfaceVariant.withOpacity(0.5)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -202,7 +205,7 @@ class VerificationCompleteScreen extends StatelessWidget {
             style: GoogleFonts.cairo(
               fontSize: ScreenUtilsManager.s10,
               fontWeight: FontWeight.w700,
-              color: ColorManger.secondary,
+              color: context.palette.secondary,
               letterSpacing: 1.2,
             ),
           ),
@@ -211,7 +214,7 @@ class VerificationCompleteScreen extends StatelessWidget {
             children: [
               Icon(
                 icon,
-                color: ColorManger.workerprimary,
+                color: context.palette.workerprimary,
                 size: ScreenUtilsManager.s22,
               ),
               const SizedBox(width: ScreenUtilsManager.s8),
@@ -221,7 +224,7 @@ class VerificationCompleteScreen extends StatelessWidget {
                   style: GoogleFonts.cairo(
                     fontSize: ScreenUtilsManager.s18,
                     fontWeight: FontWeight.bold,
-                    color: ColorManger.onSurface,
+                    color: context.palette.onSurface,
                   ),
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
@@ -238,9 +241,9 @@ class VerificationCompleteScreen extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(ScreenUtilsManager.s20),
       decoration: BoxDecoration(
-        color: ColorManger.surfaceContainerLow,
+        color: context.palette.surfaceContainerLow,
         borderRadius: BorderRadius.circular(ScreenUtilsManager.s16),
-        border: Border.all(color: ColorManger.surfaceVariant.withOpacity(0.5)),
+        border: Border.all(color: context.palette.surfaceVariant.withOpacity(0.5)),
       ),
       child: Row(
         children: [
@@ -248,7 +251,7 @@ class VerificationCompleteScreen extends StatelessWidget {
             width: ScreenUtilsManager.s44,
             height: ScreenUtilsManager.s44,
             decoration: BoxDecoration(
-              color: ColorManger.white,
+              color: context.palette.white,
               shape: BoxShape.circle,
               boxShadow: [
                 BoxShadow(
@@ -260,7 +263,7 @@ class VerificationCompleteScreen extends StatelessWidget {
             ),
             child: Icon(
               Icons.badge_outlined,
-              color: ColorManger.workerprimary,
+              color: context.palette.workerprimary,
               size: ScreenUtilsManager.s22,
             ),
           ),
@@ -274,7 +277,7 @@ class VerificationCompleteScreen extends StatelessWidget {
                   style: GoogleFonts.cairo(
                     fontSize: ScreenUtilsManager.s16,
                     fontWeight: FontWeight.w700,
-                    color: ColorManger.onSurface,
+                    color: context.palette.onSurface,
                   ),
                 ),
                 const SizedBox(height: ScreenUtilsManager.s2),
@@ -282,7 +285,7 @@ class VerificationCompleteScreen extends StatelessWidget {
                   S.of(context).expiresDate,
                   style: GoogleFonts.cairo(
                     fontSize: ScreenUtilsManager.s12,
-                    color: ColorManger.secondary,
+                    color: context.palette.secondary,
                   ),
                 ),
               ],
@@ -290,7 +293,7 @@ class VerificationCompleteScreen extends StatelessWidget {
           ),
           Icon(
             Icons.chevron_right,
-            color: ColorManger.secondary.withOpacity(0.5),
+            color: context.palette.secondary.withOpacity(0.5),
           ),
         ],
       ),

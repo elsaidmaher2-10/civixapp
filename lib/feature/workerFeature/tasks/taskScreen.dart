@@ -39,10 +39,10 @@ class _TasksViewState extends State<TasksView> {
     return BlocProvider.value(
       value: _cubit,
       child: Scaffold(
-        backgroundColor: ColorManger.tasksBackground,
+        backgroundColor: context.palette.tasksBackground,
         body: RefreshIndicator(
-          color: ColorManger.workerprimary,
-          backgroundColor: ColorManger.white,
+          color: context.palette.workerprimary,
+          backgroundColor: context.palette.white,
           onRefresh: () => _cubit.getWorkerTasks(),
           child: SingleChildScrollView(
             physics: const AlwaysScrollableScrollPhysics(),
@@ -189,7 +189,7 @@ class _ErrorState extends StatelessWidget {
             SizedBox(height: ScreenUtilsManager.h24),
             ElevatedButton.icon(
               style: ElevatedButton.styleFrom(
-                backgroundColor: ColorManger.workerprimary,
+                backgroundColor: context.palette.workerprimary,
                 foregroundColor: Colors.white,
                 elevation: 0,
                 padding: EdgeInsets.symmetric(
@@ -230,14 +230,14 @@ class _EmptyState extends StatelessWidget {
           Icon(
             Icons.assignment_late_outlined,
             size: ScreenUtilsManager.r64,
-            color: ColorManger.grey300,
+            color: context.palette.grey300,
           ),
           SizedBox(height: ScreenUtilsManager.h16),
           Text(
             S.of(context).noTasksFound(filterName),
             style: GoogleFonts.cairo(
               fontSize: ScreenUtilsManager.s16,
-              color: ColorManger.grey600,
+              color: context.palette.grey600,
               fontWeight: FontWeight.w600,
             ),
           ),
@@ -245,7 +245,7 @@ class _EmptyState extends StatelessWidget {
             onPressed: onReset,
             child: Text(
               S.of(context).showAllTasks,
-              style: GoogleFonts.cairo(color: ColorManger.workerprimary),
+              style: GoogleFonts.cairo(color: context.palette.workerprimary),
             ),
           ),
         ],
@@ -260,8 +260,8 @@ class TasksLoadingSkeleton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
-      baseColor: ColorManger.grey300,
-      highlightColor: ColorManger.grey200,
+      baseColor: context.palette.grey300,
+      highlightColor: context.palette.grey200,
       child: Column(
         children: List.generate(
           3,
@@ -270,7 +270,7 @@ class TasksLoadingSkeleton extends StatelessWidget {
             height: ScreenUtilsManager.h150,
             width: double.infinity,
             decoration: BoxDecoration(
-              color: ColorManger.white,
+              color: context.palette.white,
               borderRadius: BorderRadius.circular(ScreenUtilsManager.r16),
             ),
           ),

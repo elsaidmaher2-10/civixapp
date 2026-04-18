@@ -18,9 +18,9 @@ class TaskOwnerHeader extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(ScreenUtilsManager.w16),
       decoration: BoxDecoration(
-        color: ColorManger.surface,
+        color: context.palette.surface,
         borderRadius: BorderRadius.circular(ScreenUtilsManager.r12),
-        border: Border.all(color: ColorManger.grey200),
+        border: Border.all(color: context.palette.grey200),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -39,7 +39,7 @@ class TaskOwnerHeader extends StatelessWidget {
                       placeholder: (context, url) => Container(
                         width: ScreenUtilsManager.w60,
                         height: ScreenUtilsManager.h60,
-                        color: ColorManger.grey200,
+                        color: context.palette.grey200,
                       ),
                       errorWidget: (context, url, error) =>
                           Icon(Icons.person, size: ScreenUtilsManager.s24),
@@ -52,12 +52,12 @@ class TaskOwnerHeader extends StatelessWidget {
                     child: Container(
                       padding: EdgeInsets.all(ScreenUtilsManager.w2),
                       decoration: BoxDecoration(
-                        color: ColorManger.green,
+                        color: context.palette.green,
                         shape: BoxShape.circle,
                       ),
                       child: Icon(
                         Icons.verified,
-                        color: ColorManger.white,
+                        color: context.palette.white,
                         size: ScreenUtilsManager.s12,
                       ),
                     ),
@@ -82,7 +82,7 @@ class TaskOwnerHeader extends StatelessWidget {
                   Text(
                     S.of(context).taskOwnerLabel,
                     style: GoogleFonts.cairo(
-                      color: ColorManger.onSurfaceVariant,
+                      color: context.palette.onSurfaceVariant,
                       fontSize: ScreenUtilsManager.s12,
                     ),
                   ),
@@ -100,7 +100,7 @@ class TaskOwnerHeader extends StatelessWidget {
                 style: GoogleFonts.cairo(
                   fontSize: ScreenUtilsManager.s10,
                   fontWeight: FontWeight.bold,
-                  color: ColorManger.grey400,
+                  color: context.palette.grey400,
                   letterSpacing: ScreenUtilsManager.s1,
                 ),
               ),

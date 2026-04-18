@@ -46,14 +46,14 @@ class _WorkerEditProfileScreenState extends State<EditProfileScreen> {
         if (state is EditUserProfileInfoError) {
           Customsnackbar.show(
             context: context,
-            backgroundColor: ColorManger.red,
+            backgroundColor: context.palette.red,
             message: state.message,
           );
         }
         if (state is EditUserProfileInfoSuccess) {
           Customsnackbar.show(
             context: context,
-            backgroundColor: ColorManger.green,
+            backgroundColor: context.palette.green,
             message: S.of(context).profileUpdatedSuccess,
           );
           Future.delayed(const Duration(seconds: 1), () {
@@ -73,13 +73,13 @@ class _WorkerEditProfileScreenState extends State<EditProfileScreen> {
         return ModalProgressHUD(
           progressIndicator: isWorker
               ? CupertinoActivityIndicator(
-                  color: ColorManger.workerprimary,
+                  color: context.palette.workerprimary,
                   radius: ScreenUtilsManager.r12,
                 )
               : customloading(),
           inAsyncCall: state is EditUserProfileInfoLoading,
           child: Scaffold(
-            backgroundColor: ColorManger.reportsPageBackground,
+            backgroundColor: context.palette.reportsPageBackground,
             body: SafeArea(
               child: Column(
                 children: [
@@ -156,14 +156,14 @@ class _WorkerEditProfileScreenState extends State<EditProfileScreen> {
 
   Widget _buildLoadingState(BuildContext context, bool isWorker) {
     return Scaffold(
-      backgroundColor: ColorManger.reportsPageBackground,
+      backgroundColor: context.palette.reportsPageBackground,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             isWorker
                 ? CupertinoActivityIndicator(
-                    color: ColorManger.workerprimary,
+                    color: context.palette.workerprimary,
                     radius: ScreenUtilsManager.r12,
                   )
                 : customloading(),
@@ -172,7 +172,7 @@ class _WorkerEditProfileScreenState extends State<EditProfileScreen> {
               S.of(context).loading,
               style: GoogleFonts.cairo(
                 fontSize: ScreenUtilsManager.s14,
-                color: ColorManger.lightGrey2,
+                color: context.palette.lightGrey2,
               ),
             ),
           ],
@@ -183,8 +183,8 @@ class _WorkerEditProfileScreenState extends State<EditProfileScreen> {
 
   Widget _buildAppBar(BuildContext context, String role) {
     final iconColor = role == "worker"
-        ? ColorManger.workerprimary
-        : ColorManger.primary;
+        ? context.palette.workerprimary
+        : context.palette.primary;
 
     return Padding(
       padding: EdgeInsetsDirectional.all(ScreenUtilsManager.w8),

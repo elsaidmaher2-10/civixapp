@@ -85,11 +85,11 @@ class _GlobalGateVerificationPageState extends State<VerificationInit> {
       blur: 7,
       progressIndicator: CupertinoActivityIndicator(
         radius: ScreenUtilsManager.r12,
-        color: ColorManger.workerprimary,
+        color: context.palette.workerprimary,
       ),
       inAsyncCall: isasync,
       child: Scaffold(
-        backgroundColor: ColorManger.background,
+        backgroundColor: context.palette.background,
         appBar: buildAppBar(context),
         body: BlocConsumer<VerificationInitCubit, VerificationInitState>(
           listener: (BuildContext context, VerificationInitState state) {
@@ -118,7 +118,7 @@ class _GlobalGateVerificationPageState extends State<VerificationInit> {
             if (state is VerificationInitLoading) {
               return Center(
                 child: CupertinoActivityIndicator(
-                  color: ColorManger.workerprimary,
+                  color: context.palette.workerprimary,
                   radius: ScreenUtilsManager.r12,
                 ),
               );
@@ -207,7 +207,7 @@ class _GlobalGateVerificationPageState extends State<VerificationInit> {
           ),
           const SizedBox(height: ScreenUtilsManager.itemSpacing),
           CustomTextfromfield(
-            color: ColorManger.surface,
+            color: context.palette.surface,
             maxLines: 3,
             controller: notes,
             hinttext: S.of(context).enterNotes,
@@ -281,9 +281,9 @@ class _GlobalGateVerificationPageState extends State<VerificationInit> {
         check();
       },
       decoration: CustomDropdownDecoration(
-        closedFillColor: ColorManger.lightGrey5,
+        closedFillColor: context.palette.lightGrey5,
         closedBorderRadius: BorderRadius.circular(16),
-        closedBorder: Border.all(color: ColorManger.outline.withOpacity(0.5)),
+        closedBorder: Border.all(color: context.palette.outline.withOpacity(0.5)),
       ),
     );
   }
@@ -318,15 +318,15 @@ class _GlobalGateVerificationPageState extends State<VerificationInit> {
       duration: const Duration(milliseconds: 300),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: isSelected ? ColorManger.workerprimary : ColorManger.white,
+        color: isSelected ? context.palette.workerprimary : context.palette.white,
         borderRadius: BorderRadius.circular(ScreenUtilsManager.cardRadius),
         border: Border.all(
-          color: isSelected ? ColorManger.workerprimary : ColorManger.outline,
+          color: isSelected ? context.palette.workerprimary : context.palette.outline,
         ),
         boxShadow: isSelected
             ? [
                 BoxShadow(
-                  color: ColorManger.workerprimary.withOpacity(0.2),
+                  color: context.palette.workerprimary.withOpacity(0.2),
                   blurRadius: 8,
                   offset: const Offset(0, 4),
                 ),
@@ -338,7 +338,7 @@ class _GlobalGateVerificationPageState extends State<VerificationInit> {
         children: [
           Icon(
             Icons.location_on_outlined,
-            color: isSelected ? Colors.white : ColorManger.workerprimary,
+            color: isSelected ? Colors.white : context.palette.workerprimary,
           ),
           const SizedBox(height: 10),
           Text(
@@ -346,7 +346,7 @@ class _GlobalGateVerificationPageState extends State<VerificationInit> {
             textAlign: TextAlign.center,
             style: GoogleFonts.cairo(
               fontWeight: FontWeight.bold,
-              color: isSelected ? Colors.white : ColorManger.onSurface,
+              color: isSelected ? Colors.white : context.palette.onSurface,
             ),
           ),
         ],
@@ -363,7 +363,7 @@ class _GlobalGateVerificationPageState extends State<VerificationInit> {
           style: GoogleFonts.cairo(
             fontSize: ScreenUtilsManager.headerFontSize,
             fontWeight: FontWeight.w900,
-            color: ColorManger.onSurface,
+            color: context.palette.onSurface,
           ),
         ),
         const SizedBox(height: 8),
@@ -371,7 +371,7 @@ class _GlobalGateVerificationPageState extends State<VerificationInit> {
           S.of(context).verificationSubTitle,
           style: GoogleFonts.cairo(
             fontSize: ScreenUtilsManager.subHeaderFontSize,
-            color: ColorManger.secondary,
+            color: context.palette.secondary,
           ),
         ),
       ],

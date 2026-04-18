@@ -31,7 +31,7 @@ class ProfileMenuItem extends StatelessWidget {
               ),
             ],
             borderRadius: BorderRadius.circular(ScreenUtilsManager.r8),
-            border: BoxBorder.all(color: ColorManger.lightGrey4, width: 2.w),
+            border: BoxBorder.all(color: context.palette.lightGrey4, width: 2.w),
           ),
           child: ListTile(
             contentPadding: EdgeInsets.symmetric(

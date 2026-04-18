@@ -50,14 +50,14 @@ class _AddReportScreenState extends State<AddReportScreen> {
         if (state is CreateReportSuccess) {
           Customsnackbar.show(
             context: context,
-            backgroundColor: ColorManger.green,
+            backgroundColor: context.palette.green,
             message: S.of(context).reportSentSuccess,
           );
           Navigator.pop(context);
         } else if (state is CreateReportFailure) {
           Customsnackbar.show(
             context: context,
-            backgroundColor: ColorManger.red,
+            backgroundColor: context.palette.red,
             message: state.errMessage,
           );
         }
@@ -85,7 +85,7 @@ class _AddReportScreenState extends State<AddReportScreen> {
                         backgroundColor: Colors.white,
                         minHeight: 10,
                         value: value,
-                        color: ColorManger.primary,
+                        color: context.palette.primary,
                       );
                     },
                   ),
@@ -101,7 +101,7 @@ class _AddReportScreenState extends State<AddReportScreen> {
             ],
           ),
           child: Scaffold(
-            backgroundColor: ColorManger.white,
+            backgroundColor: context.palette.white,
             appBar: AddReportAppbar(context),
             body: SafeArea(
               child: Padding(
@@ -143,7 +143,7 @@ class _AddReportScreenState extends State<AddReportScreen> {
                       Text(
                         S.of(context).location,
                         style: GoogleFonts.cairo(
-                          color: ColorManger.kPrimary,
+                          color: context.palette.kPrimary,
                           fontWeight: FontWeight.bold,
                           fontSize: ScreenUtilsManager.s16,
                         ),
@@ -164,7 +164,7 @@ class _AddReportScreenState extends State<AddReportScreen> {
                         children: [
                           Checkbox(
                             value: reportscreencontroller.isAnonymous,
-                            activeColor: ColorManger.kPrimary,
+                            activeColor: context.palette.kPrimary,
                             onChanged: (bool? value) {
                               setState(() {
                                 reportscreencontroller.isAnonymous =
@@ -175,7 +175,7 @@ class _AddReportScreenState extends State<AddReportScreen> {
                           Text(
                             S.of(context).sendAnonymously,
                             style: GoogleFonts.cairo(
-                              color: ColorManger.kPrimary,
+                              color: context.palette.kPrimary,
                               fontWeight: FontWeight.w600,
                               fontSize: 16.sp,
                             ),

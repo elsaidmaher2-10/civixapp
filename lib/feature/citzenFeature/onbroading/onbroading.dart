@@ -84,7 +84,7 @@ class _OnbroadingState extends State<Onbroading> {
     return ChangeNotifierProvider(
       create: (context) => Onbroadingprovider(),
       child: Scaffold(
-        backgroundColor: ColorManger.reportsPageBackground,
+        backgroundColor: context.palette.reportsPageBackground,
         body: Consumer<Onbroadingprovider>(
           builder: (context, provider, child) {
             return PageView.builder(

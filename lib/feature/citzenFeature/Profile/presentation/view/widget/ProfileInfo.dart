@@ -30,14 +30,14 @@ class ProfileInfo extends StatelessWidget {
         if (state is UserProfileImageUpdatedSuccess) {
           Customsnackbar.show(
             context: context,
-            backgroundColor: ColorManger.green,
+            backgroundColor: context.palette.green,
             message: "The active image has been updated.",
           );
         }
         if (state is UserProfileInfoError) {
           Customsnackbar.show(
             context: context,
-            backgroundColor: ColorManger.red,
+            backgroundColor: context.palette.red,
             message: state.message,
           );
         }
@@ -56,7 +56,7 @@ class ProfileInfo extends StatelessWidget {
           return Padding(
             padding: EdgeInsets.symmetric(vertical: 50.h),
             child: SpinKitPouringHourGlassRefined(
-              color: ColorManger.kPrimaryLight,
+              color: context.palette.kPrimaryLight,
               size: 70.h,
             ),
           );
@@ -89,7 +89,7 @@ class ProfileInfo extends StatelessWidget {
                       children: [
                         CircleAvatar(
                           radius: 68.r,
-                          backgroundColor: ColorManger.lightBlue.withOpacity(
+                          backgroundColor: context.palette.lightBlue.withOpacity(
                             0.5,
                           ),
                           child: CircleAvatar(
@@ -97,7 +97,7 @@ class ProfileInfo extends StatelessWidget {
                             backgroundColor: Colors.white,
                             child: CircleAvatar(
                               radius: 60.r,
-                              backgroundColor: ColorManger.lightGrey,
+                              backgroundColor: context.palette.lightGrey,
                               backgroundImage: imageProvider,
                             ),
                           ),
@@ -124,10 +124,10 @@ class ProfileInfo extends StatelessWidget {
                     borderRadius: BorderRadius.circular(25.r),
                     child: CircleAvatar(
                       radius: 25.r,
-                      backgroundColor: ColorManger.white,
+                      backgroundColor: context.palette.white,
                       child: CircleAvatar(
                         radius: 20.r,
-                        backgroundColor: ColorManger.lightBlue,
+                        backgroundColor: context.palette.lightBlue,
                         child: const Icon(
                           Icons.edit,
                           color: Colors.white,
@@ -146,7 +146,7 @@ class ProfileInfo extends StatelessWidget {
                 letterSpacing: 1.1,
                 fontSize: ScreenUtilsManager.s24,
                 fontWeight: FontWeight.w700,
-                color: ColorManger.kPrimaryDark,
+                color: context.palette.kPrimaryDark,
               ),
             ),
             Text(
@@ -154,7 +154,7 @@ class ProfileInfo extends StatelessWidget {
               style: GoogleFonts.cairo(
                 fontSize: ScreenUtilsManager.s14,
                 fontWeight: FontWeight.w300,
-                color: ColorManger.lightGrey2,
+                color: context.palette.lightGrey2,
               ),
             ),
 

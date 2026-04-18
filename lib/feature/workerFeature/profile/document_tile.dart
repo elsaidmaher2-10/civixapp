@@ -57,7 +57,7 @@ class DocumentTile extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: ColorManger.surfaceLowest,
+          color: context.palette.surfaceLowest,
           borderRadius: BorderRadius.circular(12),
         ),
         child: Column(
@@ -66,7 +66,7 @@ class DocumentTile extends StatelessWidget {
               height: 80,
               width: double.infinity,
               decoration: BoxDecoration(
-                color: ColorManger.surfaceContainerLow,
+                color: context.palette.surfaceContainerLow,
                 borderRadius: BorderRadius.circular(8),
               ),
               child: icon,
@@ -77,7 +77,7 @@ class DocumentTile extends StatelessWidget {
               style: GoogleFonts.cairo(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
-                color: ColorManger.onSurface,
+                color: context.palette.onSurface,
               ),
               textAlign: TextAlign.center,
             ),

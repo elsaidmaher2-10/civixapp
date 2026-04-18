@@ -37,7 +37,7 @@ class CompletionDataSectionState extends State<CompletionDataSection> {
     return Container(
       padding: EdgeInsets.all(ScreenUtilsManager.w24),
       decoration: BoxDecoration(
-        color: ColorManger.surface,
+        color: context.palette.surface,
         borderRadius: BorderRadius.circular(ScreenUtilsManager.r12),
       ),
       child: Column(
@@ -48,7 +48,7 @@ class CompletionDataSectionState extends State<CompletionDataSection> {
             children: [
               Icon(
                 Icons.check_circle,
-                color: ColorManger.workerprimary,
+                color: context.palette.workerprimary,
                 size: ScreenUtilsManager.s20,
               ),
               SizedBox(width: ScreenUtilsManager.w8),
@@ -67,7 +67,7 @@ class CompletionDataSectionState extends State<CompletionDataSection> {
             style: GoogleFonts.cairo(
               fontSize: ScreenUtilsManager.s12,
               fontWeight: FontWeight.bold,
-              color: ColorManger.grey700,
+              color: context.palette.grey700,
             ),
           ),
           SizedBox(height: ScreenUtilsManager.h12),
@@ -101,13 +101,13 @@ class CompletionDataSectionState extends State<CompletionDataSection> {
                                   Icon(
                                     Icons.add_a_photo_outlined,
                                     size: ScreenUtilsManager.s28,
-                                    color: ColorManger.grey600,
+                                    color: context.palette.grey600,
                                   ),
                                   SizedBox(height: ScreenUtilsManager.h4),
                                   Text(
                                     S.of(context).add,
                                     style: GoogleFonts.cairo(
-                                      color: ColorManger.grey700,
+                                      color: context.palette.grey700,
                                       fontSize: ScreenUtilsManager.s13,
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -150,13 +150,13 @@ class CompletionDataSectionState extends State<CompletionDataSection> {
                               Icon(
                                 Icons.camera_alt_outlined,
                                 size: ScreenUtilsManager.s28,
-                                color: ColorManger.grey600,
+                                color: context.palette.grey600,
                               ),
                               SizedBox(height: ScreenUtilsManager.h8),
                               Text(
                                 S.of(context).uploadCompletionImages,
                                 style: GoogleFonts.cairo(
-                                  color: ColorManger.grey700,
+                                  color: context.palette.grey700,
                                   fontSize: ScreenUtilsManager.s14,
                                 ),
                               ),
@@ -175,7 +175,7 @@ class CompletionDataSectionState extends State<CompletionDataSection> {
             style: GoogleFonts.cairo(
               fontSize: ScreenUtilsManager.s12,
               fontWeight: FontWeight.bold,
-              color: ColorManger.grey700,
+              color: context.palette.grey700,
             ),
           ),
           SizedBox(height: ScreenUtilsManager.h12),
@@ -205,10 +205,10 @@ class MarkAsCompletedButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: isLoading ? null : onTap,
       style: ElevatedButton.styleFrom(
-        backgroundColor: ColorManger.completedButton,
-        foregroundColor: ColorManger.white,
+        backgroundColor: context.palette.completedButton,
+        foregroundColor: context.palette.white,
         elevation: ScreenUtilsManager.s4,
-        shadowColor: ColorManger.completedButton.withOpacity(0.4),
+        shadowColor: context.palette.completedButton.withOpacity(0.4),
         minimumSize: Size(double.infinity, ScreenUtilsManager.h56),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(ScreenUtilsManager.r12),
@@ -219,7 +219,7 @@ class MarkAsCompletedButton extends StatelessWidget {
               height: ScreenUtilsManager.h24,
               width: ScreenUtilsManager.w24,
               child: CircularProgressIndicator(
-                color: ColorManger.white,
+                color: context.palette.white,
                 strokeWidth: ScreenUtilsManager.s2_5,
               ),
             )

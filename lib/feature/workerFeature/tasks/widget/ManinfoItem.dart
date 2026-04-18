@@ -17,7 +17,7 @@ class MetaInfoItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = ColorManger.onSurfaceVariant.withOpacity(muted ? 0.6 : 1.0);
+    final color = context.palette.onSurfaceVariant.withOpacity(muted ? 0.6 : 1.0);
 
     return Row(
       mainAxisSize: MainAxisSize.min,

@@ -22,7 +22,7 @@ class UnderReviewScreen extends StatelessWidget {
     final s = S.of(context);
 
     return Scaffold(
-      backgroundColor: ColorManger.bgbackground,
+      backgroundColor: context.palette.bgbackground,
       appBar: _buildAppBar(context, s),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -52,24 +52,24 @@ class UnderReviewScreen extends StatelessWidget {
 
   PreferredSizeWidget _buildAppBar(BuildContext context, S s) {
     return AppBar(
-      backgroundColor: ColorManger.white.withOpacity(0.9),
+      backgroundColor: context.palette.white.withOpacity(0.9),
       elevation: 0,
       scrolledUnderElevation: 0,
       bottom: PreferredSize(
         preferredSize: const Size.fromHeight(1),
         child: Container(
-          color: ColorManger.outline.withOpacity(0.1),
+          color: context.palette.outline.withOpacity(0.1),
           height: 1,
         ),
       ),
       title: Row(
         children: [
-          Icon(Icons.location_city, color: ColorManger.workerprimary),
+          Icon(Icons.location_city, color: context.palette.workerprimary),
           SizedBox(width: ScreenUtilsManager.p8),
           Text(
             s.appTitle,
             style: GoogleFonts.cairo(
-              color: ColorManger.onSurface,
+              color: context.palette.onSurface,
               fontWeight: FontWeight.bold,
               fontSize: ScreenUtilsManager.s18,
             ),
@@ -94,7 +94,7 @@ class UnderReviewScreen extends StatelessWidget {
             child: Text(
               s.verification,
               style: GoogleFonts.cairo(
-                color: ColorManger.workerprimary,
+                color: context.palette.workerprimary,
                 fontWeight: FontWeight.w600,
                 fontSize: ScreenUtilsManager.s16,
               ),
@@ -112,13 +112,13 @@ class UnderReviewScreen extends StatelessWidget {
           width: 96,
           height: 96,
           decoration: BoxDecoration(
-            color: ColorManger.workerprimary.withOpacity(0.1),
+            color: context.palette.workerprimary.withOpacity(0.1),
             shape: BoxShape.circle,
           ),
           child: Icon(
             Icons.schedule,
             size: 48,
-            color: ColorManger.workerprimary,
+            color: context.palette.workerprimary,
           ),
         ),
         SizedBox(height: ScreenUtilsManager.p24),
@@ -128,7 +128,7 @@ class UnderReviewScreen extends StatelessWidget {
           style: GoogleFonts.cairo(
             fontSize: ScreenUtilsManager.s32,
             fontWeight: FontWeight.w800,
-            color: ColorManger.onSurface,
+            color: context.palette.onSurface,
           ),
         ),
         SizedBox(height: ScreenUtilsManager.p12),
@@ -137,7 +137,7 @@ class UnderReviewScreen extends StatelessWidget {
           textAlign: TextAlign.center,
           style: GoogleFonts.cairo(
             fontSize: ScreenUtilsManager.s16,
-            color: ColorManger.secondary,
+            color: context.palette.secondary,
             height: 1.5,
           ),
         ),
@@ -153,7 +153,7 @@ class UnderReviewScreen extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(ScreenUtilsManager.p32),
       decoration: BoxDecoration(
-        color: ColorManger.white,
+        color: context.palette.white,
         borderRadius: BorderRadius.circular(ScreenUtilsManager.r24),
         boxShadow: [
           BoxShadow(
@@ -174,7 +174,7 @@ class UnderReviewScreen extends StatelessWidget {
                 style: GoogleFonts.cairo(
                   fontSize: ScreenUtilsManager.s20,
                   fontWeight: FontWeight.bold,
-                  color: ColorManger.onSurface,
+                  color: context.palette.onSurface,
                 ),
               ),
               Container(
@@ -183,7 +183,7 @@ class UnderReviewScreen extends StatelessWidget {
                   vertical: 4,
                 ),
                 decoration: BoxDecoration(
-                  color: ColorManger.workerprimary.withOpacity(0.1),
+                  color: context.palette.workerprimary.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(ScreenUtilsManager.r16),
                 ),
                 child: Text(
@@ -191,23 +191,27 @@ class UnderReviewScreen extends StatelessWidget {
                   style: GoogleFonts.cairo(
                     fontSize: 10,
                     fontWeight: FontWeight.bold,
-                    color: ColorManger.workerprimary,
+                    color: context.palette.workerprimary,
                   ),
                 ),
               ),
             ],
           ),
           SizedBox(height: ScreenUtilsManager.p32),
-          _buildInfoField(s.accessZone, workerRequestModel.areaName),
+          _buildInfoField(context, s.accessZone, workerRequestModel.areaName),
           SizedBox(height: ScreenUtilsManager.p16),
-          _buildInfoField(s.department, workerRequestModel.departmentName),
+          _buildInfoField(
+            context,
+            s.department,
+            workerRequestModel.departmentName,
+          ),
           SizedBox(height: ScreenUtilsManager.p24),
           Text(
             s.identityDocs,
             style: GoogleFonts.cairo(
               fontSize: 10,
               fontWeight: FontWeight.bold,
-              color: ColorManger.secondary,
+              color: context.palette.secondary,
             ),
           ),
           SizedBox(height: ScreenUtilsManager.p8),
@@ -215,12 +219,14 @@ class UnderReviewScreen extends StatelessWidget {
             children: [
               Expanded(
                 child: _buildDocumentPlaceholder(
+                  context,
                   workerRequestModel.nationalIdFrontImageUrl,
                 ),
               ),
               SizedBox(width: ScreenUtilsManager.p12),
               Expanded(
                 child: _buildDocumentPlaceholder(
+                  context,
                   workerRequestModel.nationalIdBackImageUrl,
                 ),
               ),
@@ -231,7 +237,7 @@ class UnderReviewScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildInfoField(String label, String value) {
+  Widget _buildInfoField(BuildContext context, String label, String value) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -240,7 +246,7 @@ class UnderReviewScreen extends StatelessWidget {
           style: GoogleFonts.cairo(
             fontSize: 10,
             fontWeight: FontWeight.bold,
-            color: ColorManger.secondary,
+            color: context.palette.secondary,
           ),
         ),
         SizedBox(height: ScreenUtilsManager.p8),
@@ -248,15 +254,15 @@ class UnderReviewScreen extends StatelessWidget {
           width: double.infinity,
           padding: EdgeInsets.all(ScreenUtilsManager.p16),
           decoration: BoxDecoration(
-            color: ColorManger.background,
+            color: context.palette.background,
             borderRadius: BorderRadius.circular(ScreenUtilsManager.r12),
-            border: Border.all(color: ColorManger.outline.withOpacity(0.2)),
+            border: Border.all(color: context.palette.outline.withOpacity(0.2)),
           ),
           child: Text(
             value,
             style: GoogleFonts.cairo(
               fontWeight: FontWeight.w600,
-              color: ColorManger.onSurface,
+              color: context.palette.onSurface,
             ),
           ),
         ),
@@ -264,15 +270,15 @@ class UnderReviewScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildDocumentPlaceholder(String imgurl) {
+  Widget _buildDocumentPlaceholder(BuildContext context, String imgurl) {
     return AspectRatio(
       aspectRatio: 4 / 3,
       child: Container(
         clipBehavior: Clip.antiAlias,
         decoration: BoxDecoration(
-          color: ColorManger.background,
+          color: context.palette.background,
           borderRadius: BorderRadius.circular(ScreenUtilsManager.r12),
-          border: Border.all(color: ColorManger.outline.withOpacity(0.2)),
+          border: Border.all(color: context.palette.outline.withOpacity(0.2)),
         ),
         child: CachedNetworkImage(
           fit: BoxFit.cover,
@@ -289,19 +295,22 @@ class UnderReviewScreen extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(ScreenUtilsManager.p24),
       decoration: BoxDecoration(
-        color: ColorManger.white,
+        color: context.palette.white,
         borderRadius: BorderRadius.circular(ScreenUtilsManager.r24),
-        border: Border.all(color: ColorManger.outline.withOpacity(0.1)),
+        border: Border.all(color: context.palette.outline.withOpacity(0.1)),
       ),
       child: Row(
         children: [
           Container(
             padding: EdgeInsets.all(ScreenUtilsManager.p12),
             decoration: BoxDecoration(
-              color: ColorManger.workerprimary.withOpacity(0.1),
+              color: context.palette.workerprimary.withOpacity(0.1),
               borderRadius: BorderRadius.circular(ScreenUtilsManager.r16),
             ),
-            child: Icon(Icons.info_outline, color: ColorManger.workerprimary),
+            child: Icon(
+              Icons.info_outline,
+              color: context.palette.workerprimary,
+            ),
           ),
           SizedBox(width: ScreenUtilsManager.p16),
           Expanded(
@@ -313,7 +322,7 @@ class UnderReviewScreen extends StatelessWidget {
                   style: GoogleFonts.cairo(
                     fontSize: ScreenUtilsManager.s16,
                     fontWeight: FontWeight.bold,
-                    color: ColorManger.onSurface,
+                    color: context.palette.onSurface,
                   ),
                 ),
                 SizedBox(height: 4),
@@ -321,7 +330,7 @@ class UnderReviewScreen extends StatelessWidget {
                   s.whatsNextDesc,
                   style: GoogleFonts.cairo(
                     fontSize: ScreenUtilsManager.s14,
-                    color: ColorManger.secondary,
+                    color: context.palette.secondary,
                     height: 1.5,
                   ),
                 ),

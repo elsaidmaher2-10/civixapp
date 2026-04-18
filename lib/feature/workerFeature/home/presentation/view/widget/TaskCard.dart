@@ -24,12 +24,12 @@ class TaskCard extends StatelessWidget {
       margin: EdgeInsets.only(right: ScreenUtilsManager.w16),
       padding: EdgeInsets.all(ScreenUtilsManager.w12),
       decoration: BoxDecoration(
-        color: ColorManger.white,
+        color: context.palette.white,
         borderRadius: BorderRadius.circular(ScreenUtilsManager.r20),
         border: Border.all(color: Colors.grey.shade100),
         boxShadow: [
           BoxShadow(
-            color: ColorManger.textBlack.withOpacity(0.03),
+            color: context.palette.textBlack.withOpacity(0.03),
             blurRadius: ScreenUtilsManager.s10,
             offset: Offset(ScreenUtilsManager.w0, ScreenUtilsManager.h4),
           ),
@@ -78,7 +78,7 @@ class TaskCard extends StatelessWidget {
                     vertical: ScreenUtilsManager.h4,
                   ),
                   decoration: BoxDecoration(
-                    color: ColorManger.primaryColor.withOpacity(0.9),
+                    color: context.palette.primaryColor.withOpacity(0.9),
                     borderRadius: BorderRadius.circular(ScreenUtilsManager.r20),
                   ),
                   child: Text(
@@ -97,7 +97,7 @@ class TaskCard extends StatelessWidget {
           Text(
             report.categoryName.toUpperCase(),
             style: GoogleFonts.cairo(
-              color: ColorManger.primaryColor,
+              color: context.palette.primaryColor,
               fontSize: ScreenUtilsManager.s10,
               fontWeight: FontWeight.bold,
               letterSpacing: 0.5,
@@ -119,7 +119,7 @@ class TaskCard extends StatelessWidget {
               Icon(
                 Icons.location_on_outlined,
                 size: ScreenUtilsManager.s14,
-                color: ColorManger.onSurfaceVariant,
+                color: context.palette.onSurfaceVariant,
               ),
               SizedBox(width: ScreenUtilsManager.w4),
               Expanded(
@@ -127,7 +127,7 @@ class TaskCard extends StatelessWidget {
                   report.areaName,
                   style: GoogleFonts.cairo(
                     fontSize: ScreenUtilsManager.s12,
-                    color: ColorManger.onSurfaceVariant,
+                    color: context.palette.onSurfaceVariant,
                   ),
                 ),
               ),

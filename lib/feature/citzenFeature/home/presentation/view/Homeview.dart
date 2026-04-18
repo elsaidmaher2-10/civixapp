@@ -23,13 +23,13 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorManger.reportsPageBackground,
+      backgroundColor: context.palette.reportsPageBackground,
       appBar: const MainscreenAppbar(),
       body: BlocBuilder<ReportCubit, ReportManagerState>(
         builder: (context, state) {
           if (state is GetReportsLoading || state is deleteReportState) {
-            return const Center(
-              child: SpinKitWaveSpinner(color: ColorManger.lightColor),
+            return Center(
+              child: SpinKitWaveSpinner(color: context.palette.lightColor),
             );
           }
           if (state is GetReportsFailure) {
@@ -52,7 +52,7 @@ class HomeScreen extends StatelessWidget {
 
           return RefreshIndicator.adaptive(
             backgroundColor: Colors.white,
-            color: ColorManger.lightBlue,
+            color: context.palette.lightBlue,
             onRefresh: () async {
               await context.read<ReportCubit>().fetchReports();
             },
@@ -80,7 +80,7 @@ class HomeScreen extends StatelessWidget {
                           S.of(context).overview,
                           style: GoogleFonts.cairo(
                             letterSpacing: -0.5,
-                            color: ColorManger.kPrimaryDark,
+                            color: context.palette.kPrimaryDark,
                             fontWeight: FontWeight.w700,
                             fontSize: ScreenUtilsManager.s20,
                           ),
@@ -98,21 +98,21 @@ class HomeScreen extends StatelessWidget {
                       children: [
                         Expanded(
                           child: StatusCard(
-                            color: ColorManger.kPrimary,
+                            color: context.palette.kPrimary,
                             number: activeCount,
                             title: S.of(context).active,
                             iconPath: AssetValueManager.active,
-                            iconcolor: ColorManger.kPrimary,
+                            iconcolor: context.palette.kPrimary,
                           ),
                         ),
                         SizedBox(width: 12.w),
                         Expanded(
                           child: StatusCard(
-                            color: ColorManger.orange,
+                            color: context.palette.orange,
                             number: pendingCount,
                             title: S.of(context).pending,
                             iconPath: AssetValueManager.pending,
-                            iconcolor: ColorManger.orange,
+                            iconcolor: context.palette.orange,
                           ),
                         ),
                         SizedBox(width: 12.w),
@@ -121,8 +121,8 @@ class HomeScreen extends StatelessWidget {
                             number: completedCount,
                             title: S.of(context).completed,
                             iconPath: AssetValueManager.resolved,
-                            color: ColorManger.green,
-                            iconcolor: ColorManger.green,
+                            color: context.palette.green,
+                            iconcolor: context.palette.green,
                           ),
                         ),
                       ],
@@ -145,7 +145,7 @@ class HomeScreen extends StatelessWidget {
                             fontSize: ScreenUtilsManager.s18,
                             fontWeight: FontWeight.bold,
                             letterSpacing: -0.3,
-                            color: ColorManger.kPrimaryDark,
+                            color: context.palette.kPrimaryDark,
                           ),
                         ),
                         if (reports.isNotEmpty)
@@ -174,7 +174,7 @@ class HomeScreen extends StatelessWidget {
                               style: GoogleFonts.cairo(
                                 fontSize: ScreenUtilsManager.s14,
                                 fontWeight: FontWeight.w600,
-                                color: ColorManger.lightBlue,
+                                color: context.palette.lightBlue,
                               ),
                             ),
                           ),
@@ -220,13 +220,13 @@ class HomeScreen extends StatelessWidget {
             Container(
               padding: EdgeInsets.all(ScreenUtilsManager.w24),
               decoration: BoxDecoration(
-                color: ColorManger.lightColor.withOpacity(0.1),
+                color: context.palette.lightColor.withOpacity(0.1),
                 shape: BoxShape.circle,
               ),
               child: Icon(
                 Icons.receipt_long_rounded,
                 size: 48.r,
-                color: ColorManger.lightColor,
+                color: context.palette.lightColor,
               ),
             ),
             SizedBox(height: ScreenUtilsManager.h16),
@@ -235,7 +235,7 @@ class HomeScreen extends StatelessWidget {
               style: GoogleFonts.cairo(
                 fontSize: ScreenUtilsManager.s16,
                 fontWeight: FontWeight.bold,
-                color: ColorManger.kPrimaryDark,
+                color: context.palette.kPrimaryDark,
               ),
             ),
             SizedBox(height: ScreenUtilsManager.h8),
@@ -280,7 +280,7 @@ Widget _buildErrorWidget(BuildContext context, String message) {
         ElevatedButton(
           onPressed: () => context.read<ReportCubit>().fetchReports(),
           style: ElevatedButton.styleFrom(
-            backgroundColor: ColorManger.primary,
+            backgroundColor: context.palette.primary,
             foregroundColor: Colors.white,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8.r),

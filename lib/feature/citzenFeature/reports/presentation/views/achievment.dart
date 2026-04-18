@@ -62,16 +62,16 @@ class _AchievemrntReportScreenState extends State<AchievemrntReportScreen> {
     final l10n = S.of(context);
 
     return Scaffold(
-      backgroundColor: ColorManger.reportsPageBackground,
+      backgroundColor: context.palette.reportsPageBackground,
       body: BlocBuilder<AchievementCubit, AchievementState>(
         builder: (context, state) {
           return CustomScrollView(
             controller: _scrollController,
             physics: const BouncingScrollPhysics(),
             slivers: [
-              const SliverAppBar(
+              SliverAppBar(
                 pinned: true,
-                backgroundColor: ColorManger.reportsPageBackground,
+                backgroundColor: context.palette.reportsPageBackground,
                 elevation: 0,
                 toolbarHeight: 10,
                 automaticallyImplyLeading: false,
@@ -221,7 +221,7 @@ class _AchievemrntReportScreenState extends State<AchievemrntReportScreen> {
           ElevatedButton(
             onPressed: () => context.read<AchievementCubit>().getAchievements(),
             style: ElevatedButton.styleFrom(
-              backgroundColor: ColorManger.primary,
+              backgroundColor: context.palette.primary,
               foregroundColor: Colors.white,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8.r),

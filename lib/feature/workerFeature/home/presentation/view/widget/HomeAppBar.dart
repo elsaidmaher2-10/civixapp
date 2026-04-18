@@ -23,7 +23,7 @@ class WorkerMainscreenAppbar extends StatelessWidget
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: ColorManger.reportsPageBackground.withOpacity(0.95),
+      backgroundColor: context.palette.reportsPageBackground.withOpacity(0.95),
       surfaceTintColor: Colors.transparent,
       elevation: ScreenUtilsManager.s2,
       shadowColor: Colors.black12,
@@ -41,7 +41,7 @@ class WorkerMainscreenAppbar extends StatelessWidget
           Text(
             S.of(context).appTitle,
             style: GoogleFonts.cairo(
-              color: ColorManger.kPrimaryDark,
+              color: context.palette.kPrimaryDark,
               fontWeight: FontWeight.w800,
               fontSize: ScreenUtilsManager.s18,
               letterSpacing: -0.3,
@@ -89,7 +89,7 @@ class WorkerMainscreenAppbar extends StatelessWidget
                                   Icons.notifications_none_rounded,
                                   key: const ValueKey('icon_bell'),
                                   size: ScreenUtilsManager.s26,
-                                  color: ColorManger.kPrimaryDark.withOpacity(
+                                  color: context.palette.kPrimaryDark.withOpacity(
                                     0.7,
                                   ),
                                 ),

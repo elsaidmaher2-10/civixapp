@@ -54,7 +54,7 @@ class SelectRoleDropdown extends StatelessWidget {
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8.r),
-              borderSide: BorderSide(color: ColorManger.kPrimary, width: 1.5),
+              borderSide: BorderSide(color: context.palette.kPrimary, width: 1.5),
             ),
           ),
 

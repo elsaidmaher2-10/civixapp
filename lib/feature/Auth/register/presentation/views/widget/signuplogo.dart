@@ -25,7 +25,7 @@ class signuplogo extends StatelessWidget {
             style: GoogleFonts.cairo(
               fontWeight: FontWeight.w600,
               fontSize: ScreenUtilsManager.s34,
-              color: ColorManger.kPrimary,
+              color: context.palette.kPrimary,
             ),
           ),
         ],

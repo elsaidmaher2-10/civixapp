@@ -60,7 +60,7 @@ class StatusBadgeApp extends StatelessWidget {
     switch (status) {
       case "InProgress":
         return {
-          'color': ColorManger.kPrimary,
+          'color': context.palette.kPrimary,
           'label': S.of(context).inProgress,
         };
       case "Resolved":

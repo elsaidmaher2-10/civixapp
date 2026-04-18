@@ -73,7 +73,7 @@ class _CategoryDropdownState extends State<CategoryDropdown> {
                   decoration: BoxDecoration(
                     color: const Color(0xffF6F6F6),
                     borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: ColorManger.kPrimary, width: 1),
+                    border: Border.all(color: context.palette.kPrimary, width: 1),
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -92,7 +92,7 @@ class _CategoryDropdownState extends State<CategoryDropdown> {
                       ),
                       Icon(
                         Icons.keyboard_arrow_down,
-                        color: ColorManger.kPrimary,
+                        color: context.palette.kPrimary,
                       ),
                     ],
                   ),
@@ -184,24 +184,24 @@ class _SearchListWidgetState extends State<_SearchListWidget> {
               decoration: InputDecoration(
                 hintText: widget.searchHintText,
                 hintStyle: GoogleFonts.cairo(fontSize: 14),
-                prefixIcon: Icon(Icons.search, color: ColorManger.kPrimary),
+                prefixIcon: Icon(Icons.search, color: context.palette.kPrimary),
                 filled: true,
                 fillColor: const Color(0xffF6F6F6),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
                   borderSide: BorderSide(
-                    color: ColorManger.kPrimary.withOpacity(0.5),
+                    color: context.palette.kPrimary.withOpacity(0.5),
                   ),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
                   borderSide: BorderSide(
-                    color: ColorManger.kPrimary.withOpacity(0.5),
+                    color: context.palette.kPrimary.withOpacity(0.5),
                   ),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide(color: ColorManger.kPrimary),
+                  borderSide: BorderSide(color: context.palette.kPrimary),
                 ),
               ),
             ),

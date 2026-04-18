@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:citifix/App/manager/cubit/localization_controller_cubit.dart';
 import 'package:citifix/core/DI/getit.dart';
 import 'package:citifix/core/routing/appRoutingRole.dart';
 import 'package:citifix/core/widget/CustomSnackBar.dart';
@@ -141,19 +142,19 @@ class _LoginpageState extends State<Loginpage> {
 
                   Customsnackbar.show(
                     context: context,
-                    backgroundColor: ColorManger.red,
+                    backgroundColor: context.palette.red,
                     message: state.message,
                   );
                 }
                 Customsnackbar.show(
                   context: context,
-                  backgroundColor: ColorManger.red,
+                  backgroundColor: context.palette.red,
                   message: state.message,
                 );
               } else if (state is LogincontrollerSuccess) {
                 Customsnackbar.show(
                   context: context,
-                  backgroundColor: ColorManger.green,
+                  backgroundColor: context.palette.green,
                   message: state.response.message,
                 );
                 await getIt<ReportCubit>().fetchReports();
@@ -189,7 +190,7 @@ class _LoginpageState extends State<Loginpage> {
                         Text(
                           S.of(context).dontHaveAccount,
                           style: GoogleFonts.cairo(
-                            color: ColorManger.lightGrey2,
+                            color: context.palette.lightGrey2,
                           ),
                         ),
                         SizedBox(width: ScreenUtilsManager.w4),
@@ -200,7 +201,7 @@ class _LoginpageState extends State<Loginpage> {
                           child: Text(
                             S.of(context).signUpNow,
                             style: GoogleFonts.cairo(
-                              color: ColorManger.kPrimary,
+                              color: context.palette.kPrimary,
                             ),
                           ),
                         ),
@@ -209,7 +210,7 @@ class _LoginpageState extends State<Loginpage> {
                   ),
                   resizeToAvoidBottomInset: true,
                   extendBody: true,
-                  backgroundColor: Colors.white,
+                  backgroundColor: Theme.of(context).colorScheme.surface,
                   body: SafeArea(
                     child: Padding(
                       padding: EdgeInsets.symmetric(
@@ -218,6 +219,75 @@ class _LoginpageState extends State<Loginpage> {
                       child: SingleChildScrollView(
                         child: Column(
                           children: [
+                            Align(
+                              alignment: AlignmentDirectional.topEnd,
+                              child: Padding(
+                                padding: EdgeInsets.only(
+                                  top: ScreenUtilsManager.h12,
+                                  bottom: ScreenUtilsManager.h8,
+                                ),
+                                child:
+                                    BlocBuilder<
+                                      LocalizationControllerCubit,
+                                      LocalizationControllerState
+                                    >(
+                                      builder: (context, state) {
+                                        final String lang =
+                                            state
+                                                is LocalizationControllerChanged
+                                            ? state.lang
+                                            : 'en';
+                                        return SegmentedButton<String>(
+                                          style: SegmentedButton.styleFrom(
+                                            selectedBackgroundColor:
+                                                context.palette.kPrimary,
+                                            selectedForegroundColor:
+                                                context.palette.white,
+                                            visualDensity:
+                                                VisualDensity.compact,
+                                            tapTargetSize: MaterialTapTargetSize
+                                                .shrinkWrap,
+                                          ),
+                                          segments: [
+                                            ButtonSegment<String>(
+                                              value: 'en',
+                                              label: Text(
+                                                S.of(context).english,
+                                                style: GoogleFonts.cairo(
+                                                  fontSize:
+                                                      ScreenUtilsManager.s13,
+                                                ),
+                                              ),
+                                            ),
+                                            ButtonSegment<String>(
+                                              value: 'ar',
+                                              label: Text(
+                                                S.of(context).arabic,
+                                                style: GoogleFonts.cairo(
+                                                  fontSize:
+                                                      ScreenUtilsManager.s13,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                          selected: {lang},
+                                          showSelectedIcon: false,
+                                          onSelectionChanged:
+                                              (Set<String> selection) {
+                                                if (selection.isEmpty) return;
+                                                context
+                                                    .read<
+                                                      LocalizationControllerCubit
+                                                    >()
+                                                    .changeLanguage(
+                                                      selection.first,
+                                                    );
+                                              },
+                                        );
+                                      },
+                                    ),
+                              ),
+                            ),
                             SizedBox(height: ScreenUtilsManager.h20),
                             SizedBox(
                               width: double.infinity,
@@ -236,7 +306,7 @@ class _LoginpageState extends State<Loginpage> {
                                       style: GoogleFonts.cairo(
                                         fontWeight: FontWeight.w600,
                                         fontSize: ScreenUtilsManager.s34,
-                                        color: ColorManger.kPrimary,
+                                        color: context.palette.kPrimary,
                                       ),
                                     ),
                                   ],
@@ -248,7 +318,7 @@ class _LoginpageState extends State<Loginpage> {
                               controller: email,
                               prefix: Icon(
                                 Icons.email,
-                                color: ColorManger.lightGrey2,
+                                color: context.palette.lightGrey2,
                               ),
                               hinttext: S.of(context).hintEmail,
                               validator: (value) {
@@ -273,7 +343,7 @@ class _LoginpageState extends State<Loginpage> {
                                     return CustomTextfromfield(
                                       prefix: Icon(
                                         Icons.password_outlined,
-                                        color: ColorManger.lightGrey2,
+                                        color: context.palette.lightGrey2,
                                       ),
                                       maxLines: 1,
                                       controller: password,
@@ -304,7 +374,7 @@ class _LoginpageState extends State<Loginpage> {
                                           snapshot.data == true
                                               ? Icons.remove_red_eye
                                               : Icons.visibility_off,
-                                          color: ColorManger.lightGrey3,
+                                          color: context.palette.lightGrey3,
                                         ),
                                       ),
                                       lable: S.of(context).password,
@@ -324,7 +394,7 @@ class _LoginpageState extends State<Loginpage> {
                                         Size(30, 30),
                                       ),
                                       child: Checkbox(
-                                        activeColor: ColorManger.kPrimary,
+                                        activeColor: context.palette.kPrimary,
                                         value: ischeck,
                                         onChanged: (onChanged) async {
                                           setState(() {});
@@ -350,7 +420,7 @@ class _LoginpageState extends State<Loginpage> {
                                   child: Text(
                                     S.of(context).forgetPassword,
                                     style: GoogleFonts.cairo(
-                                      color: ColorManger.kPrimary,
+                                      color: context.palette.kPrimary,
                                       fontSize: ScreenUtilsManager.s14,
                                     ),
                                   ),
@@ -369,8 +439,9 @@ class _LoginpageState extends State<Loginpage> {
                                       AsyncSnapshot<bool> snapshot,
                                     ) => ElevatedButton(
                                       style: ElevatedButton.styleFrom(
-                                        backgroundColor: ColorManger.kPrimary,
-                                        foregroundColor: ColorManger.white,
+                                        backgroundColor:
+                                            context.palette.kPrimary,
+                                        foregroundColor: context.palette.white,
                                         shape: RoundedRectangleBorder(
                                           borderRadius: BorderRadius.circular(
                                             ScreenUtilsManager.r10,

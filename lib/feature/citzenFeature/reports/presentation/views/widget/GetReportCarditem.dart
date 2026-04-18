@@ -78,7 +78,7 @@ class ReportCardIem extends StatelessWidget {
                           style: GoogleFonts.cairo(
                             fontSize: ScreenUtilsManager.s18,
                             fontWeight: FontWeight.bold,
-                            color: ColorManger.kPrimary,
+                            color: context.palette.kPrimary,
                           ),
                         ),
                         SizedBox(height: ScreenUtilsManager.h6),
@@ -118,8 +118,8 @@ class ReportCardIem extends StatelessWidget {
                     borderRadius: BorderRadius.circular(ScreenUtilsManager.r10),
                     child: CachedNetworkImage(
                       placeholder: (context, url) =>
-                          const CupertinoActivityIndicator(
-                            color: ColorManger.lightColor,
+                          CupertinoActivityIndicator(
+                            color: context.palette.lightColor,
                           ),
                       width: ScreenUtilsManager.w80,
                       height: ScreenUtilsManager.h80,
@@ -138,7 +138,7 @@ class ReportCardIem extends StatelessWidget {
                 vertical: ScreenUtilsManager.h12,
               ),
               decoration: BoxDecoration(
-                color: ColorManger.white,
+                color: context.palette.white,
                 border: Border(
                   top: BorderSide(color: Colors.black.withOpacity(0.05)),
                 ),
@@ -151,11 +151,11 @@ class ReportCardIem extends StatelessWidget {
                     style: GoogleFonts.cairo(
                       fontWeight: FontWeight.w600,
                       fontSize: 13,
-                      color: ColorManger.lightColor,
+                      color: context.palette.lightColor,
                     ),
                   ),
                   Material(
-                    color: ColorManger.lightColor.withOpacity(0.1),
+                    color: context.palette.lightColor.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(ScreenUtilsManager.r8),
                     child: InkWell(
                       onTap: () async {
@@ -189,7 +189,7 @@ class ReportCardIem extends StatelessWidget {
                               style: GoogleFonts.cairo(
                                 fontWeight: FontWeight.bold,
                                 fontSize: ScreenUtilsManager.s12,
-                                color: ColorManger.lightColor,
+                                color: context.palette.lightColor,
                               ),
                             ),
                             SizedBox(width: 4.w),
@@ -198,7 +198,7 @@ class ReportCardIem extends StatelessWidget {
                                   ? Icons.chevron_left
                                   : Icons.chevron_right,
                               size: ScreenUtilsManager.h16,
-                              color: ColorManger.lightColor,
+                              color: context.palette.lightColor,
                             ),
                           ],
                         ),

@@ -17,7 +17,7 @@ class HelpAndTermsPage extends StatelessWidget {
       context,
     ).map((e) => e.category).toSet().toList();
     return Scaffold(
-      backgroundColor: ColorManger.reportsPageBackground,
+      backgroundColor: context.palette.reportsPageBackground,
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios_sharp, size: ScreenUtilsManager.s18),
@@ -35,7 +35,7 @@ class HelpAndTermsPage extends StatelessWidget {
         centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.white,
-        foregroundColor: ColorManger.kPrimaryDark,
+        foregroundColor: context.palette.kPrimaryDark,
       ),
       body: ListView.builder(
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
@@ -60,7 +60,7 @@ class HelpAndTermsPage extends StatelessWidget {
                   style: GoogleFonts.cairo(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.bold,
-                    color: ColorManger.kPrimary,
+                    color: context.palette.kPrimary,
                   ),
                 ),
               ),
@@ -81,7 +81,7 @@ class HelpAndTermsPage extends StatelessWidget {
                     ),
                     queStyle: GoogleFonts.cairo(
                       fontWeight: FontWeight.w600,
-                      color: ColorManger.kPrimaryDark,
+                      color: context.palette.kPrimaryDark,
                     ),
                     ansStyle: GoogleFonts.cairo(
                       color: Colors.grey[600],
@@ -113,7 +113,7 @@ class HelpAndTermsPage extends StatelessWidget {
           style: GoogleFonts.cairo(fontSize: ScreenUtilsManager.s14),
         ),
         style: ElevatedButton.styleFrom(
-          backgroundColor: ColorManger.kPrimary,
+          backgroundColor: context.palette.kPrimary,
           foregroundColor: Colors.white,
           minimumSize: Size(double.infinity, 50.h),
           shape: RoundedRectangleBorder(

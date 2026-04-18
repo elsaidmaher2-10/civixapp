@@ -8,10 +8,10 @@ import '../../../../../core/resource/screenutilsmaanger.dart';
 PreferredSizeWidget buildAppBar(BuildContext context) {
   return AppBar(
     surfaceTintColor: Colors.transparent,
-    backgroundColor: ColorManger.background,
+    backgroundColor: context.palette.background,
     elevation: 0,
     leading: IconButton(
-      color: ColorManger.workerprimary,
+      color: context.palette.workerprimary,
       onPressed: () => Navigator.of(context).pop(),
       icon: const Icon(Icons.arrow_back_ios_new_rounded),
     ),
@@ -23,7 +23,7 @@ PreferredSizeWidget buildAppBar(BuildContext context) {
         Text(
           S.of(context).verificationTitle,
           style: GoogleFonts.cairo(
-            color: ColorManger.workerprimary,
+            color: context.palette.workerprimary,
             fontWeight: FontWeight.bold,
             fontSize: ScreenUtilsManager.s18,
           ),

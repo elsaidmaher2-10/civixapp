@@ -37,7 +37,7 @@ class CustomTaskListView extends StatelessWidget {
                     '(${reports.length})',
                     style: GoogleFonts.cairo(
                       fontSize: ScreenUtilsManager.s14,
-                      color: ColorManger.onSurfaceVariant,
+                      color: context.palette.onSurfaceVariant,
                     ),
                   ),
                 ],
@@ -48,7 +48,7 @@ class CustomTaskListView extends StatelessWidget {
                 },
                 child: Text(
                   S.of(context).see_all,
-                  style: GoogleFonts.cairo(color: ColorManger.primaryColor),
+                  style: GoogleFonts.cairo(color: context.palette.primaryColor),
                 ),
               ),
             ],

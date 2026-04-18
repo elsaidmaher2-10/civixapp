@@ -26,13 +26,13 @@ class _NotificationCenterState extends State<NotificationCenter> {
     super.initState();
     context.read<NotificationCubit>().getNotifications();
     isWorker = PrefrenceManager().getstring("role")?.toLowerCase() == "worker";
-    primaryColor = isWorker ? ColorManger.workerprimary : ColorManger.primary;
+    primaryColor = isWorker ? context.palette.workerprimary : context.palette.primary;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorManger.surface,
+      backgroundColor: context.palette.surface,
       appBar: _buildAppBar(context),
       body: _buildBody(),
     );
@@ -45,7 +45,7 @@ class _NotificationCenterState extends State<NotificationCenter> {
         onPressed: () => Navigator.of(context).pop(),
         icon: const Icon(Icons.arrow_back_ios_new_rounded),
       ),
-      backgroundColor: ColorManger.surface,
+      backgroundColor: context.palette.surface,
       scrolledUnderElevation: 0,
       elevation: 0,
       centerTitle: false,
@@ -161,7 +161,7 @@ class _NotificationCenterState extends State<NotificationCenter> {
   Widget _buildNotificationList(List notifications) {
     return RefreshIndicator(
       color: primaryColor,
-      backgroundColor: ColorManger.surface,
+      backgroundColor: context.palette.surface,
       onRefresh: () => context.read<NotificationCubit>().refreshNotifications(),
       child: ListView.separated(
         key: const Key('list'),

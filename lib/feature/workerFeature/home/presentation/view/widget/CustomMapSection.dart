@@ -90,7 +90,7 @@ class _CustomMapSectionState extends State<CustomMapSection> {
                   Container(
                     height: ScreenUtilsManager.h450,
                     decoration: BoxDecoration(
-                      color: ColorManger.surfaceContainerLowest,
+                      color: context.palette.surfaceContainerLowest,
                       borderRadius: BorderRadius.circular(
                         ScreenUtilsManager.s24,
                       ),

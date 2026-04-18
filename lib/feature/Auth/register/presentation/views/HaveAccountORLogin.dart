@@ -18,7 +18,7 @@ class HaveAccountOrLogin extends StatelessWidget {
           Text(
             S.of(context).haveAccount,
             style: GoogleFonts.cairo(
-              color: ColorManger.lightGrey2,
+              color: context.palette.lightGrey2,
               fontSize: 14.sp,
             ),
           ),
@@ -29,7 +29,7 @@ class HaveAccountOrLogin extends StatelessWidget {
             child: Text(
               S.of(context).login,
               style: GoogleFonts.cairo(
-                color: ColorManger.kPrimary,
+                color: context.palette.kPrimary,
                 fontSize: 14.sp,
                 fontWeight: FontWeight.w500,
               ),

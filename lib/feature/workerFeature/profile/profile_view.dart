@@ -12,6 +12,7 @@ import 'package:citifix/core/widget/CustomSnackBar.dart';
 import 'package:citifix/feature/citzenFeature/Profile/data/Models/UserProfileModel/userProfile.dart';
 import 'package:citifix/feature/citzenFeature/Profile/data/repos/UserProfileRepos/LogOutRepos.dart';
 import 'package:citifix/feature/citzenFeature/Profile/presentation/view/Function/showLanguagePicker.dart';
+import 'package:citifix/feature/citzenFeature/Profile/presentation/view/Function/show_theme_picker.dart';
 import 'package:citifix/feature/workerFeature/profile/action_list_tile.dart';
 import 'package:citifix/feature/workerFeature/profile/document_tile.dart';
 import 'package:citifix/feature/workerFeature/profile/info_card.dart';
@@ -112,13 +113,13 @@ class _ProfileViewState extends State<ProfileView> {
                   if (userProfile == null &&
                       userInfoState is! UserProfileInfoSuccess) {
                     return Scaffold(
-                      backgroundColor: ColorManger.white,
+                      backgroundColor: Theme.of(context).colorScheme.surface,
                       body: Center(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             SpinKitPouringHourGlassRefined(
-                              color: ColorManger.workerprimary,
+                              color: context.palette.workerprimary,
                               size: 70.h,
                             ),
                             SizedBox(height: 20.h),
@@ -126,7 +127,7 @@ class _ProfileViewState extends State<ProfileView> {
                               S.of(context).loading,
                               style: TextStyle(
                                 fontSize: 16.sp,
-                                color: ColorManger.workerprimary,
+                                color: context.palette.workerprimary,
                               ),
                             ),
                           ],
@@ -136,10 +137,10 @@ class _ProfileViewState extends State<ProfileView> {
                   }
 
                   return Scaffold(
-                    backgroundColor: ColorManger.bgLight,
+                    backgroundColor: Theme.of(context).colorScheme.surface,
                     body: RefreshIndicator(
-                      color: ColorManger.workerprimary,
-                      backgroundColor: ColorManger.background,
+                      color: context.palette.workerprimary,
+                      backgroundColor: context.palette.background,
 
                       onRefresh: () {
                         return context
@@ -203,7 +204,7 @@ class _ProfileViewState extends State<ProfileView> {
                                           .titleLarge
                                           ?.copyWith(
                                             fontWeight: FontWeight.bold,
-                                            color: ColorManger.onSurface,
+                                            color: context.palette.onSurface,
                                           ),
                                     ),
                                     const SizedBox(height: 24),
@@ -313,6 +314,16 @@ class _ProfileViewState extends State<ProfileView> {
                                     label: S.of(context).language,
                                     onTap: () =>
                                         showLanguagePicker(context, true),
+                                  ),
+                                  ActionListTileData(
+                                    icon: Icons.dark_mode_outlined,
+                                    label: Localizations.localeOf(
+                                                  context,
+                                                ).languageCode ==
+                                                'ar'
+                                        ? 'المظهر'
+                                        : 'Theme',
+                                    onTap: () => showThemePicker(context),
                                   ),
 
                                   ActionListTileData(

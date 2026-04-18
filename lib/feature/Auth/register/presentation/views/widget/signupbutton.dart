@@ -17,9 +17,9 @@ class SignUPButton extends StatelessWidget {
           return ElevatedButton(
             style: ElevatedButton.styleFrom(
               backgroundColor: state == true
-                  ? ColorManger.kPrimary
-                  : ColorManger.lightGrey3,
-              foregroundColor: ColorManger.white,
+                  ? context.palette.kPrimary
+                  : context.palette.lightGrey3,
+              foregroundColor: context.palette.white,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(ScreenUtilsManager.r10),
               ),

@@ -5,6 +5,7 @@ import 'package:citifix/core/routing/routes.dart';
 import 'package:citifix/core/cubit/userinfoManger/user_profile_info_cubit.dart';
 import 'package:citifix/feature/citzenFeature/Profile/presentation/view/Function/ShowCitezenaCard.dart';
 import 'package:citifix/feature/citzenFeature/Profile/presentation/view/Function/showLanguagePicker.dart';
+import 'package:citifix/feature/citzenFeature/Profile/presentation/view/Function/show_theme_picker.dart';
 import 'package:citifix/feature/citzenFeature/Profile/presentation/view/widget/ProfileMenu.dart';
 import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +28,7 @@ class Profilesettings extends StatelessWidget {
             S.of(context).settings,
             style: GoogleFonts.cairo(
               letterSpacing: 1.6,
-              color: ColorManger.lightGrey6,
+              color: context.palette.lightGrey6,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -38,7 +39,7 @@ class Profilesettings extends StatelessWidget {
                 iconPath: SvgPicture.asset(
                   AssetValueManager.language,
                   colorFilter: ColorFilter.mode(
-                    ColorManger.lightBlue.withOpacity(0.1),
+                    context.palette.lightBlue.withOpacity(0.1),
                     BlendMode.srcATop,
                   ),
                 ),
@@ -47,10 +48,27 @@ class Profilesettings extends StatelessWidget {
                 onTap: () => showLanguagePicker(context, false),
               ),
               ProfileMenuItem(
+                iconPath: Container(
+                  padding: EdgeInsets.all(6.w),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(6),
+                    color: context.palette.lightBlue.withOpacity(0.18),
+                  ),
+                  child: Icon(
+                    Icons.dark_mode_outlined,
+                    color: context.palette.kPrimaryDark.withOpacity(0.8),
+                  ),
+                ),
+                title: Localizations.localeOf(context).languageCode == 'ar'
+                    ? 'المظهر'
+                    : 'Theme',
+                onTap: () => showThemePicker(context),
+              ),
+              ProfileMenuItem(
                 iconPath: SvgPicture.asset(
                   AssetValueManager.identity,
                   colorFilter: ColorFilter.mode(
-                    ColorManger.lightBlue.withOpacity(0.1),
+                    context.palette.lightBlue.withOpacity(0.1),
                     BlendMode.srcATop,
                   ),
                 ),
@@ -63,7 +81,7 @@ class Profilesettings extends StatelessWidget {
                   AssetValueManager.accountinformation,
 
                   colorFilter: ColorFilter.mode(
-                    ColorManger.lightBlue.withOpacity(0.1),
+                    context.palette.lightBlue.withOpacity(0.1),
                     BlendMode.srcATop,
                   ),
                 ),
@@ -80,11 +98,11 @@ class Profilesettings extends StatelessWidget {
                   padding: EdgeInsets.all(6.w),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(6),
-                    color: ColorManger.lightBlue.withOpacity(0.18),
+                    color: context.palette.lightBlue.withOpacity(0.18),
                   ),
                   child: Icon(
                     Icons.list_outlined,
-                    color: ColorManger.kPrimaryDark.withOpacity(0.8),
+                    color: context.palette.kPrimaryDark.withOpacity(0.8),
                   ),
                 ),
                 title: S.of(context).help,

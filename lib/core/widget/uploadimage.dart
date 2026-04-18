@@ -34,7 +34,7 @@ class Uploadimage extends StatelessWidget {
                 S.of(context).addPhoto,
                 style: GoogleFonts.cairo(
                   fontSize: ScreenUtilsManager.s12,
-                  color: ColorManger.lightGrey,
+                  color: context.palette.lightGrey,
                   fontWeight: FontWeight.w500,
                 ),
               ),

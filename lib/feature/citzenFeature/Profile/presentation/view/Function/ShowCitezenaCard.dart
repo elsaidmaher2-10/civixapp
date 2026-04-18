@@ -21,7 +21,7 @@ void showCitizenCard(BuildContext context) async {
   await showDialog(
     context: context,
     builder: (context) => Dialog(
-      backgroundColor: ColorManger.white,
+      backgroundColor: context.palette.white,
       clipBehavior: Clip.antiAlias,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(ScreenUtilsManager.r10),
@@ -36,7 +36,7 @@ void showCitizenCard(BuildContext context) async {
             children: [
               Container(
                 width: double.infinity,
-                color: ColorManger.kPrimary,
+                color: context.palette.kPrimary,
                 padding: EdgeInsets.symmetric(
                   horizontal: ScreenUtilsManager.w16,
                   vertical: ScreenUtilsManager.h10,
@@ -48,15 +48,15 @@ void showCitizenCard(BuildContext context) async {
                       style: GoogleFonts.cairo(
                         fontSize: ScreenUtilsManager.s18,
                         fontWeight: FontWeight.bold,
-                        color: ColorManger.white,
+                        color: context.palette.white,
                       ),
                     ),
                     const Spacer(),
                     IconButton(
                       onPressed: () => Navigator.pop(context),
-                      icon: const Icon(
+                      icon: Icon(
                         Icons.cancel_rounded,
-                        color: ColorManger.white,
+                        color: context.palette.white,
                       ),
                     ),
                   ],

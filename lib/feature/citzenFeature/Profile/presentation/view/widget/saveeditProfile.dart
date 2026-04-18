@@ -34,8 +34,8 @@ class Saveeditprofile extends StatelessWidget {
               onPressed: isEnabled ? ontap : null,
               style: ElevatedButton.styleFrom(
                 backgroundColor: role
-                    ? ColorManger.workerprimary
-                    : ColorManger.kPrimary,
+                    ? context.palette.workerprimary
+                    : context.palette.kPrimary,
                 foregroundColor: Colors.white,
                 padding: EdgeInsets.symmetric(vertical: ScreenUtilsManager.h16),
                 shape: RoundedRectangleBorder(
@@ -43,8 +43,8 @@ class Saveeditprofile extends StatelessWidget {
                 ),
                 elevation: isEnabled ? 6 : 0,
                 shadowColor: role
-                    ? ColorManger.workerprimary.withOpacity(0.35)
-                    : ColorManger.kPrimary.withOpacity(0.35),
+                    ? context.palette.workerprimary.withOpacity(0.35)
+                    : context.palette.kPrimary.withOpacity(0.35),
               ),
               child: Text(
                 S.of(context).saveChanges,

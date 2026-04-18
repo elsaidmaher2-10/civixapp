@@ -22,7 +22,7 @@ class Chanagepassword extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.all(ScreenUtilsManager.w16),
         decoration: BoxDecoration(
-          color: ColorManger.kPrimary.withOpacity(0.05),
+          color: context.palette.kPrimary.withOpacity(0.05),
           borderRadius: BorderRadius.circular(ScreenUtilsManager.r14),
         ),
         child: Row(
@@ -32,7 +32,7 @@ class Chanagepassword extends StatelessWidget {
               children: [
                 Icon(
                   Icons.lock_outline,
-                  color: ColorManger.kPrimary,
+                  color: context.palette.kPrimary,
                   size: ScreenUtilsManager.s20,
                 ),
                 SizedBox(width: ScreenUtilsManager.w12),
@@ -41,7 +41,7 @@ class Chanagepassword extends StatelessWidget {
                   style: GoogleFonts.cairo(
                     fontSize: ScreenUtilsManager.s14,
                     fontWeight: FontWeight.w600,
-                    color: ColorManger.kPrimary,
+                    color: context.palette.kPrimary,
                   ),
                 ),
               ],
@@ -50,7 +50,7 @@ class Chanagepassword extends StatelessWidget {
               Directionality.of(context) == TextDirection.rtl
                   ? CupertinoIcons.back
                   : CupertinoIcons.forward,
-              color: ColorManger.kPrimary,
+              color: context.palette.kPrimary,
               size: ScreenUtilsManager.s20,
             ),
           ],

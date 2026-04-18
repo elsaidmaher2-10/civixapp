@@ -16,9 +16,9 @@ class TaskInfoSection extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(ScreenUtilsManager.w20),
       decoration: BoxDecoration(
-        color: ColorManger.surface,
+        color: context.palette.surface,
         borderRadius: BorderRadius.circular(ScreenUtilsManager.r12),
-        border: Border.all(color: ColorManger.grey200),
+        border: Border.all(color: context.palette.grey200),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -31,7 +31,7 @@ class TaskInfoSection extends StatelessWidget {
                 style: GoogleFonts.cairo(
                   fontSize: ScreenUtilsManager.s10,
                   fontWeight: FontWeight.w500,
-                  color: ColorManger.grey500,
+                  color: context.palette.grey500,
                 ),
               ),
             ],
@@ -42,7 +42,7 @@ class TaskInfoSection extends StatelessWidget {
             style: GoogleFonts.cairo(
               fontSize: ScreenUtilsManager.s20,
               fontWeight: FontWeight.w800,
-              color: ColorManger.onSurface,
+              color: context.palette.onSurface,
             ),
           ),
           SizedBox(height: ScreenUtilsManager.h8),
@@ -50,7 +50,7 @@ class TaskInfoSection extends StatelessWidget {
             task.description ?? S.of(context).noDescription,
             style: GoogleFonts.cairo(
               fontSize: ScreenUtilsManager.s14,
-              color: ColorManger.onSurfaceVariant,
+              color: context.palette.onSurfaceVariant,
               height: ScreenUtilsManager.h1_5,
             ),
           ),

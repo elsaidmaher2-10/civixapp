@@ -38,9 +38,9 @@ class IDUploadCard extends StatelessWidget {
           child: Container(
             height: 180,
             decoration: BoxDecoration(
-              color: ColorManger.surface,
+              color: context.palette.surface,
               borderRadius: BorderRadius.circular(cardRadius),
-              border: Border.all(color: ColorManger.outline),
+              border: Border.all(color: context.palette.outline),
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(cardRadius - 1),
@@ -59,12 +59,12 @@ class IDUploadCard extends StatelessWidget {
                               padding: const EdgeInsets.all(8.0),
                               child: CircleAvatar(
                                 radius: ScreenUtilsManager.r12,
-                                backgroundColor: ColorManger.workerprimary
+                                backgroundColor: context.palette.workerprimary
                                     .withOpacity(0.8),
                                 child: Icon(
                                   Icons.close,
                                   size: ScreenUtilsManager.s20,
-                                  color: ColorManger.white,
+                                  color: context.palette.white,
                                 ),
                               ),
                             ),
@@ -75,7 +75,7 @@ class IDUploadCard extends StatelessWidget {
                   : Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(icon, size: 38, color: ColorManger.workerprimary),
+                        Icon(icon, size: 38, color: context.palette.workerprimary),
                         SizedBox(height: 12),
                         Text(
                           title,
@@ -89,7 +89,7 @@ class IDUploadCard extends StatelessWidget {
                           subtitle,
                           style: GoogleFonts.cairo(
                             fontSize: 11,
-                            color: ColorManger.secondary,
+                            color: context.palette.secondary,
                           ),
                         ),
                       ],

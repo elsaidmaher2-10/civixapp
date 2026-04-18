@@ -74,7 +74,7 @@ class _ActivityTimelineSectionState extends State<ActivityTimelineSection> {
       );
       Customsnackbar.show(
         context: context,
-        backgroundColor: ColorManger.red,
+        backgroundColor: context.palette.red,
         message: S.of(context).nextStep(nextStepName),
       );
       return;
@@ -84,7 +84,7 @@ class _ActivityTimelineSectionState extends State<ActivityTimelineSection> {
       if (widget.isCompleted == false) {
         Customsnackbar.show(
           context: context,
-          backgroundColor: ColorManger.red,
+          backgroundColor: context.palette.red,
           message: S.of(context).mustCompleteReportImages,
         );
         return;
@@ -109,7 +109,7 @@ class _ActivityTimelineSectionState extends State<ActivityTimelineSection> {
         if (state is WorkerChangeTasksError) {
           Customsnackbar.show(
             context: context,
-            backgroundColor: ColorManger.red,
+            backgroundColor: context.palette.red,
             message: state.message,
           );
           setState(() {
@@ -120,9 +120,9 @@ class _ActivityTimelineSectionState extends State<ActivityTimelineSection> {
       child: Container(
         padding: EdgeInsets.all(ScreenUtilsManager.w24),
         decoration: BoxDecoration(
-          color: ColorManger.surface,
+          color: context.palette.surface,
           borderRadius: BorderRadius.circular(ScreenUtilsManager.r12),
-          border: Border.all(color: ColorManger.grey200),
+          border: Border.all(color: context.palette.grey200),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -131,7 +131,7 @@ class _ActivityTimelineSectionState extends State<ActivityTimelineSection> {
               children: [
                 Icon(
                   Icons.event_repeat,
-                  color: ColorManger.workerprimary,
+                  color: context.palette.workerprimary,
                   size: ScreenUtilsManager.s16,
                 ),
                 SizedBox(width: ScreenUtilsManager.w8),
@@ -174,20 +174,20 @@ class _ActivityTimelineSectionState extends State<ActivityTimelineSection> {
                       child: Container(
                         decoration: BoxDecoration(
                           color: isCompletedStatus
-                              ? ColorManger.workerprimary
-                              : ColorManger.white,
+                              ? context.palette.workerprimary
+                              : context.palette.white,
                           shape: BoxShape.circle,
                           border: Border.all(
                             color: isCompletedStatus
-                                ? ColorManger.workerprimary
-                                : ColorManger.grey300,
+                                ? context.palette.workerprimary
+                                : context.palette.grey300,
                             width: ScreenUtilsManager.w2,
                           ),
                         ),
                         child: isCompletedStatus
                             ? Icon(
                                 Icons.check,
-                                color: ColorManger.white,
+                                color: context.palette.white,
                                 size: ScreenUtilsManager.s14,
                               )
                             : null,
@@ -196,15 +196,15 @@ class _ActivityTimelineSectionState extends State<ActivityTimelineSection> {
                   ),
                   beforeLineStyle: LineStyle(
                     color: isCompletedStatus
-                        ? ColorManger.workerprimary
-                        : ColorManger.grey200,
+                        ? context.palette.workerprimary
+                        : context.palette.grey200,
                     thickness: ScreenUtilsManager.w2,
                   ),
                   afterLineStyle: LineStyle(
                     color:
                         (index < _stepsOrder.length - 1 && currentIndex > index)
-                        ? ColorManger.workerprimary
-                        : ColorManger.grey200,
+                        ? context.palette.workerprimary
+                        : context.palette.grey200,
                     thickness: ScreenUtilsManager.w2,
                   ),
                   endChild: GestureDetector(
@@ -223,8 +223,8 @@ class _ActivityTimelineSectionState extends State<ActivityTimelineSection> {
                               fontSize: ScreenUtilsManager.s14,
                               fontWeight: FontWeight.bold,
                               color: isCompletedStatus
-                                  ? ColorManger.black87
-                                  : ColorManger.grey,
+                                  ? context.palette.black87
+                                  : context.palette.grey,
                             ),
                           ),
 
@@ -232,7 +232,7 @@ class _ActivityTimelineSectionState extends State<ActivityTimelineSection> {
                             curdate.toString(),
                             style: GoogleFonts.cairo(
                               fontSize: ScreenUtilsManager.s12,
-                              color: ColorManger.lightGrey6,
+                              color: context.palette.lightGrey6,
                             ),
                           ),
                         ],

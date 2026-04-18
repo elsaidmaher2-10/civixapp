@@ -121,9 +121,9 @@ class _CustomMapState extends State<CustomMap> with TickerProviderStateMixin {
           SizedBox(
             height: ScreenUtilsManager.h250,
             child: _isLoading
-                ? const Center(
+                ? Center(
                     child: CircularProgressIndicator(
-                      color: ColorManger.kPrimaryDark,
+                      color: context.palette.kPrimaryDark,
                     ),
                   )
                 : Stack(

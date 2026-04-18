@@ -20,7 +20,7 @@ class ReportSearchBar extends StatelessWidget {
           Text(
             l10n.achievement,
             style: GoogleFonts.cairo(
-              color: ColorManger.kPrimary,
+              color: context.palette.kPrimary,
               fontWeight: FontWeight.bold,
               fontSize: ScreenUtilsManager.s18,
             ),

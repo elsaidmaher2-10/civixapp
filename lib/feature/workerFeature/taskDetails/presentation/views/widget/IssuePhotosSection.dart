@@ -36,7 +36,7 @@ class _IssuePhotosSectionState extends State<IssuePhotosSection> {
           style: GoogleFonts.cairo(
             fontSize: ScreenUtilsManager.s12,
             fontWeight: FontWeight.bold,
-            color: ColorManger.onSurfaceVariant,
+            color: context.palette.onSurfaceVariant,
             letterSpacing: ScreenUtilsManager.s1,
           ),
         ),
@@ -48,7 +48,7 @@ class _IssuePhotosSectionState extends State<IssuePhotosSection> {
             borderRadius: BorderRadius.circular(ScreenUtilsManager.r16),
             boxShadow: [
               BoxShadow(
-                color: ColorManger.black.withOpacity(0.05),
+                color: context.palette.black.withOpacity(0.05),
                 blurRadius: ScreenUtilsManager.s10,
                 offset: Offset(0, ScreenUtilsManager.h5),
               ),
@@ -73,11 +73,11 @@ class _IssuePhotosSectionState extends State<IssuePhotosSection> {
                       imageUrl: item,
                       fit: BoxFit.cover,
                       placeholder: (context, url) => Container(
-                        color: ColorManger.grey200,
+                        color: context.palette.grey200,
                         child: Center(
                           child: CupertinoActivityIndicator(
                             radius: ScreenUtilsManager.r12,
-                            color: ColorManger.primaryColor,
+                            color: context.palette.primaryColor,
                           ),
                         ),
                       ),
@@ -96,8 +96,8 @@ class _IssuePhotosSectionState extends State<IssuePhotosSection> {
                   child: CustomIndicator(
                     controller: _pageController,
                     count: widget.mediaItems.length,
-                    activeColor: ColorManger.kPrimary,
-                    dotColor: ColorManger.white.withOpacity(0.7),
+                    activeColor: context.palette.kPrimary,
+                    dotColor: context.palette.white.withOpacity(0.7),
                   ),
                 ),
             ],

@@ -14,8 +14,8 @@ class TaskCardImage extends StatelessWidget {
       return Container(
         height: ScreenUtilsManager.h192,
         width: double.infinity,
-        color: ColorManger.grey200,
-        child: Icon(Icons.image_not_supported, color: ColorManger.grey400),
+        color: context.palette.grey200,
+        child: Icon(Icons.image_not_supported, color: context.palette.grey400),
       );
     }
 
@@ -31,15 +31,15 @@ class TaskCardImage extends StatelessWidget {
             return Container(
               height: ScreenUtilsManager.h192,
               width: double.infinity,
-              color: ColorManger.lightGrey,
+              color: context.palette.lightGrey,
               child: const Center(child: CircularProgressIndicator.adaptive()),
             );
           },
           errorBuilder: (context, error, stackTrace) => Container(
             height: ScreenUtilsManager.h192,
             width: double.infinity,
-            color: ColorManger.grey200,
-            child: Icon(Icons.broken_image, color: ColorManger.grey400),
+            color: context.palette.grey200,
+            child: Icon(Icons.broken_image, color: context.palette.grey400),
           ),
         ),
 
@@ -47,7 +47,7 @@ class TaskCardImage extends StatelessWidget {
           Container(
             height: ScreenUtilsManager.h192,
             width: double.infinity,
-            color: ColorManger.primaryOpacity20,
+            color: context.palette.primaryOpacity20,
           ),
       ],
     );

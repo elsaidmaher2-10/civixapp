@@ -23,7 +23,7 @@ class ActionListTile extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: ColorManger.surfaceLowest,
+          color: context.palette.surfaceLowest,
           borderRadius: BorderRadius.circular(16),
         ),
         child: Row(
@@ -32,10 +32,10 @@ class ActionListTile extends StatelessWidget {
               width: 40,
               height: 40,
               decoration: BoxDecoration(
-                color: ColorManger.workerprimary.withOpacity(0.1),
+                color: context.palette.workerprimary.withOpacity(0.1),
                 shape: BoxShape.circle,
               ),
-              child: Icon(icon, color: ColorManger.workerprimary),
+              child: Icon(icon, color: context.palette.workerprimary),
             ),
             const SizedBox(width: 16),
             Expanded(
@@ -44,13 +44,13 @@ class ActionListTile extends StatelessWidget {
                 style: GoogleFonts.cairo(
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
-                  color: ColorManger.onSurface,
+                  color: context.palette.onSurface,
                 ),
               ),
             ),
-            const Icon(
+            Icon(
               Icons.chevron_right,
-              color: ColorManger.onSurfaceVariant,
+              color: context.palette.onSurfaceVariant,
             ),
           ],
         ),

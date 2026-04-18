@@ -5,7 +5,6 @@ import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/core/routing/routes.dart';
 import 'package:citifix/core/widget/CustomSnackBar.dart';
-import 'package:citifix/core/widget/customButton.dart';
 import 'package:citifix/feature/citzenFeature/Profile/data/repos/UserProfileRepos/LogOutRepos.dart';
 import 'package:citifix/core/cubit/LogOut/LogOutState.dart';
 import 'package:citifix/core/cubit/LogOut/LogOutcubit.dart';
@@ -37,14 +36,14 @@ class ProfileScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => LogCubit(getIt<LogOutRepository>()),
       child: Scaffold(
-        backgroundColor: ColorManger.reportsPageBackground,
+        backgroundColor: Theme.of(context).colorScheme.surface,
         appBar: AppBar(
-          backgroundColor: ColorManger.reportsPageBackground,
+          backgroundColor: Theme.of(context).colorScheme.surface,
           elevation: 0,
           title: Text(
             S.of(context).profile,
             style: GoogleFonts.cairo(
-              color: ColorManger.kPrimary,
+              color: Theme.of(context).colorScheme.primary,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -109,16 +108,16 @@ class ProfileScreen extends StatelessWidget {
                         horizontal: ScreenUtilsManager.w32,
                       ),
                       child: logoutState is LogLoading
-                          ? const Center(
+                          ? Center(
                               child: CupertinoActivityIndicator(
-                                color: ColorManger.kPrimary,
+                                color: context.palette.kPrimary,
                               ),
                             )
                           : CustomButton(
                               onPressed: () => _onLogoutPressed(context),
                               icon: const Icon(Icons.logout_rounded),
-                              backgroundColor: ColorManger.redLight,
-                              foregroundColor: ColorManger.red,
+                              backgroundColor: context.palette.redLight,
+                              foregroundColor: context.palette.red,
                               lable: S.of(context).logout,
                             ),
                     ),
@@ -151,18 +150,18 @@ class LogoutConfirmDialog extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(ScreenUtilsManager.r20),
       ),
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       title: Column(
         children: [
           Container(
             padding: EdgeInsets.all(ScreenUtilsManager.h16),
             decoration: BoxDecoration(
-              color: ColorManger.redLight,
+              color: context.palette.redLight,
               shape: BoxShape.circle,
             ),
             child: Icon(
               Icons.logout_rounded,
-              color: ColorManger.red,
+              color: context.palette.red,
               size: ScreenUtilsManager.s32,
             ),
           ),
@@ -172,7 +171,7 @@ class LogoutConfirmDialog extends StatelessWidget {
             style: GoogleFonts.cairo(
               fontWeight: FontWeight.bold,
               fontSize: ScreenUtilsManager.s18,
-              color: Colors.black87,
+              color: Theme.of(context).colorScheme.onSurface,
             ),
           ),
         ],
@@ -181,7 +180,7 @@ class LogoutConfirmDialog extends StatelessWidget {
         S.of(context).logoutConfirmationMessage,
         style: GoogleFonts.cairo(
           fontSize: ScreenUtilsManager.s14,
-          color: Colors.black54,
+          color: Theme.of(context).colorScheme.onSurfaceVariant,
         ),
         textAlign: TextAlign.center,
       ),
@@ -192,7 +191,7 @@ class LogoutConfirmDialog extends StatelessWidget {
               child: OutlinedButton(
                 onPressed: () => Navigator.pop(context, false),
                 style: OutlinedButton.styleFrom(
-                  side: const BorderSide(color: ColorManger.kPrimary),
+                  side: BorderSide(color: context.palette.kPrimary),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(ScreenUtilsManager.r10),
                   ),
@@ -203,7 +202,7 @@ class LogoutConfirmDialog extends StatelessWidget {
                 child: Text(
                   S.of(context).cancel,
                   style: GoogleFonts.cairo(
-                    color: ColorManger.kPrimary,
+                    color: context.palette.kPrimary,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -214,7 +213,7 @@ class LogoutConfirmDialog extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () => Navigator.pop(context, true),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: ColorManger.red,
+                  backgroundColor: context.palette.red,
                   foregroundColor: Colors.white,
                   elevation: 0,
                   shape: RoundedRectangleBorder(

@@ -71,7 +71,7 @@ class _ResendCodeOptState extends State<ResendCodeOpt> {
                 canResend
                     ? S.of(context).resendCode
                     : "${S.of(context).resendCodeIn} 00:${current.toString().padLeft(2, "0")}",
-                style: GoogleFonts.cairo(color: ColorManger.lightGrey),
+                style: GoogleFonts.cairo(color: context.palette.lightGrey),
               ),
             ),
           ],

@@ -8,6 +8,7 @@ import 'package:citifix/core/service/LocationService.dart';
 import 'package:citifix/core/service/local_notification_service.dart';
 import 'package:citifix/core/service/notification_service.dart';
 import 'package:citifix/core/service/observer.dart';
+import 'package:citifix/core/cubit/theme/theme_cubit.dart';
 import 'package:citifix/core/cubit/userinfoManger/user_profile_info_cubit.dart';
 import 'package:citifix/feature/citzenFeature/home/presentation/manager/navbarManger/mange_custom_bottomnav_bar_cubit.dart';
 import 'package:citifix/feature/citzenFeature/notication/data/repo/noticationRepo.dart';
@@ -80,6 +81,7 @@ class MyAppWrapper extends StatelessWidget {
         BlocProvider(
           create: (context) => LocalizationControllerCubit()..fetchLanguage(),
         ),
+        BlocProvider(create: (_) => ThemeCubit()..fetchTheme()),
       ],
       child: Citifix(
         isOnboardingViewed: isOnboardingViewed,

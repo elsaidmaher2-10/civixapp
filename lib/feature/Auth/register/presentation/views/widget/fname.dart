@@ -16,7 +16,7 @@ class Fname extends StatelessWidget {
         // Text(
         //   S.of(context).firstName,
         //   style: GoogleFonts.cairo(
-        //     color: ColorManger.lightGrey,
+        //     color: context.palette.lightGrey,
         //     fontSize: ScreenUtilsManager.s16,
         //   ),
         // ),

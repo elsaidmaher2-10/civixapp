@@ -25,8 +25,8 @@ class Customonbroadingitem extends StatelessWidget {
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-            ColorManger.reportsPageBackground,
-            ColorManger.reportsPageBackground.withOpacity(0.8),
+            context.palette.reportsPageBackground,
+            context.palette.reportsPageBackground.withOpacity(0.8),
             Colors.white,
           ],
         ),
@@ -64,7 +64,7 @@ class Customonbroadingitem extends StatelessWidget {
               textAlign: TextAlign.center,
               style: GoogleFonts.cairo(
                 fontSize: 26.sp,
-                color: ColorManger.kPrimaryDark,
+                color: context.palette.kPrimaryDark,
                 fontWeight: FontWeight.w800,
                 letterSpacing: -0.5,
               ),
@@ -77,7 +77,7 @@ class Customonbroadingitem extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: GoogleFonts.cairo(
                   fontSize: 15.sp,
-                  color: ColorManger.lightGrey6.withOpacity(0.8),
+                  color: context.palette.lightGrey6.withOpacity(0.8),
                   height: 1.5,
                 ),
               ),
@@ -105,13 +105,13 @@ class Customonbroadingitem extends StatelessWidget {
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
             decoration: BoxDecoration(
-              color: ColorManger.lightGrey.withOpacity(0.1),
+              color: context.palette.lightGrey.withOpacity(0.1),
               borderRadius: BorderRadius.circular(20.r),
             ),
             child: Text(
               Constantmanger.skip,
               style: GoogleFonts.cairo(
-                color: ColorManger.kPrimary,
+                color: context.palette.kPrimary,
                 fontWeight: FontWeight.w600,
                 fontSize: 14.sp,
               ),
@@ -136,7 +136,7 @@ class Customonbroadingitem extends StatelessWidget {
               height: 60.w,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: ColorManger.kPrimary,
+                  backgroundColor: context.palette.kPrimary,
                   foregroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(
@@ -144,7 +144,7 @@ class Customonbroadingitem extends StatelessWidget {
                     ),
                   ),
                   elevation: 5,
-                  shadowColor: ColorManger.kPrimary.withOpacity(0.4),
+                  shadowColor: context.palette.kPrimary.withOpacity(0.4),
                 ),
                 onPressed: () => _handleNext(context, provider, isLastPage),
                 child: isLastPage

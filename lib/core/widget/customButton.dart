@@ -1,4 +1,3 @@
-import 'package:citifix/core/resource/colormanager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -27,7 +26,8 @@ class AppButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bgColor = backgroundColor ?? ColorManger.workerprimary;
+    final scheme = Theme.of(context).colorScheme;
+    final bgColor = backgroundColor ?? scheme.primary;
 
     return SizedBox(
       width: double.infinity,
@@ -41,7 +41,7 @@ class AppButton extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(radius.r),
           ),
-          disabledBackgroundColor: Colors.grey.shade300,
+          disabledBackgroundColor: scheme.surfaceContainerHighest,
         ),
         onPressed: isLoading ? null : onPressed,
         child: isLoading

@@ -67,14 +67,14 @@ class Customimagepicker extends StatelessWidget {
                   child: CircleAvatar(
                     radius: 68.r,
                     backgroundColor: role
-                        ? ColorManger.workerprimary.withOpacity(0.5)
-                        : ColorManger.lightBlue.withOpacity(0.5),
+                        ? context.palette.workerprimary.withOpacity(0.5)
+                        : context.palette.lightBlue.withOpacity(0.5),
                     child: CircleAvatar(
                       radius: 64.r,
                       backgroundColor: Colors.white,
                       child: CircleAvatar(
                         radius: 60.r,
-                        backgroundColor: ColorManger.lightGrey,
+                        backgroundColor: context.palette.lightGrey,
                         backgroundImage: imageProvider,
                         onBackgroundImageError: (_, _) {},
                       ),
@@ -100,8 +100,8 @@ class Customimagepicker extends StatelessWidget {
                             padding: EdgeInsets.all(8.r),
                             decoration: BoxDecoration(
                               color: role
-                                  ? ColorManger.workerprimary
-                                  : ColorManger.primary,
+                                  ? context.palette.workerprimary
+                                  : context.palette.primary,
 
                               shape: BoxShape.circle,
                               border: Border.all(color: Colors.white, width: 2),

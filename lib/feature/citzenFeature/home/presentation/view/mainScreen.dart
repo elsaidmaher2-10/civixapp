@@ -105,7 +105,7 @@ class _CitizenMainScreenState extends State<CitizenMainScreen> {
               builder: (context, state) {
                 final cubit = context.read<MangeCustomBottomnavBarCubit>();
                 return Scaffold(
-                  backgroundColor: ColorManger.reportsPageBackground,
+                  backgroundColor: context.palette.reportsPageBackground,
                   floatingActionButtonLocation:
                       FloatingActionButtonLocation.endFloat,
                   floatingActionButton: cubit.curindex == 0
@@ -113,12 +113,12 @@ class _CitizenMainScreenState extends State<CitizenMainScreen> {
                           height: 62.h,
                           width: 62.w,
                           child: FloatingActionButton(
-                            splashColor: ColorManger.lightGrey3,
+                            splashColor: context.palette.lightGrey3,
                             onPressed: () async {
                               final reportCubit = context.read<ReportCubit>();
                               await showModalBottomSheet(
                                 useSafeArea: true,
-                                backgroundColor: ColorManger.bgLight,
+                                backgroundColor: context.palette.bgLight,
                                 context: context,
                                 elevation: 0,
                                 barrierColor: Colors.white,
@@ -129,8 +129,8 @@ class _CitizenMainScreenState extends State<CitizenMainScreen> {
                                 ),
                               );
                             },
-                            foregroundColor: ColorManger.white,
-                            backgroundColor: ColorManger.kPrimary,
+                            foregroundColor: context.palette.white,
+                            backgroundColor: context.palette.kPrimary,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadiusGeometry.circular(50),
                             ),

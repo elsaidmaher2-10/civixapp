@@ -53,7 +53,7 @@ class Reportcard extends StatelessWidget {
           child: Container(
             height: 108.h,
             decoration: BoxDecoration(
-              color: ColorManger.white,
+              color: context.palette.white,
               borderRadius: BorderRadius.circular(10.r),
               boxShadow: [
                 BoxShadow(
@@ -86,13 +86,18 @@ class Reportcard extends StatelessWidget {
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: GoogleFonts.cairo(
-                            color: ColorManger.kPrimaryDark,
+                            color: context.palette.kPrimaryDark,
                             fontSize: ScreenUtilsManager.s16,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
-                        _buildInfoRow(Icons.place_outlined, report.location),
                         _buildInfoRow(
+                          context,
+                          Icons.place_outlined,
+                          report.location,
+                        ),
+                        _buildInfoRow(
+                          context,
                           Icons.watch_later_outlined,
                           report.createdAt.timeAgo(context),
                         ),
@@ -127,10 +132,10 @@ class Reportcard extends StatelessWidget {
     }
   }
 
-  Widget _buildInfoRow(IconData icon, String text) {
+  Widget _buildInfoRow(BuildContext context, IconData icon, String text) {
     return Row(
       children: [
-        Icon(icon, size: 14.h, color: ColorManger.lightGrey6),
+        Icon(icon, size: 14.h, color: context.palette.lightGrey6),
         SizedBox(width: 4.w),
         Expanded(
           child: Text(
@@ -138,7 +143,7 @@ class Reportcard extends StatelessWidget {
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: GoogleFonts.cairo(
-              color: ColorManger.lightGrey6,
+              color: context.palette.lightGrey6,
               fontSize: ScreenUtilsManager.s12,
               fontWeight: FontWeight.w400,
             ),

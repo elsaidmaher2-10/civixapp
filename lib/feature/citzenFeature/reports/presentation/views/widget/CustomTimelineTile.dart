@@ -31,11 +31,11 @@ class CustomTimelineTile extends StatelessWidget {
         indicatorStyle: IndicatorStyle(
           width: 24.w,
           height: 24.w,
-          indicator: _buildIndicator(),
+          indicator: _buildIndicator(context),
           padding: EdgeInsets.symmetric(horizontal: 4.w),
         ),
         beforeLineStyle: LineStyle(
-          color: isDone ? ColorManger.kPrimary : Colors.grey[300]!,
+          color: isDone ? context.palette.kPrimary : Colors.grey[300]!,
           thickness: 3,
         ),
         endChild: Padding(
@@ -68,13 +68,13 @@ class CustomTimelineTile extends StatelessWidget {
     );
   }
 
-  Widget _buildIndicator() {
+  Widget _buildIndicator(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: isDone ? ColorManger.kPrimary : Colors.white,
+        color: isDone ? context.palette.kPrimary : Colors.white,
         border: Border.all(
-          color: isDone ? ColorManger.kPrimary : Colors.grey[300]!,
+          color: isDone ? context.palette.kPrimary : Colors.grey[300]!,
           width: 2,
         ),
       ),

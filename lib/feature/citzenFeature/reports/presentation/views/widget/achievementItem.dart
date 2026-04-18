@@ -53,7 +53,7 @@ class AchievementReportCard extends StatelessWidget {
                         style: GoogleFonts.cairo(
                           fontSize: 15.sp,
                           fontWeight: FontWeight.bold,
-                          color: ColorManger.kPrimary,
+                          color: context.palette.kPrimary,
                           height: 1.2,
                         ),
                         maxLines: 1,
@@ -171,7 +171,7 @@ class AchievementReportCard extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
       decoration: BoxDecoration(
-        color: ColorManger.lightColor.withOpacity(0.05),
+        color: context.palette.lightColor.withOpacity(0.05),
         border: Border(top: BorderSide(color: Colors.black.withOpacity(0.05))),
       ),
       child: Row(
@@ -182,7 +182,7 @@ class AchievementReportCard extends StatelessWidget {
             style: GoogleFonts.cairo(
               fontSize: 12.sp,
               fontWeight: FontWeight.bold,
-              color: ColorManger.kPrimary.withOpacity(0.7),
+              color: context.palette.kPrimary.withOpacity(0.7),
             ),
           ),
           InkWell(
@@ -202,14 +202,14 @@ class AchievementReportCard extends StatelessWidget {
                   style: GoogleFonts.cairo(
                     fontWeight: FontWeight.bold,
                     fontSize: 12.sp,
-                    color: ColorManger.kPrimary,
+                    color: context.palette.kPrimary,
                   ),
                 ),
                 SizedBox(width: 4.w),
                 Icon(
                   isRtl ? Icons.arrow_back_ios : Icons.arrow_forward_ios,
                   size: 12.sp,
-                  color: ColorManger.kPrimary,
+                  color: context.palette.kPrimary,
                 ),
               ],
             ),

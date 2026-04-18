@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:citifix/core/function/sinupvalidator.dart';
-import 'package:citifix/core/resource/colormanager.dart' show ColorManger;
+import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/core/routing/routes.dart';
@@ -47,13 +47,13 @@ class _ForegetpasswordState extends State<Foregetpassword> {
           if (state is ForgetpasswordstatecontrollerFailure) {
             Customsnackbar.show(
               context: context,
-              backgroundColor: ColorManger.red,
+              backgroundColor: context.palette.red,
               message: state.message,
             );
           } else if (state is ForgetpasswordstatecontrollerSuccess) {
             Customsnackbar.show(
               context: context,
-              backgroundColor: ColorManger.green,
+              backgroundColor: context.palette.green,
               message: state.response,
             );
 
@@ -80,7 +80,7 @@ class _ForegetpasswordState extends State<Foregetpassword> {
             opacity: 0.5,
             progressIndicator: customloading(),
             child: Scaffold(
-              backgroundColor: ColorManger.white,
+              backgroundColor: context.palette.white,
               appBar: foregetpasswordappbar(context),
               body: SafeArea(
                 child: SingleChildScrollView(
@@ -97,7 +97,7 @@ class _ForegetpasswordState extends State<Foregetpassword> {
                         child: Icon(
                           Icons.lock_reset_rounded,
                           size: 80.r,
-                          color: ColorManger.kPrimary.withOpacity(0.8),
+                          color: context.palette.kPrimary.withOpacity(0.8),
                         ),
                       ),
 
@@ -106,7 +106,7 @@ class _ForegetpasswordState extends State<Foregetpassword> {
                       Text(
                         S.of(context).forgetPasswordDesc,
                         style: GoogleFonts.cairo(
-                          color: ColorManger.lightGrey2,
+                          color: context.palette.lightGrey2,
                           fontSize: ScreenUtilsManager.s14,
                           height: 1.5,
                           fontWeight: FontWeight.w400,
@@ -139,8 +139,8 @@ class _ForegetpasswordState extends State<Foregetpassword> {
                           builder: (context, snapshot) {
                             return ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: ColorManger.kPrimary,
-                                foregroundColor: ColorManger.white,
+                                backgroundColor: context.palette.kPrimary,
+                                foregroundColor: context.palette.white,
                                 disabledForegroundColor: Colors.white70,
                                 elevation: 2,
                                 padding: EdgeInsets.symmetric(vertical: 10.h),
@@ -200,12 +200,12 @@ PreferredSizeWidget foregetpasswordappbar(BuildContext context) {
     title: Text(
       S.of(context).forgetPasswordTitle,
       style: GoogleFonts.cairo(
-        color: ColorManger.kPrimary,
+        color: context.palette.kPrimary,
         fontSize: ScreenUtilsManager.s20,
         fontWeight: FontWeight.w600,
       ),
     ),
-    backgroundColor: ColorManger.white,
+    backgroundColor: context.palette.white,
     leadingWidth: 50.w,
     leading: Padding(
       padding: EdgeInsets.only(left: 10.w),
@@ -217,7 +217,7 @@ PreferredSizeWidget foregetpasswordappbar(BuildContext context) {
         },
         icon: Icon(
           CupertinoIcons.back,
-          color: ColorManger.kPrimary,
+          color: context.palette.kPrimary,
           size: 28.r,
         ),
       ),

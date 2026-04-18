@@ -86,7 +86,7 @@ class Editfromprofile extends StatelessWidget {
         SizedBox(height: ScreenUtilsManager.h8),
         Container(
           decoration: BoxDecoration(
-            color: ColorManger.white,
+            color: context.palette.white,
             borderRadius: BorderRadius.circular(ScreenUtilsManager.r14),
             boxShadow: [
               BoxShadow(
@@ -131,8 +131,8 @@ class Editfromprofile extends StatelessWidget {
                 borderSide: BorderSide(
                   // ignore: unrelated_type_equality_checks
                   color: role
-                      ? ColorManger.errorContainer
-                      : ColorManger.kPrimary,
+                      ? context.palette.errorContainer
+                      : context.palette.kPrimary,
                   width: 2,
                 ),
               ),

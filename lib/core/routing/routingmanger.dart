@@ -14,6 +14,7 @@ import 'package:citifix/feature/citzenFeature/Profile/presentation/view/widget/H
 import 'package:citifix/feature/citzenFeature/Profile/presentation/view/widget/editprofile.dart';
 import 'package:citifix/feature/citzenFeature/home/presentation/view/mainScreen.dart';
 import 'package:citifix/feature/citzenFeature/onbroading/onbroading.dart';
+import 'package:citifix/feature/splash/presentation/views/animated_splash_view.dart';
 import 'package:citifix/feature/workerFeature/home/data/repo/homrepo.dart';
 import 'package:citifix/feature/workerFeature/home/presentation/manager/dashbroadHomemanager/cubit/dashbroad_home_manager_cubit.dart';
 import 'package:citifix/feature/workerFeature/main/Manager/cubit/worker_cubit_cubit.dart';
@@ -29,6 +30,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class Routingmanger {
   static Route<dynamic> onGenerateRoute(RouteSettings route) {
     switch (route.name) {
+      case Routes.animatedSplash:
+        return _noPopRoute(child: const AnimatedSplashView());
       case Routes.onbroading:
         return _noPopRoute(child: Onbroading());
       case Routes.login:

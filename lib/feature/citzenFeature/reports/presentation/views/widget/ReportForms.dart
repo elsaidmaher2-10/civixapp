@@ -25,7 +25,7 @@ class ReportFormFields extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildSectionTitle(S.of(context).reportTitleLabel),
+        _buildSectionTitle(context, S.of(context).reportTitleLabel),
         SizedBox(height: ScreenUtilsManager.h16),
         CustomTextfromfield(
           validator: (value) {
@@ -44,7 +44,7 @@ class ReportFormFields extends StatelessWidget {
 
         SizedBox(height: ScreenUtilsManager.h24),
 
-        _buildSectionTitle(S.of(context).descriptionLabel),
+        _buildSectionTitle(context, S.of(context).descriptionLabel),
         SizedBox(height: ScreenUtilsManager.h16),
         CustomTextfromfield(
           validator: (value) {
@@ -64,18 +64,18 @@ class ReportFormFields extends StatelessWidget {
 
         SizedBox(height: ScreenUtilsManager.h24),
 
-        _buildSectionTitle(S.of(context).selectCategory),
+        _buildSectionTitle(context, S.of(context).selectCategory),
         SizedBox(height: ScreenUtilsManager.h16),
         CategoryDropdown(onChanged: onCategoryChanged,  ),
       ],
     );
   }
 
-  Widget _buildSectionTitle(String title) {
+  Widget _buildSectionTitle(BuildContext context, String title) {
     return Text(
       title,
       style: GoogleFonts.cairo(
-        color: ColorManger.kPrimary,
+        color: context.palette.kPrimary,
         fontWeight: FontWeight.w600,
         fontSize: ScreenUtilsManager.s16,
       ),

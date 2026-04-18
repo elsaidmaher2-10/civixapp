@@ -68,8 +68,8 @@ class VerificationFailedScreen extends StatelessWidget {
           onPressed: () {},
           child: Text(
             s.support,
-            style: const TextStyle(
-              color: ColorManger.inProgressContainer,
+            style: TextStyle(
+              color: context.palette.inProgressContainer,
               fontWeight: FontWeight.w600,
             ),
           ),
@@ -209,7 +209,7 @@ class VerificationFailedScreen extends StatelessWidget {
                 );
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: ColorManger.workerprimary,
+                backgroundColor: context.palette.workerprimary,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),

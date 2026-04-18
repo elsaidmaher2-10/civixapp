@@ -11,12 +11,12 @@ class CompletedCheckIcon extends StatelessWidget {
       width: ScreenUtilsManager.w48,
       height: ScreenUtilsManager.h48,
       decoration: BoxDecoration(
-        color: ColorManger.surfaceLowest,
+        color: context.palette.surfaceLowest,
         borderRadius: BorderRadius.circular(ScreenUtilsManager.r12),
       ),
       child: Icon(
         Icons.check_circle,
-        color: ColorManger.green,
+        color: context.palette.green,
         size: ScreenUtilsManager.s28,
       ),
     );

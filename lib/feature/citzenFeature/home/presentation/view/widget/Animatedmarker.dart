@@ -40,7 +40,7 @@ class _AnimatedMarkerState extends State<AnimatedMarker>
       animation: opacityAnimation,
       builder: (context, child) {
         return CircleAvatar(
-          backgroundColor: ColorManger.kPrimaryLight.withOpacity(
+          backgroundColor: context.palette.kPrimaryLight.withOpacity(
             opacityAnimation.value,
           ),
           child: SvgPicture.asset(

@@ -11,11 +11,11 @@
 //   Widget build(BuildContext context) {
 //     return Container(
 //       decoration: BoxDecoration(
-//         color: ColorManger.surfaceContainerLowest,
+//         color: context.palette.surfaceContainerLowest,
 //         borderRadius: BorderRadius.circular(ScreenUtilsManager.s16),
 //         boxShadow: [
 //           BoxShadow(
-//             color: ColorManger.onSurface.withOpacity(0.04),
+//             color: context.palette.onSurface.withOpacity(0.04),
 //             blurRadius: ScreenUtilsManager.s32,
 //             offset: Offset(ScreenUtilsManager.w0, ScreenUtilsManager.h12),
 //           ),
@@ -74,7 +74,7 @@
 //                     Icon(
 //                       Icons.pin_drop,
 //                       size: ScreenUtilsManager.s16,
-//                       color: ColorManger.onSurfaceVariant,
+//                       color: context.palette.onSurfaceVariant,
 //                     ),
 //                     SizedBox(width: ScreenUtilsManager.w8),
 //                     Expanded(
@@ -83,7 +83,7 @@
 //                         style: GoogleFonts.cairo(
 //                           fontSize: ScreenUtilsManager.s14,
 //                           fontWeight: FontWeight.w500,
-//                           color: ColorManger.onSurfaceVariant,
+//                           color: context.palette.onSurfaceVariant,
 //                         ),
 //                         maxLines: 1,
 //                         overflow: TextOverflow.ellipsis,
@@ -95,7 +95,7 @@
 //                 Text(
 //                   S.of(context).sample_description,
 //                   style: GoogleFonts.cairo(
-//                     color: ColorManger.onSurfaceVariant,
+//                     color: context.palette.onSurfaceVariant,
 //                     fontSize: ScreenUtilsManager.s14,
 //                   ),
 //                   maxLines: 2,
@@ -114,7 +114,7 @@
 //                       ),
 //                       boxShadow: [
 //                         BoxShadow(
-//                           color: ColorManger.primaryColor.withOpacity(0.2),
+//                           color: context.palette.primaryColor.withOpacity(0.2),
 //                           blurRadius: ScreenUtilsManager.s10,
 //                           offset: Offset(
 //                             ScreenUtilsManager.w0,

@@ -23,7 +23,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorManger.bgbackground,
+      backgroundColor: context.palette.bgbackground,
       appBar: WorkerMainscreenAppbar(),
       body: BlocBuilder<HomeCubit, HomeState>(
         builder: (context, state) {
@@ -82,7 +82,7 @@ class HomePage extends StatelessWidget {
             SizedBox(height: ScreenUtilsManager.h24),
             ElevatedButton.icon(
               style: ElevatedButton.styleFrom(
-                backgroundColor: ColorManger.workerprimary,
+                backgroundColor: context.palette.workerprimary,
                 foregroundColor: Colors.white,
                 elevation: 0,
                 padding: EdgeInsets.symmetric(
@@ -110,7 +110,7 @@ class HomePage extends StatelessWidget {
 
 Widget _buildHomeContent(DashBroadHome data, BuildContext context) {
   return RefreshIndicator(
-    color: ColorManger.workerprimary,
+    color: context.palette.workerprimary,
     backgroundColor: Colors.white,
     notificationPredicate: (notification) => true,
     onRefresh: () {
@@ -159,7 +159,7 @@ Widget _buildHeaderSection(String name, BuildContext context) {
         style: GoogleFonts.cairo(
           fontSize: ScreenUtilsManager.s32,
           fontWeight: FontWeight.w800,
-          color: ColorManger.onSurface,
+          color: context.palette.onSurface,
         ),
       ),
       SizedBox(height: ScreenUtilsManager.s4),
@@ -168,7 +168,7 @@ Widget _buildHeaderSection(String name, BuildContext context) {
         style: GoogleFonts.cairo(
           fontSize: ScreenUtilsManager.s16,
           fontWeight: FontWeight.w500,
-          color: ColorManger.onSurfaceVariant,
+          color: context.palette.onSurfaceVariant,
         ),
       ),
     ],
@@ -204,16 +204,16 @@ Widget _buildEmptyTasksMessage(BuildContext context) {
     width: double.infinity,
     padding: EdgeInsets.all(ScreenUtilsManager.s20),
     decoration: BoxDecoration(
-      color: ColorManger.white,
+      color: context.palette.white,
       borderRadius: BorderRadius.circular(ScreenUtilsManager.s12),
-      border: Border.all(color: ColorManger.outline),
+      border: Border.all(color: context.palette.outline),
     ),
     child: Column(
       children: [
         Icon(
           Icons.assignment_turned_in_outlined,
           size: ScreenUtilsManager.s40,
-          color: ColorManger.secondary,
+          color: context.palette.secondary,
         ),
         SizedBox(height: ScreenUtilsManager.s10),
         Text(

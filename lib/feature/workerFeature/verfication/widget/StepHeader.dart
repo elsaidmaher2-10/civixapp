@@ -18,22 +18,22 @@ class StepHeader extends StatelessWidget {
           style: GoogleFonts.cairo(
             fontSize: 20,
             fontWeight: FontWeight.bold,
-            color: ColorManger.onSurface,
+            color: context.palette.onSurface,
           ),
         ),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
           decoration: BoxDecoration(
-            color: ColorManger.surface,
+            color: context.palette.surface,
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: ColorManger.outline),
+            border: Border.all(color: context.palette.outline),
           ),
           child: Text(
             stepLabel.toUpperCase(),
             style: GoogleFonts.cairo(
               fontSize: 10,
               fontWeight: FontWeight.w800,
-              color: ColorManger.secondary,
+              color: context.palette.secondary,
               letterSpacing: 1.1,
             ),
           ),

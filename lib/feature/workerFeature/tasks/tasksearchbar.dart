@@ -13,11 +13,11 @@ class TaskSearchBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: ColorManger.white,
+        color: context.palette.white,
         borderRadius: BorderRadius.circular(ScreenUtilsManager.r12),
         boxShadow: [
           BoxShadow(
-            color: ColorManger.black.withOpacity(0.03),
+            color: context.palette.black.withOpacity(0.03),
             blurRadius: ScreenUtilsManager.s15,
             offset: Offset(0, ScreenUtilsManager.h8),
           ),
@@ -30,12 +30,12 @@ class TaskSearchBar extends StatelessWidget {
         decoration: InputDecoration(
           hintText: S.of(context).searchTasksHint,
           hintStyle: GoogleFonts.cairo(
-            color: ColorManger.grey400,
+            color: context.palette.grey400,
             fontSize: ScreenUtilsManager.s14,
           ),
           prefixIcon: Icon(
             Icons.search_rounded,
-            color: ColorManger.primaryColor,
+            color: context.palette.primaryColor,
           ),
           border: InputBorder.none,
           contentPadding: EdgeInsets.symmetric(

@@ -22,8 +22,8 @@ class NotificationTile extends StatelessWidget {
     final bool isWorker =
         PrefrenceManager().getstring("role")?.toLowerCase() == "worker";
     final Color primaryColor = isWorker
-        ? ColorManger.workerprimary
-        : ColorManger.primary;
+        ? context.palette.workerprimary
+        : context.palette.primary;
 
     return Material(
       color: Colors.transparent,

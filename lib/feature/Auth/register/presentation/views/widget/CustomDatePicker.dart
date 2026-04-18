@@ -19,13 +19,13 @@ class CustomDateField extends StatelessWidget {
         return Theme(
           data: Theme.of(context).copyWith(
             colorScheme: ColorScheme.light(
-              primary: ColorManger.kPrimary,
+              primary: context.palette.kPrimary,
               onPrimary: Colors.white,
               onSurface: Colors.black,
             ),
             textButtonTheme: TextButtonThemeData(
               style: TextButton.styleFrom(
-                foregroundColor: ColorManger.kPrimary,
+                foregroundColor: context.palette.kPrimary,
               ),
             ),
           ),

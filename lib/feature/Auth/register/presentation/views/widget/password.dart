@@ -44,7 +44,7 @@ class PasswordField extends StatelessWidget {
 
                 prefix: Icon(
                   isNew ? Icons.lock : Icons.password,
-                  color: ColorManger.lightGrey2,
+                  color: context.palette.lightGrey2,
                 ),
 
                 suffix: IconButton(
@@ -53,7 +53,7 @@ class PasswordField extends StatelessWidget {
                   },
                   icon: Icon(
                     isHidden ? Icons.visibility_off : Icons.remove_red_eye,
-                    color: ColorManger.lightGrey2,
+                    color: context.palette.lightGrey2,
                   ),
                 ),
               ),

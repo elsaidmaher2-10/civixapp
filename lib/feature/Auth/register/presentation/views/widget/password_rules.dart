@@ -31,7 +31,7 @@ class _PasswordRulesState extends State<PasswordRules> {
                     S.of(context).passwordRulesTitle,
                     style: GoogleFonts.cairo(
                       fontSize: ScreenUtilsManager.s10,
-                      color: ColorManger.red,
+                      color: context.palette.red,
                     ),
                   )
                 : SizedBox(),
@@ -44,8 +44,8 @@ class _PasswordRulesState extends State<PasswordRules> {
                     Icons.circle,
                     size: ScreenUtilsManager.s5,
                     color: e["status"] == true
-                        ? ColorManger.green
-                        : ColorManger.red,
+                        ? context.palette.green
+                        : context.palette.red,
                   ),
                   SizedBox(width: 2.sp),
                   Text(
@@ -56,8 +56,8 @@ class _PasswordRulesState extends State<PasswordRules> {
                           : TextDecoration.none,
                       fontSize: ScreenUtilsManager.s9,
                       color: e["status"] == true
-                          ? ColorManger.green
-                          : ColorManger.red,
+                          ? context.palette.green
+                          : context.palette.red,
                     ),
                   ),
                 ],

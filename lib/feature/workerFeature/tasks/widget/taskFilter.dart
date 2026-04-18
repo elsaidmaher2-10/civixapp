@@ -27,14 +27,14 @@ class _TaskFilterChipsState extends State<TaskFilterChips> {
           return Padding(
             padding: const EdgeInsets.only(right: 8),
             child: ChoiceChip(
-              checkmarkColor: ColorManger.white,
+              checkmarkColor: context.palette.white,
               label: Text(widget.filters[index]),
               selected: isSelected,
               onSelected: (selected) {
                 setState(() => selectedIndex = index);
                 widget.onFilterSelected(widget.filters[index]);
               },
-              selectedColor: ColorManger.primaryColor,
+              selectedColor: context.palette.primaryColor,
               backgroundColor: Colors.white,
               labelStyle: GoogleFonts.cairo(
                 color: isSelected ? Colors.white : Colors.grey.shade600,

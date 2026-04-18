@@ -11,13 +11,13 @@ class TaskStatusBadge extends StatelessWidget {
   Widget build(BuildContext context) {
     final (bgColor, textColor, label) = switch (status) {
       'Assigned' => (
-        ColorManger.availableContainer,
-        ColorManger.onAvailableContainer,
+        context.palette.availableContainer,
+        context.palette.onAvailableContainer,
         'ASSIGNED',
       ),
       'InProgress' => (
-        ColorManger.inProgressContainer,
-        ColorManger.onInProgressContainer,
+        context.palette.inProgressContainer,
+        context.palette.onInProgressContainer,
         'IN PROGRESS',
       ),
       'Resolved' => (

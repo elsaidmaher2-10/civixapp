@@ -104,14 +104,14 @@ class _GateVerificationBody extends StatelessWidget {
       },
       builder: (context, state) {
         return Scaffold(
-          backgroundColor: ColorManger.bgbackground,
+          backgroundColor: context.palette.bgbackground,
           body: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CupertinoActivityIndicator(
                   radius: ScreenUtilsManager.r12,
-                  color: ColorManger.workerprimary,
+                  color: context.palette.workerprimary,
                 ),
                 SizedBox(height: ScreenUtilsManager.h16),
                 Text(

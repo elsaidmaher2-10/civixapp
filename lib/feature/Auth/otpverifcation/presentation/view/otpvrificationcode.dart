@@ -93,7 +93,7 @@ class _OtpvrificationcodeState extends State<Otpvrificationcode> {
           if (state is OtpVericationFailure) {
             Customsnackbar.show(
               context: context,
-              backgroundColor: ColorManger.red,
+              backgroundColor: context.palette.red,
               message: state.failureResponse.errors.join("\n"),
             );
           } else if (state is OtpVericationSucces) {
@@ -101,7 +101,7 @@ class _OtpvrificationcodeState extends State<Otpvrificationcode> {
 
             Customsnackbar.show(
               context: context,
-              backgroundColor: ColorManger.green,
+              backgroundColor: context.palette.green,
               message: response.data?.message ?? response.message ?? "Success",
             );
 
@@ -134,7 +134,7 @@ class _OtpvrificationcodeState extends State<Otpvrificationcode> {
             blur: 7,
             progressIndicator: customloading(),
             child: Scaffold(
-              backgroundColor: ColorManger.white,
+              backgroundColor: context.palette.white,
               appBar: otpappbar(context, () {}),
               body: Padding(
                 padding: EdgeInsets.symmetric(
@@ -150,7 +150,7 @@ class _OtpvrificationcodeState extends State<Otpvrificationcode> {
                           ? S.of(context).otpMsgResetPassword
                           : S.of(context).otpMsgRegister,
                       style: GoogleFonts.cairo(
-                        color: ColorManger.lightGrey2,
+                        color: context.palette.lightGrey2,
                         fontSize: 14.sp,
                       ),
                     ),
@@ -190,7 +190,7 @@ class _OtpvrificationcodeState extends State<Otpvrificationcode> {
                                 focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(8.r),
                                   borderSide: BorderSide(
-                                    color: ColorManger.kPrimary,
+                                    color: context.palette.kPrimary,
                                     width: 1.5,
                                   ),
                                 ),
@@ -209,8 +209,8 @@ class _OtpvrificationcodeState extends State<Otpvrificationcode> {
                           height: 50.h,
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: ColorManger.kPrimary,
-                              foregroundColor: ColorManger.white,
+                              backgroundColor: context.palette.kPrimary,
+                              foregroundColor: context.palette.white,
                               disabledBackgroundColor: Colors.grey.shade300,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(

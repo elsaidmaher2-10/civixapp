@@ -70,6 +70,7 @@ class _WorkerDashboardState extends State<WorkerDashboard>
         Row(
           children: [
             buildWorkerCard(
+              context,
               label: S.of(context).resolved,
               value: HomeDashboardLogic.formatNumber(
                 widget.data.resolvedReports,
@@ -77,6 +78,7 @@ class _WorkerDashboardState extends State<WorkerDashboard>
             ),
             SizedBox(width: ScreenUtilsManager.w16),
             buildWorkerCard(
+              context,
               label: S.of(context).assigned,
               value: HomeDashboardLogic.formatNumber(
                 widget.data.assignedReports,
@@ -88,11 +90,11 @@ class _WorkerDashboardState extends State<WorkerDashboard>
         Container(
           padding: EdgeInsets.all(ScreenUtilsManager.h20),
           decoration: BoxDecoration(
-            color: ColorManger.surfaceContainerLow,
+            color: context.palette.surfaceContainerLow,
             borderRadius: BorderRadius.circular(ScreenUtilsManager.r16),
             boxShadow: [
               BoxShadow(
-                color: ColorManger.onSurface.withOpacity(0.04),
+                color: context.palette.onSurface.withOpacity(0.04),
                 blurRadius: ScreenUtilsManager.s32,
                 offset: Offset(ScreenUtilsManager.w0, ScreenUtilsManager.h12),
               ),
@@ -112,7 +114,7 @@ class _WorkerDashboardState extends State<WorkerDashboard>
                         style: GoogleFonts.cairo(
                           fontSize: ScreenUtilsManager.s11,
                           fontWeight: FontWeight.bold,
-                          color: ColorManger.onSurfaceVariant,
+                          color: context.palette.onSurfaceVariant,
                           letterSpacing: ScreenUtilsManager.s1,
                         ),
                       ),
@@ -143,7 +145,7 @@ class _WorkerDashboardState extends State<WorkerDashboard>
                     style: GoogleFonts.cairo(
                       fontSize: ScreenUtilsManager.s11,
                       fontWeight: FontWeight.bold,
-                      color: ColorManger.onSurfaceVariant,
+                      color: context.palette.onSurfaceVariant,
                     ),
                   ),
                   AnimatedBuilder(
@@ -153,7 +155,7 @@ class _WorkerDashboardState extends State<WorkerDashboard>
                       style: GoogleFonts.cairo(
                         fontSize: ScreenUtilsManager.s11,
                         fontWeight: FontWeight.bold,
-                        color: ColorManger.onSurfaceVariant,
+                        color: context.palette.onSurfaceVariant,
                       ),
                     ),
                   ),
@@ -165,9 +167,9 @@ class _WorkerDashboardState extends State<WorkerDashboard>
                 builder: (BuildContext context, Widget? child) =>
                     LinearProgressIndicator(
                       value: animation.value,
-                      backgroundColor: ColorManger.surfaceContainer,
+                      backgroundColor: context.palette.surfaceContainer,
                       valueColor: AlwaysStoppedAnimation<Color>(
-                        ColorManger.primaryColor,
+                        context.palette.primaryColor,
                       ),
                       minHeight: ScreenUtilsManager.h6,
                       borderRadius: BorderRadius.circular(

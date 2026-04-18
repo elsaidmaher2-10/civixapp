@@ -21,7 +21,7 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason> errorsnackbar(
       content: Text(
         Constantmanger.imagerequired,
         style: GoogleFonts.cairo(
-          color: ColorManger.white,
+          color: context.palette.white,
           fontSize: ScreenUtilsManager.h16,
         ),
       ),

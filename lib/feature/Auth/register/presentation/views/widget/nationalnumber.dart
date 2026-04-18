@@ -20,7 +20,7 @@ class Nationalnumber extends StatelessWidget {
         // Text(
         //   Constantmanger.nationalnumber,
         //   style: GoogleFonts.cairo(
-        //     color: ColorManger.lightGrey,
+        //     color: context.palette.lightGrey,
         //     fontSize: ScreenUtilsManager.s16,
         //   ),
         // ),
@@ -35,7 +35,7 @@ class Nationalnumber extends StatelessWidget {
                 fit: BoxFit.cover,
                 height: 1,
                 width: 1,
-                color: ColorManger.lightGrey2,
+                color: context.palette.lightGrey2,
                 AssetValueManager.id,
               ),
             ),

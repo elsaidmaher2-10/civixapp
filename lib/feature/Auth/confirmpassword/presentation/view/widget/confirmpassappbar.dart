@@ -15,15 +15,15 @@ PreferredSizeWidget confirmpassappbar(
     titleSpacing: 3.w,
     title: Text(
       S.of(context).newPassword,
-      style: GoogleFonts.cairo(fontSize: 20.sp, color: ColorManger.kPrimary),
+      style: GoogleFonts.cairo(fontSize: 20.sp, color: context.palette.kPrimary),
     ),
-    backgroundColor: ColorManger.white,
+    backgroundColor: context.palette.white,
     leadingWidth: 36.w,
     leading: Padding(
       padding: EdgeInsetsDirectional.all(ScreenUtilsManager.w8),
       child: IconButton(
         onPressed: onBack,
-        icon: Icon(CupertinoIcons.back, color: ColorManger.kPrimary),
+        icon: Icon(CupertinoIcons.back, color: context.palette.kPrimary),
       ),
     ),
   );

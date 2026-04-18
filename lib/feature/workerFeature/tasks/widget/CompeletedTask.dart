@@ -35,21 +35,21 @@ class CompletedTaskCard extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.all(ScreenUtilsManager.w16),
         decoration: BoxDecoration(
-          color: ColorManger.grey50.withOpacity(0.8),
+          color: context.palette.grey50.withOpacity(0.8),
           borderRadius: BorderRadius.circular(ScreenUtilsManager.r16),
-          border: Border.all(color: ColorManger.grey200),
+          border: Border.all(color: context.palette.grey200),
         ),
         child: Row(
           children: [
             Container(
               padding: EdgeInsets.all(ScreenUtilsManager.w8),
               decoration: BoxDecoration(
-                color: ColorManger.green,
+                color: context.palette.green,
                 shape: BoxShape.circle,
               ),
               child: Icon(
                 Icons.check,
-                color: ColorManger.white,
+                color: context.palette.white,
                 size: ScreenUtilsManager.s16,
               ),
             ),
@@ -62,7 +62,7 @@ class CompletedTaskCard extends StatelessWidget {
                     task.title,
                     style: GoogleFonts.cairo(
                       decoration: TextDecoration.lineThrough,
-                      color: ColorManger.grey600,
+                      color: context.palette.grey600,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
@@ -72,7 +72,7 @@ class CompletedTaskCard extends StatelessWidget {
                         .completedFrom(task.createdAt.timeAgo(context)),
                     style: GoogleFonts.cairo(
                       fontSize: ScreenUtilsManager.s12,
-                      color: ColorManger.grey,
+                      color: context.palette.grey,
                     ),
                   ),
                 ],
@@ -81,7 +81,7 @@ class CompletedTaskCard extends StatelessWidget {
             Icon(
               Icons.arrow_forward_ios,
               size: ScreenUtilsManager.s14,
-              color: ColorManger.grey400,
+              color: context.palette.grey400,
             ),
           ],
         ),

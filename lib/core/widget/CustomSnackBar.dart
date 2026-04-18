@@ -23,7 +23,7 @@ class Customsnackbar {
           message,
           style: GoogleFonts.cairo(
             fontWeight: FontWeight.w700,
-            color: ColorManger.white,
+            color: context.palette.white,
             fontSize: ScreenUtilsManager.h16,
           ),
         ),

@@ -26,7 +26,7 @@ class TasksHeader extends StatelessWidget {
               style: GoogleFonts.cairo(
                 fontWeight: FontWeight.w800,
                 fontSize: ScreenUtilsManager.s32,
-                color: ColorManger.onSurface,
+                color: context.palette.onSurface,
                 letterSpacing: -1,
               ),
             ),
@@ -77,7 +77,7 @@ class TasksHeader extends StatelessWidget {
                                       Icons.notifications_none_rounded,
                                       key: const ValueKey('icon_bell'),
                                       size: ScreenUtilsManager.s26,
-                                      color: ColorManger.kPrimaryDark
+                                      color: context.palette.kPrimaryDark
                                           .withOpacity(0.7),
                                     ),
                             ),
@@ -105,8 +105,8 @@ class TasksHeader extends StatelessWidget {
                                         decoration: BoxDecoration(
                                           gradient: LinearGradient(
                                             colors: [
-                                              ColorManger.notificationRedStart,
-                                              ColorManger.notificationRedEnd,
+                                              context.palette.notificationRedStart,
+                                              context.palette.notificationRedEnd,
                                             ],
                                             begin: Alignment.topLeft,
                                             end: Alignment.bottomRight,
@@ -115,12 +115,12 @@ class TasksHeader extends StatelessWidget {
                                             ScreenUtilsManager.r10,
                                           ),
                                           border: Border.all(
-                                            color: ColorManger.white,
+                                            color: context.palette.white,
                                             width: 1.5,
                                           ),
                                           boxShadow: [
                                             BoxShadow(
-                                              color: ColorManger.black
+                                              color: context.palette.black
                                                   .withOpacity(0.15),
                                               blurRadius: 4,
                                               offset: const Offset(0, 2),
@@ -133,7 +133,7 @@ class TasksHeader extends StatelessWidget {
                                                 ? '9+'
                                                 : '$unreadCount',
                                             style: GoogleFonts.cairo(
-                                              color: ColorManger.white,
+                                              color: context.palette.white,
                                               fontSize: ScreenUtilsManager.s9,
                                               fontWeight: FontWeight.bold,
                                               height: 1.1,
@@ -159,7 +159,7 @@ class TasksHeader extends StatelessWidget {
           S.of(context).tasksSubtitle,
           style: GoogleFonts.cairo(
             fontSize: ScreenUtilsManager.s15,
-            color: ColorManger.onSurfaceVariant.withOpacity(0.7),
+            color: context.palette.onSurfaceVariant.withOpacity(0.7),
             fontWeight: FontWeight.w500,
           ),
         ),

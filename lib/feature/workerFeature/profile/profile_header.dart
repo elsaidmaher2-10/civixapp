@@ -17,7 +17,7 @@ class ProfileHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      color: ColorManger.surfaceLowest,
+      color: context.palette.surfaceLowest,
       padding: const EdgeInsets.only(left: 24, right: 24, top: 64, bottom: 20),
       child: Column(
         children: [
@@ -28,7 +28,7 @@ class ProfileHeader extends StatelessWidget {
             style: GoogleFonts.cairo(
               fontWeight: FontWeight.w800,
               fontSize: 30,
-              color: ColorManger.onSurface,
+              color: context.palette.onSurface,
               letterSpacing: -0.5,
             ),
           ),
@@ -54,10 +54,10 @@ class _Avatar extends StatelessWidget {
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             border: Border.all(
-              color: ColorManger.bgLight.withOpacity(0.2),
+              color: context.palette.bgLight.withOpacity(0.2),
               width: 4,
             ),
-            color: ColorManger.surfaceContainer,
+            color: context.palette.surfaceContainer,
             image: DecorationImage(
               image: NetworkImage(avatarUrl),
               fit: BoxFit.cover,
@@ -71,7 +71,7 @@ class _Avatar extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.all(2),
               decoration: BoxDecoration(
-                color: ColorManger.success,
+                color: context.palette.success,
                 shape: BoxShape.circle,
                 border: Border.all(color: Colors.white, width: 4),
               ),

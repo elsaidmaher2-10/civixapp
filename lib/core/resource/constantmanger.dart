@@ -142,6 +142,9 @@ class Constantmanger {
   static String search = "Search";
   static String accessToken = "accessToken";
 
+  /// Saved [ThemeMode] (`system` / `light` / `dark`); see [ThemeCubit].
+  static const String themeModePrefKey = 'themeMode';
+
   static var refreshToken = "refreshToken";
 
   static var refreshTokenExpiration = "refreshTokenExpiration";

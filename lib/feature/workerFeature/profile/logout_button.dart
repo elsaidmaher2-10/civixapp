@@ -17,20 +17,20 @@ class LogoutButton extends StatelessWidget {
       style: OutlinedButton.styleFrom(
         minimumSize: const Size(double.infinity, 64),
         side: BorderSide(
-          color: ColorManger.error.withOpacity(isLoading ? 0.1 : 0.2),
+          color: context.palette.error.withOpacity(isLoading ? 0.1 : 0.2),
           width: 2,
         ),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        foregroundColor: ColorManger.error,
-        disabledForegroundColor: ColorManger.error.withOpacity(0.5),
+        foregroundColor: context.palette.error,
+        disabledForegroundColor: context.palette.error.withOpacity(0.5),
       ),
       child: isLoading
-          ? const SizedBox(
+          ? SizedBox(
               height: 24,
               width: 24,
               child: CircularProgressIndicator(
                 strokeWidth: 2,
-                color: ColorManger.error,
+                color: context.palette.error,
               ),
             )
           : Row(

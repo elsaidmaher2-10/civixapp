@@ -1,4 +1,5 @@
 class Routes {
+  static const String animatedSplash = "/animated-splash";
   static const String onbroading = "/";
   static const String login = "/login";
   static const String signup = "/signup";

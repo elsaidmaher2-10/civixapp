@@ -16,7 +16,7 @@ class Address extends StatelessWidget {
       children: [
         SizedBox(height: ScreenUtilsManager.h6),
         CustomTextfromfield(
-          prefix: Icon(Icons.location_city, color: ColorManger.lightGrey2),
+          prefix: Icon(Icons.location_city, color: context.palette.lightGrey2),
           onChanged: onChanged,
           controller: controller,
           obstext: false,

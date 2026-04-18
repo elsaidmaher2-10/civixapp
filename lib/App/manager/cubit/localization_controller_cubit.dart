@@ -6,15 +6,18 @@ part 'localization_controller_state.dart';
 
 class LocalizationControllerCubit extends Cubit<LocalizationControllerState> {
   LocalizationControllerCubit() : super(LocalizationControllerInitial());
-  static const String _langKey = "Lang";
+
+  /// SharedPreferences key for the selected locale (`en` / `ar`).
+  static const String languagePrefKey = 'Lang';
+
   void fetchLanguage() {
-    String? savedLang = PrefrenceManager().getstring(_langKey);
+    String? savedLang = PrefrenceManager().getstring(languagePrefKey);
     String initialLang = savedLang ?? "en";
     emit(LocalizationControllerChanged(lang: initialLang));
   }
 
   void changeLanguage(String lang) {
-    PrefrenceManager().setstring(_langKey, lang);
+    PrefrenceManager().setstring(languagePrefKey, lang);
     emit(LocalizationControllerChanged(lang: lang));
     PrefrenceManager().remove("categories");
   }

@@ -105,13 +105,13 @@ class _SingnupState extends State<Singnup> {
               if (state is Signupcontrollerfailure) {
                 Customsnackbar.show(
                   context: context,
-                  backgroundColor: ColorManger.red,
+                  backgroundColor: context.palette.red,
                   message: state.message,
                 );
               } else if (state is Signupcontrollersucess) {
                 Customsnackbar.show(
                   context: context,
-                  backgroundColor: ColorManger.green,
+                  backgroundColor: context.palette.green,
                   message: state.message,
                 );
                 await Future.delayed(

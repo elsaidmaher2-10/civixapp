@@ -32,7 +32,7 @@ Future<List<File>?> showImageBottomSheet(BuildContext context) async {
             }
           },
         ),
-        Divider(height: 0.3, color: ColorManger.white, thickness: 1),
+        Divider(height: 0.3, color: context.palette.white, thickness: 1),
         AppButton(
           onPressed: () => Navigator.pop(ctx),
           text: S.of(context).cancel,

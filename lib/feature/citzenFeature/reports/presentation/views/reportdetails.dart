@@ -71,14 +71,14 @@ class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
         create: (context) =>
             CommentsCubit(getIt<Commentrepo>())..fetchComments(widget.reportId),
         child: Scaffold(
-          backgroundColor: ColorManger.reportsPageBackground,
+          backgroundColor: context.palette.reportsPageBackground,
           body: BlocBuilder<ReportCubit, ReportManagerState>(
             builder: (context, state) {
               if (state is GetReportsByidLoading) {
                 return Center(
                   child: CupertinoActivityIndicator(
                     radius: ScreenUtilsManager.r12,
-                    color: ColorManger.kPrimary,
+                    color: context.palette.kPrimary,
                   ),
                 );
               } else if (state is GetReportsByidSuccess) {
@@ -106,7 +106,7 @@ class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
                               style: GoogleFonts.cairo(
                                 fontSize: 24.sp,
                                 fontWeight: FontWeight.w900,
-                                color: ColorManger.kPrimary,
+                                color: context.palette.kPrimary,
                               ),
                             ),
                             SizedBox(height: 8.h),
@@ -233,12 +233,12 @@ class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
       padding: EdgeInsets.all(12.w),
       decoration: BoxDecoration(
         color: isWorker
-            ? ColorManger.kPrimary.withOpacity(0.03)
+            ? context.palette.kPrimary.withOpacity(0.03)
             : Colors.grey[50],
         borderRadius: BorderRadius.circular(12.r),
         border: Border.all(
           color: isWorker
-              ? ColorManger.kPrimary.withOpacity(0.1)
+              ? context.palette.kPrimary.withOpacity(0.1)
               : Colors.grey[200]!,
         ),
       ),
@@ -246,7 +246,7 @@ class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
         children: [
           CircleAvatar(
             radius: 20.r,
-            backgroundColor: ColorManger.kPrimary.withOpacity(0.1),
+            backgroundColor: context.palette.kPrimary.withOpacity(0.1),
             child: ClipOval(
               child: CachedNetworkImage(
                 imageUrl: imageUrl,
@@ -254,7 +254,7 @@ class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
                 width: 40.r,
                 height: 40.r,
                 errorWidget: (context, url, error) =>
-                    Icon(icon, color: ColorManger.kPrimary),
+                    Icon(icon, color: context.palette.kPrimary),
                 placeholder: (context, url) =>
                     const CupertinoActivityIndicator(),
               ),
@@ -281,7 +281,7 @@ class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
                     department,
                     style: GoogleFonts.cairo(
                       fontSize: 11.sp,
-                      color: ColorManger.kPrimary,
+                      color: context.palette.kPrimary,
                     ),
                   ),
               ],
@@ -298,7 +298,7 @@ class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
       style: GoogleFonts.cairo(
         fontSize: 18.sp,
         fontWeight: FontWeight.bold,
-        color: ColorManger.kPrimary,
+        color: context.palette.kPrimary,
       ),
     );
   }
@@ -397,7 +397,7 @@ class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
               ReportID: widget.reportId,
             ),
             style: ElevatedButton.styleFrom(
-              backgroundColor: ColorManger.primary,
+              backgroundColor: context.palette.primary,
               foregroundColor: Colors.white,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8.r),

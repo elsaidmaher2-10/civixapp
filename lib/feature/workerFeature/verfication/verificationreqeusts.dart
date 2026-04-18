@@ -34,7 +34,7 @@ class _VerificationRequestsScreenState
       backgroundColor: const Color(0xFFF8F9FD),
       appBar: AppBar(
         leading: IconButton(
-          color: ColorManger.workerprimary,
+          color: context.palette.workerprimary,
           onPressed: () => Navigator.of(context).pop(),
           icon: const Icon(Icons.arrow_back_ios_new_rounded),
         ),
@@ -45,14 +45,14 @@ class _VerificationRequestsScreenState
           s.verificationRequestsTitle,
           style: GoogleFonts.cairo(
             fontWeight: FontWeight.bold,
-            color: ColorManger.workerprimary,
+            color: context.palette.workerprimary,
           ),
         ),
         actions: [
           IconButton(
             onPressed: () =>
                 context.read<VerificationInitCubit>().fetchRequests(),
-            icon: const Icon(Icons.refresh, color: ColorManger.workerprimary),
+            icon: Icon(Icons.refresh, color: context.palette.workerprimary),
           ),
         ],
       ),
@@ -62,7 +62,7 @@ class _VerificationRequestsScreenState
             return Center(
               child: CupertinoActivityIndicator(
                 radius: ScreenUtilsManager.r12,
-                color: ColorManger.inProgressContainer,
+                color: context.palette.inProgressContainer,
               ),
             );
           } else if (state is VerificationRequestsError) {
@@ -126,12 +126,12 @@ class _VerificationRequestsScreenState
                     children: [
                       CircleAvatar(
                         radius: 24,
-                        backgroundColor: ColorManger.bgbackground,
+                        backgroundColor: context.palette.bgbackground,
                         backgroundImage: item.workerProfileImageUrl.isNotEmpty
                             ? NetworkImage(item.workerProfileImageUrl)
                             : null,
                         child: item.workerProfileImageUrl.isEmpty
-                            ? Icon(Icons.person, color: ColorManger.textGrey)
+                            ? Icon(Icons.person, color: context.palette.textGrey)
                             : null,
                       ),
                       SizedBox(width: ScreenUtilsManager.p12),
@@ -150,7 +150,7 @@ class _VerificationRequestsScreenState
                             Text(
                               "${item.id}",
                               style: GoogleFonts.cairo(
-                                color: ColorManger.textGrey,
+                                color: context.palette.textGrey,
                                 fontSize: 12,
                               ),
                             ),
@@ -317,7 +317,7 @@ class _VerificationRequestsScreenState
             SizedBox(height: ScreenUtilsManager.h24),
             ElevatedButton.icon(
               style: ElevatedButton.styleFrom(
-                backgroundColor: ColorManger.workerprimary,
+                backgroundColor: context.palette.workerprimary,
                 foregroundColor: Colors.white,
                 elevation: 0,
                 padding: EdgeInsets.symmetric(

@@ -16,7 +16,7 @@ class Phone extends StatelessWidget {
         // Text(
         //   Constantmanger.phone,
         //   style: GoogleFonts.cairo(
-        //     color: ColorManger.lightGrey,
+        //     color: context.palette.lightGrey,
         //     fontSize: ScreenUtilsManager.s16,
         //   ),
         // ),
@@ -24,7 +24,7 @@ class Phone extends StatelessWidget {
         CustomTextfromfield(
           controller: controller,
           ktype: TextInputType.number,
-          prefix: Icon(Icons.phone, color: ColorManger.lightGrey2),
+          prefix: Icon(Icons.phone, color: context.palette.lightGrey2),
           hinttext: S.of(context).hintPhone,
           validator: validator,
           lable: S.of(context).phone,

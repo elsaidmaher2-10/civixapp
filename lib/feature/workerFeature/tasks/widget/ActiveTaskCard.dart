@@ -27,12 +27,12 @@ class ActiveTaskCard extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(bottom: ScreenUtilsManager.h16),
       decoration: BoxDecoration(
-        color: ColorManger.white,
+        color: context.palette.white,
         borderRadius: BorderRadius.circular(ScreenUtilsManager.r16),
-        border: Border.all(color: ColorManger.grey200.withOpacity(0.5)),
+        border: Border.all(color: context.palette.grey200.withOpacity(0.5)),
         boxShadow: [
           BoxShadow(
-            color: ColorManger.black.withOpacity(0.04),
+            color: context.palette.black.withOpacity(0.04),
             blurRadius: ScreenUtilsManager.r20,
             offset: Offset(0, ScreenUtilsManager.h10),
           ),
@@ -67,7 +67,7 @@ class ActiveTaskCard extends StatelessWidget {
                     Text(
                       "#${task.id}",
                       style: GoogleFonts.cairo(
-                        color: ColorManger.grey400,
+                        color: context.palette.grey400,
                         fontSize: ScreenUtilsManager.s12,
                       ),
                     ),
@@ -79,7 +79,7 @@ class ActiveTaskCard extends StatelessWidget {
                   style: GoogleFonts.cairo(
                     fontSize: ScreenUtilsManager.s18,
                     fontWeight: FontWeight.w800,
-                    color: ColorManger.onSurface,
+                    color: context.palette.onSurface,
                   ),
                 ),
                 SizedBox(height: ScreenUtilsManager.h6),
@@ -113,7 +113,7 @@ class _LocationRow extends StatelessWidget {
         Icon(
           Icons.location_on_rounded,
           size: ScreenUtilsManager.s14,
-          color: ColorManger.primaryColor,
+          color: context.palette.primaryColor,
         ),
         SizedBox(width: ScreenUtilsManager.w4),
         Expanded(
@@ -121,7 +121,7 @@ class _LocationRow extends StatelessWidget {
             address,
             style: GoogleFonts.cairo(
               fontSize: ScreenUtilsManager.s13,
-              color: ColorManger.grey600,
+              color: context.palette.grey600,
             ),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
@@ -165,7 +165,7 @@ class _AvailableActionsState extends State<_AvailableActions> {
           setState(() => isLoading = false);
           Customsnackbar.show(
             context: context,
-            backgroundColor: ColorManger.red,
+            backgroundColor: context.palette.red,
             message: state.message,
           );
         }
@@ -177,8 +177,8 @@ class _AvailableActionsState extends State<_AvailableActions> {
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: [
-                    ColorManger.workerprimary,
-                    ColorManger.workerprimary.withAlpha(200),
+                    context.palette.workerprimary,
+                    context.palette.workerprimary.withAlpha(200),
                   ],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
@@ -186,7 +186,7 @@ class _AvailableActionsState extends State<_AvailableActions> {
                 borderRadius: BorderRadius.circular(ScreenUtilsManager.r8),
                 boxShadow: [
                   BoxShadow(
-                    color: ColorManger.workerprimary.withOpacity(0.3),
+                    color: context.palette.workerprimary.withOpacity(0.3),
                     blurRadius: ScreenUtilsManager.s10,
                     offset: Offset(0, ScreenUtilsManager.h4),
                   ),
@@ -215,11 +215,11 @@ class _AvailableActionsState extends State<_AvailableActions> {
                   ),
                 ),
                 child: isLoading
-                    ? CupertinoActivityIndicator(color: ColorManger.white)
+                    ? CupertinoActivityIndicator(color: context.palette.white)
                     : Text(
                         S.of(context).startTask,
                         style: GoogleFonts.cairo(
-                          color: ColorManger.white,
+                          color: context.palette.white,
                           fontWeight: FontWeight.w700,
                         ),
                       ),
@@ -254,7 +254,7 @@ class _InProgressActions extends StatelessWidget {
           );
         },
         style: ElevatedButton.styleFrom(
-          backgroundColor: ColorManger.onSurface,
+          backgroundColor: context.palette.onSurface,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(ScreenUtilsManager.r8),
           ),
@@ -263,7 +263,7 @@ class _InProgressActions extends StatelessWidget {
         child: Text(
           S.of(context).viewDirectionsUpdate,
           style: GoogleFonts.cairo(
-            color: ColorManger.white,
+            color: context.palette.white,
             fontWeight: FontWeight.w700,
           ),
         ),

@@ -37,7 +37,7 @@ class Workercomments extends StatelessWidget {
             padding: EdgeInsets.symmetric(vertical: 20.h),
             child: Center(
               child: CupertinoActivityIndicator(
-                color: ColorManger.kPrimary,
+                color: context.palette.kPrimary,
                 radius: ScreenUtilsManager.r12,
               ),
             ),
@@ -71,7 +71,7 @@ class Workercomments extends StatelessWidget {
                       "assets/commentsytem.svg",
                       width: 24.w,
                       colorFilter: ColorFilter.mode(
-                        ColorManger.workerprimary,
+                        context.palette.workerprimary,
                         BlendMode.srcIn,
                       ),
                     ),
@@ -79,7 +79,7 @@ class Workercomments extends StatelessWidget {
                     Text(
                       S.of(context).comments,
                       style: GoogleFonts.cairo(
-                        color: ColorManger.workerprimary,
+                        color: context.palette.workerprimary,
                         fontWeight: FontWeight.bold,
                         fontSize: 16.sp,
                       ),
@@ -91,7 +91,7 @@ class Workercomments extends StatelessWidget {
                         vertical: 6.h,
                       ),
                       decoration: BoxDecoration(
-                        color: ColorManger.lightGrey5,
+                        color: context.palette.lightGrey5,
                         borderRadius: BorderRadius.circular(8.r),
                       ),
                       child: Text(
@@ -138,7 +138,7 @@ class Workercomments extends StatelessWidget {
                     suffix: IconButton(
                       icon: Icon(
                         Icons.send_rounded,
-                        color: ColorManger.workerprimary,
+                        color: context.palette.workerprimary,
                       ),
                       onPressed: () async {
                         if (controller.text.trim().isNotEmpty) {
@@ -150,7 +150,7 @@ class Workercomments extends StatelessWidget {
                         }
                       },
                     ),
-                    color: ColorManger.bgLight,
+                    color: context.palette.bgLight,
                     hinttext: S.of(context).addCommentHint,
                     lable: S.of(context).addCommentLabel,
                     controller: controller,

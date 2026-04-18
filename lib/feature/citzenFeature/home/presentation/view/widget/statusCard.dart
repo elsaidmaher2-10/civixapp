@@ -25,7 +25,7 @@ class StatusCard extends StatelessWidget {
     return Container(
       height: 106.h,
       decoration: BoxDecoration(
-        color: ColorManger.white,
+        color: context.palette.white,
         borderRadius: BorderRadius.circular(10.r),
       ),
       padding: EdgeInsets.all(12.w),
@@ -49,7 +49,7 @@ class StatusCard extends StatelessWidget {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: GoogleFonts.cairo(
-                    color: ColorManger.lightGrey6,
+                    color: context.palette.lightGrey6,
                     fontSize: 12.sp,
                     fontWeight: FontWeight.w600,
                   ),

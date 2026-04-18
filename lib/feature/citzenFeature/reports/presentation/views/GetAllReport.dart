@@ -69,7 +69,7 @@ class _ReportsPageState extends State<ReportsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorManger.reportsPageBackground,
+      backgroundColor: context.palette.reportsPageBackground,
       appBar: AppBar(
         surfaceTintColor: Colors.white,
         backgroundColor: Colors.white.withOpacity(0.8),
@@ -81,12 +81,12 @@ class _ReportsPageState extends State<ReportsPage> {
                 ? CupertinoIcons.back
                 : CupertinoIcons.back,
           ),
-          color: ColorManger.kPrimary,
+          color: context.palette.kPrimary,
         ),
         title: Text(
           S.of(context).reports,
           style: GoogleFonts.cairo(
-            color: ColorManger.kPrimary,
+            color: context.palette.kPrimary,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -144,7 +144,7 @@ class _ReportsPageState extends State<ReportsPage> {
                 if (state is GetReportsLoading) {
                   return Center(
                     child: SpinKitWaveSpinner(
-                      color: ColorManger.lightColor,
+                      color: context.palette.lightColor,
                       size: 50.sp,
                     ),
                   );
@@ -181,7 +181,7 @@ class _ReportsPageState extends State<ReportsPage> {
                         textAlign: TextAlign.center,
                         style: GoogleFonts.cairo(
                           fontWeight: FontWeight.w500,
-                          color: ColorManger.lightGrey.withOpacity(0.8),
+                          color: context.palette.lightGrey.withOpacity(0.8),
                           fontSize: ScreenUtilsManager.s16,
                         ),
                       ),
@@ -209,7 +209,7 @@ class _ReportsPageState extends State<ReportsPage> {
                 }
 
                 return RefreshIndicator(
-                  color: ColorManger.kPrimary,
+                  color: context.palette.kPrimary,
                   backgroundColor: Colors.white,
                   onRefresh: () => context.read<ReportCubit>().fetchReports(),
                   child: ListView.builder(

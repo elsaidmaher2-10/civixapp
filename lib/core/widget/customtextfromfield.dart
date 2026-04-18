@@ -38,6 +38,9 @@ class CustomTextfromfield extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ColorScheme scheme = Theme.of(context).colorScheme;
+    final Color resolvedFill =
+        color == const Color(0xffF6F6F6) ? scheme.surfaceContainerHighest : color;
     return TextFormField(
       maxLines: maxLines,
       initialValue: initialValue,
@@ -51,18 +54,21 @@ class CustomTextfromfield extends StatelessWidget {
       obscureText: obstext,
       decoration: InputDecoration(
         prefixIcon: prefix,
-        labelStyle: GoogleFonts.cairo(color: Colors.black, fontSize: 14.sp),
+        labelStyle: GoogleFonts.cairo(
+          color: scheme.onSurface,
+          fontSize: 14.sp,
+        ),
         alignLabelWithHint: true,
         labelText: lable,
         isDense: true,
         floatingLabelAlignment: FloatingLabelAlignment.start,
         contentPadding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 14.h),
-        fillColor: color,
+        fillColor: resolvedFill,
         filled: true,
         suffixIcon: suffix,
         hintText: hinttext,
         hintStyle: GoogleFonts.cairo(
-          color: const Color(0xff6C6C6C),
+          color: scheme.onSurfaceVariant,
           fontSize: 12.sp,
         ),
         border: OutlineInputBorder(
@@ -70,7 +76,7 @@ class CustomTextfromfield extends StatelessWidget {
           borderRadius: BorderRadius.circular(10.r),
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Color(0xff04332D), width: 1),
+          borderSide: BorderSide(color: scheme.primary, width: 1),
           borderRadius: BorderRadius.circular(10.r),
         ),
         errorBorder: OutlineInputBorder(

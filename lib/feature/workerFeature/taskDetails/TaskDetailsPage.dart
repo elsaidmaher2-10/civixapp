@@ -100,13 +100,13 @@ class _TaskDetailsPageState extends State<TaskDetailsPage> {
           return ModalProgressHUD(
             inAsyncCall: state is MarkAsCompeleteLoading,
             opacity: 0.5,
-            color: ColorManger.black54,
+            color: context.palette.black54,
             progressIndicator: CupertinoActivityIndicator(
               radius: ScreenUtilsManager.r12,
-              color: ColorManger.workerprimary,
+              color: context.palette.workerprimary,
             ),
             child: Scaffold(
-              backgroundColor: ColorManger.background,
+              backgroundColor: context.palette.background,
               appBar: _buildAppBar(context),
               bottomNavigationBar: _buildBottomAction(context),
               body: _buildScaffoldBody(context, state),
@@ -163,8 +163,8 @@ class _TaskDetailsPageState extends State<TaskDetailsPage> {
 
   Widget _buildMainContent(BuildContext context, dynamic task) {
     return RefreshIndicator(
-      color: ColorManger.workerprimary,
-      backgroundColor: ColorManger.white,
+      color: context.palette.workerprimary,
+      backgroundColor: context.palette.white,
       onRefresh: () async => context
           .read<ReportDetailsManager>()
           .getReportDetails(id: widget.reportid),
@@ -223,14 +223,14 @@ class _TaskDetailsPageState extends State<TaskDetailsPage> {
     if (state is MarkAsCompeleteFailure) {
       Customsnackbar.show(
         context: context,
-        backgroundColor: ColorManger.red,
+        backgroundColor: context.palette.red,
         message: state.error,
       );
     }
     if (state is MarkAsCompeleteSuccess) {
       Customsnackbar.show(
         context: context,
-        backgroundColor: ColorManger.green,
+        backgroundColor: context.palette.green,
         message: S.of(context).markasCompeleted,
       );
       context.read<ReportDetailsManager>().getReportDetails(
@@ -241,10 +241,10 @@ class _TaskDetailsPageState extends State<TaskDetailsPage> {
 
   PreferredSizeWidget _buildAppBar(BuildContext context) {
     return AppBar(
-      backgroundColor: ColorManger.surface,
+      backgroundColor: context.palette.surface,
       elevation: 0,
       leading: IconButton(
-        icon: Icon(Icons.arrow_back_ios_outlined, color: ColorManger.onSurface),
+        icon: Icon(Icons.arrow_back_ios_outlined, color: context.palette.onSurface),
         onPressed: () => Navigator.pop(context),
       ),
       centerTitle: true,
@@ -264,7 +264,7 @@ class _TaskDetailsPageState extends State<TaskDetailsPage> {
           Icon(
             isNoInternet ? Icons.wifi_off : Icons.error_outline,
             size: ScreenUtilsManager.s60,
-            color: ColorManger.grey,
+            color: context.palette.grey,
           ),
           SizedBox(height: ScreenUtilsManager.h16),
           Text(
@@ -276,8 +276,8 @@ class _TaskDetailsPageState extends State<TaskDetailsPage> {
           SizedBox(height: ScreenUtilsManager.h16),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: ColorManger.workerprimary,
-              foregroundColor: ColorManger.white,
+              backgroundColor: context.palette.workerprimary,
+              foregroundColor: context.palette.white,
             ),
             onPressed: () => context
                 .read<ReportDetailsManager>()

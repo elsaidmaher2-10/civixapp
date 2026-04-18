@@ -30,13 +30,13 @@ class ReportDetailsAppbar extends StatelessWidget {
       expandedHeight: MediaQuery.of(context).size.height * 0.45,
       pinned: true,
       stretch: true,
-      backgroundColor: ColorManger.kPrimary,
+      backgroundColor: context.palette.kPrimary,
       leading: IconButton(
         icon: CircleAvatar(
           backgroundColor: Colors.white70,
           child: Icon(
             CupertinoIcons.back,
-            color: ColorManger.kPrimary,
+            color: context.palette.kPrimary,
             size: ScreenUtilsManager.s18,
           ),
         ),
@@ -66,9 +66,9 @@ class ReportDetailsAppbar extends StatelessWidget {
                   imageUrl: item,
                   placeholder: (context, url) => Container(
                     color: Colors.grey[200],
-                    child: const Center(
+                    child: Center(
                       child: CircularProgressIndicator(
-                        color: ColorManger.kPrimary,
+                        color: context.palette.kPrimary,
                       ),
                     ),
                   ),
@@ -86,7 +86,7 @@ class ReportDetailsAppbar extends StatelessWidget {
                 child: CustomIndicator(
                   dotSize: 8,
                   controller: pageController,
-                  activeColor: ColorManger.kPrimary,
+                  activeColor: context.palette.kPrimary,
                   dotColor: Colors.white.withOpacity(0.6),
                   count: mediaItems.length,
                 ),

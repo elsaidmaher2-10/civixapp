@@ -27,9 +27,9 @@ class _MainscreenwrokerState extends State<Mainscreenwroker> {
             selectedLabelStyle: GoogleFonts.cairo(),
             unselectedLabelStyle: GoogleFonts.cairo(),
 
-            backgroundColor: ColorManger.white,
+            backgroundColor: context.palette.white,
             currentIndex: state,
-            selectedItemColor: ColorManger.workerprimary,
+            selectedItemColor: context.palette.workerprimary,
             unselectedItemColor: Colors.grey,
             onTap: (index) {
               context.read<WorkerCubit>().changeCurrentIndex(index);

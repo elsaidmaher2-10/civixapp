@@ -13,7 +13,7 @@ void showLanguagePicker(BuildContext context, bool isWorekr) async {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(ScreenUtilsManager.r12),
       ),
-      backgroundColor: ColorManger.white,
+      backgroundColor: context.palette.white,
       child: Padding(
         padding: EdgeInsets.all(ScreenUtilsManager.h24),
         child: Column(
@@ -26,8 +26,8 @@ void showLanguagePicker(BuildContext context, bool isWorekr) async {
                 fontSize: ScreenUtilsManager.s20,
                 fontWeight: FontWeight.bold,
                 color: isWorekr
-                    ? ColorManger.workerprimary
-                    : ColorManger.kPrimary,
+                    ? context.palette.workerprimary
+                    : context.palette.kPrimary,
               ),
             ),
             SizedBox(height: ScreenUtilsManager.h10),
@@ -37,7 +37,7 @@ void showLanguagePicker(BuildContext context, bool isWorekr) async {
               style: GoogleFonts.cairo(
                 fontSize: ScreenUtilsManager.s12,
                 fontWeight: FontWeight.w400,
-                color: ColorManger.lightGrey2,
+                color: context.palette.lightGrey2,
               ),
             ),
             SizedBox(height: ScreenUtilsManager.h20),
@@ -75,7 +75,7 @@ Widget _buildLanguageOption(
       decoration: BoxDecoration(
         border: Border.all(
           width: ScreenUtilsManager.w1,
-          color: ColorManger.lightGrey2.withOpacity(0.5),
+          color: context.palette.lightGrey2.withOpacity(0.5),
         ),
         borderRadius: BorderRadius.circular(ScreenUtilsManager.r8),
       ),
@@ -85,7 +85,7 @@ Widget _buildLanguageOption(
         style: GoogleFonts.cairo(
           fontSize: ScreenUtilsManager.s14,
           fontWeight: FontWeight.w600,
-          color: ColorManger.textBlack,
+          color: context.palette.textBlack,
         ),
       ),
     ),

@@ -17,7 +17,7 @@ class HelpAndTermsPageWorker extends StatelessWidget {
       context,
     ).map((e) => e.category).toSet().toList();
     return Scaffold(
-      backgroundColor: ColorManger.reportsPageBackground,
+      backgroundColor: context.palette.reportsPageBackground,
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios_sharp, size: ScreenUtilsManager.s18),
@@ -35,7 +35,7 @@ class HelpAndTermsPageWorker extends StatelessWidget {
         centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.white,
-        foregroundColor: ColorManger.kPrimaryDark,
+        foregroundColor: context.palette.kPrimaryDark,
       ),
       body: ListView.builder(
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
@@ -60,7 +60,7 @@ class HelpAndTermsPageWorker extends StatelessWidget {
                   style: GoogleFonts.cairo(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.bold,
-                    color: ColorManger.workerprimary,
+                    color: context.palette.workerprimary,
                   ),
                 ),
               ),
@@ -81,7 +81,7 @@ class HelpAndTermsPageWorker extends StatelessWidget {
                     ),
                     queStyle: GoogleFonts.cairo(
                       fontWeight: FontWeight.w600,
-                      color: ColorManger.textBlack,
+                      color: context.palette.textBlack,
                     ),
                     ansStyle: GoogleFonts.cairo(
                       color: Colors.grey[600],
@@ -113,7 +113,7 @@ class HelpAndTermsPageWorker extends StatelessWidget {
           style: GoogleFonts.cairo(fontSize: ScreenUtilsManager.s14),
         ),
         style: ElevatedButton.styleFrom(
-          backgroundColor: ColorManger.workerprimary,
+          backgroundColor: context.palette.workerprimary,
           foregroundColor: Colors.white,
           minimumSize: Size(double.infinity, 50.h),
           shape: RoundedRectangleBorder(

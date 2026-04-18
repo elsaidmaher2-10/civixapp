@@ -39,7 +39,7 @@ class ConfirmPassword extends StatelessWidget {
                   },
                   icon: Icon(
                     state ? Icons.remove_red_eye : Icons.visibility_off,
-                    color: ColorManger.lightGrey2,
+                    color: context.palette.lightGrey2,
                   ),
                 ),
                 lable: S.of(context).confirmPassword,

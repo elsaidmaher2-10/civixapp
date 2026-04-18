@@ -12,8 +12,8 @@ class WorkerAlertVrefication extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(ScreenUtilsManager.h20),
       decoration: BoxDecoration(
-        color: ColorManger.primaryColor.withValues(alpha: 0.05),
-        border: Border.all(color: ColorManger.primaryColor.withOpacity(0.1)),
+        color: context.palette.primaryColor.withValues(alpha: 0.05),
+        border: Border.all(color: context.palette.primaryColor.withOpacity(0.1)),
         borderRadius: BorderRadius.circular(ScreenUtilsManager.r16),
       ),
       child: Row(
@@ -22,10 +22,10 @@ class WorkerAlertVrefication extends StatelessWidget {
             width: ScreenUtilsManager.w40,
             height: ScreenUtilsManager.h40,
             decoration: BoxDecoration(
-              color: ColorManger.primaryColor.withOpacity(0.2),
+              color: context.palette.primaryColor.withOpacity(0.2),
               shape: BoxShape.circle,
             ),
-            child: Icon(Icons.report_problem, color: ColorManger.primaryColor),
+            child: Icon(Icons.report_problem, color: context.palette.primaryColor),
           ),
           SizedBox(width: ScreenUtilsManager.w16),
           Expanded(
@@ -36,7 +36,7 @@ class WorkerAlertVrefication extends StatelessWidget {
                   S.of(context).alertRequired,
                   style: GoogleFonts.cairo(
                     fontWeight: FontWeight.bold,
-                    color: ColorManger.primaryColor,
+                    color: context.palette.primaryColor,
                   ),
                 ),
                 SizedBox(height: ScreenUtilsManager.h4),
@@ -44,7 +44,7 @@ class WorkerAlertVrefication extends StatelessWidget {
                   S.of(context).updateYourId,
                   style: GoogleFonts.cairo(
                     fontSize: ScreenUtilsManager.s14,
-                    color: ColorManger.onInProgressContainer,
+                    color: context.palette.onInProgressContainer,
                   ),
                 ),
               ],

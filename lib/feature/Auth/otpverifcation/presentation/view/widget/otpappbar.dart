@@ -12,9 +12,9 @@ PreferredSizeWidget otpappbar(BuildContext context, Null Function() param1) {
     titleSpacing: 3.w,
     title: Text(
       S.of(context).otpVerification,
-      style: GoogleFonts.cairo(color: ColorManger.kPrimary, fontSize: 20.sp),
+      style: GoogleFonts.cairo(color: context.palette.kPrimary, fontSize: 20.sp),
     ),
-    backgroundColor: ColorManger.white,
+    backgroundColor: context.palette.white,
     leadingWidth: 36.w,
 
     leading: Padding(
@@ -23,7 +23,7 @@ PreferredSizeWidget otpappbar(BuildContext context, Null Function() param1) {
         onPressed: () {
           Navigator.pop(context);
         },
-        icon: Icon(CupertinoIcons.back, color: ColorManger.kPrimary),
+        icon: Icon(CupertinoIcons.back, color: context.palette.kPrimary),
       ),
     ),
   );

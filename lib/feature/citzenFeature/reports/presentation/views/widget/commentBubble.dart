@@ -35,8 +35,8 @@ class CommentBubble extends StatelessWidget {
                   fontSize: 10.sp,
                   fontWeight: FontWeight.bold,
                   color: isWorker
-                      ? ColorManger.workerprimary
-                      : ColorManger.primary,
+                      ? context.palette.workerprimary
+                      : context.palette.primary,
                 ),
               ),
               SizedBox(width: 8.w),
@@ -58,8 +58,8 @@ class CommentBubble extends StatelessWidget {
                   padding: EdgeInsets.all(12.r),
                   decoration: BoxDecoration(
                     color: isWorker
-                        ? ColorManger.workerprimary
-                        : ColorManger.primary,
+                        ? context.palette.workerprimary
+                        : context.palette.primary,
                     boxShadow: const [
                       BoxShadow(
                         offset: Offset(0, 2),
@@ -90,7 +90,7 @@ class CommentBubble extends StatelessWidget {
               if (isWorker)
                 _buildAvatar(
                   comment.userProfileImageUrl,
-                  ColorManger.workerprimary,
+                  context.palette.workerprimary,
                 ),
             ],
           ),

@@ -29,11 +29,11 @@ class WorkerCard extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       child: Card(
-        color: ColorManger.white,
+        color: context.palette.white,
         elevation: 0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(ScreenUtilsManager.r14),
-          side: BorderSide(color: ColorManger.onSurface.withOpacity(0.05)),
+          side: BorderSide(color: context.palette.onSurface.withOpacity(0.05)),
         ),
         child: Padding(
           padding: EdgeInsets.all(ScreenUtilsManager.w16),
@@ -96,7 +96,7 @@ class WorkerCard extends StatelessWidget {
             style: GoogleFonts.cairo(
               fontSize: ScreenUtilsManager.s20,
               fontWeight: FontWeight.bold,
-              color: ColorManger.onSurface,
+              color: context.palette.onSurface,
             ),
           ),
         ),
@@ -122,7 +122,7 @@ class WorkerCard extends StatelessWidget {
         style: GoogleFonts.cairo(
           fontSize: ScreenUtilsManager.s10,
           fontWeight: FontWeight.w700,
-          color: isVerified ? ColorManger.green : ColorManger.orange,
+          color: isVerified ? context.palette.green : context.palette.orange,
         ),
       ),
     );
@@ -134,8 +134,8 @@ class WorkerCard extends StatelessWidget {
         Container(
           width: ScreenUtilsManager.w8,
           height: ScreenUtilsManager.h8,
-          decoration: const BoxDecoration(
-            color: ColorManger.green,
+          decoration: BoxDecoration(
+            color: context.palette.green,
             shape: BoxShape.circle,
           ),
         ),
@@ -144,7 +144,7 @@ class WorkerCard extends StatelessWidget {
           S.of(context).online,
           style: GoogleFonts.cairo(
             fontSize: ScreenUtilsManager.s14,
-            color: ColorManger.onSurfaceVariant,
+            color: context.palette.onSurfaceVariant,
           ),
         ),
       ],

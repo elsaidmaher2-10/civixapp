@@ -21,7 +21,7 @@ Widget buildBottomBar(
       return Container(
         padding: const EdgeInsets.fromLTRB(24, 16, 24, 40),
         decoration: BoxDecoration(
-          color: ColorManger.background,
+          color: context.palette.background,
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(0.05),
@@ -39,8 +39,8 @@ Widget buildBottomBar(
                 }
               : null,
           style: ElevatedButton.styleFrom(
-            backgroundColor: ColorManger.workerprimary,
-            disabledBackgroundColor: ColorManger.lightGrey.withOpacity(0.5),
+            backgroundColor: context.palette.workerprimary,
+            disabledBackgroundColor: context.palette.lightGrey.withOpacity(0.5),
             minimumSize: Size(double.infinity, ScreenUtilsManager.buttonHeight),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(18),

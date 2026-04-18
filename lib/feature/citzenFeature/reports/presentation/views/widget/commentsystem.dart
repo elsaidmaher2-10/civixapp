@@ -39,7 +39,7 @@ class Commentsystem extends StatelessWidget {
               padding: EdgeInsets.symmetric(vertical: 20.h),
               child: Center(
                 child: CupertinoActivityIndicator(
-                  color: ColorManger.kPrimary,
+                  color: context.palette.kPrimary,
                   radius: ScreenUtilsManager.r12,
                 ),
               ),
@@ -70,7 +70,7 @@ class Commentsystem extends StatelessWidget {
                       Text(
                         S.of(context).comments,
                         style: GoogleFonts.cairo(
-                          color: ColorManger.kPrimary,
+                          color: context.palette.kPrimary,
                           fontWeight: FontWeight.bold,
                           fontSize: 16.sp,
                         ),
@@ -82,7 +82,7 @@ class Commentsystem extends StatelessWidget {
                           vertical: 6.h,
                         ),
                         decoration: BoxDecoration(
-                          color: ColorManger.lightGrey5,
+                          color: context.palette.lightGrey5,
                           borderRadius: BorderRadius.circular(8.r),
                         ),
                         child: Text(
@@ -128,7 +128,7 @@ class Commentsystem extends StatelessWidget {
                           suffix: IconButton(
                             icon: Icon(
                               Icons.send_rounded,
-                              color: ColorManger.kPrimary,
+                              color: context.palette.kPrimary,
                             ),
                             onPressed: () async {
                               if (controller.text.isNotEmpty) {

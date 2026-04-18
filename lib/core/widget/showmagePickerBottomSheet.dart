@@ -21,7 +21,7 @@ void showSignupImageBottomSheet(BuildContext context) {
           text: Constantmanger.photoGallery,
         ),
 
-        Divider(height: 2, color: ColorManger.white, thickness: 2),
+        Divider(height: 2, color: context.palette.white, thickness: 2),
 
         AppButton(
           onPressed: () async {
