@@ -70,7 +70,7 @@ class Commentsystem extends StatelessWidget {
                       Text(
                         S.of(context).comments,
                         style: GoogleFonts.cairo(
-                          color: context.palette.kPrimary,
+                          color: context.palette.onSurface,
                           fontWeight: FontWeight.bold,
                           fontSize: 16.sp,
                         ),
@@ -82,14 +82,14 @@ class Commentsystem extends StatelessWidget {
                           vertical: 6.h,
                         ),
                         decoration: BoxDecoration(
-                          color: context.palette.lightGrey5,
+                          color: context.palette.surfaceContainerHigh,
                           borderRadius: BorderRadius.circular(8.r),
                         ),
                         child: Text(
                           S.of(context).messagesCount(currentComments.length),
                           style: GoogleFonts.cairo(
                             fontSize: 12.sp,
-                            color: Colors.grey[700],
+                            color: context.palette.onSurface,
                           ),
                         ),
                       ),
@@ -104,7 +104,9 @@ class Commentsystem extends StatelessWidget {
                         child: Center(
                           child: Text(
                             S.of(context).noCommentsYet,
-                            style: GoogleFonts.cairo(color: Colors.grey),
+                            style: GoogleFonts.cairo(
+                              color: context.palette.onSurfaceVariant,
+                            ),
                           ),
                         ),
                       ),

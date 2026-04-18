@@ -5,16 +5,16 @@ import 'package:google_fonts/google_fonts.dart';
 
 class Customsnackbar {
   static void show({
-    required context,
+    required BuildContext context,
     required Color backgroundColor,
     required String message,
   }) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        padding: EdgeInsets.all(16),
-        duration: Duration(seconds: 2),
+        padding: const EdgeInsets.all(16),
+        duration: const Duration(seconds: 2),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadiusGeometry.circular(16),
+          borderRadius: BorderRadius.circular(16),
         ),
         behavior: SnackBarBehavior.floating,
         backgroundColor: backgroundColor,

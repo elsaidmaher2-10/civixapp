@@ -76,7 +76,8 @@ class WorkerCard extends StatelessWidget {
         width: ScreenUtilsManager.w64,
         height: ScreenUtilsManager.h64,
         fit: BoxFit.cover,
-        placeholder: (context, url) => customShimer(ScreenUtilsManager.h64),
+        placeholder: (context, url) =>
+            customShimer(context, ScreenUtilsManager.h64),
         errorWidget: (context, url, error) =>
             Icon(Icons.person, size: ScreenUtilsManager.s40),
       ),

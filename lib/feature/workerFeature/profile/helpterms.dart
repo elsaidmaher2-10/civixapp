@@ -30,12 +30,13 @@ class HelpAndTermsPageWorker extends StatelessWidget {
           style: GoogleFonts.cairo(
             fontWeight: FontWeight.bold,
             fontSize: 18.sp,
+            color: context.palette.onSurface,
           ),
         ),
         centerTitle: true,
         elevation: 0,
-        backgroundColor: Colors.white,
-        foregroundColor: context.palette.kPrimaryDark,
+        backgroundColor: context.palette.surfaceContainerLowest,
+        foregroundColor: context.palette.onSurface,
       ),
       body: ListView.builder(
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
@@ -81,10 +82,10 @@ class HelpAndTermsPageWorker extends StatelessWidget {
                     ),
                     queStyle: GoogleFonts.cairo(
                       fontWeight: FontWeight.w600,
-                      color: context.palette.textBlack,
+                      color: ColorManger.textBlack,
                     ),
                     ansStyle: GoogleFonts.cairo(
-                      color: Colors.grey[600],
+                      color: ColorManger.textGrey,
                       height: 1.5,
                     ),
                   ),

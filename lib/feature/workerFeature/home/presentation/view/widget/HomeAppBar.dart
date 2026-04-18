@@ -41,7 +41,7 @@ class WorkerMainscreenAppbar extends StatelessWidget
           Text(
             S.of(context).appTitle,
             style: GoogleFonts.cairo(
-              color: context.palette.kPrimaryDark,
+              color: context.palette.onSurface,
               fontWeight: FontWeight.w800,
               fontSize: ScreenUtilsManager.s18,
               letterSpacing: -0.3,
@@ -89,8 +89,8 @@ class WorkerMainscreenAppbar extends StatelessWidget
                                   Icons.notifications_none_rounded,
                                   key: const ValueKey('icon_bell'),
                                   size: ScreenUtilsManager.s26,
-                                  color: context.palette.kPrimaryDark.withOpacity(
-                                    0.7,
+                                  color: context.palette.onSurface.withValues(
+                                    alpha: 0.85,
                                   ),
                                 ),
                         ),

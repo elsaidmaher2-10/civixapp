@@ -123,7 +123,7 @@ class _CustomMapState extends State<CustomMap> with TickerProviderStateMixin {
             child: _isLoading
                 ? Center(
                     child: CircularProgressIndicator(
-                      color: context.palette.kPrimaryDark,
+                      color: context.palette.kPrimary,
                     ),
                   )
                 : Stack(

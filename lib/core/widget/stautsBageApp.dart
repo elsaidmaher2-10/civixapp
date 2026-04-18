@@ -82,7 +82,10 @@ class StatusBadgeApp extends StatelessWidget {
       case "Rejected":
         return {'color': const Color(0xFFD32F2F), 'label': "Rejected"};
       default:
-        return {'color': Colors.grey, 'label': status};
+        return {
+          'color': context.palette.onSurfaceVariant,
+          'label': status,
+        };
     }
   }
 }

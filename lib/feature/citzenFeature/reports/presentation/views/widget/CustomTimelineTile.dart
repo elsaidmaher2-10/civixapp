@@ -22,6 +22,8 @@ class CustomTimelineTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Color lineMuted =
+        context.palette.outline.withValues(alpha: 0.55);
     return SizedBox(
       height: 90.h,
       child: TimelineTile(
@@ -35,7 +37,7 @@ class CustomTimelineTile extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 4.w),
         ),
         beforeLineStyle: LineStyle(
-          color: isDone ? context.palette.kPrimary : Colors.grey[300]!,
+          color: isDone ? context.palette.kPrimary : lineMuted,
           thickness: 3,
         ),
         endChild: Padding(
@@ -51,14 +53,16 @@ class CustomTimelineTile extends StatelessWidget {
                 style: GoogleFonts.cairo(
                   fontSize: 16.sp,
                   fontWeight: isDone ? FontWeight.bold : FontWeight.normal,
-                  color: isDone ? Colors.black : Colors.grey[600],
+                  color: isDone
+                      ? context.palette.onSurface
+                      : context.palette.onSurfaceVariant,
                 ),
               ),
               Text(
                 timeline,
                 style: GoogleFonts.cairo(
                   fontSize: 12.sp,
-                  color: Colors.grey[500],
+                  color: context.palette.onSurfaceVariant,
                 ),
               ),
             ],
@@ -69,16 +73,26 @@ class CustomTimelineTile extends StatelessWidget {
   }
 
   Widget _buildIndicator(BuildContext context) {
+    final Color borderMuted =
+        context.palette.outline.withValues(alpha: 0.65);
     return Container(
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: isDone ? context.palette.kPrimary : Colors.white,
+        color: isDone
+            ? context.palette.kPrimary
+            : context.palette.surfaceContainerLowest,
         border: Border.all(
-          color: isDone ? context.palette.kPrimary : Colors.grey[300]!,
+          color: isDone ? context.palette.kPrimary : borderMuted,
           width: 2,
         ),
       ),
-      child: isDone ? Icon(Icons.check, size: 14.w, color: Colors.white) : null,
+      child: isDone
+          ? Icon(
+              Icons.check,
+              size: 14.w,
+              color: context.palette.onPrimary,
+            )
+          : null,
     );
   }
 }

@@ -51,8 +51,8 @@ class HomeScreen extends StatelessWidget {
               .length;
 
           return RefreshIndicator.adaptive(
-            backgroundColor: Colors.white,
-            color: context.palette.lightBlue,
+            backgroundColor: context.palette.surfaceContainerLowest,
+            color: context.palette.kPrimary,
             onRefresh: () async {
               await context.read<ReportCubit>().fetchReports();
             },
@@ -80,7 +80,7 @@ class HomeScreen extends StatelessWidget {
                           S.of(context).overview,
                           style: GoogleFonts.cairo(
                             letterSpacing: -0.5,
-                            color: context.palette.kPrimaryDark,
+                            color: context.palette.onSurface,
                             fontWeight: FontWeight.w700,
                             fontSize: ScreenUtilsManager.s20,
                           ),
@@ -145,7 +145,7 @@ class HomeScreen extends StatelessWidget {
                             fontSize: ScreenUtilsManager.s18,
                             fontWeight: FontWeight.bold,
                             letterSpacing: -0.3,
-                            color: context.palette.kPrimaryDark,
+                            color: context.palette.onSurface,
                           ),
                         ),
                         if (reports.isNotEmpty)
@@ -174,7 +174,7 @@ class HomeScreen extends StatelessWidget {
                               style: GoogleFonts.cairo(
                                 fontSize: ScreenUtilsManager.s14,
                                 fontWeight: FontWeight.w600,
-                                color: context.palette.lightBlue,
+                                color: context.palette.kPrimary,
                               ),
                             ),
                           ),
@@ -235,7 +235,7 @@ class HomeScreen extends StatelessWidget {
               style: GoogleFonts.cairo(
                 fontSize: ScreenUtilsManager.s16,
                 fontWeight: FontWeight.bold,
-                color: context.palette.kPrimaryDark,
+                color: context.palette.onSurface,
               ),
             ),
             SizedBox(height: ScreenUtilsManager.h8),
@@ -244,7 +244,7 @@ class HomeScreen extends StatelessWidget {
               textAlign: TextAlign.center,
               style: GoogleFonts.cairo(
                 fontSize: ScreenUtilsManager.s14,
-                color: Colors.grey.shade600,
+                color: context.palette.onSurfaceVariant,
               ),
             ),
           ],
@@ -261,27 +261,38 @@ Widget _buildErrorWidget(BuildContext context, String message) {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         message.contains(Constantmanger.nointernet)
-            ? Icon(Icons.cloud_off, size: 64.w, color: Colors.grey)
-            : Icon(Icons.error, size: 64.w, color: Colors.grey),
+            ? Icon(
+                Icons.cloud_off,
+                size: 64.w,
+                color: context.palette.onSurfaceVariant,
+              )
+            : Icon(
+                Icons.error,
+                size: 64.w,
+                color: context.palette.onSurfaceVariant,
+              ),
         SizedBox(height: 16.h),
         Text(
           S.of(context).errorOccurred,
           style: GoogleFonts.cairo(
             fontSize: 18.sp,
             fontWeight: FontWeight.bold,
+            color: context.palette.onSurface,
           ),
         ),
         Text(
           message,
           textAlign: TextAlign.center,
-          style: GoogleFonts.cairo(color: Colors.grey),
+          style: GoogleFonts.cairo(
+            color: context.palette.onSurfaceVariant,
+          ),
         ),
         SizedBox(height: 16.h),
         ElevatedButton(
           onPressed: () => context.read<ReportCubit>().fetchReports(),
           style: ElevatedButton.styleFrom(
             backgroundColor: context.palette.primary,
-            foregroundColor: Colors.white,
+            foregroundColor: context.palette.onPrimary,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8.r),
             ),

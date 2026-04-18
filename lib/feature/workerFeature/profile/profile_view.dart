@@ -48,13 +48,22 @@ class _ProfileViewState extends State<ProfileView> {
     return showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: Colors.white,
-        title: Text(S.of(context).logout),
-        content: Text(S.of(context).areYouSureLogout),
+        backgroundColor: context.palette.surfaceContainerHigh,
+        title: Text(
+          S.of(context).logout,
+          style: TextStyle(color: context.palette.onSurface),
+        ),
+        content: Text(
+          S.of(context).areYouSureLogout,
+          style: TextStyle(color: context.palette.onSurfaceVariant),
+        ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: Text(S.of(context).cancel),
+            child: Text(
+              S.of(context).cancel,
+              style: TextStyle(color: context.palette.onSurfaceVariant),
+            ),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),

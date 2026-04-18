@@ -106,18 +106,20 @@ class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
                               style: GoogleFonts.cairo(
                                 fontSize: 24.sp,
                                 fontWeight: FontWeight.w900,
-                                color: context.palette.kPrimary,
+                                color: context.palette.onSurface,
                               ),
                             ),
                             SizedBox(height: 8.h),
                             Row(
                               children: [
                                 _buildInfoChip(
+                                  context,
                                   Icons.category_outlined,
                                   report.categoryName,
                                 ),
                                 SizedBox(width: 16.w),
                                 _buildInfoChip(
+                                  context,
                                   Icons.access_time_rounded,
                                   report.createdAt.timeAgo(context),
                                 ),
@@ -153,7 +155,8 @@ class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
                               report.description,
                               style: GoogleFonts.cairo(
                                 fontSize: 15.sp,
-                                color: Colors.black87.withOpacity(0.7),
+                                color: context.palette.onSurface
+                                    .withValues(alpha: 0.88),
                                 height: 1.6,
                               ),
                             ),
@@ -174,7 +177,7 @@ class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
                                     "${report.areaName} - ${report.location}",
                                     style: GoogleFonts.cairo(
                                       fontSize: 13.sp,
-                                      color: Colors.grey[600],
+                                      color: context.palette.onSurfaceVariant,
                                     ),
                                   ),
                                 ),
@@ -233,20 +236,20 @@ class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
       padding: EdgeInsets.all(12.w),
       decoration: BoxDecoration(
         color: isWorker
-            ? context.palette.kPrimary.withOpacity(0.03)
-            : Colors.grey[50],
+            ? context.palette.kPrimary.withValues(alpha: 0.12)
+            : context.palette.surfaceContainerLow,
         borderRadius: BorderRadius.circular(12.r),
         border: Border.all(
           color: isWorker
-              ? context.palette.kPrimary.withOpacity(0.1)
-              : Colors.grey[200]!,
+              ? context.palette.kPrimary.withValues(alpha: 0.28)
+              : context.palette.outline.withValues(alpha: 0.45),
         ),
       ),
       child: Row(
         children: [
           CircleAvatar(
             radius: 20.r,
-            backgroundColor: context.palette.kPrimary.withOpacity(0.1),
+            backgroundColor: context.palette.kPrimary.withValues(alpha: 0.15),
             child: ClipOval(
               child: CachedNetworkImage(
                 imageUrl: imageUrl,
@@ -267,13 +270,17 @@ class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
               children: [
                 Text(
                   label,
-                  style: GoogleFonts.cairo(fontSize: 11.sp, color: Colors.grey),
+                  style: GoogleFonts.cairo(
+                    fontSize: 11.sp,
+                    color: context.palette.onSurfaceVariant,
+                  ),
                 ),
                 Text(
                   name,
                   style: GoogleFonts.cairo(
                     fontSize: 14.sp,
                     fontWeight: FontWeight.bold,
+                    color: context.palette.onSurface,
                   ),
                 ),
                 if (isWorker && department != null)
@@ -303,15 +310,22 @@ class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
     );
   }
 
-  Widget _buildInfoChip(IconData icon, String label) {
+  Widget _buildInfoChip(BuildContext context, IconData icon, String label) {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Icon(icon, size: 16.sp, color: Colors.grey[600]),
+        Icon(
+          icon,
+          size: 16.sp,
+          color: context.palette.onSurfaceVariant,
+        ),
         SizedBox(width: 4.w),
         Text(
           label,
-          style: GoogleFonts.cairo(fontSize: 13.sp, color: Colors.grey[700]),
+          style: GoogleFonts.cairo(
+            fontSize: 13.sp,
+            color: context.palette.onSurface,
+          ),
         ),
       ],
     );
@@ -376,20 +390,31 @@ class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           message.contains(Constantmanger.nointernet)
-              ? Icon(Icons.cloud_off, size: 64.w, color: Colors.grey)
-              : Icon(Icons.error, size: 64.w, color: Colors.grey),
+              ? Icon(
+                  Icons.cloud_off,
+                  size: 64.w,
+                  color: context.palette.onSurfaceVariant,
+                )
+              : Icon(
+                  Icons.error,
+                  size: 64.w,
+                  color: context.palette.onSurfaceVariant,
+                ),
           SizedBox(height: 16.h),
           Text(
             S.of(context).errorOccurred,
             style: GoogleFonts.cairo(
               fontSize: 18.sp,
               fontWeight: FontWeight.bold,
+              color: context.palette.onSurface,
             ),
           ),
           Text(
             message,
             textAlign: TextAlign.center,
-            style: GoogleFonts.cairo(color: Colors.grey),
+            style: GoogleFonts.cairo(
+              color: context.palette.onSurfaceVariant,
+            ),
           ),
           SizedBox(height: 16.h),
           ElevatedButton(
@@ -398,7 +423,7 @@ class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
             ),
             style: ElevatedButton.styleFrom(
               backgroundColor: context.palette.primary,
-              foregroundColor: Colors.white,
+              foregroundColor: context.palette.onPrimary,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8.r),
               ),

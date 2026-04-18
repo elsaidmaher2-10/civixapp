@@ -91,14 +91,14 @@ class Workercomments extends StatelessWidget {
                         vertical: 6.h,
                       ),
                       decoration: BoxDecoration(
-                        color: context.palette.lightGrey5,
+                        color: context.palette.surfaceContainerHigh,
                         borderRadius: BorderRadius.circular(8.r),
                       ),
                       child: Text(
                         S.of(context).messagesCount(currentComments.length),
                         style: GoogleFonts.cairo(
                           fontSize: 12.sp,
-                          color: Colors.grey[700],
+                          color: context.palette.onSurface,
                         ),
                       ),
                     ),
@@ -113,7 +113,9 @@ class Workercomments extends StatelessWidget {
                       child: Center(
                         child: Text(
                           S.of(context).noCommentsYet,
-                          style: GoogleFonts.cairo(color: Colors.grey),
+                          style: GoogleFonts.cairo(
+                            color: context.palette.onSurfaceVariant,
+                          ),
                         ),
                       ),
                     )

@@ -39,7 +39,7 @@ class ReportCardIem extends StatelessWidget {
               await showDeleteDialog(context, ReportID: report.id);
             },
             backgroundColor: const Color(0xFFFE4A49),
-            foregroundColor: Colors.white,
+            foregroundColor: context.palette.onPrimary,
             icon: Icons.delete,
 
             label: S.of(context).delete,
@@ -48,11 +48,11 @@ class ReportCardIem extends StatelessWidget {
       ),
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: context.palette.surfaceContainerLowest,
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.03),
+              color: Colors.black.withValues(alpha: 0.08),
               blurRadius: 10,
               offset: const Offset(0, 4),
             ),
@@ -78,7 +78,7 @@ class ReportCardIem extends StatelessWidget {
                           style: GoogleFonts.cairo(
                             fontSize: ScreenUtilsManager.s18,
                             fontWeight: FontWeight.bold,
-                            color: context.palette.kPrimary,
+                            color: context.palette.onSurface,
                           ),
                         ),
                         SizedBox(height: ScreenUtilsManager.h6),
@@ -95,7 +95,7 @@ class ReportCardIem extends StatelessWidget {
                                 report.location,
                                 style: GoogleFonts.cairo(
                                   fontSize: ScreenUtilsManager.s12,
-                                  color: Colors.black54,
+                                  color: context.palette.onSurfaceVariant,
                                 ),
                                 overflow: TextOverflow.ellipsis,
                               ),
@@ -107,7 +107,7 @@ class ReportCardIem extends StatelessWidget {
                           '${S.of(context).submitted} ${report.createdAt.timeAgo(context)}',
                           style: GoogleFonts.cairo(
                             fontSize: ScreenUtilsManager.s11,
-                            color: Colors.black38,
+                            color: context.palette.onSurfaceVariant,
                           ),
                         ),
                       ],
@@ -138,9 +138,11 @@ class ReportCardIem extends StatelessWidget {
                 vertical: ScreenUtilsManager.h12,
               ),
               decoration: BoxDecoration(
-                color: context.palette.white,
+                color: context.palette.surfaceContainerLow,
                 border: Border(
-                  top: BorderSide(color: Colors.black.withOpacity(0.05)),
+                  top: BorderSide(
+                    color: context.palette.outline.withValues(alpha: 0.35),
+                  ),
                 ),
               ),
               child: Row(

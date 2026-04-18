@@ -1,9 +1,9 @@
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-Widget buildItem(String title, String value) {
+Widget buildItem(BuildContext context, String title, String value) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -12,7 +12,7 @@ Widget buildItem(String title, String value) {
         style: GoogleFonts.cairo(
           fontSize: ScreenUtilsManager.s12,
           fontWeight: FontWeight.bold,
-          color: ColorManger.kPrimary,
+          color: context.palette.kPrimary,
         ),
       ),
       Text(
@@ -20,7 +20,7 @@ Widget buildItem(String title, String value) {
         style: GoogleFonts.cairo(
           fontSize: ScreenUtilsManager.s14,
           fontWeight: FontWeight.w600,
-          color: Color(0xff111827),
+          color: context.palette.onSurface,
         ),
       ),
     ],

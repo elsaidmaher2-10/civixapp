@@ -22,11 +22,11 @@ class AchievementReportCard extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(bottom: 16.h, left: 16.w, right: 16.w),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: context.palette.surfaceContainerLowest,
         borderRadius: BorderRadius.circular(16.r),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.12),
             blurRadius: 15,
             offset: const Offset(0, 5),
           ),
@@ -53,7 +53,7 @@ class AchievementReportCard extends StatelessWidget {
                         style: GoogleFonts.cairo(
                           fontSize: 15.sp,
                           fontWeight: FontWeight.bold,
-                          color: context.palette.kPrimary,
+                          color: context.palette.onSurface,
                           height: 1.2,
                         ),
                         maxLines: 1,
@@ -61,11 +61,13 @@ class AchievementReportCard extends StatelessWidget {
                       ),
 
                       _buildInfoRow(
+                        context,
                         Icons.location_on_rounded,
                         report.areaName,
                         Colors.redAccent,
                       ),
                       _buildInfoRow(
+                        context,
                         Icons.business_rounded,
                         report.departmentName,
                         Colors.blueGrey,
@@ -77,7 +79,7 @@ class AchievementReportCard extends StatelessWidget {
                         style: GoogleFonts.cairo(
                           fontSize: 11.sp,
                           fontWeight: FontWeight.w500,
-                          color: Colors.black87,
+                          color: context.palette.onSurface,
                         ),
                       ),
 
@@ -85,7 +87,7 @@ class AchievementReportCard extends StatelessWidget {
                         "${S.of(context).completed} ${report.resolvedAt.timeAgo(context)}",
                         style: GoogleFonts.cairo(
                           fontSize: 10.sp,
-                          color: Colors.black38,
+                          color: context.palette.onSurfaceVariant,
                         ),
                       ),
                     ],
@@ -127,7 +129,12 @@ class AchievementReportCard extends StatelessWidget {
     );
   }
 
-  Widget _buildInfoRow(IconData icon, String text, Color iconColor) {
+  Widget _buildInfoRow(
+    BuildContext context,
+    IconData icon,
+    String text,
+    Color iconColor,
+  ) {
     return Padding(
       padding: EdgeInsets.only(top: 4.h),
       child: Row(
@@ -137,7 +144,10 @@ class AchievementReportCard extends StatelessWidget {
           Expanded(
             child: Text(
               text,
-              style: GoogleFonts.cairo(fontSize: 11.sp, color: Colors.black54),
+              style: GoogleFonts.cairo(
+                fontSize: 11.sp,
+                color: context.palette.onSurfaceVariant,
+              ),
               overflow: TextOverflow.ellipsis,
             ),
           ),
@@ -171,8 +181,12 @@ class AchievementReportCard extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
       decoration: BoxDecoration(
-        color: context.palette.lightColor.withOpacity(0.05),
-        border: Border(top: BorderSide(color: Colors.black.withOpacity(0.05))),
+        color: context.palette.surfaceContainerLow,
+        border: Border(
+          top: BorderSide(
+            color: context.palette.outline.withValues(alpha: 0.35),
+          ),
+        ),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

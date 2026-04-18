@@ -190,7 +190,7 @@ class _AchievemrntReportScreenState extends State<AchievemrntReportScreen> {
       style: GoogleFonts.cairo(
         fontSize: ScreenUtilsManager.s18,
         fontWeight: FontWeight.w800,
-        color: Colors.black87,
+        color: context.palette.onSurface,
       ),
     );
   }
@@ -202,27 +202,38 @@ class _AchievemrntReportScreenState extends State<AchievemrntReportScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           message.contains(Constantmanger.nointernet)
-              ? Icon(Icons.cloud_off, size: 64.w, color: Colors.grey)
-              : Icon(Icons.error, size: 64.w, color: Colors.grey),
+              ? Icon(
+                  Icons.cloud_off,
+                  size: 64.w,
+                  color: context.palette.onSurfaceVariant,
+                )
+              : Icon(
+                  Icons.error,
+                  size: 64.w,
+                  color: context.palette.onSurfaceVariant,
+                ),
           SizedBox(height: 16.h),
           Text(
             l10n.errorOccurred,
             style: GoogleFonts.cairo(
               fontSize: 18.sp,
               fontWeight: FontWeight.bold,
+              color: context.palette.onSurface,
             ),
           ),
           Text(
             message,
             textAlign: TextAlign.center,
-            style: GoogleFonts.cairo(color: Colors.grey),
+            style: GoogleFonts.cairo(
+              color: context.palette.onSurfaceVariant,
+            ),
           ),
           SizedBox(height: 16.h),
           ElevatedButton(
             onPressed: () => context.read<AchievementCubit>().getAchievements(),
             style: ElevatedButton.styleFrom(
               backgroundColor: context.palette.primary,
-              foregroundColor: Colors.white,
+              foregroundColor: context.palette.onPrimary,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8.r),
               ),

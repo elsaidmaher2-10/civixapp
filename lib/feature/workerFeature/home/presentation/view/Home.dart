@@ -28,7 +28,7 @@ class HomePage extends StatelessWidget {
       body: BlocBuilder<HomeCubit, HomeState>(
         builder: (context, state) {
           if (state is HomeLoading) {
-            return buildShimmerLoading();
+            return buildShimmerLoading(context);
           } else if (state is HomeSuccess) {
             final data = state.dashboardData;
             return _buildHomeContent(data, context);
@@ -52,13 +52,13 @@ class HomePage extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: Colors.red.shade50,
+                color: context.palette.error.withValues(alpha: 0.15),
                 shape: BoxShape.circle,
               ),
               child: Icon(
                 Icons.wifi_off_rounded,
                 size: 50,
-                color: Colors.red.shade400,
+                color: context.palette.error,
               ),
             ),
             SizedBox(height: ScreenUtilsManager.h20),
@@ -67,7 +67,7 @@ class HomePage extends StatelessWidget {
               style: GoogleFonts.cairo(
                 fontSize: ScreenUtilsManager.s16,
                 fontWeight: FontWeight.bold,
-                color: Colors.black87,
+                color: context.palette.onSurface,
               ),
             ),
             SizedBox(height: ScreenUtilsManager.h8),
@@ -76,14 +76,14 @@ class HomePage extends StatelessWidget {
               textAlign: TextAlign.center,
               style: GoogleFonts.cairo(
                 fontSize: ScreenUtilsManager.s14,
-                color: Colors.grey.shade600,
+                color: context.palette.onSurfaceVariant,
               ),
             ),
             SizedBox(height: ScreenUtilsManager.h24),
             ElevatedButton.icon(
               style: ElevatedButton.styleFrom(
                 backgroundColor: context.palette.workerprimary,
-                foregroundColor: Colors.white,
+                foregroundColor: context.palette.onPrimary,
                 elevation: 0,
                 padding: EdgeInsets.symmetric(
                   horizontal: ScreenUtilsManager.w24,
@@ -111,7 +111,7 @@ class HomePage extends StatelessWidget {
 Widget _buildHomeContent(DashBroadHome data, BuildContext context) {
   return RefreshIndicator(
     color: context.palette.workerprimary,
-    backgroundColor: Colors.white,
+    backgroundColor: context.palette.surfaceContainerLowest,
     notificationPredicate: (notification) => true,
     onRefresh: () {
       return context.read<HomeCubit>().getWorkerDashboard();
@@ -175,10 +175,12 @@ Widget _buildHeaderSection(String name, BuildContext context) {
   );
 }
 
-Widget buildShimmerLoading() {
+Widget buildShimmerLoading(BuildContext context) {
+  final Color base = context.palette.surfaceContainerHigh;
+  final Color highlight = context.palette.surfaceContainerHighest;
   return Shimmer.fromColors(
-    baseColor: Color.fromRGBO(224, 224, 224, 1),
-    highlightColor: Colors.grey[100]!,
+    baseColor: base,
+    highlightColor: highlight,
     child: SingleChildScrollView(
       padding: EdgeInsets.all(ScreenUtilsManager.s16),
       child: Column(
@@ -189,7 +191,7 @@ Widget buildShimmerLoading() {
             height: ScreenUtilsManager.h150,
             width: double.infinity,
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: base,
               borderRadius: BorderRadius.circular(ScreenUtilsManager.s16),
             ),
           ),
@@ -221,9 +223,15 @@ Widget _buildEmptyTasksMessage(BuildContext context) {
           style: GoogleFonts.cairo(
             fontWeight: FontWeight.bold,
             fontSize: ScreenUtilsManager.s16,
+            color: context.palette.onSurface,
           ),
         ),
-        Text(S.of(context).notify_new_tasks),
+        Text(
+          S.of(context).notify_new_tasks,
+          style: GoogleFonts.cairo(
+            color: context.palette.onSurfaceVariant,
+          ),
+        ),
       ],
     ),
   );

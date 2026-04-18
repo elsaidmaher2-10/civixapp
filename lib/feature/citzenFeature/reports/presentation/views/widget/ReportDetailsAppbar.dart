@@ -33,7 +33,8 @@ class ReportDetailsAppbar extends StatelessWidget {
       backgroundColor: context.palette.kPrimary,
       leading: IconButton(
         icon: CircleAvatar(
-          backgroundColor: Colors.white70,
+          backgroundColor:
+              context.palette.surfaceContainerLowest.withValues(alpha: 0.92),
           child: Icon(
             CupertinoIcons.back,
             color: context.palette.kPrimary,
@@ -65,7 +66,7 @@ class ReportDetailsAppbar extends StatelessWidget {
                   fit: BoxFit.cover,
                   imageUrl: item,
                   placeholder: (context, url) => Container(
-                    color: Colors.grey[200],
+                    color: context.palette.surfaceContainerHigh,
                     child: Center(
                       child: CircularProgressIndicator(
                         color: context.palette.kPrimary,
@@ -87,7 +88,7 @@ class ReportDetailsAppbar extends StatelessWidget {
                   dotSize: 8,
                   controller: pageController,
                   activeColor: context.palette.kPrimary,
-                  dotColor: Colors.white.withOpacity(0.6),
+                  dotColor: context.palette.onPrimary.withValues(alpha: 0.55),
                   count: mediaItems.length,
                 ),
               ),

@@ -1,3 +1,4 @@
+import 'package:citifix/core/resource/colormanager.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -7,16 +8,19 @@ class FliterCheap extends StatelessWidget {
   final bool isActive;
   @override
   Widget build(BuildContext context) {
+    final Color primary = context.palette.kPrimary;
     return Container(
       margin: const EdgeInsets.only(right: 8),
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       decoration: BoxDecoration(
-        color: isActive ? const Color(0xFF003366) : Colors.white,
+        color: isActive
+            ? primary
+            : context.palette.surfaceContainerLowest,
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           if (isActive)
             BoxShadow(
-              color: const Color(0xFF003366).withOpacity(0.3),
+              color: primary.withValues(alpha: 0.35),
               blurRadius: 8,
               offset: const Offset(0, 4),
             ),
@@ -24,13 +28,15 @@ class FliterCheap extends StatelessWidget {
         border: Border.all(
           color: isActive
               ? Colors.transparent
-              : const Color(0xFF003366).withOpacity(0.1),
+              : context.palette.outline.withValues(alpha: 0.45),
         ),
       ),
       child: Text(
         label,
         style: GoogleFonts.cairo(
-          color: isActive ? Colors.white : Colors.black87,
+          color: isActive
+              ? context.palette.onPrimary
+              : context.palette.onSurface,
           fontWeight: isActive ? FontWeight.bold : FontWeight.w500,
           fontSize: 14,
         ),

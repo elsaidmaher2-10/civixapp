@@ -24,9 +24,19 @@ class _NotificationCenterState extends State<NotificationCenter> {
   @override
   void initState() {
     super.initState();
+    // Non-inherited widget logic is safe here
     context.read<NotificationCubit>().getNotifications();
     isWorker = PrefrenceManager().getstring("role")?.toLowerCase() == "worker";
-    primaryColor = isWorker ? context.palette.workerprimary : context.palette.primary;
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // FIXED: Accessing context.palette here is safe because the widget is fully mounted.
+    // This method is called after initState and whenever the theme/palette changes.
+    primaryColor = isWorker
+        ? context.palette.workerprimary
+        : context.palette.primary;
   }
 
   @override
@@ -73,7 +83,7 @@ class _NotificationCenterState extends State<NotificationCenter> {
                     "$unreadCount ${S.of(context).unread}",
                     key: ValueKey(unreadCount),
                     style: GoogleFonts.cairo(
-                      color: Colors.grey.shade500,
+                      color: context.palette.onSurfaceVariant,
                       fontSize: ScreenUtilsManager.s12,
                       fontWeight: FontWeight.w600,
                     ),
@@ -233,7 +243,7 @@ class _NotificationCenterState extends State<NotificationCenter> {
             style: GoogleFonts.cairo(
               fontSize: ScreenUtilsManager.s18,
               fontWeight: FontWeight.w700,
-              color: Colors.black87,
+              color: context.palette.onSurface,
             ),
           ),
           SizedBox(height: ScreenUtilsManager.h8),
@@ -241,7 +251,7 @@ class _NotificationCenterState extends State<NotificationCenter> {
             "You're all caught up!",
             style: GoogleFonts.cairo(
               fontSize: ScreenUtilsManager.s14,
-              color: Colors.grey.shade500,
+              color: context.palette.onSurfaceVariant,
             ),
           ),
         ],
@@ -260,13 +270,17 @@ class _NotificationCenterState extends State<NotificationCenter> {
             Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: isWorker ? Colors.red.shade50 : Colors.grey.shade100,
+                color: isWorker
+                    ? context.palette.error.withValues(alpha: 0.15)
+                    : context.palette.surfaceContainerHigh,
                 shape: BoxShape.circle,
               ),
               child: Icon(
                 Icons.wifi_off_rounded,
                 size: 50,
-                color: isWorker ? Colors.red.shade400 : Colors.grey,
+                color: isWorker
+                    ? context.palette.error
+                    : context.palette.onSurfaceVariant,
               ),
             ),
             SizedBox(height: ScreenUtilsManager.h20),
@@ -275,7 +289,7 @@ class _NotificationCenterState extends State<NotificationCenter> {
               style: GoogleFonts.cairo(
                 fontSize: ScreenUtilsManager.s16,
                 fontWeight: FontWeight.bold,
-                color: Colors.black87,
+                color: context.palette.onSurface,
               ),
             ),
             SizedBox(height: ScreenUtilsManager.h8),
@@ -284,14 +298,14 @@ class _NotificationCenterState extends State<NotificationCenter> {
               textAlign: TextAlign.center,
               style: GoogleFonts.cairo(
                 fontSize: ScreenUtilsManager.s14,
-                color: Colors.grey.shade600,
+                color: context.palette.onSurfaceVariant,
               ),
             ),
             SizedBox(height: ScreenUtilsManager.h24),
             ElevatedButton.icon(
               style: ElevatedButton.styleFrom(
                 backgroundColor: primaryColor,
-                foregroundColor: Colors.white,
+                foregroundColor: context.palette.onPrimary,
                 elevation: 0,
                 padding: EdgeInsets.symmetric(
                   horizontal: ScreenUtilsManager.w24,

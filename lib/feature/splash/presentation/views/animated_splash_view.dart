@@ -37,9 +37,10 @@ class _AnimatedSplashViewState extends State<AnimatedSplashView>
       vsync: this,
       duration: const Duration(milliseconds: 2600),
     );
-    _logoScale = Tween<double>(begin: 0.72, end: 1.0).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeOutBack),
-    );
+    _logoScale = Tween<double>(
+      begin: 0.72,
+      end: 1.0,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOutBack));
     _logoOpacity = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(parent: _controller, curve: const Interval(0.0, 0.42)),
     );
@@ -71,7 +72,9 @@ class _AnimatedSplashViewState extends State<AnimatedSplashView>
     final String? accessToken = PrefrenceManager().getstring(
       Constantmanger.accessToken,
     );
-    final String? roleString = PrefrenceManager().getstring(Constantmanger.role);
+    final String? roleString = PrefrenceManager().getstring(
+      Constantmanger.role,
+    );
 
     if (!isOnboardingViewed) return Routes.onbroading;
     if (accessToken == null || accessToken.trim().isEmpty) return Routes.login;
@@ -132,8 +135,11 @@ class _AnimatedSplashViewState extends State<AnimatedSplashView>
                       mainAxisAlignment: MainAxisAlignment.center,
                       mainAxisSize: MainAxisSize.min,
                       children: List<Widget>.generate(n, (int i) {
-                        final double reveal =
-                            _letterReveal(i, n, _controller.value);
+                        final double reveal = _letterReveal(
+                          i,
+                          n,
+                          _controller.value,
+                        );
                         return Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 1),
                           child: Opacity(

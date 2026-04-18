@@ -44,7 +44,7 @@ class Reportcard extends StatelessWidget {
                   await showDeleteDialog(context, ReportID: report.id);
                 },
                 backgroundColor: const Color(0xFFFE4A49),
-                foregroundColor: Colors.white,
+                foregroundColor: context.palette.onPrimary,
                 icon: Icons.delete,
                 label: S.of(context).delete,
               ),
@@ -86,7 +86,7 @@ class Reportcard extends StatelessWidget {
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: GoogleFonts.cairo(
-                            color: context.palette.kPrimaryDark,
+                            color: context.palette.onSurface,
                             fontSize: ScreenUtilsManager.s16,
                             fontWeight: FontWeight.w600,
                           ),
@@ -135,7 +135,7 @@ class Reportcard extends StatelessWidget {
   Widget _buildInfoRow(BuildContext context, IconData icon, String text) {
     return Row(
       children: [
-        Icon(icon, size: 14.h, color: context.palette.lightGrey6),
+        Icon(icon, size: 14.h, color: context.palette.onSurfaceVariant),
         SizedBox(width: 4.w),
         Expanded(
           child: Text(
@@ -143,7 +143,7 @@ class Reportcard extends StatelessWidget {
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: GoogleFonts.cairo(
-              color: context.palette.lightGrey6,
+              color: context.palette.onSurfaceVariant,
               fontSize: ScreenUtilsManager.s12,
               fontWeight: FontWeight.w400,
             ),

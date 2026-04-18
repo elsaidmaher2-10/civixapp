@@ -26,8 +26,8 @@ class Customonbroadingitem extends StatelessWidget {
           end: Alignment.bottomCenter,
           colors: [
             context.palette.reportsPageBackground,
-            context.palette.reportsPageBackground.withOpacity(0.8),
-            Colors.white,
+            context.palette.reportsPageBackground.withValues(alpha: 0.92),
+            context.palette.surfaceContainerLowest,
           ],
         ),
       ),
@@ -64,7 +64,7 @@ class Customonbroadingitem extends StatelessWidget {
               textAlign: TextAlign.center,
               style: GoogleFonts.cairo(
                 fontSize: 26.sp,
-                color: context.palette.kPrimaryDark,
+                color: context.palette.onSurface,
                 fontWeight: FontWeight.w800,
                 letterSpacing: -0.5,
               ),

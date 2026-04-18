@@ -26,7 +26,7 @@ Future<bool> showDeleteDialog(
                 onPressed: () => Navigator.of(context).pop(false),
                 child: Text(
                   S.of(context).cancel,
-                  style: GoogleFonts.cairo(color: context.palette.kPrimaryDark),
+                  style: GoogleFonts.cairo(color: context.palette.kPrimary),
                 ),
               ),
               CupertinoDialogAction(

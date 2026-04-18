@@ -27,7 +27,7 @@ class _TaskFilterChipsState extends State<TaskFilterChips> {
           return Padding(
             padding: const EdgeInsets.only(right: 8),
             child: ChoiceChip(
-              checkmarkColor: context.palette.white,
+              checkmarkColor: context.palette.onPrimary,
               label: Text(widget.filters[index]),
               selected: isSelected,
               onSelected: (selected) {
@@ -35,15 +35,19 @@ class _TaskFilterChipsState extends State<TaskFilterChips> {
                 widget.onFilterSelected(widget.filters[index]);
               },
               selectedColor: context.palette.primaryColor,
-              backgroundColor: Colors.white,
+              backgroundColor: context.palette.surfaceContainerLowest,
               labelStyle: GoogleFonts.cairo(
-                color: isSelected ? Colors.white : Colors.grey.shade600,
+                color: isSelected
+                    ? context.palette.onPrimary
+                    : context.palette.onSurfaceVariant,
                 fontWeight: FontWeight.w600,
               ),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20),
                 side: BorderSide(
-                  color: isSelected ? Colors.white : Colors.grey.shade200,
+                  color: isSelected
+                      ? Colors.transparent
+                      : context.palette.outline.withValues(alpha: 0.45),
                 ),
               ),
             ),

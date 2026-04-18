@@ -71,8 +71,10 @@ class _ReportsPageState extends State<ReportsPage> {
     return Scaffold(
       backgroundColor: context.palette.reportsPageBackground,
       appBar: AppBar(
-        surfaceTintColor: Colors.white,
-        backgroundColor: Colors.white.withOpacity(0.8),
+        surfaceTintColor: Colors.transparent,
+        backgroundColor: context.palette.surfaceContainerLowest
+            .withValues(alpha: 0.97),
+        foregroundColor: context.palette.onSurface,
         elevation: 0,
         leading: IconButton(
           onPressed: () => Navigator.pop(context),
@@ -86,7 +88,7 @@ class _ReportsPageState extends State<ReportsPage> {
         title: Text(
           S.of(context).reports,
           style: GoogleFonts.cairo(
-            color: context.palette.kPrimary,
+            color: context.palette.onSurface,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -181,7 +183,7 @@ class _ReportsPageState extends State<ReportsPage> {
                         textAlign: TextAlign.center,
                         style: GoogleFonts.cairo(
                           fontWeight: FontWeight.w500,
-                          color: context.palette.lightGrey.withOpacity(0.8),
+                          color: context.palette.onSurfaceVariant,
                           fontSize: ScreenUtilsManager.s16,
                         ),
                       ),
@@ -203,14 +205,16 @@ class _ReportsPageState extends State<ReportsPage> {
                   return Center(
                     child: Text(
                       S.of(context).noReportsAvailable,
-                      style: GoogleFonts.cairo(color: Colors.grey),
+                      style: GoogleFonts.cairo(
+                        color: context.palette.onSurfaceVariant,
+                      ),
                     ),
                   );
                 }
 
                 return RefreshIndicator(
                   color: context.palette.kPrimary,
-                  backgroundColor: Colors.white,
+                  backgroundColor: context.palette.surfaceContainerLowest,
                   onRefresh: () => context.read<ReportCubit>().fetchReports(),
                   child: ListView.builder(
                     padding: const EdgeInsets.symmetric(horizontal: 16),

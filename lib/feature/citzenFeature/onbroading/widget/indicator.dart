@@ -25,6 +25,12 @@ class CustomIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Color schemeDot = Theme.of(context)
+        .colorScheme
+        .onSurfaceVariant
+        .withValues(alpha: 0.45);
+    final Color resolvedDot =
+        dotColor == Colors.grey ? schemeDot : dotColor;
     return SmoothPageIndicator(
       controller: controller,
       count: count,
@@ -36,7 +42,7 @@ class CustomIndicator extends StatelessWidget {
         dotHeight: dotSize.h,
         paintStyle: PaintingStyle.fill,
         strokeWidth: 1.5,
-        dotColor: dotColor,
+        dotColor: resolvedDot,
         activeDotColor: activeColor,
       ),
     );

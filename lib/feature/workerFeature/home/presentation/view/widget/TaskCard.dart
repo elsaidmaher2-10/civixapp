@@ -26,10 +26,12 @@ class TaskCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: context.palette.white,
         borderRadius: BorderRadius.circular(ScreenUtilsManager.r20),
-        border: Border.all(color: Colors.grey.shade100),
+        border: Border.all(
+          color: context.palette.outline.withValues(alpha: 0.4),
+        ),
         boxShadow: [
           BoxShadow(
-            color: context.palette.textBlack.withOpacity(0.03),
+            color: Colors.black.withValues(alpha: 0.08),
             blurRadius: ScreenUtilsManager.s10,
             offset: Offset(ScreenUtilsManager.w0, ScreenUtilsManager.h4),
           ),
@@ -58,7 +60,7 @@ class TaskCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(ScreenUtilsManager.r12),
                   child: CachedNetworkImage(
                     placeholder: (context, url) {
-                      return customShimer(ScreenUtilsManager.h150);
+                      return customShimer(context, ScreenUtilsManager.h150);
                     },
                     height: ScreenUtilsManager.h130,
                     width: double.infinity,
@@ -84,7 +86,7 @@ class TaskCard extends StatelessWidget {
                   child: Text(
                     report.status,
                     style: GoogleFonts.cairo(
-                      color: Colors.white,
+                      color: context.palette.onPrimary,
                       fontSize: ScreenUtilsManager.s10,
                       fontWeight: FontWeight.bold,
                     ),
@@ -111,6 +113,7 @@ class TaskCard extends StatelessWidget {
             style: GoogleFonts.cairo(
               fontWeight: FontWeight.bold,
               fontSize: ScreenUtilsManager.s16,
+              color: context.palette.onSurface,
             ),
           ),
           SizedBox(height: ScreenUtilsManager.h8),
@@ -135,7 +138,7 @@ class TaskCard extends StatelessWidget {
                 "${report.createdAt.day}/${report.createdAt.month}",
                 style: GoogleFonts.cairo(
                   fontSize: ScreenUtilsManager.s11,
-                  color: Colors.grey.shade400,
+                  color: context.palette.onSurfaceVariant,
                 ),
               ),
             ],

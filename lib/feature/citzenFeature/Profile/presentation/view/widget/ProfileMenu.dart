@@ -25,8 +25,10 @@ class ProfileMenuItem extends StatelessWidget {
           decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
-                color: Colors.white30,
-                offset: Offset(2, 10),
+                color: Theme.of(context).brightness == Brightness.dark
+                    ? Colors.black.withValues(alpha: 0.35)
+                    : Colors.white30,
+                offset: const Offset(2, 10),
                 blurRadius: 15,
               ),
             ],
@@ -39,10 +41,16 @@ class ProfileMenuItem extends StatelessWidget {
             ),
             onTap: onTap,
             leading: iconPath,
-            title: Text(title, style: GoogleFonts.cairo()),
+            title: Text(
+              title,
+              style: GoogleFonts.cairo(color: context.palette.onSurface),
+            ),
             trailing: RotatedBox(
               quarterTurns: 90,
-              child: Icon(CupertinoIcons.back),
+              child: Icon(
+                CupertinoIcons.back,
+                color: context.palette.onSurfaceVariant,
+              ),
             ),
           ),
         ),

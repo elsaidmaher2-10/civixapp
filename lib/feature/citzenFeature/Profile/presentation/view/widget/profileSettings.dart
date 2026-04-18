@@ -56,7 +56,7 @@ class Profilesettings extends StatelessWidget {
                   ),
                   child: Icon(
                     Icons.dark_mode_outlined,
-                    color: context.palette.kPrimaryDark.withOpacity(0.8),
+                    color: context.palette.lightBlue,
                   ),
                 ),
                 title: Localizations.localeOf(context).languageCode == 'ar'
@@ -102,7 +102,7 @@ class Profilesettings extends StatelessWidget {
                   ),
                   child: Icon(
                     Icons.list_outlined,
-                    color: context.palette.kPrimaryDark.withOpacity(0.8),
+                    color: context.palette.lightBlue,
                   ),
                 ),
                 title: S.of(context).help,

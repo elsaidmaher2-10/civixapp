@@ -159,13 +159,13 @@ class _ErrorState extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: Colors.red.shade50,
+                color: context.palette.error.withValues(alpha: 0.15),
                 shape: BoxShape.circle,
               ),
               child: Icon(
                 Icons.wifi_off_rounded,
                 size: 50,
-                color: Colors.red.shade400,
+                color: context.palette.error,
               ),
             ),
             SizedBox(height: ScreenUtilsManager.h20),
@@ -174,7 +174,7 @@ class _ErrorState extends StatelessWidget {
               style: GoogleFonts.cairo(
                 fontSize: ScreenUtilsManager.s16,
                 fontWeight: FontWeight.bold,
-                color: Colors.black87,
+                color: context.palette.onSurface,
               ),
             ),
             SizedBox(height: ScreenUtilsManager.h8),
@@ -183,14 +183,14 @@ class _ErrorState extends StatelessWidget {
               textAlign: TextAlign.center,
               style: GoogleFonts.cairo(
                 fontSize: ScreenUtilsManager.s14,
-                color: Colors.grey.shade600,
+                color: context.palette.onSurfaceVariant,
               ),
             ),
             SizedBox(height: ScreenUtilsManager.h24),
             ElevatedButton.icon(
               style: ElevatedButton.styleFrom(
                 backgroundColor: context.palette.workerprimary,
-                foregroundColor: Colors.white,
+                foregroundColor: context.palette.onPrimary,
                 elevation: 0,
                 padding: EdgeInsets.symmetric(
                   horizontal: ScreenUtilsManager.w24,

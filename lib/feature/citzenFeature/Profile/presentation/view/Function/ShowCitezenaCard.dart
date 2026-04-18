@@ -90,11 +90,13 @@ void showCitizenCard(BuildContext context) async {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               buildItem(
+                                context,
                                 S.of(context).fullName,
                                 userProfile?.fullName ?? "---",
                               ),
                               SizedBox(height: ScreenUtilsManager.h12),
                               buildItem(
+                                context,
                                 S.of(context).nationalID,
                                 userProfile?.nationalId ?? "---",
                               ),
@@ -114,11 +116,13 @@ void showCitizenCard(BuildContext context) async {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               buildItem(
+                                context,
                                 S.of(context).address,
                                 userProfile?.address ?? "---",
                               ),
                               SizedBox(height: ScreenUtilsManager.h12),
                               buildItem(
+                                context,
                                 S.of(context).phone,
                                 userProfile?.phoneNumber ?? "---",
                               ),

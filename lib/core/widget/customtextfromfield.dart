@@ -40,7 +40,9 @@ class CustomTextfromfield extends StatelessWidget {
   Widget build(BuildContext context) {
     final ColorScheme scheme = Theme.of(context).colorScheme;
     final Color resolvedFill =
-        color == const Color(0xffF6F6F6) ? scheme.surfaceContainerHighest : color;
+        (color == const Color(0xffF6F6F6) || color == Colors.white)
+            ? scheme.surfaceContainerHighest
+            : color;
     return TextFormField(
       maxLines: maxLines,
       initialValue: initialValue,

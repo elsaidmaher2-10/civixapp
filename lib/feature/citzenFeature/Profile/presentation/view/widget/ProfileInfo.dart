@@ -146,7 +146,7 @@ class ProfileInfo extends StatelessWidget {
                 letterSpacing: 1.1,
                 fontSize: ScreenUtilsManager.s24,
                 fontWeight: FontWeight.w700,
-                color: context.palette.kPrimaryDark,
+                color: context.palette.onSurface,
               ),
             ),
             Text(
@@ -154,7 +154,7 @@ class ProfileInfo extends StatelessWidget {
               style: GoogleFonts.cairo(
                 fontSize: ScreenUtilsManager.s14,
                 fontWeight: FontWeight.w300,
-                color: context.palette.lightGrey2,
+                color: context.palette.onSurfaceVariant,
               ),
             ),
 

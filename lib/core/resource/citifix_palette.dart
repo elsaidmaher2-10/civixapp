@@ -162,17 +162,30 @@ class CitifixPalette extends ThemeExtension<CitifixPalette> {
 
   /// Dark companions: keep brand blues / worker orange; text tuned for WCAG-friendly
   /// contrast on navy surfaces (primary body lighter than slate-200; muted text ≥ slate-300).
-  factory CitifixPalette.dark() {
+  ///
+  /// Set [workerAccent] when the signed-in role is worker so primary tokens match
+  /// [AppTheme.dark] (warm orange on navy instead of soft blue).
+  factory CitifixPalette.dark({bool workerAccent = false}) {
     const Color scaffold = Color(0xFF0F172A);
     const Color surface = Color(0xFF1B2634);
+    const Color surfaceContainerLow = Color(0xFF151F2E);
     const Color surfaceHigh = Color(0xFF273549);
+    const Color surfaceHighest = Color(0xFF324458);
     // Primary / secondary text: brighter than typical “slate on navy” defaults for readability.
-    const Color onSurf = Color(0xFFF1F5F9);
-    const Color onVar = Color(0xFFCBD5E1);
-    const Color onTertiary = Color(0xFFAAB8CA);
-    const Color primaryOnDark = Color(0xFF9EC5FF);
+    const Color onSurf = Color(0xFFF8FAFC);
+    const Color onVar = Color(0xFFE2E8F0);
+    const Color onTertiary = Color(0xFFCBD5E1);
+    const Color primaryBlueOnDark = Color(0xFF9EC5FF);
+    const Color primaryWorkerOnDark = Color(0xFFFFB74D);
+    final Color primaryOnDark =
+        workerAccent ? primaryWorkerOnDark : primaryBlueOnDark;
     const Color borderDark = Color(0xFF3D4F66);
     const Color outlineDark = Color(0xFF5A6D85);
+    final Color onPrimaryDark =
+        workerAccent ? const Color(0xFF271800) : scaffold;
+    final Color primaryFixedDark = workerAccent
+        ? const Color(0xFF5C3D14)
+        : const Color(0xFF1E3A5F);
 
     return CitifixPalette(
       grey50: Color(0xFF1E293B),
@@ -191,14 +204,16 @@ class CitifixPalette extends ThemeExtension<CitifixPalette> {
       grey: outlineDark,
       kPrimary: primaryOnDark,
       kPrimaryDark: scaffold,
-      kPrimaryLight: Color(0xFF5B8FD9),
+      kPrimaryLight: workerAccent
+          ? const Color(0xFFFFCC80)
+          : const Color(0xFF5B8FD9),
       bgLight: surface,
       surface: surface,
       surfaceContainerLowest: surfaceHigh,
       onSurface: onSurf,
       onSurfaceVariant: onVar,
       primary: primaryOnDark,
-      primaryFixed: Color(0xFF1E3A5F),
+      primaryFixed: primaryFixedDark,
       lightGrey: onVar,
       lightGrey2: onTertiary,
       lightGrey3: Color(0xFF94A3B8),
@@ -229,23 +244,25 @@ class CitifixPalette extends ThemeExtension<CitifixPalette> {
       secondary: onTertiary,
       success: Color(0xFF4ADE80),
       outline: outlineDark,
-      onPrimary: scaffold,
+      onPrimary: onPrimaryDark,
       error: Color(0xFFFF8A80),
       surfaceVariant: borderDark,
       surfaceLowest: surfaceHigh,
-      surfaceContainerHighest: Color(0xFF324458),
+      surfaceContainerHighest: surfaceHighest,
       errorContainer: Color(0xFF5C2B2B),
       onErrorContainer: Color(0xFFFFDAD6),
       availableContainer: Color(0xFF5C4A1F),
       onAvailableContainer: Color(0xFFFFE08A),
       inProgressContainer: ColorManger.inProgressContainer,
       onInProgressContainer: Color(0xFFFFE0CC),
-      kineticGradient: const LinearGradient(
-        colors: [Color(0xFF8DB9F5), Color(0xFFD7E2FF)],
+      kineticGradient: LinearGradient(
+        colors: workerAccent
+            ? const [Color(0xFFFFB74D), Color(0xFFFFE0B2)]
+            : const [Color(0xFF8DB9F5), Color(0xFFD7E2FF)],
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
       ),
-      surfaceContainerLow: surface,
+      surfaceContainerLow: surfaceContainerLow,
       surfaceContainerHigh: surfaceHigh,
       bgBackground: scaffold,
       textDark: onSurf,
