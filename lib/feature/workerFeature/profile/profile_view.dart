@@ -324,17 +324,17 @@ class _ProfileViewState extends State<ProfileView> {
                                     onTap: () =>
                                         showLanguagePicker(context, true),
                                   ),
-                                  ActionListTileData(
-                                    icon: Icons.dark_mode_outlined,
-                                    label: Localizations.localeOf(
-                                                  context,
-                                                ).languageCode ==
-                                                'ar'
-                                        ? 'المظهر'
-                                        : 'Theme',
-                                    onTap: () => showThemePicker(context),
-                                  ),
 
+                                  // ActionListTileData(
+                                  //   icon: Icons.dark_mode_outlined,
+                                  //   label: Localizations.localeOf(
+                                  //                 context,
+                                  //               ).languageCode ==
+                                  //               'ar'
+                                  //       ? 'المظهر'
+                                  //       : 'Theme',
+                                  //   onTap: () => showThemePicker(context),
+                                  // ),
                                   ActionListTileData(
                                     icon: Icons.list_outlined,
                                     label: S.of(context).helpAndLegal,

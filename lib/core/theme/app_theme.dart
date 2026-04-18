@@ -2,9 +2,11 @@ import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/routing/appRoutingRole.dart';
 import 'package:flutter/material.dart';
 
+/// Light / dark [ThemeData] derived from [ColorManger] brand colors.
 abstract final class AppTheme {
   static Color _accentForRole(AppRole role) =>
       role == AppRole.worker ? ColorManger.workerprimary : ColorManger.kPrimary;
+
   static ThemeData light(AppRole role) {
     final Color accent = _accentForRole(role);
     final ColorScheme scheme = ColorScheme.light(
@@ -87,12 +89,15 @@ abstract final class AppTheme {
     final Color primaryOnDark = isWorker
         ? const Color(0xFFFFB74D)
         : const Color(0xFF9EC5FF);
-    final Color onPrimaryDark =
-        isWorker ? const Color(0xFF271800) : ColorManger.kPrimaryDark;
-    final Color primaryContainerDark =
-        isWorker ? const Color(0xFF5C3D14) : const Color(0xFF1E3A5F);
-    final Color onPrimaryContainerDark =
-        isWorker ? const Color(0xFFFFE0B2) : ColorManger.primaryFixed;
+    final Color onPrimaryDark = isWorker
+        ? const Color(0xFF271800)
+        : ColorManger.kPrimaryDark;
+    final Color primaryContainerDark = isWorker
+        ? const Color(0xFF5C3D14)
+        : const Color(0xFF1E3A5F);
+    final Color onPrimaryContainerDark = isWorker
+        ? const Color(0xFFFFE0B2)
+        : ColorManger.primaryFixed;
 
     final ColorScheme scheme = ColorScheme.dark(
       primary: primaryOnDark,
@@ -121,9 +126,7 @@ abstract final class AppTheme {
       surfaceContainerHighest: surfaceHighest,
       inverseSurface: onSurfaceMain,
       onInverseSurface: scaffold,
-      inversePrimary: isWorker
-          ? const Color(0xFFE65100)
-          : ColorManger.kPrimary,
+      inversePrimary: isWorker ? const Color(0xFFE65100) : ColorManger.kPrimary,
     );
 
     final TextTheme darkTextBase = ThemeData(
@@ -140,11 +143,19 @@ abstract final class AppTheme {
       colorScheme: scheme,
       textTheme: darkTextBase.copyWith(
         displayLarge: darkTextBase.displayLarge?.copyWith(color: onSurfaceMain),
-        displayMedium: darkTextBase.displayMedium?.copyWith(color: onSurfaceMain),
+        displayMedium: darkTextBase.displayMedium?.copyWith(
+          color: onSurfaceMain,
+        ),
         displaySmall: darkTextBase.displaySmall?.copyWith(color: onSurfaceMain),
-        headlineLarge: darkTextBase.headlineLarge?.copyWith(color: onSurfaceMain),
-        headlineMedium: darkTextBase.headlineMedium?.copyWith(color: onSurfaceMain),
-        headlineSmall: darkTextBase.headlineSmall?.copyWith(color: onSurfaceMain),
+        headlineLarge: darkTextBase.headlineLarge?.copyWith(
+          color: onSurfaceMain,
+        ),
+        headlineMedium: darkTextBase.headlineMedium?.copyWith(
+          color: onSurfaceMain,
+        ),
+        headlineSmall: darkTextBase.headlineSmall?.copyWith(
+          color: onSurfaceMain,
+        ),
         titleLarge: darkTextBase.titleLarge?.copyWith(color: onSurfaceMain),
         titleMedium: darkTextBase.titleMedium?.copyWith(color: onSurfaceMain),
         titleSmall: darkTextBase.titleSmall?.copyWith(color: onSurfaceMain),

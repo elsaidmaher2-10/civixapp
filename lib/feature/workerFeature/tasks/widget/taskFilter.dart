@@ -4,11 +4,13 @@ import 'package:google_fonts/google_fonts.dart';
 
 class TaskFilterChips extends StatefulWidget {
   final List<String> filters;
+  final List<String> filtersen;
   final Function(String) onFilterSelected;
   const TaskFilterChips({
     super.key,
     required this.filters,
     required this.onFilterSelected,
+    required this.filtersen,
   });
 
   @override
@@ -22,7 +24,7 @@ class _TaskFilterChipsState extends State<TaskFilterChips> {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
-        children: List.generate(widget.filters.length, (index) {
+        children: List.generate(widget.filtersen.length, (index) {
           bool isSelected = selectedIndex == index;
           return Padding(
             padding: const EdgeInsets.only(right: 8),
@@ -32,7 +34,7 @@ class _TaskFilterChipsState extends State<TaskFilterChips> {
               selected: isSelected,
               onSelected: (selected) {
                 setState(() => selectedIndex = index);
-                widget.onFilterSelected(widget.filters[index]);
+                widget.onFilterSelected(widget.filtersen[index]);
               },
               selectedColor: context.palette.primaryColor,
               backgroundColor: context.palette.surfaceContainerLowest,

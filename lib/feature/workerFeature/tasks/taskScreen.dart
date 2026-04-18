@@ -62,10 +62,12 @@ class _TasksViewState extends State<TasksView> {
                 TaskFilterChips(
                   filters: Taskscontroller.filters(context),
                   onFilterSelected: (filter) {
+                    print(filter);
                     setState(() {
                       Taskscontroller.selectedFilter = filter;
                     });
                   },
+                  filtersen: Taskscontroller.filtersen(context),
                 ),
                 SizedBox(height: ScreenUtilsManager.h16),
                 BlocBuilder<WorkerTasksCubit, WorkerTasksState>(
@@ -81,7 +83,7 @@ class _TasksViewState extends State<TasksView> {
                       final filteredTasks = state.response.items.where((task) {
                         if (Taskscontroller.selectedFilter ==
                                 S.of(context).all ||
-                            Taskscontroller.selectedFilter == 'All') {
+                            Taskscontroller.selectedFilter == 'all') {
                           return true;
                         }
                         return task.status.trim().toLowerCase() ==
@@ -234,7 +236,9 @@ class _EmptyState extends StatelessWidget {
           ),
           SizedBox(height: ScreenUtilsManager.h16),
           Text(
-            S.of(context).noTasksFound(filterName),
+            S
+                .of(context)
+                .noTasksFound(Taskscontroller.transalte(filterName, context)),
             style: GoogleFonts.cairo(
               fontSize: ScreenUtilsManager.s16,
               color: context.palette.grey600,

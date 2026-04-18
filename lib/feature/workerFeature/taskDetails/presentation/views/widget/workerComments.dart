@@ -131,7 +131,6 @@ class Workercomments extends StatelessWidget {
                       ),
                     ),
 
-              // Add Comment Field Section
               if (!isComment)
                 Padding(
                   padding: EdgeInsets.fromLTRB(16.w, 8.h, 16.w, 16.h),

@@ -17,6 +17,7 @@ class CustomTextfromfield extends StatelessWidget {
     this.onChanged,
     this.ktype = TextInputType.text,
     this.onTap,
+    this.isworker = false,
     this.maxLines = 1,
     this.color = const Color(0xffF6F6F6),
   });
@@ -27,6 +28,7 @@ class CustomTextfromfield extends StatelessWidget {
   final Widget? suffix;
   final TextInputType ktype;
   final bool obstext;
+  final bool isworker;
   final Function(String)? onChanged;
   final TextEditingController controller;
   final String? Function(String?)? validator;
@@ -39,10 +41,7 @@ class CustomTextfromfield extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ColorScheme scheme = Theme.of(context).colorScheme;
-    final Color resolvedFill =
-        (color == const Color(0xffF6F6F6) || color == Colors.white)
-            ? scheme.surfaceContainerHighest
-            : color;
+
     return TextFormField(
       maxLines: maxLines,
       initialValue: initialValue,
@@ -56,38 +55,20 @@ class CustomTextfromfield extends StatelessWidget {
       obscureText: obstext,
       decoration: InputDecoration(
         prefixIcon: prefix,
-        labelStyle: GoogleFonts.cairo(
-          color: scheme.onSurface,
-          fontSize: 14.sp,
-        ),
+        labelStyle: GoogleFonts.cairo(color: scheme.onSurface, fontSize: 14.sp),
         alignLabelWithHint: true,
         labelText: lable,
         isDense: true,
         floatingLabelAlignment: FloatingLabelAlignment.start,
         contentPadding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 14.h),
-        fillColor: resolvedFill,
+        fillColor: Color(0xffF6F6F6),
+
         filled: true,
         suffixIcon: suffix,
         hintText: hinttext,
         hintStyle: GoogleFonts.cairo(
           color: scheme.onSurfaceVariant,
           fontSize: 12.sp,
-        ),
-        border: OutlineInputBorder(
-          borderSide: BorderSide.none,
-          borderRadius: BorderRadius.circular(10.r),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: scheme.primary, width: 1),
-          borderRadius: BorderRadius.circular(10.r),
-        ),
-        errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10.r),
-          borderSide: const BorderSide(color: Color(0xffFC1B1A), width: 1.5),
-        ),
-        focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10.r),
-          borderSide: const BorderSide(color: Color(0xffFC1B1A), width: 2),
         ),
       ),
     );

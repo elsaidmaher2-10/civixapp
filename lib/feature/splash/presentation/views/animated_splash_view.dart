@@ -46,7 +46,7 @@ class _AnimatedSplashViewState extends State<AnimatedSplashView>
     );
 
     _controller.forward();
-    _navigationTimer = Timer(const Duration(milliseconds: 3100), () {
+    _navigationTimer = Timer(const Duration(seconds: 3), () {
       if (!mounted) return;
       Navigator.pushReplacementNamed(context, _resolveInitialRoute());
     });
@@ -147,6 +147,7 @@ class _AnimatedSplashViewState extends State<AnimatedSplashView>
                             child: Transform.translate(
                               offset: Offset(0, (1 - reveal) * 14),
                               child: Text(
+                                locale: Locale("en"),
                                 title[i],
                                 style: TextStyle(
                                   color: _titleLetterColor(i),
