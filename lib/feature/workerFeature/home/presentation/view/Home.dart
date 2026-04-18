@@ -33,7 +33,7 @@ class HomePage extends StatelessWidget {
             final data = state.dashboardData;
             return _buildHomeContent(data, context);
           } else if (state is HomeError) {
-            return _buildErrorWidget(context, state.errorMessage);
+            return _buildErrorState(context, state.errorMessage);
           }
           return SizedBox.shrink();
         },
@@ -41,149 +41,190 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _buildHomeContent(DashBroadHome data, BuildContext context) {
-    return RefreshIndicator(
-      notificationPredicate: (notification) => true,
-      onRefresh: () {
-        return context.read<HomeCubit>().getWorkerDashboard();
-      },
-      child: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(
-          horizontal: ScreenUtilsManager.s16,
-          vertical: ScreenUtilsManager.s24,
-        ),
+  Widget _buildErrorState(BuildContext context, String message) {
+    return Center(
+      key: const Key('error'),
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: ScreenUtilsManager.w24),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            _buildHeaderSection(data.workerName, context),
-            SizedBox(height: ScreenUtilsManager.s16),
-            WorkerCard(
-              isVerified: data.verified,
-              name: data.workerName,
-              imageUrl: data.profileImageUrl ?? AssetValueManager.defualtimage1,
+            Container(
+              padding: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                color: Colors.red.shade50,
+                shape: BoxShape.circle,
+              ),
+              child: Icon(
+                Icons.wifi_off_rounded,
+                size: 50,
+                color: Colors.red.shade400,
+              ),
             ),
-            SizedBox(height: ScreenUtilsManager.s16),
-            if (!data.verified) WorkerAlertVrefication(),
-            SizedBox(height: ScreenUtilsManager.s16),
-            WorkerDashboard(data: data),
-            SizedBox(height: ScreenUtilsManager.s24),
-            CustomMapSection(
-              zonemLevel: data.areaCoordinates,
-              areaname: data.areaName,
+            SizedBox(height: ScreenUtilsManager.h20),
+            Text(
+              S.of(context).errorTitle,
+              style: GoogleFonts.cairo(
+                fontSize: ScreenUtilsManager.s16,
+                fontWeight: FontWeight.bold,
+                color: Colors.black87,
+              ),
             ),
-            SizedBox(height: ScreenUtilsManager.s24),
-            data.recentReports.isEmpty
-                ? _buildEmptyTasksMessage(context)
-                : CustomTaskListView(reports: data.recentReports),
+            SizedBox(height: ScreenUtilsManager.h8),
+            Text(
+              message,
+              textAlign: TextAlign.center,
+              style: GoogleFonts.cairo(
+                fontSize: ScreenUtilsManager.s14,
+                color: Colors.grey.shade600,
+              ),
+            ),
+            SizedBox(height: ScreenUtilsManager.h24),
+            ElevatedButton.icon(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: ColorManger.workerprimary,
+                foregroundColor: Colors.white,
+                elevation: 0,
+                padding: EdgeInsets.symmetric(
+                  horizontal: ScreenUtilsManager.w24,
+                  vertical: ScreenUtilsManager.h12,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+              onPressed: () => context.read<HomeCubit>().getWorkerDashboard(),
+
+              icon: const Icon(Icons.refresh_rounded, size: 20),
+              label: Text(
+                S.of(context).tryAgain,
+                style: GoogleFonts.cairo(fontWeight: FontWeight.bold),
+              ),
+            ),
           ],
         ),
       ),
     );
   }
+}
 
-  Widget _buildHeaderSection(String name, BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          "${S.of(context).welcome_message}$name",
-          style: GoogleFonts.cairo(
-            fontSize: ScreenUtilsManager.s32,
-            fontWeight: FontWeight.w800,
-            color: ColorManger.onSurface,
-          ),
-        ),
-        SizedBox(height: ScreenUtilsManager.s4),
-        Text(
-          S.of(context).stay_focused,
-          style: GoogleFonts.cairo(
-            fontSize: ScreenUtilsManager.s16,
-            fontWeight: FontWeight.w500,
-            color: ColorManger.onSurfaceVariant,
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget buildShimmerLoading() {
-    return Shimmer.fromColors(
-      baseColor: Color.fromRGBO(224, 224, 224, 1),
-      highlightColor: Colors.grey[100]!,
-      child: SingleChildScrollView(
-        padding: EdgeInsets.all(ScreenUtilsManager.s16),
-        child: Column(
-          children: List.generate(
-            4,
-            (index) => Container(
-              margin: EdgeInsets.only(bottom: ScreenUtilsManager.s20),
-              height: ScreenUtilsManager.h150,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(ScreenUtilsManager.s16),
-              ),
-            ),
-          ),
-        ),
+Widget _buildHomeContent(DashBroadHome data, BuildContext context) {
+  return RefreshIndicator(
+    color: ColorManger.workerprimary,
+    backgroundColor: Colors.white,
+    notificationPredicate: (notification) => true,
+    onRefresh: () {
+      return context.read<HomeCubit>().getWorkerDashboard();
+    },
+    child: SingleChildScrollView(
+      padding: EdgeInsets.symmetric(
+        horizontal: ScreenUtilsManager.s16,
+        vertical: ScreenUtilsManager.s24,
       ),
-    );
-  }
-
-  Widget _buildErrorWidget(BuildContext context, String message) {
-    return Center(
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Icon(
-            Icons.error_outline,
-            size: ScreenUtilsManager.s60,
-            color: Colors.redAccent,
+          _buildHeaderSection(data.workerName, context),
+          SizedBox(height: ScreenUtilsManager.s16),
+          WorkerCard(
+            isVerified: data.verified,
+            name: data.workerName,
+            imageUrl: data.profileImageUrl ?? AssetValueManager.defualtimage1,
           ),
           SizedBox(height: ScreenUtilsManager.s16),
-          Text(
-            message,
-            style: GoogleFonts.cairo(fontSize: ScreenUtilsManager.s16),
+          if (!data.verified) WorkerAlertVrefication(),
+          SizedBox(height: ScreenUtilsManager.s16),
+          WorkerDashboard(data: data),
+          SizedBox(height: ScreenUtilsManager.s24),
+          CustomMapSection(
+            zonemLevel: data.areaCoordinates,
+            areaname: data.areaName,
           ),
-          TextButton(
-            onPressed: () => context.read<HomeCubit>().getWorkerDashboard(),
-            child: Text(
-              S.of(context).retry,
-              style: GoogleFonts.cairo(color: ColorManger.kPrimaryDark),
-            ),
-          ),
+          SizedBox(height: ScreenUtilsManager.s24),
+          data.recentReports.isEmpty
+              ? _buildEmptyTasksMessage(context)
+              : CustomTaskListView(reports: data.recentReports),
         ],
       ),
-    );
-  }
+    ),
+  );
+}
 
-  Widget _buildEmptyTasksMessage(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      padding: EdgeInsets.all(ScreenUtilsManager.s20),
-      decoration: BoxDecoration(
-        color: ColorManger.white,
-        borderRadius: BorderRadius.circular(ScreenUtilsManager.s12),
-        border: Border.all(color: ColorManger.outline),
+Widget _buildHeaderSection(String name, BuildContext context) {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text(
+        "${S.of(context).welcome_message}$name",
+        style: GoogleFonts.cairo(
+          fontSize: ScreenUtilsManager.s32,
+          fontWeight: FontWeight.w800,
+          color: ColorManger.onSurface,
+        ),
       ),
+      SizedBox(height: ScreenUtilsManager.s4),
+      Text(
+        S.of(context).stay_focused,
+        style: GoogleFonts.cairo(
+          fontSize: ScreenUtilsManager.s16,
+          fontWeight: FontWeight.w500,
+          color: ColorManger.onSurfaceVariant,
+        ),
+      ),
+    ],
+  );
+}
+
+Widget buildShimmerLoading() {
+  return Shimmer.fromColors(
+    baseColor: Color.fromRGBO(224, 224, 224, 1),
+    highlightColor: Colors.grey[100]!,
+    child: SingleChildScrollView(
+      padding: EdgeInsets.all(ScreenUtilsManager.s16),
       child: Column(
-        children: [
-          Icon(
-            Icons.assignment_turned_in_outlined,
-            size: ScreenUtilsManager.s40,
-            color: ColorManger.secondary,
-          ),
-          SizedBox(height: ScreenUtilsManager.s10),
-          Text(
-            S.of(context).no_tasks_available,
-            style: GoogleFonts.cairo(
-              fontWeight: FontWeight.bold,
-              fontSize: ScreenUtilsManager.s16,
+        children: List.generate(
+          4,
+          (index) => Container(
+            margin: EdgeInsets.only(bottom: ScreenUtilsManager.s20),
+            height: ScreenUtilsManager.h150,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(ScreenUtilsManager.s16),
             ),
           ),
-          Text(S.of(context).notify_new_tasks),
-        ],
+        ),
       ),
-    );
-  }
+    ),
+  );
+}
+
+Widget _buildEmptyTasksMessage(BuildContext context) {
+  return Container(
+    width: double.infinity,
+    padding: EdgeInsets.all(ScreenUtilsManager.s20),
+    decoration: BoxDecoration(
+      color: ColorManger.white,
+      borderRadius: BorderRadius.circular(ScreenUtilsManager.s12),
+      border: Border.all(color: ColorManger.outline),
+    ),
+    child: Column(
+      children: [
+        Icon(
+          Icons.assignment_turned_in_outlined,
+          size: ScreenUtilsManager.s40,
+          color: ColorManger.secondary,
+        ),
+        SizedBox(height: ScreenUtilsManager.s10),
+        Text(
+          S.of(context).no_tasks_available,
+          style: GoogleFonts.cairo(
+            fontWeight: FontWeight.bold,
+            fontSize: ScreenUtilsManager.s16,
+          ),
+        ),
+        Text(S.of(context).notify_new_tasks),
+      ],
+    ),
+  );
 }

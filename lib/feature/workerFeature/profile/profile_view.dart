@@ -47,6 +47,7 @@ class _ProfileViewState extends State<ProfileView> {
     return showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
+        backgroundColor: Colors.white,
         title: Text(S.of(context).logout),
         content: Text(S.of(context).areYouSureLogout),
         actions: [

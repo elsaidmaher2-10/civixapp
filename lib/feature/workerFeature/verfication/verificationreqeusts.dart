@@ -66,7 +66,7 @@ class _VerificationRequestsScreenState
               ),
             );
           } else if (state is VerificationRequestsError) {
-            return _buildErrorState(state.message);
+            return _buildErrorState(context, state.message);
           } else if (state is VerificationRequestsSuccess) {
             if (state.requests.isEmpty) return _buildEmptyState(s);
             return _buildListView(state.requests, s);
@@ -276,28 +276,73 @@ class _VerificationRequestsScreenState
       ),
     );
   }
-
-  Widget _buildErrorState(String message) {
+  Widget _buildErrorState(BuildContext context, String message) {
     return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(Icons.cloud_off_rounded, size: 80, color: Colors.grey.shade300),
-          const SizedBox(height: 16),
-          Text(
-            message,
-            style: GoogleFonts.cairo(fontSize: 16, color: Colors.grey.shade700),
-          ),
-          const SizedBox(height: 12),
-          ElevatedButton(
-            onPressed: () =>
-                context.read<VerificationInitCubit>().fetchRequests(),
-            child: Text(S.of(context).tryAgain, style: GoogleFonts.cairo()),
-          ),
-        ],
+      key: const Key('error'),
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: ScreenUtilsManager.w24),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              padding: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                color: Colors.red.shade50,
+                shape: BoxShape.circle,
+              ),
+              child: Icon(
+                Icons.wifi_off_rounded,
+                size: 50,
+                color: Colors.red.shade400,
+              ),
+            ),
+            SizedBox(height: ScreenUtilsManager.h20),
+            Text(
+              S.of(context).errorTitle,
+              style: GoogleFonts.cairo(
+                fontSize: ScreenUtilsManager.s16,
+                fontWeight: FontWeight.bold,
+                color: Colors.black87,
+              ),
+            ),
+            SizedBox(height: ScreenUtilsManager.h8),
+            Text(
+              message,
+              textAlign: TextAlign.center,
+              style: GoogleFonts.cairo(
+                fontSize: ScreenUtilsManager.s14,
+                color: Colors.grey.shade600,
+              ),
+            ),
+            SizedBox(height: ScreenUtilsManager.h24),
+            ElevatedButton.icon(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: ColorManger.workerprimary,
+                foregroundColor: Colors.white,
+                elevation: 0,
+                padding: EdgeInsets.symmetric(
+                  horizontal: ScreenUtilsManager.w24,
+                  vertical: ScreenUtilsManager.h12,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+              onPressed: () => context.read<VerificationInitCubit>().fetchRequests(),
+
+              icon: const Icon(Icons.refresh_rounded, size: 20),
+              label: Text(
+                S.of(context).tryAgain,
+                style: GoogleFonts.cairo(fontWeight: FontWeight.bold),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
+}
+  
 
   Widget _buildEmptyState(S s) {
     return Center(
@@ -322,4 +367,4 @@ class _VerificationRequestsScreenState
       ),
     );
   }
-}
+

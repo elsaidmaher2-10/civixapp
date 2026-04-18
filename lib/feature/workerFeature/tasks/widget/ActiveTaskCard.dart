@@ -1,7 +1,7 @@
 import 'package:citifix/core/service/StatusReport.dart';
 import 'package:citifix/feature/workerFeature/taskDetails/TaskDetailsPage.dart';
 import 'package:citifix/feature/workerFeature/tasks/data/model/ReportResponse.dart';
-import 'package:citifix/generated/l10n.dart'; 
+import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:citifix/core/resource/colormanager.dart';
@@ -132,28 +132,37 @@ class _LocationRow extends StatelessWidget {
   }
 }
 
-class _AvailableActions extends StatelessWidget {
+class _AvailableActions extends StatefulWidget {
   const _AvailableActions({required this.id, required this.initstates});
   final String initstates;
   final int id;
 
   @override
+  State<_AvailableActions> createState() => _AvailableActionsState();
+}
+
+class _AvailableActionsState extends State<_AvailableActions> {
+  bool isLoading = false;
+
+  @override
   Widget build(BuildContext context) {
-    return BlocConsumer<WorkerTasksCubit, WorkerTasksState>(
+    return BlocListener<WorkerTasksCubit, WorkerTasksState>(
       listener: (BuildContext context, WorkerTasksState state) {
         if (state is WorkerChangeTasksSuccess) {
+          setState(() => isLoading = false);
           Navigator.push(
             context,
             MaterialPageRoute(
               builder: (_) => BlocProvider(
                 create: (_) => ReportDetailsManager(
                   reportdetailsRepo: getIt<ReportdetailsRepo>(),
-                )..getReportDetails(id: id),
-                child: TaskDetailsPage(reportid: id),
+                )..getReportDetails(id: widget.id),
+                child: TaskDetailsPage(reportid: widget.id),
               ),
             ),
           );
         } else if (state is WorkerChangeTasksError) {
+          setState(() => isLoading = false);
           Customsnackbar.show(
             context: context,
             backgroundColor: ColorManger.red,
@@ -161,65 +170,64 @@ class _AvailableActions extends StatelessWidget {
           );
         }
       },
-      builder: (BuildContext context, WorkerTasksState state) {
-        return Row(
-          children: [
-            Expanded(
-              child: Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      ColorManger.workerprimary,
-                      ColorManger.workerprimary.withAlpha(200),
-                    ],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ),
-                  borderRadius: BorderRadius.circular(ScreenUtilsManager.r8),
-                  boxShadow: [
-                    BoxShadow(
-                      color: ColorManger.workerprimary.withOpacity(0.3),
-                      blurRadius: ScreenUtilsManager.s10,
-                      offset: Offset(0, ScreenUtilsManager.h4),
-                    ),
+      child: Row(
+        children: [
+          Expanded(
+            child: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    ColorManger.workerprimary,
+                    ColorManger.workerprimary.withAlpha(200),
                   ],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
                 ),
-                child: ElevatedButton(
-                  onPressed: () {
-                    context.read<WorkerTasksCubit>().changeWorkerTaskStatus(
-                      status: StatusReport.getNextStatus(
-                        StatusReport.fromString(initstates),
-                      ).value,
-                      reportId: id,
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.transparent,
-                    shadowColor: Colors.transparent,
-                    padding: EdgeInsets.symmetric(
-                      vertical: ScreenUtilsManager.h12,
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(
-                        ScreenUtilsManager.r8,
-                      ),
-                    ),
+                borderRadius: BorderRadius.circular(ScreenUtilsManager.r8),
+                boxShadow: [
+                  BoxShadow(
+                    color: ColorManger.workerprimary.withOpacity(0.3),
+                    blurRadius: ScreenUtilsManager.s10,
+                    offset: Offset(0, ScreenUtilsManager.h4),
                   ),
-                  child: state is WorkerTasksLoading
-                      ? CupertinoActivityIndicator(color: ColorManger.white)
-                      : Text(
-                          S.of(context).startTask,
-                          style: GoogleFonts.cairo(
-                            color: ColorManger.white,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
+                ],
+              ),
+              child: ElevatedButton(
+                onPressed: isLoading
+                    ? null
+                    : () {
+                        setState(() => isLoading = true);
+                        context.read<WorkerTasksCubit>().changeWorkerTaskStatus(
+                          status: StatusReport.getNextStatus(
+                            StatusReport.fromString(widget.initstates),
+                          ).value,
+                          reportId: widget.id,
+                        );
+                      },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.transparent,
+                  shadowColor: Colors.transparent,
+                  padding: EdgeInsets.symmetric(
+                    vertical: ScreenUtilsManager.h12,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(ScreenUtilsManager.r8),
+                  ),
                 ),
+                child: isLoading
+                    ? CupertinoActivityIndicator(color: ColorManger.white)
+                    : Text(
+                        S.of(context).startTask,
+                        style: GoogleFonts.cairo(
+                          color: ColorManger.white,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
               ),
             ),
-          ],
-        );
-      },
+          ),
+        ],
+      ),
     );
   }
 }

@@ -46,7 +46,7 @@ class _NotificationCenterState extends State<NotificationCenter> {
         icon: const Icon(Icons.arrow_back_ios_new_rounded),
       ),
       backgroundColor: ColorManger.surface,
-      scrolledUnderElevation: 0, // Prevents tinting when scrolling
+      scrolledUnderElevation: 0,
       elevation: 0,
       centerTitle: false,
       title: BlocBuilder<NotificationCubit, NotificationState>(
@@ -260,18 +260,18 @@ class _NotificationCenterState extends State<NotificationCenter> {
             Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: Colors.red.shade50,
+                color: isWorker ? Colors.red.shade50 : Colors.grey.shade100,
                 shape: BoxShape.circle,
               ),
               child: Icon(
                 Icons.wifi_off_rounded,
                 size: 50,
-                color: Colors.red.shade400,
+                color: isWorker ? Colors.red.shade400 : Colors.grey,
               ),
             ),
             SizedBox(height: ScreenUtilsManager.h20),
             Text(
-              "Oops! Something went wrong.",
+              S.of(context).errorTitle,
               style: GoogleFonts.cairo(
                 fontSize: ScreenUtilsManager.s16,
                 fontWeight: FontWeight.bold,

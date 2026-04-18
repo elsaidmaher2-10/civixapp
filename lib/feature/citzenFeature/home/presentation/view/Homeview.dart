@@ -254,7 +254,7 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-Widget _buildErrorWidget(context, String message) {
+Widget _buildErrorWidget(BuildContext context, String message) {
   return Padding(
     padding: EdgeInsets.all(20.w),
     child: Column(

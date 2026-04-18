@@ -69,10 +69,10 @@ class _TasksViewState extends State<TasksView> {
                 ),
                 SizedBox(height: ScreenUtilsManager.h16),
                 BlocBuilder<WorkerTasksCubit, WorkerTasksState>(
-                  buildWhen: (currnet, prevous) =>
-                      currnet is WorkerTasksLoading ||
-                      currnet is WorkerTasksSuccess ||
-                      currnet is WorkerTasksError,
+                  buildWhen: (previous, current) =>
+                      current is WorkerTasksLoading ||
+                      current is WorkerTasksSuccess ||
+                      current is WorkerTasksError,
                   builder: (context, state) {
                     if (state is WorkerTasksLoading) {
                       return const TasksLoadingSkeleton();
@@ -150,54 +150,65 @@ class _ErrorState extends StatelessWidget {
   Widget build(BuildContext context) {
     final isNoInternet = errorMessage.contains(Constantmanger.nointernet);
     return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SizedBox(height: ScreenUtilsManager.h40),
-          Icon(
-            isNoInternet ? Icons.wifi_off : Icons.error_outline,
-            size: ScreenUtilsManager.r60,
-            color: ColorManger.grey,
-          ),
-          SizedBox(height: ScreenUtilsManager.h16),
-          Text(
-            isNoInternet
-                ? S.of(context).noInternetConnection
-                : S.of(context).somethingWentWrong,
-            style: GoogleFonts.cairo(
-              fontSize: ScreenUtilsManager.s16,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          SizedBox(height: ScreenUtilsManager.h8),
-          Text(
-            errorMessage,
-            textAlign: TextAlign.center,
-            style: GoogleFonts.cairo(
-              color: ColorManger.grey,
-              fontSize: ScreenUtilsManager.s13,
-            ),
-          ),
-          SizedBox(height: ScreenUtilsManager.h16),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: ColorManger.workerprimary,
-              foregroundColor: ColorManger.white,
-              padding: EdgeInsets.symmetric(
-                horizontal: ScreenUtilsManager.w32,
-                vertical: ScreenUtilsManager.h12,
+      key: const Key('error'),
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: ScreenUtilsManager.w24),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              padding: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                color: Colors.red.shade50,
+                shape: BoxShape.circle,
               ),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(ScreenUtilsManager.r12),
+              child: Icon(
+                Icons.wifi_off_rounded,
+                size: 50,
+                color: Colors.red.shade400,
               ),
             ),
-            onPressed: onRetry,
-            child: Text(
-              S.of(context).retry,
-              style: GoogleFonts.cairo(fontWeight: FontWeight.bold),
+            SizedBox(height: ScreenUtilsManager.h20),
+            Text(
+              S.of(context).errorTitle,
+              style: GoogleFonts.cairo(
+                fontSize: ScreenUtilsManager.s16,
+                fontWeight: FontWeight.bold,
+                color: Colors.black87,
+              ),
             ),
-          ),
-        ],
+            SizedBox(height: ScreenUtilsManager.h8),
+            Text(
+              errorMessage,
+              textAlign: TextAlign.center,
+              style: GoogleFonts.cairo(
+                fontSize: ScreenUtilsManager.s14,
+                color: Colors.grey.shade600,
+              ),
+            ),
+            SizedBox(height: ScreenUtilsManager.h24),
+            ElevatedButton.icon(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: ColorManger.workerprimary,
+                foregroundColor: Colors.white,
+                elevation: 0,
+                padding: EdgeInsets.symmetric(
+                  horizontal: ScreenUtilsManager.w24,
+                  vertical: ScreenUtilsManager.h12,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+              onPressed: () => onRetry(),
+              icon: const Icon(Icons.refresh_rounded, size: 20),
+              label: Text(
+                S.of(context).tryAgain,
+                style: GoogleFonts.cairo(fontWeight: FontWeight.bold),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

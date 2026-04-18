@@ -1,10 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:citifix/core/DI/getit.dart';
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/core/widget/customShimerwidget.dart';
 import 'package:citifix/feature/workerFeature/home/data/models/dashbroadmodel.dart';
+import 'package:citifix/feature/workerFeature/taskDetails/TaskDetailsPage.dart';
+import 'package:citifix/feature/workerFeature/taskDetails/data/repos/reportdetails.dart';
+import 'package:citifix/feature/workerFeature/taskDetails/presentation/manager/reportdetailsManger.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class TaskCard extends StatelessWidget {
@@ -36,7 +41,19 @@ class TaskCard extends StatelessWidget {
           Stack(
             children: [
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (c) => BlocProvider(
+                        create: (c) => ReportDetailsManager(
+                          reportdetailsRepo: getIt<ReportdetailsRepo>(),
+                        ),
+                        child: TaskDetailsPage(reportid: report.id),
+                      ),
+                    ),
+                  );
+                },
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(ScreenUtilsManager.r12),
                   child: CachedNetworkImage(
