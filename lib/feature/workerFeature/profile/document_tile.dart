@@ -105,7 +105,6 @@ class DocumentTile extends StatelessWidget {
   }
 }
 
-/// A row of up to 3 [DocumentTile]s with gaps between them.
 class DocumentsRow extends StatelessWidget {
   const DocumentsRow({super.key, required this.documents});
 
@@ -121,7 +120,7 @@ class DocumentsRow extends StatelessWidget {
             icon: documents[i].icon,
             status: documents[i].status,
           ),
-          if (i < documents.length - 1) const SizedBox(width: 16),
+          if (i < documents.length - 1) const SizedBox(width: 8),
         ],
       ],
     );

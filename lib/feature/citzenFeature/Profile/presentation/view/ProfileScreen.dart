@@ -24,7 +24,7 @@ import '../../../../../core/function/imagebutton.dart';
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
-  Future<void> _onLogoutPressed(BuildContext context) async {
+  Future<void> onLogoutPressed(BuildContext context) async {
     final confirmed = await LogoutConfirmDialog.show(context);
     if (confirmed == true && context.mounted) {
       context.read<LogCubit>().logout();
@@ -114,7 +114,7 @@ class ProfileScreen extends StatelessWidget {
                               ),
                             )
                           : CustomButton(
-                              onPressed: () => _onLogoutPressed(context),
+                              onPressed: () => onLogoutPressed(context),
                               icon: const Icon(Icons.logout_rounded),
                               backgroundColor: context.palette.redLight,
                               foregroundColor: context.palette.red,

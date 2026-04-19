@@ -69,7 +69,6 @@ class MyAppWrapper extends StatelessWidget {
     final String? roleString = PrefrenceManager().getstring(
       Constantmanger.role,
     );
-    print(accessToken);
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => UserProfileInfoCubit(getIt())),

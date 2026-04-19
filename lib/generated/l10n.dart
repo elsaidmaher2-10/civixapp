@@ -2224,14 +2224,9 @@ class S {
     );
   }
 
-  /// `Expires Oct 2025`
+  /// `Expires `
   String get expiresDate {
-    return Intl.message(
-      'Expires Oct 2025',
-      name: 'expiresDate',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Expires ', name: 'expiresDate', desc: '', args: []);
   }
 
   /// `Continue to App`

@@ -4,6 +4,7 @@ import 'package:citifix/feature/workerFeature/verfication/data/model/WorkerReque
 import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
 class VerificationCompleteScreen extends StatelessWidget {
   VerificationCompleteScreen({super.key, required this.workerRequestModel});
@@ -44,6 +45,7 @@ class VerificationCompleteScreen extends StatelessWidget {
 
   PreferredSizeWidget _buildAppBar(BuildContext context) {
     return AppBar(
+      centerTitle: true,
       backgroundColor: context.palette.background.withOpacity(0.9),
       elevation: ScreenUtilsManager.s0,
       surfaceTintColor: Colors.transparent,
@@ -54,36 +56,15 @@ class VerificationCompleteScreen extends StatelessWidget {
           height: ScreenUtilsManager.s1,
         ),
       ),
-      title: Row(
-        children: [
-          SizedBox(width: ScreenUtilsManager.s12),
-          Text(
-            S.of(context).appTitle,
-            style: GoogleFonts.cairo(
-              color: context.palette.onSurface,
-              fontWeight: FontWeight.bold,
-              fontSize: ScreenUtilsManager.s18,
-              letterSpacing: -0.5,
-            ),
-          ),
-        ],
-      ),
-      actions: [
-        Container(
-          width: ScreenUtilsManager.s36,
-          height: ScreenUtilsManager.s36,
-          margin: EdgeInsets.all(8),
-          decoration: BoxDecoration(
-            color: context.palette.surfaceContainerHigh,
-            shape: BoxShape.circle,
-          ),
-          child: Icon(
-            Icons.menu,
-            size: ScreenUtilsManager.s20,
-            color: context.palette.workerprimary,
-          ),
+      title: Text(
+        S.of(context).appTitle,
+        style: GoogleFonts.cairo(
+          color: context.palette.onSurface,
+          fontWeight: FontWeight.bold,
+          fontSize: ScreenUtilsManager.s18,
+          letterSpacing: -0.5,
         ),
-      ],
+      ),
     );
   }
 
@@ -195,7 +176,9 @@ class VerificationCompleteScreen extends StatelessWidget {
       decoration: BoxDecoration(
         color: context.palette.surfaceContainerLowest,
         borderRadius: BorderRadius.circular(ScreenUtilsManager.s16),
-        border: Border.all(color: context.palette.surfaceVariant.withOpacity(0.5)),
+        border: Border.all(
+          color: context.palette.surfaceVariant.withOpacity(0.5),
+        ),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -222,7 +205,7 @@ class VerificationCompleteScreen extends StatelessWidget {
                 child: Text(
                   value,
                   style: GoogleFonts.cairo(
-                    fontSize: ScreenUtilsManager.s18,
+                    fontSize: ScreenUtilsManager.s14,
                     fontWeight: FontWeight.bold,
                     color: context.palette.onSurface,
                   ),
@@ -243,7 +226,9 @@ class VerificationCompleteScreen extends StatelessWidget {
       decoration: BoxDecoration(
         color: context.palette.surfaceContainerLow,
         borderRadius: BorderRadius.circular(ScreenUtilsManager.s16),
-        border: Border.all(color: context.palette.surfaceVariant.withOpacity(0.5)),
+        border: Border.all(
+          color: context.palette.surfaceVariant.withOpacity(0.5),
+        ),
       ),
       child: Row(
         children: [
@@ -282,7 +267,7 @@ class VerificationCompleteScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: ScreenUtilsManager.s2),
                 Text(
-                  S.of(context).expiresDate,
+                  "${S.of(context).expiresDate} ${DateFormat('d MMMM yyyy').format(workerRequestModel.reviewedAt!.add(const Duration(days: 365)))}",
                   style: GoogleFonts.cairo(
                     fontSize: ScreenUtilsManager.s12,
                     color: context.palette.secondary,
@@ -290,10 +275,6 @@ class VerificationCompleteScreen extends StatelessWidget {
                 ),
               ],
             ),
-          ),
-          Icon(
-            Icons.chevron_right,
-            color: context.palette.secondary.withOpacity(0.5),
           ),
         ],
       ),

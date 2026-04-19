@@ -193,7 +193,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "الصورة الشخصية لا تتطابق مع صورة الهوية المقدمة.",
     ),
     "errorTitle": MessageLookupByLibrary.simpleMessage("عذراً! حدث خطأ ما."),
-    "expiresDate": MessageLookupByLibrary.simpleMessage("صالح حتى أكتوبر 2025"),
+    "expiresDate": MessageLookupByLibrary.simpleMessage("صالح حتى"),
     "failedToLoadCategories": MessageLookupByLibrary.simpleMessage(
       "فشل تحميل الأقسام",
     ),

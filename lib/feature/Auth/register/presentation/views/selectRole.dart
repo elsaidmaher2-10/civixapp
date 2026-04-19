@@ -28,7 +28,6 @@ class SelectRoleDropdown extends StatelessWidget {
           icon: const Icon(Icons.keyboard_arrow_down, color: Colors.grey),
           borderRadius: BorderRadius.circular(8.r),
           dropdownColor: const Color(0xffF6F6F6),
-
           decoration: InputDecoration(
             filled: true,
             fillColor: const Color(0xffF6F6F6),
@@ -54,7 +53,10 @@ class SelectRoleDropdown extends StatelessWidget {
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8.r),
-              borderSide: BorderSide(color: context.palette.kPrimary, width: 1.5),
+              borderSide: BorderSide(
+                color: context.palette.kPrimary,
+                width: 1.5,
+              ),
             ),
           ),
 

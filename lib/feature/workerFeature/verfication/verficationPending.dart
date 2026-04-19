@@ -169,14 +169,18 @@ class UnderReviewScreen extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                s.submissionSummary,
-                style: GoogleFonts.cairo(
-                  fontSize: ScreenUtilsManager.s20,
-                  fontWeight: FontWeight.bold,
-                  color: context.palette.onSurface,
+              // FIX: Wrap the text in Expanded to prevent horizontal overflow
+              Expanded(
+                child: Text(
+                  s.submissionSummary,
+                  style: GoogleFonts.cairo(
+                    fontSize: ScreenUtilsManager.s20,
+                    fontWeight: FontWeight.bold,
+                    color: context.palette.onSurface,
+                  ),
                 ),
               ),
+              SizedBox(width: ScreenUtilsManager.p8), // Add a little gap
               Container(
                 padding: EdgeInsets.symmetric(
                   horizontal: ScreenUtilsManager.p12,

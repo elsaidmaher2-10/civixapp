@@ -206,7 +206,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "errorTitle": MessageLookupByLibrary.simpleMessage(
       "Oops! Something went wrong.",
     ),
-    "expiresDate": MessageLookupByLibrary.simpleMessage("Expires Oct 2025"),
+    "expiresDate": MessageLookupByLibrary.simpleMessage("Expires "),
     "failedToLoadCategories": MessageLookupByLibrary.simpleMessage(
       "Failed to load categories",
     ),

@@ -127,7 +127,7 @@ Widget _buildHomeContent(DashBroadHome data, BuildContext context) {
           _buildHeaderSection(data.workerName, context),
           SizedBox(height: ScreenUtilsManager.s16),
           WorkerCard(
-            isVerified: data.verified,
+            isVerified: false,
             name: data.workerName,
             imageUrl: data.profileImageUrl ?? AssetValueManager.defualtimage1,
           ),
@@ -228,9 +228,7 @@ Widget _buildEmptyTasksMessage(BuildContext context) {
         ),
         Text(
           S.of(context).notify_new_tasks,
-          style: GoogleFonts.cairo(
-            color: context.palette.onSurfaceVariant,
-          ),
+          style: GoogleFonts.cairo(color: context.palette.onSurfaceVariant),
         ),
       ],
     ),

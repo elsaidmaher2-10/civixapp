@@ -218,7 +218,6 @@ class _WorkerEditProfileScreenState extends State<EditProfileScreen> {
     );
   }
 
-  // ملاحظة الأمان
   Widget _buildSecurityNote(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: ScreenUtilsManager.w24),

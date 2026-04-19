@@ -31,7 +31,6 @@ class _NotificationCenterState extends State<NotificationCenter> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    // Safety check: InheritedWidgets like context.palette must be accessed here
     primaryColor = isWorker
         ? context.palette.workerprimary
         : context.palette.primary;

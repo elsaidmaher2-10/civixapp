@@ -57,7 +57,6 @@ class Customimagepicker extends StatelessWidget {
                     File? image = await controller.pickImage(
                       ImageSource.camera,
                     );
-                    print(image);
                     if (image != null && context.mounted) {
                       await context
                           .read<UserProfileInfoCubit>()
@@ -95,7 +94,16 @@ class Customimagepicker extends StatelessWidget {
                         bottom: 0,
                         right: 0,
                         child: GestureDetector(
-                          onTap: () => controller.pickImage(ImageSource.camera),
+                          onTap: () async {
+                            File? image = await controller.pickImage(
+                              ImageSource.camera,
+                            );
+                            if (image != null && context.mounted) {
+                              await context
+                                  .read<UserProfileInfoCubit>()
+                                  .updateUserProfleImage(image);
+                            }
+                          },
                           child: Container(
                             padding: EdgeInsets.all(8.r),
                             decoration: BoxDecoration(

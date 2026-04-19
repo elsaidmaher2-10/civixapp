@@ -9,6 +9,7 @@ import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/routing/routes.dart';
 import 'package:citifix/core/widget/CustomSnackBar.dart';
+import 'package:citifix/core/widget/onLogoutPressed.dart';
 import 'package:citifix/feature/citzenFeature/Profile/data/Models/UserProfileModel/userProfile.dart';
 import 'package:citifix/feature/citzenFeature/Profile/data/repos/UserProfileRepos/LogOutRepos.dart';
 import 'package:citifix/feature/citzenFeature/Profile/presentation/view/Function/showLanguagePicker.dart';
@@ -36,44 +37,6 @@ class ProfileView extends StatefulWidget {
 
 class _ProfileViewState extends State<ProfileView> {
   UserProfile? userProfile;
-
-  Future<void> _onLogoutPressed(BuildContext context) async {
-    final confirmed = await _showLogoutConfirmDialog(context);
-    if (confirmed == true && context.mounted) {
-      context.read<LogCubit>().logout();
-    }
-  }
-
-  Future<bool?> _showLogoutConfirmDialog(BuildContext context) {
-    return showDialog<bool>(
-      context: context,
-      builder: (context) => AlertDialog(
-        backgroundColor: context.palette.surfaceContainerHigh,
-        title: Text(
-          S.of(context).logout,
-          style: TextStyle(color: context.palette.onSurface),
-        ),
-        content: Text(
-          S.of(context).areYouSureLogout,
-          style: TextStyle(color: context.palette.onSurfaceVariant),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context, false),
-            child: Text(
-              S.of(context).cancel,
-              style: TextStyle(color: context.palette.onSurfaceVariant),
-            ),
-          ),
-          TextButton(
-            onPressed: () => Navigator.pop(context, true),
-            style: TextButton.styleFrom(foregroundColor: Colors.red),
-            child: Text(S.of(context).confirm),
-          ),
-        ],
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -357,7 +320,7 @@ class _ProfileViewState extends State<ProfileView> {
                               ),
                               child: LogoutButton(
                                 isLoading: logState is LogLoading,
-                                onTap: () => _onLogoutPressed(context),
+                                onTap: () => onLogoutPressed(context),
                               ),
                             ),
                           ],

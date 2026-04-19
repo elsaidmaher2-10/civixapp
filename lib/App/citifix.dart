@@ -70,7 +70,7 @@ class Citifix extends StatelessWidget {
                         debugShowCheckedModeBanner: false,
                         themeMode: themeMode,
                         theme: AppTheme.light(role),
-                        darkTheme: AppTheme.dark(role),
+                        // darkTheme: AppTheme.dark(role),
                       );
                     },
                   );

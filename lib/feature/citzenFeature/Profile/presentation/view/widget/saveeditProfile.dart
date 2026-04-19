@@ -1,25 +1,29 @@
 import 'dart:async';
-import 'package:citifix/core/resource/colormanager.dart';
+
+import 'package:citifix/core/resource/citifix_palette.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Saveeditprofile extends StatelessWidget {
-  Saveeditprofile({
+  const Saveeditprofile({
     required this.role,
     super.key,
     required this.ontap,
     required this.bntcontroller,
   });
 
-  bool role;
-
+  final bool role; 
   final Function() ontap;
   final StreamController<bool> bntcontroller;
 
   @override
   Widget build(BuildContext context) {
+    final Color themeColor = role 
+        ? context.palette.workerprimary 
+        : context.palette.kPrimary;
+
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: ScreenUtilsManager.p23),
       child: SizedBox(
@@ -30,27 +34,37 @@ class Saveeditprofile extends StatelessWidget {
           builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
             final bool isEnabled = snapshot.data ?? false;
 
-            return ElevatedButton(
-              onPressed: isEnabled ? ontap : null,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: role
-                    ? context.palette.workerprimary
-                    : context.palette.kPrimary,
-                foregroundColor: Colors.white,
-                padding: EdgeInsets.symmetric(vertical: ScreenUtilsManager.h16),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(ScreenUtilsManager.r14),
+            return AnimatedScale(
+              scale: isEnabled ? 1.0 : 0.98,
+              duration: const Duration(milliseconds: 200),
+              child: ElevatedButton(
+                onPressed: isEnabled ? ontap : null,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: themeColor,
+                  foregroundColor: Colors.white,
+                  // Improved disabled state
+                  disabledBackgroundColor: context.palette.lightGrey.withOpacity(0.5),
+                  disabledForegroundColor: context.palette.lightGrey2,
+                  
+                  padding: EdgeInsets.symmetric(vertical: ScreenUtilsManager.h16),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(ScreenUtilsManager.r14),
+                  ),
+                  
+                  elevation: isEnabled ? 8 : 0,
+                  shadowColor: themeColor.withOpacity(0.4),
                 ),
-                elevation: isEnabled ? 6 : 0,
-                shadowColor: role
-                    ? context.palette.workerprimary.withOpacity(0.35)
-                    : context.palette.kPrimary.withOpacity(0.35),
-              ),
-              child: Text(
-                S.of(context).saveChanges,
-                style: GoogleFonts.cairo(
-                  fontSize: ScreenUtilsManager.s16,
-                  fontWeight: FontWeight.w700,
+                child: AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 300),
+                  child: Text(
+                    S.of(context).saveChanges,
+                    key: ValueKey<bool>(isEnabled), 
+                    style: GoogleFonts.cairo(
+                      fontSize: ScreenUtilsManager.s16,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 0.5,
+                    ),
+                  ),
                 ),
               ),
             );

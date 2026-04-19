@@ -62,26 +62,28 @@ class NotificationTile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _buildIconContainer(primaryColor),
-
               SizedBox(width: ScreenUtilsManager.w12),
-
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
                       children: [
-                        Text(
-                          item.title,
-                          style: GoogleFonts.cairo(
-                            fontSize: ScreenUtilsManager.s16,
-                            fontWeight: item.isRead
-                                ? FontWeight.w600
-                                : FontWeight.w800,
-                            color: item.isRead ? Colors.black87 : Colors.black,
+                        Expanded(
+                          child: Text(
+                            item.title,
+                            style: GoogleFonts.cairo(
+                              fontSize: ScreenUtilsManager.s16,
+                              fontWeight: item.isRead
+                                  ? FontWeight.w600
+                                  : FontWeight.w800,
+                              color: item.isRead
+                                  ? Colors.black87
+                                  : Colors.black,
+                            ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                           ),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
                         ),
                         SizedBox(width: 5),
                         Text(
@@ -114,7 +116,6 @@ class NotificationTile extends StatelessWidget {
                   ],
                 ),
               ),
-
               SizedBox(width: ScreenUtilsManager.w8),
 
               _buildDeleteButton(),
