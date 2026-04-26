@@ -9,7 +9,7 @@ class TaskDetailsModel {
   final bool isCompleted;
   final String departmentName;
   final String citizenName;
-  final String citizenProfileImageUrl;
+  final String? citizenProfileImageUrl;
   final String status;
   final String createdAt;
   final List<String> imagesUrls;
@@ -45,10 +45,8 @@ class TaskDetailsModel {
   factory TaskDetailsModel.fromJson(Map<String, dynamic> json) {
     return TaskDetailsModel(
       id: json["id"] ?? 0,
-
       title: json["title"]?.toString() ?? "",
       description: json["description"]?.toString() ?? "",
-
       areaName: json["areaName"]?.toString() ?? "",
       categoryName: json["categoryName"]?.toString() ?? "",
       departmentName: json["departmentName"]?.toString() ?? "",

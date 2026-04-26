@@ -62,7 +62,6 @@ class _TasksViewState extends State<TasksView> {
                 TaskFilterChips(
                   filters: Taskscontroller.filters(context),
                   onFilterSelected: (filter) {
-                    print(filter);
                     setState(() {
                       Taskscontroller.selectedFilter = filter;
                     });

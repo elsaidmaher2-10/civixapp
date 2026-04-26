@@ -2,7 +2,6 @@ import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/routing/appRoutingRole.dart';
 import 'package:flutter/material.dart';
 
-/// Light / dark [ThemeData] derived from [ColorManger] brand colors.
 abstract final class AppTheme {
   static Color _accentForRole(AppRole role) =>
       role == AppRole.worker ? ColorManger.workerprimary : ColorManger.kPrimary;

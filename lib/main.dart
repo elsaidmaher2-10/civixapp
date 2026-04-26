@@ -20,7 +20,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:logger/logger.dart';
+import 'package:intl/date_symbol_data_file.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
@@ -46,7 +46,6 @@ Future<void> _initApp() async {
   await LocalNotificationService.init();
   await NotificationService.init();
   await Locationservice().init();
-
   Bloc.observer = MyBlocObserver();
 }
 

@@ -1,9 +1,17 @@
+import 'package:citifix/core/DI/getit.dart';
 import 'package:citifix/core/database/local/prefmanger.dart';
 import 'package:citifix/core/extenstion/datetimeextension.dart';
 import 'package:citifix/core/resource/colormanager.dart';
+import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
+import 'package:citifix/core/routing/appRoutingRole.dart';
 import 'package:citifix/feature/citzenFeature/notication/data/model/notifavtionmodel.dart';
+import 'package:citifix/feature/citzenFeature/reports/presentation/views/reportdetails.dart';
+import 'package:citifix/feature/workerFeature/taskDetails/TaskDetailsPage.dart';
+import 'package:citifix/feature/workerFeature/taskDetails/data/repos/reportdetails.dart';
+import 'package:citifix/feature/workerFeature/taskDetails/presentation/manager/reportdetailsManger.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class NotificationTile extends StatelessWidget {
@@ -30,7 +38,38 @@ class NotificationTile extends StatelessWidget {
       color: Colors.transparent,
       child: InkWell(
         borderRadius: BorderRadius.circular(ScreenUtilsManager.r15),
-        onTap: onTap,
+        onTap: () {
+          onTap();
+
+          if (item.message.contains("report")) {
+            final role =
+                PrefrenceManager().getstring(Constantmanger.role) ?? "";
+
+            if (role.toLowerCase() == "worker") {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => BlocProvider(
+                    create: (_) => ReportDetailsManager(
+                      reportdetailsRepo: getIt<ReportdetailsRepo>(),
+                    ),
+                    child: TaskDetailsPage(reportid: item.id),
+                  ),
+                ),
+              );
+            } else {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ReportDetailsScreen(
+                    reportId: item.id,
+                    isachivement: false,
+                  ),
+                ),
+              );
+            }
+          }
+        },
         highlightColor: primaryColor.withOpacity(0.05),
         splashColor: primaryColor.withOpacity(0.1),
         child: AnimatedContainer(
@@ -40,6 +79,7 @@ class NotificationTile extends StatelessWidget {
           decoration: BoxDecoration(
             color: item.isRead
                 ? Theme.of(context).scaffoldBackgroundColor
+                // ignore: deprecated_member_use
                 : primaryColor.withOpacity(0.03),
             borderRadius: BorderRadius.circular(ScreenUtilsManager.r15),
             border: Border.all(

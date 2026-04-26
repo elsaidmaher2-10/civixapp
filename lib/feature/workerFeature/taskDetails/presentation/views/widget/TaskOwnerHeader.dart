@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:citifix/core/extenstion/datetimeextension.dart';
+import 'package:citifix/core/resource/assetvaluemanger.dart';
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart'; // تم الإضافة
@@ -33,7 +34,9 @@ class TaskOwnerHeader extends StatelessWidget {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(ScreenUtilsManager.r50),
                     child: CachedNetworkImage(
-                      imageUrl: task.citizenProfileImageUrl,
+                      imageUrl:
+                          task.citizenProfileImageUrl ??
+                          AssetValueManager.defualtimage1,
                       width: ScreenUtilsManager.w60,
                       height: ScreenUtilsManager.h60,
                       fit: BoxFit.contain,

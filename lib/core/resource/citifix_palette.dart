@@ -160,11 +160,7 @@ class CitifixPalette extends ThemeExtension<CitifixPalette> {
     );
   }
 
-  /// Dark companions: keep brand blues / worker orange; text tuned for WCAG-friendly
-  /// contrast on navy surfaces (primary body lighter than slate-200; muted text ≥ slate-300).
-  ///
-  /// Set [workerAccent] when the signed-in role is worker so primary tokens match
-  /// [AppTheme.dark] (warm orange on navy instead of soft blue).
+
   factory CitifixPalette.dark({bool workerAccent = false}) {
     const Color scaffold = Color(0xFF0F172A);
     const Color surface = Color(0xFF1B2634);

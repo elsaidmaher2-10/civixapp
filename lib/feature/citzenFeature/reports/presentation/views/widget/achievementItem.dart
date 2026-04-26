@@ -25,7 +25,7 @@ class AchievementReportCard extends StatelessWidget {
         MaterialPageRoute(
           builder: (_) => ReportDetailsScreen(
             reportId: report.reportId,
-            isachivement: true,
+            isachivement: true, 
           ),
         ),
       ),
