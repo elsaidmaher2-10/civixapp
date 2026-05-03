@@ -10,14 +10,15 @@ class CustomDateField extends StatelessWidget {
 
   Future<void> _selectDate(BuildContext context) async {
     DateTime? pickedDate = await showDatePicker(
-      locale: Locale("en"),
+      locale: Locale(Localizations.localeOf(context).languageCode),
       context: context,
-      initialDate: DateTime.now(),
+      initialDate: null,
       firstDate: DateTime(1950),
-      lastDate: DateTime(DateTime.now().year + 1),
+      lastDate: DateTime(2018),
       builder: (context, child) {
         return Theme(
           data: Theme.of(context).copyWith(
+            textTheme: TextTheme.of(context),
             colorScheme: ColorScheme.light(
               primary: context.palette.kPrimary,
               onPrimary: Colors.white,
@@ -35,7 +36,8 @@ class CustomDateField extends StatelessWidget {
     );
 
     if (pickedDate != null) {
-      String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
+      String formattedDate = DateFormat('yyyy-MM-dd', 'en').format(pickedDate);
+
       controller.text = formattedDate;
     }
   }

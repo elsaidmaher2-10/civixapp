@@ -162,10 +162,13 @@ class _LoginpageState extends State<Loginpage> {
                 switch (role) {
                   case AppRole.citizen:
                     Navigator.pushNamed(context, Routes.citizenMain);
+                    break;
                   case AppRole.worker:
                     Navigator.pushNamed(context, Routes.workerMain);
+                    break;
                   case AppRole.unknown:
                     Navigator.pushNamed(context, Routes.login);
+                    break;
                 }
               }
             },

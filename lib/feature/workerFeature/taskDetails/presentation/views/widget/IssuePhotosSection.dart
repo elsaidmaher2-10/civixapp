@@ -2,9 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
-import 'package:citifix/feature/citzenFeature/onbroading/widget/indicator.dart'; // تأكد من المسار
-import 'package:citifix/feature/citzenFeature/reports/presentation/views/widget/vedioplayer.dart'; // تأكد من المسار
-import 'package:citifix/generated/l10n.dart'; // تم إضافة ملف الترجمة
+import 'package:citifix/feature/citzenFeature/onbroading/widget/indicator.dart';
+import 'package:citifix/feature/citzenFeature/reports/presentation/views/widget/vedioplayer.dart';
+import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -69,21 +69,59 @@ class _IssuePhotosSectionState extends State<IssuePhotosSection> {
                       return AppVideoPlayer(dataSource: item, isRemote: true);
                     }
 
-                    return CachedNetworkImage(
-                      imageUrl: item,
-                      fit: BoxFit.cover,
-                      placeholder: (context, url) => Container(
-                        color: context.palette.grey200,
-                        child: Center(
-                          child: CupertinoActivityIndicator(
-                            radius: ScreenUtilsManager.r12,
-                            color: context.palette.primaryColor,
+                    return InkWell(
+                      onTap: () {
+                        showDialog(
+                          barrierColor: Color(0xff0f172b).withOpacity(0.9),
+                          context: context,
+                          builder: (ctx) {
+                            return Center(
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(8),
+                                child: CachedNetworkImage(
+                                  imageUrl: item,
+                                  fit: BoxFit.fill,
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.8,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.8,
+                                  placeholder: (context, url) => Container(
+                                    color: context.palette.grey200,
+                                    child: Center(
+                                      child: CupertinoActivityIndicator(
+                                        radius: ScreenUtilsManager.r12,
+                                        color: context.palette.primaryColor,
+                                      ),
+                                    ),
+                                  ),
+                                  errorWidget: (context, url, error) =>
+                                      Image.network(
+                                        Constantmanger.defualtImage,
+                                        fit: BoxFit.cover,
+                                      ),
+                                ),
+                              ),
+                            );
+                          },
+                        );
+                      },
+
+                      child: CachedNetworkImage(
+                        imageUrl: item,
+                        fit: BoxFit.cover,
+                        placeholder: (context, url) => Container(
+                          color: context.palette.grey200,
+                          child: Center(
+                            child: CupertinoActivityIndicator(
+                              radius: ScreenUtilsManager.r12,
+                              color: context.palette.primaryColor,
+                            ),
                           ),
                         ),
-                      ),
-                      errorWidget: (context, url, error) => Image.network(
-                        Constantmanger.defualtImage,
-                        fit: BoxFit.cover,
+                        errorWidget: (context, url, error) => Image.network(
+                          Constantmanger.defualtImage,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     );
                   },

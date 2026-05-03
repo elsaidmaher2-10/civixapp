@@ -47,10 +47,9 @@ class Citifix extends StatelessWidget {
                 LocalizationControllerState
               >(
                 builder: (context, locState) {
-                  String currentLang = "en";
-
+                  Locale currentLocale = const Locale('en');
                   if (locState is LocalizationControllerChanged) {
-                    currentLang = locState.lang;
+                    currentLocale = Locale(locState.lang);
                   }
                   return BlocBuilder<ThemeCubit, ThemeMode>(
                     builder: (context, themeMode) {
@@ -64,7 +63,7 @@ class Citifix extends StatelessWidget {
                         ],
                         supportedLocales: S.delegate.supportedLocales,
                         initialRoute: Routes.animatedSplash,
-                        locale: Locale(currentLang),
+                        locale: currentLocale,
                         onGenerateRoute: Routingmanger.onGenerateRoute,
                         title: Constantmanger.apptitle,
                         debugShowCheckedModeBanner: false,

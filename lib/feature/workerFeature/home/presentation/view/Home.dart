@@ -127,7 +127,7 @@ Widget _buildHomeContent(DashBroadHome data, BuildContext context) {
           _buildHeaderSection(data.workerName, context),
           SizedBox(height: ScreenUtilsManager.s16),
           WorkerCard(
-            isVerified: false,
+            isVerified: data.verified,
             name: data.workerName,
             imageUrl: data.profileImageUrl ?? AssetValueManager.defualtimage1,
           ),

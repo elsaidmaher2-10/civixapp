@@ -12,13 +12,19 @@ PreferredSizeWidget otpappbar(BuildContext context, Null Function() param1) {
     titleSpacing: 3.w,
     title: Text(
       S.of(context).otpVerification,
-      style: GoogleFonts.cairo(color: context.palette.kPrimary, fontSize: 20.sp),
+      style: GoogleFonts.cairo(
+        color: context.palette.kPrimary,
+        fontSize: 20.sp,
+      ),
     ),
     backgroundColor: context.palette.white,
     leadingWidth: 36.w,
 
     leading: Padding(
-      padding: EdgeInsets.only(left: 10.w, bottom: ScreenUtilsManager.h4),
+      padding: EdgeInsetsGeometry.directional(
+        start: 10.w,
+        bottom: ScreenUtilsManager.h4,
+      ),
       child: IconButton(
         onPressed: () {
           Navigator.pop(context);

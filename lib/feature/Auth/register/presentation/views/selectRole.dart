@@ -68,11 +68,11 @@ class SelectRoleDropdown extends StatelessWidget {
           items: [
             DropdownMenuItem(
               value: "WORKER",
-              child: Text(S.of(context).worker),
+              child: Text(S.of(context).worker, style: GoogleFonts.cairo()),
             ),
             DropdownMenuItem(
               value: "CITIZEN",
-              child: Text(S.of(context).citizen),
+              child: Text(S.of(context).citizen, style: GoogleFonts.cairo()),
             ),
           ],
           onChanged: onChanged,

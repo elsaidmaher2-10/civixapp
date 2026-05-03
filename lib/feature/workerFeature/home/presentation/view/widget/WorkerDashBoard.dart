@@ -80,9 +80,7 @@ class _WorkerDashboardState extends State<WorkerDashboard>
             buildWorkerCard(
               context,
               label: S.of(context).assigned,
-              value: HomeDashboardLogic.formatNumber(
-                widget.data.assignedReports,
-              ),
+              value: HomeDashboardLogic.formatNumber(widget.data.totalReports),
             ),
           ],
         ),

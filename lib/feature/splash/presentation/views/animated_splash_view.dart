@@ -17,7 +17,6 @@ class AnimatedSplashView extends StatefulWidget {
 
 class _AnimatedSplashViewState extends State<AnimatedSplashView>
     with SingleTickerProviderStateMixin {
-  /// Colors sampled from [assets/citiFixLogo.svg] fills.
   static const List<Color> _logoTitlePalette = [
     Color(0xFF1B3B69),
     Color(0xFF1A6CAE),
