@@ -1,5 +1,6 @@
+import 'package:citifix/feature/citzenFeature/achivement/data/Achievment/achievementModel.dart';
 import 'package:citifix/feature/citzenFeature/reports/data/Models/GetReportModel.dart';
-import 'package:citifix/feature/citzenFeature/reports/data/Models/Report/CreateReportResponseModel.dart';
+import 'package:citifix/feature/citzenFeature/reports/data/Models/Report/ReportResponseModel.dart';
 
 abstract class ReportManagerState {}
 
@@ -22,6 +23,11 @@ class GetReportsByidLoading extends ReportManagerState {}
 class GetReportsByidSuccess extends ReportManagerState {
   final ReportResponseModelByid reports;
   GetReportsByidSuccess(this.reports);
+}
+
+class GetAchivmentReportsByidSuccess extends ReportManagerState {
+  final AchievementModel reports;
+  GetAchivmentReportsByidSuccess(this.reports);
 }
 
 class GetReportsByidFailure extends ReportManagerState {

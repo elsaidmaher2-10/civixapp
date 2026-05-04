@@ -1,12 +1,12 @@
 import 'package:citifix/core/widget/stautsBageApp.dart';
-import 'package:citifix/feature/citzenFeature/reports/data/Models/Achievment/achievementModel.dart';
+import 'package:citifix/feature/citzenFeature/achivement/data/Achievment/achievementModel.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'AchievementImage.dart';
 
 class AchievementCard extends StatelessWidget {
-  final Achievementmodel report;
+  final AchievementModel report;
   const AchievementCard({super.key, required this.report});
 
   @override

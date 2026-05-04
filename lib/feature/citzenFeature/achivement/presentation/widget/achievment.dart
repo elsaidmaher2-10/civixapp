@@ -7,12 +7,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
-import 'package:citifix/feature/citzenFeature/reports/presentation/manager/achievement/achicvementState.dart';
-import 'package:citifix/feature/citzenFeature/reports/presentation/manager/achievement/achivementManger.dart';
-import 'package:citifix/feature/citzenFeature/reports/presentation/views/AchievementCard.dart';
+import 'package:citifix/feature/citzenFeature/achivement/presentation/achievement/achicvementState.dart';
+import 'package:citifix/feature/citzenFeature/achivement/presentation/achievement/achivementManger.dart';
+import 'package:citifix/feature/citzenFeature/achivement/presentation/widget/AchievementCard.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/views/Dotincator.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/views/ReportSearchBar.dart';
-import 'package:citifix/feature/citzenFeature/reports/presentation/views/widget/achievementItem.dart';
+import 'package:citifix/feature/citzenFeature/achivement/presentation/views/achievementItem.dart';
 import '../../../../../generated/l10n.dart';
 
 class AchievemrntReportScreen extends StatefulWidget {

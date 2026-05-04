@@ -3,7 +3,6 @@ import 'package:citifix/core/database/local/prefmanger.dart';
 import 'package:citifix/core/database/remote/api/ApiService.dart';
 import 'package:citifix/core/function/passvlidatorrules.dart';
 import 'package:citifix/core/resource/colormanager.dart';
-import 'package:citifix/core/resource/constantmanagerAr.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/core/routing/routes.dart';
 import 'package:citifix/core/service/networkchecker.dart';

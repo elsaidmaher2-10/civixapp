@@ -1,8 +1,9 @@
 import 'dart:async';
 
+import 'package:citifix/feature/citzenFeature/achivement/data/Achievment/achievementModel.dart';
 import 'package:citifix/feature/citzenFeature/reports/data/Models/GetReportModel.dart';
-import 'package:citifix/feature/citzenFeature/reports/data/Models/Report/CreateReportRequestModel.dart';
-import 'package:citifix/feature/citzenFeature/reports/data/Models/Report/CreateReportResponseModel.dart';
+import 'package:citifix/feature/citzenFeature/reports/data/Models/Report/ReportRequestModel.dart';
+import 'package:citifix/feature/citzenFeature/reports/data/Models/Report/ReportResponseModel.dart';
 import 'package:citifix/feature/citzenFeature/reports/data/repos/reports/reports.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/manager/reportManger/cubit/report_manager_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -55,11 +56,8 @@ class ReportCubit extends Cubit<ReportManagerState> {
   Future<void> GetReportByID({required int ReportID}) async {
     if (isClosed) return;
     emit(GetReportsByidLoading());
-
     final result = await reportRepository.getReportById(reportId: ReportID);
-
     if (isClosed) return;
-
     result.fold(
       (failure) => emit(GetReportsByidFailure(failure.errors.first)),
       (ReportResponseModelByid successMessage) async {
@@ -67,7 +65,18 @@ class ReportCubit extends Cubit<ReportManagerState> {
       },
     );
   }
-
+  Future<void> getAchievementbyReportID({required int ReportID}) async {
+    if (isClosed) return;
+    emit(GetReportsByidLoading());
+    final result = await reportRepository.getAchievementbyReportID(reportId: ReportID);
+    if (isClosed) return;
+    result.fold(
+      (failure) => emit(GetReportsByidFailure(failure.errors.first)),
+      (AchievementModel successMessage) async {
+        emit(GetAchivmentReportsByidSuccess(successMessage));
+      },
+    );
+  }
   Future<void> deleteReport({required int ReportID}) async {
     if (isClosed) return;
     emit(GetReportsByidLoading());

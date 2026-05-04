@@ -20,7 +20,6 @@ class ReportResponseModelByid {
   final int? workerId;
   final String workerName;
   final List<TimelineModel> timeline;
-
   final String workerProfileImageUrl;
   final List<CommentModel> comments;
   final DateTime createdAt;

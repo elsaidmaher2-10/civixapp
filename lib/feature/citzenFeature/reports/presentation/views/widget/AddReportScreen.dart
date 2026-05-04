@@ -8,7 +8,7 @@ import 'package:citifix/feature/citzenFeature/reports/presentation/manager/repor
 import 'package:citifix/feature/citzenFeature/reports/presentation/manager/reportManger/cubit/report_manager_state.dart';
 import 'package:citifix/feature/citzenFeature/home/presentation/view/widget/CustomMap.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/views/widget/ImagePickerList.dart';
-import 'package:citifix/feature/citzenFeature/reports/data/Models/Report/CreateReportRequestModel.dart';
+import 'package:citifix/feature/citzenFeature/reports/data/Models/Report/ReportRequestModel.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/views/widget/ReportForms.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/views/widget/addreportAppbar.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/views/widget/extensionvediotype.dart';

@@ -1,7 +1,7 @@
-import 'dart:developer';
 import 'package:citifix/core/DI/getit.dart';
 import 'package:citifix/core/extenstion/datetimeextension.dart';
 import 'package:citifix/core/resource/colormanager.dart';
+import 'package:citifix/core/resource/constantmanagerAr.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/core/service/StatusReport.dart';
 import 'package:citifix/core/widget/stautsBageApp.dart';
@@ -12,6 +12,7 @@ import 'package:citifix/feature/citzenFeature/reports/presentation/manager/repor
 import 'package:citifix/feature/citzenFeature/reports/presentation/manager/reportManger/cubit/report_manager_state.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/views/widget/CustomTimelineTile.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/views/widget/ReportDetailsAppbar.dart';
+import 'package:citifix/feature/citzenFeature/achivement/presentation/views/achievementItem.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/views/widget/commentsystem.dart';
 import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/cupertino.dart';
@@ -21,30 +22,31 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-
 import '../../../../../core/resource/constantmanger.dart';
-import '../../data/repos/commentRepo/commentRepo.dart';
+import '../../../reports/data/repos/commentRepo/commentRepo.dart';
 
-class ReportDetailsScreen extends StatefulWidget {
+class AchivementReportDetails extends StatefulWidget {
   final int reportId;
   final bool isachivement;
-  const ReportDetailsScreen({
+  const AchivementReportDetails({
     super.key,
     required this.reportId,
     required this.isachivement,
   });
 
   @override
-  State<ReportDetailsScreen> createState() => _ReportDetailsScreenState();
+  State<AchivementReportDetails> createState() => _ReportDetailsScreenState();
 }
 
-class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
+class _ReportDetailsScreenState extends State<AchivementReportDetails> {
   final TextEditingController controller = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    context.read<ReportCubit>().GetReportByID(ReportID: widget.reportId);
+    context.read<ReportCubit>().getAchievementbyReportID(
+      ReportID: widget.reportId,
+    );
   }
 
   @override
@@ -80,13 +82,13 @@ class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
                     color: context.palette.kPrimary,
                   ),
                 );
-              } else if (state is GetReportsByidSuccess) {
+              } else if (state is GetAchivmentReportsByidSuccess) {
                 final report = state.reports;
                 return CustomScrollView(
                   physics: const BouncingScrollPhysics(),
                   slivers: [
                     ReportDetailsAppbar(
-                      mediaItems: [...report.imagesUrls, ...report.videosUrls],
+                      mediaItems: [...report.completionImageUrls],
                       ontap: () => Navigator.pop(context, true),
                     ),
                     SliverToBoxAdapter(
@@ -98,7 +100,7 @@ class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            StatusBadgeApp(status: report.status),
+                            StatusBadgeApp(status: "Resolved"),
                             SizedBox(height: 16.h),
                             Text(
                               report.title,
@@ -130,7 +132,9 @@ class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
                               context,
                               label: S.of(context).reportedBy,
                               name: report.citizenName,
-                              imageUrl: report.citizenProfileImageUrl,
+                              imageUrl:
+                                  report.citizenProfileImageUrl ??
+                                  Constantmanger.defualtImage,
                               icon: Icons.person_outline,
                             ),
 
@@ -140,7 +144,9 @@ class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
                                 context,
                                 label: S.of(context).assigned,
                                 name: report.workerName,
-                                imageUrl: report.workerProfileImageUrl,
+                                imageUrl:
+                                    report.workerProfileImageUrl ??
+                                    Constantmanger.defualtImage,
                                 icon: Icons.engineering_outlined,
                                 isWorker: true,
                                 department: report.departmentName,
@@ -154,8 +160,9 @@ class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
                               report.description,
                               style: GoogleFonts.cairo(
                                 fontSize: 15.sp,
-                                color: context.palette.onSurface
-                                    .withValues(alpha: 0.88),
+                                color: context.palette.onSurface.withValues(
+                                  alpha: 0.88,
+                                ),
                                 height: 1.6,
                               ),
                             ),
@@ -202,12 +209,7 @@ class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
                         ),
                       ),
                     ),
-                    Commentsystem(
-                      controller: controller,
-                      reporID: report.id,
-                      comments: report.comments,
-                      isComment: widget.isachivement ? true : false,
-                    ),
+
                     SliverToBoxAdapter(child: SizedBox(height: 50.h)),
                   ],
                 );
@@ -313,11 +315,7 @@ class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Icon(
-          icon,
-          size: 16.sp,
-          color: context.palette.onSurfaceVariant,
-        ),
+        Icon(icon, size: 16.sp, color: context.palette.onSurfaceVariant),
         SizedBox(width: 4.w),
         Text(
           label,
@@ -411,9 +409,7 @@ class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
           Text(
             message,
             textAlign: TextAlign.center,
-            style: GoogleFonts.cairo(
-              color: context.palette.onSurfaceVariant,
-            ),
+            style: GoogleFonts.cairo(color: context.palette.onSurfaceVariant),
           ),
           SizedBox(height: 16.h),
           ElevatedButton(

@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../data/Models/Achievment/achievementModel.dart';
-import '../../../data/repos/reports/reports.dart';
+import '../../data/Achievment/achievementModel.dart';
+import '../../../reports/data/repos/reports/reports.dart';
 import 'achicvementState.dart';
 
 class AchievementCubit extends Cubit<AchievementState> {
@@ -15,7 +15,7 @@ class AchievementCubit extends Cubit<AchievementState> {
   bool isLoading = false;
   bool hasMore = true;
 
-  List<Achievementmodel> reports = [];
+  List<AchievementModel> reports = [];
 
   Future<void> getAchievements() async {
     if (isLoading || !hasMore) return;

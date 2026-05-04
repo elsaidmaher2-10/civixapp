@@ -9,13 +9,13 @@ import 'package:citifix/core/database/remote/error/failureResponse.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/service/networkchecker.dart';
 import 'package:citifix/feature/citzenFeature/reports/data/Models/GetReportModel.dart';
-import 'package:citifix/feature/citzenFeature/reports/data/Models/Report/CreateReportRequestModel.dart';
-import 'package:citifix/feature/citzenFeature/reports/data/Models/Report/CreateReportResponseModel.dart';
+import 'package:citifix/feature/citzenFeature/reports/data/Models/Report/ReportRequestModel.dart';
+import 'package:citifix/feature/citzenFeature/reports/data/Models/Report/ReportResponseModel.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:video_compress/video_compress.dart';
 
-import '../../Models/Achievment/achievementModel.dart';
+import '../../../../achivement/data/Achievment/achievementModel.dart';
 
 class ReportRepositoryT {
   final Apiservice service;
@@ -115,6 +115,40 @@ class ReportRepositoryT {
         path: "${Apiconstant.report}/$reportId",
       );
       return right(ReportResponseModelByid.fromJson(response));
+    } on Serverexciptionmodel catch (e) {
+      final dynamic errorData = e.errors;
+      if (errorData is Map<String, dynamic>) {
+        return left(FailureResponse.fromJson(errorData));
+      }
+      return left(
+        FailureResponse(
+          errors: [errorData?.toString() ?? "Unknown server error"],
+          statusCode: e.statuscode,
+        ),
+      );
+    } catch (e) {
+      return left(
+        FailureResponse(
+          errors: ["Unknown Error: ${e.toString()}"],
+          statusCode: 500,
+        ),
+      );
+    }
+  }
+
+  Future<Either<FailureResponse, AchievementModel>>
+  getAchievementbyReportID({required int reportId}) async {
+    if (!await internetChecker.checkInternet()) {
+      return left(
+        FailureResponse(errors: [Constantmanger.nointernet], statusCode: 1),
+      );
+    }
+
+    try {
+      final response = await service.get(
+        path: "${Apiconstant.achievemnent}/$reportId",
+      );
+      return right(AchievementModel.fromJson(response));
     } on Serverexciptionmodel catch (e) {
       final dynamic errorData = e.errors;
       if (errorData is Map<String, dynamic>) {

@@ -1,18 +1,19 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:citifix/core/extenstion/datetimeextension.dart';
-import 'package:citifix/feature/citzenFeature/reports/data/Models/Achievment/achievementModel.dart';
+import 'package:citifix/feature/citzenFeature/achivement/data/Achievment/achievementModel.dart';
+import 'package:citifix/feature/citzenFeature/achivement/presentation/widget/achivement_report_details.dart';
 import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../../../../core/resource/colormanager.dart';
-import '../../../../../../core/resource/constantmanger.dart';
-import '../reportdetails.dart';
+import '../../../../../core/resource/colormanager.dart';
+import '../../../../../core/resource/constantmanger.dart';
+import '../../../reports/presentation/views/reportdetails.dart';
 
 class AchievementReportCard extends StatelessWidget {
-  final Achievementmodel report;
+  final AchievementModel report;
 
   const AchievementReportCard({super.key, required this.report});
 
@@ -23,9 +24,9 @@ class AchievementReportCard extends StatelessWidget {
       onTap: () => Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (_) => ReportDetailsScreen(
+          builder: (_) => AchivementReportDetails(
             reportId: report.reportId,
-            isachivement: true, 
+            isachivement: true,
           ),
         ),
       ),
@@ -94,7 +95,7 @@ class AchievementReportCard extends StatelessWidget {
                         ),
 
                         Text(
-                          "${S.of(context).completed} ${report.resolvedAt.timeAgo(context)}",
+                          "${S.of(context).completed} ${report.createdAt.timeAgo(context)}",
                           style: GoogleFonts.cairo(
                             fontSize: 10.sp,
                             color: context.palette.onSurfaceVariant,

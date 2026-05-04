@@ -1,4 +1,4 @@
-import 'package:citifix/feature/citzenFeature/reports/data/Models/timelinestep/timelinestep.dart';
+import 'package:citifix/feature/citzenFeature/reports/data/Models/timeline/timelinestep.dart';
 import 'package:citifix/feature/citzenFeature/onbroading/model/onbroadingmodel.dart';
 
 class Constantmanger {
