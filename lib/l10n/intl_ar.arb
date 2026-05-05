@@ -383,7 +383,19 @@
   "attentionRequired": "تنبيه مطلوب",
   "errorIdNotClear": "صورة الهوية غير واضحة أو منتهية الصلاحية.",
   "resubmit": "إعادة إرسال الطلب",
-  "needHelp": "هل تحتاج لمساعدة؟"
-
+  "needHelp": "هل تحتاج لمساعدة؟",
+  "reportedBy": "مُقدم البلاغ",
+  "assigned": "مُسند إلى",
+  "description": "الوصف",
+  "location": "الموقع",
+  "progressTracking": "تتبع حالة البلاغ",
+  "pending": "قيد الانتظار",
+  "inProgress": "قيد التنفيذ",
+  "resolved": "تم الحل",
+  "completionDetails": "تفاصيل الإنجاز",
+  "reportedImages": "الصور المرفقة بالبلاغ",
+  "completionImages": "الصور بعد الإنجاز",
+  "errorOccurred": "حدث خطأ",
+  "retry": "إعادة المحاولة"
 }
 

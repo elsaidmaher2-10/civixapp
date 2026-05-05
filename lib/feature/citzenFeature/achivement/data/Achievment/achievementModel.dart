@@ -4,28 +4,39 @@ class AchievementModel {
   final int reportId;
   final String title;
   final String description;
+
   final String areaName;
   final int areaId;
+
   final String categoryName;
   final int categoryId;
+
   final String departmentName;
   final int departmentId;
+
   final int citizenId;
   final String citizenName;
   final String citizenUserId;
   final String? citizenProfileImageUrl;
+
   final int workerId;
   final String workerName;
   final String workerUserId;
   final String? workerProfileImageUrl;
+
   final String status;
+
   final String location;
   final double latitude;
   final double longitude;
+
   final List<String> reportImageUrls;
   final List<String> completionImageUrls;
+
   final String? completionNote;
+
   final DateTime createdAt;
+
   final List<TimelineModel> timeline;
 
   AchievementModel({
@@ -59,45 +70,48 @@ class AchievementModel {
 
   factory AchievementModel.fromJson(Map<String, dynamic> json) {
     return AchievementModel(
-      reportId: json['reportId'],
-      title: json['title'],
-      description: json['description'],
+      reportId: json['reportId'] ?? 0,
+      title: json['title'] ?? "",
+      description: json['description'] ?? "",
 
-      areaName: json['areaName'],
-      areaId: json['areaId'],
+      areaName: json['areaName'] ?? "",
+      areaId: json['areaId'] ?? 0,
 
-      categoryName: json['categoryName'],
-      categoryId: json['categoryId'],
+      categoryName: json['categoryName'] ?? "",
+      categoryId: json['categoryId'] ?? 0,
 
-      departmentName: json['departmentName'] ?? '',
-      departmentId: json['departmentId'],
+      departmentName: json['departmentName'] ?? "",
+      departmentId: json['departmentId'] ?? 0,
 
-      citizenId: json['citizenId'],
-      citizenName: json['citizenName'],
-      citizenUserId: json['citizenUserId'],
+      citizenId: json['citizenId'] ?? 0,
+      citizenName: json['citizenName'] ?? "",
+      citizenUserId: json['citizenUserId'] ?? "",
       citizenProfileImageUrl: json['citizenProfileImageUrl'],
 
-      workerId: json['workerId'],
-      workerName: json['workerName'],
-      workerUserId: json['workerUserId'],
+      workerId: json['workerId'] ?? 0,
+      workerName: json['workerName'] ?? "",
+      workerUserId: json['workerUserId'] ?? "",
       workerProfileImageUrl: json['workerProfileImageUrl'],
 
-      status: json['status'],
+      status: json['status'] ?? "",
 
-      location: json['location'],
-      latitude: (json['latitude'] as num).toDouble(),
-      longitude: (json['longitude'] as num).toDouble(),
+      location: json['location'] ?? "",
+
+      latitude: (json['latitude'] as num?)?.toDouble() ?? 0.0,
+      longitude: (json['longitude'] as num?)?.toDouble() ?? 0.0,
 
       reportImageUrls: List<String>.from(json['reportImageUrls'] ?? []),
       completionImageUrls: List<String>.from(json['completionImageUrls'] ?? []),
 
       completionNote: json['completionNote'],
 
-      createdAt: DateTime.parse(json['createdAt']),
+      createdAt: DateTime.tryParse(json['createdAt'] ?? "") ?? DateTime.now(),
 
-      timeline: (json['timeline'] as List)
-          .map((e) => TimelineModel.fromJson(e))
-          .toList(),
+      timeline:
+          (json['timeline'] as List?)
+              ?.map((e) => TimelineModel.fromJson(e))
+              .toList() ??
+          [],
     );
   }
 }

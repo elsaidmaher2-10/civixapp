@@ -69,7 +69,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "areYouSureLogout": MessageLookupByLibrary.simpleMessage(
       "هل أنت متأكد من تسجيل الخروج؟",
     ),
-    "assigned": MessageLookupByLibrary.simpleMessage("تم التعيين"),
+    "assigned": MessageLookupByLibrary.simpleMessage("مُسند إلى"),
     "attentionRequired": MessageLookupByLibrary.simpleMessage("تنبيه مطلوب"),
     "available_tasks": MessageLookupByLibrary.simpleMessage("المهام المتاحة"),
     "camera": MessageLookupByLibrary.simpleMessage("الكاميرا"),
@@ -100,8 +100,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "completedBy": MessageLookupByLibrary.simpleMessage("تم الإنجاز بواسطة"),
     "completedFrom": m0,
     "completionData": MessageLookupByLibrary.simpleMessage("بيانات الإنجاز"),
+    "completionDetails": MessageLookupByLibrary.simpleMessage("تفاصيل الإنجاز"),
     "completionImages": MessageLookupByLibrary.simpleMessage(
-      "صور وفيديوهات الإنجاز",
+      "الصور بعد الإنجاز",
     ),
     "completionNote": MessageLookupByLibrary.simpleMessage("ملاحظات الإنجاز"),
     "completionNotes": MessageLookupByLibrary.simpleMessage("ملاحظات الإنجاز"),
@@ -188,7 +189,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "errorMissingData": MessageLookupByLibrary.simpleMessage(
       "بعض المعلومات المطلوبة مفقودة من مستنداتك.",
     ),
-    "errorOccurred": MessageLookupByLibrary.simpleMessage("حدث خطأ ما"),
+    "errorOccurred": MessageLookupByLibrary.simpleMessage("حدث خطأ"),
     "errorSelfieMismatch": MessageLookupByLibrary.simpleMessage(
       "الصورة الشخصية لا تتطابق مع صورة الهوية المقدمة.",
     ),
@@ -255,7 +256,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "identityDocs": MessageLookupByLibrary.simpleMessage("وثائق الهوية"),
     "imageBlurry": MessageLookupByLibrary.simpleMessage("الصورة غير واضحة"),
     "imageRequired": MessageLookupByLibrary.simpleMessage("الصورة مطلوبة"),
-    "inProgress": MessageLookupByLibrary.simpleMessage("جاري التنفيذ"),
+    "inProgress": MessageLookupByLibrary.simpleMessage("قيد التنفيذ"),
     "inside_work_zone": MessageLookupByLibrary.simpleMessage(
       "داخل منطقة العمل",
     ),
@@ -413,7 +414,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "passwordsDoNotMatch": MessageLookupByLibrary.simpleMessage(
       "كلمات المرور غير متطابقة",
     ),
-    "pending": MessageLookupByLibrary.simpleMessage("قيد المعالجة"),
+    "pending": MessageLookupByLibrary.simpleMessage("قيد الانتظار"),
     "phone": MessageLookupByLibrary.simpleMessage("رقم الهاتف"),
     "phoneNumber": MessageLookupByLibrary.simpleMessage("رقم الهاتف"),
     "phoneRequired": MessageLookupByLibrary.simpleMessage("رقم الهاتف مطلوب"),
@@ -450,7 +451,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "reportTitle": MessageLookupByLibrary.simpleMessage("حفرة في الشارع"),
     "reportTitleHint": MessageLookupByLibrary.simpleMessage("عنوان البلاغ"),
     "reportTitleLabel": MessageLookupByLibrary.simpleMessage("عنوان البلاغ"),
-    "reportedBy": MessageLookupByLibrary.simpleMessage("تم التبليغ بواسطة"),
+    "reportedBy": MessageLookupByLibrary.simpleMessage("مُقدم البلاغ"),
+    "reportedImages": MessageLookupByLibrary.simpleMessage(
+      "الصور المرفقة بالبلاغ",
+    ),
     "reporter": MessageLookupByLibrary.simpleMessage("صاحب البلاغ"),
     "reports": MessageLookupByLibrary.simpleMessage("البلاغات"),
     "requestSentSuccessfully": MessageLookupByLibrary.simpleMessage(

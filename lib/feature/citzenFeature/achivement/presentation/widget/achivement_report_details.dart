@@ -1,19 +1,14 @@
-import 'package:citifix/core/DI/getit.dart';
 import 'package:citifix/core/extenstion/datetimeextension.dart';
 import 'package:citifix/core/resource/colormanager.dart';
-import 'package:citifix/core/resource/constantmanagerAr.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/core/service/StatusReport.dart';
 import 'package:citifix/core/widget/stautsBageApp.dart';
 import 'package:citifix/feature/citzenFeature/home/presentation/view/widget/CustomMap.dart';
 import 'package:citifix/feature/citzenFeature/reports/data/Models/Report/ReportResponseModel.dart';
-import 'package:citifix/feature/citzenFeature/reports/presentation/manager/comment/commentmanger_cubit.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/manager/reportManger/cubit/report_manager_cubit.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/manager/reportManger/cubit/report_manager_state.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/views/widget/CustomTimelineTile.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/views/widget/ReportDetailsAppbar.dart';
-import 'package:citifix/feature/citzenFeature/achivement/presentation/views/achievementItem.dart';
-import 'package:citifix/feature/citzenFeature/reports/presentation/views/widget/commentsystem.dart';
 import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +18,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import '../../../../../core/resource/constantmanger.dart';
-import '../../../reports/data/repos/commentRepo/commentRepo.dart';
 
 class AchivementReportDetails extends StatefulWidget {
   final int reportId;
@@ -68,157 +62,190 @@ class _ReportDetailsScreenState extends State<AchivementReportDetails> {
           });
         }
       },
-      child: BlocProvider(
-        create: (context) =>
-            CommentsCubit(getIt<Commentrepo>())..fetchComments(widget.reportId),
-        child: Scaffold(
-          backgroundColor: context.palette.reportsPageBackground,
-          body: BlocBuilder<ReportCubit, ReportManagerState>(
-            builder: (context, state) {
-              if (state is GetReportsByidLoading) {
-                return Center(
-                  child: CupertinoActivityIndicator(
-                    radius: ScreenUtilsManager.r12,
-                    color: context.palette.kPrimary,
+      child: Scaffold(
+        backgroundColor: context.palette.reportsPageBackground,
+        body: BlocBuilder<ReportCubit, ReportManagerState>(
+          builder: (context, state) {
+            if (state is GetReportsByidLoading) {
+              return Center(
+                child: CupertinoActivityIndicator(
+                  radius: ScreenUtilsManager.r12,
+                  color: context.palette.kPrimary,
+                ),
+              );
+            } else if (state is GetAchivmentReportsByidSuccess) {
+              final report = state.reports;
+              return CustomScrollView(
+                physics: const BouncingScrollPhysics(),
+                slivers: [
+                  ReportDetailsAppbar(
+                    mediaItems: [...report.reportImageUrls],
+                    ontap: () => Navigator.pop(context, true),
                   ),
-                );
-              } else if (state is GetAchivmentReportsByidSuccess) {
-                final report = state.reports;
-                return CustomScrollView(
-                  physics: const BouncingScrollPhysics(),
-                  slivers: [
-                    ReportDetailsAppbar(
-                      mediaItems: [...report.completionImageUrls],
-                      ontap: () => Navigator.pop(context, true),
-                    ),
-                    SliverToBoxAdapter(
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 24.w,
-                          vertical: 16.h,
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            StatusBadgeApp(status: "Resolved"),
-                            SizedBox(height: 16.h),
-                            Text(
-                              report.title,
-                              style: GoogleFonts.cairo(
-                                fontSize: 24.sp,
-                                fontWeight: FontWeight.w900,
-                                color: context.palette.onSurface,
-                              ),
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 24.w,
+                        vertical: 16.h,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          StatusBadgeApp(status: report.status),
+                          SizedBox(height: 16.h),
+                          Text(
+                            report.title,
+                            style: GoogleFonts.cairo(
+                              fontSize: 24.sp,
+                              fontWeight: FontWeight.w900,
+                              color: context.palette.onSurface,
                             ),
-                            SizedBox(height: 8.h),
-                            Row(
-                              children: [
-                                _buildInfoChip(
-                                  context,
-                                  Icons.category_outlined,
-                                  report.categoryName,
-                                ),
-                                SizedBox(width: 16.w),
-                                _buildInfoChip(
-                                  context,
-                                  Icons.access_time_rounded,
-                                  report.createdAt.timeAgo(context),
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: 20.h),
-
-                            _buildUserCard(
-                              context,
-                              label: S.of(context).reportedBy,
-                              name: report.citizenName,
-                              imageUrl:
-                                  report.citizenProfileImageUrl ??
-                                  Constantmanger.defualtImage,
-                              icon: Icons.person_outline,
-                            ),
-
-                            if (report.workerName.isNotEmpty) ...[
-                              SizedBox(height: 12.h),
-                              _buildUserCard(
+                          ),
+                          SizedBox(height: 8.h),
+                          Row(
+                            children: [
+                              _buildInfoChip(
                                 context,
-                                label: S.of(context).assigned,
-                                name: report.workerName,
-                                imageUrl:
-                                    report.workerProfileImageUrl ??
-                                    Constantmanger.defualtImage,
-                                icon: Icons.engineering_outlined,
-                                isWorker: true,
-                                department: report.departmentName,
+                                Icons.category_outlined,
+                                report.categoryName,
+                              ),
+                              SizedBox(width: 16.w),
+                              _buildInfoChip(
+                                context,
+                                Icons.access_time_rounded,
+                                report.createdAt.timeAgo(context),
                               ),
                             ],
+                          ),
+                          SizedBox(height: 20.h),
 
-                            SizedBox(height: 20.h),
-                            _sectionTitle(S.of(context).description),
-                            SizedBox(height: 8.h),
-                            Text(
-                              report.description,
-                              style: GoogleFonts.cairo(
-                                fontSize: 15.sp,
-                                color: context.palette.onSurface.withValues(
-                                  alpha: 0.88,
-                                ),
-                                height: 1.6,
-                              ),
+                          _buildUserCard(
+                            context,
+                            label: S.of(context).reportedBy,
+                            name: report.citizenName,
+                            userId: report.citizenId.toString(),
+                            imageUrl:
+                                report.citizenProfileImageUrl ??
+                                Constantmanger.defualtImage,
+                            icon: Icons.person_outline,
+                          ),
+
+                          if (report.workerName.isNotEmpty) ...[
+                            SizedBox(height: 12.h),
+                            _buildUserCard(
+                              context,
+                              label: S.of(context).assigned,
+                              name: report.workerName,
+                              userId: report.workerId.toString(),
+                              imageUrl:
+                                  report.workerProfileImageUrl ??
+                                  Constantmanger.defualtImage,
+                              icon: Icons.engineering_outlined,
+                              isWorker: true,
+                              department: report.departmentName,
                             ),
+                          ],
 
-                            SizedBox(height: 24.h),
-                            _sectionTitle(S.of(context).location),
-                            SizedBox(height: 4.h),
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.location_on,
-                                  size: 14.sp,
-                                  color: Colors.red,
-                                ),
-                                SizedBox(width: 4.w),
-                                Expanded(
-                                  child: Text(
-                                    "${report.areaName} - ${report.location}",
-                                    style: GoogleFonts.cairo(
-                                      fontSize: 13.sp,
-                                      color: context.palette.onSurfaceVariant,
-                                    ),
+                          SizedBox(height: 20.h),
+                          _sectionTitle(S.of(context).description),
+                          SizedBox(height: 8.h),
+                          Text(
+                            report.description,
+                            style: GoogleFonts.cairo(
+                              fontSize: 15.sp,
+                              color: context.palette.onSurface.withValues(
+                                alpha: 0.88,
+                              ),
+                              height: 1.6,
+                            ),
+                          ),
+
+                          SizedBox(height: 24.h),
+                          _sectionTitle(S.of(context).location),
+                          SizedBox(height: 4.h),
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.location_on,
+                                size: 14.sp,
+                                color: Colors.red,
+                              ),
+                              SizedBox(width: 4.w),
+                              Expanded(
+                                child: Text(
+                                  "${report.areaName} - ${report.location}",
+                                  style: GoogleFonts.cairo(
+                                    fontSize: 13.sp,
+                                    color: context.palette.onSurfaceVariant,
                                   ),
                                 ),
-                              ],
-                            ),
-                            SizedBox(height: 12.h),
-                            _buildMapSection(
-                              LatLng(report.latitude, report.longitude),
-                              report.location,
-                            ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 12.h),
+                          _buildMapSection(
+                            LatLng(report.latitude, report.longitude),
+                            report.location,
+                          ),
 
-                            SizedBox(height: 24.h),
-                            _sectionTitle(S.of(context).progressTracking),
+                          SizedBox(height: 24.h),
+                          _sectionTitle(S.of(context).progressTracking),
+                          SizedBox(height: 12.h),
+                          _buildTimeline(
+                            context,
+                            report.status,
+                            report.timeline,
+                          ),
+                          SizedBox(height: 24.h),
+                          const Divider(),
+
+                          if ((report.completionNote != null &&
+                                  report.completionNote!.isNotEmpty) ||
+                              report.reportImageUrls.isNotEmpty ||
+                              report.completionImageUrls.isNotEmpty) ...[
                             SizedBox(height: 12.h),
-                            _buildTimeline(
-                              context,
-                              report.status,
-                              report.timeline,
-                            ),
+                            _sectionTitle(S.of(context).completionDetails),
+                            SizedBox(height: 12.h),
+
+                            if (report.completionNote != null &&
+                                report.completionNote!.isNotEmpty) ...[
+                              _buildCompletionNote(
+                                context,
+                                report.completionNote!,
+                              ),
+                              SizedBox(height: 16.h),
+                            ],
+
+                            if (report.reportImageUrls.isNotEmpty)
+                              _buildImageGallery(
+                                context,
+                                S.of(context).reportedImages,
+                                report.reportImageUrls,
+                              ),
+
+                            if (report.completionImageUrls.isNotEmpty)
+                              _buildImageGallery(
+                                context,
+                                S.of(context).completionImages,
+                                report.completionImageUrls,
+                              ),
+
                             SizedBox(height: 24.h),
                             const Divider(),
                           ],
-                        ),
+                        ],
                       ),
                     ),
+                  ),
 
-                    SliverToBoxAdapter(child: SizedBox(height: 50.h)),
-                  ],
-                );
-              } else if (state is GetReportsByidFailure) {
-                return Center(child: _buildErrorWidget(state.errMessage));
-              }
-              return const SizedBox.shrink();
-            },
-          ),
+                  SliverToBoxAdapter(child: SizedBox(height: 50.h)),
+                ],
+              );
+            } else if (state is GetReportsByidFailure) {
+              return Center(child: _buildErrorWidget(state.errMessage));
+            }
+            return const SizedBox.shrink();
+          },
         ),
       ),
     );
@@ -228,6 +255,7 @@ class _ReportDetailsScreenState extends State<AchivementReportDetails> {
     BuildContext context, {
     required String label,
     required String name,
+    String? userId,
     required String imageUrl,
     required IconData icon,
     bool isWorker = false,
@@ -276,13 +304,31 @@ class _ReportDetailsScreenState extends State<AchivementReportDetails> {
                     color: context.palette.onSurfaceVariant,
                   ),
                 ),
-                Text(
-                  name,
-                  style: GoogleFonts.cairo(
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.bold,
-                    color: context.palette.onSurface,
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: Text(
+                        name,
+                        style: GoogleFonts.cairo(
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.bold,
+                          color: context.palette.onSurface,
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    if (userId != null && userId.isNotEmpty)
+                      Text(
+                        "#$userId",
+                        style: GoogleFonts.cairo(
+                          fontSize: 10.sp,
+                          color: context.palette.onSurfaceVariant.withValues(
+                            alpha: 0.7,
+                          ),
+                        ),
+                      ),
+                  ],
                 ),
                 if (isWorker && department != null)
                   Text(
@@ -331,7 +377,6 @@ class _ReportDetailsScreenState extends State<AchivementReportDetails> {
   Widget _buildTimeline(
     BuildContext context,
     String currentStatus,
-
     List<TimelineModel> timeline,
   ) {
     int currentIndex = StatusReport.fromString(currentStatus).index;
@@ -377,6 +422,85 @@ class _ReportDetailsScreenState extends State<AchivementReportDetails> {
           apiPosition: apiPosition,
         ),
       ),
+    );
+  }
+
+  Widget _buildCompletionNote(BuildContext context, String note) {
+    return Container(
+      width: double.infinity,
+      padding: EdgeInsets.all(12.w),
+      decoration: BoxDecoration(
+        color: context.palette.surfaceContainerLow,
+        borderRadius: BorderRadius.circular(12.r),
+        border: Border.all(
+          color: context.palette.outline.withValues(alpha: 0.45),
+        ),
+      ),
+      child: Text(
+        note,
+        style: GoogleFonts.cairo(
+          fontSize: 14.sp,
+          color: context.palette.onSurface,
+          height: 1.6,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildImageGallery(
+    BuildContext context,
+    String title,
+    List<String> images,
+  ) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: GoogleFonts.cairo(
+            fontSize: 14.sp,
+            fontWeight: FontWeight.bold,
+            color: context.palette.onSurfaceVariant,
+          ),
+        ),
+        SizedBox(height: 8.h),
+        SizedBox(
+          height: 90.h,
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: images.length,
+            physics: const BouncingScrollPhysics(),
+            itemBuilder: (context, index) {
+              return Padding(
+                padding: EdgeInsetsDirectional.only(end: 12.w),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(8.r),
+                  child: CachedNetworkImage(
+                    imageUrl: images[index],
+                    width: 90.w,
+                    height: 90.h,
+                    fit: BoxFit.cover,
+                    placeholder: (context, url) => Container(
+                      width: 90.w,
+                      color: context.palette.surfaceContainerLow,
+                      child: const CupertinoActivityIndicator(),
+                    ),
+                    errorWidget: (context, url, error) => Container(
+                      width: 90.w,
+                      color: context.palette.surfaceContainerLow,
+                      child: Icon(
+                        Icons.broken_image,
+                        color: context.palette.onSurfaceVariant,
+                      ),
+                    ),
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+        SizedBox(height: 16.h),
+      ],
     );
   }
 

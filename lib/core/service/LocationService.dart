@@ -30,7 +30,6 @@ class Locationservice {
     return true;
   }
 
-  // ✅ بقت async وبتستنى init الأول
   Future<bool> getLocationData(void Function(LocationData) onData) async {
     final ready = await init();
     if (!ready) return false;

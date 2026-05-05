@@ -71,9 +71,11 @@ class _CategoryDropdownState extends State<CategoryDropdown> {
                     vertical: 14,
                   ),
                   decoration: BoxDecoration(
-                    color: const Color(0xffF6F6F6),
                     borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: context.palette.kPrimary, width: 1),
+                    border: Border.all(
+                      color: context.palette.kPrimary,
+                      width: 1,
+                    ),
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,

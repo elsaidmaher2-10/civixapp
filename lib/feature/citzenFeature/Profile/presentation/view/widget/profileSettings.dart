@@ -47,23 +47,23 @@ class Profilesettings extends StatelessWidget {
                 title: S.of(context).language,
                 onTap: () => showLanguagePicker(context, false),
               ),
-              // ProfileMenuItem(
-              //   iconPath: Container(
-              //     padding: EdgeInsets.all(6.w),
-              //     decoration: BoxDecoration(
-              //       borderRadius: BorderRadius.circular(6),
-              //       color: context.palette.lightBlue.withOpacity(0.18),
-              //     ),
-              //     child: Icon(
-              //       Icons.dark_mode_outlined,
-              //       color: context.palette.lightBlue,
-              //     ),
-              //   ),
-              //   title: Localizations.localeOf(context).languageCode == 'ar'
-              //       ? 'المظهر'
-              //       : 'Theme',
-              //   onTap: () => showThemePicker(context),
-              // ),
+              ProfileMenuItem(
+                iconPath: Container(
+                  padding: EdgeInsets.all(6.w),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(6),
+                    color: context.palette.lightBlue.withOpacity(0.18),
+                  ),
+                  child: Icon(
+                    Icons.dark_mode_outlined,
+                    color: context.palette.lightBlue,
+                  ),
+                ),
+                title: Localizations.localeOf(context).languageCode == 'ar'
+                    ? 'المظهر'
+                    : 'Theme',
+                onTap: () => showThemePicker(context),
+              ),
               ProfileMenuItem(
                 iconPath: SvgPicture.asset(
                   AssetValueManager.identity,

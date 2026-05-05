@@ -2963,6 +2963,26 @@ class S {
   String get step {
     return Intl.message('Step', name: 'step', desc: '', args: []);
   }
+
+  /// `Completion Details`
+  String get completionDetails {
+    return Intl.message(
+      'Completion Details',
+      name: 'completionDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Original Reported Images`
+  String get reportedImages {
+    return Intl.message(
+      'Original Reported Images',
+      name: 'reportedImages',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

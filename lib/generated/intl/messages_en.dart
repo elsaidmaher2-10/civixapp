@@ -108,6 +108,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "completedBy": MessageLookupByLibrary.simpleMessage("Completed By"),
     "completedFrom": m0,
     "completionData": MessageLookupByLibrary.simpleMessage("COMPLETION DATA"),
+    "completionDetails": MessageLookupByLibrary.simpleMessage(
+      "Completion Details",
+    ),
     "completionImages": MessageLookupByLibrary.simpleMessage(
       "Completion Images",
     ),
@@ -484,6 +487,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "reportTitleHint": MessageLookupByLibrary.simpleMessage("Report title"),
     "reportTitleLabel": MessageLookupByLibrary.simpleMessage("Report Title"),
     "reportedBy": MessageLookupByLibrary.simpleMessage("Reported by"),
+    "reportedImages": MessageLookupByLibrary.simpleMessage(
+      "Original Reported Images",
+    ),
     "reporter": MessageLookupByLibrary.simpleMessage("Reporter"),
     "reports": MessageLookupByLibrary.simpleMessage("Reports"),
     "requestSentSuccessfully": MessageLookupByLibrary.simpleMessage(
