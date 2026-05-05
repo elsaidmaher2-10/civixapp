@@ -30,6 +30,8 @@ class NotificationTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final bool isWorker =
         PrefrenceManager().getstring("role")?.toLowerCase() == "worker";
+         final ColorScheme scheme = Theme.of(context).colorScheme;
+    final bool isDark = Theme.of(context).brightness == Brightness.dark;
     final Color primaryColor = isWorker
         ? context.palette.workerprimary
         : context.palette.primary;

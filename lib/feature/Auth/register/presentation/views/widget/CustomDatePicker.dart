@@ -15,14 +15,16 @@ class CustomDateField extends StatelessWidget {
       initialDate: null,
       firstDate: DateTime(1950),
       lastDate: DateTime(2018),
-      builder: (context, child) {
+      builder: (context, child) { 
+       final bool isDark = Theme.of(context).brightness == Brightness.dark;
+        final ColorScheme baseScheme = Theme.of(context).colorScheme;
         return Theme(
           data: Theme.of(context).copyWith(
             textTheme: TextTheme.of(context),
-            colorScheme: ColorScheme.light(
+            colorScheme: baseScheme.copyWith(
               primary: context.palette.kPrimary,
-              onPrimary: Colors.white,
-              onSurface: Colors.black,
+          onPrimary: baseScheme.onPrimary,
+              onSurface: baseScheme.onSurface,
             ),
             textButtonTheme: TextButtonThemeData(
               style: TextButton.styleFrom(
@@ -60,8 +62,8 @@ class CustomDateField extends StatelessWidget {
       decoration: InputDecoration(
         isDense: true,
         filled: true,
-        fillColor: Color(0xffF6F6F6),
-        labelText: S.of(context).dateOfBirth,
+        fillColor: context.palette.searchFieldFill,
+                labelText: S.of(context).dateOfBirth,
         hintText: S.of(context).dateOfBirth,
         prefixIcon: const Icon(Icons.date_range_outlined),
         border: OutlineInputBorder(
