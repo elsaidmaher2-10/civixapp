@@ -19,7 +19,10 @@ class CustomTextfromfield extends StatelessWidget {
     this.onTap,
     this.isworker = false,
     this.maxLines = 1,
-    this.color = const Color(0xffF6F6F6),
+    this.color,
+    this.fillColor,
+    this.borderRadius,
+    this.contentPadding,
   });
 
   final Function()? onTap;
@@ -36,11 +39,31 @@ class CustomTextfromfield extends StatelessWidget {
   final String lable;
   final String? initialValue;
   final int? maxLines;
-  final Color color;
+  final Color? color;
+  final Color? fillColor;
+  final double? borderRadius;
+  final EdgeInsetsGeometry? contentPadding;
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     final ColorScheme scheme = Theme.of(context).colorScheme;
+
+    // Dynamic fill color based on theme
+    final backgroundColor =
+        fillColor ??
+        (isDark
+            ? scheme.surfaceContainerHighest
+            : (color ?? const Color(0xffF6F6F6)));
+
+    // Border colors for different states
+    final enabledBorderColor = isDark
+        ? scheme.outline.withOpacity(0.3)
+        : Colors.grey.shade300;
+
+    final focusedBorderColor = isworker ? scheme.primary : scheme.primary;
+
+    final errorBorderColor = scheme.error;
 
     return TextFormField(
       maxLines: maxLines,
@@ -53,23 +76,79 @@ class CustomTextfromfield extends StatelessWidget {
       controller: controller,
       validator: validator,
       obscureText: obstext,
+      cursorColor: focusedBorderColor,
+      style: GoogleFonts.cairo(
+        fontSize: 14.sp,
+        fontWeight: FontWeight.w500,
+        color: isDark ? scheme.onSurface : const Color(0xFF0F172A),
+      ),
       decoration: InputDecoration(
-        prefixIcon: prefix,
-        labelStyle: GoogleFonts.cairo(color: scheme.onSurface, fontSize: 14.sp),
+        prefixIcon: prefix != null
+            ? IconTheme(
+                data: IconThemeData(
+                  color: isDark
+                      ? scheme.onSurfaceVariant
+                      : Colors.grey.shade600,
+                  size: 20.sp,
+                ),
+                child: prefix!,
+              )
+            : null,
+        suffixIcon: suffix != null
+            ? IconTheme(
+                data: IconThemeData(
+                  color: isDark
+                      ? scheme.onSurfaceVariant
+                      : Colors.grey.shade600,
+                  size: 20.sp,
+                ),
+                child: suffix!,
+              )
+            : null,
+        labelStyle: GoogleFonts.cairo(
+          color: isDark ? scheme.onSurfaceVariant : scheme.onSurface,
+          fontSize: 14.sp,
+          fontWeight: FontWeight.w500,
+        ),
         alignLabelWithHint: true,
         labelText: lable,
         isDense: true,
         floatingLabelAlignment: FloatingLabelAlignment.start,
-        contentPadding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 14.h),
-        fillColor: Color(0xffF6F6F6),
-
+        contentPadding:
+            contentPadding ??
+            EdgeInsets.symmetric(horizontal: 12.w, vertical: 14.h),
+        fillColor: backgroundColor,
         filled: true,
-        suffixIcon: suffix,
         hintText: hinttext,
         hintStyle: GoogleFonts.cairo(
-          color: scheme.onSurfaceVariant,
-          fontSize: 12.sp,
+          color: isDark
+              ? scheme.onSurfaceVariant.withOpacity(0.6)
+              : scheme.onSurfaceVariant.withOpacity(0.7),
+          fontSize: 13.sp,
         ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(borderRadius ?? 12.r),
+          borderSide: BorderSide(
+            color: enabledBorderColor,
+            width: isDark ? 0.5 : 1,
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(borderRadius ?? 12.r),
+          borderSide: BorderSide(color: focusedBorderColor, width: 2),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(borderRadius ?? 12.r),
+          borderSide: BorderSide(
+            color: errorBorderColor.withOpacity(0.5),
+            width: 1,
+          ),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(borderRadius ?? 12.r),
+          borderSide: BorderSide(color: errorBorderColor, width: 2),
+        ),
+        errorStyle: GoogleFonts.cairo(fontSize: 11.sp, color: errorBorderColor),
       ),
     );
   }

@@ -20,10 +20,10 @@ class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({super.key});
 
   @override
-  State<EditProfileScreen> createState() => _WorkerEditProfileScreenState();
+  State<EditProfileScreen> createState() => _EditProfileScreenState();
 }
 
-class _WorkerEditProfileScreenState extends State<EditProfileScreen> {
+class _EditProfileScreenState extends State<EditProfileScreen> {
   late final Userprofilecontroller userprofilecontroller;
 
   @override
@@ -41,6 +41,8 @@ class _WorkerEditProfileScreenState extends State<EditProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return BlocConsumer<UserProfileInfoCubit, UserProfileInfoState>(
       listener: (context, state) {
         if (state is EditUserProfileInfoError) {
@@ -79,25 +81,19 @@ class _WorkerEditProfileScreenState extends State<EditProfileScreen> {
               : customloading(),
           inAsyncCall: state is EditUserProfileInfoLoading,
           child: Scaffold(
-            backgroundColor: context.palette.reportsPageBackground,
+            backgroundColor: isDark
+                ? Theme.of(context).colorScheme.surface
+                : context.palette.reportsPageBackground,
             body: SafeArea(
               child: Column(
                 children: [
-                  _buildAppBar(context, role),
+                  _buildAppBar(context, role, isDark),
                   Expanded(
                     child: SingleChildScrollView(
                       physics: const BouncingScrollPhysics(),
                       child: Column(
                         children: [
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                              vertical: ScreenUtilsManager.h32,
-                            ),
-                            child: Customimagepicker(
-                              role: isWorker,
-                              userProfile: userprofilecontroller.userProfile,
-                            ),
-                          ),
+                          _buildImagePickerSection(context, isWorker),
                           Editfromprofile(
                             role: isWorker,
                             EmailCotroller:
@@ -108,14 +104,7 @@ class _WorkerEditProfileScreenState extends State<EditProfileScreen> {
                             addressCotroller:
                                 userprofilecontroller.addressController,
                           ),
-                          if (!isWorker)
-                            Padding(
-                              padding: EdgeInsets.symmetric(
-                                vertical: ScreenUtilsManager.p10,
-                                horizontal: ScreenUtilsManager.p23,
-                              ),
-                              child: const Chanagepassword(),
-                            ),
+                          if (!isWorker) _buildChangePasswordSection(context),
                           SizedBox(height: ScreenUtilsManager.h24),
                           Saveeditprofile(
                             role: isWorker,
@@ -123,7 +112,7 @@ class _WorkerEditProfileScreenState extends State<EditProfileScreen> {
                             bntcontroller: userprofilecontroller.bntController,
                           ),
                           SizedBox(height: ScreenUtilsManager.h12),
-                          _buildSecurityNote(context),
+                          _buildSecurityNote(context, isDark),
                           SizedBox(height: ScreenUtilsManager.h16),
                         ],
                       ),
@@ -155,8 +144,12 @@ class _WorkerEditProfileScreenState extends State<EditProfileScreen> {
   }
 
   Widget _buildLoadingState(BuildContext context, bool isWorker) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Scaffold(
-      backgroundColor: context.palette.reportsPageBackground,
+      backgroundColor: isDark
+          ? Theme.of(context).colorScheme.surface
+          : context.palette.reportsPageBackground,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -164,7 +157,7 @@ class _WorkerEditProfileScreenState extends State<EditProfileScreen> {
             isWorker
                 ? CupertinoActivityIndicator(
                     color: context.palette.workerprimary,
-                    radius: ScreenUtilsManager.r12,
+                    radius: ScreenUtilsManager.r16,
                   )
                 : customloading(),
             SizedBox(height: ScreenUtilsManager.h16),
@@ -172,7 +165,9 @@ class _WorkerEditProfileScreenState extends State<EditProfileScreen> {
               S.of(context).loading,
               style: GoogleFonts.cairo(
                 fontSize: ScreenUtilsManager.s14,
-                color: context.palette.lightGrey2,
+                color: isDark
+                    ? context.palette.onSurfaceVariant
+                    : context.palette.lightGrey2,
               ),
             ),
           ],
@@ -181,53 +176,92 @@ class _WorkerEditProfileScreenState extends State<EditProfileScreen> {
     );
   }
 
-  Widget _buildAppBar(BuildContext context, String role) {
-    final iconColor = role == "worker"
-        ? context.palette.workerprimary
-        : context.palette.primary;
+  Widget _buildAppBar(BuildContext context, String role, bool isDark) {
+    final isWorker = role == "worker";
+    final iconColor = isDark
+        ? Colors.white
+        : (isWorker
+            ? context.palette.workerprimary
+            : context.palette.primary);
+
+    final backgroundColor = isDark
+        ? Theme.of(context).colorScheme.surfaceContainer
+        : Colors.transparent;
 
     return Padding(
       padding: EdgeInsetsDirectional.all(ScreenUtilsManager.w8),
-      child: Row(
-        children: [
-          IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-              context.read<UserProfileInfoCubit>().getUserProfleInfo();
-            },
-            icon: Icon(
-              CupertinoIcons.back,
-              color: iconColor,
-              size: ScreenUtilsManager.s20,
-            ),
-          ),
-          Expanded(
-            child: Text(
-              S.of(context).editProfile,
-              textAlign: TextAlign.center,
-              style: GoogleFonts.cairo(
-                fontSize: ScreenUtilsManager.s20,
-                fontWeight: FontWeight.w700,
+      child: Container(
+        decoration: BoxDecoration(
+          color: backgroundColor,
+          borderRadius: BorderRadius.circular(ScreenUtilsManager.r12),
+        ),
+        child: Row(
+          children: [
+            IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+                context.read<UserProfileInfoCubit>().getUserProfleInfo();
+              },
+              icon: Icon(
+                CupertinoIcons.back,
                 color: iconColor,
+                size: ScreenUtilsManager.s22,
               ),
             ),
-          ),
-          SizedBox(width: ScreenUtilsManager.w48),
-        ],
+            Expanded(
+              child: Text(
+                S.of(context).editProfile,
+                textAlign: TextAlign.center,
+                style: GoogleFonts.cairo(
+                  fontSize: ScreenUtilsManager.s20,
+                  fontWeight: FontWeight.w700,
+                  color: iconColor,
+                ),
+              ),
+            ),
+            SizedBox(
+              width: ScreenUtilsManager.w40,
+              child: isDark ? null : null,
+            ),
+          ],
+        ),
       ),
     );
   }
 
-  Widget _buildSecurityNote(BuildContext context) {
+  Widget _buildImagePickerSection(BuildContext context, bool isWorker) {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: ScreenUtilsManager.h32),
+      child: Customimagepicker(
+        role: isWorker,
+        userProfile: userprofilecontroller.userProfile,
+        imagePickerController: null,
+      ),
+    );
+  }
+
+  Widget _buildChangePasswordSection(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(
+        vertical: ScreenUtilsManager.p10,
+        horizontal: ScreenUtilsManager.p23,
+      ),
+      child: const Chanagepassword(),
+    );
+  }
+
+  Widget _buildSecurityNote(BuildContext context, bool isDark) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: ScreenUtilsManager.w24),
       child: Text(
         S.of(context).dataSecurityNote,
         textAlign: TextAlign.center,
         style: GoogleFonts.cairo(
-          fontSize: 12,
-          color: const Color(0xFF94A3B8),
-          height: 1.4,
+          fontSize: ScreenUtilsManager.s12,
+          color: isDark
+              ? context.palette.onSurfaceVariant.withValues(alpha: 0.7)
+              : const Color(0xFF94A3B8),
+          height: 1.5,
         ),
       ),
     );

@@ -5,6 +5,7 @@ import 'package:citifix/feature/Auth/register/presentation/manager/visblitypassw
 import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class PasswordField extends StatelessWidget {
   const PasswordField({
@@ -12,14 +13,25 @@ class PasswordField extends StatelessWidget {
     required this.controller,
     this.onChanged,
     this.isNew = false,
+    this.label,
+    this.hintText,
+    this.showLabel = true,
+    this.isRequired = false,
   });
 
   final TextEditingController controller;
   final Function(String)? onChanged;
   final bool isNew;
+  final String? label;
+  final String? hintText;
+  final bool showLabel;
+  final bool isRequired;
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final primaryColor = context.palette.kPrimary;
+
     return BlocProvider(
       create: (_) => VisibleeyeCubit(),
       child: BlocBuilder<VisibleeyeCubit, bool>(
@@ -27,38 +39,82 @@ class PasswordField extends StatelessWidget {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: ScreenUtilsManager.h12),
+              if (showLabel) ...[
+                Padding(
+                  padding: EdgeInsets.only(
+                    left: ScreenUtilsManager.w4,
+                    bottom: ScreenUtilsManager.h4,
+                  ),
+                  child: Row(
+                    children: [
+                      Text(
+                        label ??
+                            (isNew
+                                ? S.of(context).newPassword
+                                : S.of(context).password),
+                        style: GoogleFonts.cairo(
+                          fontSize: ScreenUtilsManager.s14,
+                          fontWeight: FontWeight.w600,
+                          color: isDark
+                              ? context.palette.onSurface.withOpacity(0.9)
+                              : context.palette.onSurfaceVariant,
+                        ),
+                      ),
+                      if (isRequired)
+                        Padding(
+                          padding: EdgeInsets.only(left: ScreenUtilsManager.w4),
+                          child: Text(
+                            '*',
+                            style: TextStyle(
+                              fontSize: ScreenUtilsManager.s14,
+                              fontWeight: FontWeight.bold,
+                              color: context.palette.error,
+                            ),
+                          ),
+                        ),
+                    ],
+                  ),
+                ),
+                SizedBox(height: ScreenUtilsManager.h8),
+              ],
+
+              // Custom Text Field
               CustomTextfromfield(
                 maxLines: 1,
                 controller: controller,
                 onChanged: onChanged,
                 obstext: isHidden,
-
-                hinttext: isNew
-                    ? S.of(context).enterNewPassword
-                    : S.of(context).hintPassword,
-
-                lable: isNew
-                    ? S.of(context).newPassword
-                    : S.of(context).password,
-
+                hinttext:
+                    hintText ??
+                    (isNew
+                        ? S.of(context).enterNewPassword
+                        : S.of(context).hintPassword),
+                lable: '', // Empty string since we show custom label above
                 prefix: Icon(
-                  isNew ? Icons.lock : Icons.password,
-                  color: context.palette.lightGrey2,
+                  isNew ? Icons.lock_outline : Icons.password_outlined,
+                  color: isDark
+                      ? primaryColor.withOpacity(0.7)
+                      : context.palette.lightGrey2,
+                  size: ScreenUtilsManager.s20,
                 ),
-
                 suffix: IconButton(
                   onPressed: () {
                     context.read<VisibleeyeCubit>().chanagevisbilitypassword();
                   },
                   icon: Icon(
-                    isHidden ? Icons.visibility_off : Icons.remove_red_eye,
-                    color: context.palette.lightGrey2,
+                    isHidden ? Icons.visibility_off : Icons.visibility,
+                    color: isDark
+                        ? context.palette.onSurfaceVariant.withOpacity(0.7)
+                        : context.palette.lightGrey2,
+                    size: ScreenUtilsManager.s20,
                   ),
                 ),
+                isworker: false,
+                color: isDark
+                    ? Theme.of(context).colorScheme.surfaceContainerHighest
+                    : const Color(0xffF6F6F6),
               ),
-
-              SizedBox(height: ScreenUtilsManager.h16),
+              SizedBox(height: ScreenUtilsManager.h8),
             ],
           );
         },

@@ -47,7 +47,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
     confirmPasswordController.initState(isProfileScreen: _isProfileScreen);
   }
 
-  Widget _buildForgotPasswordFields() {
+  Widget _buildForgotPasswordFields(BuildContext context, bool isDark) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -66,9 +66,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
           streamController:
               confirmPasswordController.forgotPasswordStreamController,
         ),
-
         const SizedBox(height: 8),
-
         ConfirmPassword(
           controller: confirmPasswordController.confirmPasswordController,
           validator: (String? value) {
@@ -81,25 +79,22 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
             return null;
           },
         ),
-
         const SizedBox(height: 32),
       ],
     );
   }
 
-  Widget _buildChangePasswordFields() {
+  Widget _buildChangePasswordFields(BuildContext context, bool isDark) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(height: ScreenUtilsManager.h8),
-
         PasswordField(
           isNew: false,
           controller: confirmPasswordController.oldPasswordController,
           onChanged: (_) {},
         ),
-
-        SizedBox(height: ScreenUtilsManager.h8),
+        SizedBox(height: ScreenUtilsManager.h16),
         PasswordField(
           isNew: true,
           controller: confirmPasswordController.newPasswordController,
@@ -109,14 +104,11 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
             );
           },
         ),
-
-        SizedBox(height: ScreenUtilsManager.h8),
-
+        SizedBox(height: ScreenUtilsManager.h16),
         PasswordRules(
           streamController:
               confirmPasswordController.changePasswordStreamController,
         ),
-
         const SizedBox(height: 32),
       ],
     );
@@ -130,7 +122,9 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     final args = ModalRoute.of(context)?.settings.arguments as Map? ?? {};
+
     return BlocProvider(
       create: (context) => ConfirmPasswordController(
         Confirmpasswordrepo(
@@ -138,139 +132,179 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
           networkChecker: InternetChecker(),
         ),
       ),
-      child: BlocConsumer<ConfirmPasswordController, ConfirmPasswordControllerState>(
-        listener: (context, state) async {
-          if (state is ConfirmPasswordControllerFailure) {
-            Customsnackbar.show(
-              context: context,
-              backgroundColor: context.palette.red,
-              message: state.message,
-            );
-          } else if (state is ChangePasswordFailure) {
-            Customsnackbar.show(
-              context: context,
-              backgroundColor: context.palette.red,
-              message: state.message,
-            );
-          } else if (state is ConfirmPasswordControllerSuccess) {
-            Customsnackbar.show(
-              context: context,
-              backgroundColor: context.palette.green,
-              message: state.message,
-            );
-            await Future.delayed(
-              const Duration(seconds: 3),
-              () => Navigator.pushNamedAndRemoveUntil(
-                context,
-                Routes.login,
-                (Route route) => false,
-              ),
-            );
-          } else if (state is ChangePasswordSuccess) {
-            Customsnackbar.show(
-              context: context,
-              backgroundColor: context.palette.green,
-              message: state.message,
-            );
+      child:
+          BlocConsumer<
+            ConfirmPasswordController,
+            ConfirmPasswordControllerState
+          >(
+            listener: (context, state) async {
+              if (state is ConfirmPasswordControllerFailure) {
+                Customsnackbar.show(
+                  context: context,
+                  backgroundColor: context.palette.red,
+                  message: state.message,
+                );
+              } else if (state is ChangePasswordFailure) {
+                Customsnackbar.show(
+                  context: context,
+                  backgroundColor: context.palette.red,
+                  message: state.message,
+                );
+              } else if (state is ConfirmPasswordControllerSuccess) {
+                Customsnackbar.show(
+                  context: context,
+                  backgroundColor: context.palette.green,
+                  message: state.message,
+                );
+                await Future.delayed(
+                  const Duration(seconds: 3),
+                  () => Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    Routes.login,
+                    (Route route) => false,
+                  ),
+                );
+              } else if (state is ChangePasswordSuccess) {
+                Customsnackbar.show(
+                  context: context,
+                  backgroundColor: context.palette.green,
+                  message: state.message,
+                );
 
-            final role = PrefrenceManager().getstring(Constantmanger.role);
-            await Future.delayed(
-              const Duration(seconds: 2),
-              () => Navigator.pushNamedAndRemoveUntil(
-                context,
-                role == "Worker" ? Routes.workerMain : Routes.citizenMain,
-                (Route route) => false,
-              ),
-            );
-          }
-        },
-        builder: (context, state) {
-          final bool inAsyncCall =
-              state is ConfirmPasswordControllerLoading ||
-              state is ChangePasswordLoading;
+                final role = PrefrenceManager().getstring(Constantmanger.role);
+                await Future.delayed(
+                  const Duration(seconds: 2),
+                  () => Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    role == "Worker" ? Routes.workerMain : Routes.citizenMain,
+                    (Route route) => false,
+                  ),
+                );
+              }
+            },
+            builder: (context, state) {
+              final bool inAsyncCall =
+                  state is ConfirmPasswordControllerLoading ||
+                  state is ChangePasswordLoading;
 
-          return ModalProgressHUD(
-            inAsyncCall: inAsyncCall,
-            blur: 7,
-            progressIndicator: customloading(),
-            child: Scaffold(
-              backgroundColor: Colors.white,
-              appBar: confirmpassappbar(context, () {
-                Navigator.pop(context);
-              }),
-              body: SafeArea(
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 18.w),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        if (args["screen"] == "profile")
-                          _buildChangePasswordFields()
-                        else
-                          _buildForgotPasswordFields(),
+              return ModalProgressHUD(
+                inAsyncCall: inAsyncCall,
+                blur: 7,
+                progressIndicator: customloading(),
+                child: Scaffold(
+                  backgroundColor: isDark
+                      ? Theme.of(context).colorScheme.surface
+                      : Colors.white,
+                  appBar: confirmpassappbar(context, () {
+                    Navigator.pop(context);
+                  }),
+                  body: SafeArea(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 18.w),
+                      child: SingleChildScrollView(
+                        physics: const BouncingScrollPhysics(),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            if (args["screen"] == "profile")
+                              _buildChangePasswordFields(context, isDark)
+                            else
+                              _buildForgotPasswordFields(context, isDark),
 
-                        SizedBox(
-                          width: double.infinity,
-                          height: 44.h,
-                          child: StreamBuilder<bool>(
-                            initialData: false,
-                            stream:
-                                confirmPasswordController.btnController.stream,
-                            builder: (context, snapshot) {
-                              return ElevatedButton(
-                                onPressed: snapshot.data == true
-                                    ? () {
-                                        if (args["screen"] == "profile") {
-                                          context
-                                              .read<ConfirmPasswordController>()
-                                              .changePassword(
-                                                newPassword:
-                                                    confirmPasswordController
-                                                        .newPasswordController
-                                                        .text,
-                                                currentPassword:
-                                                    confirmPasswordController
-                                                        .oldPasswordController
-                                                        .text,
-                                              );
-                                        } else {
-                                          context
-                                              .read<ConfirmPasswordController>()
-                                              .createnewpassword(
-                                                email:
-                                                    args[Constantmanger.email],
-                                                newPassword:
-                                                    confirmPasswordController
-                                                        .confirmPasswordController
-                                                        .text,
-                                                otp: args["otp"],
-                                              );
-                                        }
-                                      }
-                                    : null,
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: context.palette.kPrimary,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
-                                  elevation: 0,
-                                ),
-                                child: Text(
-                                  S.of(context).submit,
-                                  style: GoogleFonts.cairo(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
+                            SizedBox(height: ScreenUtilsManager.h24),
+                            _buildSubmitButton(context, args, isDark),
+                            SizedBox(height: ScreenUtilsManager.h32),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
                   ),
+                ),
+              );
+            },
+          ),
+    );
+  }
+
+  Widget _buildSubmitButton(BuildContext context, Map args, bool isDark) {
+    final isProfileScreen = args["screen"] == "profile";
+
+    return SizedBox(
+      width: double.infinity,
+      height: 48.h,
+      child: StreamBuilder<bool>(
+        initialData: false,
+        stream: confirmPasswordController.btnController.stream,
+        builder: (context, snapshot) {
+          final isEnabled = snapshot.data == true;
+          final buttonColor = isEnabled
+              ? (isDark ? context.palette.kPrimary : context.palette.kPrimary)
+              : (isDark
+                    ? context.palette.outline.withOpacity(0.3)
+                    : context.palette.lightGrey);
+
+          return AnimatedContainer(
+            duration: const Duration(milliseconds: 200),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(ScreenUtilsManager.r12),
+              boxShadow: isEnabled && !isDark
+                  ? [
+                      BoxShadow(
+                        color: context.palette.kPrimary.withOpacity(0.3),
+                        blurRadius: 8,
+                        offset: const Offset(0, 4),
+                      ),
+                    ]
+                  : null,
+            ),
+            child: ElevatedButton(
+              onPressed: isEnabled
+                  ? () {
+                      if (isProfileScreen) {
+                        context
+                            .read<ConfirmPasswordController>()
+                            .changePassword(
+                              newPassword: confirmPasswordController
+                                  .newPasswordController
+                                  .text,
+                              currentPassword: confirmPasswordController
+                                  .oldPasswordController
+                                  .text,
+                            );
+                      } else {
+                        context
+                            .read<ConfirmPasswordController>()
+                            .createnewpassword(
+                              email: args[Constantmanger.email],
+                              newPassword: confirmPasswordController
+                                  .confirmPasswordController
+                                  .text,
+                              otp: args["otp"],
+                            );
+                      }
+                    }
+                  : null,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: buttonColor,
+                foregroundColor: Colors.white,
+                disabledBackgroundColor: isDark
+                    ? context.palette.surfaceContainerHighest
+                    : context.palette.lightGrey,
+                disabledForegroundColor: isDark
+                    ? context.palette.onSurfaceVariant
+                    : context.palette.lightGrey2,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(ScreenUtilsManager.r12),
+                ),
+                elevation: isEnabled && !isDark ? 2 : 0,
+                padding: EdgeInsets.symmetric(vertical: ScreenUtilsManager.h14),
+              ),
+              child: Text(
+                S.of(context).submit,
+                style: GoogleFonts.cairo(
+                  fontSize: ScreenUtilsManager.s16,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white,
                 ),
               ),
             ),

@@ -33,23 +33,13 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return BlocProvider(
       create: (context) => LogCubit(getIt<LogOutRepository>()),
       child: Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.surface,
-        appBar: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.surface,
-          elevation: 0,
-          title: Text(
-            S.of(context).profile,
-            style: GoogleFonts.cairo(
-              color: Theme.of(context).colorScheme.primary,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          centerTitle: true,
-          automaticallyImplyLeading: false,
-        ),
+        backgroundColor: context.palette.reportsPageBackground,
+        appBar: _buildAppBar(context, isDark),
         body: MultiBlocListener(
           listeners: [
             BlocListener<UserProfileInfoCubit, UserProfileInfoState>(
@@ -64,20 +54,15 @@ class ProfileScreen extends StatelessWidget {
               listener: (context, state) {
                 if (state is LogSuccess) {
                   Customsnackbar.show(
-                    backgroundColor: Colors.green,
+                    backgroundColor: context.palette.green,
                     context: context,
                     message: state.logs,
                   );
-                  PrefrenceManager().remove(Constantmanger.refreshToken);
-                  PrefrenceManager().remove(Constantmanger.accessToken);
-                  PrefrenceManager().remove(Constantmanger.cacheKey);
-                  Navigator.of(
-                    context,
-                  ).pushNamedAndRemoveUntil(Routes.login, (route) => false);
+                  _clearUserDataAndNavigate(context);
                 }
                 if (state is LogFailure) {
                   Customsnackbar.show(
-                    backgroundColor: Colors.red,
+                    backgroundColor: context.palette.red,
                     context: context,
                     message: state.failure,
                   );
@@ -103,24 +88,7 @@ class ProfileScreen extends StatelessWidget {
                     ),
                     const Profilesettings(),
                     SizedBox(height: ScreenUtilsManager.h24),
-                    Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: ScreenUtilsManager.w32,
-                      ),
-                      child: logoutState is LogLoading
-                          ? Center(
-                              child: CupertinoActivityIndicator(
-                                color: context.palette.kPrimary,
-                              ),
-                            )
-                          : CustomButton(
-                              onPressed: () => onLogoutPressed(context),
-                              icon: const Icon(Icons.logout_rounded),
-                              backgroundColor: context.palette.redLight,
-                              foregroundColor: context.palette.red,
-                              lable: S.of(context).logout,
-                            ),
-                    ),
+                    _buildLogoutButton(context, logoutState),
                     SizedBox(height: ScreenUtilsManager.h32),
                   ],
                 ),
@@ -131,6 +99,71 @@ class ProfileScreen extends StatelessWidget {
       ),
     );
   }
+
+  AppBar _buildAppBar(BuildContext context, bool isDark) {
+    return AppBar(
+      backgroundColor: Theme.of(context).colorScheme.surface,
+      elevation: 0,
+      title: Text(
+        S.of(context).profile,
+        style: GoogleFonts.cairo(
+          fontSize: ScreenUtilsManager.s20,
+          fontWeight: FontWeight.bold,
+          color: Theme.of(context).colorScheme.primary,
+        ),
+      ),
+      centerTitle: true,
+      automaticallyImplyLeading: false,
+      flexibleSpace: Container(
+        decoration: BoxDecoration(
+          border: isDark
+              ? Border(
+                  bottom: BorderSide(
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.outline.withOpacity(0.1),
+                    width: 0.5,
+                  ),
+                )
+              : null,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildLogoutButton(BuildContext context, LogState logoutState) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final isLoading = logoutState is LogLoading;
+
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: ScreenUtilsManager.w32),
+      child: isLoading
+          ? Center(
+              child: CupertinoActivityIndicator(
+                color: context.palette.kPrimary,
+                radius: ScreenUtilsManager.r12,
+              ),
+            )
+          : CustomButton(
+              onPressed: () => onLogoutPressed(context),
+              icon: const Icon(Icons.logout_rounded),
+              backgroundColor: isDark
+                  ? context.palette.error.withOpacity(0.15)
+                  : context.palette.redLight,
+              foregroundColor: context.palette.red,
+              lable: S.of(context).logout,
+            ),
+    );
+  }
+
+  void _clearUserDataAndNavigate(BuildContext context) {
+    PrefrenceManager().remove(Constantmanger.refreshToken);
+    PrefrenceManager().remove(Constantmanger.accessToken);
+    PrefrenceManager().remove(Constantmanger.cacheKey);
+    Navigator.of(
+      context,
+    ).pushNamedAndRemoveUntil(Routes.login, (route) => false);
+  }
 }
 
 class LogoutConfirmDialog extends StatelessWidget {
@@ -139,99 +172,138 @@ class LogoutConfirmDialog extends StatelessWidget {
   static Future<bool?> show(BuildContext context) {
     return showDialog<bool>(
       context: context,
-      barrierDismissible: false,
+      barrierDismissible: true,
+      barrierColor: Colors.black.withOpacity(0.5),
       builder: (_) => const LogoutConfirmDialog(),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final colorScheme = Theme.of(context).colorScheme;
+
+    return Dialog(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(ScreenUtilsManager.r20),
+        borderRadius: BorderRadius.circular(ScreenUtilsManager.r24),
       ),
-      backgroundColor: Theme.of(context).colorScheme.surface,
-      title: Column(
-        children: [
-          Container(
-            padding: EdgeInsets.all(ScreenUtilsManager.h16),
-            decoration: BoxDecoration(
-              color: context.palette.redLight,
-              shape: BoxShape.circle,
-            ),
-            child: Icon(
-              Icons.logout_rounded,
-              color: context.palette.red,
-              size: ScreenUtilsManager.s32,
-            ),
-          ),
-          SizedBox(height: ScreenUtilsManager.h12),
-          Text(
-            S.of(context).logout,
-            style: GoogleFonts.cairo(
-              fontWeight: FontWeight.bold,
-              fontSize: ScreenUtilsManager.s18,
-              color: Theme.of(context).colorScheme.onSurface,
-            ),
-          ),
-        ],
-      ),
-      content: Text(
-        S.of(context).logoutConfirmationMessage,
-        style: GoogleFonts.cairo(
-          fontSize: ScreenUtilsManager.s14,
-          color: Theme.of(context).colorScheme.onSurfaceVariant,
+      backgroundColor: colorScheme.surface,
+      elevation: 0,
+      child: Container(
+        padding: EdgeInsets.all(ScreenUtilsManager.w20),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(ScreenUtilsManager.r24),
+          color: colorScheme.surface,
         ),
-        textAlign: TextAlign.center,
-      ),
-      actions: [
-        Row(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
-            Expanded(
-              child: OutlinedButton(
-                onPressed: () => Navigator.pop(context, false),
-                style: OutlinedButton.styleFrom(
-                  side: BorderSide(color: context.palette.kPrimary),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(ScreenUtilsManager.r10),
-                  ),
-                  padding: EdgeInsets.symmetric(
-                    vertical: ScreenUtilsManager.h12,
-                  ),
-                ),
-                child: Text(
-                  S.of(context).cancel,
-                  style: GoogleFonts.cairo(
-                    color: context.palette.kPrimary,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
+            // Icon
+            Container(
+              padding: EdgeInsets.all(ScreenUtilsManager.h16),
+              decoration: BoxDecoration(
+                color: isDark
+                    ? context.palette.error.withOpacity(0.15)
+                    : context.palette.redLight,
+                shape: BoxShape.circle,
+              ),
+              child: Icon(
+                Icons.logout_rounded,
+                color: context.palette.red,
+                size: ScreenUtilsManager.s40,
               ),
             ),
-            SizedBox(width: ScreenUtilsManager.w12),
-            Expanded(
-              child: ElevatedButton(
-                onPressed: () => Navigator.pop(context, true),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: context.palette.red,
-                  foregroundColor: Colors.white,
-                  elevation: 0,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(ScreenUtilsManager.r10),
-                  ),
-                  padding: EdgeInsets.symmetric(
-                    vertical: ScreenUtilsManager.h12,
-                  ),
-                ),
-                child: Text(
-                  S.of(context).logout,
-                  style: GoogleFonts.cairo(fontWeight: FontWeight.w600),
-                ),
+            SizedBox(height: ScreenUtilsManager.h16),
+
+            // Title
+            Text(
+              S.of(context).logout,
+              style: GoogleFonts.cairo(
+                fontWeight: FontWeight.bold,
+                fontSize: ScreenUtilsManager.s20,
+                color: colorScheme.onSurface,
               ),
+            ),
+            SizedBox(height: ScreenUtilsManager.h12),
+
+            // Message
+            Text(
+              S.of(context).logoutConfirmationMessage,
+              style: GoogleFonts.cairo(
+                fontSize: ScreenUtilsManager.s14,
+                color: colorScheme.onSurfaceVariant,
+                height: 1.5,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(height: ScreenUtilsManager.h24),
+
+            // Buttons
+            Row(
+              children: [
+                Expanded(
+                  child: OutlinedButton(
+                    onPressed: () => Navigator.pop(context, false),
+                    style: OutlinedButton.styleFrom(
+                      side: BorderSide(
+                        color: isDark
+                            ? colorScheme.outline
+                            : context.palette.kPrimary,
+                        width: 1.5,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(
+                          ScreenUtilsManager.r12,
+                        ),
+                      ),
+                      padding: EdgeInsets.symmetric(
+                        vertical: ScreenUtilsManager.h12,
+                      ),
+                      backgroundColor: Colors.transparent,
+                    ),
+                    child: Text(
+                      S.of(context).cancel,
+                      style: GoogleFonts.cairo(
+                        color: isDark
+                            ? colorScheme.onSurfaceVariant
+                            : context.palette.kPrimary,
+                        fontWeight: FontWeight.w600,
+                        fontSize: ScreenUtilsManager.s14,
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(width: ScreenUtilsManager.w12),
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: () => Navigator.pop(context, true),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: context.palette.red,
+                      foregroundColor: Colors.white,
+                      elevation: isDark ? 0 : 2,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(
+                          ScreenUtilsManager.r12,
+                        ),
+                      ),
+                      padding: EdgeInsets.symmetric(
+                        vertical: ScreenUtilsManager.h12,
+                      ),
+                    ),
+                    child: Text(
+                      S.of(context).logout,
+                      style: GoogleFonts.cairo(
+                        fontWeight: FontWeight.w600,
+                        fontSize: ScreenUtilsManager.s14,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
-      ],
+      ),
     );
   }
 }

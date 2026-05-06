@@ -22,6 +22,7 @@ class Editfromprofile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     final Color primaryThemeColor = role
         ? context.palette.workerprimary
         : context.palette.kPrimary;
@@ -38,6 +39,7 @@ class Editfromprofile extends StatelessWidget {
             controller: nameCotroller,
             icon: Icons.person_outline,
             themeColor: primaryThemeColor,
+            isDark: isDark,
           ),
           SizedBox(height: ScreenUtilsManager.h20),
           _buildTextFieldSection(
@@ -48,6 +50,7 @@ class Editfromprofile extends StatelessWidget {
             icon: Icons.mail_outline,
             keyboardType: TextInputType.emailAddress,
             themeColor: primaryThemeColor,
+            isDark: isDark,
           ),
           SizedBox(height: ScreenUtilsManager.h20),
           _buildTextFieldSection(
@@ -58,6 +61,7 @@ class Editfromprofile extends StatelessWidget {
             icon: Icons.call_outlined,
             keyboardType: TextInputType.phone,
             themeColor: primaryThemeColor,
+            isDark: isDark,
           ),
           SizedBox(height: ScreenUtilsManager.h20),
           _buildTextFieldSection(
@@ -67,6 +71,7 @@ class Editfromprofile extends StatelessWidget {
             controller: addressCotroller,
             icon: Icons.location_on_outlined,
             themeColor: primaryThemeColor,
+            isDark: isDark,
           ),
         ],
       ),
@@ -80,6 +85,7 @@ class Editfromprofile extends StatelessWidget {
     required TextEditingController controller,
     required IconData icon,
     required Color themeColor,
+    required bool isDark,
     TextInputType keyboardType = TextInputType.text,
   }) {
     return Column(
@@ -91,23 +97,26 @@ class Editfromprofile extends StatelessWidget {
             label,
             style: GoogleFonts.cairo(
               fontSize: ScreenUtilsManager.s14,
-              fontWeight: FontWeight.bold,
-              color: context.palette.onSurface.withOpacity(0.8),
+              fontWeight: FontWeight.w600,
+              color: isDark
+                  ? context.palette.onSurface.withOpacity(0.85)
+                  : context.palette.onSurface.withOpacity(0.8),
             ),
           ),
         ),
         SizedBox(height: ScreenUtilsManager.h8),
         Container(
           decoration: BoxDecoration(
-            color: context.palette.white,
             borderRadius: BorderRadius.circular(ScreenUtilsManager.r14),
-            boxShadow: [
-              BoxShadow(
-                color: themeColor.withOpacity(0.05),
-                blurRadius: 10,
-                offset: const Offset(0, 4),
-              ),
-            ],
+            boxShadow: isDark
+                ? null
+                : [
+                    BoxShadow(
+                      color: themeColor.withOpacity(0.05),
+                      blurRadius: 10,
+                      offset: const Offset(0, 4),
+                    ),
+                  ],
           ),
           child: TextField(
             controller: controller,
@@ -116,21 +125,27 @@ class Editfromprofile extends StatelessWidget {
             style: GoogleFonts.cairo(
               fontSize: ScreenUtilsManager.s14,
               fontWeight: FontWeight.w500,
-              color: const Color(0xFF0F172A),
+              color: isDark
+                  ? context.palette.onSurface
+                  : const Color(0xFF0F172A),
             ),
             decoration: InputDecoration(
               prefixIcon: Icon(
                 icon,
-                color: themeColor.withOpacity(0.6),
+                color: themeColor.withOpacity(isDark ? 0.7 : 0.6),
                 size: ScreenUtilsManager.s20,
               ),
               hintText: hint,
               hintStyle: GoogleFonts.cairo(
                 fontSize: ScreenUtilsManager.s14,
-                color: const Color(0xFF94A3B8),
+                color: isDark
+                    ? context.palette.onSurfaceVariant.withOpacity(0.6)
+                    : const Color(0xFF94A3B8),
               ),
               filled: true,
-              fillColor: context.palette.white,
+              fillColor: isDark
+                  ? Theme.of(context).colorScheme.surfaceContainerHighest
+                  : context.palette.white,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(ScreenUtilsManager.r14),
                 borderSide: BorderSide.none,
@@ -138,13 +153,26 @@ class Editfromprofile extends StatelessWidget {
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(ScreenUtilsManager.r14),
                 borderSide: BorderSide(
-                  color: const Color(0xFFE2E8F0),
-                  width: 1,
+                  color: isDark
+                      ? context.palette.outline.withOpacity(0.3)
+                      : const Color(0xFFE2E8F0),
+                  width: isDark ? 0.5 : 1,
                 ),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(ScreenUtilsManager.r14),
                 borderSide: BorderSide(color: themeColor, width: 2),
+              ),
+              errorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(ScreenUtilsManager.r14),
+                borderSide: BorderSide(
+                  color: context.palette.error.withOpacity(0.7),
+                  width: 1,
+                ),
+              ),
+              focusedErrorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(ScreenUtilsManager.r14),
+                borderSide: BorderSide(color: context.palette.error, width: 2),
               ),
               contentPadding: EdgeInsets.symmetric(
                 horizontal: ScreenUtilsManager.w16,

@@ -73,19 +73,19 @@ class HelpAndTermsPage extends StatelessWidget {
                     answer: item.answer,
                     showDivider: false,
                     ansDecoration: BoxDecoration(
-                      color: Colors.white,
+                      color: Theme.of(context).colorScheme.surface,
                       borderRadius: BorderRadius.circular(12.r),
                     ),
                     queDecoration: BoxDecoration(
-                      color: Colors.white,
+                      color: Theme.of(context).colorScheme.surface,
                       borderRadius: BorderRadius.circular(12.r),
                     ),
                     queStyle: GoogleFonts.cairo(
                       fontWeight: FontWeight.w600,
-                      color: ColorManger.textBlack,
+                      color: context.palette.onSurface,
                     ),
                     ansStyle: GoogleFonts.cairo(
-                      color: ColorManger.textGrey,
+                      color: context.palette.onSurfaceVariant,
                       height: 1.5,
                     ),
                   ),
@@ -103,7 +103,7 @@ class HelpAndTermsPage extends StatelessWidget {
   Widget _buildContactBar(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(20.h),
-      color: Colors.white,
+      color: Theme.of(context).colorScheme.surface,
       child: ElevatedButton.icon(
         onPressed: () async {
           await Customersupport.sendEmail("body");

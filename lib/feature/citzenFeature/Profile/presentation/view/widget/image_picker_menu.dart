@@ -13,7 +13,7 @@ class ImagePickerMenu {
   static Future<File?> show(BuildContext context) async {
     return await showModalBottomSheet<File?>(
       context: context,
-      backgroundColor: context.palette.white,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(
           top: Radius.circular(ScreenUtilsManager.r20),
@@ -24,7 +24,7 @@ class ImagePickerMenu {
           child: Padding(
             padding: EdgeInsets.symmetric(vertical: ScreenUtilsManager.h16),
             child: Column(
-              mainAxisSize: MainAxisSize.min, 
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Container(
                   width: ScreenUtilsManager.w40,
@@ -81,13 +81,15 @@ class ImagePickerMenu {
     Color? iconColor,
     Color? iconBgColor,
   }) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    
     return Container(
       margin: EdgeInsets.symmetric(
         horizontal: ScreenUtilsManager.w16,
         vertical: ScreenUtilsManager.h4,
       ),
       decoration: BoxDecoration(
-        color: context.palette.lightGrey5,
+        color: isDark ? context.palette.outline.withOpacity(0.1) : context.palette.lightGrey5,
         borderRadius: BorderRadius.circular(ScreenUtilsManager.r12),
       ),
       child: ListTile(
@@ -96,10 +98,10 @@ class ImagePickerMenu {
             ? CircleAvatar(
                 radius: ScreenUtilsManager.r18,
                 backgroundColor:
-                    iconBgColor ?? context.palette.lightBlue.withOpacity(0.5),
+                    iconBgColor ?? (isDark ? context.palette.primary.withOpacity(0.2) : context.palette.lightBlue.withOpacity(0.5)),
                 child: Icon(
                   icon,
-                  color: iconColor ?? context.palette.white,
+                  color: iconColor ?? (isDark ? context.palette.white : context.palette.white),
                   size: ScreenUtilsManager.s18,
                 ),
               )
@@ -109,7 +111,7 @@ class ImagePickerMenu {
           style: GoogleFonts.cairo(
             fontSize: ScreenUtilsManager.s16,
             fontWeight: FontWeight.w600,
-            color: context.palette.textBlack,
+            color: isDark ? context.palette.onSurface : context.palette.onSurface,
           ),
         ),
         trailing: Icon(
