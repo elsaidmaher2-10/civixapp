@@ -19,12 +19,16 @@ class CategoryCubit extends Cubit<CategoryState> {
         final List<CategoryItem> categories = decodedData
             .map((e) => CategoryItem.fromJson(e as Map<String, dynamic>))
             .toList();
+        if (isClosed) return;
 
         emit(CategoryLoaded(categories));
       } catch (e) {
+        if (isClosed) return;
+
         await fetchCategories();
       }
     } else {
+      if (isClosed) return;
       await fetchCategories();
     }
   }

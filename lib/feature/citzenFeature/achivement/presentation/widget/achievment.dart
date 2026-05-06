@@ -71,16 +71,38 @@ class _AchievemrntReportScreenState extends State<AchievemrntReportScreen> {
             slivers: [
               SliverAppBar(
                 pinned: true,
-                backgroundColor: context.palette.reportsPageBackground,
+                backgroundColor: Theme.of(context).colorScheme.surface,
                 elevation: 0,
-                toolbarHeight: 10,
+                title: Text(
+                  l10n.achievement,
+                  style: GoogleFonts.cairo(
+                    fontSize: ScreenUtilsManager.s20,
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                ),
+                centerTitle: true,
                 automaticallyImplyLeading: false,
+                flexibleSpace: Container(
+                  decoration: BoxDecoration(
+                    border: Theme.of(context).brightness == Brightness.dark
+                        ? Border(
+                            bottom: BorderSide(
+                              color: Theme.of(
+                                context,
+                              ).colorScheme.outline.withOpacity(0.1),
+                              width: 0.5,
+                            ),
+                          )
+                        : null,
+                  ),
+                ),
               ),
-
+              SliverToBoxAdapter(child: SizedBox(height: 16.h)),
               SliverToBoxAdapter(
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(16.w, 0, 16.w, 16.h),
-                  child: const ReportSearchBar(),
+                  child: SizedBox(),
                 ),
               ),
 
@@ -224,9 +246,7 @@ class _AchievemrntReportScreenState extends State<AchievemrntReportScreen> {
           Text(
             message,
             textAlign: TextAlign.center,
-            style: GoogleFonts.cairo(
-              color: context.palette.onSurfaceVariant,
-            ),
+            style: GoogleFonts.cairo(color: context.palette.onSurfaceVariant),
           ),
           SizedBox(height: 16.h),
           ElevatedButton(

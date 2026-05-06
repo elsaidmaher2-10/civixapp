@@ -71,10 +71,15 @@ class _CategoryDropdownState extends State<CategoryDropdown> {
                     vertical: 14,
                   ),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? Theme.of(context).colorScheme.surfaceContainerHighest
+                        : const Color(0xffF6F6F6),
+                    borderRadius: BorderRadius.circular(12),
                     border: Border.all(
-                      color: context.palette.kPrimary,
-                      width: 1,
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Theme.of(context).colorScheme.outline.withOpacity(0.3)
+                          : Colors.grey.shade300,
+                      width: Theme.of(context).brightness == Brightness.dark ? 0.5 : 1,
                     ),
                   ),
                   child: Row(
@@ -88,8 +93,8 @@ class _CategoryDropdownState extends State<CategoryDropdown> {
                               ? FontWeight.normal
                               : FontWeight.w500,
                           color: selectedItem == null
-                              ? Colors.grey[600]
-                              : Colors.black,
+                              ? context.palette.onSurfaceVariant.withOpacity(0.6)
+                              : context.palette.onSurface,
                         ),
                       ),
                       Icon(
@@ -111,7 +116,7 @@ class _CategoryDropdownState extends State<CategoryDropdown> {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      backgroundColor: Colors.white,
+      backgroundColor: context.palette.surface,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
       ),
@@ -155,8 +160,8 @@ class _SearchListWidgetState extends State<_SearchListWidget> {
 
   @override
   void initState() {
-    super.initState();
     filteredItems = widget.items;
+    super.initState();
   }
 
   void _filter(String query) {
@@ -182,13 +187,19 @@ class _SearchListWidgetState extends State<_SearchListWidget> {
           children: [
             TextField(
               onChanged: _filter,
-              style: GoogleFonts.cairo(fontSize: 14),
+              style: GoogleFonts.cairo(
+                fontSize: 14,
+                color: context.palette.onSurface,
+              ),
               decoration: InputDecoration(
                 hintText: widget.searchHintText,
-                hintStyle: GoogleFonts.cairo(fontSize: 14),
+                hintStyle: GoogleFonts.cairo(
+                  fontSize: 14,
+                  color: context.palette.onSurfaceVariant.withOpacity(0.6),
+                ),
                 prefixIcon: Icon(Icons.search, color: context.palette.kPrimary),
                 filled: true,
-                fillColor: const Color(0xffF6F6F6),
+                fillColor: context.palette.surfaceContainer,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
                   borderSide: BorderSide(
@@ -215,20 +226,23 @@ class _SearchListWidgetState extends State<_SearchListWidget> {
                         widget.noResultText,
                         style: GoogleFonts.cairo(
                           fontSize: 14,
-                          color: Colors.grey,
+                          color: context.palette.onSurfaceVariant,
                         ),
                       ),
                     )
                   : ListView.separated(
                       itemCount: filteredItems.length,
                       separatorBuilder: (context, index) =>
-                          const Divider(height: 1),
+                          Divider(height: 1, color: context.palette.outline.withOpacity(0.2)),
                       itemBuilder: (context, index) {
                         final item = filteredItems[index];
                         return ListTile(
                           title: Text(
                             item.name ?? '',
-                            style: GoogleFonts.cairo(fontSize: 14),
+                            style: GoogleFonts.cairo(
+                              fontSize: 14,
+                              color: context.palette.onSurface,
+                            ),
                           ),
                           onTap: () => widget.onItemSelected(item),
                         );

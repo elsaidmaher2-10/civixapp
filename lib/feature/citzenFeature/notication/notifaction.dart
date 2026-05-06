@@ -100,7 +100,7 @@ class _NotificationCenterState extends State<NotificationCenter> {
                   ),
                   IconButton(
                     icon: const Icon(Icons.delete_sweep_rounded),
-                    color: Colors.red.shade400,
+                    color: context.palette.red,
                     onPressed: () => context
                         .read<NotificationCubit>()
                         .clearAllNotifications(),
@@ -148,7 +148,7 @@ class _NotificationCenterState extends State<NotificationCenter> {
               alignment: Alignment.centerRight,
               padding: EdgeInsets.symmetric(horizontal: ScreenUtilsManager.w24),
               decoration: BoxDecoration(
-                color: Colors.red.shade400,
+                color: context.palette.red,
                 borderRadius: BorderRadius.circular(12),
               ),
               child: const Icon(
@@ -183,7 +183,11 @@ class _NotificationCenterState extends State<NotificationCenter> {
           ),
           Text(
             S.of(context).noNotifications,
-            style: GoogleFonts.cairo(fontSize: 18, fontWeight: FontWeight.bold),
+            style: GoogleFonts.cairo(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: context.palette.onSurface,
+            ),
           ),
         ],
       ),
@@ -195,7 +199,10 @@ class _NotificationCenterState extends State<NotificationCenter> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(message),
+          Text(
+            message,
+            style: GoogleFonts.cairo(color: context.palette.onSurface),
+          ),
           ElevatedButton(
             onPressed: () =>
                 context.read<NotificationCubit>().getNotifications(),

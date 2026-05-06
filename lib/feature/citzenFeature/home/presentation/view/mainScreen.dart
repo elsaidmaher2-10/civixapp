@@ -117,15 +117,17 @@ class _CitizenMainScreenState extends State<CitizenMainScreen> {
                             onPressed: () async {
                               final reportCubit = context.read<ReportCubit>();
                               await showModalBottomSheet(
-                                useSafeArea: true,
-                                backgroundColor: context.palette.bgLight,
+                                useSafeArea: false,
+                                backgroundColor: context.palette.bgBackground,
                                 context: context,
                                 elevation: 0,
-                                barrierColor: Colors.white,
                                 isScrollControlled: true,
                                 builder: (context) => BlocProvider.value(
                                   value: reportCubit,
-                                  child: const AddReportScreen(),
+                                  child: SizedBox(
+                                    height: MediaQuery.of(context).size.height,
+                                    child: const AddReportScreen(),
+                                  ),
                                 ),
                               );
                             },

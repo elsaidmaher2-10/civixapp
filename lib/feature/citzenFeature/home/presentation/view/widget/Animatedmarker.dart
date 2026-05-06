@@ -55,5 +55,19 @@ class _AnimatedMarkerState extends State<AnimatedMarker>
 }
 
 Widget CustomLocationMarker() {
-  return Lottie.asset(AssetValueManager.location);
+  return Container(
+    padding: const EdgeInsets.all(4),
+    decoration: const BoxDecoration(
+      color: Colors.white,
+      shape: BoxShape.circle,
+      boxShadow: [
+        BoxShadow(
+          color: Colors.black26,
+          blurRadius: 4,
+          spreadRadius: 1,
+        ),
+      ],
+    ),
+    child: Lottie.asset(AssetValueManager.location),
+  );
 }

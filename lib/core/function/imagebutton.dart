@@ -72,57 +72,38 @@ class AppButton extends StatelessWidget {
 class CustomButton extends StatelessWidget {
   const CustomButton({
     required this.lable,
-
     super.key,
-
     required this.onPressed,
-
     this.icon,
-
-    this.backgroundColor = ColorManger.kPrimary,
-
-    this.foregroundColor = ColorManger.white,
-
+    this.backgroundColor,
+    this.foregroundColor,
     this.raduis = 8,
   });
 
   final double raduis;
-
   final void Function()? onPressed;
-
   final Widget? icon;
-
   final Color? backgroundColor;
-
   final Color? foregroundColor;
-
   final String lable;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 40.h,
-
       width: double.infinity,
-
       child: ElevatedButton.icon(
         style: ElevatedButton.styleFrom(
-          backgroundColor: backgroundColor,
-
-          foregroundColor: foregroundColor,
-
+          backgroundColor: backgroundColor ?? context.palette.kPrimary,
+          foregroundColor: foregroundColor ?? context.palette.onPrimary,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(raduis),
           ),
         ),
-
         onPressed: onPressed,
-
         icon: icon,
-
         label: Text(
           lable,
-
           style: GoogleFonts.cairo(fontWeight: FontWeight.bold),
         ),
       ),

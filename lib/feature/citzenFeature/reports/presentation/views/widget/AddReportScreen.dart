@@ -81,8 +81,7 @@ class _AddReportScreenState extends State<AddReportScreen> {
                     duration: Duration(milliseconds: 300),
                     builder: (context, value, child) {
                       return LinearProgressIndicator(
-                        backgroundColor:
-                            context.palette.surfaceContainerHigh,
+                        backgroundColor: context.palette.surfaceContainerHigh,
                         minHeight: 10,
                         value: value,
                         color: context.palette.primary,
@@ -101,7 +100,7 @@ class _AddReportScreenState extends State<AddReportScreen> {
             ],
           ),
           child: Scaffold(
-            backgroundColor: context.palette.white,
+            backgroundColor: context.palette.bgBackground,
             appBar: AddReportAppbar(context),
             body: SafeArea(
               child: Padding(

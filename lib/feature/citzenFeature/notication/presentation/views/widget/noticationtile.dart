@@ -80,21 +80,20 @@ class NotificationTile extends StatelessWidget {
           padding: EdgeInsets.all(ScreenUtilsManager.w16),
           decoration: BoxDecoration(
             color: item.isRead
-                ? Theme.of(context).scaffoldBackgroundColor
-                // ignore: deprecated_member_use
-                : primaryColor.withOpacity(0.03),
+                ? context.palette.surface
+                : context.palette.primary.withOpacity(0.05),
             borderRadius: BorderRadius.circular(ScreenUtilsManager.r15),
             border: Border.all(
               color: item.isRead
-                  ? Colors.grey.shade200
-                  : primaryColor.withOpacity(0.3),
+                  ? context.palette.outline.withOpacity(0.2)
+                  : context.palette.primary.withOpacity(0.3),
               width: 1,
             ),
             boxShadow: item.isRead
                 ? []
                 : [
                     BoxShadow(
-                      color: primaryColor.withOpacity(0.05),
+                      color: context.palette.primary.withOpacity(0.05),
                       blurRadius: 10,
                       offset: const Offset(0, 4),
                     ),
@@ -103,7 +102,7 @@ class NotificationTile extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildIconContainer(primaryColor),
+              _buildIconContainer(context, primaryColor),
               SizedBox(width: ScreenUtilsManager.w12),
               Expanded(
                 child: Column(
@@ -120,8 +119,8 @@ class NotificationTile extends StatelessWidget {
                                   ? FontWeight.w600
                                   : FontWeight.w800,
                               color: item.isRead
-                                  ? Colors.black87
-                                  : Colors.black,
+                                  ? context.palette.onSurfaceVariant
+                                  : context.palette.onSurface,
                             ),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
@@ -135,7 +134,9 @@ class NotificationTile extends StatelessWidget {
                             fontWeight: item.isRead
                                 ? FontWeight.w400
                                 : FontWeight.w300,
-                            color: item.isRead ? Colors.black87 : Colors.black,
+                            color: item.isRead
+                                ? context.palette.onSurfaceVariant
+                                : context.palette.onSurface,
                           ),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
@@ -148,8 +149,8 @@ class NotificationTile extends StatelessWidget {
                       style: GoogleFonts.cairo(
                         fontSize: ScreenUtilsManager.s14,
                         color: item.isRead
-                            ? Colors.grey.shade500
-                            : Colors.grey.shade800,
+                            ? context.palette.onSurfaceVariant.withOpacity(0.7)
+                            : context.palette.onSurfaceVariant,
                         height: 1.4,
                       ),
                       maxLines: 2,
@@ -159,8 +160,7 @@ class NotificationTile extends StatelessWidget {
                 ),
               ),
               SizedBox(width: ScreenUtilsManager.w8),
-
-              _buildDeleteButton(),
+              _buildDeleteButton(context),
             ],
           ),
         ),
@@ -168,14 +168,14 @@ class NotificationTile extends StatelessWidget {
     );
   }
 
-  Widget _buildIconContainer(Color primaryColor) {
+  Widget _buildIconContainer(BuildContext context, Color primaryColor) {
     return Stack(
       children: [
         Container(
           padding: EdgeInsets.all(ScreenUtilsManager.w10),
           decoration: BoxDecoration(
             color: item.isRead
-                ? Colors.grey.shade100
+                ? context.palette.outline.withOpacity(0.1)
                 : primaryColor.withOpacity(0.1),
             shape: BoxShape.circle,
           ),
@@ -183,7 +183,7 @@ class NotificationTile extends StatelessWidget {
             item.isRead
                 ? Icons.notifications_none_rounded
                 : Icons.notifications_active_rounded,
-            color: item.isRead ? Colors.grey.shade400 : primaryColor,
+            color: item.isRead ? context.palette.onSurfaceVariant : primaryColor,
             size: ScreenUtilsManager.s20,
           ),
         ),
@@ -195,9 +195,9 @@ class NotificationTile extends StatelessWidget {
               width: ScreenUtilsManager.w12,
               height: ScreenUtilsManager.h12,
               decoration: BoxDecoration(
-                color: Colors.redAccent,
+                color: context.palette.red,
                 shape: BoxShape.circle,
-                border: Border.all(color: Colors.white, width: 2),
+                border: Border.all(color: context.palette.surface, width: 2),
               ),
             ),
           ),
@@ -205,7 +205,7 @@ class NotificationTile extends StatelessWidget {
     );
   }
 
-  Widget _buildDeleteButton() {
+  Widget _buildDeleteButton(BuildContext context) {
     return Material(
       color: Colors.transparent,
       child: InkWell(
@@ -214,12 +214,12 @@ class NotificationTile extends StatelessWidget {
         child: Container(
           padding: EdgeInsets.all(ScreenUtilsManager.w8),
           decoration: BoxDecoration(
-            color: Colors.red.shade50.withOpacity(0.5),
+            color: context.palette.red.withOpacity(0.1),
             shape: BoxShape.circle,
           ),
           child: Icon(
             Icons.close_rounded,
-            color: Colors.red.shade400,
+            color: context.palette.red,
             size: ScreenUtilsManager.s18,
           ),
         ),

@@ -15,7 +15,7 @@ class Uploadimage extends StatelessWidget {
   Widget build(BuildContext context) {
     return DottedBorder(
       options: RoundedRectDottedBorderOptions(
-        color: const Color(0xff64748B),
+        color: context.palette.outline,
         dashPattern: const [10, 5],
         borderPadding: const EdgeInsets.all(5),
         strokeWidth: 0.8,
@@ -28,13 +28,21 @@ class Uploadimage extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              SvgPicture.asset("assets/camera.svg", width: 20.w, height: 22.h),
+              SvgPicture.asset(
+                "assets/camera.svg",
+                width: 20.w,
+                height: 22.h,
+                colorFilter: ColorFilter.mode(
+                  context.palette.kPrimary,
+                  BlendMode.srcIn,
+                ),
+              ),
               SizedBox(height: 7.h),
               Text(
                 S.of(context).addPhoto,
                 style: GoogleFonts.cairo(
                   fontSize: ScreenUtilsManager.s12,
-                  color: context.palette.lightGrey,
+                  color: context.palette.onSurfaceVariant,
                   fontWeight: FontWeight.w500,
                 ),
               ),

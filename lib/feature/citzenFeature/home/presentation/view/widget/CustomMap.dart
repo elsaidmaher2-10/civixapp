@@ -175,14 +175,20 @@ class _CustomMapState extends State<CustomMap> with TickerProviderStateMixin {
                 SizedBox(
                   height: 40,
                   width: 40,
-                  child: Lottie.asset(AssetValueManager.pinLocaation),
+                  child: ColorFiltered(
+                    colorFilter: ColorFilter.mode(
+                      context.palette.kPrimary,
+                      BlendMode.srcIn,
+                    ),
+                    child: Lottie.asset(AssetValueManager.pinLocaation),
+                  ),
                 ),
                 const SizedBox(width: 5),
                 Expanded(
                   child: Text(
                     _street,
                     style: GoogleFonts.cairo(
-                      color: const Color(0xff475569),
+                      color: context.palette.onSurfaceVariant,
                       fontSize: ScreenUtilsManager.s14,
                     ),
                     overflow: TextOverflow.ellipsis,

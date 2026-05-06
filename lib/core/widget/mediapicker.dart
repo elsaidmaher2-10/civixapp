@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:citifix/core/resource/citifix_palette.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -99,6 +100,7 @@ class _PickerBottomSheetState extends State<PickerBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.palette;
     return DraggableScrollableSheet(
       initialChildSize: 0.8,
       minChildSize: 0.5,
@@ -106,9 +108,9 @@ class _PickerBottomSheetState extends State<PickerBottomSheet> {
       expand: false,
       builder: (context, scrollController) {
         return Container(
-          decoration: const BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+          decoration: BoxDecoration(
+            color: palette.surfaceContainerLow,
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
           ),
           child: Column(
             children: [
@@ -117,7 +119,11 @@ class _PickerBottomSheetState extends State<PickerBottomSheet> {
                 onPhoto: widget.onCameraPhoto,
                 onVideo: widget.onCameraVideo,
               ),
-              const Divider(height: 1, thickness: 1),
+              Divider(
+                height: 1,
+                thickness: 1,
+                color: palette.outline.withOpacity(0.2),
+              ),
               _GalleryHeader(
                 selectedCount: _selectedAssets.length,
                 onAdd: _confirmSelection,
@@ -153,7 +159,7 @@ class _DragHandle extends StatelessWidget {
       width: 40,
       height: 4,
       decoration: BoxDecoration(
-        color: Colors.grey[300],
+        color: context.palette.outline.withOpacity(0.4),
         borderRadius: BorderRadius.circular(2),
       ),
     );
@@ -206,28 +212,29 @@ class _CameraButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.palette;
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(14),
       child: Ink(
         decoration: BoxDecoration(
-          color: kPrimaryFaint,
+          color: palette.surfaceContainerHigh,
           borderRadius: BorderRadius.circular(14),
-          border: Border.all(color: kPrimary.withOpacity(0.18)),
+          border: Border.all(color: palette.outline.withOpacity(0.18)),
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 16),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(icon, size: 30, color: kPrimary),
+              Icon(icon, size: 30, color: palette.kPrimary),
               const SizedBox(height: 6),
               Text(
                 label,
                 style: GoogleFonts.cairo(
                   fontSize: 13,
                   fontWeight: FontWeight.w600,
-                  color: kPrimary,
+                  color: palette.kPrimary,
                 ),
               ),
             ],
@@ -246,6 +253,7 @@ class _GalleryHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.palette;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       child: Row(
@@ -256,7 +264,7 @@ class _GalleryHeader extends StatelessWidget {
             style: GoogleFonts.cairo(
               fontSize: 16,
               fontWeight: FontWeight.w700,
-              color: kPrimary,
+              color: palette.onSurface,
             ),
           ),
           if (selectedCount > 0)
@@ -268,13 +276,13 @@ class _GalleryHeader extends StatelessWidget {
                   vertical: 7,
                 ),
                 decoration: BoxDecoration(
-                  color: kPrimary,
+                  color: palette.kPrimary,
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Text(
                   'Add  $selectedCount',
                   style: GoogleFonts.cairo(
-                    color: Colors.white,
+                    color: palette.onPrimary,
                     fontSize: 13,
                     fontWeight: FontWeight.w700,
                   ),
@@ -306,8 +314,9 @@ class _GalleryBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.palette;
     if (loading) {
-      return const Center(child: CircularProgressIndicator(color: kPrimary));
+      return Center(child: CircularProgressIndicator(color: palette.kPrimary));
     }
 
     if (permissionDenied) {
@@ -318,7 +327,10 @@ class _GalleryBody extends StatelessWidget {
       return Center(
         child: Text(
           'No media found',
-          style: GoogleFonts.cairo(color: Colors.grey, fontSize: 14),
+          style: GoogleFonts.cairo(
+            color: palette.onSurfaceVariant,
+            fontSize: 14,
+          ),
         ),
       );
     }
@@ -355,8 +367,9 @@ class _SelectedStrip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.palette;
     return Container(
-      color: kPrimaryFaint,
+      color: palette.surfaceContainerHigh,
       padding: const EdgeInsets.fromLTRB(12, 8, 12, 14),
       child: SizedBox(
         height: 64,
@@ -385,14 +398,14 @@ class _SelectedStrip extends StatelessWidget {
                       child: Container(
                         width: 17,
                         height: 17,
-                        decoration: const BoxDecoration(
-                          color: kPrimary,
+                        decoration: BoxDecoration(
+                          color: palette.kPrimary,
                           shape: BoxShape.circle,
                         ),
-                        child: const Icon(
+                        child: Icon(
                           Icons.close,
                           size: 11,
-                          color: Colors.white,
+                          color: palette.onPrimary,
                         ),
                       ),
                     ),
@@ -422,6 +435,7 @@ class _GalleryTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.palette;
     return GestureDetector(
       onTap: onTap,
       child: Stack(
@@ -432,16 +446,16 @@ class _GalleryTile extends StatelessWidget {
             isOriginal: false,
             fit: BoxFit.cover,
             errorBuilder: (_, __, ___) => Container(
-              color: Colors.grey[200],
-              child: const Icon(
+              color: palette.surfaceContainerLow,
+              child: Icon(
                 Icons.broken_image,
-                color: Colors.grey,
+                color: palette.onSurfaceVariant,
                 size: 28,
               ),
             ),
           ),
 
-          if (isSelected) Container(color: kPrimary.withOpacity(0.28)),
+          if (isSelected) Container(color: palette.kPrimary.withOpacity(0.28)),
 
           if (asset.type == AssetType.video)
             Positioned(
@@ -479,9 +493,9 @@ class _GalleryTile extends StatelessWidget {
               height: 22,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: isSelected ? kPrimary : Colors.transparent,
+                color: isSelected ? palette.kPrimary : Colors.transparent,
                 border: Border.all(
-                  color: isSelected ? kPrimary : Colors.white,
+                  color: isSelected ? palette.kPrimary : Colors.white,
                   width: 2,
                 ),
                 boxShadow: const [
@@ -493,7 +507,7 @@ class _GalleryTile extends StatelessWidget {
                       child: Text(
                         '$selectionNumber',
                         style: GoogleFonts.cairo(
-                          color: Colors.white,
+                          color: palette.onPrimary,
                           fontSize: 11,
                           fontWeight: FontWeight.bold,
                         ),
@@ -517,21 +531,25 @@ class _GalleryTile extends StatelessWidget {
 class _PermissionDeniedView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final palette = context.palette;
     return Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Icon(Icons.lock_outline, size: 52, color: kPrimary),
+          Icon(Icons.lock_outline, size: 52, color: palette.kPrimary),
           const SizedBox(height: 10),
           Text(
             'Gallery permission denied',
-            style: GoogleFonts.cairo(color: Colors.grey[600], fontSize: 15),
+            style: GoogleFonts.cairo(
+              color: palette.onSurfaceVariant,
+              fontSize: 15,
+            ),
           ),
           const SizedBox(height: 8),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: kPrimary,
-              foregroundColor: Colors.white,
+              backgroundColor: palette.kPrimary,
+              foregroundColor: palette.onPrimary,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
               ),
