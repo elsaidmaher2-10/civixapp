@@ -190,6 +190,8 @@ class ScreenUtilsManager {
   static double r60 = 60.r;
 
   static double w44 = 44.w;
+
+  static double get h140 => 140.h;
   static double get w28 => 28.w;
   static double get w1_5 => 1.5.w;
 }

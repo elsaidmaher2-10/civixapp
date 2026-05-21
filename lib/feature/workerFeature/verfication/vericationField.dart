@@ -1,5 +1,6 @@
 import 'package:citifix/core/DI/getit.dart';
 import 'package:citifix/core/resource/colormanager.dart';
+import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/feature/workerFeature/profile/helpterms.dart';
 import 'package:citifix/feature/workerFeature/verfication/Presentation/VerficationinitManger/VerificationInitCubit.dart';
 import 'package:citifix/feature/workerFeature/verfication/data/model/WorkerRequestModel.dart';
@@ -8,6 +9,7 @@ import 'package:citifix/feature/workerFeature/verfication/verficationinit.dart';
 import 'package:flutter/material.dart';
 import 'package:citifix/generated/l10n.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class VerificationFailedScreen extends StatelessWidget {
   const VerificationFailedScreen({super.key, required this.workerRequestModel});
@@ -91,7 +93,6 @@ class VerificationFailedScreen extends StatelessWidget {
         Stack(
           alignment: Alignment.center,
           children: [
-            // Soft animated-like pulses
             Container(
               height: ScreenUtilsManager.h140,
               width: ScreenUtilsManager.h140,

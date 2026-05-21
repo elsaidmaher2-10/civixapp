@@ -123,6 +123,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "continueToApp": MessageLookupByLibrary.simpleMessage("الاستمرار للتطبيق"),
     "created": MessageLookupByLibrary.simpleMessage("تاريخ الإنشاء"),
+    "darkMode": MessageLookupByLibrary.simpleMessage("المظهر الداكن"),
     "dataSecurityNote": MessageLookupByLibrary.simpleMessage(
       "بياناتك مخزنة ومُشفرة بشكل آمن.",
     ),

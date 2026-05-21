@@ -56,7 +56,6 @@ class _GlobalGateVerificationPageState extends State<VerificationInit> {
     bool ready =
         selectedZone != null &&
         selectedCategory != null &&
-        notes.text.isNotEmpty &&
         frontFile != null &&
         backFile != null;
 
@@ -188,7 +187,7 @@ class _GlobalGateVerificationPageState extends State<VerificationInit> {
             stepLabel: "${S.of(context).step} 2",
           ),
           const SizedBox(height: ScreenUtilsManager.itemSpacing),
-          _buildZoneDropdown(departments),
+          _buildCategoryDropdown(departments),
 
           const SizedBox(height: ScreenUtilsManager.sectionSpacing),
 
@@ -197,7 +196,7 @@ class _GlobalGateVerificationPageState extends State<VerificationInit> {
             stepLabel: "${S.of(context).step} 3",
           ),
           const SizedBox(height: ScreenUtilsManager.itemSpacing),
-          _buildCategoryGrid(areas),
+          _buildZoneGrid(areas),
 
           const SizedBox(height: ScreenUtilsManager.sectionSpacing),
 
@@ -270,7 +269,7 @@ class _GlobalGateVerificationPageState extends State<VerificationInit> {
     );
   }
 
-  Widget _buildZoneDropdown(List<Verficationmodel> items) {
+  Widget _buildCategoryDropdown(List<Verficationmodel> items) {
     return CustomDropdown<String>.search(
       hintText: S.of(context).category,
       items: items.map((e) => e.name).toList(),
@@ -288,7 +287,7 @@ class _GlobalGateVerificationPageState extends State<VerificationInit> {
     );
   }
 
-  Widget _buildCategoryGrid(List<Verficationmodel> areas) {
+  Widget _buildZoneGrid(List<Verficationmodel> areas) {
     return GridView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
@@ -307,13 +306,13 @@ class _GlobalGateVerificationPageState extends State<VerificationInit> {
             setState(() => selectedZone = item.id);
             check();
           },
-          child: _buildCategoryItem(item, isSelected),
+          child: _buildZoneItem(item, isSelected),
         );
       },
     );
   }
 
-  Widget _buildCategoryItem(Verficationmodel item, bool isSelected) {
+  Widget _buildZoneItem(Verficationmodel item, bool isSelected) {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 300),
       padding: const EdgeInsets.all(16),

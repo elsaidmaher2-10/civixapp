@@ -28,11 +28,23 @@ class WorkerMainscreenAppbar extends StatelessWidget
       elevation: 0,
       automaticallyImplyLeading: false,
       toolbarHeight: ScreenUtilsManager.h70,
-      centerTitle: true,
-      title: SvgPicture.asset(
-        AssetValueManager.Klog,
-        height: ScreenUtilsManager.s48,
-        width: ScreenUtilsManager.s48,
+      title: Row(
+        children: [
+          SvgPicture.asset(
+            AssetValueManager.Klog,
+            height: ScreenUtilsManager.s32,
+            width: ScreenUtilsManager.s32,
+          ),
+          SizedBox(width: ScreenUtilsManager.w12),
+          Text(
+            S.of(context).appTitle,
+            style: GoogleFonts.cairo(
+              fontSize: ScreenUtilsManager.s20,
+              fontWeight: FontWeight.bold,
+              color: context.palette.onSurface,
+            ),
+          ),
+        ],
       ),
       actions: [
         BlocBuilder<NotificationCubit, NotificationState>(

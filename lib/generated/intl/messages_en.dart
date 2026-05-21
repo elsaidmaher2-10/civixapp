@@ -131,6 +131,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "continueToApp": MessageLookupByLibrary.simpleMessage("Continue to App"),
     "created": MessageLookupByLibrary.simpleMessage("CREATED"),
+    "darkMode": MessageLookupByLibrary.simpleMessage("Dark Mode"),
     "dataSecurityNote": MessageLookupByLibrary.simpleMessage(
       "Your data is securely stored and encrypted.",
     ),

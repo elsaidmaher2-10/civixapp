@@ -2964,6 +2964,11 @@ class S {
     return Intl.message('Step', name: 'step', desc: '', args: []);
   }
 
+  /// `Dark Mode`
+  String get darkMode {
+    return Intl.message('Dark Mode', name: 'darkMode', desc: '', args: []);
+  }
+
   /// `Completion Details`
   String get completionDetails {
     return Intl.message(
