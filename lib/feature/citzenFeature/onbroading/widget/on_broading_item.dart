@@ -26,7 +26,7 @@ class Customonbroadingitem extends StatelessWidget {
           end: Alignment.bottomCenter,
           colors: [
             context.palette.reportsPageBackground,
-            context.palette.reportsPageBackground.withValues(alpha: 0.92),
+            context.palette.reportsPageBackground.withOpacity(0.92),
             context.palette.surfaceContainerLowest,
           ],
         ),

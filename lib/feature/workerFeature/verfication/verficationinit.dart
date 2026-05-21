@@ -100,7 +100,7 @@ class _GlobalGateVerificationPageState extends State<VerificationInit> {
               setState(() => isasync = false);
               Customsnackbar.show(
                 context: context,
-                backgroundColor: Colors.green,
+                backgroundColor: context.palette.success,
                 message: S.of(context).requestSentSuccessfully,
               );
               Navigator.of(context).pop();
@@ -109,7 +109,7 @@ class _GlobalGateVerificationPageState extends State<VerificationInit> {
               setState(() => isasync = false);
               Customsnackbar.show(
                 context: context,
-                backgroundColor: Colors.red,
+                backgroundColor: context.palette.red,
                 message: state.errorMessage,
               );
             }

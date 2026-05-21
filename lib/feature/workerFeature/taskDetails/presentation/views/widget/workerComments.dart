@@ -64,41 +64,55 @@ class Workercomments extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: EdgeInsets.all(16.r),
+                padding: EdgeInsets.symmetric(
+                  horizontal: ScreenUtilsManager.w16,
+                  vertical: ScreenUtilsManager.h12,
+                ),
                 child: Row(
                   children: [
-                    SvgPicture.asset(
-                      "assets/commentsytem.svg",
-                      width: 24.w,
-                      colorFilter: ColorFilter.mode(
-                        context.palette.workerprimary,
-                        BlendMode.srcIn,
+                    Container(
+                      padding: EdgeInsets.all(ScreenUtilsManager.h8),
+                      decoration: BoxDecoration(
+                        color: context.palette.workerprimary.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(ScreenUtilsManager.r8),
+                      ),
+                      child: SvgPicture.asset(
+                        "assets/commentsytem.svg",
+                        width: ScreenUtilsManager.s20,
+                        colorFilter: ColorFilter.mode(
+                          context.palette.workerprimary,
+                          BlendMode.srcIn,
+                        ),
                       ),
                     ),
-                    SizedBox(width: ScreenUtilsManager.w8),
+                    SizedBox(width: ScreenUtilsManager.w12),
                     Text(
                       S.of(context).comments,
                       style: GoogleFonts.cairo(
-                        color: context.palette.workerprimary,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16.sp,
+                        color: context.palette.onSurface,
+                        fontWeight: FontWeight.w800,
+                        fontSize: ScreenUtilsManager.s18,
                       ),
                     ),
                     const Spacer(),
                     Container(
                       padding: EdgeInsets.symmetric(
-                        horizontal: 12.w,
-                        vertical: 6.h,
+                        horizontal: ScreenUtilsManager.w12,
+                        vertical: ScreenUtilsManager.h6,
                       ),
                       decoration: BoxDecoration(
-                        color: context.palette.surfaceContainerHigh,
-                        borderRadius: BorderRadius.circular(8.r),
+                        color: context.palette.surfaceContainerHighest,
+                        borderRadius: BorderRadius.circular(ScreenUtilsManager.r20),
+                        border: Border.all(
+                          color: context.palette.outline.withOpacity(0.1),
+                        ),
                       ),
                       child: Text(
                         S.of(context).messagesCount(currentComments.length),
                         style: GoogleFonts.cairo(
-                          fontSize: 12.sp,
-                          color: context.palette.onSurface,
+                          fontSize: ScreenUtilsManager.s12,
+                          fontWeight: FontWeight.w700,
+                          color: context.palette.onSurfaceVariant,
                         ),
                       ),
                     ),
@@ -109,18 +123,29 @@ class Workercomments extends StatelessWidget {
               // Comments List Section
               currentComments.isEmpty
                   ? Padding(
-                      padding: EdgeInsets.symmetric(vertical: 20.h),
+                      padding: EdgeInsets.symmetric(vertical: ScreenUtilsManager.h40),
                       child: Center(
-                        child: Text(
-                          S.of(context).noCommentsYet,
-                          style: GoogleFonts.cairo(
-                            color: context.palette.onSurfaceVariant,
-                          ),
+                        child: Column(
+                          children: [
+                            Icon(
+                              Icons.chat_bubble_outline_rounded,
+                              size: ScreenUtilsManager.s48,
+                              color: context.palette.onSurfaceVariant.withOpacity(0.2),
+                            ),
+                            SizedBox(height: ScreenUtilsManager.h12),
+                            Text(
+                              S.of(context).noCommentsYet,
+                              style: GoogleFonts.cairo(
+                                color: context.palette.onSurfaceVariant.withOpacity(0.5),
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     )
                   : Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 16.w),
+                      padding: EdgeInsets.symmetric(horizontal: ScreenUtilsManager.w16),
                       child: ListView.builder(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
@@ -132,32 +157,92 @@ class Workercomments extends StatelessWidget {
                     ),
 
               if (!isComment)
-                Padding(
-                  padding: EdgeInsets.fromLTRB(16.w, 8.h, 16.w, 16.h),
-                  child: CustomTextfromfield(
-                    maxLines: null,
-                    suffix: IconButton(
-                      icon: Icon(
-                        Icons.send_rounded,
-                        color: context.palette.workerprimary,
+                Container(
+                  padding: EdgeInsets.fromLTRB(
+                    ScreenUtilsManager.w16,
+                    ScreenUtilsManager.h8,
+                    ScreenUtilsManager.w16,
+                    ScreenUtilsManager.h24,
+                  ),
+                  decoration: BoxDecoration(
+                    color: context.palette.surface,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.03),
+                        blurRadius: 10,
+                        offset: const Offset(0, -5),
                       ),
-                      onPressed: () async {
-                        if (controller.text.trim().isNotEmpty) {
-                          await context.read<CommentsCubit>().makeComments(
-                            reporID,
-                            content: controller.text,
-                          );
-                          controller.clear();
-                        }
-                      },
-                    ),
-                    color: context.palette.bgLight,
-                    hinttext: S.of(context).addCommentHint,
-                    lable: S.of(context).addCommentLabel,
-                    controller: controller,
+                    ],
+                  ),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: context.palette.surfaceContainerHighest,
+                            borderRadius: BorderRadius.circular(ScreenUtilsManager.r24),
+                            border: Border.all(
+                              color: context.palette.outline.withOpacity(0.1),
+                            ),
+                          ),
+                          child: TextField(
+                            controller: controller,
+                            maxLines: 4,
+                            minLines: 1,
+                            style: GoogleFonts.cairo(
+                              fontSize: ScreenUtilsManager.s14,
+                              color: context.palette.onSurface,
+                            ),
+                            decoration: InputDecoration(
+                              hintText: S.of(context).addCommentHint,
+                              hintStyle: GoogleFonts.cairo(
+                                fontSize: ScreenUtilsManager.s14,
+                                color: context.palette.onSurfaceVariant.withOpacity(0.5),
+                              ),
+                              contentPadding: EdgeInsets.symmetric(
+                                horizontal: ScreenUtilsManager.w16,
+                                vertical: ScreenUtilsManager.h12,
+                              ),
+                              border: InputBorder.none,
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: ScreenUtilsManager.w12),
+                      GestureDetector(
+                        onTap: () async {
+                          if (controller.text.trim().isNotEmpty) {
+                            await context.read<CommentsCubit>().makeComments(
+                                  reporID,
+                                  content: controller.text,
+                                );
+                            controller.clear();
+                          }
+                        },
+                        child: Container(
+                          width: ScreenUtilsManager.h44,
+                          height: ScreenUtilsManager.h44,
+                          decoration: BoxDecoration(
+                            gradient: context.palette.kineticGradient,
+                            shape: BoxShape.circle,
+                            boxShadow: [
+                              BoxShadow(
+                                color: context.palette.workerprimary.withOpacity(0.3),
+                                blurRadius: 10,
+                                offset: const Offset(0, 4),
+                              ),
+                            ],
+                          ),
+                          child: const Icon(
+                            Icons.send_rounded,
+                            color: Colors.white,
+                            size: 20,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              SizedBox(height: 50.h),
             ],
           );
         }

@@ -1,4 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:citifix/core/service/StatusReport.dart';
+import 'package:citifix/core/widget/customShimerwidget.dart';
 import 'package:citifix/feature/workerFeature/taskDetails/TaskDetailsPage.dart';
 import 'package:citifix/feature/workerFeature/tasks/data/model/ReportResponse.dart';
 import 'package:citifix/generated/l10n.dart';
@@ -27,12 +29,12 @@ class ActiveTaskCard extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(bottom: ScreenUtilsManager.h16),
       decoration: BoxDecoration(
-        color: context.palette.white,
+        color: context.palette.surface,
         borderRadius: BorderRadius.circular(ScreenUtilsManager.r16),
-        border: Border.all(color: context.palette.grey200.withOpacity(0.5)),
+        border: Border.all(color: context.palette.outline.withOpacity(0.1)),
         boxShadow: [
           BoxShadow(
-            color: context.palette.black.withOpacity(0.04),
+            color: Colors.black.withOpacity(0.04),
             blurRadius: ScreenUtilsManager.r20,
             offset: Offset(0, ScreenUtilsManager.h10),
           ),
@@ -46,12 +48,14 @@ class ActiveTaskCard extends StatelessWidget {
               borderRadius: BorderRadius.vertical(
                 top: Radius.circular(ScreenUtilsManager.r16),
               ),
-              child: Image.network(
-                task.imagesUrls.first,
+              child: CachedNetworkImage(
+                imageUrl: task.imagesUrls.first,
                 height: ScreenUtilsManager.h150,
                 width: double.infinity,
                 fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) => const SizedBox(),
+                placeholder: (context, url) =>
+                    customShimer(context, ScreenUtilsManager.h150),
+                errorWidget: (context, url, error) => const SizedBox(),
               ),
             ),
 
@@ -67,8 +71,11 @@ class ActiveTaskCard extends StatelessWidget {
                     Text(
                       "#${task.id}",
                       style: GoogleFonts.cairo(
-                        color: context.palette.grey400,
+                        color: context.palette.onSurfaceVariant.withOpacity(
+                          0.6,
+                        ),
                         fontSize: ScreenUtilsManager.s12,
+                        fontWeight: FontWeight.w700,
                       ),
                     ),
                   ],
@@ -88,7 +95,7 @@ class ActiveTaskCard extends StatelessWidget {
             ),
           ),
 
-          const Divider(height: 1),
+          Divider(height: 1, color: context.palette.outline.withOpacity(0.1)),
           Padding(
             padding: EdgeInsets.all(ScreenUtilsManager.w16),
             child:
@@ -113,7 +120,7 @@ class _LocationRow extends StatelessWidget {
         Icon(
           Icons.location_on_rounded,
           size: ScreenUtilsManager.s14,
-          color: context.palette.primaryColor,
+          color: context.palette.primary,
         ),
         SizedBox(width: ScreenUtilsManager.w4),
         Expanded(
@@ -121,7 +128,7 @@ class _LocationRow extends StatelessWidget {
             address,
             style: GoogleFonts.cairo(
               fontSize: ScreenUtilsManager.s13,
-              color: context.palette.grey600,
+              color: context.palette.onSurfaceVariant,
             ),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,

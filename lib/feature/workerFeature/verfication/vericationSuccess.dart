@@ -28,7 +28,7 @@ class VerificationCompleteScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   _buildSuccessHero(context),
-                  const SizedBox(height: ScreenUtilsManager.s48),
+                  SizedBox(height: ScreenUtilsManager.s48),
                   _buildSummaryGrid(context),
                   SizedBox(height: ScreenUtilsManager.s16),
                   _buildStatusDetails(context),

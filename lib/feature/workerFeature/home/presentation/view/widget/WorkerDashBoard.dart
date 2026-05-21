@@ -75,12 +75,14 @@ class _WorkerDashboardState extends State<WorkerDashboard>
               value: HomeDashboardLogic.formatNumber(
                 widget.data.resolvedReports,
               ),
+              icon: Icons.check_circle_outline_rounded,
             ),
             SizedBox(width: ScreenUtilsManager.w16),
             buildWorkerCard(
               context,
               label: S.of(context).assigned,
               value: HomeDashboardLogic.formatNumber(widget.data.totalReports),
+              icon: Icons.assignment_outlined,
             ),
           ],
         ),
@@ -88,13 +90,16 @@ class _WorkerDashboardState extends State<WorkerDashboard>
         Container(
           padding: EdgeInsets.all(ScreenUtilsManager.h20),
           decoration: BoxDecoration(
-            color: context.palette.surfaceContainerLow,
-            borderRadius: BorderRadius.circular(ScreenUtilsManager.r16),
+            color: context.palette.surface,
+            borderRadius: BorderRadius.circular(ScreenUtilsManager.r20),
+            border: Border.all(
+              color: context.palette.outline.withOpacity(0.15),
+            ),
             boxShadow: [
               BoxShadow(
-                color: context.palette.onSurface.withOpacity(0.04),
-                blurRadius: ScreenUtilsManager.s32,
-                offset: Offset(ScreenUtilsManager.w0, ScreenUtilsManager.h12),
+                color: context.palette.shadow,
+                blurRadius: ScreenUtilsManager.s20,
+                offset: Offset(0, ScreenUtilsManager.h8),
               ),
             ],
           ),
@@ -108,12 +113,12 @@ class _WorkerDashboardState extends State<WorkerDashboard>
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        S.of(context).inProgress,
+                        S.of(context).inProgress.toUpperCase(),
                         style: GoogleFonts.cairo(
                           fontSize: ScreenUtilsManager.s11,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w800,
                           color: context.palette.onSurfaceVariant,
-                          letterSpacing: ScreenUtilsManager.s1,
+                          letterSpacing: 1.2,
                         ),
                       ),
                       Text(
@@ -121,8 +126,10 @@ class _WorkerDashboardState extends State<WorkerDashboard>
                           widget.data.inProgressReports,
                         ),
                         style: GoogleFonts.cairo(
-                          fontSize: ScreenUtilsManager.s32,
-                          fontWeight: FontWeight.bold,
+                          fontSize: ScreenUtilsManager.s30,
+                          fontWeight: FontWeight.w900,
+                          color: context.palette.onSurface,
+                          height: 1.2,
                         ),
                       ),
                     ],
@@ -132,18 +139,16 @@ class _WorkerDashboardState extends State<WorkerDashboard>
                   ),
                 ],
               ),
-
-              SizedBox(height: ScreenUtilsManager.h16),
-
+              SizedBox(height: ScreenUtilsManager.h24),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     '${S.of(context).totalReports}: ${widget.data.totalReports}',
                     style: GoogleFonts.cairo(
-                      fontSize: ScreenUtilsManager.s11,
-                      fontWeight: FontWeight.bold,
-                      color: context.palette.onSurfaceVariant,
+                      fontSize: ScreenUtilsManager.s12,
+                      fontWeight: FontWeight.w700,
+                      color: context.palette.onSurfaceVariant.withOpacity(0.8),
                     ),
                   ),
                   AnimatedBuilder(
@@ -151,28 +156,50 @@ class _WorkerDashboardState extends State<WorkerDashboard>
                     builder: (context, _) => Text(
                       '${S.of(context).progress}: ${(animation.value * 100).toInt()}%',
                       style: GoogleFonts.cairo(
-                        fontSize: ScreenUtilsManager.s11,
-                        fontWeight: FontWeight.bold,
-                        color: context.palette.onSurfaceVariant,
+                        fontSize: ScreenUtilsManager.s12,
+                        fontWeight: FontWeight.w800,
+                        color: context.palette.workerprimary,
                       ),
                     ),
                   ),
                 ],
               ),
-              SizedBox(height: ScreenUtilsManager.h8),
+              SizedBox(height: ScreenUtilsManager.h12),
               AnimatedBuilder(
                 animation: animation,
                 builder: (BuildContext context, Widget? child) =>
-                    LinearProgressIndicator(
-                      value: animation.value,
-                      backgroundColor: context.palette.surfaceContainer,
-                      valueColor: AlwaysStoppedAnimation<Color>(
-                        context.palette.primaryColor,
-                      ),
-                      minHeight: ScreenUtilsManager.h6,
-                      borderRadius: BorderRadius.circular(
-                        ScreenUtilsManager.r8,
-                      ),
+                    Stack(
+                      children: [
+                        Container(
+                          height: ScreenUtilsManager.h10,
+                          decoration: BoxDecoration(
+                            color: context.palette.surfaceContainerHigh,
+                            borderRadius: BorderRadius.circular(ScreenUtilsManager.r10),
+                          ),
+                        ),
+                        FractionallySizedBox(
+                          widthFactor: animation.value.clamp(0.0, 1.0),
+                          child: Container(
+                            height: ScreenUtilsManager.h10,
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: [
+                                  context.palette.workerprimary,
+                                  context.palette.workerprimary.withOpacity(0.7),
+                                ],
+                              ),
+                              borderRadius: BorderRadius.circular(ScreenUtilsManager.r10),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: context.palette.workerprimary.withOpacity(0.3),
+                                  blurRadius: ScreenUtilsManager.s6,
+                                  offset: Offset(0, ScreenUtilsManager.h2),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
               ),
             ],
@@ -185,20 +212,32 @@ class _WorkerDashboardState extends State<WorkerDashboard>
   Widget _buildTrendIndicator(String text) {
     return Container(
       padding: EdgeInsets.symmetric(
-        horizontal: ScreenUtilsManager.w8,
-        vertical: ScreenUtilsManager.h4,
+        horizontal: ScreenUtilsManager.w12,
+        vertical: ScreenUtilsManager.h8,
       ),
       decoration: BoxDecoration(
-        color: Colors.green.shade50,
-        borderRadius: BorderRadius.circular(ScreenUtilsManager.r8),
+        color: context.palette.success.withOpacity(0.12),
+        borderRadius: BorderRadius.circular(ScreenUtilsManager.r16),
+        border: Border.all(color: context.palette.success.withOpacity(0.2)),
       ),
-      child: Text(
-        text,
-        style: GoogleFonts.cairo(
-          fontSize: ScreenUtilsManager.s12,
-          fontWeight: FontWeight.bold,
-          color: Colors.green.shade700,
-        ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(
+            Icons.trending_up_rounded,
+            size: ScreenUtilsManager.s16,
+            color: context.palette.success,
+          ),
+          SizedBox(width: ScreenUtilsManager.w6),
+          Text(
+            text,
+            style: GoogleFonts.cairo(
+              fontSize: ScreenUtilsManager.s12,
+              fontWeight: FontWeight.w900,
+              color: context.palette.success,
+            ),
+          ),
+        ],
       ),
     );
   }

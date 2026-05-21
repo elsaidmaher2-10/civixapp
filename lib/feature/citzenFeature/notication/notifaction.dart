@@ -178,13 +178,14 @@ class _NotificationCenterState extends State<NotificationCenter> {
         children: [
           Icon(
             Icons.notifications_none_rounded,
-            size: 80,
+            size: ScreenUtilsManager.s80,
             color: primaryColor.withOpacity(0.2),
           ),
+          SizedBox(height: ScreenUtilsManager.h16),
           Text(
             S.of(context).noNotifications,
             style: GoogleFonts.cairo(
-              fontSize: 18,
+              fontSize: ScreenUtilsManager.s18,
               fontWeight: FontWeight.bold,
               color: context.palette.onSurface,
             ),
@@ -196,19 +197,55 @@ class _NotificationCenterState extends State<NotificationCenter> {
 
   Widget _buildErrorState(String message) {
     return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            message,
-            style: GoogleFonts.cairo(color: context.palette.onSurface),
-          ),
-          ElevatedButton(
-            onPressed: () =>
-                context.read<NotificationCubit>().getNotifications(),
-            child: Text(S.of(context).tryAgain),
-          ),
-        ],
+      child: Padding(
+        padding: EdgeInsets.all(ScreenUtilsManager.w24),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              padding: EdgeInsets.all(ScreenUtilsManager.w20),
+              decoration: BoxDecoration(
+                color: context.palette.red.withOpacity(0.1),
+                shape: BoxShape.circle,
+              ),
+              child: Icon(
+                Icons.error_outline_rounded,
+                size: ScreenUtilsManager.s50,
+                color: context.palette.red,
+              ),
+            ),
+            SizedBox(height: ScreenUtilsManager.h20),
+            Text(
+              message,
+              textAlign: TextAlign.center,
+              style: GoogleFonts.cairo(
+                color: context.palette.onSurface,
+                fontSize: ScreenUtilsManager.s16,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            SizedBox(height: ScreenUtilsManager.h24),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: primaryColor,
+                foregroundColor: Colors.white,
+                padding: EdgeInsets.symmetric(
+                  horizontal: ScreenUtilsManager.w32,
+                  vertical: ScreenUtilsManager.h12,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(ScreenUtilsManager.r12),
+                ),
+              ),
+              onPressed: () =>
+                  context.read<NotificationCubit>().getNotifications(),
+              child: Text(
+                S.of(context).tryAgain,
+                style: GoogleFonts.cairo(fontWeight: FontWeight.bold),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

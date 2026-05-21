@@ -61,7 +61,7 @@ class HomeScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: ScreenUtilsManager.h24),
+                  SizedBox(height: ScreenUtilsManager.h20),
 
                   Padding(
                     padding: EdgeInsets.symmetric(
@@ -70,23 +70,30 @@ class HomeScreen extends StatelessWidget {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        SvgPicture.asset(
-                          AssetValueManager.overVeiw,
-                          height: 24.h,
-                          width: 24.w,
-                          colorFilter: ColorFilter.mode(
-                            context.palette.kPrimary,
-                            BlendMode.srcIn,
+                        Container(
+                          padding: EdgeInsets.all(ScreenUtilsManager.w8),
+                          decoration: BoxDecoration(
+                            color: context.palette.kPrimary.withOpacity(0.1),
+                            borderRadius: BorderRadius.circular(ScreenUtilsManager.r8),
+                          ),
+                          child: SvgPicture.asset(
+                            AssetValueManager.overVeiw,
+                            height: 20.h,
+                            width: 20.w,
+                            colorFilter: ColorFilter.mode(
+                              context.palette.kPrimary,
+                              BlendMode.srcIn,
+                            ),
                           ),
                         ),
-                        SizedBox(width: ScreenUtilsManager.w8),
+                        SizedBox(width: ScreenUtilsManager.w10),
                         Text(
                           S.of(context).overview,
                           style: GoogleFonts.cairo(
                             letterSpacing: -0.5,
                             color: context.palette.onSurface,
-                            fontWeight: FontWeight.w700,
-                            fontSize: ScreenUtilsManager.s20,
+                            fontWeight: FontWeight.w800,
+                            fontSize: ScreenUtilsManager.s22,
                           ),
                         ),
                       ],
@@ -147,7 +154,7 @@ class HomeScreen extends StatelessWidget {
                           S.of(context).recentReport,
                           style: GoogleFonts.cairo(
                             fontSize: ScreenUtilsManager.s18,
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.w800,
                             letterSpacing: -0.3,
                             color: context.palette.onSurface,
                           ),
@@ -155,12 +162,15 @@ class HomeScreen extends StatelessWidget {
                         if (reports.isNotEmpty)
                           TextButton(
                             style: TextButton.styleFrom(
+                              foregroundColor: context.palette.kPrimary,
                               padding: EdgeInsets.symmetric(
-                                horizontal: 8.w,
-                                vertical: 4.h,
+                                horizontal: 12.w,
+                                vertical: 6.h,
                               ),
-                              minimumSize: Size.zero,
-                              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                              backgroundColor: context.palette.kPrimary.withOpacity(0.05),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(ScreenUtilsManager.r20),
+                              ),
                             ),
                             onPressed: () {
                               Navigator.push(
@@ -176,9 +186,8 @@ class HomeScreen extends StatelessWidget {
                             child: Text(
                               S.of(context).seeAll,
                               style: GoogleFonts.cairo(
-                                fontSize: ScreenUtilsManager.s14,
-                                fontWeight: FontWeight.w600,
-                                color: context.palette.kPrimary,
+                                fontSize: ScreenUtilsManager.s12,
+                                fontWeight: FontWeight.w700,
                               ),
                             ),
                           ),
@@ -217,42 +226,52 @@ class HomeScreen extends StatelessWidget {
 
   Widget _buildEmptyState(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: ScreenUtilsManager.h40),
+      padding: EdgeInsets.symmetric(vertical: ScreenUtilsManager.h60),
       child: Center(
         child: Column(
           children: [
             Container(
               padding: EdgeInsets.all(ScreenUtilsManager.w24),
               decoration: BoxDecoration(
-                color: context.palette.surfaceContainerLow,
+                color: context.palette.surface,
                 shape: BoxShape.circle,
                 border: Border.all(
                   color: context.palette.outline.withOpacity(0.1),
                   width: 2,
                 ),
+                boxShadow: [
+                  BoxShadow(
+                    color: context.palette.shadow,
+                    blurRadius: 20,
+                  ),
+                ],
               ),
               child: Icon(
                 Icons.receipt_long_rounded,
-                size: 48.r,
-                color: context.palette.kPrimary.withOpacity(0.8),
+                size: 56.r,
+                color: context.palette.kPrimary.withOpacity(0.4),
               ),
             ),
-            SizedBox(height: ScreenUtilsManager.h16),
+            SizedBox(height: ScreenUtilsManager.h20),
             Text(
-              S.of(context).noRecentReports, // ARB
+              S.of(context).noRecentReports,
               style: GoogleFonts.cairo(
-                fontSize: ScreenUtilsManager.s16,
-                fontWeight: FontWeight.bold,
+                fontSize: ScreenUtilsManager.s18,
+                fontWeight: FontWeight.w800,
                 color: context.palette.onSurface,
               ),
             ),
             SizedBox(height: ScreenUtilsManager.h8),
-            Text(
-              S.of(context).emptyReportsSubtitle, // ARB
-              textAlign: TextAlign.center,
-              style: GoogleFonts.cairo(
-                fontSize: ScreenUtilsManager.s14,
-                color: context.palette.onSurfaceVariant,
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: ScreenUtilsManager.w40),
+              child: Text(
+                S.of(context).emptyReportsSubtitle,
+                textAlign: TextAlign.center,
+                style: GoogleFonts.cairo(
+                  fontSize: ScreenUtilsManager.s14,
+                  fontWeight: FontWeight.w600,
+                  color: context.palette.onSurfaceVariant.withOpacity(0.7),
+                ),
               ),
             ),
           ],

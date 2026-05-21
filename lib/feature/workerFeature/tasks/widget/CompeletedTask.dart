@@ -35,22 +35,24 @@ class CompletedTaskCard extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.all(ScreenUtilsManager.w16),
         decoration: BoxDecoration(
-          color: context.palette.grey50.withOpacity(0.8),
+          color: context.palette.surface,
           borderRadius: BorderRadius.circular(ScreenUtilsManager.r16),
-          border: Border.all(color: context.palette.grey200),
+          border: Border.all(
+            color: context.palette.outline.withOpacity(0.1),
+          ),
         ),
         child: Row(
           children: [
             Container(
               padding: EdgeInsets.all(ScreenUtilsManager.w8),
               decoration: BoxDecoration(
-                color: context.palette.green,
+                color: context.palette.success.withOpacity(0.1),
                 shape: BoxShape.circle,
               ),
               child: Icon(
-                Icons.check,
-                color: context.palette.white,
-                size: ScreenUtilsManager.s16,
+                Icons.check_circle_rounded,
+                color: context.palette.success,
+                size: ScreenUtilsManager.s20,
               ),
             ),
             SizedBox(width: ScreenUtilsManager.w12),
@@ -62,8 +64,10 @@ class CompletedTaskCard extends StatelessWidget {
                     task.title,
                     style: GoogleFonts.cairo(
                       decoration: TextDecoration.lineThrough,
-                      color: context.palette.grey600,
-                      fontWeight: FontWeight.w600,
+                      decorationColor: context.palette.onSurfaceVariant.withOpacity(0.5),
+                      color: context.palette.onSurfaceVariant.withOpacity(0.7),
+                      fontWeight: FontWeight.w700,
+                      fontSize: ScreenUtilsManager.s14,
                     ),
                   ),
                   Text(
@@ -72,16 +76,17 @@ class CompletedTaskCard extends StatelessWidget {
                         .completedFrom(task.createdAt.timeAgo(context)),
                     style: GoogleFonts.cairo(
                       fontSize: ScreenUtilsManager.s12,
-                      color: context.palette.grey,
+                      color: context.palette.onSurfaceVariant.withOpacity(0.5),
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                 ],
               ),
             ),
             Icon(
-              Icons.arrow_forward_ios,
+              Icons.arrow_forward_ios_rounded,
               size: ScreenUtilsManager.s14,
-              color: context.palette.grey400,
+              color: context.palette.onSurfaceVariant.withOpacity(0.3),
             ),
           ],
         ),

@@ -78,7 +78,7 @@ class TasksHeader extends StatelessWidget {
                                       key: const ValueKey('icon_bell'),
                                       size: ScreenUtilsManager.s26,
                                       color: context.palette.onSurface
-                                          .withValues(alpha: 0.85),
+                                          .withOpacity(0.85),
                                     ),
                             ),
 
@@ -115,13 +115,12 @@ class TasksHeader extends StatelessWidget {
                                             ScreenUtilsManager.r10,
                                           ),
                                           border: Border.all(
-                                            color: context.palette.white,
+                                            color: context.palette.surface,
                                             width: 1.5,
                                           ),
                                           boxShadow: [
                                             BoxShadow(
-                                              color: context.palette.black
-                                                  .withOpacity(0.15),
+                                              color: Colors.black.withOpacity(0.15),
                                               blurRadius: 4,
                                               offset: const Offset(0, 2),
                                             ),
@@ -133,7 +132,7 @@ class TasksHeader extends StatelessWidget {
                                                 ? '9+'
                                                 : '$unreadCount',
                                             style: GoogleFonts.cairo(
-                                              color: context.palette.white,
+                                              color: Colors.white,
                                               fontSize: ScreenUtilsManager.s9,
                                               fontWeight: FontWeight.bold,
                                               height: 1.1,

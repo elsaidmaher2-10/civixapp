@@ -10,22 +10,25 @@ class WorkerAlertVrefication extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(ScreenUtilsManager.h20),
+      padding: EdgeInsets.all(ScreenUtilsManager.h16),
       decoration: BoxDecoration(
-        color: context.palette.primaryColor.withValues(alpha: 0.05),
-        border: Border.all(color: context.palette.primaryColor.withOpacity(0.1)),
+        color: context.palette.orange.withOpacity(0.08),
+        border: Border.all(color: context.palette.orange.withOpacity(0.15)),
         borderRadius: BorderRadius.circular(ScreenUtilsManager.r16),
       ),
       child: Row(
         children: [
           Container(
-            width: ScreenUtilsManager.w40,
-            height: ScreenUtilsManager.h40,
+            padding: EdgeInsets.all(ScreenUtilsManager.w10),
             decoration: BoxDecoration(
-              color: context.palette.primaryColor.withOpacity(0.2),
+              color: context.palette.orange.withOpacity(0.12),
               shape: BoxShape.circle,
             ),
-            child: Icon(Icons.report_problem, color: context.palette.primaryColor),
+            child: Icon(
+              Icons.warning_amber_rounded,
+              color: context.palette.orange,
+              size: ScreenUtilsManager.icon24,
+            ),
           ),
           SizedBox(width: ScreenUtilsManager.w16),
           Expanded(
@@ -35,16 +38,18 @@ class WorkerAlertVrefication extends StatelessWidget {
                 Text(
                   S.of(context).alertRequired,
                   style: GoogleFonts.cairo(
-                    fontWeight: FontWeight.bold,
-                    color: context.palette.primaryColor,
+                    fontWeight: FontWeight.w800,
+                    fontSize: ScreenUtilsManager.s15,
+                    color: context.palette.orange,
                   ),
                 ),
-                SizedBox(height: ScreenUtilsManager.h4),
+                SizedBox(height: ScreenUtilsManager.h2),
                 Text(
                   S.of(context).updateYourId,
                   style: GoogleFonts.cairo(
-                    fontSize: ScreenUtilsManager.s14,
-                    color: context.palette.onInProgressContainer,
+                    fontSize: ScreenUtilsManager.s13,
+                    fontWeight: FontWeight.w600,
+                    color: context.palette.onSurfaceVariant.withOpacity(0.9),
                   ),
                 ),
               ],

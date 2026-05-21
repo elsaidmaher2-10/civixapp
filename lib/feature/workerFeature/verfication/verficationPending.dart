@@ -52,14 +52,14 @@ class UnderReviewScreen extends StatelessWidget {
 
   PreferredSizeWidget _buildAppBar(BuildContext context, S s) {
     return AppBar(
-      backgroundColor: context.palette.white.withOpacity(0.9),
+      backgroundColor: context.palette.surface,
       elevation: 0,
       scrolledUnderElevation: 0,
       bottom: PreferredSize(
-        preferredSize: const Size.fromHeight(1),
+        preferredSize: Size.fromHeight(ScreenUtilsManager.w1),
         child: Container(
           color: context.palette.outline.withOpacity(0.1),
-          height: 1,
+          height: ScreenUtilsManager.w1,
         ),
       ),
       title: Row(
@@ -109,15 +109,15 @@ class UnderReviewScreen extends StatelessWidget {
     return Column(
       children: [
         Container(
-          width: 96,
-          height: 96,
+          width: ScreenUtilsManager.s96,
+          height: ScreenUtilsManager.s96,
           decoration: BoxDecoration(
             color: context.palette.workerprimary.withOpacity(0.1),
             shape: BoxShape.circle,
           ),
           child: Icon(
             Icons.schedule,
-            size: 48,
+            size: ScreenUtilsManager.s48,
             color: context.palette.workerprimary,
           ),
         ),
@@ -137,7 +137,7 @@ class UnderReviewScreen extends StatelessWidget {
           textAlign: TextAlign.center,
           style: GoogleFonts.cairo(
             fontSize: ScreenUtilsManager.s16,
-            color: context.palette.secondary,
+            color: context.palette.onSurfaceVariant,
             height: 1.5,
           ),
         ),
@@ -153,11 +153,11 @@ class UnderReviewScreen extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(ScreenUtilsManager.p32),
       decoration: BoxDecoration(
-        color: context.palette.white,
+        color: context.palette.surface,
         borderRadius: BorderRadius.circular(ScreenUtilsManager.r24),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.04),
+            color: context.palette.shadow,
             blurRadius: 24,
             offset: const Offset(0, 8),
           ),
@@ -184,7 +184,7 @@ class UnderReviewScreen extends StatelessWidget {
               Container(
                 padding: EdgeInsets.symmetric(
                   horizontal: ScreenUtilsManager.p12,
-                  vertical: 4,
+                  vertical: ScreenUtilsManager.h4,
                 ),
                 decoration: BoxDecoration(
                   color: context.palette.workerprimary.withOpacity(0.1),
@@ -193,7 +193,7 @@ class UnderReviewScreen extends StatelessWidget {
                 child: Text(
                   s.inProgress,
                   style: GoogleFonts.cairo(
-                    fontSize: 10,
+                    fontSize: ScreenUtilsManager.s10,
                     fontWeight: FontWeight.bold,
                     color: context.palette.workerprimary,
                   ),
@@ -213,9 +213,9 @@ class UnderReviewScreen extends StatelessWidget {
           Text(
             s.identityDocs,
             style: GoogleFonts.cairo(
-              fontSize: 10,
+              fontSize: ScreenUtilsManager.s10,
               fontWeight: FontWeight.bold,
-              color: context.palette.secondary,
+              color: context.palette.onSurfaceVariant,
             ),
           ),
           SizedBox(height: ScreenUtilsManager.p8),
@@ -248,9 +248,9 @@ class UnderReviewScreen extends StatelessWidget {
         Text(
           label,
           style: GoogleFonts.cairo(
-            fontSize: 10,
+            fontSize: ScreenUtilsManager.s10,
             fontWeight: FontWeight.bold,
-            color: context.palette.secondary,
+            color: context.palette.onSurfaceVariant,
           ),
         ),
         SizedBox(height: ScreenUtilsManager.p8),
@@ -258,7 +258,7 @@ class UnderReviewScreen extends StatelessWidget {
           width: double.infinity,
           padding: EdgeInsets.all(ScreenUtilsManager.p16),
           decoration: BoxDecoration(
-            color: context.palette.background,
+            color: context.palette.surfaceContainerLow,
             borderRadius: BorderRadius.circular(ScreenUtilsManager.r12),
             border: Border.all(color: context.palette.outline.withOpacity(0.2)),
           ),
@@ -280,7 +280,7 @@ class UnderReviewScreen extends StatelessWidget {
       child: Container(
         clipBehavior: Clip.antiAlias,
         decoration: BoxDecoration(
-          color: context.palette.background,
+          color: context.palette.surfaceContainerLow,
           borderRadius: BorderRadius.circular(ScreenUtilsManager.r12),
           border: Border.all(color: context.palette.outline.withOpacity(0.2)),
         ),
@@ -299,7 +299,7 @@ class UnderReviewScreen extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(ScreenUtilsManager.p24),
       decoration: BoxDecoration(
-        color: context.palette.white,
+        color: context.palette.surface,
         borderRadius: BorderRadius.circular(ScreenUtilsManager.r24),
         border: Border.all(color: context.palette.outline.withOpacity(0.1)),
       ),
@@ -329,12 +329,12 @@ class UnderReviewScreen extends StatelessWidget {
                     color: context.palette.onSurface,
                   ),
                 ),
-                SizedBox(height: 4),
+                SizedBox(height: ScreenUtilsManager.h4),
                 Text(
                   s.whatsNextDesc,
                   style: GoogleFonts.cairo(
                     fontSize: ScreenUtilsManager.s14,
-                    color: context.palette.secondary,
+                    color: context.palette.onSurfaceVariant,
                     height: 1.5,
                   ),
                 ),

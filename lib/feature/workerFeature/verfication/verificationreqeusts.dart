@@ -31,7 +31,7 @@ class _VerificationRequestsScreenState
     final s = S.of(context);
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF8F9FD),
+      backgroundColor: context.palette.reportsPageBackground,
       appBar: AppBar(
         leading: IconButton(
           color: context.palette.workerprimary,
@@ -40,12 +40,13 @@ class _VerificationRequestsScreenState
         ),
         surfaceTintColor: Colors.transparent,
         elevation: 0,
-        backgroundColor: Colors.white,
+        backgroundColor: context.palette.surface,
         title: Text(
           s.verificationRequestsTitle,
           style: GoogleFonts.cairo(
             fontWeight: FontWeight.bold,
             color: context.palette.workerprimary,
+            fontSize: ScreenUtilsManager.s20,
           ),
         ),
         actions: [
@@ -62,13 +63,13 @@ class _VerificationRequestsScreenState
             return Center(
               child: CupertinoActivityIndicator(
                 radius: ScreenUtilsManager.r12,
-                color: context.palette.inProgressContainer,
+                color: context.palette.workerprimary,
               ),
             );
           } else if (state is VerificationRequestsError) {
             return _buildErrorState(context, state.message);
           } else if (state is VerificationRequestsSuccess) {
-            if (state.requests.isEmpty) return _buildEmptyState(s);
+            if (state.requests.isEmpty) return _buildEmptyState(s, context);
             return _buildListView(state.requests, s);
           }
           return const SizedBox();
@@ -80,8 +81,8 @@ class _VerificationRequestsScreenState
   Widget _buildListView(List<WorkerVerificationModel> requests, S s) {
     return ListView.builder(
       padding: EdgeInsets.symmetric(
-        horizontal: ScreenUtilsManager.p16,
-        vertical: ScreenUtilsManager.p12,
+        horizontal: ScreenUtilsManager.w16,
+        vertical: ScreenUtilsManager.h12,
       ),
       itemCount: requests.length,
       itemBuilder: (context, index) {
@@ -96,14 +97,15 @@ class _VerificationRequestsScreenState
     S s,
     BuildContext context,
   ) {
+    final statusColor = _getStatusColor(item.status.name, context);
     return Container(
-      margin: EdgeInsets.only(bottom: ScreenUtilsManager.w20),
+      margin: EdgeInsets.only(bottom: ScreenUtilsManager.h20),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: context.palette.surface,
         borderRadius: BorderRadius.circular(ScreenUtilsManager.r20),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.04),
+            color: context.palette.shadow,
             blurRadius: 15,
             offset: const Offset(0, 8),
           ),
@@ -114,27 +116,27 @@ class _VerificationRequestsScreenState
         child: Column(
           children: [
             Container(
-              height: 4,
-              color: _getStatusColor(item.status.name).withOpacity(0.5),
+              height: ScreenUtilsManager.h4,
+              color: statusColor.withOpacity(0.5),
             ),
             Padding(
-              padding: EdgeInsets.all(ScreenUtilsManager.p16),
+              padding: EdgeInsets.all(ScreenUtilsManager.w16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
                     children: [
                       CircleAvatar(
-                        radius: 24,
+                        radius: ScreenUtilsManager.r24,
                         backgroundColor: context.palette.bgbackground,
                         backgroundImage: item.workerProfileImageUrl.isNotEmpty
                             ? NetworkImage(item.workerProfileImageUrl)
                             : null,
                         child: item.workerProfileImageUrl.isEmpty
-                            ? Icon(Icons.person, color: context.palette.textGrey)
+                            ? Icon(Icons.person, color: context.palette.onSurfaceVariant)
                             : null,
                       ),
-                      SizedBox(width: ScreenUtilsManager.p12),
+                      SizedBox(width: ScreenUtilsManager.w12),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -144,14 +146,15 @@ class _VerificationRequestsScreenState
                               style: GoogleFonts.cairo(
                                 fontSize: ScreenUtilsManager.s16,
                                 fontWeight: FontWeight.bold,
+                                color: context.palette.onSurface,
                                 height: 1.2,
                               ),
                             ),
                             Text(
                               "${item.id}",
                               style: GoogleFonts.cairo(
-                                color: context.palette.textGrey,
-                                fontSize: 12,
+                                color: context.palette.onSurfaceVariant,
+                                fontSize: ScreenUtilsManager.s12,
                               ),
                             ),
                           ],
@@ -160,34 +163,40 @@ class _VerificationRequestsScreenState
                       _buildStatusBadge(context, item.status.name, s),
                     ],
                   ),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 12),
-                    child: Divider(thickness: 0.5),
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: ScreenUtilsManager.h12),
+                    child: Divider(
+                      thickness: 0.5,
+                      color: context.palette.outline.withOpacity(0.2),
+                    ),
                   ),
                   _buildIconInfoRow(
                     Icons.business_center_rounded,
                     item.departmentName,
-                    Colors.blue,
+                    context.palette.primary,
+                    context,
                   ),
-                  SizedBox(height: ScreenUtilsManager.p8),
+                  SizedBox(height: ScreenUtilsManager.h8),
                   _buildIconInfoRow(
                     Icons.location_on_rounded,
                     item.areaName,
-                    Colors.redAccent,
+                    context.palette.red,
+                    context,
                   ),
-                  SizedBox(height: ScreenUtilsManager.p8),
+                  SizedBox(height: ScreenUtilsManager.h8),
                   _buildIconInfoRow(
                     Icons.access_time_filled_rounded,
                     DateFormat.yMMMd(
                       Localizations.localeOf(context).languageCode,
                     ).add_jm().format(item.submittedAt),
-                    Colors.orange,
+                    context.palette.orange,
+                    context,
                   ),
 
                   if (item.rejectionReason != null)
-                    _buildRejectionBox(item.rejectionReason!, s),
+                    _buildRejectionBox(item.rejectionReason!, s, context),
 
-                  SizedBox(height: ScreenUtilsManager.w20),
+                  SizedBox(height: ScreenUtilsManager.h20),
                 ],
               ),
             ),
@@ -197,45 +206,48 @@ class _VerificationRequestsScreenState
     );
   }
 
-  Widget _buildIconInfoRow(IconData icon, String text, Color iconColor) {
+  Widget _buildIconInfoRow(IconData icon, String text, Color iconColor, BuildContext context) {
     return Row(
       children: [
         Container(
-          padding: const EdgeInsets.all(4),
+          padding: EdgeInsets.all(ScreenUtilsManager.w4),
           decoration: BoxDecoration(
             color: iconColor.withOpacity(0.1),
             shape: BoxShape.circle,
           ),
-          child: Icon(icon, size: 14, color: iconColor),
+          child: Icon(icon, size: ScreenUtilsManager.s14, color: iconColor),
         ),
-        SizedBox(width: ScreenUtilsManager.p10),
+        SizedBox(width: ScreenUtilsManager.w10),
         Text(
           text,
-          style: GoogleFonts.cairo(fontSize: 13, color: Colors.black87),
+          style: GoogleFonts.cairo(
+            fontSize: ScreenUtilsManager.s13,
+            color: context.palette.onSurface.withOpacity(0.8),
+          ),
         ),
       ],
     );
   }
 
-  Widget _buildRejectionBox(String reason, S s) {
+  Widget _buildRejectionBox(String reason, S s, BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(top: 12),
-      padding: const EdgeInsets.all(12),
+      margin: EdgeInsets.only(top: ScreenUtilsManager.h12),
+      padding: EdgeInsets.all(ScreenUtilsManager.w12),
       decoration: BoxDecoration(
-        color: Colors.red.withOpacity(0.05),
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.red.withOpacity(0.1)),
+        color: context.palette.red.withOpacity(0.05),
+        borderRadius: BorderRadius.circular(ScreenUtilsManager.r12),
+        border: Border.all(color: context.palette.red.withOpacity(0.1)),
       ),
       child: Row(
         children: [
-          const Icon(Icons.info_outline, color: Colors.red, size: 18),
-          const SizedBox(width: 8),
+          Icon(Icons.info_outline, color: context.palette.red, size: ScreenUtilsManager.s18),
+          SizedBox(width: ScreenUtilsManager.w8),
           Expanded(
             child: Text(
               "${s.rejectionReasonLabel}: $reason",
               style: GoogleFonts.cairo(
-                color: Colors.red.shade800,
-                fontSize: 12,
+                color: context.palette.red,
+                fontSize: ScreenUtilsManager.s12,
                 fontWeight: FontWeight.w500,
               ),
             ),
@@ -245,33 +257,36 @@ class _VerificationRequestsScreenState
     );
   }
 
-  Color _getStatusColor(String status) {
+  Color _getStatusColor(String status, BuildContext context) {
     switch (status.toLowerCase()) {
       case 'approved':
-        return Colors.green;
+        return context.palette.success;
       case 'pending':
-        return Colors.orange;
+        return context.palette.orange;
       case 'rejected':
-        return Colors.red;
+        return context.palette.red;
       default:
-        return Colors.grey;
+        return context.palette.onSurfaceVariant;
     }
   }
 
   Widget _buildStatusBadge(BuildContext context, String status, S s) {
-    final color = _getStatusColor(status);
+    final color = _getStatusColor(status, context);
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+      padding: EdgeInsets.symmetric(
+        horizontal: ScreenUtilsManager.w10,
+        vertical: ScreenUtilsManager.h4,
+      ),
       decoration: BoxDecoration(
         color: color.withOpacity(0.1),
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(ScreenUtilsManager.r8),
       ),
       child: Text(
         status.toUpperCase(),
         style: GoogleFonts.cairo(
           color: color,
           fontWeight: FontWeight.bold,
-          fontSize: 10,
+          fontSize: ScreenUtilsManager.s10,
         ),
       ),
     );
@@ -285,15 +300,15 @@ class _VerificationRequestsScreenState
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              padding: const EdgeInsets.all(20),
+              padding: EdgeInsets.all(ScreenUtilsManager.w20),
               decoration: BoxDecoration(
-                color: Colors.red.shade50,
+                color: context.palette.red.withOpacity(0.1),
                 shape: BoxShape.circle,
               ),
               child: Icon(
                 Icons.wifi_off_rounded,
-                size: 50,
-                color: Colors.red.shade400,
+                size: ScreenUtilsManager.s50,
+                color: context.palette.red,
               ),
             ),
             SizedBox(height: ScreenUtilsManager.h20),
@@ -302,7 +317,7 @@ class _VerificationRequestsScreenState
               style: GoogleFonts.cairo(
                 fontSize: ScreenUtilsManager.s16,
                 fontWeight: FontWeight.bold,
-                color: Colors.black87,
+                color: context.palette.onSurface,
               ),
             ),
             SizedBox(height: ScreenUtilsManager.h8),
@@ -311,7 +326,7 @@ class _VerificationRequestsScreenState
               textAlign: TextAlign.center,
               style: GoogleFonts.cairo(
                 fontSize: ScreenUtilsManager.s14,
-                color: Colors.grey.shade600,
+                color: context.palette.onSurfaceVariant,
               ),
             ),
             SizedBox(height: ScreenUtilsManager.h24),
@@ -325,12 +340,12 @@ class _VerificationRequestsScreenState
                   vertical: ScreenUtilsManager.h12,
                 ),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(ScreenUtilsManager.r12),
                 ),
               ),
               onPressed: () => context.read<VerificationInitCubit>().fetchRequests(),
 
-              icon: const Icon(Icons.refresh_rounded, size: 20),
+              icon: Icon(Icons.refresh_rounded, size: ScreenUtilsManager.s20),
               label: Text(
                 S.of(context).tryAgain,
                 style: GoogleFonts.cairo(fontWeight: FontWeight.bold),
@@ -344,24 +359,28 @@ class _VerificationRequestsScreenState
 }
   
 
-  Widget _buildEmptyState(S s) {
+  Widget _buildEmptyState(S s, BuildContext context) {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Icon(
             Icons.auto_awesome_motion_rounded,
-            size: 80,
-            color: Colors.grey.shade300,
+            size: ScreenUtilsManager.s80,
+            color: context.palette.onSurfaceVariant.withOpacity(0.2),
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: ScreenUtilsManager.h16),
           Text(
             "All caught up!",
-            style: GoogleFonts.cairo(fontSize: 20, fontWeight: FontWeight.bold),
+            style: GoogleFonts.cairo(
+              fontSize: ScreenUtilsManager.s20,
+              fontWeight: FontWeight.bold,
+              color: context.palette.onSurface,
+            ),
           ),
           Text(
             "No pending requests at the moment",
-            style: GoogleFonts.cairo(color: Colors.grey),
+            style: GoogleFonts.cairo(color: context.palette.onSurfaceVariant),
           ),
         ],
       ),

@@ -26,60 +26,80 @@ class WorkerCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
       width: double.infinity,
-      child: Card(
-        color: context.palette.white,
-        elevation: 0,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(ScreenUtilsManager.r14),
-          side: BorderSide(color: context.palette.onSurface.withOpacity(0.05)),
+      decoration: BoxDecoration(
+        color: context.palette.surface,
+        borderRadius: BorderRadius.circular(ScreenUtilsManager.r24),
+        border: Border.all(
+          color: context.palette.outline.withOpacity(0.15),
         ),
-        child: Padding(
-          padding: EdgeInsets.all(ScreenUtilsManager.w16),
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  _buildWorkerImage(),
-                  SizedBox(width: ScreenUtilsManager.w16),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        _buildNameAndBadge(context),
-                        SizedBox(height: ScreenUtilsManager.h4),
-                        _buildVerificationBadge(context),
-                        SizedBox(height: ScreenUtilsManager.h6),
-                        _buildOnlineStatus(context),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              if (!isVerified) ...[
-                SizedBox(height: ScreenUtilsManager.h20),
-                _buildVerifyButton(context),
-              ],
-            ],
+        boxShadow: [
+          BoxShadow(
+            color: context.palette.shadow,
+            blurRadius: ScreenUtilsManager.s20,
+            offset: Offset(0, ScreenUtilsManager.h10),
           ),
+        ],
+      ),
+      child: Padding(
+        padding: EdgeInsets.all(ScreenUtilsManager.w20),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                _buildWorkerImage(context),
+                SizedBox(width: ScreenUtilsManager.w16),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _buildNameAndBadge(context),
+                      SizedBox(height: ScreenUtilsManager.h4),
+                      _buildVerificationBadge(context),
+                      SizedBox(height: ScreenUtilsManager.h6),
+                      _buildOnlineStatus(context),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            if (!isVerified) ...[
+              SizedBox(height: ScreenUtilsManager.h20),
+              _buildVerifyButton(context),
+            ],
+          ],
         ),
       ),
     );
   }
 
-  Widget _buildWorkerImage() {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(ScreenUtilsManager.r12),
-      child: CachedNetworkImage(
-        imageUrl: imageUrl,
-        width: ScreenUtilsManager.w64,
-        height: ScreenUtilsManager.h64,
-        fit: BoxFit.cover,
-        placeholder: (context, url) =>
-            customShimer(context, ScreenUtilsManager.h64),
-        errorWidget: (context, url, error) =>
-            Icon(Icons.person, size: ScreenUtilsManager.s40),
+  Widget _buildWorkerImage(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(ScreenUtilsManager.w3),
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        gradient: context.palette.kineticGradient,
+      ),
+      child: Container(
+        padding: EdgeInsets.all(ScreenUtilsManager.w2),
+        decoration: BoxDecoration(
+          color: context.palette.surface,
+          shape: BoxShape.circle,
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(ScreenUtilsManager.r32),
+          child: CachedNetworkImage(
+            imageUrl: imageUrl,
+            width: ScreenUtilsManager.w56,
+            height: ScreenUtilsManager.h56,
+            fit: BoxFit.cover,
+            placeholder: (context, url) =>
+                customShimer(context, ScreenUtilsManager.h56),
+            errorWidget: (context, url, error) =>
+                Icon(Icons.person, size: ScreenUtilsManager.s32, color: context.palette.onSurfaceVariant),
+          ),
+        ),
       ),
     );
   }
@@ -95,17 +115,18 @@ class WorkerCard extends StatelessWidget {
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: GoogleFonts.cairo(
-              fontSize: ScreenUtilsManager.s20,
+              fontSize: ScreenUtilsManager.s18,
               fontWeight: FontWeight.bold,
               color: context.palette.onSurface,
             ),
           ),
         ),
         if (isVerified) ...[
-          SizedBox(width: ScreenUtilsManager.w5),
+          SizedBox(width: ScreenUtilsManager.w6),
           SvgPicture.asset(
             "assets/verified-symbol-icon.svg",
             width: ScreenUtilsManager.w20,
+            colorFilter: ColorFilter.mode(context.palette.success, BlendMode.srcIn),
           ),
         ],
       ],
@@ -113,17 +134,23 @@ class WorkerCard extends StatelessWidget {
   }
 
   Widget _buildVerificationBadge(BuildContext context) {
+    final Color badgeColor = isVerified ? context.palette.success : context.palette.orange;
     return Container(
       padding: EdgeInsets.symmetric(
-        horizontal: ScreenUtilsManager.h8,
-        vertical: ScreenUtilsManager.w2,
+        horizontal: ScreenUtilsManager.w10,
+        vertical: ScreenUtilsManager.h2,
+      ),
+      decoration: BoxDecoration(
+        color: badgeColor.withOpacity(0.1),
+        borderRadius: BorderRadius.circular(ScreenUtilsManager.r20),
+        border: Border.all(color: badgeColor.withOpacity(0.2)),
       ),
       child: Text(
         isVerified ? S.of(context).verified : S.of(context).pending,
         style: GoogleFonts.cairo(
           fontSize: ScreenUtilsManager.s10,
-          fontWeight: FontWeight.w700,
-          color: isVerified ? context.palette.green : context.palette.orange,
+          fontWeight: FontWeight.w800,
+          color: badgeColor,
         ),
       ),
     );
@@ -136,8 +163,14 @@ class WorkerCard extends StatelessWidget {
           width: ScreenUtilsManager.w8,
           height: ScreenUtilsManager.h8,
           decoration: BoxDecoration(
-            color: context.palette.green,
+            color: context.palette.success,
             shape: BoxShape.circle,
+            boxShadow: [
+              BoxShadow(
+                color: context.palette.success.withOpacity(0.4),
+                blurRadius: ScreenUtilsManager.s4,
+              ),
+            ],
           ),
         ),
         SizedBox(width: ScreenUtilsManager.w6),
@@ -145,6 +178,7 @@ class WorkerCard extends StatelessWidget {
           S.of(context).online,
           style: GoogleFonts.cairo(
             fontSize: ScreenUtilsManager.s14,
+            fontWeight: FontWeight.w600,
             color: context.palette.onSurfaceVariant,
           ),
         ),
@@ -155,13 +189,23 @@ class WorkerCard extends StatelessWidget {
   Widget _buildVerifyButton(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      height: ScreenUtilsManager.h44,
-      child: DecoratedBox(
+      height: ScreenUtilsManager.h48,
+      child: Container(
         decoration: BoxDecoration(
-          gradient: const LinearGradient(
-            colors: [Color(0xFF954400), Color(0xFFFF7B04)],
+          gradient: LinearGradient(
+            colors: [
+              context.palette.workerprimary,
+              context.palette.workerprimary.withOpacity(0.8),
+            ],
           ),
-          borderRadius: BorderRadius.circular(ScreenUtilsManager.r8),
+          borderRadius: BorderRadius.circular(ScreenUtilsManager.r12),
+          boxShadow: [
+            BoxShadow(
+              color: context.palette.workerprimary.withOpacity(0.25),
+              blurRadius: ScreenUtilsManager.s12,
+              offset: Offset(0, ScreenUtilsManager.h4),
+            ),
+          ],
         ),
         child: ElevatedButton(
           onPressed: () {
@@ -179,16 +223,16 @@ class WorkerCard extends StatelessWidget {
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.transparent,
             shadowColor: Colors.transparent,
+            foregroundColor: Colors.white,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(ScreenUtilsManager.r8),
+              borderRadius: BorderRadius.circular(ScreenUtilsManager.r12),
             ),
           ),
           child: Text(
             S.of(context).verifyNow,
             style: GoogleFonts.cairo(
               fontSize: ScreenUtilsManager.s16,
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.w800,
             ),
           ),
         ),

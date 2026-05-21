@@ -43,7 +43,7 @@ abstract final class AppTheme {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       ),
       dividerTheme: DividerThemeData(
-        color: ColorManger.border.withValues(alpha: 0.6),
+        color: ColorManger.border.withOpacity(0.6),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
@@ -53,7 +53,7 @@ abstract final class AppTheme {
       ),
       textSelectionTheme: TextSelectionThemeData(
         selectionHandleColor: accent,
-        selectionColor: accent.withValues(alpha: 0.35),
+        selectionColor: accent.withOpacity(0.35),
         cursorColor: ColorManger.kPrimary,
       ),
       inputDecorationTheme: InputDecorationTheme(
@@ -186,14 +186,14 @@ abstract final class AppTheme {
       cardTheme: CardThemeData(
         color: surfaceHigh,
         elevation: 0,
-        shadowColor: Colors.black.withValues(alpha: 0.35),
+        shadowColor: Colors.black.withOpacity(0.35),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
-          side: BorderSide(color: outlineMuted.withValues(alpha: 0.55)),
+          side: BorderSide(color: outlineMuted.withOpacity(0.55)),
         ),
       ),
       dividerTheme: DividerThemeData(
-        color: outlineMuted.withValues(alpha: 0.65),
+        color: outlineMuted.withOpacity(0.65),
         thickness: 1,
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
@@ -211,7 +211,7 @@ abstract final class AppTheme {
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
           foregroundColor: primaryOnDark,
-          side: BorderSide(color: scheme.outline.withValues(alpha: 0.9)),
+          side: BorderSide(color: scheme.outline.withOpacity(0.9)),
         ),
       ),
       textButtonTheme: TextButtonThemeData(
@@ -219,7 +219,7 @@ abstract final class AppTheme {
       ),
       textSelectionTheme: TextSelectionThemeData(
         selectionHandleColor: accent,
-        selectionColor: accent.withValues(alpha: 0.45),
+        selectionColor: accent.withOpacity(0.45),
         cursorColor: primaryOnDark,
       ),
       floatingActionButtonTheme: FloatingActionButtonThemeData(
@@ -229,13 +229,13 @@ abstract final class AppTheme {
       ),
       chipTheme: ChipThemeData(
         backgroundColor: surfaceHigh,
-        selectedColor: primaryOnDark.withValues(alpha: 0.22),
+        selectedColor: primaryOnDark.withOpacity(0.22),
         disabledColor: surfaceContainerLow,
         labelStyle: TextStyle(color: onSurfaceMain, fontSize: 13),
         secondaryLabelStyle: TextStyle(color: onSurfaceMuted, fontSize: 13),
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-        side: BorderSide(color: outlineMuted.withValues(alpha: 0.6)),
+        side: BorderSide(color: outlineMuted.withOpacity(0.6)),
         brightness: Brightness.dark,
       ),
       listTileTheme: ListTileThemeData(
@@ -256,7 +256,7 @@ abstract final class AppTheme {
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
         ),
-        dragHandleColor: onSurfaceMuted.withValues(alpha: 0.45),
+        dragHandleColor: onSurfaceMuted.withOpacity(0.45),
       ),
       dialogTheme: DialogThemeData(
         backgroundColor: surfaceHigh,
@@ -272,7 +272,7 @@ abstract final class AppTheme {
       ),
       navigationBarTheme: NavigationBarThemeData(
         backgroundColor: scheme.surfaceContainer,
-        indicatorColor: primaryOnDark.withValues(alpha: 0.22),
+        indicatorColor: primaryOnDark.withOpacity(0.22),
         surfaceTintColor: Colors.transparent,
         elevation: 0,
         labelTextStyle: WidgetStateProperty.resolveWith((states) {
@@ -306,15 +306,15 @@ abstract final class AppTheme {
         decoration: BoxDecoration(
           color: surfaceHigh,
           borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: scheme.outline.withValues(alpha: 0.45)),
+          border: Border.all(color: scheme.outline.withOpacity(0.45)),
         ),
         textStyle: TextStyle(color: onSurfaceMain, fontSize: 12),
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       ),
       progressIndicatorTheme: ProgressIndicatorThemeData(
         color: primaryOnDark,
-        linearTrackColor: primaryOnDark.withValues(alpha: 0.22),
-        circularTrackColor: primaryOnDark.withValues(alpha: 0.22),
+        linearTrackColor: primaryOnDark.withOpacity(0.22),
+        circularTrackColor: primaryOnDark.withOpacity(0.22),
       ),
       switchTheme: SwitchThemeData(
         thumbColor: WidgetStateProperty.resolveWith((states) {
@@ -323,16 +323,16 @@ abstract final class AppTheme {
         }),
         trackColor: WidgetStateProperty.resolveWith((states) {
           if (states.contains(WidgetState.selected)) {
-            return primaryOnDark.withValues(alpha: 0.55);
+            return primaryOnDark.withOpacity(0.55);
           }
-          return outlineMuted.withValues(alpha: 0.5);
+          return outlineMuted.withOpacity(0.5);
         }),
       ),
       checkboxTheme: CheckboxThemeData(
         fillColor: WidgetStateProperty.resolveWith((states) {
           if (states.contains(WidgetState.selected)) return primaryOnDark;
           if (states.contains(WidgetState.disabled)) {
-            return outlineMuted.withValues(alpha: 0.35);
+            return outlineMuted.withOpacity(0.35);
           }
           return Colors.transparent;
         }),
@@ -349,14 +349,14 @@ abstract final class AppTheme {
         filled: true,
         fillColor: surfaceHigh,
         labelStyle: TextStyle(color: onSurfaceMuted),
-        hintStyle: TextStyle(color: onSurfaceMuted.withValues(alpha: 0.85)),
+        hintStyle: TextStyle(color: onSurfaceMuted.withOpacity(0.85)),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide(color: scheme.outline.withValues(alpha: 0.85)),
+          borderSide: BorderSide(color: scheme.outline.withOpacity(0.85)),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide(color: scheme.outline.withValues(alpha: 0.85)),
+          borderSide: BorderSide(color: scheme.outline.withOpacity(0.85)),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
@@ -364,7 +364,7 @@ abstract final class AppTheme {
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide(color: scheme.error.withValues(alpha: 0.95)),
+          borderSide: BorderSide(color: scheme.error.withOpacity(0.95)),
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),

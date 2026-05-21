@@ -19,13 +19,18 @@ Widget buildBottomBar(
     builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
       bool isEnabled = snapshot.data == true && request != null;
       return Container(
-        padding: const EdgeInsets.fromLTRB(24, 16, 24, 40),
+        padding: EdgeInsets.fromLTRB(
+          ScreenUtilsManager.w24,
+          ScreenUtilsManager.h16,
+          ScreenUtilsManager.w24,
+          ScreenUtilsManager.h40,
+        ),
         decoration: BoxDecoration(
-          color: context.palette.background,
+          color: context.palette.surface,
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.05),
-              blurRadius: 10,
+              color: context.palette.shadow,
+              blurRadius: ScreenUtilsManager.s10,
               offset: const Offset(0, -5),
             ),
           ],
@@ -40,19 +45,19 @@ Widget buildBottomBar(
               : null,
           style: ElevatedButton.styleFrom(
             backgroundColor: context.palette.workerprimary,
-            disabledBackgroundColor: context.palette.lightGrey.withOpacity(0.5),
-            minimumSize: Size(double.infinity, ScreenUtilsManager.buttonHeight),
+            disabledBackgroundColor: context.palette.outline.withOpacity(0.12),
+            minimumSize: Size(double.infinity, ScreenUtilsManager.h56),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(18),
+              borderRadius: BorderRadius.circular(ScreenUtilsManager.r18),
             ),
             elevation: isEnabled ? 2 : 0,
           ),
           child: Text(
             Constantmanger.verifyButtonText,
             style: GoogleFonts.cairo(
-              color: Colors.white,
+              color: isEnabled ? Colors.white : context.palette.onSurfaceVariant.withOpacity(0.5),
               fontWeight: FontWeight.bold,
-              fontSize: 16,
+              fontSize: ScreenUtilsManager.s16,
             ),
           ),
         ),

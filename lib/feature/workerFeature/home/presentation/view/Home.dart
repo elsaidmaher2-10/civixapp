@@ -10,6 +10,7 @@ import 'package:citifix/feature/workerFeature/home/presentation/view/widget/Work
 import 'package:citifix/feature/workerFeature/home/presentation/view/widget/WorkerDashBoard.dart';
 import 'package:citifix/feature/workerFeature/home/presentation/view/widget/workerCard.dart';
 import 'package:citifix/generated/l10n.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -18,24 +19,23 @@ import 'package:shimmer/shimmer.dart';
 import '../../../../../core/resource/screenutilsmaanger.dart';
 
 class HomePage extends StatelessWidget {
-  HomePage({super.key});
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: context.palette.bgbackground,
-      appBar: WorkerMainscreenAppbar(),
+      backgroundColor: context.palette.reportsPageBackground,
+      appBar: const WorkerMainscreenAppbar(),
       body: BlocBuilder<HomeCubit, HomeState>(
         builder: (context, state) {
           if (state is HomeLoading) {
             return buildShimmerLoading(context);
           } else if (state is HomeSuccess) {
-            final data = state.dashboardData;
-            return _buildHomeContent(data, context);
+            return _buildHomeContent(state.dashboardData, context);
           } else if (state is HomeError) {
             return _buildErrorState(context, state.errorMessage);
           }
-          return SizedBox.shrink();
+          return const SizedBox.shrink();
         },
       ),
     );
@@ -43,21 +43,20 @@ class HomePage extends StatelessWidget {
 
   Widget _buildErrorState(BuildContext context, String message) {
     return Center(
-      key: const Key('error'),
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: ScreenUtilsManager.w24),
+        padding: EdgeInsets.all(ScreenUtilsManager.w24),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              padding: const EdgeInsets.all(20),
+              padding: EdgeInsets.all(ScreenUtilsManager.w20),
               decoration: BoxDecoration(
-                color: context.palette.error.withValues(alpha: 0.15),
+                color: context.palette.error.withOpacity(0.1),
                 shape: BoxShape.circle,
               ),
               child: Icon(
                 Icons.wifi_off_rounded,
-                size: 50,
+                size: ScreenUtilsManager.s50,
                 color: context.palette.error,
               ),
             ),
@@ -65,7 +64,7 @@ class HomePage extends StatelessWidget {
             Text(
               S.of(context).errorTitle,
               style: GoogleFonts.cairo(
-                fontSize: ScreenUtilsManager.s16,
+                fontSize: ScreenUtilsManager.s18,
                 fontWeight: FontWeight.bold,
                 color: context.palette.onSurface,
               ),
@@ -83,19 +82,17 @@ class HomePage extends StatelessWidget {
             ElevatedButton.icon(
               style: ElevatedButton.styleFrom(
                 backgroundColor: context.palette.workerprimary,
-                foregroundColor: context.palette.onPrimary,
-                elevation: 0,
+                foregroundColor: Colors.white,
                 padding: EdgeInsets.symmetric(
-                  horizontal: ScreenUtilsManager.w24,
+                  horizontal: ScreenUtilsManager.w32,
                   vertical: ScreenUtilsManager.h12,
                 ),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(ScreenUtilsManager.r12),
                 ),
               ),
               onPressed: () => context.read<HomeCubit>().getWorkerDashboard(),
-
-              icon: const Icon(Icons.refresh_rounded, size: 20),
+              icon: Icon(Icons.refresh_rounded, size: ScreenUtilsManager.s20),
               label: Text(
                 S.of(context).tryAgain,
                 style: GoogleFonts.cairo(fontWeight: FontWeight.bold),
@@ -111,36 +108,54 @@ class HomePage extends StatelessWidget {
 Widget _buildHomeContent(DashBroadHome data, BuildContext context) {
   return RefreshIndicator(
     color: context.palette.workerprimary,
-    backgroundColor: context.palette.surfaceContainerLowest,
-    notificationPredicate: (notification) => true,
-    onRefresh: () {
-      return context.read<HomeCubit>().getWorkerDashboard();
-    },
+    backgroundColor: context.palette.surface,
+    onRefresh: () => context.read<HomeCubit>().getWorkerDashboard(),
     child: SingleChildScrollView(
-      padding: EdgeInsets.symmetric(
-        horizontal: ScreenUtilsManager.s16,
-        vertical: ScreenUtilsManager.s24,
+      physics: const AlwaysScrollableScrollPhysics(),
+      padding: EdgeInsets.fromLTRB(
+        ScreenUtilsManager.w20,
+        ScreenUtilsManager.h20,
+        ScreenUtilsManager.w20,
+        ScreenUtilsManager.h100,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _buildHeaderSection(data.workerName, context),
-          SizedBox(height: ScreenUtilsManager.s16),
+          SizedBox(height: ScreenUtilsManager.h24),
           WorkerCard(
             isVerified: data.verified,
             name: data.workerName,
             imageUrl: data.profileImageUrl ?? AssetValueManager.defualtimage1,
           ),
-          SizedBox(height: ScreenUtilsManager.s16),
-          if (!data.verified) WorkerAlertVrefication(),
-          SizedBox(height: ScreenUtilsManager.s16),
+          if (!data.verified) ...[
+            SizedBox(height: ScreenUtilsManager.h16),
+            const WorkerAlertVrefication(),
+          ],
+          SizedBox(height: ScreenUtilsManager.h32),
           WorkerDashboard(data: data),
-          SizedBox(height: ScreenUtilsManager.s24),
+          SizedBox(height: ScreenUtilsManager.h32),
           CustomMapSection(
             zonemLevel: data.areaCoordinates,
             areaname: data.areaName,
           ),
-          SizedBox(height: ScreenUtilsManager.s24),
+          SizedBox(height: ScreenUtilsManager.h32),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                S.of(context).recentReport,
+                style: GoogleFonts.cairo(
+                  fontSize: ScreenUtilsManager.s18,
+                  fontWeight: FontWeight.w800,
+                  color: context.palette.onSurface,
+                  letterSpacing: -0.5,
+                ),
+              ),
+             
+            ],
+          ),
+          SizedBox(height: ScreenUtilsManager.h16),
           data.recentReports.isEmpty
               ? _buildEmptyTasksMessage(context)
               : CustomTaskListView(reports: data.recentReports),
@@ -155,20 +170,32 @@ Widget _buildHeaderSection(String name, BuildContext context) {
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Text(
-        "${S.of(context).welcome_message}$name",
+        "${S.of(context).welcome_message} $name 👋",
         style: GoogleFonts.cairo(
-          fontSize: ScreenUtilsManager.s32,
-          fontWeight: FontWeight.w800,
+          fontSize: ScreenUtilsManager.s22,
+          fontWeight: FontWeight.w900,
           color: context.palette.onSurface,
+          letterSpacing: -0.8,
+          height: 1.1,
         ),
       ),
-      SizedBox(height: ScreenUtilsManager.s4),
-      Text(
-        S.of(context).stay_focused,
-        style: GoogleFonts.cairo(
-          fontSize: ScreenUtilsManager.s16,
-          fontWeight: FontWeight.w500,
-          color: context.palette.onSurfaceVariant,
+      SizedBox(height: ScreenUtilsManager.h6),
+      Container(
+        padding: EdgeInsets.symmetric(
+          horizontal: ScreenUtilsManager.w10,
+          vertical: ScreenUtilsManager.h4,
+        ),
+        decoration: BoxDecoration(
+          color: context.palette.workerprimary.withOpacity(0.1),
+          borderRadius: BorderRadius.circular(ScreenUtilsManager.r8),
+        ),
+        child: Text(
+          S.of(context).stay_focused,
+          style: GoogleFonts.cairo(
+            fontSize: ScreenUtilsManager.s13,
+            fontWeight: FontWeight.w700,
+            color: context.palette.workerprimary,
+          ),
         ),
       ),
     ],
@@ -176,23 +203,21 @@ Widget _buildHeaderSection(String name, BuildContext context) {
 }
 
 Widget buildShimmerLoading(BuildContext context) {
-  final Color base = context.palette.surfaceContainerHigh;
-  final Color highlight = context.palette.surfaceContainerHighest;
-  return Shimmer.fromColors(
-    baseColor: base,
-    highlightColor: highlight,
-    child: SingleChildScrollView(
-      padding: EdgeInsets.all(ScreenUtilsManager.s16),
+  return SingleChildScrollView(
+    padding: EdgeInsets.all(ScreenUtilsManager.w20),
+    child: Shimmer.fromColors(
+      baseColor: context.palette.surfaceContainerHigh,
+      highlightColor: context.palette.surfaceContainerHighest,
       child: Column(
         children: List.generate(
-          4,
+          3,
           (index) => Container(
-            margin: EdgeInsets.only(bottom: ScreenUtilsManager.s20),
-            height: ScreenUtilsManager.h150,
+            margin: EdgeInsets.only(bottom: ScreenUtilsManager.h20),
+            height: ScreenUtilsManager.h180,
             width: double.infinity,
             decoration: BoxDecoration(
-              color: base,
-              borderRadius: BorderRadius.circular(ScreenUtilsManager.s16),
+              color: context.palette.surfaceContainerHigh,
+              borderRadius: BorderRadius.circular(ScreenUtilsManager.r24),
             ),
           ),
         ),
@@ -204,31 +229,51 @@ Widget buildShimmerLoading(BuildContext context) {
 Widget _buildEmptyTasksMessage(BuildContext context) {
   return Container(
     width: double.infinity,
-    padding: EdgeInsets.all(ScreenUtilsManager.s20),
+    padding: EdgeInsets.all(ScreenUtilsManager.w32),
     decoration: BoxDecoration(
-      color: context.palette.white,
-      borderRadius: BorderRadius.circular(ScreenUtilsManager.s12),
-      border: Border.all(color: context.palette.outline),
+      color: context.palette.surface,
+      borderRadius: BorderRadius.circular(ScreenUtilsManager.r24),
+      border: Border.all(color: context.palette.outline.withOpacity(0.1)),
+      boxShadow: [
+        BoxShadow(
+          color: context.palette.shadow,
+          blurRadius: ScreenUtilsManager.s20,
+        ),
+      ],
     ),
     child: Column(
       children: [
-        Icon(
-          Icons.assignment_turned_in_outlined,
-          size: ScreenUtilsManager.s40,
-          color: context.palette.secondary,
+        Container(
+          padding: EdgeInsets.all(ScreenUtilsManager.w20),
+          decoration: BoxDecoration(
+            color: context.palette.workerprimary.withOpacity(0.08),
+            shape: BoxShape.circle,
+          ),
+          child: Icon(
+            Icons.assignment_turned_in_rounded,
+            size: ScreenUtilsManager.s48,
+            color: context.palette.workerprimary.withOpacity(0.4),
+          ),
         ),
-        SizedBox(height: ScreenUtilsManager.s10),
+        SizedBox(height: ScreenUtilsManager.h20),
         Text(
           S.of(context).no_tasks_available,
+          textAlign: TextAlign.center,
           style: GoogleFonts.cairo(
-            fontWeight: FontWeight.bold,
-            fontSize: ScreenUtilsManager.s16,
+            fontWeight: FontWeight.w900,
+            fontSize: ScreenUtilsManager.s18,
             color: context.palette.onSurface,
           ),
         ),
+        SizedBox(height: ScreenUtilsManager.h8),
         Text(
           S.of(context).notify_new_tasks,
-          style: GoogleFonts.cairo(color: context.palette.onSurfaceVariant),
+          textAlign: TextAlign.center,
+          style: GoogleFonts.cairo(
+            fontSize: ScreenUtilsManager.s14,
+            fontWeight: FontWeight.w600,
+            color: context.palette.onSurfaceVariant.withOpacity(0.7),
+          ),
         ),
       ],
     ),

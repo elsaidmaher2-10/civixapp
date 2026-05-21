@@ -88,11 +88,11 @@ class _CustomMapSectionState extends State<CustomMapSection> {
               Stack(
                 children: [
                   Container(
-                    height: ScreenUtilsManager.h450,
+                    height: ScreenUtilsManager.h320,
                     decoration: BoxDecoration(
                       color: context.palette.surfaceContainerLowest,
                       borderRadius: BorderRadius.circular(
-                        ScreenUtilsManager.s24,
+                        ScreenUtilsManager.r24,
                       ),
                     ),
                     clipBehavior: Clip.antiAlias,
@@ -134,7 +134,7 @@ class _CustomMapSectionState extends State<CustomMapSection> {
                               Polyline(
                                 points: state.routePoints,
                                 strokeWidth: ScreenUtilsManager.s5,
-                                color: Color(0xFFFF7B00),
+                                color: context.palette.workerprimary,
                                 borderStrokeWidth: ScreenUtilsManager.s2,
                                 borderColor: Colors.white,
                               ),
@@ -145,8 +145,8 @@ class _CustomMapSectionState extends State<CustomMapSection> {
                             polygons: [
                               Polygon(
                                 points: widget.zonemLevel,
-                                color: Color(0xFFFF7B00).withOpacity(0.1),
-                                borderColor: Color(0xFFFF7B00),
+                                color: context.palette.workerprimary.withOpacity(0.12),
+                                borderColor: context.palette.workerprimary,
                                 borderStrokeWidth: ScreenUtilsManager.s2,
                               ),
                             ],
@@ -159,8 +159,8 @@ class _CustomMapSectionState extends State<CustomMapSection> {
                                 width: ScreenUtilsManager.s50,
                                 height: ScreenUtilsManager.s50,
                                 child: Icon(
-                                  Icons.location_on,
-                                  color: Colors.blueGrey,
+                                  Icons.location_on_rounded,
+                                  color: context.palette.onSurfaceVariant,
                                   size: ScreenUtilsManager.s45,
                                 ),
                               ),
@@ -188,14 +188,20 @@ class _CustomMapSectionState extends State<CustomMapSection> {
                           horizontal: ScreenUtilsManager.s20,
                         ),
                         decoration: BoxDecoration(
-                          color: Color(0xFFFF7B00).withOpacity(0.9),
+                          gradient: LinearGradient(
+                            colors: [
+                              context.palette.workerprimary,
+                              context.palette.workerprimary.withOpacity(0.8),
+                            ],
+                          ),
                           borderRadius: BorderRadius.circular(
-                            ScreenUtilsManager.s12,
+                            ScreenUtilsManager.s16,
                           ),
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.black26,
-                              blurRadius: ScreenUtilsManager.s10,
+                              color: context.palette.workerprimary.withOpacity(0.3),
+                              blurRadius: ScreenUtilsManager.s12,
+                              offset: const Offset(0, 4),
                             ),
                           ],
                         ),
@@ -206,27 +212,35 @@ class _CustomMapSectionState extends State<CustomMapSection> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  S.of(context).distance_to_task,
+                                  S.of(context).distance_to_task.toUpperCase(),
                                   style: GoogleFonts.cairo(
-                                    color: Colors.white70,
+                                    color: Colors.white.withOpacity(0.8),
                                     fontSize: ScreenUtilsManager.s10,
-                                    fontWeight: FontWeight.bold,
+                                    fontWeight: FontWeight.w800,
+                                    letterSpacing: 1,
                                   ),
                                 ),
                                 Text(
                                   "$distanceValue ${S.of(context).km}",
                                   style: GoogleFonts.cairo(
                                     color: Colors.white,
-                                    fontSize: ScreenUtilsManager.s18,
-                                    fontWeight: FontWeight.bold,
+                                    fontSize: ScreenUtilsManager.s20,
+                                    fontWeight: FontWeight.w900,
                                   ),
                                 ),
                               ],
                             ),
-                            Icon(
-                              Icons.directions_run,
-                              color: Colors.white,
-                              size: ScreenUtilsManager.s30,
+                            Container(
+                              padding: EdgeInsets.all(ScreenUtilsManager.w8),
+                              decoration: BoxDecoration(
+                                color: Colors.white.withOpacity(0.2),
+                                shape: BoxShape.circle,
+                              ),
+                              child: Icon(
+                                Icons.directions_run_rounded,
+                                color: Colors.white,
+                                size: ScreenUtilsManager.icon24,
+                              ),
                             ),
                           ],
                         ),
@@ -239,7 +253,7 @@ class _CustomMapSectionState extends State<CustomMapSection> {
                     child: Column(
                       children: [
                         _MapButton(
-                          icon: Icons.add,
+                          icon: Icons.add_rounded,
                           onTap: () {
                             final currentZoom = _mapController.camera.zoom;
                             _mapController.move(
@@ -248,9 +262,9 @@ class _CustomMapSectionState extends State<CustomMapSection> {
                             );
                           },
                         ),
-                        SizedBox(height: ScreenUtilsManager.s8),
+                        SizedBox(height: ScreenUtilsManager.s10),
                         _MapButton(
-                          icon: Icons.remove,
+                          icon: Icons.remove_rounded,
                           onTap: () {
                             final currentZoom = _mapController.camera.zoom;
                             _mapController.move(
@@ -259,9 +273,9 @@ class _CustomMapSectionState extends State<CustomMapSection> {
                             );
                           },
                         ),
-                        SizedBox(height: ScreenUtilsManager.s8),
+                        SizedBox(height: ScreenUtilsManager.s10),
                         _MapButton(
-                          icon: Icons.my_location,
+                          icon: Icons.my_location_rounded,
                           onTap: () {
                             if (_currLocation != null) {
                               _mapController.move(
@@ -281,12 +295,19 @@ class _CustomMapSectionState extends State<CustomMapSection> {
                 padding: EdgeInsets.all(ScreenUtilsManager.s20),
                 child: Row(
                   children: [
-                    CircleAvatar(
-                      radius: ScreenUtilsManager.s25,
-                      backgroundColor: Color(0xFFFF7B00).withOpacity(0.1),
-                      child: Icon(Icons.my_location, color: Color(0xFFFF7B00)),
+                    Container(
+                      padding: EdgeInsets.all(ScreenUtilsManager.w12),
+                      decoration: BoxDecoration(
+                        color: context.palette.workerprimary.withOpacity(0.12),
+                        borderRadius: BorderRadius.circular(ScreenUtilsManager.r16),
+                      ),
+                      child: Icon(
+                        Icons.my_location_rounded, 
+                        color: context.palette.workerprimary,
+                        size: ScreenUtilsManager.s26,
+                      ),
                     ),
-                    SizedBox(width: ScreenUtilsManager.w15),
+                    SizedBox(width: ScreenUtilsManager.w16),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -300,15 +321,17 @@ class _CustomMapSectionState extends State<CustomMapSection> {
                                       ? S.of(context).heading_to_task
                                       : S.of(context).monitoring_area),
                             style: GoogleFonts.cairo(
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.w800,
                               fontSize: ScreenUtilsManager.s18,
+                              color: context.palette.onSurface,
                             ),
                           ),
                           Text(
                             widget.areaname,
                             style: GoogleFonts.cairo(
                               fontSize: ScreenUtilsManager.s14,
-                              color: Colors.grey[600],
+                              fontWeight: FontWeight.w600,
+                              color: context.palette.onSurfaceVariant.withOpacity(0.7),
                             ),
                           ),
                         ],
@@ -336,20 +359,21 @@ class _MapButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: 40,
-        height: 40,
+        width: ScreenUtilsManager.w44,
+        height: ScreenUtilsManager.h44,
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(8),
+          color: context.palette.surface,
+          borderRadius: BorderRadius.circular(ScreenUtilsManager.r12),
+          border: Border.all(color: context.palette.outline.withOpacity(0.1)),
           boxShadow: [
             BoxShadow(
-              color: Colors.black26,
-              blurRadius: 4,
-              offset: Offset(0, 2),
+              color: context.palette.shadow,
+              blurRadius: ScreenUtilsManager.s8,
+              offset: Offset(0, ScreenUtilsManager.h4),
             ),
           ],
         ),
-        child: Icon(icon, color: Color(0xFFFF7B00), size: 22),
+        child: Icon(icon, color: context.palette.workerprimary, size: ScreenUtilsManager.icon24),
       ),
     );
   }

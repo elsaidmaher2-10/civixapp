@@ -103,10 +103,10 @@ class _TaskDetailsPageState extends State<TaskDetailsPage> {
             color: context.palette.black54,
             progressIndicator: CupertinoActivityIndicator(
               radius: ScreenUtilsManager.r12,
-              color: context.palette.workerprimary,
+              color: context.palette.primary,
             ),
             child: Scaffold(
-              backgroundColor: context.palette.background,
+              backgroundColor: context.palette.reportsPageBackground,
               appBar: _buildAppBar(context),
               bottomNavigationBar: _buildBottomAction(context),
               body: _buildScaffoldBody(context, state),
@@ -120,7 +120,10 @@ class _TaskDetailsPageState extends State<TaskDetailsPage> {
   Widget _buildScaffoldBody(BuildContext context, ReportDetailsState state) {
     if (state is ReportDetailsLoading && _currentTask == null) {
       return Center(
-        child: CupertinoActivityIndicator(radius: ScreenUtilsManager.r12),
+        child: CupertinoActivityIndicator(
+          radius: ScreenUtilsManager.r12,
+          color: context.palette.primary,
+        ),
       );
     }
     if (state is ReportDetailsFailure && _currentTask == null) {
@@ -163,8 +166,8 @@ class _TaskDetailsPageState extends State<TaskDetailsPage> {
 
   Widget _buildMainContent(BuildContext context, dynamic task) {
     return RefreshIndicator(
-      color: context.palette.workerprimary,
-      backgroundColor: context.palette.white,
+      color: context.palette.primary,
+      backgroundColor: context.palette.surface,
       onRefresh: () async => context
           .read<ReportDetailsManager>()
           .getReportDetails(id: widget.reportid),
@@ -244,13 +247,21 @@ class _TaskDetailsPageState extends State<TaskDetailsPage> {
       backgroundColor: context.palette.surface,
       elevation: 0,
       leading: IconButton(
-        icon: Icon(Icons.arrow_back_ios_outlined, color: context.palette.onSurface),
+        icon: Icon(
+          Icons.arrow_back_ios_outlined,
+          color: context.palette.onSurface,
+          size: ScreenUtilsManager.s20,
+        ),
         onPressed: () => Navigator.pop(context),
       ),
       centerTitle: true,
       title: Text(
         S.of(context).taskDetails,
-        style: GoogleFonts.cairo(fontWeight: FontWeight.bold),
+        style: GoogleFonts.cairo(
+          fontWeight: FontWeight.w800,
+          color: context.palette.onSurface,
+          fontSize: ScreenUtilsManager.s18,
+        ),
       ),
     );
   }
@@ -258,33 +269,68 @@ class _TaskDetailsPageState extends State<TaskDetailsPage> {
   Widget _buildErrorWidget(BuildContext context, String error) {
     final isNoInternet = error.contains(Constantmanger.nointernet);
     return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            isNoInternet ? Icons.wifi_off : Icons.error_outline,
-            size: ScreenUtilsManager.s60,
-            color: context.palette.grey,
-          ),
-          SizedBox(height: ScreenUtilsManager.h16),
-          Text(
-            isNoInternet
-                ? S.of(context).noInternetConnection
-                : S.of(context).somethingWentWrong,
-            style: GoogleFonts.cairo(fontWeight: FontWeight.bold),
-          ),
-          SizedBox(height: ScreenUtilsManager.h16),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: context.palette.workerprimary,
-              foregroundColor: context.palette.white,
+      child: Padding(
+        padding: EdgeInsets.all(ScreenUtilsManager.w24),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              padding: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                color: context.palette.error.withOpacity(0.1),
+                shape: BoxShape.circle,
+              ),
+              child: Icon(
+                isNoInternet ? Icons.wifi_off_rounded : Icons.error_outline_rounded,
+                size: ScreenUtilsManager.s60,
+                color: context.palette.error,
+              ),
             ),
-            onPressed: () => context
-                .read<ReportDetailsManager>()
-                .getReportDetails(id: widget.reportid),
-            child: Text(S.of(context).retry),
-          ),
-        ],
+            SizedBox(height: ScreenUtilsManager.h20),
+            Text(
+              isNoInternet
+                  ? S.of(context).noInternetConnection
+                  : S.of(context).somethingWentWrong,
+              textAlign: TextAlign.center,
+              style: GoogleFonts.cairo(
+                fontWeight: FontWeight.bold,
+                fontSize: ScreenUtilsManager.s18,
+                color: context.palette.onSurface,
+              ),
+            ),
+            SizedBox(height: ScreenUtilsManager.h8),
+            Text(
+              error,
+              textAlign: TextAlign.center,
+              style: GoogleFonts.cairo(
+                color: context.palette.onSurfaceVariant,
+                fontSize: ScreenUtilsManager.s14,
+              ),
+            ),
+            SizedBox(height: ScreenUtilsManager.h24),
+            ElevatedButton.icon(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: context.palette.workerprimary,
+                foregroundColor: Colors.white,
+                padding: EdgeInsets.symmetric(
+                  horizontal: ScreenUtilsManager.w32,
+                  vertical: ScreenUtilsManager.h12,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+              onPressed: () => context
+                  .read<ReportDetailsManager>()
+                  .getReportDetails(id: widget.reportid),
+              icon: const Icon(Icons.refresh_rounded),
+              label: Text(
+                S.of(context).retry,
+                style: GoogleFonts.cairo(fontWeight: FontWeight.bold),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

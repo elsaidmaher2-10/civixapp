@@ -39,10 +39,10 @@ class _TasksViewState extends State<TasksView> {
     return BlocProvider.value(
       value: _cubit,
       child: Scaffold(
-        backgroundColor: context.palette.tasksBackground,
+        backgroundColor: context.palette.reportsPageBackground,
         body: RefreshIndicator(
-          color: context.palette.workerprimary,
-          backgroundColor: context.palette.white,
+          color: context.palette.primary,
+          backgroundColor: context.palette.surface,
           onRefresh: () => _cubit.getWorkerTasks(),
           child: SingleChildScrollView(
             physics: const AlwaysScrollableScrollPhysics(),
@@ -160,7 +160,7 @@ class _ErrorState extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: context.palette.error.withValues(alpha: 0.15),
+                color: context.palette.error.withOpacity(0.15),
                 shape: BoxShape.circle,
               ),
               child: Icon(

@@ -16,24 +16,27 @@ class StepHeader extends StatelessWidget {
         Text(
           title,
           style: GoogleFonts.cairo(
-            fontSize: 20,
+            fontSize: ScreenUtilsManager.s20,
             fontWeight: FontWeight.bold,
             color: context.palette.onSurface,
           ),
         ),
         Container(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+          padding: EdgeInsets.symmetric(
+            horizontal: ScreenUtilsManager.w12,
+            vertical: ScreenUtilsManager.h6,
+          ),
           decoration: BoxDecoration(
-            color: context.palette.surface,
-            borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: context.palette.outline),
+            color: context.palette.surfaceContainerHigh,
+            borderRadius: BorderRadius.circular(ScreenUtilsManager.r12),
+            border: Border.all(color: context.palette.outline.withOpacity(0.2)),
           ),
           child: Text(
             stepLabel.toUpperCase(),
             style: GoogleFonts.cairo(
-              fontSize: 10,
+              fontSize: ScreenUtilsManager.s10,
               fontWeight: FontWeight.w800,
-              color: context.palette.secondary,
+              color: context.palette.workerprimary,
               letterSpacing: 1.1,
             ),
           ),

@@ -37,7 +37,7 @@ class AchievementReportCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(16.r),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withValues(alpha: 0.12),
+              color: Colors.black.withOpacity(0.12),
               blurRadius: 15,
               offset: const Offset(0, 5),
             ),
@@ -196,7 +196,7 @@ class AchievementReportCard extends StatelessWidget {
         color: context.palette.surfaceContainerLow,
         border: Border(
           top: BorderSide(
-            color: context.palette.outline.withValues(alpha: 0.35),
+            color: context.palette.outline.withOpacity(0.35),
           ),
         ),
       ),

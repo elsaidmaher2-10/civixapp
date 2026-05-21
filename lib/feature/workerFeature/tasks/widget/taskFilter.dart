@@ -1,4 +1,5 @@
 import 'package:citifix/core/resource/colormanager.dart';
+import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -29,27 +30,27 @@ class _TaskFilterChipsState extends State<TaskFilterChips> {
           return Padding(
             padding: const EdgeInsets.only(right: 8),
             child: ChoiceChip(
-              checkmarkColor: context.palette.onPrimary,
+              checkmarkColor: Colors.white,
               label: Text(widget.filters[index]),
               selected: isSelected,
               onSelected: (selected) {
                 setState(() => selectedIndex = index);
                 widget.onFilterSelected(widget.filtersen[index]);
               },
-              selectedColor: context.palette.primaryColor,
+              selectedColor: context.palette.workerprimary,
               backgroundColor: context.palette.surfaceContainerLowest,
               labelStyle: GoogleFonts.cairo(
                 color: isSelected
-                    ? context.palette.onPrimary
+                    ? Colors.white
                     : context.palette.onSurfaceVariant,
-                fontWeight: FontWeight.w600,
+                fontWeight: FontWeight.w700,
               ),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(ScreenUtilsManager.r20),
                 side: BorderSide(
                   color: isSelected
                       ? Colors.transparent
-                      : context.palette.outline.withValues(alpha: 0.45),
+                      : context.palette.outline.withOpacity(0.15),
                 ),
               ),
             ),

@@ -20,20 +20,20 @@ class TaskCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: ScreenUtilsManager.w280,
-      margin: EdgeInsets.only(right: ScreenUtilsManager.w16),
+      width: ScreenUtilsManager.w240,
+      margin: EdgeInsets.only(right: ScreenUtilsManager.w16, bottom: ScreenUtilsManager.h8),
       padding: EdgeInsets.all(ScreenUtilsManager.w12),
       decoration: BoxDecoration(
-        color: context.palette.white,
-        borderRadius: BorderRadius.circular(ScreenUtilsManager.r20),
+        color: context.palette.surface,
+        borderRadius: BorderRadius.circular(ScreenUtilsManager.r24),
         border: Border.all(
-          color: context.palette.outline.withValues(alpha: 0.4),
+          color: context.palette.outline.withOpacity(0.15),
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.08),
-            blurRadius: ScreenUtilsManager.s10,
-            offset: Offset(ScreenUtilsManager.w0, ScreenUtilsManager.h4),
+            color: context.palette.shadow,
+            blurRadius: ScreenUtilsManager.s15,
+            offset: Offset(0, ScreenUtilsManager.h6),
           ),
         ],
       ),
@@ -56,39 +56,48 @@ class TaskCard extends StatelessWidget {
                     ),
                   );
                 },
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(ScreenUtilsManager.r12),
-                  child: CachedNetworkImage(
-                    placeholder: (context, url) {
-                      return customShimer(context, ScreenUtilsManager.h150);
-                    },
-                    height: ScreenUtilsManager.h130,
-                    width: double.infinity,
-                    fit: BoxFit.cover,
-                    imageUrl: report.imageUrls.isNotEmpty
-                        ? report.imageUrls.first
-                        : Constantmanger.defualtImage,
+                child: Hero(
+                  tag: 'task_${report.id}',
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(ScreenUtilsManager.r16),
+                    child: CachedNetworkImage(
+                      placeholder: (context, url) {
+                        return customShimer(context, ScreenUtilsManager.h150);
+                      },
+                      height: ScreenUtilsManager.h110,
+                      width: double.infinity,
+                      fit: BoxFit.cover,
+                      imageUrl: report.imageUrls.isNotEmpty
+                          ? report.imageUrls.first
+                          : Constantmanger.defualtImage,
+                    ),
                   ),
                 ),
               ),
               Positioned(
-                top: ScreenUtilsManager.h8,
-                right: ScreenUtilsManager.w8,
+                top: ScreenUtilsManager.h10,
+                right: ScreenUtilsManager.w10,
                 child: Container(
                   padding: EdgeInsets.symmetric(
-                    horizontal: ScreenUtilsManager.w10,
-                    vertical: ScreenUtilsManager.h4,
+                    horizontal: ScreenUtilsManager.w12,
+                    vertical: ScreenUtilsManager.h6,
                   ),
                   decoration: BoxDecoration(
-                    color: context.palette.primaryColor.withOpacity(0.9),
+                    color: context.palette.primary.withOpacity(0.95),
                     borderRadius: BorderRadius.circular(ScreenUtilsManager.r20),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.1),
+                        blurRadius: ScreenUtilsManager.s4,
+                      ),
+                    ],
                   ),
                   child: Text(
                     report.status,
                     style: GoogleFonts.cairo(
                       color: context.palette.onPrimary,
                       fontSize: ScreenUtilsManager.s10,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w800,
                     ),
                   ),
                 ),
@@ -96,52 +105,72 @@ class TaskCard extends StatelessWidget {
             ],
           ),
           SizedBox(height: ScreenUtilsManager.h12),
-          Text(
-            report.categoryName.toUpperCase(),
-            style: GoogleFonts.cairo(
-              color: context.palette.primaryColor,
-              fontSize: ScreenUtilsManager.s10,
-              fontWeight: FontWeight.bold,
-              letterSpacing: 0.5,
-            ),
-          ),
-          SizedBox(height: ScreenUtilsManager.h4),
-          Text(
-            report.title,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: GoogleFonts.cairo(
-              fontWeight: FontWeight.bold,
-              fontSize: ScreenUtilsManager.s16,
-              color: context.palette.onSurface,
-            ),
-          ),
-          SizedBox(height: ScreenUtilsManager.h8),
-          Row(
-            children: [
-              Icon(
-                Icons.location_on_outlined,
-                size: ScreenUtilsManager.s14,
-                color: context.palette.onSurfaceVariant,
-              ),
-              SizedBox(width: ScreenUtilsManager.w4),
-              Expanded(
-                child: Text(
-                  report.areaName,
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: ScreenUtilsManager.w4),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  report.categoryName.toUpperCase(),
                   style: GoogleFonts.cairo(
-                    fontSize: ScreenUtilsManager.s12,
-                    color: context.palette.onSurfaceVariant,
+                    color: context.palette.workerprimary,
+                    fontSize: ScreenUtilsManager.s10,
+                    fontWeight: FontWeight.w900,
+                    letterSpacing: 1.1,
                   ),
                 ),
-              ),
-              Text(
-                "${report.createdAt.day}/${report.createdAt.month}",
-                style: GoogleFonts.cairo(
-                  fontSize: ScreenUtilsManager.s11,
-                  color: context.palette.onSurfaceVariant,
+                SizedBox(height: ScreenUtilsManager.h2),
+                Text(
+                  report.title,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: GoogleFonts.cairo(
+                    fontWeight: FontWeight.w800,
+                    fontSize: ScreenUtilsManager.s15,
+                    color: context.palette.onSurface,
+                  ),
                 ),
-              ),
-            ],
+                SizedBox(height: ScreenUtilsManager.h10),
+                Row(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.all(ScreenUtilsManager.w4),
+                      decoration: BoxDecoration(
+                        color: context.palette.onSurfaceVariant.withOpacity(0.1),
+                        shape: BoxShape.circle,
+                      ),
+                      child: Icon(
+                        Icons.location_on_rounded,
+                        size: ScreenUtilsManager.s14,
+                        color: context.palette.workerprimary,
+                      ),
+                    ),
+                    SizedBox(width: ScreenUtilsManager.w6),
+                    Expanded(
+                      child: Text(
+                        report.areaName,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: GoogleFonts.cairo(
+                          fontSize: ScreenUtilsManager.s12,
+                          color: context.palette.onSurfaceVariant.withOpacity(0.8),
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: ScreenUtilsManager.w8),
+                    Text(
+                      "${report.createdAt.day}/${report.createdAt.month}",
+                      style: GoogleFonts.cairo(
+                        fontSize: ScreenUtilsManager.s11,
+                        color: context.palette.onSurfaceVariant.withOpacity(0.5),
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ],
       ),

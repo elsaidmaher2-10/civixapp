@@ -36,11 +36,11 @@ class IDUploadCard extends StatelessWidget {
           onTap: ontap,
           borderRadius: BorderRadius.circular(cardRadius),
           child: Container(
-            height: 180,
+            height: ScreenUtilsManager.h180,
             decoration: BoxDecoration(
               color: context.palette.surface,
               borderRadius: BorderRadius.circular(cardRadius),
-              border: Border.all(color: context.palette.outline),
+              border: Border.all(color: context.palette.outline.withOpacity(0.5)),
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(cardRadius - 1),
@@ -51,12 +51,12 @@ class IDUploadCard extends StatelessWidget {
                           child: Image.file(snapshot.data!, fit: BoxFit.cover),
                         ),
                         Positioned(
-                          top: 4,
-                          right: 4,
+                          top: ScreenUtilsManager.h4,
+                          right: ScreenUtilsManager.w4,
                           child: GestureDetector(
                             onTap: removeimagebtn,
                             child: Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding: EdgeInsets.all(ScreenUtilsManager.w8),
                               child: CircleAvatar(
                                 radius: ScreenUtilsManager.r12,
                                 backgroundColor: context.palette.workerprimary
@@ -64,7 +64,7 @@ class IDUploadCard extends StatelessWidget {
                                 child: Icon(
                                   Icons.close,
                                   size: ScreenUtilsManager.s20,
-                                  color: context.palette.white,
+                                  color: Colors.white,
                                 ),
                               ),
                             ),
@@ -75,21 +75,22 @@ class IDUploadCard extends StatelessWidget {
                   : Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(icon, size: 38, color: context.palette.workerprimary),
-                        SizedBox(height: 12),
+                        Icon(icon, size: ScreenUtilsManager.s40, color: context.palette.workerprimary),
+                        SizedBox(height: ScreenUtilsManager.h12),
                         Text(
                           title,
                           style: GoogleFonts.cairo(
                             fontWeight: FontWeight.bold,
-                            fontSize: 14,
+                            fontSize: ScreenUtilsManager.s14,
+                            color: context.palette.onSurface,
                           ),
                         ),
-                        SizedBox(height: 4),
+                        SizedBox(height: ScreenUtilsManager.h4),
                         Text(
                           subtitle,
                           style: GoogleFonts.cairo(
-                            fontSize: 11,
-                            color: context.palette.secondary,
+                            fontSize: ScreenUtilsManager.s11,
+                            color: context.palette.onSurfaceVariant.withOpacity(0.7),
                           ),
                         ),
                       ],

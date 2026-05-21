@@ -23,31 +23,16 @@ class WorkerMainscreenAppbar extends StatelessWidget
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: context.palette.reportsPageBackground.withOpacity(0.95),
+      backgroundColor: context.palette.surface,
       surfaceTintColor: Colors.transparent,
-      elevation: ScreenUtilsManager.s2,
-      shadowColor: Colors.black12,
+      elevation: 0,
       automaticallyImplyLeading: false,
-      toolbarHeight: ScreenUtilsManager.h61,
-      titleSpacing: ScreenUtilsManager.w16,
-      title: Row(
-        children: [
-          SvgPicture.asset(
-            AssetValueManager.Klog,
-            width: ScreenUtilsManager.w24,
-            height: ScreenUtilsManager.w24,
-          ),
-          SizedBox(width: ScreenUtilsManager.w12),
-          Text(
-            S.of(context).appTitle,
-            style: GoogleFonts.cairo(
-              color: context.palette.onSurface,
-              fontWeight: FontWeight.w800,
-              fontSize: ScreenUtilsManager.s18,
-              letterSpacing: -0.3,
-            ),
-          ),
-        ],
+      toolbarHeight: ScreenUtilsManager.h70,
+      centerTitle: true,
+      title: SvgPicture.asset(
+        AssetValueManager.Klog,
+        height: ScreenUtilsManager.s48,
+        width: ScreenUtilsManager.s48,
       ),
       actions: [
         BlocBuilder<NotificationCubit, NotificationState>(
@@ -58,7 +43,7 @@ class WorkerMainscreenAppbar extends StatelessWidget
               unreadCount = state.notifications.where((e) => !e.isRead).length;
             }
             return Padding(
-              padding: EdgeInsets.only(right: ScreenUtilsManager.w12),
+              padding: EdgeInsets.only(right: ScreenUtilsManager.w8),
               child: Material(
                 color: Colors.transparent,
                 child: InkWell(
@@ -70,7 +55,7 @@ class WorkerMainscreenAppbar extends StatelessWidget
                   ),
                   borderRadius: BorderRadius.circular(ScreenUtilsManager.r12),
                   child: Container(
-                    padding: EdgeInsets.all(ScreenUtilsManager.w8),
+                    padding: EdgeInsets.all(ScreenUtilsManager.w10),
                     child: Stack(
                       clipBehavior: Clip.none,
                       children: [
@@ -86,18 +71,18 @@ class WorkerMainscreenAppbar extends StatelessWidget
                                   height: ScreenUtilsManager.h28,
                                 )
                               : Icon(
-                                  Icons.notifications_none_rounded,
+                                  Icons.notifications_rounded,
                                   key: const ValueKey('icon_bell'),
                                   size: ScreenUtilsManager.s26,
                                   color: context.palette.onSurface.withValues(
-                                    alpha: 0.85,
+                                    alpha: 0.8,
                                   ),
                                 ),
                         ),
                         if (unreadCount > 0)
                           Positioned(
-                            right: -ScreenUtilsManager.w4,
-                            top: -ScreenUtilsManager.h4,
+                            right: -ScreenUtilsManager.w2,
+                            top: -ScreenUtilsManager.h2,
                             child: TweenAnimationBuilder<double>(
                               tween: Tween(begin: 0.0, end: 1.0),
                               duration: const Duration(milliseconds: 400),
@@ -115,27 +100,20 @@ class WorkerMainscreenAppbar extends StatelessWidget
                                       minHeight: ScreenUtilsManager.h18,
                                     ),
                                     decoration: BoxDecoration(
-                                      gradient: const LinearGradient(
-                                        colors: [
-                                          Color(0xffFF5252),
-                                          Color(0xffFF1744),
-                                        ],
-                                        begin: Alignment.topLeft,
-                                        end: Alignment.bottomRight,
-                                      ),
+                                      color: context.palette.error,
                                       borderRadius: BorderRadius.circular(
                                         ScreenUtilsManager.r10,
                                       ),
                                       border: Border.all(
-                                        color: Colors.white,
+                                        color: context.palette.surface,
                                         width: ScreenUtilsManager.w1_5,
                                       ),
                                       boxShadow: [
                                         BoxShadow(
-                                          color: Colors.black.withOpacity(0.15),
+                                          color: Colors.black.withOpacity(0.2),
                                           blurRadius: ScreenUtilsManager.s4,
                                           offset: Offset(
-                                            ScreenUtilsManager.w0,
+                                            0,
                                             ScreenUtilsManager.h2,
                                           ),
                                         ),
@@ -147,7 +125,7 @@ class WorkerMainscreenAppbar extends StatelessWidget
                                         style: GoogleFonts.cairo(
                                           color: Colors.white,
                                           fontSize: ScreenUtilsManager.s9,
-                                          fontWeight: FontWeight.bold,
+                                          fontWeight: FontWeight.w900,
                                           height: 1.1,
                                         ),
                                       ),
@@ -166,26 +144,39 @@ class WorkerMainscreenAppbar extends StatelessWidget
           },
         ),
 
-        InkWell(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (_) => BlocProvider(
-                  create: (context) =>
-                      VerificationInitCubit(getIt<VerficationInitRepo>()),
-                  child: const VerificationRequestsScreen(),
+        Padding(
+          padding: EdgeInsets.only(right: ScreenUtilsManager.w12),
+          child: Material(
+            color: Colors.transparent,
+            child: InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => BlocProvider(
+                      create: (context) =>
+                          VerificationInitCubit(getIt<VerficationInitRepo>()),
+                      child: const VerificationRequestsScreen(),
+                    ),
+                  ),
+                );
+              },
+              borderRadius: BorderRadius.circular(ScreenUtilsManager.r12),
+              child: Container(
+                padding: EdgeInsets.all(ScreenUtilsManager.w10),
+                child: Icon(
+                  Icons.menu_rounded,
+                  size: ScreenUtilsManager.s26,
+                  color: context.palette.onSurface.withOpacity(0.8),
                 ),
               ),
-            );
-          },
-          child: Icon(Icons.menu, size: ScreenUtilsManager.s20),
+            ),
+          ),
         ),
-        SizedBox(width: ScreenUtilsManager.w8),
       ],
     );
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(ScreenUtilsManager.h61);
+  Size get preferredSize => Size.fromHeight(ScreenUtilsManager.h70);
 }

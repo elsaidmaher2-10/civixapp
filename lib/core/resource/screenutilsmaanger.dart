@@ -17,8 +17,10 @@ class ScreenUtilsManager {
   static double get h150 => 150.h;
   static double get r64 => 64.r;
   static double get h100 => 100.h;
+  static double get h110 => 110.h;
   static double get h48 => 48.h;
   static double get w26 => 26.w;
+  static double get w56 => 56.w;
   static double get h26 => 26.h;
   static double get h120 => 120.h;
   static double get s13 => 13.sp;
@@ -41,6 +43,7 @@ class ScreenUtilsManager {
   static double get statusBarHeight => ScreenUtil().statusBarHeight;
   static double get bottomBarHeight => ScreenUtil().bottomBarHeight;
   static double get r4 => 4.r;
+
   static double get h130 => 130.h;
   static double get w1 => 1.w;
   static double get w3 => 3.w;
@@ -62,6 +65,7 @@ class ScreenUtilsManager {
   static double get w90 => 90.w;
   static double get w100 => 100.w;
   static double get w128 => 128.w;
+  static double get w240 => 240.w;
   static double get w280 => 280.w;
   static double get w400 => 400.w;
   static double w0 = 0.0;
@@ -89,29 +93,47 @@ class ScreenUtilsManager {
   static double get h61 => 61.h;
   static double get h64 => 64.h;
   static double get h68 => 68.h;
+  static double get h70 => 70.h;
   static double get h80 => 80.h;
   static double get h128 => 128.h;
+  static double get h180 => 180.h;
   static double get h200 => 200.h;
   static double get h250 => 250.h;
+  static double get h320 => 320.h;
+  static double get h350 => 350.h;
 
   static const double w15 = 15.0;
+  static double get w22 => 22.w;
 
   static const double h450 = 450.0;
 
   static const double s2 = 2.0;
   static const double s5 = 5.0;
-  static const double s12 = 12.0;
-  static const double s14 = 14.0;
-  static const double s17 = 17.0;
-  static const double s18 = 18.0;
-  static const double s20 = 20.0;
-  static const double s24 = 24.0;
-  static const double s25 = 25.0;
-  static const double s30 = 30.0;
-  static const double s45 = 45.0;
-  static const double s50 = 50.0;
-  static const double s65 = 65.0;
-  static const double s70 = 70.0;
+  static double get s12 => 12.sp;
+  static double get s14 => 14.sp;
+  static double get s17 => 17.sp;
+  static double get s18 => 18.sp;
+  static double get s20 => 20.sp;
+  static double get s24 => 24.sp;
+  static double get s25 => 25.sp;
+  static double get s30 => 30.sp;
+  static double get s36 => 36.sp;
+  static double get s44 => 44.sp;
+  static double get s45 => 45.sp;
+  static double get s48 => 48.sp;
+  static double get s50 => 50.sp;
+  static double get s56 => 56.sp;
+  static double get s60 => 60.sp;
+  static double get s65 => 65.sp;
+  static double get s70 => 70.sp;
+  static double get s72 => 72.sp;
+  static double get s80 => 80.sp;
+  static double get s96 => 96.sp;
+  static double get s100 => 100.sp;
+  static double get s120 => 120.sp;
+  static double get s160 => 160.sp;
+  static double get s200 => 200.sp;
+
   static double get p8 => 8.w;
   static double get p10 => 10.h;
   static double get p12 => 12.w;
@@ -128,6 +150,7 @@ class ScreenUtilsManager {
   static double get r16 => 16.r;
   static double get r20 => 20.r;
   static double get r24 => 24.r;
+  static double get r32 => 32.r;
 
   static double get s11 => 11.sp;
   static double get s15 => 15.sp;
@@ -163,18 +186,6 @@ class ScreenUtilsManager {
   static const double s4 = 4.0;
   static const double s6 = 6.0;
   static const double s8 = 8.0;
-  static const double s36 = 36.0;
-  static const double s44 = 44.0;
-  static const double s48 = 48.0;
-  static const double s56 = 56.0;
-  static const double s60 = 60.0;
-  static const double s72 = 72.0;
-  static const double s80 = 80.0;
-  static const double s96 = 96.0;
-  static const double s100 = 100.0;
-  static const double s120 = 120.0;
-  static const double s160 = 160.0;
-  static const double s200 = 200.0;
 
   static double r60 = 60.r;
 

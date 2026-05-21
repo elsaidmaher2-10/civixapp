@@ -23,30 +23,43 @@ class StatusCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 106.h,
+      height: 110.h,
       decoration: BoxDecoration(
-        color: context.palette.surfaceContainerLowest,
-        borderRadius: BorderRadius.circular(10.r),
+        color: context.palette.surface,
+        borderRadius: BorderRadius.circular(16.r),
         border: Border.all(
-          color: context.palette.outline.withOpacity(0.1),
+          color: context.palette.outline.withOpacity(0.12),
           width: 1,
         ),
+        boxShadow: [
+          BoxShadow(
+            color: context.palette.shadow,
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
       ),
-      padding: EdgeInsets.all(12.w),
+      padding: EdgeInsets.all(14.w),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
-              SvgPicture.asset(
-                iconPath,
-                width: 18.w,
-                height: 18.w,
-                colorFilter: ColorFilter.mode(iconcolor, BlendMode.srcIn),
+              Container(
+                padding: EdgeInsets.all(6.w),
+                decoration: BoxDecoration(
+                  color: iconcolor.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(8.r),
+                ),
+                child: SvgPicture.asset(
+                  iconPath,
+                  width: 16.w,
+                  height: 16.w,
+                  colorFilter: ColorFilter.mode(iconcolor, BlendMode.srcIn),
+                ),
               ),
-              SizedBox(width: 4.w),
-
+              SizedBox(width: 8.w),
               Expanded(
                 child: Text(
                   title,
@@ -54,20 +67,23 @@ class StatusCard extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   style: GoogleFonts.cairo(
                     color: context.palette.onSurfaceVariant,
-                    fontSize: 12.sp,
-                    fontWeight: FontWeight.w600,
+                    fontSize: 11.sp,
+                    fontWeight: FontWeight.w700,
+                    letterSpacing: -0.2,
                   ),
                 ),
               ),
             ],
           ),
-          Center(
+          Align(
+            alignment: Alignment.bottomRight,
             child: Text(
               number.toString(),
               style: GoogleFonts.cairo(
-                color: color,
-                fontWeight: FontWeight.w700,
-                fontSize: 24.sp,
+                color: color ?? context.palette.onSurface,
+                fontWeight: FontWeight.w900,
+                fontSize: 26.sp,
+                height: 1,
               ),
             ),
           ),

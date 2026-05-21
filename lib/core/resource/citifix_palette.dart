@@ -14,6 +14,7 @@ class CitifixPalette extends ThemeExtension<CitifixPalette> {
     required this.grey200,
     required this.grey700,
     required this.grey600,
+    required this.grey100,
     required this.notificationRedStart,
     required this.notificationRedEnd,
     required this.grey300,
@@ -80,6 +81,7 @@ class CitifixPalette extends ThemeExtension<CitifixPalette> {
     required this.textDark,
     required this.textGrey,
     required this.border,
+    required this.shadow,
   });
 
   /// Same tokens as [ColorManger] today (light theme).
@@ -91,6 +93,7 @@ class CitifixPalette extends ThemeExtension<CitifixPalette> {
       grey200: ColorManger.grey200,
       grey700: ColorManger.grey700,
       grey600: ColorManger.grey600,
+      grey100: const Color(0xFFF1F5F9),
       notificationRedStart: ColorManger.notificationRedStart,
       notificationRedEnd: ColorManger.notificationRedEnd,
       grey300: ColorManger.grey300,
@@ -157,6 +160,7 @@ class CitifixPalette extends ThemeExtension<CitifixPalette> {
       textDark: ColorManger.textDark,
       textGrey: ColorManger.textGrey,
       border: ColorManger.border,
+      shadow: Colors.black.withOpacity(0.04),
     );
   }
 
@@ -190,10 +194,11 @@ class CitifixPalette extends ThemeExtension<CitifixPalette> {
       grey200: borderDark,
       grey700: Color(0xFFE2E8F0),
       grey600: onVar,
+      grey100: const Color(0xFF1E293B),
       notificationRedStart: Color(0xFFFF6B6B),
       notificationRedEnd: Color(0xFFFF5252),
       grey300: outlineDark,
-      primaryOpacity20: ColorManger.workerprimary.withValues(alpha: 0.2),
+      primaryOpacity20: ColorManger.workerprimary.withOpacity(0.2),
       black87: onSurf,
       completedButton: ColorManger.completedButton,
       black54: onTertiary,
@@ -264,6 +269,7 @@ class CitifixPalette extends ThemeExtension<CitifixPalette> {
       textDark: onSurf,
       textGrey: onTertiary,
       border: borderDark,
+      shadow: Colors.black.withOpacity(0.3),
     );
   }
 
@@ -273,6 +279,7 @@ class CitifixPalette extends ThemeExtension<CitifixPalette> {
   final Color grey200;
   final Color grey700;
   final Color grey600;
+  final Color grey100;
   final Color notificationRedStart;
   final Color notificationRedEnd;
   final Color grey300;
@@ -339,6 +346,7 @@ class CitifixPalette extends ThemeExtension<CitifixPalette> {
   final Color textDark;
   final Color textGrey;
   final Color border;
+  final Color shadow;
 
   @override
   CitifixPalette copyWith({
@@ -348,6 +356,7 @@ class CitifixPalette extends ThemeExtension<CitifixPalette> {
     Color? grey200,
     Color? grey700,
     Color? grey600,
+    Color? grey100,
     Color? notificationRedStart,
     Color? notificationRedEnd,
     Color? grey300,
@@ -414,6 +423,7 @@ class CitifixPalette extends ThemeExtension<CitifixPalette> {
     Color? textDark,
     Color? textGrey,
     Color? border,
+    Color? shadow,
   }) {
     return CitifixPalette(
       grey50: grey50 ?? this.grey50,
@@ -422,6 +432,7 @@ class CitifixPalette extends ThemeExtension<CitifixPalette> {
       grey200: grey200 ?? this.grey200,
       grey700: grey700 ?? this.grey700,
       grey600: grey600 ?? this.grey600,
+      grey100: grey100 ?? this.grey100,
       notificationRedStart: notificationRedStart ?? this.notificationRedStart,
       notificationRedEnd: notificationRedEnd ?? this.notificationRedEnd,
       grey300: grey300 ?? this.grey300,
@@ -492,6 +503,7 @@ class CitifixPalette extends ThemeExtension<CitifixPalette> {
       textDark: textDark ?? this.textDark,
       textGrey: textGrey ?? this.textGrey,
       border: border ?? this.border,
+      shadow: shadow ?? this.shadow,
     );
   }
 

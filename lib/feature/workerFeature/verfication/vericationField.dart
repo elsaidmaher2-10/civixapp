@@ -18,15 +18,17 @@ class VerificationFailedScreen extends StatelessWidget {
     final s = S.of(context);
 
     return Scaffold(
-      // Gradient background for a more modern feel
-      backgroundColor: Colors.white,
+      backgroundColor: context.palette.surface,
       appBar: _buildAppBar(context, s),
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [Colors.white, Colors.grey.shade50],
+            colors: [
+              context.palette.surface,
+              context.palette.reportsPageBackground,
+            ],
           ),
         ),
         child: SafeArea(
@@ -35,14 +37,14 @@ class VerificationFailedScreen extends StatelessWidget {
               Expanded(
                 child: SingleChildScrollView(
                   physics: const BouncingScrollPhysics(),
-                  padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                  padding: EdgeInsets.symmetric(horizontal: ScreenUtilsManager.w24),
                   child: Column(
                     children: [
-                      const SizedBox(height: 20),
-                      _buildHeroSection(s),
-                      const SizedBox(height: 32),
+                      SizedBox(height: ScreenUtilsManager.h20),
+                      _buildHeroSection(s, context),
+                      SizedBox(height: ScreenUtilsManager.h32),
                       _buildReasonCard(context, s),
-                      const SizedBox(height: 24),
+                      SizedBox(height: ScreenUtilsManager.h24),
                     ],
                   ),
                 ),
@@ -57,33 +59,33 @@ class VerificationFailedScreen extends StatelessWidget {
 
   PreferredSizeWidget _buildAppBar(BuildContext context, S s) {
     return AppBar(
-      backgroundColor: Colors.white,
+      backgroundColor: context.palette.surface,
       elevation: 0,
       centerTitle: true,
       leading: IconButton(
         icon: Container(
-          padding: const EdgeInsets.all(8),
+          padding: EdgeInsets.all(ScreenUtilsManager.w8),
           decoration: BoxDecoration(
-            color: Colors.grey.shade100,
+            color: context.palette.surfaceContainerHigh,
             shape: BoxShape.circle,
           ),
-          child: const Icon(Icons.close, color: Colors.black87, size: 20),
+          child: Icon(Icons.close, color: context.palette.onSurface, size: ScreenUtilsManager.s20),
         ),
         onPressed: () => Navigator.pop(context),
       ),
       title: Text(
         s.appTitle,
-        style: const TextStyle(
-          color: Colors.black87,
+        style: GoogleFonts.cairo(
+          color: context.palette.onSurface,
           fontWeight: FontWeight.w800,
-          fontSize: 16,
+          fontSize: ScreenUtilsManager.s16,
           letterSpacing: 0.5,
         ),
       ),
     );
   }
 
-  Widget _buildHeroSection(S s) {
+  Widget _buildHeroSection(S s, BuildContext context) {
     return Column(
       children: [
         Stack(
@@ -91,61 +93,61 @@ class VerificationFailedScreen extends StatelessWidget {
           children: [
             // Soft animated-like pulses
             Container(
-              height: 140,
-              width: 140,
+              height: ScreenUtilsManager.h140,
+              width: ScreenUtilsManager.h140,
               decoration: BoxDecoration(
-                color: Colors.red.withOpacity(0.05),
+                color: context.palette.red.withOpacity(0.05),
                 shape: BoxShape.circle,
               ),
             ),
             Container(
-              height: 110,
-              width: 110,
+              height: ScreenUtilsManager.h110,
+              width: ScreenUtilsManager.h110,
               decoration: BoxDecoration(
-                color: Colors.red.withOpacity(0.1),
+                color: context.palette.red.withOpacity(0.1),
                 shape: BoxShape.circle,
               ),
             ),
             Container(
-              padding: const EdgeInsets.all(20),
-              decoration: const BoxDecoration(
-                color: Colors.red,
+              padding: EdgeInsets.all(ScreenUtilsManager.w20),
+              decoration: BoxDecoration(
+                color: context.palette.red,
                 shape: BoxShape.circle,
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.red,
+                    color: context.palette.red.withOpacity(0.3),
                     blurRadius: 20,
-                    offset: Offset(0, 10),
+                    offset: const Offset(0, 10),
                   ),
                 ],
               ),
-              child: const Icon(
+              child: Icon(
                 Icons.priority_high_rounded,
                 color: Colors.white,
-                size: 48,
+                size: ScreenUtilsManager.s48,
               ),
             ),
           ],
         ),
-        const SizedBox(height: 24),
+        SizedBox(height: ScreenUtilsManager.h24),
         Text(
           s.verificationFailed,
           textAlign: TextAlign.center,
-          style: const TextStyle(
-            fontSize: 24,
+          style: GoogleFonts.cairo(
+            fontSize: ScreenUtilsManager.s24,
             fontWeight: FontWeight.w900,
-            color: Color(0xFF1A1A1A),
+            color: context.palette.onSurface,
           ),
         ),
-        const SizedBox(height: 12),
+        SizedBox(height: ScreenUtilsManager.h12),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: EdgeInsets.symmetric(horizontal: ScreenUtilsManager.w20),
           child: Text(
             s.verificationFailedDesc,
             textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 15,
-              color: Colors.grey.shade600,
+            style: GoogleFonts.cairo(
+              fontSize: ScreenUtilsManager.s15,
+              color: context.palette.onSurfaceVariant,
               height: 1.6,
             ),
           ),
@@ -157,14 +159,14 @@ class VerificationFailedScreen extends StatelessWidget {
   Widget _buildReasonCard(BuildContext context, S s) {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(24),
+      padding: EdgeInsets.all(ScreenUtilsManager.w24),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: Colors.grey.shade200),
+        color: context.palette.surface,
+        borderRadius: BorderRadius.circular(ScreenUtilsManager.r20),
+        border: Border.all(color: context.palette.outline.withOpacity(0.2)),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.04),
+            color: context.palette.shadow,
             blurRadius: 24,
             offset: const Offset(0, 8),
           ),
@@ -177,30 +179,30 @@ class VerificationFailedScreen extends StatelessWidget {
             children: [
               Icon(
                 Icons.info_outline_rounded,
-                color: Colors.red.shade400,
-                size: 22,
+                color: context.palette.red,
+                size: ScreenUtilsManager.s22,
               ),
-              const SizedBox(width: 10),
+              SizedBox(width: ScreenUtilsManager.w10),
               Text(
                 s.attentionRequired.toUpperCase(),
-                style: TextStyle(
-                  fontSize: 13,
+                style: GoogleFonts.cairo(
+                  fontSize: ScreenUtilsManager.s13,
                   fontWeight: FontWeight.w800,
-                  color: Colors.red.shade700,
+                  color: context.palette.red,
                   letterSpacing: 1.1,
                 ),
               ),
             ],
           ),
-          const Padding(
-            padding: EdgeInsets.symmetric(vertical: 16),
-            child: Divider(),
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: ScreenUtilsManager.h16),
+            child: Divider(color: context.palette.outline.withOpacity(0.2)),
           ),
           Text(
             workerRequestModel.rejectionReason ?? s.errorIdNotClear,
-            style: const TextStyle(
-              fontSize: 15,
-              color: Color(0xFF424242),
+            style: GoogleFonts.cairo(
+              fontSize: ScreenUtilsManager.s15,
+              color: context.palette.onSurface.withOpacity(0.8),
               height: 1.5,
               fontWeight: FontWeight.w500,
             ),
@@ -212,12 +214,17 @@ class VerificationFailedScreen extends StatelessWidget {
 
   Widget _buildBottomActions(BuildContext context, S s) {
     return Container(
-      padding: const EdgeInsets.fromLTRB(24, 16, 24, 32),
+      padding: EdgeInsets.fromLTRB(
+        ScreenUtilsManager.w24,
+        ScreenUtilsManager.h16,
+        ScreenUtilsManager.w24,
+        ScreenUtilsManager.h32,
+      ),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: context.palette.surface,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: context.palette.shadow,
             blurRadius: 10,
             offset: const Offset(0, -5),
           ),
@@ -241,22 +248,22 @@ class VerificationFailedScreen extends StatelessWidget {
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: context.palette.workerprimary,
-              minimumSize: const Size(double.infinity, 58),
+              minimumSize: Size(double.infinity, ScreenUtilsManager.h56),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(ScreenUtilsManager.r16),
               ),
               elevation: 0,
             ),
             child: Text(
               s.resubmit,
-              style: const TextStyle(
-                fontSize: 16,
+              style: GoogleFonts.cairo(
+                fontSize: ScreenUtilsManager.s16,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
               ),
             ),
           ),
-          const SizedBox(height: 12),
+          SizedBox(height: ScreenUtilsManager.h12),
           TextButton(
             onPressed: () {
               Navigator.of(context).push(
@@ -264,14 +271,14 @@ class VerificationFailedScreen extends StatelessWidget {
               );
             },
             style: TextButton.styleFrom(
-              minimumSize: const Size(double.infinity, 50),
+              minimumSize: Size(double.infinity, ScreenUtilsManager.h50),
             ),
             child: Text(
               s.needHelp,
-              style: TextStyle(
-                fontSize: 15,
+              style: GoogleFonts.cairo(
+                fontSize: ScreenUtilsManager.s15,
                 fontWeight: FontWeight.w700,
-                color: Colors.grey.shade700,
+                color: context.palette.onSurfaceVariant,
               ),
             ),
           ),
