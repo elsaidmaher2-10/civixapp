@@ -58,6 +58,11 @@ class _ProfileViewState extends State<ProfileView> {
                   PrefrenceManager().remove(Constantmanger.accessToken);
                   PrefrenceManager().remove(Constantmanger.cacheKey);
                   PrefrenceManager().remove(Constantmanger.role);
+                  
+                  if (context.mounted) {
+                    context.read<ThemeCubit>().setThemeMode(ThemeMode.light);
+                  }
+
                   Navigator.of(
                     context,
                   ).pushNamedAndRemoveUntil(Routes.login, (route) => false);

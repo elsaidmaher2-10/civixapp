@@ -76,15 +76,15 @@ class WorkerCard extends StatelessWidget {
 
   Widget _buildWorkerImage(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(ScreenUtilsManager.w3),
+      padding: EdgeInsets.all(ScreenUtilsManager.w2),
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        gradient: context.palette.kineticGradient,
+        border: Border.all(color: context.palette.orange, width: 2),
       ),
       child: Container(
         padding: EdgeInsets.all(ScreenUtilsManager.w2),
         decoration: BoxDecoration(
-          color: context.palette.surface,
+          color: Colors.white,
           shape: BoxShape.circle,
         ),
         child: ClipRRect(

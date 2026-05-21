@@ -8,6 +8,7 @@ import 'package:citifix/feature/workerFeature/home/data/models/dashbroadmodel.da
 import 'package:citifix/feature/workerFeature/taskDetails/TaskDetailsPage.dart';
 import 'package:citifix/feature/workerFeature/taskDetails/data/repos/reportdetails.dart';
 import 'package:citifix/feature/workerFeature/taskDetails/presentation/manager/reportdetailsManger.dart';
+import 'package:citifix/core/service/StatusReport.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -19,6 +20,7 @@ class TaskCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final statusColor = StatusReport.fromString(report.status).color;
     return Container(
       width: ScreenUtilsManager.w240,
       margin: EdgeInsets.only(right: ScreenUtilsManager.w16, bottom: ScreenUtilsManager.h8),
@@ -83,7 +85,7 @@ class TaskCard extends StatelessWidget {
                     vertical: ScreenUtilsManager.h6,
                   ),
                   decoration: BoxDecoration(
-                    color: context.palette.primary.withOpacity(0.95),
+                    color: statusColor.withOpacity(0.9),
                     borderRadius: BorderRadius.circular(ScreenUtilsManager.r20),
                     boxShadow: [
                       BoxShadow(
@@ -95,7 +97,7 @@ class TaskCard extends StatelessWidget {
                   child: Text(
                     report.status,
                     style: GoogleFonts.cairo(
-                      color: context.palette.onPrimary,
+                      color: Colors.white,
                       fontSize: ScreenUtilsManager.s10,
                       fontWeight: FontWeight.w800,
                     ),

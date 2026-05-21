@@ -1,7 +1,5 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
-import 'package:citifix/core/widget/customtextfromfield.dart';
 import 'package:citifix/feature/citzenFeature/reports/data/Models/commentmodel/commentmodel.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/manager/comment/commentmanger_cubit.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/manager/comment/commentmanger_state.dart';
@@ -14,7 +12,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../../../../generated/l10n.dart';
 
-class Workercomments extends StatelessWidget {
+class Workercomments extends StatefulWidget {
   const Workercomments({
     super.key,
     required this.isComment,
@@ -27,6 +25,13 @@ class Workercomments extends StatelessWidget {
   final TextEditingController controller;
   final int reporID;
   final List<CommentModel> comments;
+
+  @override
+  State<Workercomments> createState() => _WorkercommentsState();
+}
+
+class _WorkercommentsState extends State<Workercomments> {
+  bool _isSending = false;
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +63,7 @@ class Workercomments extends StatelessWidget {
             state is CommentsLoading) {
           final currentComments = (state is CommentsSuccess)
               ? state.comments
-              : comments;
+              : widget.comments;
 
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -156,11 +161,11 @@ class Workercomments extends StatelessWidget {
                       ),
                     ),
 
-              if (!isComment)
+              if (!widget.isComment)
                 Container(
                   padding: EdgeInsets.fromLTRB(
                     ScreenUtilsManager.w16,
-                    ScreenUtilsManager.h8,
+                    ScreenUtilsManager.h12,
                     ScreenUtilsManager.w16,
                     ScreenUtilsManager.h24,
                   ),
@@ -168,8 +173,8 @@ class Workercomments extends StatelessWidget {
                     color: context.palette.surface,
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.03),
-                        blurRadius: 10,
+                        color: Colors.black.withOpacity(0.05),
+                        blurRadius: 15,
                         offset: const Offset(0, -5),
                       ),
                     ],
@@ -179,14 +184,14 @@ class Workercomments extends StatelessWidget {
                       Expanded(
                         child: Container(
                           decoration: BoxDecoration(
-                            color: context.palette.surfaceContainerHighest,
+                            color: context.palette.surfaceContainerLow,
                             borderRadius: BorderRadius.circular(ScreenUtilsManager.r24),
                             border: Border.all(
-                              color: context.palette.outline.withOpacity(0.1),
+                              color: context.palette.outline.withOpacity(0.2),
                             ),
                           ),
                           child: TextField(
-                            controller: controller,
+                            controller: widget.controller,
                             maxLines: 4,
                             minLines: 1,
                             style: GoogleFonts.cairo(
@@ -200,7 +205,7 @@ class Workercomments extends StatelessWidget {
                                 color: context.palette.onSurfaceVariant.withOpacity(0.5),
                               ),
                               contentPadding: EdgeInsets.symmetric(
-                                horizontal: ScreenUtilsManager.w16,
+                                horizontal: ScreenUtilsManager.w20,
                                 vertical: ScreenUtilsManager.h12,
                               ),
                               border: InputBorder.none,
@@ -210,34 +215,54 @@ class Workercomments extends StatelessWidget {
                       ),
                       SizedBox(width: ScreenUtilsManager.w12),
                       GestureDetector(
-                        onTap: () async {
-                          if (controller.text.trim().isNotEmpty) {
-                            await context.read<CommentsCubit>().makeComments(
-                                  reporID,
-                                  content: controller.text,
-                                );
-                            controller.clear();
-                          }
-                        },
-                        child: Container(
-                          width: ScreenUtilsManager.h44,
-                          height: ScreenUtilsManager.h44,
+                        onTap: _isSending
+                            ? null
+                            : () async {
+                                if (widget.controller.text.trim().isNotEmpty) {
+                                  setState(() {
+                                    _isSending = true;
+                                  });
+                                  
+                                  await context.read<CommentsCubit>().makeComments(
+                                        widget.reporID,
+                                        content: widget.controller.text,
+                                      );
+                                  widget.controller.clear();
+                                  
+                                  // 2-second delay before allowing to send again
+                                  await Future.delayed(const Duration(seconds: 2));
+                                  if (mounted) {
+                                    setState(() {
+                                      _isSending = false;
+                                    });
+                                  }
+                                }
+                              },
+                        child: AnimatedContainer(
+                          duration: const Duration(milliseconds: 200),
+                          width: ScreenUtilsManager.h48,
+                          height: ScreenUtilsManager.h48,
                           decoration: BoxDecoration(
-                            gradient: context.palette.kineticGradient,
+                            color: _isSending 
+                                ? context.palette.grey300 
+                                : context.palette.workerprimary,
                             shape: BoxShape.circle,
                             boxShadow: [
-                              BoxShadow(
-                                color: context.palette.workerprimary.withOpacity(0.3),
-                                blurRadius: 10,
-                                offset: const Offset(0, 4),
-                              ),
+                              if (!_isSending)
+                                BoxShadow(
+                                  color: context.palette.workerprimary.withOpacity(0.3),
+                                  blurRadius: 12,
+                                  offset: const Offset(0, 4),
+                                ),
                             ],
                           ),
-                          child: const Icon(
-                            Icons.send_rounded,
-                            color: Colors.white,
-                            size: 20,
-                          ),
+                          child: _isSending
+                              ? const CupertinoActivityIndicator(color: Colors.white, radius: 10)
+                              : const Icon(
+                                  Icons.send_rounded,
+                                  color: Colors.white,
+                                  size: 24,
+                                ),
                         ),
                       ),
                     ],

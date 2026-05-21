@@ -42,7 +42,7 @@ class CommentBubble extends StatelessWidget {
               if (!isWorker) ...[
                 _buildAvatar(
                   comment.userProfileImageUrl,
-                  context.palette.primary,
+                  context.palette.orange,
                 ),
                 SizedBox(width: ScreenUtilsManager.w8),
               ],
@@ -124,23 +124,31 @@ class CommentBubble extends StatelessWidget {
 
   Widget _buildAvatar(String url, Color color) {
     return Container(
+      padding: const EdgeInsets.all(1.5),
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        border: Border.all(color: color.withOpacity(0.2), width: 2),
+        border: Border.all(color: color, width: 1.5),
       ),
-      child: CircleAvatar(
-        radius: ScreenUtilsManager.r14,
-        backgroundColor: color.withOpacity(0.1),
-        child: ClipOval(
-          child: CachedNetworkImage(
-            placeholder: (context, url) =>
-                const CupertinoActivityIndicator(radius: 6),
-            errorWidget: (c, e, s) =>
-                Icon(Icons.person, size: 14, color: color),
-            imageUrl: url,
-            width: double.infinity,
-            height: double.infinity,
-            fit: BoxFit.cover,
+      child: Container(
+        padding: const EdgeInsets.all(1),
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          shape: BoxShape.circle,
+        ),
+        child: CircleAvatar(
+          radius: ScreenUtilsManager.r14,
+          backgroundColor: color.withOpacity(0.1),
+          child: ClipOval(
+            child: CachedNetworkImage(
+              placeholder: (context, url) =>
+                  const CupertinoActivityIndicator(radius: 6),
+              errorWidget: (c, e, s) =>
+                  Icon(Icons.person, size: 14, color: color),
+              imageUrl: url,
+              width: double.infinity,
+              height: double.infinity,
+              fit: BoxFit.cover,
+            ),
           ),
         ),
       ),

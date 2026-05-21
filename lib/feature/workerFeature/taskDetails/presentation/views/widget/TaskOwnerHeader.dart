@@ -31,22 +31,39 @@ class TaskOwnerHeader extends StatelessWidget {
             children: [
               Stack(
                 children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(ScreenUtilsManager.r50),
-                    child: CachedNetworkImage(
-                      imageUrl:
-                          task.citizenProfileImageUrl ??
-                          AssetValueManager.defualtimage1,
-                      width: ScreenUtilsManager.w60,
-                      height: ScreenUtilsManager.h60,
-                      fit: BoxFit.contain,
-                      placeholder: (context, url) => Container(
-                        width: ScreenUtilsManager.w60,
-                        height: ScreenUtilsManager.h60,
-                        color: context.palette.grey200,
+                  Container(
+                    padding: EdgeInsets.all(ScreenUtilsManager.w2),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color: context.palette.orange,
+                        width: ScreenUtilsManager.w2,
                       ),
-                      errorWidget: (context, url, error) =>
-                          Icon(Icons.person, size: ScreenUtilsManager.s24),
+                    ),
+                    child: Container(
+                      padding: EdgeInsets.all(ScreenUtilsManager.w2),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        shape: BoxShape.circle,
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(ScreenUtilsManager.r50),
+                        child: CachedNetworkImage(
+                          imageUrl:
+                              task.citizenProfileImageUrl ??
+                              AssetValueManager.defualtimage1,
+                          width: ScreenUtilsManager.w60,
+                          height: ScreenUtilsManager.h60,
+                          fit: BoxFit.contain,
+                          placeholder: (context, url) => Container(
+                            width: ScreenUtilsManager.w60,
+                            height: ScreenUtilsManager.h60,
+                            color: context.palette.grey200,
+                          ),
+                          errorWidget: (context, url, error) =>
+                              Icon(Icons.person, size: ScreenUtilsManager.s24),
+                        ),
+                      ),
                     ),
                   ),
 

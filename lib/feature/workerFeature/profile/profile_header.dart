@@ -117,14 +117,12 @@ class _Avatar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(4),
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        gradient: context.palette.kineticGradient,
         boxShadow: [
           BoxShadow(
-            color: context.palette.workerprimary.withOpacity(0.2),
-            blurRadius: 20,
+            color: context.palette.shadow,
+            blurRadius: 30,
             offset: const Offset(0, 10),
           ),
         ],
@@ -136,11 +134,19 @@ class _Avatar extends StatelessWidget {
             height: 110,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              border: Border.all(color: context.palette.surface, width: 4),
-              color: context.palette.surfaceContainer,
-              image: DecorationImage(
-                image: NetworkImage(avatarUrl),
-                fit: BoxFit.cover,
+              border: Border.all(color: context.palette.orange, width: 3),
+              color: Colors.white,
+            ),
+            child: Container(
+              margin: const EdgeInsets.all(2),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(color: Colors.white, width: 2),
+                color: context.palette.surfaceContainer,
+                image: DecorationImage(
+                  image: NetworkImage(avatarUrl),
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
           ),

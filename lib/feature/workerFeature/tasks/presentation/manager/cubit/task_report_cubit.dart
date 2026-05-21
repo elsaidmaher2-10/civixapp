@@ -21,6 +21,10 @@ class WorkerTasksCubit extends Cubit<WorkerTasksState> {
   }
 
   Future<void> searchTasks(String query) async {
+    if (query.trim().isEmpty) {
+      await getWorkerTasks();
+      return;
+    }
     emit(WorkerTasksLoading());
     final data = await _workerTaskRepo.getFilterdreports(query: query);
     data.fold(

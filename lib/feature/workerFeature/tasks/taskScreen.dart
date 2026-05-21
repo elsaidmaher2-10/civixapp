@@ -73,10 +73,19 @@ class _TasksViewState extends State<TasksView> {
                   buildWhen: (previous, current) =>
                       current is WorkerTasksLoading ||
                       current is WorkerTasksSuccess ||
-                      current is WorkerTasksError,
+                      current is WorkerTasksError ||
+                      current is ReportNotFound,
                   builder: (context, state) {
                     if (state is WorkerTasksLoading) {
                       return const TasksLoadingSkeleton();
+                    }
+                    if (state is ReportNotFound) {
+                      return _EmptyState(
+                        filterName: Taskscontroller.selectedFilter,
+                        onReset: () => setState(
+                          () => Taskscontroller.selectedFilter = S.of(context).all,
+                        ),
+                      );
                     }
                     if (state is WorkerTasksSuccess) {
                       final filteredTasks = state.response.items.where((task) {

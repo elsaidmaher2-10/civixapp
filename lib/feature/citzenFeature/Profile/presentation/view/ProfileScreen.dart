@@ -166,7 +166,7 @@ class ProfileScreen extends StatelessWidget {
     PrefrenceManager().remove(Constantmanger.userid);
 
     if (context.mounted) {
-      context.read<ThemeCubit>().fetchTheme();
+      context.read<ThemeCubit>().setThemeMode(ThemeMode.light);
     }
 
     Navigator.of(
