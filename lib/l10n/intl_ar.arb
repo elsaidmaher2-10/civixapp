@@ -392,6 +392,7 @@
   "pending": "قيد الانتظار",
   "inProgress": "قيد التنفيذ",
   "resolved": "تم الحل",
+  "darkMode": "المظهر الداكن",
   "completionDetails": "تفاصيل الإنجاز",
   "reportedImages": "الصور المرفقة بالبلاغ",
   "completionImages": "الصور بعد الإنجاز",

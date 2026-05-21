@@ -73,6 +73,7 @@ class ScreenUtilsManager {
   static double get h10 => 10.h;
   static double get h12 => 12.h;
   static double get h14 => 14.h;
+  static double get h15 => 15.h;
   static double get h16 => 16.h;
   static double get h18 => 18.h;
   static double get h20 => 20.h;
@@ -84,6 +85,7 @@ class ScreenUtilsManager {
   static double get h36 => 36.h;
   static double get h40 => 40.h;
   static double get h44 => 44.h;
+  static double get h50 => 50.h;
   static double get h61 => 61.h;
   static double get h64 => 64.h;
   static double get h68 => 68.h;

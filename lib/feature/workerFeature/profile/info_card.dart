@@ -19,18 +19,29 @@ class InfoCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(32),
+      padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
         color: context.palette.surfaceLowest,
-        borderRadius: BorderRadius.circular(32),
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(
+          color: context.palette.outline.withOpacity(0.1),
+          width: 1,
+        ),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
-              Icon(icon, color: context.palette.workerprimary, size: 24),
-              const SizedBox(width: 8),
+              Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: context.palette.workerprimary.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Icon(icon, color: context.palette.workerprimary, size: 20),
+              ),
+              const SizedBox(width: 12),
               Text(
                 title,
                 style: GoogleFonts.cairo(
@@ -57,28 +68,33 @@ class InfoField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          label,
-          style: GoogleFonts.cairo(
-            fontSize: 11,
-            fontWeight: FontWeight.w600,
-            color: context.palette.onSurfaceVariant,
-            letterSpacing: 0.5,
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            label.toUpperCase(),
+            style: GoogleFonts.cairo(
+              fontSize: 10,
+              fontWeight: FontWeight.w700,
+              color: context.palette.onSurfaceVariant.withOpacity(0.6),
+              letterSpacing: 1.2,
+            ),
           ),
-        ),
-        const SizedBox(height: 4),
-        Text(
-          value,
-          style: GoogleFonts.cairo(
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-            color: context.palette.onSurface,
+          const SizedBox(height: 4),
+          Text(
+            value,
+            style: GoogleFonts.cairo(
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
+              color: context.palette.onSurface,
+            ),
           ),
-        ),
-      ],
+          const SizedBox(height: 8),
+          Divider(color: context.palette.outline.withOpacity(0.05), height: 1),
+        ],
+      ),
     );
   }
 }

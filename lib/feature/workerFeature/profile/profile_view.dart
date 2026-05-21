@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:citifix/core/DI/getit.dart';
 import 'package:citifix/core/cubit/LogOut/LogOutState.dart';
 import 'package:citifix/core/cubit/LogOut/LogOutcubit.dart';
+import 'package:citifix/core/cubit/theme/theme_cubit.dart';
 import 'package:citifix/core/cubit/userinfoManger/user_profile_info_cubit.dart';
 import 'package:citifix/core/database/local/prefmanger.dart';
 import 'package:citifix/core/resource/assetvaluemanger.dart';
@@ -109,11 +110,10 @@ class _ProfileViewState extends State<ProfileView> {
                   }
 
                   return Scaffold(
-                    backgroundColor: Theme.of(context).colorScheme.surface,
+                    backgroundColor: context.palette.reportsPageBackground,
                     body: RefreshIndicator(
-                      color: context.palette.workerprimary,
-                      backgroundColor: context.palette.background,
-
+                      color: context.palette.primary,
+                      backgroundColor: context.palette.surface,
                       onRefresh: () {
                         return context
                             .read<UserProfileInfoCubit>()
@@ -287,17 +287,47 @@ class _ProfileViewState extends State<ProfileView> {
                                     onTap: () =>
                                         showLanguagePicker(context, true),
                                   ),
+                                  ActionListTileData(
+                                    icon: Icons.dark_mode_outlined,
+                                    label:
+                                        Localizations.localeOf(
+                                              context,
+                                            ).languageCode ==
+                                            'ar'
+                                        ? 'المظهر الداكن'
+                                        : 'Dark Mode',
+                                    onTap: () {
+                                      final isDark =
+                                          context.read<ThemeCubit>().state ==
+                                          ThemeMode.dark;
+                                      context.read<ThemeCubit>().setThemeMode(
+                                        isDark
+                                            ? ThemeMode.light
+                                            : ThemeMode.dark,
+                                      );
+                                    },
+                                    trailing: BlocBuilder<
+                                      ThemeCubit,
+                                      ThemeMode
+                                    >(
+                                      builder: (context, mode) {
+                                        return Switch.adaptive(
+                                          value: mode == ThemeMode.dark,
+                                          activeColor: context.palette.primary,
+                                          onChanged: (value) {
+                                            context
+                                                .read<ThemeCubit>()
+                                                .setThemeMode(
+                                                  value
+                                                      ? ThemeMode.dark
+                                                      : ThemeMode.light,
+                                                );
+                                          },
+                                        );
+                                      },
+                                    ),
 
-                                  // ActionListTileData(
-                                  //   icon: Icons.dark_mode_outlined,
-                                  //   label: Localizations.localeOf(
-                                  //                 context,
-                                  //               ).languageCode ==
-                                  //               'ar'
-                                  //       ? 'المظهر'
-                                  //       : 'Theme',
-                                  //   onTap: () => showThemePicker(context),
-                                  // ),
+                                  ),
                                   ActionListTileData(
                                     icon: Icons.list_outlined,
                                     label: S.of(context).helpAndLegal,

@@ -96,23 +96,21 @@ class Editfromprofile extends StatelessWidget {
           child: Text(
             label,
             style: GoogleFonts.cairo(
-              fontSize: ScreenUtilsManager.s14,
-              fontWeight: FontWeight.w600,
-              color: isDark
-                  ? context.palette.onSurface.withOpacity(0.85)
-                  : context.palette.onSurface.withOpacity(0.8),
+              fontSize: ScreenUtilsManager.s15,
+              fontWeight: FontWeight.w700,
+              color: context.palette.onSurface.withOpacity(isDark ? 0.9 : 0.8),
             ),
           ),
         ),
         SizedBox(height: ScreenUtilsManager.h8),
         Container(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(ScreenUtilsManager.r14),
+            borderRadius: BorderRadius.circular(ScreenUtilsManager.r16),
             boxShadow: isDark
                 ? null
                 : [
                     BoxShadow(
-                      color: themeColor.withOpacity(0.05),
+                      color: Colors.black.withOpacity(0.02),
                       blurRadius: 10,
                       offset: const Offset(0, 4),
                     ),
@@ -123,60 +121,52 @@ class Editfromprofile extends StatelessWidget {
             keyboardType: keyboardType,
             cursorColor: themeColor,
             style: GoogleFonts.cairo(
-              fontSize: ScreenUtilsManager.s14,
-              fontWeight: FontWeight.w500,
-              color: isDark
-                  ? context.palette.onSurface
-                  : const Color(0xFF0F172A),
+              fontSize: ScreenUtilsManager.s16,
+              fontWeight: FontWeight.w600,
+              color: context.palette.onSurface,
             ),
             decoration: InputDecoration(
               prefixIcon: Icon(
                 icon,
-                color: themeColor.withOpacity(isDark ? 0.7 : 0.6),
-                size: ScreenUtilsManager.s20,
+                color: themeColor.withOpacity(isDark ? 0.8 : 0.7),
+                size: ScreenUtilsManager.s22,
               ),
               hintText: hint,
               hintStyle: GoogleFonts.cairo(
                 fontSize: ScreenUtilsManager.s14,
-                color: isDark
-                    ? context.palette.onSurfaceVariant.withOpacity(0.6)
-                    : const Color(0xFF94A3B8),
+                color: context.palette.onSurfaceVariant.withOpacity(0.5),
               ),
               filled: true,
-              fillColor: isDark
-                  ? Theme.of(context).colorScheme.surfaceContainerHighest
-                  : context.palette.white,
+              fillColor: context.palette.surfaceLowest,
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(ScreenUtilsManager.r14),
+                borderRadius: BorderRadius.circular(ScreenUtilsManager.r16),
                 borderSide: BorderSide.none,
               ),
               enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(ScreenUtilsManager.r14),
+                borderRadius: BorderRadius.circular(ScreenUtilsManager.r16),
                 borderSide: BorderSide(
-                  color: isDark
-                      ? context.palette.outline.withOpacity(0.3)
-                      : const Color(0xFFE2E8F0),
-                  width: isDark ? 0.5 : 1,
+                  color: context.palette.outline.withOpacity(isDark ? 0.15 : 0.1),
+                  width: 1.5,
                 ),
               ),
               focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(ScreenUtilsManager.r14),
+                borderRadius: BorderRadius.circular(ScreenUtilsManager.r16),
                 borderSide: BorderSide(color: themeColor, width: 2),
               ),
               errorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(ScreenUtilsManager.r14),
+                borderRadius: BorderRadius.circular(ScreenUtilsManager.r16),
                 borderSide: BorderSide(
                   color: context.palette.error.withOpacity(0.7),
-                  width: 1,
+                  width: 1.5,
                 ),
               ),
               focusedErrorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(ScreenUtilsManager.r14),
+                borderRadius: BorderRadius.circular(ScreenUtilsManager.r16),
                 borderSide: BorderSide(color: context.palette.error, width: 2),
               ),
               contentPadding: EdgeInsets.symmetric(
-                horizontal: ScreenUtilsManager.w16,
-                vertical: ScreenUtilsManager.h16,
+                horizontal: ScreenUtilsManager.w18,
+                vertical: ScreenUtilsManager.h18,
               ),
             ),
           ),

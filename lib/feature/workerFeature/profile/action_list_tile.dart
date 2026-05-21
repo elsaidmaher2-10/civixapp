@@ -9,50 +9,71 @@ class ActionListTile extends StatelessWidget {
     required this.icon,
     required this.label,
     required this.onTap,
+    this.trailing,
   });
 
   final IconData icon;
   final String label;
   final VoidCallback onTap;
+  final Widget? trailing;
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      borderRadius: BorderRadius.circular(16),
-      child: Container(
-        padding: const EdgeInsets.all(12),
-        decoration: BoxDecoration(
-          color: context.palette.surfaceLowest,
-          borderRadius: BorderRadius.circular(16),
+    return Container(
+      margin: const EdgeInsets.only(bottom: 12),
+      decoration: BoxDecoration(
+        color: context.palette.surfaceLowest,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(
+          color: context.palette.outline.withOpacity(0.1),
+          width: 1,
         ),
-        child: Row(
-          children: [
-            Container(
-              width: 40,
-              height: 40,
-              decoration: BoxDecoration(
-                color: context.palette.workerprimary.withOpacity(0.1),
-                shape: BoxShape.circle,
-              ),
-              child: Icon(icon, color: context.palette.workerprimary),
-            ),
-            const SizedBox(width: 16),
-            Expanded(
-              child: Text(
-                label,
-                style: GoogleFonts.cairo(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  color: context.palette.onSurface,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.02),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(16),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+            child: Row(
+              children: [
+                Container(
+                  width: 44,
+                  height: 44,
+                  decoration: BoxDecoration(
+                    color: context.palette.workerprimary.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Icon(icon, color: context.palette.workerprimary, size: 22),
                 ),
-              ),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: Text(
+                    label,
+                    style: GoogleFonts.cairo(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: context.palette.onSurface,
+                    ),
+                  ),
+                ),
+                trailing ??
+                    Icon(
+                      Icons.arrow_forward_ios,
+                      size: 14,
+                      color: context.palette.onSurfaceVariant.withOpacity(0.5),
+                    ),
+              ],
             ),
-            Icon(
-              Icons.chevron_right,
-              color: context.palette.onSurfaceVariant,
-            ),
-          ],
+          ),
         ),
       ),
     );
@@ -68,14 +89,13 @@ class ActionList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        for (int i = 0; i < actions.length; i++) ...[
+        for (var action in actions)
           ActionListTile(
-            icon: actions[i].icon,
-            label: actions[i].label,
-            onTap: actions[i].onTap,
+            icon: action.icon,
+            label: action.label,
+            onTap: action.onTap,
+            trailing: action.trailing,
           ),
-          if (i < actions.length - 1) const SizedBox(height: 8),
-        ],
       ],
     );
   }
@@ -86,9 +106,11 @@ class ActionListTileData {
     required this.icon,
     required this.label,
     required this.onTap,
+    this.trailing,
   });
 
   final IconData icon;
   final String label;
   final VoidCallback onTap;
+  final Widget? trailing;
 }

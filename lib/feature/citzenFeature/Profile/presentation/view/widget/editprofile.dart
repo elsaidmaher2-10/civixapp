@@ -178,53 +178,43 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   Widget _buildAppBar(BuildContext context, String role, bool isDark) {
     final isWorker = role == "worker";
-    final iconColor = isDark
-        ? Colors.white
+    final Color iconColor = isDark
+        ? context.palette.onSurface
         : (isWorker
             ? context.palette.workerprimary
             : context.palette.primary);
 
-    final backgroundColor = isDark
-        ? Theme.of(context).colorScheme.surfaceContainer
-        : Colors.transparent;
-
-    return Padding(
-      padding: EdgeInsetsDirectional.all(ScreenUtilsManager.w8),
-      child: Container(
-        decoration: BoxDecoration(
-          color: backgroundColor,
-          borderRadius: BorderRadius.circular(ScreenUtilsManager.r12),
-        ),
-        child: Row(
-          children: [
-            IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-                context.read<UserProfileInfoCubit>().getUserProfleInfo();
-              },
-              icon: Icon(
-                CupertinoIcons.back,
+    return Container(
+      padding: EdgeInsets.symmetric(
+        horizontal: ScreenUtilsManager.w8,
+        vertical: ScreenUtilsManager.h12,
+      ),
+      child: Row(
+        children: [
+          IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+              context.read<UserProfileInfoCubit>().getUserProfleInfo();
+            },
+            icon: Icon(
+              CupertinoIcons.back,
+              color: iconColor,
+              size: ScreenUtilsManager.s24,
+            ),
+          ),
+          Expanded(
+            child: Text(
+              S.of(context).editProfile,
+              textAlign: TextAlign.center,
+              style: GoogleFonts.cairo(
+                fontSize: ScreenUtilsManager.s22,
+                fontWeight: FontWeight.w800,
                 color: iconColor,
-                size: ScreenUtilsManager.s22,
               ),
             ),
-            Expanded(
-              child: Text(
-                S.of(context).editProfile,
-                textAlign: TextAlign.center,
-                style: GoogleFonts.cairo(
-                  fontSize: ScreenUtilsManager.s20,
-                  fontWeight: FontWeight.w700,
-                  color: iconColor,
-                ),
-              ),
-            ),
-            SizedBox(
-              width: ScreenUtilsManager.w40,
-              child: isDark ? null : null,
-            ),
-          ],
-        ),
+          ),
+          SizedBox(width: ScreenUtilsManager.w48), // Balancing width
+        ],
       ),
     );
   }
