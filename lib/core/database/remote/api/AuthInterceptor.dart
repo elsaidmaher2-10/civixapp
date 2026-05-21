@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:citifix/App/citifix.dart';
 import 'package:citifix/core/database/local/prefmanger.dart';
 import 'package:citifix/core/database/remote/api/ApiConstant.dart';
 import 'package:citifix/core/resource/constantmanger.dart';

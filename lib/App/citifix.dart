@@ -8,11 +8,12 @@ import 'package:citifix/core/routing/routes.dart';
 import 'package:citifix/core/routing/routingmanger.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/manager/reportManger/cubit/report_manager_cubit.dart';
 import 'package:citifix/generated/l10n.dart';
-import 'package:citifix/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 class Citifix extends StatelessWidget {
   const Citifix({
@@ -54,7 +55,7 @@ class Citifix extends StatelessWidget {
                   return BlocBuilder<ThemeCubit, ThemeMode>(
                     builder: (context, themeMode) {
                       return MaterialApp(
-                        key: navigatorKey,
+                        navigatorKey: navigatorKey,
                         localizationsDelegates: const [
                           S.delegate,
                           GlobalMaterialLocalizations.delegate,

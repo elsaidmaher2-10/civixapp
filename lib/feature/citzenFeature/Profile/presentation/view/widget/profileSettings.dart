@@ -1,4 +1,3 @@
-import 'package:citifix/core/resource/assetvaluemanger.dart';
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/core/routing/routes.dart';
@@ -10,7 +9,6 @@ import 'package:citifix/feature/citzenFeature/Profile/presentation/view/widget/P
 import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Profilesettings extends StatelessWidget {
@@ -60,7 +58,6 @@ class Profilesettings extends StatelessWidget {
           ),
         ),
         const Spacer(),
-        // Optional: Show number of settings items
         Container(
           padding: EdgeInsets.symmetric(
             horizontal: ScreenUtilsManager.w8,

@@ -1,3 +1,4 @@
+import 'package:citifix/App/citifix.dart';
 import 'package:citifix/core/DI/getit.dart';
 import 'package:citifix/core/routing/routes.dart';
 import 'package:citifix/feature/Auth/Login/presentation/views/LoginPage.dart';
@@ -21,7 +22,6 @@ import 'package:citifix/feature/workerFeature/main/Manager/cubit/worker_cubit_cu
 import 'package:citifix/feature/workerFeature/main/mainscreenwroker.dart';
 import 'package:citifix/feature/workerFeature/tasks/data/repos/worker_task_Repo.dart';
 import 'package:citifix/feature/workerFeature/tasks/presentation/manager/cubit/task_report_cubit.dart';
-import 'package:citifix/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
