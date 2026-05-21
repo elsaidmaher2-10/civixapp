@@ -16,11 +16,17 @@ class MainscreenAppbar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return AppBar(
-      backgroundColor: context.palette.reportsPageBackground.withOpacity(0.95),
+      backgroundColor: context.palette.surface,
       surfaceTintColor: Colors.transparent,
-      elevation: 2,
-      shadowColor: Colors.black12,
+      elevation: 0,
+      shape: Border(
+        bottom: BorderSide(
+          color: context.palette.outline.withOpacity(isDark ? 0.1 : 0.05),
+          width: 1,
+        ),
+      ),
       automaticallyImplyLeading: false,
       toolbarHeight: ScreenUtilsManager.h61,
       titleSpacing: ScreenUtilsManager.w16,
@@ -123,7 +129,7 @@ class MainscreenAppbar extends StatelessWidget implements PreferredSizeWidget {
                                       ),
                                       borderRadius: BorderRadius.circular(10),
                                       border: Border.all(
-                                        color: Colors.white,
+                                        color: context.palette.surface,
                                         width: 1.5,
                                       ),
                                       boxShadow: [

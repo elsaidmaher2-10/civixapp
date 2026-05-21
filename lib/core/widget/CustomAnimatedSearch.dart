@@ -1,3 +1,4 @@
+import 'package:citifix/core/resource/colormanager.dart';
 import 'package:animated_hint_textfield/animated_hint_textfield.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/generated/l10n.dart';
@@ -36,14 +37,14 @@ class CustomSearchField extends StatelessWidget {
       decoration: InputDecoration(
         prefixIcon: Icon(
           Icons.search,
-          color: const Color(0xff475569),
+          color: context.palette.onSurfaceVariant,
           size: ScreenUtilsManager.s20,
         ),
         isDense: true,
-        fillColor: const Color(0xffF1F5F9),
+        fillColor: context.palette.surfaceContainerHigh,
         filled: true,
         hintStyle: GoogleFonts.cairo(
-          color: const Color(0xff94A3B8),
+          color: context.palette.onSurfaceVariant.withOpacity(0.6),
           fontSize: ScreenUtilsManager.s14,
         ),
         contentPadding: EdgeInsets.symmetric(
@@ -55,12 +56,12 @@ class CustomSearchField extends StatelessWidget {
           borderRadius: BorderRadius.circular(ScreenUtilsManager.r8),
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Color(0xff475569), width: 1.5),
+          borderSide: BorderSide(color: context.palette.kPrimary, width: 1.5),
           borderRadius: BorderRadius.circular(ScreenUtilsManager.r8),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(ScreenUtilsManager.r8),
-          borderSide: const BorderSide(color: Colors.redAccent, width: 1),
+          borderSide: BorderSide(color: context.palette.red, width: 1),
         ),
       ),
     );

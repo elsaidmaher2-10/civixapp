@@ -1,4 +1,5 @@
 import 'package:citifix/core/DI/getit.dart';
+import 'package:citifix/core/cubit/theme/theme_cubit.dart';
 import 'package:citifix/core/database/local/prefmanger.dart';
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
@@ -160,6 +161,14 @@ class ProfileScreen extends StatelessWidget {
     PrefrenceManager().remove(Constantmanger.refreshToken);
     PrefrenceManager().remove(Constantmanger.accessToken);
     PrefrenceManager().remove(Constantmanger.cacheKey);
+    PrefrenceManager().remove(Constantmanger.themeModePrefKey);
+    PrefrenceManager().remove(Constantmanger.role);
+    PrefrenceManager().remove(Constantmanger.userid);
+
+    if (context.mounted) {
+      context.read<ThemeCubit>().fetchTheme();
+    }
+
     Navigator.of(
       context,
     ).pushNamedAndRemoveUntil(Routes.login, (route) => false);

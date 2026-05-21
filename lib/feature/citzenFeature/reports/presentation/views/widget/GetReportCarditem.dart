@@ -52,7 +52,7 @@ class ReportCardIem extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withValues(alpha: 0.08),
+              color: Colors.black.withValues(alpha: Theme.of(context).brightness == Brightness.dark ? 0.2 : 0.08),
               blurRadius: 10,
               offset: const Offset(0, 4),
             ),
@@ -84,10 +84,10 @@ class ReportCardIem extends StatelessWidget {
                         SizedBox(height: ScreenUtilsManager.h6),
                         Row(
                           children: [
-                            const Icon(
+                            Icon(
                               Icons.location_pin,
                               size: 14,
-                              color: Colors.red,
+                              color: context.palette.red,
                             ),
                             SizedBox(width: ScreenUtilsManager.w4),
                             Expanded(
@@ -107,7 +107,7 @@ class ReportCardIem extends StatelessWidget {
                           '${S.of(context).submitted} ${report.createdAt.timeAgo(context)}',
                           style: GoogleFonts.cairo(
                             fontSize: ScreenUtilsManager.s11,
-                            color: context.palette.onSurfaceVariant,
+                            color: context.palette.onSurfaceVariant.withOpacity(0.8),
                           ),
                         ),
                       ],
@@ -119,7 +119,7 @@ class ReportCardIem extends StatelessWidget {
                     child: CachedNetworkImage(
                       placeholder: (context, url) =>
                           CupertinoActivityIndicator(
-                            color: context.palette.lightColor,
+                            color: context.palette.kPrimary,
                           ),
                       width: ScreenUtilsManager.w80,
                       height: ScreenUtilsManager.h80,
@@ -141,7 +141,7 @@ class ReportCardIem extends StatelessWidget {
                 color: context.palette.surfaceContainerLow,
                 border: Border(
                   top: BorderSide(
-                    color: context.palette.outline.withValues(alpha: 0.35),
+                    color: context.palette.outline.withOpacity(0.15),
                   ),
                 ),
               ),
@@ -153,11 +153,11 @@ class ReportCardIem extends StatelessWidget {
                     style: GoogleFonts.cairo(
                       fontWeight: FontWeight.w600,
                       fontSize: 13,
-                      color: context.palette.lightColor,
+                      color: context.palette.onSurfaceVariant,
                     ),
                   ),
                   Material(
-                    color: context.palette.lightColor.withOpacity(0.1),
+                    color: context.palette.kPrimary.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(ScreenUtilsManager.r8),
                     child: InkWell(
                       onTap: () async {
@@ -191,7 +191,7 @@ class ReportCardIem extends StatelessWidget {
                               style: GoogleFonts.cairo(
                                 fontWeight: FontWeight.bold,
                                 fontSize: ScreenUtilsManager.s12,
-                                color: context.palette.lightColor,
+                                color: context.palette.kPrimary,
                               ),
                             ),
                             SizedBox(width: 4.w),
@@ -200,7 +200,7 @@ class ReportCardIem extends StatelessWidget {
                                   ? Icons.chevron_left
                                   : Icons.chevron_right,
                               size: ScreenUtilsManager.h16,
-                              color: context.palette.lightColor,
+                              color: context.palette.kPrimary,
                             ),
                           ],
                         ),

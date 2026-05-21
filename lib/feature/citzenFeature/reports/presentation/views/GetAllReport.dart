@@ -7,7 +7,6 @@ import 'package:citifix/feature/citzenFeature/reports/data/Models/GetReportModel
 import 'package:citifix/feature/citzenFeature/reports/presentation/manager/reportManger/cubit/report_manager_cubit.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/manager/reportManger/cubit/report_manager_state.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/views/widget/GetReportCarditem.dart';
-import 'package:citifix/feature/citzenFeature/reports/presentation/views/widget/GetreportFiltring.dart';
 import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -68,21 +67,23 @@ class _ReportsPageState extends State<ReportsPage> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
       backgroundColor: context.palette.reportsPageBackground,
       appBar: AppBar(
         surfaceTintColor: Colors.transparent,
-        backgroundColor: context.palette.surfaceContainerLowest
-            .withValues(alpha: 0.97),
+        backgroundColor: context.palette.surface,
         foregroundColor: context.palette.onSurface,
         elevation: 0,
+        shape: Border(
+          bottom: BorderSide(
+            color: context.palette.outline.withOpacity(isDark ? 0.1 : 0.05),
+            width: 1,
+          ),
+        ),
         leading: IconButton(
           onPressed: () => Navigator.pop(context),
-          icon: Icon(
-            Directionality.of(context) == TextDirection.ltr
-                ? CupertinoIcons.back
-                : CupertinoIcons.back,
-          ),
+          icon: const Icon(CupertinoIcons.back),
           color: context.palette.kPrimary,
         ),
         title: Text(
@@ -114,27 +115,49 @@ class _ReportsPageState extends State<ReportsPage> {
       body: Column(
         children: [
           SizedBox(
-            height: 80.h,
+            height: 60.h,
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               itemCount: filters.length,
               separatorBuilder: (_, _) => const SizedBox(width: 8),
-              itemBuilder: (context, index) => InkWell(
-                onTap: () {
-                  setState(() {
-                    for (var e in filters) {
-                      e["selected"] = false;
+              itemBuilder: (context, index) {
+                final bool isSelected = filters[index]["selected"];
+                return ChoiceChip(
+                  label: Text(_getFilterTitle(context, filters[index]["key"])),
+                  selected: isSelected,
+                  onSelected: (selected) {
+                    if (selected) {
+                      setState(() {
+                        for (var e in filters) {
+                          e["selected"] = false;
+                        }
+                        filters[index]["selected"] = true;
+                        _selectedFilterKey = filters[index]["key"];
+                      });
                     }
-                    filters[index]["selected"] = true;
-                    _selectedFilterKey = filters[index]["key"];
-                  });
-                },
-                child: FliterCheap(
-                  label: _getFilterTitle(context, filters[index]["key"]),
-                  isActive: filters[index]["selected"],
-                ),
-              ),
+                  },
+                  showCheckmark: true,
+                  checkmarkColor: context.palette.onPrimary,
+                  selectedColor: context.palette.kPrimary,
+                  backgroundColor: context.palette.surfaceContainerLowest,
+                  labelStyle: GoogleFonts.cairo(
+                    color: isSelected
+                        ? context.palette.onPrimary
+                        : context.palette.onSurface,
+                    fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
+                    fontSize: 14,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                    side: BorderSide(
+                      color: isSelected
+                          ? Colors.transparent
+                          : context.palette.outline.withOpacity(0.3),
+                    ),
+                  ),
+                );
+              },
             ),
           ),
 
@@ -214,7 +237,7 @@ class _ReportsPageState extends State<ReportsPage> {
 
                 return RefreshIndicator(
                   color: context.palette.kPrimary,
-                  backgroundColor: context.palette.surfaceContainerLowest,
+                  backgroundColor: context.palette.surface,
                   onRefresh: () => context.read<ReportCubit>().fetchReports(),
                   child: ListView.builder(
                     padding: const EdgeInsets.symmetric(horizontal: 16),

@@ -4,7 +4,7 @@ import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:flutter/material.dart';
 
 class ThemeCubit extends Cubit<ThemeMode> {
-  ThemeCubit() : super(ThemeMode.system);
+  ThemeCubit() : super(ThemeMode.light);
 
   void fetchTheme() {
     final String? raw = PrefrenceManager().getstring(

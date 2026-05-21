@@ -74,6 +74,10 @@ class HomeScreen extends StatelessWidget {
                           AssetValueManager.overVeiw,
                           height: 24.h,
                           width: 24.w,
+                          colorFilter: ColorFilter.mode(
+                            context.palette.kPrimary,
+                            BlendMode.srcIn,
+                          ),
                         ),
                         SizedBox(width: ScreenUtilsManager.w8),
                         Text(
@@ -220,13 +224,17 @@ class HomeScreen extends StatelessWidget {
             Container(
               padding: EdgeInsets.all(ScreenUtilsManager.w24),
               decoration: BoxDecoration(
-                color: context.palette.lightColor.withOpacity(0.1),
+                color: context.palette.surfaceContainerLow,
                 shape: BoxShape.circle,
+                border: Border.all(
+                  color: context.palette.outline.withOpacity(0.1),
+                  width: 2,
+                ),
               ),
               child: Icon(
                 Icons.receipt_long_rounded,
                 size: 48.r,
-                color: context.palette.lightColor,
+                color: context.palette.kPrimary.withOpacity(0.8),
               ),
             ),
             SizedBox(height: ScreenUtilsManager.h16),
