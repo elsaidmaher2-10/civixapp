@@ -68,7 +68,7 @@ class Citifix extends StatelessWidget {
                         onGenerateRoute: Routingmanger.onGenerateRoute,
                         title: Constantmanger.apptitle,
                         debugShowCheckedModeBanner: false,
-                        themeMode: role == AppRole.worker ? themeMode : ThemeMode.light,
+                        themeMode: themeMode,
                         theme: AppTheme.light(role),
                         darkTheme: AppTheme.dark(role),
                       );

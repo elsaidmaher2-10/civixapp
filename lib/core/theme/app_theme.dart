@@ -8,6 +8,7 @@ abstract final class AppTheme {
 
   static ThemeData light(AppRole role) {
     final Color accent = _accentForRole(role);
+    final bool isWorker = role == AppRole.worker;
     final ColorScheme scheme = ColorScheme.light(
       primary: ColorManger.kPrimary,
       onPrimary: ColorManger.onPrimary,
@@ -27,7 +28,9 @@ abstract final class AppTheme {
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.light,
-      extensions: <ThemeExtension<dynamic>>[CitifixPalette.light()],
+      extensions: <ThemeExtension<dynamic>>[
+        CitifixPalette.light(isWorker: isWorker),
+      ],
       colorScheme: scheme,
       scaffoldBackgroundColor: ColorManger.white,
       appBarTheme: AppBarTheme(
@@ -137,7 +140,7 @@ abstract final class AppTheme {
       useMaterial3: true,
       brightness: Brightness.dark,
       extensions: <ThemeExtension<dynamic>>[
-        CitifixPalette.dark(workerAccent: role == AppRole.worker),
+        CitifixPalette.dark(isWorker: isWorker),
       ],
       colorScheme: scheme,
       textTheme: darkTextBase.copyWith(

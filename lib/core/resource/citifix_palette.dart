@@ -85,7 +85,7 @@ class CitifixPalette extends ThemeExtension<CitifixPalette> {
   });
 
   /// Same tokens as [ColorManger] today (light theme).
-  factory CitifixPalette.light() {
+  factory CitifixPalette.light({required bool isWorker}) {
     return CitifixPalette(
       grey50: ColorManger.grey50,
       black: ColorManger.black,
@@ -164,8 +164,10 @@ class CitifixPalette extends ThemeExtension<CitifixPalette> {
     );
   }
 
-
-  factory CitifixPalette.dark({bool workerAccent = false}) {
+  factory CitifixPalette.dark({
+    bool workerAccent = false,
+    required bool isWorker,
+  }) {
     const Color scaffold = Color(0xFF0F172A);
     const Color surface = Color(0xFF1B2634);
     const Color surfaceContainerLow = Color(0xFF151F2E);
@@ -177,12 +179,14 @@ class CitifixPalette extends ThemeExtension<CitifixPalette> {
     const Color onTertiary = Color(0xFFCBD5E1);
     const Color primaryBlueOnDark = Color(0xFF9EC5FF);
     const Color primaryWorkerOnDark = Color(0xFFFFB74D);
-    final Color primaryOnDark =
-        workerAccent ? primaryWorkerOnDark : primaryBlueOnDark;
+    final Color primaryOnDark = workerAccent
+        ? primaryWorkerOnDark
+        : primaryBlueOnDark;
     const Color borderDark = Color(0xFF3D4F66);
     const Color outlineDark = Color(0xFF5A6D85);
-    final Color onPrimaryDark =
-        workerAccent ? const Color(0xFF271800) : scaffold;
+    final Color onPrimaryDark = workerAccent
+        ? const Color(0xFF271800)
+        : scaffold;
     final Color primaryFixedDark = workerAccent
         ? const Color(0xFF5C3D14)
         : const Color(0xFF1E3A5F);

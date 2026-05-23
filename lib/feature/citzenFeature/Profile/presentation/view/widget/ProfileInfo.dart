@@ -89,7 +89,7 @@ class ProfileInfo extends StatelessWidget {
                       children: [
                         CircleAvatar(
                           radius: 68.r,
-                          backgroundColor: context.palette.orange,
+                          backgroundColor: context.palette.kPrimary,
                           child: CircleAvatar(
                             radius: 65.r,
                             backgroundColor: Colors.white,

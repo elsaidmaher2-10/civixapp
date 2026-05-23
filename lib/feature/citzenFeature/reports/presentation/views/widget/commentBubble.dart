@@ -42,7 +42,7 @@ class CommentBubble extends StatelessWidget {
               if (!isWorker) ...[
                 _buildAvatar(
                   comment.userProfileImageUrl,
-                  context.palette.orange,
+                  context.palette.kPrimary,
                 ),
                 SizedBox(width: ScreenUtilsManager.w8),
               ],
