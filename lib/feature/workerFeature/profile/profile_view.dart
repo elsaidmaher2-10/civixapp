@@ -15,6 +15,8 @@ import 'package:citifix/feature/citzenFeature/Profile/data/Models/UserProfileMod
 import 'package:citifix/feature/citzenFeature/Profile/data/repos/UserProfileRepos/LogOutRepos.dart';
 import 'package:citifix/feature/citzenFeature/Profile/presentation/view/Function/showLanguagePicker.dart';
 import 'package:citifix/feature/citzenFeature/Profile/presentation/view/Function/show_theme_picker.dart';
+import 'package:citifix/feature/citzenFeature/notication/presentation/manager/cubit/notifcation_cubit.dart';
+import 'package:citifix/feature/citzenFeature/reports/presentation/manager/reportManger/cubit/report_manager_cubit.dart';
 import 'package:citifix/feature/workerFeature/profile/action_list_tile.dart';
 import 'package:citifix/feature/workerFeature/profile/document_tile.dart';
 import 'package:citifix/feature/workerFeature/profile/info_card.dart';
@@ -57,10 +59,15 @@ class _ProfileViewState extends State<ProfileView> {
                   PrefrenceManager().remove(Constantmanger.refreshToken);
                   PrefrenceManager().remove(Constantmanger.accessToken);
                   PrefrenceManager().remove(Constantmanger.cacheKey);
+                  PrefrenceManager().remove(Constantmanger.themeModePrefKey);
                   PrefrenceManager().remove(Constantmanger.role);
+                  PrefrenceManager().remove(Constantmanger.userid);
                   
                   if (context.mounted) {
                     context.read<ThemeCubit>().setThemeMode(ThemeMode.light);
+                    context.read<UserProfileInfoCubit>().clear();
+                    context.read<NotificationCubit>().clear();
+                    context.read<ReportCubit>().clear();
                   }
 
                   Navigator.of(
@@ -318,7 +325,6 @@ class _ProfileViewState extends State<ProfileView> {
                                       builder: (context, mode) {
                                         return Switch.adaptive(
                                           value: mode == ThemeMode.dark,
-                                          activeColor: context.palette.primary,
                                           onChanged: (value) {
                                             context
                                                 .read<ThemeCubit>()

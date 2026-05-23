@@ -14,6 +14,8 @@ import 'package:citifix/core/cubit/userinfoManger/user_profile_info_cubit.dart';
 import 'package:citifix/feature/citzenFeature/Profile/presentation/view/widget/ProfileInfo.dart';
 import 'package:citifix/feature/citzenFeature/Profile/presentation/view/widget/image_picker_menu.dart';
 import 'package:citifix/feature/citzenFeature/Profile/presentation/view/widget/profileSettings.dart';
+import 'package:citifix/feature/citzenFeature/notication/presentation/manager/cubit/notifcation_cubit.dart';
+import 'package:citifix/feature/citzenFeature/reports/presentation/manager/reportManger/cubit/report_manager_cubit.dart';
 import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -167,6 +169,9 @@ class ProfileScreen extends StatelessWidget {
 
     if (context.mounted) {
       context.read<ThemeCubit>().setThemeMode(ThemeMode.light);
+      context.read<UserProfileInfoCubit>().clear();
+      context.read<NotificationCubit>().clear();
+      context.read<ReportCubit>().clear();
     }
 
     Navigator.of(

@@ -36,6 +36,10 @@ class UserProfileInfoCubit extends Cubit<UserProfileInfoState> {
     );
   }
 
+  void clear() {
+    emit(UserProfileInfoInitial());
+  }
+
   Future<void> updateUserProfleImage(File image) async {
     if (isClosed) return;
     UserProfile? currentUser;

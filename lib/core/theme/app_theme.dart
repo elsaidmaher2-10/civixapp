@@ -71,6 +71,15 @@ abstract final class AppTheme {
           borderSide: BorderSide(color: ColorManger.outline),
         ),
       ),
+      switchTheme: SwitchThemeData(
+        thumbColor: WidgetStateProperty.all(Colors.white),
+        trackColor: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) {
+            return ColorManger.kPrimary.withOpacity(0.55);
+          }
+          return ColorManger.outline.withOpacity(0.5);
+        }),
+      ),
     );
   }
 
@@ -320,10 +329,7 @@ abstract final class AppTheme {
         circularTrackColor: primaryOnDark.withOpacity(0.22),
       ),
       switchTheme: SwitchThemeData(
-        thumbColor: WidgetStateProperty.resolveWith((states) {
-          if (states.contains(WidgetState.selected)) return onPrimaryDark;
-          return onSurfaceMuted;
-        }),
+        thumbColor: WidgetStateProperty.all(Colors.white),
         trackColor: WidgetStateProperty.resolveWith((states) {
           if (states.contains(WidgetState.selected)) {
             return primaryOnDark.withOpacity(0.55);

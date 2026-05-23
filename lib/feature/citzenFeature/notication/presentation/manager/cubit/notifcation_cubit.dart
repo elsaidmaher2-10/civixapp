@@ -108,6 +108,10 @@ class NotificationCubit extends Cubit<NotificationState> {
     await _getNotificationsSilent();
   }
 
+  void clear() {
+    emit(NotificationInitial());
+  }
+
   @override
   Future<void> close() {
     _messagingSubscription?.cancel();

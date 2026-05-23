@@ -136,14 +136,17 @@ class Customimagepicker extends StatelessWidget {
                     padding: const EdgeInsets.all(4),
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      gradient: context.palette.kineticGradient,
+                      gradient: role
+                          ? LinearGradient(
+                            colors: [
+                              context.palette.workerprimary,
+                              context.palette.orange,
+                            ],
+                          )
+                          : context.palette.kineticGradient,
                       boxShadow: [
                         BoxShadow(
-                          color:
-                              (role
-                                      ? context.palette.workerprimary
-                                      : context.palette.primary)
-                                  .withOpacity(0.2),
+                          color: Colors.black.withOpacity(0.08),
                           blurRadius: 20,
                           offset: const Offset(0, 8),
                         ),

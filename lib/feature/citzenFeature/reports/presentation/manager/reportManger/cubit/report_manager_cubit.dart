@@ -130,6 +130,11 @@ class ReportCubit extends Cubit<ReportManagerState> {
     emit(GetReportsSuccess(List.from(_allReports)));
   }
 
+  void clear() {
+    _allReports = [];
+    emit(ReportManagerInitial());
+  }
+
   @override
   Future<void> close() {
     _progressSub?.cancel();

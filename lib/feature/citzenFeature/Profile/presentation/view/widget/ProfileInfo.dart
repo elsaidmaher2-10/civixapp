@@ -62,6 +62,9 @@ class ProfileInfo extends StatelessWidget {
           );
         }
 
+        final role = user?.role?.toLowerCase() ?? "";
+        final isWorker = role == "worker";
+
         return Column(
           children: [
             SizedBox(height: ScreenUtilsManager.h32),
@@ -89,7 +92,9 @@ class ProfileInfo extends StatelessWidget {
                       children: [
                         CircleAvatar(
                           radius: 68.r,
-                          backgroundColor: context.palette.kPrimary,
+                          backgroundColor: isWorker
+                              ? context.palette.workerprimary
+                              : context.palette.kPrimary,
                           child: CircleAvatar(
                             radius: 65.r,
                             backgroundColor: Colors.white,
