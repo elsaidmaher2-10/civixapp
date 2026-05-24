@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:io';
 import 'package:animated_custom_dropdown/custom_dropdown.dart';
 import 'package:citifix/core/resource/colormanager.dart';
-import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/core/widget/customtextfromfield.dart';
 import 'package:citifix/feature/workerFeature/verfication/data/model/verficationmodel.dart';

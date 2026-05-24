@@ -11,7 +11,6 @@ import 'package:citifix/feature/citzenFeature/achivement/presentation/achievemen
 import 'package:citifix/feature/citzenFeature/achivement/presentation/achievement/achivementManger.dart';
 import 'package:citifix/feature/citzenFeature/achivement/presentation/widget/AchievementCard.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/views/Dotincator.dart';
-import 'package:citifix/feature/citzenFeature/reports/presentation/views/ReportSearchBar.dart';
 import 'package:citifix/feature/citzenFeature/achivement/presentation/views/achievementItem.dart';
 import '../../../../../generated/l10n.dart';
 

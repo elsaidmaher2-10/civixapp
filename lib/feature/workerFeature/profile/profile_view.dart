@@ -14,7 +14,6 @@ import 'package:citifix/core/widget/onLogoutPressed.dart';
 import 'package:citifix/feature/citzenFeature/Profile/data/Models/UserProfileModel/userProfile.dart';
 import 'package:citifix/feature/citzenFeature/Profile/data/repos/UserProfileRepos/LogOutRepos.dart';
 import 'package:citifix/feature/citzenFeature/Profile/presentation/view/Function/showLanguagePicker.dart';
-import 'package:citifix/feature/citzenFeature/Profile/presentation/view/Function/show_theme_picker.dart';
 import 'package:citifix/feature/citzenFeature/notication/presentation/manager/cubit/notifcation_cubit.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/manager/reportManger/cubit/report_manager_cubit.dart';
 import 'package:citifix/feature/workerFeature/profile/action_list_tile.dart';

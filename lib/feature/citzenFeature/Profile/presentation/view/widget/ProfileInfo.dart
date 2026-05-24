@@ -62,7 +62,7 @@ class ProfileInfo extends StatelessWidget {
           );
         }
 
-        final role = user?.role?.toLowerCase() ?? "";
+        final role = user.role?.toLowerCase() ?? "";
         final isWorker = role == "worker";
 
         return Column(

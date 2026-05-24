@@ -1,6 +1,6 @@
 import 'package:citifix/core/resource/colormanager.dart';
-import 'package:citifix/core/resource/screenutilsmaanger.dart'; // تم الإضافة
-import 'package:citifix/generated/l10n.dart'; // تم الإضافة
+import 'package:citifix/core/resource/screenutilsmaanger.dart'; 
+import 'package:citifix/generated/l10n.dart'; 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -38,7 +38,7 @@ class TaskInfoSection extends StatelessWidget {
           ),
           SizedBox(height: ScreenUtilsManager.h12),
           Text(
-            task.title ?? S.of(context).noTitle,
+            task.title ,
             style: GoogleFonts.cairo(
               fontSize: ScreenUtilsManager.s20,
               fontWeight: FontWeight.w800,
@@ -47,7 +47,7 @@ class TaskInfoSection extends StatelessWidget {
           ),
           SizedBox(height: ScreenUtilsManager.h8),
           Text(
-            task.description ?? S.of(context).noDescription,
+            task.description ,
             style: GoogleFonts.cairo(
               fontSize: ScreenUtilsManager.s14,
               color: context.palette.onSurfaceVariant,
