@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:citifix/core/function/show_full_screen_video.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../citzenFeature/reports/presentation/views/widget/extensionvediotype.dart';
@@ -39,7 +40,16 @@ class ImageWorkerPickerList extends StatelessWidget {
                         children: [
                           Positioned.fill(
                             child: image.isVideo
-                                ? AppVideoPlayer(dataSource: image.path)
+                                ? AppVideoPlayer(
+                                  dataSource: image.path,
+                                  isRemote: false,
+                                  onTap:
+                                      () => showFullScreenVideo(
+                                        context,
+                                        image.path,
+                                        isRemote: false,
+                                      ),
+                                )
                                 : Image.file(image, fit: BoxFit.cover),
                           ),
                           Positioned.directional(

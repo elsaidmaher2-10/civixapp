@@ -1,4 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:citifix/core/function/show_full_screen_image.dart';
+import 'package:citifix/core/function/show_full_screen_video.dart';
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
@@ -66,46 +68,20 @@ class _IssuePhotosSectionState extends State<IssuePhotosSection> {
                     final String item = widget.mediaItems[index];
 
                     if (_isVideo(item)) {
-                      return AppVideoPlayer(dataSource: item, isRemote: true);
+                      return AppVideoPlayer(
+                        dataSource: item,
+                        isRemote: true,
+                        onTap:
+                            () => showFullScreenVideo(
+                              context,
+                              item,
+                              isRemote: true,
+                            ),
+                      );
                     }
 
                     return InkWell(
-                      onTap: () {
-                        showDialog(
-                          barrierColor: Color(0xff0f172b).withOpacity(0.9),
-                          context: context,
-                          builder: (ctx) {
-                            return Center(
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(8),
-                                child: CachedNetworkImage(
-                                  imageUrl: item,
-                                  fit: BoxFit.fill,
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.8,
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.8,
-                                  placeholder: (context, url) => Container(
-                                    color: context.palette.grey200,
-                                    child: Center(
-                                      child: CupertinoActivityIndicator(
-                                        radius: ScreenUtilsManager.r12,
-                                        color: context.palette.primaryColor,
-                                      ),
-                                    ),
-                                  ),
-                                  errorWidget: (context, url, error) =>
-                                      Image.network(
-                                        Constantmanger.defualtImage,
-                                        fit: BoxFit.cover,
-                                      ),
-                                ),
-                              ),
-                            );
-                          },
-                        );
-                      },
-
+                      onTap: () => showFullScreenImage(context, item),
                       child: CachedNetworkImage(
                         imageUrl: item,
                         fit: BoxFit.cover,
