@@ -14,9 +14,8 @@ class AchievementCard extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 4),
       decoration: BoxDecoration(
-        color: Colors.white,
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: const Color(0xFFE2E8F0)),
+
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.07),
