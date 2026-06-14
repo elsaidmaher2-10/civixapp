@@ -13,18 +13,44 @@ class ReportCubit extends Cubit<ReportManagerState> {
   ReportCubit(this.reportRepository) : super(ReportManagerInitial());
   StreamSubscription<double>? _progressSub;
   List<ReportItem> _allReports = [];
-  Future<void> fetchReports() async {
-    if (isClosed) return;
-    emit(GetReportsLoading());
+  int _offset = 0;
+  final int _limit = 10;
+  bool _hasReachedMax = false;
 
-    final result = await reportRepository.getReports();
+  Future<void> fetchReports({bool isRefresh = false}) async {
+    if (isClosed) return;
+
+    if (isRefresh) {
+      _offset = 0;
+      _hasReachedMax = false;
+      _allReports = [];
+      emit(GetReportsLoading());
+    } else {
+      if (_hasReachedMax) {
+        emit(GetReportsSuccess(List.from(_allReports)));
+        return;
+      }
+    }
+
+    final result = await reportRepository.getReports(
+      offset: _offset,
+      limit: _limit,
+    );
 
     if (isClosed) return;
 
     result.fold((failure) => emit(GetReportsFailure(failure.errors.first)), (
       reports,
     ) {
-      _allReports = reports;
+      if (reports.isEmpty) {
+        _hasReachedMax = true;
+      } else {
+        _allReports.addAll(reports);
+        _offset += _limit;
+        if (reports.length < _limit) {
+          _hasReachedMax = true;
+        }
+      }
       emit(GetReportsSuccess(List.from(_allReports)));
     });
   }
@@ -48,7 +74,7 @@ class ReportCubit extends Cubit<ReportManagerState> {
       emit(CreateReportSuccess(successMessage));
 
       if (!isClosed) {
-        await fetchReports();
+        await fetchReports(isRefresh: true);
       }
     });
   }
@@ -89,7 +115,7 @@ class ReportCubit extends Cubit<ReportManagerState> {
       (failure) => emit(GetReportsByidFailure(failure.errors.first)),
       (String successMessage) async {
         emit(deleteReportState(successMessage));
-        await fetchReports();
+        await fetchReports(isRefresh: true);
       },
     );
   }

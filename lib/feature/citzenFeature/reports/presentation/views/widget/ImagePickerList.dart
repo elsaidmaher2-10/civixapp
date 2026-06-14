@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:citifix/core/function/show_full_screen_video.dart';
 import 'package:citifix/core/widget/uploadimage.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/views/widget/extensionvediotype.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/views/widget/vedioplayer.dart';
@@ -48,8 +49,20 @@ class ImagePickerList extends StatelessWidget {
                           children: [
                             Positioned.fill(
                               child: image.isVideo
-                                  ? AppVideoPlayer(dataSource: image.path)
-                                  : Image.file(image, fit: BoxFit.cover),
+                                  ? AppVideoPlayer(
+                                    dataSource: image.path,
+                                    isRemote: false,
+                                    onTap:
+                                        () => showFullScreenVideo(
+                                          context,
+                                          image.path,
+                                          isRemote: false,
+                                        ),
+                                  )
+                                  : GestureDetector(
+                                    onTap: () {}, // Images don't have full screen preview here currently, but we could add it
+                                    child: Image.file(image, fit: BoxFit.cover),
+                                  ),
                             ),
                             Positioned.directional(
                               textDirection: Directionality.of(context),

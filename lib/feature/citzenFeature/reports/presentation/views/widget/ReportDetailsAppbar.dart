@@ -1,4 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:citifix/core/function/show_full_screen_image.dart';
+import 'package:citifix/core/function/show_full_screen_video.dart';
 import 'package:citifix/core/resource/colormanager.dart';
 import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
@@ -59,23 +61,30 @@ class ReportDetailsAppbar extends StatelessWidget {
                 final String item = mediaItems[index];
 
                 if (_isVideo(item)) {
-                  return AppVideoPlayer(dataSource: item, isRemote: true);
+                  return AppVideoPlayer(
+                    dataSource: item,
+                    isRemote: true,
+                    onTap: () => showFullScreenVideo(context, item, isRemote: true),
+                  );
                 }
 
-                return CachedNetworkImage(
-                  fit: BoxFit.cover,
-                  imageUrl: item,
-                  placeholder: (context, url) => Container(
-                    color: context.palette.surfaceContainerHigh,
-                    child: Center(
-                      child: CircularProgressIndicator(
-                        color: context.palette.kPrimary,
+                return GestureDetector(
+                  onTap: () => showFullScreenImage(context, item),
+                  child: CachedNetworkImage(
+                    fit: BoxFit.cover,
+                    imageUrl: item,
+                    placeholder: (context, url) => Container(
+                      color: context.palette.surfaceContainerHigh,
+                      child: Center(
+                        child: CircularProgressIndicator(
+                          color: context.palette.kPrimary,
+                        ),
                       ),
                     ),
-                  ),
-                  errorWidget: (context, url, error) => Image.network(
-                    Constantmanger.defualtImage,
-                    fit: BoxFit.cover,
+                    errorWidget: (context, url, error) => Image.network(
+                      Constantmanger.defualtImage,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 );
               },

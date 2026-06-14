@@ -54,7 +54,7 @@ class _PickerBottomSheetState extends State<PickerBottomSheet> {
 
       filterOption: FilterOptionGroup(
         orders: [
-          const OrderOption(type: OrderOptionType.createDate, asc: true),
+          const OrderOption(type: OrderOptionType.createDate, asc: false),
         ],
       ),
     );

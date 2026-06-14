@@ -54,7 +54,7 @@ class HomeScreen extends StatelessWidget {
             backgroundColor: context.palette.surfaceContainerLowest,
             color: context.palette.kPrimary,
             onRefresh: () async {
-              await context.read<ReportCubit>().fetchReports();
+              await context.read<ReportCubit>().fetchReports(isRefresh: true);
             },
             child: SingleChildScrollView(
               physics: const AlwaysScrollableScrollPhysics(),

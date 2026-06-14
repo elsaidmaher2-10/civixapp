@@ -33,13 +33,28 @@ class _ReportsPageState extends State<ReportsPage> {
 
   final TextEditingController _controller = TextEditingController();
   final FocusNode _focusNode = FocusNode();
+  final ScrollController _scrollController = ScrollController();
   String _selectedFilterKey = "All";
   late ReportCubit _reportCubit;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(_onScroll);
+  }
+
+  void _onScroll() {
+    if (_scrollController.position.pixels >=
+        _scrollController.position.maxScrollExtent * 0.7) {
+      context.read<ReportCubit>().fetchReports();
+    }
+  }
 
   @override
   void dispose() {
     _controller.dispose();
     _focusNode.dispose();
+    _scrollController.dispose();
     _reportCubit.resetSearch();
     super.dispose();
   }
@@ -238,8 +253,10 @@ class _ReportsPageState extends State<ReportsPage> {
                 return RefreshIndicator(
                   color: context.palette.kPrimary,
                   backgroundColor: context.palette.surface,
-                  onRefresh: () => context.read<ReportCubit>().fetchReports(),
+                  onRefresh: () =>
+                      context.read<ReportCubit>().fetchReports(isRefresh: true),
                   child: ListView.builder(
+                    controller: _scrollController,
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     itemCount: finalFiltered.length,
                     itemBuilder: (context, index) {

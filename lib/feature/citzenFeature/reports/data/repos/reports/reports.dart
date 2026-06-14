@@ -170,7 +170,11 @@ class ReportRepositoryT {
     }
   }
 
-  Future<Either<FailureResponse, List<ReportItem>>> getReports() async {
+  Future<Either<FailureResponse, List<ReportItem>>> getReports({
+    int offset = 0,
+    int limit = 10,
+    bool hasPagination = true,
+  }) async {
     if (!await internetChecker.checkInternet()) {
       return left(
         FailureResponse(errors: [Constantmanger.nointernet], statusCode: 1),
@@ -182,6 +186,11 @@ class ReportRepositoryT {
 
       final response = await service.get(
         path: "${Apiconstant.report}/citizen/$userid",
+        queryprams: {
+          "Offset": offset,
+          "Limit": limit,
+          "HasPagination": hasPagination,
+        },
       );
 
       final List<dynamic> items = response['items'];

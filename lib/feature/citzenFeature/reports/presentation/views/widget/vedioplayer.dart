@@ -6,11 +6,13 @@ import 'package:shimmer/shimmer.dart';
 class AppVideoPlayer extends StatefulWidget {
   final String dataSource;
   final bool isRemote;
+  final VoidCallback? onTap;
 
   const AppVideoPlayer({
     super.key,
     required this.dataSource,
     this.isRemote = true,
+    this.onTap,
   });
 
   @override
@@ -34,7 +36,6 @@ class _AppVideoPlayerState extends State<AppVideoPlayer> {
 
     try {
       await _controller.initialize();
-      await _controller.setVolume(10);
       if (mounted) {
         setState(() => _isInitialized = true);
       }
@@ -54,13 +55,14 @@ class _AppVideoPlayerState extends State<AppVideoPlayer> {
     }
 
     return GestureDetector(
-      onTap: () {
-        setState(() {
-          _controller.value.isPlaying
-              ? _controller.pause()
-              : _controller.play();
-        });
-      },
+      onTap: widget.onTap ??
+          () {
+            setState(() {
+              _controller.value.isPlaying
+                  ? _controller.pause()
+                  : _controller.play();
+            });
+          },
       child: Container(
         color: Colors.black,
         child: Stack(

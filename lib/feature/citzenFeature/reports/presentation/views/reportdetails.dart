@@ -21,6 +21,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:citifix/core/function/show_full_screen_image.dart';
 
 import '../../../../../core/resource/constantmanger.dart';
 import '../../data/repos/commentRepo/commentRepo.dart';
@@ -247,19 +248,22 @@ class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
       ),
       child: Row(
         children: [
-          CircleAvatar(
-            radius: 20.r,
-            backgroundColor: context.palette.kPrimary.withOpacity(0.15),
-            child: ClipOval(
-              child: CachedNetworkImage(
-                imageUrl: imageUrl,
-                fit: BoxFit.cover,
-                width: 40.r,
-                height: 40.r,
-                errorWidget: (context, url, error) =>
-                    Icon(icon, color: context.palette.kPrimary),
-                placeholder: (context, url) =>
-                    const CupertinoActivityIndicator(),
+          GestureDetector(
+            onTap: () => showFullScreenImage(context, imageUrl),
+            child: CircleAvatar(
+              radius: 20.r,
+              backgroundColor: context.palette.kPrimary.withOpacity(0.15),
+              child: ClipOval(
+                child: CachedNetworkImage(
+                  imageUrl: imageUrl,
+                  fit: BoxFit.cover,
+                  width: 40.r,
+                  height: 40.r,
+                  errorWidget: (context, url, error) =>
+                      Icon(icon, color: context.palette.kPrimary),
+                  placeholder: (context, url) =>
+                      const CupertinoActivityIndicator(),
+                ),
               ),
             ),
           ),

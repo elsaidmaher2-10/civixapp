@@ -17,6 +17,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:citifix/core/function/show_full_screen_image.dart';
 import '../../../../../core/resource/constantmanger.dart';
 
 class AchivementReportDetails extends StatefulWidget {
@@ -276,19 +277,22 @@ class _ReportDetailsScreenState extends State<AchivementReportDetails> {
       ),
       child: Row(
         children: [
-          CircleAvatar(
-            radius: 20.r,
-            backgroundColor: context.palette.kPrimary.withOpacity(0.15),
-            child: ClipOval(
-              child: CachedNetworkImage(
-                imageUrl: imageUrl,
-                fit: BoxFit.cover,
-                width: 40.r,
-                height: 40.r,
-                errorWidget: (context, url, error) =>
-                    Icon(icon, color: context.palette.kPrimary),
-                placeholder: (context, url) =>
-                    const CupertinoActivityIndicator(),
+          GestureDetector(
+            onTap: () => showFullScreenImage(context, imageUrl),
+            child: CircleAvatar(
+              radius: 20.r,
+              backgroundColor: context.palette.kPrimary.withOpacity(0.15),
+              child: ClipOval(
+                child: CachedNetworkImage(
+                  imageUrl: imageUrl,
+                  fit: BoxFit.cover,
+                  width: 40.r,
+                  height: 40.r,
+                  errorWidget: (context, url, error) =>
+                      Icon(icon, color: context.palette.kPrimary),
+                  placeholder: (context, url) =>
+                      const CupertinoActivityIndicator(),
+                ),
               ),
             ),
           ),
@@ -473,24 +477,27 @@ class _ReportDetailsScreenState extends State<AchivementReportDetails> {
             itemBuilder: (context, index) {
               return Padding(
                 padding: EdgeInsetsDirectional.only(end: 12.w),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(8.r),
-                  child: CachedNetworkImage(
-                    imageUrl: images[index],
-                    width: 90.w,
-                    height: 90.h,
-                    fit: BoxFit.cover,
-                    placeholder: (context, url) => Container(
+                child: GestureDetector(
+                  onTap: () => showFullScreenImage(context, images[index]),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8.r),
+                    child: CachedNetworkImage(
+                      imageUrl: images[index],
                       width: 90.w,
-                      color: context.palette.surfaceContainerLow,
-                      child: const CupertinoActivityIndicator(),
-                    ),
-                    errorWidget: (context, url, error) => Container(
-                      width: 90.w,
-                      color: context.palette.surfaceContainerLow,
-                      child: Icon(
-                        Icons.broken_image,
-                        color: context.palette.onSurfaceVariant,
+                      height: 90.h,
+                      fit: BoxFit.cover,
+                      placeholder: (context, url) => Container(
+                        width: 90.w,
+                        color: context.palette.surfaceContainerLow,
+                        child: const CupertinoActivityIndicator(),
+                      ),
+                      errorWidget: (context, url, error) => Container(
+                        width: 90.w,
+                        color: context.palette.surfaceContainerLow,
+                        child: Icon(
+                          Icons.broken_image,
+                          color: context.palette.onSurfaceVariant,
+                        ),
                       ),
                     ),
                   ),

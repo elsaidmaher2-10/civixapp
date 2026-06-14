@@ -50,7 +50,7 @@ class ReportScreenController {
           await _pickFromCamera(isVideo: true);
         },
         onFilesSelected: (files) {
-          selectedFiles = [...selectedFiles, ...files];
+          selectedFiles = [...files.reversed, ...selectedFiles];
           streamController.add(selectedFiles);
           updateButtonStatus();
         },
@@ -65,7 +65,7 @@ class ReportScreenController {
           source: ImageSource.camera,
         );
         if (video != null) {
-          selectedFiles = [...selectedFiles, File(video.path)];
+          selectedFiles = [File(video.path), ...selectedFiles];
           streamController.add(selectedFiles);
           updateButtonStatus();
         }
@@ -74,7 +74,7 @@ class ReportScreenController {
           source: ImageSource.camera,
         );
         if (photo != null) {
-          selectedFiles = [...selectedFiles, File(photo.path)];
+          selectedFiles = [File(photo.path), ...selectedFiles];
           streamController.add(selectedFiles);
           updateButtonStatus();
         }
