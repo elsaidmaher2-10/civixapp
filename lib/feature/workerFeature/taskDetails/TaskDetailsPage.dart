@@ -2,12 +2,13 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:citifix/feature/workerFeature/taskDetails/data/model/taskdetailsmodel.dart';
+import 'package:citifix/feature/workerFeature/taskDetails/presentation/views/widget/EditCompletionImagesSection.dart';
+import 'package:citifix/feature/workerFeature/taskDetails/presentation/views/widget/TaskDetailsAppBar.dart';
+import 'package:citifix/feature/workerFeature/taskDetails/presentation/views/widget/TaskDetailsErrorView.dart';
 import 'package:citifix/feature/workerFeature/taskDetails/presentation/views/widget/WorkerCompletionDetailsSection.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
@@ -16,7 +17,6 @@ import 'package:screenshot/screenshot.dart';
 
 import 'package:citifix/core/DI/getit.dart';
 import 'package:citifix/core/resource/colormanager.dart';
-import 'package:citifix/core/resource/constantmanger.dart';
 import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/core/widget/CustomSnackBar.dart';
 import 'package:citifix/generated/l10n.dart';
@@ -80,17 +80,14 @@ class _TaskDetailsPageState extends State<TaskDetailsPage> {
     if (_isEditing) {
       _buttonStatusController.add(notesController.text.trim().isNotEmpty);
     } else {
-      if (_pickedFiles.isNotEmpty && notesController.text.trim().isNotEmpty) {
-        _buttonStatusController.add(true);
-      } else {
-        _buttonStatusController.add(false);
-      }
+      _buttonStatusController.add(
+        _pickedFiles.isNotEmpty && notesController.text.trim().isNotEmpty,
+      );
     }
   }
 
   Future<void> _exportToPdf() async {
     try {
-      // Capture the screen with a small delay to ensure rendering is complete
       final Uint8List? imageBytes = await screenshotController.capture(
         delay: const Duration(milliseconds: 100),
       );
@@ -150,11 +147,9 @@ class _TaskDetailsPageState extends State<TaskDetailsPage> {
         builder: (context, state) {
           if (state is ReportDetailsSuccess) {
             _currentTask = state.data;
-            if (_isEditing && state.data.isCompleted) {
-              // Stay in editing if we explicitly started editing
-            } else {
-               _isEditing = false;
-               _deletedImageIds.clear();
+            if (!(_isEditing && state.data.isCompleted)) {
+              _isEditing = false;
+              _deletedImageIds.clear();
             }
           }
 
@@ -168,7 +163,7 @@ class _TaskDetailsPageState extends State<TaskDetailsPage> {
             ),
             child: Scaffold(
               backgroundColor: context.palette.reportsPageBackground,
-              appBar: _buildAppBar(context),
+              appBar: const TaskDetailsAppBar(),
               floatingActionButton: _currentTask != null
                   ? FloatingActionButton(
                       onPressed: _exportToPdf,
@@ -179,8 +174,8 @@ class _TaskDetailsPageState extends State<TaskDetailsPage> {
                       ),
                     )
                   : null,
-              bottomNavigationBar: _buildBottomAction(context),
-              body: _buildScaffoldBody(context, state),
+              bottomNavigationBar: _buildBottomAction(),
+              body: _buildScaffoldBody(state),
             ),
           );
         },
@@ -188,7 +183,7 @@ class _TaskDetailsPageState extends State<TaskDetailsPage> {
     );
   }
 
-  Widget _buildScaffoldBody(BuildContext context, ReportDetailsState state) {
+  Widget _buildScaffoldBody(ReportDetailsState state) {
     if (state is ReportDetailsLoading && _currentTask == null) {
       return Center(
         child: CupertinoActivityIndicator(
@@ -198,16 +193,18 @@ class _TaskDetailsPageState extends State<TaskDetailsPage> {
       );
     }
     if (state is ReportDetailsFailure && _currentTask == null) {
-      return _buildErrorWidget(context, state.error);
+      return TaskDetailsErrorView(
+        error: state.error,
+        onRetry: () => _fetchReportDetails(),
+      );
     }
     if (_currentTask != null) {
-      return _buildMainContent(context, _currentTask!);
+      return _buildMainContent(_currentTask!);
     }
-
     return const SizedBox.shrink();
   }
 
-  Widget _buildBottomAction(BuildContext context) {
+  Widget _buildBottomAction() {
     if (_currentTask != null && (!_currentTask!.isCompleted || _isEditing)) {
       return SafeArea(
         child: Padding(
@@ -222,17 +219,17 @@ class _TaskDetailsPageState extends State<TaskDetailsPage> {
                     ? () {
                         if (_isEditing) {
                           context.read<ReportDetailsManager>().updateCompletion(
-                                id: widget.reportid,
-                                notes: notesController.text,
-                                imagesToAdd: _pickedFiles,
-                                imagesToDeleteIds: _deletedImageIds,
-                              );
+                            id: widget.reportid,
+                            notes: notesController.text,
+                            imagesToAdd: _pickedFiles,
+                            imagesToDeleteIds: _deletedImageIds,
+                          );
                         } else {
                           context.read<ReportDetailsManager>().markAsCompleted(
-                                id: widget.reportid,
-                                notes: notesController.text,
-                                images: _pickedFiles,
-                              );
+                            id: widget.reportid,
+                            notes: notesController.text,
+                            images: _pickedFiles,
+                          );
                         }
                       }
                     : null,
@@ -245,7 +242,7 @@ class _TaskDetailsPageState extends State<TaskDetailsPage> {
     return const SizedBox.shrink();
   }
 
-  Widget _buildMainContent(BuildContext context, TaskDetailsModel task) {
+  Widget _buildMainContent(TaskDetailsModel task) {
     return RefreshIndicator(
       color: context.palette.primary,
       backgroundColor: context.palette.surface,
@@ -264,21 +261,28 @@ class _TaskDetailsPageState extends State<TaskDetailsPage> {
                 TaskOwnerHeader(task: task),
                 SizedBox(height: ScreenUtilsManager.h16),
                 TaskInfoSection(task: task),
-                SizedBox(height: ScreenUtilsManager.h16),
-                IssuePhotosSection(
-                  mediaItems: [...task.imagesUrls, ...task.videosUrls],
-                ),
+                if (task.imagesUrls.isNotEmpty ||
+                    task.videosUrls.isNotEmpty) ...[
+                  SizedBox(height: ScreenUtilsManager.h16),
+                  IssuePhotosSection(
+                    mediaItems: [...task.imagesUrls, ...task.videosUrls],
+                  ),
+                ],
                 SizedBox(height: ScreenUtilsManager.h16),
                 MapNavigationSection(taskDetailsModel: task),
+                if (task.timeline.isNotEmpty) ...[
+                  SizedBox(height: ScreenUtilsManager.h16),
+                  ActivityTimelineSection(
+                    timeline: task.timeline,
+                    isCompleted: task.isCompleted,
+                    initialStatus: task.status,
+                    id: task.id,
+                  ),
+                ],
                 SizedBox(height: ScreenUtilsManager.h16),
-                ActivityTimelineSection(
-                  timeline: task.timeline,
-                  isCompleted: task.isCompleted,
-                  initialStatus: task.status,
-                  id: task.id,
-                ),
-                SizedBox(height: ScreenUtilsManager.h16),
-                if (task.isCompleted && task.completionDetails != null && !_isEditing) ...[
+                if (task.isCompleted &&
+                    task.completionDetails != null &&
+                    !_isEditing) ...[
                   WorkerCompletionDetailsSection(
                     completionDetails: task.completionDetails!,
                     status: task.status,
@@ -295,7 +299,7 @@ class _TaskDetailsPageState extends State<TaskDetailsPage> {
                   ),
                   SizedBox(height: ScreenUtilsManager.h16),
                 ],
-                if (!task.isCompleted || _isEditing)
+                if (!task.isCompleted || _isEditing) ...[
                   CompletionDataSection(
                     streamController: _imagesController,
                     notesController: notesController,
@@ -311,81 +315,32 @@ class _TaskDetailsPageState extends State<TaskDetailsPage> {
                       _checkButtonStatus();
                     },
                   ),
-                if (_isEditing && task.completionDetails != null) ...[
                   SizedBox(height: ScreenUtilsManager.h16),
-                  Text(
-                    S.of(context).completionImages,
-                    style: GoogleFonts.cairo(
-                      fontSize: ScreenUtilsManager.s12,
-                      fontWeight: FontWeight.bold,
-                      color: context.palette.onSurfaceVariant,
-                    ),
-                  ),
-                  SizedBox(height: ScreenUtilsManager.h8),
-                  SizedBox(
-                    height: ScreenUtilsManager.h80,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: task.completionDetails!.imageUrls.length,
-                      itemBuilder: (context, index) {
-                        final id = task.completionDetails!.imageIds[index];
-                        final url = task.completionDetails!.imageUrls[index];
-                        final isDeleted = _deletedImageIds.contains(id);
-
-                        return Padding(
-                          padding: EdgeInsets.only(right: ScreenUtilsManager.w8),
-                          child: Stack(
-                            children: [
-                              Opacity(
-                                opacity: isDeleted ? 0.3 : 1.0,
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(8),
-                                  child: Image.network(
-                                    url,
-                                    width: ScreenUtilsManager.w80,
-                                    height: ScreenUtilsManager.h80,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              ),
-                              Positioned(
-                                top: 0,
-                                right: 0,
-                                child: IconButton(
-                                  padding: EdgeInsets.zero,
-                                  constraints: const BoxConstraints(),
-                                  icon: Icon(
-                                    isDeleted
-                                        ? Icons.add_circle
-                                        : Icons.remove_circle,
-                                    color: isDeleted ? Colors.green : Colors.red,
-                                  ),
-                                  onPressed: () {
-                                    setState(() {
-                                      if (isDeleted) {
-                                        _deletedImageIds.remove(id);
-                                      } else {
-                                        _deletedImageIds.add(id);
-                                      }
-                                      _checkButtonStatus();
-                                    });
-                                  },
-                                ),
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-                    ),
-                  ),
                 ],
-                SizedBox(height: ScreenUtilsManager.h16),
-                Workercomments(
-                  isComment: false,
-                  comments: task.comments,
-                  controller: _commentController,
-                  reporID: task.id,
-                ),
+                if (_isEditing && task.completionDetails != null) ...[
+                  EditCompletionImagesSection(
+                    completionDetails: task.completionDetails!,
+                    deletedImageIds: _deletedImageIds,
+                    onToggleDelete: (id) {
+                      setState(() {
+                        if (_deletedImageIds.contains(id)) {
+                          _deletedImageIds.remove(id);
+                        } else {
+                          _deletedImageIds.add(id);
+                        }
+                        _checkButtonStatus();
+                      });
+                    },
+                  ),
+                  SizedBox(height: ScreenUtilsManager.h16),
+                ],
+                if (task.comments.isNotEmpty || !task.isCompleted || _isEditing)
+                  Workercomments(
+                    isComment: false,
+                    comments: task.comments,
+                    controller: _commentController,
+                    reporID: task.id,
+                  ),
               ],
             ),
           ),
@@ -412,100 +367,5 @@ class _TaskDetailsPageState extends State<TaskDetailsPage> {
         id: widget.reportid,
       );
     }
-  }
-
-  PreferredSizeWidget _buildAppBar(BuildContext context) {
-    return AppBar(
-      backgroundColor: context.palette.surface,
-      elevation: 0,
-      leading: IconButton(
-        icon: Icon(
-          Icons.arrow_back_ios_outlined,
-          color: context.palette.onSurface,
-          size: ScreenUtilsManager.s20,
-        ),
-        onPressed: () => Navigator.pop(context),
-      ),
-      centerTitle: true,
-      title: Text(
-        S.of(context).taskDetails,
-        style: GoogleFonts.cairo(
-          fontWeight: FontWeight.w800,
-          color: context.palette.onSurface,
-          fontSize: ScreenUtilsManager.s18,
-        ),
-      ),
-    );
-  }
-
-  Widget _buildErrorWidget(BuildContext context, String error) {
-    final isNoInternet = error.contains(Constantmanger.nointernet);
-    return Center(
-      child: Padding(
-        padding: EdgeInsets.all(ScreenUtilsManager.w24),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              padding: const EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                color: context.palette.error.withOpacity(0.1),
-                shape: BoxShape.circle,
-              ),
-              child: Icon(
-                isNoInternet
-                    ? Icons.wifi_off_rounded
-                    : Icons.error_outline_rounded,
-                size: ScreenUtilsManager.s60,
-                color: context.palette.error,
-              ),
-            ),
-            SizedBox(height: ScreenUtilsManager.h20),
-            Text(
-              isNoInternet
-                  ? S.of(context).noInternetConnection
-                  : S.of(context).somethingWentWrong,
-              textAlign: TextAlign.center,
-              style: GoogleFonts.cairo(
-                fontWeight: FontWeight.bold,
-                fontSize: ScreenUtilsManager.s18,
-                color: context.palette.onSurface,
-              ),
-            ),
-            SizedBox(height: ScreenUtilsManager.h8),
-            Text(
-              error,
-              textAlign: TextAlign.center,
-              style: GoogleFonts.cairo(
-                color: context.palette.onSurfaceVariant,
-                fontSize: ScreenUtilsManager.s14,
-              ),
-            ),
-            SizedBox(height: ScreenUtilsManager.h24),
-            ElevatedButton.icon(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: context.palette.workerprimary,
-                foregroundColor: Colors.white,
-                padding: EdgeInsets.symmetric(
-                  horizontal: ScreenUtilsManager.w32,
-                  vertical: ScreenUtilsManager.h12,
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-              onPressed: () => context
-                  .read<ReportDetailsManager>()
-                  .getReportDetails(id: widget.reportid),
-              icon: const Icon(Icons.refresh_rounded),
-              label: Text(
-                S.of(context).retry,
-                style: GoogleFonts.cairo(fontWeight: FontWeight.bold),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
   }
 }
