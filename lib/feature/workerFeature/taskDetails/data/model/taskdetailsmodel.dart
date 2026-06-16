@@ -18,9 +18,8 @@ class TaskDetailsModel {
   final double latitude;
   final String location;
   final List<CommentModel> comments;
-
   final double longitude;
-
+  final CompletionDetails? completionDetails;
   TaskDetailsModel({
     required this.id,
     required this.areaName,
@@ -40,6 +39,7 @@ class TaskDetailsModel {
     required this.citizenProfileImageUrl,
     required this.timeline,
     required this.comments,
+    this.completionDetails,
   });
 
   factory TaskDetailsModel.fromJson(Map<String, dynamic> json) {
@@ -66,24 +66,32 @@ class TaskDetailsModel {
               .toList() ??
           [],
 
-      latitude: (json["latitude"] is num)
-          ? (json["latitude"] as num).toDouble()
-          : 0.0,
+      latitude:
+          (json["latitude"] is num)
+              ? (json["latitude"] as num).toDouble()
+              : 0.0,
 
-      longitude: (json["longitude"] is num)
-          ? (json["longitude"] as num).toDouble()
-          : 0.0,
+      longitude:
+          (json["longitude"] is num)
+              ? (json["longitude"] as num).toDouble()
+              : 0.0,
       location: json["location"],
       isCompleted: json["isCompleted"],
       citizenProfileImageUrl: json['citizenProfileImageUrl'],
-      timeline: (json["timeline"] as List<dynamic>)
-          .map((e) => TimelineModel.fromJson(e))
-          .toList(),
+      timeline:
+          (json["timeline"] as List<dynamic>?)
+              ?.map((e) => TimelineModel.fromJson(e))
+              .toList() ??
+          [],
       comments:
           (json['comments'] as List?)
               ?.map((e) => CommentModel.fromJson(e))
               .toList() ??
           [],
+      completionDetails:
+          json["completionDetails"] != null
+              ? CompletionDetails.fromJson(json["completionDetails"])
+              : null,
     );
   }
 }
@@ -98,6 +106,44 @@ class TimelineModel {
     return TimelineModel(
       date: json["date"] ?? "",
       status: json["status"] ?? "",
+    );
+  }
+}
+
+class CompletionDetails {
+  final int id;
+  final int reportId;
+  final int workerId;
+  final String note;
+  final String createdAt;
+  final List<String> imageUrls;
+  final List<int> imageIds;
+
+  CompletionDetails({
+    required this.id,
+    required this.reportId,
+    required this.workerId,
+    required this.note,
+    required this.createdAt,
+    required this.imageUrls,
+    required this.imageIds,
+  });
+
+  factory CompletionDetails.fromJson(Map<String, dynamic> json) {
+    return CompletionDetails(
+      id: json["id"] ?? 0,
+      reportId: json["reportId"] ?? 0,
+      workerId: json["workerId"] ?? 0,
+      note: json["note"] ?? "",
+      createdAt: json["createdAt"] ?? "",
+      imageUrls:
+          (json["imageUrls"] as List<dynamic>?)
+              ?.map((e) => e.toString())
+              .toList() ??
+          [],
+      imageIds:
+          (json["imageIds"] as List<dynamic>?)?.map((e) => e as int).toList() ??
+          [],
     );
   }
 }

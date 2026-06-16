@@ -100,4 +100,59 @@ class ReportdetailsRepo {
       );
     }
   }
+
+  Future<Either<FailureResponse, bool>> updateCompletion({
+    required int reportId,
+    required String notes,
+    required List<File> imagesToAdd,
+    required List<int> imagesToDeleteIds,
+  }) async {
+    if (!await internetChecker.checkInternet()) {
+      return left(
+        FailureResponse(errors: [Constantmanger.nointernet], statusCode: 1),
+      );
+    }
+
+    try {
+      List<MultipartFile> imageFiles = [];
+      for (var imgPath in imagesToAdd) {
+        imageFiles.add(
+          await MultipartFile.fromFile(
+            imgPath.path,
+            filename: imgPath.path.split('/').last,
+          ),
+        );
+      }
+
+      FormData formData = FormData.fromMap({
+        "ImagesToAdd": imageFiles,
+        "Note": notes,
+        "ImagesToDeleteIds": imagesToDeleteIds,
+      });
+
+      final response = await service.put(
+        body: formData,
+        path: Apiconstant.markasCompeleted(reportId),
+      );
+      return right(true);
+    } on Serverexciptionmodel catch (e) {
+      final dynamic errorData = e.errors;
+      if (errorData is Map<String, dynamic>) {
+        return left(FailureResponse.fromJson(errorData));
+      }
+      return left(
+        FailureResponse(
+          errors: [errorData?.toString() ?? "Unknown server error"],
+          statusCode: e.statuscode,
+        ),
+      );
+    } catch (e) {
+      return left(
+        FailureResponse(
+          errors: ["Unknown Error${e.toString()}"],
+          statusCode: 500,
+        ),
+      );
+    }
+  }
 }

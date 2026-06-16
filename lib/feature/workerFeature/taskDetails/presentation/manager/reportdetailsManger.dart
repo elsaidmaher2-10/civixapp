@@ -44,4 +44,24 @@ class ReportDetailsManager extends Cubit<ReportDetailsState> {
       emit(MarkAsCompeleteSuccess(true));
     });
   }
+
+  Future<void> updateCompletion({
+    required int id,
+    required String notes,
+    required List<File> imagesToAdd,
+    required List<int> imagesToDeleteIds,
+  }) async {
+    emit(MarkAsCompeleteLoading());
+    final data = await _reportdetailsRepo.updateCompletion(
+      reportId: id,
+      notes: notes,
+      imagesToAdd: imagesToAdd,
+      imagesToDeleteIds: imagesToDeleteIds,
+    );
+    data.fold((ifLeft) => emit(MarkAsCompeleteFailure(ifLeft.errors.join())), (
+      ifRight,
+    ) {
+      emit(MarkAsCompeleteSuccess(true));
+    });
+  }
 }

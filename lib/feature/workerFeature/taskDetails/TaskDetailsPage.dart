@@ -1,11 +1,18 @@
 import 'dart:async';
 import 'dart:io';
+import 'dart:typed_data';
 
+import 'package:citifix/feature/workerFeature/taskDetails/data/model/taskdetailsmodel.dart';
+import 'package:citifix/feature/workerFeature/taskDetails/presentation/views/widget/WorkerCompletionDetailsSection.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
+import 'package:printing/printing.dart';
+import 'package:screenshot/screenshot.dart';
 
 import 'package:citifix/core/DI/getit.dart';
 import 'package:citifix/core/resource/colormanager.dart';
@@ -28,6 +35,8 @@ import 'package:citifix/feature/workerFeature/taskDetails/presentation/views/wid
 import 'package:citifix/feature/workerFeature/tasks/data/repos/worker_task_Repo.dart';
 import 'package:citifix/feature/workerFeature/tasks/presentation/manager/cubit/task_report_cubit.dart';
 
+import 'data/model/taskdetailsmodel.dart';
+
 class TaskDetailsPage extends StatefulWidget {
   const TaskDetailsPage({super.key, required this.reportid});
   final int reportid;
@@ -44,8 +53,11 @@ class _TaskDetailsPageState extends State<TaskDetailsPage> {
   final List<File> _pickedFiles = [];
   final TextEditingController notesController = TextEditingController();
   final TextEditingController _commentController = TextEditingController();
+  final ScreenshotController screenshotController = ScreenshotController();
 
-  dynamic _currentTask;
+  TaskDetailsModel? _currentTask;
+  bool _isEditing = false;
+  final List<int> _deletedImageIds = [];
 
   @override
   void initState() {
@@ -65,10 +77,53 @@ class _TaskDetailsPageState extends State<TaskDetailsPage> {
   }
 
   void _checkButtonStatus() {
-    if (_pickedFiles.isNotEmpty && notesController.text.trim().isNotEmpty) {
-      _buttonStatusController.add(true);
+    if (_isEditing) {
+      _buttonStatusController.add(notesController.text.trim().isNotEmpty);
     } else {
-      _buttonStatusController.add(false);
+      if (_pickedFiles.isNotEmpty && notesController.text.trim().isNotEmpty) {
+        _buttonStatusController.add(true);
+      } else {
+        _buttonStatusController.add(false);
+      }
+    }
+  }
+
+  Future<void> _exportToPdf() async {
+    try {
+      // Capture the screen with a small delay to ensure rendering is complete
+      final Uint8List? imageBytes = await screenshotController.capture(
+        delay: const Duration(milliseconds: 100),
+      );
+
+      if (imageBytes != null) {
+        final pdf = pw.Document();
+        final image = pw.MemoryImage(imageBytes);
+
+        pdf.addPage(
+          pw.Page(
+            pageFormat: PdfPageFormat.a4,
+            build: (pw.Context context) {
+              return pw.Center(child: pw.Image(image, fit: pw.BoxFit.contain));
+            },
+          ),
+        );
+
+        await Printing.layoutPdf(
+          onLayout: (PdfPageFormat format) async => pdf.save(),
+          name: 'Task_Details_${widget.reportid}.pdf',
+        );
+      } else {
+        throw Exception("Capture returned null");
+      }
+    } catch (e) {
+      debugPrint("PDF Generation Error: $e");
+      if (mounted) {
+        Customsnackbar.show(
+          context: context,
+          backgroundColor: context.palette.red,
+          message: "Failed to generate PDF: ${e.toString()}",
+        );
+      }
     }
   }
 
@@ -95,6 +150,12 @@ class _TaskDetailsPageState extends State<TaskDetailsPage> {
         builder: (context, state) {
           if (state is ReportDetailsSuccess) {
             _currentTask = state.data;
+            if (_isEditing && state.data.isCompleted) {
+              // Stay in editing if we explicitly started editing
+            } else {
+               _isEditing = false;
+               _deletedImageIds.clear();
+            }
           }
 
           return ModalProgressHUD(
@@ -108,6 +169,16 @@ class _TaskDetailsPageState extends State<TaskDetailsPage> {
             child: Scaffold(
               backgroundColor: context.palette.reportsPageBackground,
               appBar: _buildAppBar(context),
+              floatingActionButton: _currentTask != null
+                  ? FloatingActionButton(
+                      onPressed: _exportToPdf,
+                      backgroundColor: context.palette.workerprimary,
+                      child: const Icon(
+                        Icons.picture_as_pdf,
+                        color: Colors.white,
+                      ),
+                    )
+                  : null,
               bottomNavigationBar: _buildBottomAction(context),
               body: _buildScaffoldBody(context, state),
             ),
@@ -130,14 +201,14 @@ class _TaskDetailsPageState extends State<TaskDetailsPage> {
       return _buildErrorWidget(context, state.error);
     }
     if (_currentTask != null) {
-      return _buildMainContent(context, _currentTask);
+      return _buildMainContent(context, _currentTask!);
     }
 
     return const SizedBox.shrink();
   }
 
   Widget _buildBottomAction(BuildContext context) {
-    if (_currentTask != null && !_currentTask.isCompleted) {
+    if (_currentTask != null && (!_currentTask!.isCompleted || _isEditing)) {
       return SafeArea(
         child: Padding(
           padding: EdgeInsets.all(ScreenUtilsManager.w16),
@@ -148,12 +219,22 @@ class _TaskDetailsPageState extends State<TaskDetailsPage> {
               final isFormValid = snapshot.data ?? false;
               return MarkAsCompletedButton(
                 onTap: isFormValid
-                    ? () =>
+                    ? () {
+                        if (_isEditing) {
+                          context.read<ReportDetailsManager>().updateCompletion(
+                                id: widget.reportid,
+                                notes: notesController.text,
+                                imagesToAdd: _pickedFiles,
+                                imagesToDeleteIds: _deletedImageIds,
+                              );
+                        } else {
                           context.read<ReportDetailsManager>().markAsCompleted(
-                            id: widget.reportid,
-                            notes: notesController.text,
-                            images: _pickedFiles,
-                          )
+                                id: widget.reportid,
+                                notes: notesController.text,
+                                images: _pickedFiles,
+                              );
+                        }
+                      }
                     : null,
               );
             },
@@ -164,7 +245,7 @@ class _TaskDetailsPageState extends State<TaskDetailsPage> {
     return const SizedBox.shrink();
   }
 
-  Widget _buildMainContent(BuildContext context, dynamic task) {
+  Widget _buildMainContent(BuildContext context, TaskDetailsModel task) {
     return RefreshIndicator(
       color: context.palette.primary,
       backgroundColor: context.palette.surface,
@@ -172,51 +253,142 @@ class _TaskDetailsPageState extends State<TaskDetailsPage> {
           .read<ReportDetailsManager>()
           .getReportDetails(id: widget.reportid),
       child: SingleChildScrollView(
-        padding: EdgeInsets.all(ScreenUtilsManager.w16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            TaskOwnerHeader(task: task),
-            SizedBox(height: ScreenUtilsManager.h16),
-            TaskInfoSection(task: task),
-            SizedBox(height: ScreenUtilsManager.h16),
-            IssuePhotosSection(
-              mediaItems: [...task.imagesUrls, ...task.videosUrls],
+        child: Screenshot(
+          controller: screenshotController,
+          child: Container(
+            color: context.palette.reportsPageBackground,
+            padding: EdgeInsets.all(ScreenUtilsManager.w16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                TaskOwnerHeader(task: task),
+                SizedBox(height: ScreenUtilsManager.h16),
+                TaskInfoSection(task: task),
+                SizedBox(height: ScreenUtilsManager.h16),
+                IssuePhotosSection(
+                  mediaItems: [...task.imagesUrls, ...task.videosUrls],
+                ),
+                SizedBox(height: ScreenUtilsManager.h16),
+                MapNavigationSection(taskDetailsModel: task),
+                SizedBox(height: ScreenUtilsManager.h16),
+                ActivityTimelineSection(
+                  timeline: task.timeline,
+                  isCompleted: task.isCompleted,
+                  initialStatus: task.status,
+                  id: task.id,
+                ),
+                SizedBox(height: ScreenUtilsManager.h16),
+                if (task.isCompleted && task.completionDetails != null && !_isEditing) ...[
+                  WorkerCompletionDetailsSection(
+                    completionDetails: task.completionDetails!,
+                    status: task.status,
+                    onEdit: () {
+                      setState(() {
+                        _isEditing = true;
+                        notesController.text = task.completionDetails!.note;
+                        _deletedImageIds.clear();
+                        _pickedFiles.clear();
+                        _imagesController.add([]);
+                        _checkButtonStatus();
+                      });
+                    },
+                  ),
+                  SizedBox(height: ScreenUtilsManager.h16),
+                ],
+                if (!task.isCompleted || _isEditing)
+                  CompletionDataSection(
+                    streamController: _imagesController,
+                    notesController: notesController,
+                    onFilesChanged: (_) {},
+                    addimage: (images) {
+                      setState(() => _pickedFiles.addAll(images));
+                      _imagesController.add(_pickedFiles);
+                      _checkButtonStatus();
+                    },
+                    removeImage: (index) {
+                      setState(() => _pickedFiles.removeAt(index));
+                      _imagesController.add(_pickedFiles);
+                      _checkButtonStatus();
+                    },
+                  ),
+                if (_isEditing && task.completionDetails != null) ...[
+                  SizedBox(height: ScreenUtilsManager.h16),
+                  Text(
+                    S.of(context).completionImages,
+                    style: GoogleFonts.cairo(
+                      fontSize: ScreenUtilsManager.s12,
+                      fontWeight: FontWeight.bold,
+                      color: context.palette.onSurfaceVariant,
+                    ),
+                  ),
+                  SizedBox(height: ScreenUtilsManager.h8),
+                  SizedBox(
+                    height: ScreenUtilsManager.h80,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: task.completionDetails!.imageUrls.length,
+                      itemBuilder: (context, index) {
+                        final id = task.completionDetails!.imageIds[index];
+                        final url = task.completionDetails!.imageUrls[index];
+                        final isDeleted = _deletedImageIds.contains(id);
+
+                        return Padding(
+                          padding: EdgeInsets.only(right: ScreenUtilsManager.w8),
+                          child: Stack(
+                            children: [
+                              Opacity(
+                                opacity: isDeleted ? 0.3 : 1.0,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(8),
+                                  child: Image.network(
+                                    url,
+                                    width: ScreenUtilsManager.w80,
+                                    height: ScreenUtilsManager.h80,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                              Positioned(
+                                top: 0,
+                                right: 0,
+                                child: IconButton(
+                                  padding: EdgeInsets.zero,
+                                  constraints: const BoxConstraints(),
+                                  icon: Icon(
+                                    isDeleted
+                                        ? Icons.add_circle
+                                        : Icons.remove_circle,
+                                    color: isDeleted ? Colors.green : Colors.red,
+                                  ),
+                                  onPressed: () {
+                                    setState(() {
+                                      if (isDeleted) {
+                                        _deletedImageIds.remove(id);
+                                      } else {
+                                        _deletedImageIds.add(id);
+                                      }
+                                      _checkButtonStatus();
+                                    });
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ],
+                SizedBox(height: ScreenUtilsManager.h16),
+                Workercomments(
+                  isComment: false,
+                  comments: task.comments,
+                  controller: _commentController,
+                  reporID: task.id,
+                ),
+              ],
             ),
-            SizedBox(height: ScreenUtilsManager.h16),
-            MapNavigationSection(taskDetailsModel: task),
-            SizedBox(height: ScreenUtilsManager.h16),
-            ActivityTimelineSection(
-              timeline: task.timeline,
-              isCompleted: task.isCompleted,
-              initialStatus: task.status,
-              id: task.id,
-            ),
-            SizedBox(height: ScreenUtilsManager.h16),
-            if (!task.isCompleted)
-              CompletionDataSection(
-                streamController: _imagesController,
-                notesController: notesController,
-                onFilesChanged: (_) {},
-                addimage: (images) {
-                  setState(() => _pickedFiles.addAll(images));
-                  _imagesController.add(_pickedFiles);
-                  _checkButtonStatus();
-                },
-                removeImage: (index) {
-                  setState(() => _pickedFiles.removeAt(index));
-                  _imagesController.add(_pickedFiles);
-                  _checkButtonStatus();
-                },
-              ),
-            SizedBox(height: ScreenUtilsManager.h16),
-            Workercomments(
-              isComment: false,
-              comments: task.comments,
-              controller: _commentController,
-              reporID: task.id,
-            ),
-          ],
+          ),
         ),
       ),
     );
@@ -281,7 +453,9 @@ class _TaskDetailsPageState extends State<TaskDetailsPage> {
                 shape: BoxShape.circle,
               ),
               child: Icon(
-                isNoInternet ? Icons.wifi_off_rounded : Icons.error_outline_rounded,
+                isNoInternet
+                    ? Icons.wifi_off_rounded
+                    : Icons.error_outline_rounded,
                 size: ScreenUtilsManager.s60,
                 color: context.palette.error,
               ),
