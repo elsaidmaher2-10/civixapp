@@ -29,23 +29,41 @@ class _AnimatedSplashViewState extends State<AnimatedSplashView>
   late final Animation<double> _logoOpacity;
   Timer? _navigationTimer;
 
+  static const int _animDuration = 2200;
+
+  static const int _holdAfterAnim = 600;
+
+  static const int _navDelay = _animDuration + _holdAfterAnim;
+
+  static const double _logoFadeEnd = 0.30;
+
+  static const double _textStart = 0.28;
+
+  static const double _textEnd = 0.88;
+
   @override
   void initState() {
     super.initState();
+
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 2600),
+      duration: const Duration(milliseconds: _animDuration),
     );
     _logoScale = Tween<double>(
-      begin: 0.72,
+      begin: 0.0,
       end: 1.0,
-    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOutBack));
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.elasticOut));
+
     _logoOpacity = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(parent: _controller, curve: const Interval(0.0, 0.42)),
+      CurvedAnimation(
+        parent: _controller,
+        curve: Interval(0.0, _logoFadeEnd, curve: Curves.easeIn),
+      ),
     );
 
     _controller.forward();
-    _navigationTimer = Timer(const Duration(seconds: 4), () {
+
+    _navigationTimer = Timer(const Duration(milliseconds: _navDelay), () {
       if (!mounted) return;
       Navigator.pushReplacementNamed(context, _resolveInitialRoute());
     });
@@ -56,13 +74,14 @@ class _AnimatedSplashViewState extends State<AnimatedSplashView>
 
   double _letterReveal(int index, int total, double t) {
     if (total <= 0) return 0;
-    final double span = 0.52 / total;
-    final double start = 0.38 + index * span;
-    return Interval(
-      start,
-      (start + span * 1.15).clamp(0.0, 1.0),
-      curve: Curves.easeOutCubic,
-    ).transform(t);
+
+    final double totalSpan = _textEnd - _textStart;
+
+    final double spanPerLetter = totalSpan / total;
+    final double start = _textStart + index * spanPerLetter;
+    final double end = (start + spanPerLetter * 1.4).clamp(0.0, 1.0);
+
+    return Interval(start, end, curve: Curves.easeOutCubic).transform(t);
   }
 
   String _resolveInitialRoute() {
@@ -101,7 +120,6 @@ class _AnimatedSplashViewState extends State<AnimatedSplashView>
       backgroundColor: Colors.white,
       body: Directionality(
         textDirection: TextDirection.ltr,
-
         child: DecoratedBox(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
@@ -149,7 +167,7 @@ class _AnimatedSplashViewState extends State<AnimatedSplashView>
                               child: Transform.translate(
                                 offset: Offset(0, (1 - reveal) * 14),
                                 child: Text(
-                                  locale: Locale("en"),
+                                  locale: const Locale('en'),
                                   title[i],
                                   style: TextStyle(
                                     color: _titleLetterColor(i),

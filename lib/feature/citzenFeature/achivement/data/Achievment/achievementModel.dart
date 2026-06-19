@@ -36,6 +36,7 @@ class AchievementModel {
   final String? completionNote;
 
   final DateTime createdAt;
+  final DateTime resolvedAt;
 
   final List<TimelineModel> timeline;
 
@@ -65,6 +66,7 @@ class AchievementModel {
     required this.completionImageUrls,
     this.completionNote,
     required this.createdAt,
+    required this.resolvedAt,
     required this.timeline,
   });
 
@@ -106,6 +108,7 @@ class AchievementModel {
       completionNote: json['completionNote'],
 
       createdAt: DateTime.tryParse(json['createdAt'] ?? "") ?? DateTime.now(),
+      resolvedAt: DateTime.tryParse(json['resolvedAt'] ?? "") ?? DateTime.now(),
 
       timeline:
           (json['timeline'] as List?)

@@ -95,7 +95,7 @@ class AchievementReportCard extends StatelessWidget {
                         ),
 
                         Text(
-                          "${S.of(context).completed} ${report.createdAt.timeAgo(context)}",
+                          "${S.of(context).completed} ${report.resolvedAt.timeAgo(context)}",
                           style: GoogleFonts.cairo(
                             fontSize: 10.sp,
                             color: context.palette.onSurfaceVariant,
@@ -195,9 +195,7 @@ class AchievementReportCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: context.palette.surfaceContainerLow,
         border: Border(
-          top: BorderSide(
-            color: context.palette.outline.withOpacity(0.35),
-          ),
+          top: BorderSide(color: context.palette.outline.withOpacity(0.35)),
         ),
       ),
       child: Row(

@@ -14,12 +14,11 @@ class Signuprepo {
         path: Apiconstant.signupendpoint,
         body: {
           "nationalId": user.nationalId,
-          "fullName": user.firstName + user.lastName,
+          "fullName": "${user.firstName} ${user.lastName}",
           "email": user.email,
           "phoneNumber": user.phone,
           "password": user.password,
           "address": user.address,
-
           "dateOfBirth": user.dateOfBirth,
 
           "role": user.role,

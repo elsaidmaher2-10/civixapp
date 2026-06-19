@@ -1,6 +1,6 @@
 abstract class AssetValueManager {
   static String uploadimage = "assets/onbroadingimage/Subtract.png";
-  static const String Klog = "assets/citiFixLogo.svg";
+  static const String Klog = "assets/profileicons/citiFixIco_fixed_1.svg";
   static const String Klog2 = "assets/splach.png";
   static const String pending = "assets/pending.svg";
   static const String resolved = "assets/resolved.svg";

@@ -14,7 +14,7 @@ part 'mange_custom_bottomnav_bar_state.dart';
 class MangeCustomBottomnavBarCubit extends Cubit<MangeCustomBottomnavBarState> {
   MangeCustomBottomnavBarCubit() : super(MangeCustomBottomnavBarInitial());
   int curindex = 0;
-  final List<Widget> _screens = [
+  final List<Widget> screens = [
     HomeScreen(),
     BlocProvider(
       create: (_) =>
@@ -30,9 +30,5 @@ class MangeCustomBottomnavBarCubit extends Cubit<MangeCustomBottomnavBarState> {
       PrefrenceManager().setbool("isvisit", true);
     }
     emit(MangeCustomBottomnavBarChange(curindex));
-  }
-
-  Widget CurScreen() {
-    return _screens[curindex];
   }
 }

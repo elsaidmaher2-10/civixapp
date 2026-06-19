@@ -16,7 +16,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-
 import '../../../core/widget/CustomSnackBar.dart';
 import 'Presentation/VerficationinitManger/VerificationInitCubit.dart';
 import 'Presentation/VerficationinitManger/verficationinitState.dart';
@@ -279,9 +278,40 @@ class _GlobalGateVerificationPageState extends State<VerificationInit> {
         check();
       },
       decoration: CustomDropdownDecoration(
-        closedFillColor: context.palette.lightGrey5,
-        closedBorderRadius: BorderRadius.circular(16),
-        closedBorder: Border.all(color: context.palette.outline.withOpacity(0.5)),
+        closedShadow: null,
+        closedBorderRadius: BorderRadius.circular(0),
+        closedFillColor: Colors.transparent,
+        closedBorder: null,
+        expandedFillColor: context.palette.surface,
+
+        headerStyle: GoogleFonts.cairo(
+          color: context.palette.onSurface,
+          fontSize: ScreenUtilsManager.s14,
+        ),
+        hintStyle: GoogleFonts.cairo(
+          color: context.palette.onSurfaceVariant.withOpacity(0.6),
+          fontSize: ScreenUtilsManager.s14,
+        ),
+        listItemStyle: GoogleFonts.cairo(
+          color: context.palette.onSurface,
+          fontSize: ScreenUtilsManager.s14,
+        ),
+        searchFieldDecoration: SearchFieldDecoration(
+          fillColor: Colors.transparent,
+          prefixIcon: Icon(
+            Icons.search,
+            color: context.palette.onSurfaceVariant,
+            size: ScreenUtilsManager.s20,
+          ),
+          textStyle: GoogleFonts.cairo(
+            color: context.palette.onSurface,
+            fontSize: ScreenUtilsManager.s14,
+          ),
+          hintStyle: GoogleFonts.cairo(
+            color: context.palette.onSurfaceVariant,
+            fontSize: ScreenUtilsManager.s14,
+          ),
+        ),
       ),
     );
   }
@@ -316,10 +346,14 @@ class _GlobalGateVerificationPageState extends State<VerificationInit> {
       duration: const Duration(milliseconds: 300),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: isSelected ? context.palette.workerprimary : context.palette.white,
+        color: isSelected
+            ? context.palette.workerprimary
+            : context.palette.surface,
         borderRadius: BorderRadius.circular(ScreenUtilsManager.cardRadius),
         border: Border.all(
-          color: isSelected ? context.palette.workerprimary : context.palette.outline,
+          color: isSelected
+              ? context.palette.workerprimary
+              : context.palette.outline,
         ),
         boxShadow: isSelected
             ? [

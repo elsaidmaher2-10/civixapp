@@ -245,7 +245,7 @@ class CitifixPalette extends ThemeExtension<CitifixPalette> {
       bgbackground: scaffold,
       workerprimary: ColorManger.workerprimary,
       workerbgLight: surface,
-      background: surfaceHigh,
+      background: scaffold,
       secondary: onTertiary,
       success: Color(0xFF4ADE80),
       outline: outlineDark,

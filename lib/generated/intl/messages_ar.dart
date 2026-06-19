@@ -64,7 +64,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "alertRequired": MessageLookupByLibrary.simpleMessage("مطلوب توثيق الحساب"),
     "all": MessageLookupByLibrary.simpleMessage("الكل"),
     "appName": MessageLookupByLibrary.simpleMessage("البوابة العالمية"),
-    "appTitle": MessageLookupByLibrary.simpleMessage("سيتي فيكس"),
+    "appTitle": MessageLookupByLibrary.simpleMessage("سيتيفيكس"),
     "arabic": MessageLookupByLibrary.simpleMessage("العربية"),
     "areYouSureLogout": MessageLookupByLibrary.simpleMessage(
       "هل أنت متأكد من تسجيل الخروج؟",

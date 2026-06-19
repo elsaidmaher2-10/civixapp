@@ -21,12 +21,20 @@ class CitizenMainScreen extends StatefulWidget {
 }
 
 class _CitizenMainScreenState extends State<CitizenMainScreen> {
-  @override
+  late PageController _pageController;
+
   @override
   void initState() {
     super.initState();
+    _pageController = PageController();
     Future.microtask(() => context.read<ReportCubit>().fetchReports());
     _checkForUpdates();
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
   }
 
   Future<void> _checkForUpdates() async {
@@ -98,10 +106,22 @@ class _CitizenMainScreenState extends State<CitizenMainScreen> {
       ],
       child: Builder(
         builder: (BuildContext context) =>
-            BlocBuilder<
+            BlocConsumer<
               MangeCustomBottomnavBarCubit,
               MangeCustomBottomnavBarState
             >(
+              listener: (context, state) {
+                if (state is MangeCustomBottomnavBarChange) {
+                  if (_pageController.hasClients &&
+                      _pageController.page?.round() != state.index) {
+                    _pageController.animateToPage(
+                      state.index,
+                      duration: const Duration(milliseconds: 300),
+                      curve: Curves.easeInOut,
+                    );
+                  }
+                }
+              },
               builder: (context, state) {
                 final cubit = context.read<MangeCustomBottomnavBarCubit>();
                 return Scaffold(
@@ -141,7 +161,13 @@ class _CitizenMainScreenState extends State<CitizenMainScreen> {
                         )
                       : null,
 
-                  body: cubit.CurScreen(),
+                  body: PageView(
+                    controller: _pageController,
+                    onPageChanged: (index) {
+                      cubit.ontap(index);
+                    },
+                    children: cubit.screens,
+                  ),
                   bottomNavigationBar: CustomSnakeNavbar(),
                 );
               },

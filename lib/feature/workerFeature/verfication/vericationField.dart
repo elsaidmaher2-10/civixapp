@@ -39,7 +39,9 @@ class VerificationFailedScreen extends StatelessWidget {
               Expanded(
                 child: SingleChildScrollView(
                   physics: const BouncingScrollPhysics(),
-                  padding: EdgeInsets.symmetric(horizontal: ScreenUtilsManager.w24),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: ScreenUtilsManager.w24,
+                  ),
                   child: Column(
                     children: [
                       SizedBox(height: ScreenUtilsManager.h20),
@@ -71,7 +73,11 @@ class VerificationFailedScreen extends StatelessWidget {
             color: context.palette.surfaceContainerHigh,
             shape: BoxShape.circle,
           ),
-          child: Icon(Icons.close, color: context.palette.onSurface, size: ScreenUtilsManager.s20),
+          child: Icon(
+            Icons.close,
+            color: context.palette.onSurface,
+            size: ScreenUtilsManager.s20,
+          ),
         ),
         onPressed: () => Navigator.pop(context),
       ),
@@ -236,7 +242,7 @@ class VerificationFailedScreen extends StatelessWidget {
         children: [
           ElevatedButton(
             onPressed: () {
-              Navigator.of(context).pushAndRemoveUntil(
+              Navigator.of(context).pushReplacement(
                 MaterialPageRoute(
                   builder: (context) => BlocProvider(
                     create: (context) =>
@@ -244,7 +250,6 @@ class VerificationFailedScreen extends StatelessWidget {
                     child: const VerificationInit(),
                   ),
                 ),
-                (route) => route.isFirst,
               );
             },
             style: ElevatedButton.styleFrom(

@@ -162,6 +162,8 @@ class _TaskDetailsPageState extends State<TaskDetailsPage> {
               color: context.palette.primary,
             ),
             child: Scaffold(
+              floatingActionButtonLocation:
+                  FloatingActionButtonLocation.miniStartFloat,
               backgroundColor: context.palette.reportsPageBackground,
               appBar: const TaskDetailsAppBar(),
               floatingActionButton: _currentTask != null

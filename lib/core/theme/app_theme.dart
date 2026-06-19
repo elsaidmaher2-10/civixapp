@@ -149,7 +149,7 @@ abstract final class AppTheme {
       useMaterial3: true,
       brightness: Brightness.dark,
       extensions: <ThemeExtension<dynamic>>[
-        CitifixPalette.dark(isWorker: isWorker),
+        CitifixPalette.dark(isWorker: isWorker, workerAccent: isWorker),
       ],
       colorScheme: scheme,
       textTheme: darkTextBase.copyWith(

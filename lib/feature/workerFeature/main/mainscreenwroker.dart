@@ -19,7 +19,15 @@ class Mainscreenwroker extends StatefulWidget {
 }
 
 class _MainscreenwrokerState extends State<Mainscreenwroker> {
+  final PageController _pageController = PageController();
   final List<Widget> _pages = [HomePage(), const TasksView(), ProfileView()];
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ThemeCubit, ThemeMode>(
@@ -28,10 +36,26 @@ class _MainscreenwrokerState extends State<Mainscreenwroker> {
           data: themeMode == ThemeMode.dark
               ? AppTheme.dark(AppRole.worker)
               : AppTheme.light(AppRole.worker),
-          child: BlocBuilder<WorkerCubit, int>(
+          child: BlocConsumer<WorkerCubit, int>(
+            listener: (context, state) {
+              if (_pageController.hasClients &&
+                  _pageController.page?.round() != state) {
+                _pageController.animateToPage(
+                  state,
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.easeInOut,
+                );
+              }
+            },
             builder: (context, state) {
               return Scaffold(
-                body: _pages[state],
+                body: PageView(
+                  controller: _pageController,
+                  onPageChanged: (index) {
+                    context.read<WorkerCubit>().changeCurrentIndex(index);
+                  },
+                  children: _pages,
+                ),
                 bottomNavigationBar: BottomNavigationBar(
                   selectedLabelStyle: GoogleFonts.cairo(),
                   unselectedLabelStyle: GoogleFonts.cairo(),
