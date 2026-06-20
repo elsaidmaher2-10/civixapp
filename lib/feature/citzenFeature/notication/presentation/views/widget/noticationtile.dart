@@ -24,12 +24,21 @@ class NotificationTile extends StatelessWidget {
     required this.onTap,
     required this.onDelete,
   });
+  int? extractReportNumber(String message) {
+    final match = RegExp(r'#(\d+)').firstMatch(message);
+
+    if (match != null) {
+      return int.parse(match.group(1)!);
+    }
+
+    return null;
+  }
 
   @override
   Widget build(BuildContext context) {
     final bool isWorker =
         PrefrenceManager().getstring("role")?.toLowerCase() == "worker";
-         final ColorScheme scheme = Theme.of(context).colorScheme;
+    final ColorScheme scheme = Theme.of(context).colorScheme;
     final bool isDark = Theme.of(context).brightness == Brightness.dark;
     final Color primaryColor = isWorker
         ? context.palette.workerprimary
@@ -54,7 +63,9 @@ class NotificationTile extends StatelessWidget {
                     create: (_) => ReportDetailsManager(
                       reportdetailsRepo: getIt<ReportdetailsRepo>(),
                     ),
-                    child: TaskDetailsPage(reportid: item.id),
+                    child: TaskDetailsPage(
+                      reportid: extractReportNumber(item.message) ?? 2,
+                    ),
                   ),
                 ),
               );
@@ -182,7 +193,9 @@ class NotificationTile extends StatelessWidget {
             item.isRead
                 ? Icons.notifications_none_rounded
                 : Icons.notifications_active_rounded,
-            color: item.isRead ? context.palette.onSurfaceVariant : primaryColor,
+            color: item.isRead
+                ? context.palette.onSurfaceVariant
+                : primaryColor,
             size: ScreenUtilsManager.s20,
           ),
         ),

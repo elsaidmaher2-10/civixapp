@@ -180,7 +180,7 @@ class AchievementReportCard extends StatelessWidget {
           placeholder: (_, _) =>
               const Center(child: CupertinoActivityIndicator()),
           errorWidget: (_, _, _) =>
-              Image.asset(Constantmanger.defualtImage, fit: BoxFit.cover),
+              Image.network(Constantmanger.defualtImage, fit: BoxFit.cover),
           imageUrl: report.completionImageUrls.isNotEmpty
               ? report.completionImageUrls.first
               : Constantmanger.defualtImage,

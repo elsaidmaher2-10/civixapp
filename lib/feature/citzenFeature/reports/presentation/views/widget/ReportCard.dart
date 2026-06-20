@@ -128,7 +128,7 @@ class Reportcard extends StatelessWidget {
         isRemote: true,
       );
     } else {
-      return Image.asset(Constantmanger.defualtImage, fit: BoxFit.cover);
+      return Image.network(Constantmanger.defualtImage, fit: BoxFit.cover);
     }
   }
 
