@@ -20,22 +20,29 @@ PreferredSizeWidget AddReportAppbar(BuildContext context) => AppBar(
   ),
   leading: IconButton(
     onPressed: () => Navigator.pop(context),
-    icon: Icon(
-      CupertinoIcons.back,
-      size: 22.h,
-      color: context.palette.kPrimary,
+    icon: Padding(
+      padding: const EdgeInsets.only(top: 24.0),
+      child: Icon(
+        CupertinoIcons.back,
+        size: 22.h,
+        color: context.palette.kPrimary,
+      ),
     ),
   ),
   centerTitle: true,
+  toolbarHeight: 70.h,
   scrolledUnderElevation: 0,
   backgroundColor: context.palette.surfaceContainerLowest,
   foregroundColor: context.palette.onSurface,
-  title: Text(
-    S.of(context).addReport,
-    style: GoogleFonts.cairo(
-      color: Theme.of(context).colorScheme.primary,
-      fontWeight: FontWeight.w600,
-      fontSize: 18.sp,
+  title: Padding(
+    padding: const EdgeInsets.only(top: 16.0),
+    child: Text(
+      S.of(context).addReport,
+      style: GoogleFonts.cairo(
+        color: Theme.of(context).colorScheme.primary,
+        fontWeight: FontWeight.w700,
+        fontSize: 18.sp,
+      ),
     ),
   ),
 );
