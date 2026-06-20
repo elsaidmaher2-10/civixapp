@@ -17,7 +17,7 @@ class AchievementCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(14),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.07),
+            color: Colors.grey.shade600.withOpacity(0.1),
             blurRadius: 10,
             offset: const Offset(0, 3),
           ),
@@ -49,7 +49,7 @@ class AchievementCard extends StatelessWidget {
                         report.areaName,
                         style: GoogleFonts.cairo(
                           fontSize: 11,
-                          color: Colors.grey,
+                          color: Colors.black.withOpacity(0.7),
                         ),
                       ),
                     ],

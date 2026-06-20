@@ -33,7 +33,7 @@ PreferredSizeWidget AddReportAppbar(BuildContext context) => AppBar(
   title: Text(
     S.of(context).addReport,
     style: GoogleFonts.cairo(
-      color: context.palette.onSurface,
+      color: Theme.of(context).colorScheme.primary,
       fontWeight: FontWeight.w600,
       fontSize: 18.sp,
     ),

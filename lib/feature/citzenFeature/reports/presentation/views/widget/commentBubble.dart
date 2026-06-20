@@ -5,9 +5,7 @@ import 'package:citifix/core/resource/screenutilsmaanger.dart';
 import 'package:citifix/feature/citzenFeature/reports/data/Models/commentmodel/commentmodel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../../../../../generated/l10n.dart';
 
 class CommentBubble extends StatelessWidget {
   final CommentModel comment;
