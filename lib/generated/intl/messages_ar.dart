@@ -289,6 +289,12 @@ class MessageLookup extends MessageLookupByLibrary {
       "جاري تحميل الأقسام...",
     ),
     "location": MessageLookupByLibrary.simpleMessage("الموقع"),
+    "locationNotFound": MessageLookupByLibrary.simpleMessage(
+      "لم يتم العثور على الموقع",
+    ),
+    "locationSearchFailed": MessageLookupByLibrary.simpleMessage(
+      "تعذر العثور على هذا الموقع",
+    ),
     "logIn": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
     "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
     "logout": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
@@ -499,6 +505,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "ابحث عن \"إصلاح حفرة\"",
     ),
     "searchHint5": MessageLookupByLibrary.simpleMessage("صف المشكلة هنا..."),
+    "searchLocationHint": MessageLookupByLibrary.simpleMessage("ابحث عن موقع"),
     "searchMyReports": MessageLookupByLibrary.simpleMessage("ابحث في بلاغاتي"),
     "searchPlaceholder": MessageLookupByLibrary.simpleMessage(
       "بحث عن التقارير...",
@@ -558,6 +565,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "submittedAtLabel": MessageLookupByLibrary.simpleMessage("تاريخ التقديم"),
     "success": MessageLookupByLibrary.simpleMessage("تم بنجاح"),
     "support": MessageLookupByLibrary.simpleMessage("الدعم"),
+    "tapMapToChooseLocation": MessageLookupByLibrary.simpleMessage(
+      "اضغط على الخريطة أو ابحث لاختيار موقع البلاغ.",
+    ),
     "tapToScan": MessageLookupByLibrary.simpleMessage("اضغط للتصوير"),
     "taskDetails": MessageLookupByLibrary.simpleMessage("تفاصيل المهمة"),
     "taskOwnerLabel": MessageLookupByLibrary.simpleMessage("• صاحب المهمة"),

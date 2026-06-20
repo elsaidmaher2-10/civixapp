@@ -151,6 +151,7 @@ class _AddReportScreenState extends State<AddReportScreen> {
                       SizedBox(height: ScreenUtilsManager.h16),
 
                       CustomMap.fromDevice(
+                        allowSelection: true,
                         onmapCreated: (String street, LatLng latlang) {
                           reportscreencontroller.selectedStreet = street;
                           reportscreencontroller.selectedLatLng = latlang;

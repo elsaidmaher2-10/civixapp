@@ -24,7 +24,7 @@ class ReportImage extends StatelessWidget {
           url,
           width: width,
           height: height,
-          fit: BoxFit.fill,
+          fit: BoxFit.cover,
           errorBuilder: (_, _, _) => Container(
             color: Colors.grey.shade200,
             child: const Icon(Icons.broken_image, color: Colors.grey),

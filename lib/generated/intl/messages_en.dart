@@ -310,6 +310,12 @@ class MessageLookup extends MessageLookupByLibrary {
       "Loading Categories...",
     ),
     "location": MessageLookupByLibrary.simpleMessage("Location"),
+    "locationNotFound": MessageLookupByLibrary.simpleMessage(
+      "Location not found",
+    ),
+    "locationSearchFailed": MessageLookupByLibrary.simpleMessage(
+      "Could not find that location",
+    ),
     "logIn": MessageLookupByLibrary.simpleMessage("log in"),
     "login": MessageLookupByLibrary.simpleMessage("Log in"),
     "logout": MessageLookupByLibrary.simpleMessage("Log out"),
@@ -536,6 +542,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "searchHint5": MessageLookupByLibrary.simpleMessage(
       "Describe the issue...",
     ),
+    "searchLocationHint": MessageLookupByLibrary.simpleMessage(
+      "Search for a location",
+    ),
     "searchMyReports": MessageLookupByLibrary.simpleMessage(
       "Search my reports",
     ),
@@ -605,6 +614,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "submittedAtLabel": MessageLookupByLibrary.simpleMessage("Submitted"),
     "success": MessageLookupByLibrary.simpleMessage("Success"),
     "support": MessageLookupByLibrary.simpleMessage("Support"),
+    "tapMapToChooseLocation": MessageLookupByLibrary.simpleMessage(
+      "Tap the map or search to choose the report location.",
+    ),
     "tapToScan": MessageLookupByLibrary.simpleMessage("Tap to scan"),
     "taskDetails": MessageLookupByLibrary.simpleMessage("Task Details"),
     "taskOwnerLabel": MessageLookupByLibrary.simpleMessage("• Task Owner"),

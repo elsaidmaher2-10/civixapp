@@ -454,6 +454,46 @@ class S {
     return Intl.message('Location', name: 'location', desc: '', args: []);
   }
 
+  /// `Search for a location`
+  String get searchLocationHint {
+    return Intl.message(
+      'Search for a location',
+      name: 'searchLocationHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tap the map or search to choose the report location.`
+  String get tapMapToChooseLocation {
+    return Intl.message(
+      'Tap the map or search to choose the report location.',
+      name: 'tapMapToChooseLocation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Location not found`
+  String get locationNotFound {
+    return Intl.message(
+      'Location not found',
+      name: 'locationNotFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Could not find that location`
+  String get locationSearchFailed {
+    return Intl.message(
+      'Could not find that location',
+      name: 'locationSearchFailed',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Select Category`
   String get selectCategory {
     return Intl.message(
