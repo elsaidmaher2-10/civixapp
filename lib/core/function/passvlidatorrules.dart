@@ -1,7 +1,7 @@
 import 'package:citifix/core/resource/constantmanger.dart';
 
 List passwordvalidatorrules(String value) {
-  if (value.trim().length >= 12) {
+  if (value.trim().length >= 8) {
     Constantmanger.passwordRules[0]["status"] = true;
   } else {
     Constantmanger.passwordRules[0]["status"] = false;
@@ -34,7 +34,7 @@ List passwordvalidatorrules(String value) {
 }
 
 bool passwordvalidatorrulesListener(String value) {
-  if (value.trim().length >= 12) {
+  if (value.trim().length >= 8) {
     Constantmanger.passwordRules[0]["status"] = true;
   } else {
     Constantmanger.passwordRules[0]["status"] = false;

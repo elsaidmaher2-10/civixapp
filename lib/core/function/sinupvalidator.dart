@@ -69,6 +69,7 @@ String? nationalIdValidator(BuildContext context, String? value) {
 
 String getRuleText(BuildContext context, String key) {
   switch (key) {
+    case "Minimum characters 8":
     case "Minimum characters 12":
       return S.of(context).passwordMinLength;
 

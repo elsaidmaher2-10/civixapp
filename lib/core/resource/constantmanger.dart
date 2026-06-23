@@ -70,7 +70,7 @@ class Constantmanger {
       "Please add all necessary characters to create safe password.";
 
   static List<Map<String, dynamic>> passwordRules = [
-    {"title": "Minimum characters 12", "status": false},
+    {"title": "Minimum characters 8", "status": false},
     {"title": "One uppercase character", "status": false},
     {"title": "One lowercase character", "status": false},
     {"title": "One special character", "status": false},

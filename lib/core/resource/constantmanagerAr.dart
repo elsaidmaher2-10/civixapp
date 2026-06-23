@@ -69,7 +69,7 @@ class Constantmanagerar {
       "يرجى إضافة جميع الشروط لإنشاء كلمة مرور آمنة.";
 
   static List<Map<String, dynamic>> passwordRules = [
-    {"title": "12 حرف على الأقل", "status": false},
+    {"title": "8 حرف على الأقل", "status": false},
     {"title": "حرف كبير واحد", "status": false},
     {"title": "حرف صغير واحد", "status": false},
     {"title": "رمز خاص واحد", "status": false},

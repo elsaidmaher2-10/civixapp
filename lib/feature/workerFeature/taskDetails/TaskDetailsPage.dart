@@ -338,7 +338,9 @@ class _TaskDetailsPageState extends State<TaskDetailsPage> {
                 ],
                 if (task.comments.isNotEmpty || !task.isCompleted || _isEditing)
                   Workercomments(
-                    isComment: false,
+                    isComment:
+                        task.isCompleted ||
+                        task.status.toLowerCase() == 'resolved',
                     comments: task.comments,
                     controller: _commentController,
                     reporID: task.id,

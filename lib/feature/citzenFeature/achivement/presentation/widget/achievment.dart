@@ -140,7 +140,7 @@ class _AchievemrntReportScreenState extends State<AchievemrntReportScreen> {
       ];
     }
 
-    final topReports = reports.take(5).toList();
+    final topReports = reports.where((e) => e.isTopAchievement).toList();
 
     return [
       SliverToBoxAdapter(

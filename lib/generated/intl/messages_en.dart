@@ -431,7 +431,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "One lowercase character",
     ),
     "passwordMinLength": MessageLookupByLibrary.simpleMessage(
-      "Minimum 12 characters",
+      "Minimum 8 characters",
     ),
     "passwordNotMatch": MessageLookupByLibrary.simpleMessage(
       "Passwords do not match",

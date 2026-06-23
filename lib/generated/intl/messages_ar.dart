@@ -404,7 +404,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
     "passwordLowercase": MessageLookupByLibrary.simpleMessage("حرف صغير واحد"),
     "passwordMinLength": MessageLookupByLibrary.simpleMessage(
-      "12 حرف على الأقل",
+      "8 حرف على الأقل",
     ),
     "passwordNotMatch": MessageLookupByLibrary.simpleMessage(
       "كلمتا المرور غير متطابقتين",

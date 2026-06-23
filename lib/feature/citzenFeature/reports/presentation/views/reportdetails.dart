@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:citifix/core/DI/getit.dart';
 import 'package:citifix/core/extenstion/datetimeextension.dart';
 import 'package:citifix/core/resource/colormanager.dart';
@@ -208,7 +207,10 @@ class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
                       controller: controller,
                       reporID: report.id,
                       comments: report.comments,
-                      isComment: widget.isachivement ? true : false,
+                      isComment:
+                          widget.isachivement ||
+                          report.status.toLowerCase() == 'resolved' ||
+                          report.status.toLowerCase() == 'completed',
                     ),
                     SliverToBoxAdapter(child: SizedBox(height: 50.h)),
                   ],

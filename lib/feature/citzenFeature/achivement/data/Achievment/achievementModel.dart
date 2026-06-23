@@ -7,7 +7,7 @@ class AchievementModel {
 
   final String areaName;
   final int areaId;
-
+  final bool isTopAchievement;
   final String categoryName;
   final int categoryId;
 
@@ -68,6 +68,7 @@ class AchievementModel {
     required this.createdAt,
     required this.resolvedAt,
     required this.timeline,
+    required this.isTopAchievement,
   });
 
   factory AchievementModel.fromJson(Map<String, dynamic> json) {
@@ -115,6 +116,7 @@ class AchievementModel {
               ?.map((e) => TimelineModel.fromJson(e))
               .toList() ??
           [],
+      isTopAchievement: json['isTopAchievement'] ?? false,
     );
   }
 }

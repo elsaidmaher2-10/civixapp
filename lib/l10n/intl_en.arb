@@ -99,7 +99,7 @@
   "dateRequired": "Please choose date of birth",
   "newPassword": "New Password",
   "enterNewPassword": "Enter new password",
-  "passwordMinLength": "Minimum 12 characters",
+  "passwordMinLength": "Minimum 8 characters",
   "passwordUppercase": "One uppercase character",
   "passwordLowercase": "One lowercase character",
   "passwordSpecialChar": "One special character",

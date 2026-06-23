@@ -819,10 +819,10 @@ class S {
     );
   }
 
-  /// `Minimum 12 characters`
+  /// `Minimum 8 characters`
   String get passwordMinLength {
     return Intl.message(
-      'Minimum 12 characters',
+      'Minimum 8 characters',
       name: 'passwordMinLength',
       desc: '',
       args: [],

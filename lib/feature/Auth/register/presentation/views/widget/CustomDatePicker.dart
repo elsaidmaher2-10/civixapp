@@ -1,7 +1,8 @@
+import 'package:citifix/core/resource/colormanager.dart';
+import 'package:citifix/core/widget/customtextfromfield.dart';
+import 'package:citifix/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:citifix/generated/l10n.dart';
-import 'package:citifix/core/resource/colormanager.dart';
 
 class CustomDateField extends StatelessWidget {
   const CustomDateField({super.key, required this.controller});
@@ -12,18 +13,16 @@ class CustomDateField extends StatelessWidget {
     DateTime? pickedDate = await showDatePicker(
       locale: Locale(Localizations.localeOf(context).languageCode),
       context: context,
-      initialDate: null,
+      initialDate: DateTime(2000),
       firstDate: DateTime(1950),
       lastDate: DateTime(2018),
-      builder: (context, child) { 
-       final bool isDark = Theme.of(context).brightness == Brightness.dark;
+      builder: (context, child) {
         final ColorScheme baseScheme = Theme.of(context).colorScheme;
         return Theme(
           data: Theme.of(context).copyWith(
-            textTheme: TextTheme.of(context),
             colorScheme: baseScheme.copyWith(
               primary: context.palette.kPrimary,
-          onPrimary: baseScheme.onPrimary,
+              onPrimary: baseScheme.onPrimary,
               onSurface: baseScheme.onSurface,
             ),
             textButtonTheme: TextButtonThemeData(
@@ -53,24 +52,21 @@ class CustomDateField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      controller: controller,
-      readOnly: true,
+    final isDark = Theme.of(context).brightness == Brightness.dark;
 
+    return CustomTextfromfield(
+      controller: controller,
+      hinttext: S.of(context).dateOfBirth,
+      lable: S.of(context).dateOfBirth,
+      readonly: true,
       onTap: () => _selectDate(context),
       validator: (value) => _validator(context, value),
-      decoration: InputDecoration(
-        isDense: true,
-        filled: true,
-        fillColor: context.palette.searchFieldFill,
-                labelText: S.of(context).dateOfBirth,
-        hintText: S.of(context).dateOfBirth,
-        prefixIcon: const Icon(Icons.date_range_outlined),
-        border: OutlineInputBorder(
-          borderSide: BorderSide.none,
-          borderRadius: BorderRadius.circular(12),
-        ),
-      ),
+      prefix: const Icon(Icons.date_range_outlined),
+      fillColor: isDark
+          ? Theme.of(context).colorScheme.surfaceContainerHighest
+          : const Color(0xffF6F6F6),
+      borderRadius: 12,
+      contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
     );
   }
 }

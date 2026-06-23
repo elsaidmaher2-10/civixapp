@@ -98,7 +98,7 @@
   "dateRequired": "من فضلك اختر تاريخ الميلاد",
   "newPassword": "كلمة مرور جديدة",
   "enterNewPassword": "أدخل كلمة مرور جديدة",
-  "passwordMinLength": "12 حرف على الأقل",
+  "passwordMinLength": "8 حرف على الأقل",
   "passwordUppercase": "حرف كبير واحد",
   "passwordLowercase": "حرف صغير واحد",
   "passwordSpecialChar": "رمز خاص واحد",

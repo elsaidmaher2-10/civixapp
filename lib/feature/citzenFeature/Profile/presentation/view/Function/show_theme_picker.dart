@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void showThemePicker(BuildContext context) {
+  final themeCubit = context.read<ThemeCubit>();
   final bool isArabic = Localizations.localeOf(context).languageCode == 'ar';
   final String title = isArabic ? 'اختر المظهر' : 'Choose theme';
   final String lightLabel = isArabic ? 'فاتح' : 'Light';
@@ -64,7 +65,8 @@ void showThemePicker(BuildContext context) {
                   selected: {currentMode},
                   onSelectionChanged: (selection) {
                     if (selection.isEmpty) return;
-                    context.read<ThemeCubit>().setThemeMode(selection.first);
+                    Navigator.of(context).pop();
+                    themeCubit.setThemeMode(selection.first);
                   },
                 );
               },

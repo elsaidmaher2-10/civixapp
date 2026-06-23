@@ -1,12 +1,18 @@
 import 'dart:async';
 import 'package:citifix/App/manager/cubit/localization_controller_cubit.dart';
 import 'package:citifix/core/DI/getit.dart';
+import 'package:citifix/core/cubit/userinfoManger/user_profile_info_cubit.dart';
 import 'package:citifix/core/routing/appRoutingRole.dart';
 import 'package:citifix/core/widget/CustomSnackBar.dart';
 import 'package:citifix/core/widget/customloading.dart';
 import 'package:citifix/feature/Auth/Login/presentation/manager/cubit/loginmanger_cubit.dart';
 import 'package:citifix/feature/Auth/Login/presentation/manager/cubit/loginmanger_state.dart';
+import 'package:citifix/feature/citzenFeature/notication/presentation/manager/cubit/notifcation_cubit.dart';
+import 'package:citifix/feature/citzenFeature/reports/data/repos/categortrepos/categoryrepos.dart';
+import 'package:citifix/feature/citzenFeature/reports/presentation/manager/categoryManger/category_cubit.dart';
 import 'package:citifix/feature/citzenFeature/reports/presentation/manager/reportManger/cubit/report_manager_cubit.dart';
+import 'package:citifix/feature/workerFeature/home/data/repo/homrepo.dart';
+import 'package:citifix/feature/workerFeature/home/presentation/manager/dashbroadHomemanager/cubit/dashbroad_home_manager_cubit.dart';
 import 'package:citifix/generated/l10n.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
@@ -90,6 +96,34 @@ class _LoginpageState extends State<Loginpage> {
     }
   }
 
+  Future<void> _preloadCitizenData() async {
+    if (!mounted) return;
+
+    try {
+      await Future.wait<void>([
+        getIt<ReportCubit>().fetchReports(isRefresh: true),
+        context.read<UserProfileInfoCubit>().getUserProfleInfo(),
+        context.read<NotificationCubit>().getNotifications(),
+        CategoryCubit(getIt<CategoryRepository>()).fetchCategories(),
+      ]);
+    } catch (error) {
+      debugPrint('Failed to preload citizen data: $error');
+    }
+  }
+
+  Future<void> _preloadWorkerData() async {
+    if (!mounted) return;
+
+    try {
+      await Future.wait<void>([
+        context.read<NotificationCubit>().getNotifications(),
+        HomeCubit(getIt<Homreposatory>()).getWorkerDashboard(),
+      ]);
+    } catch (error) {
+      debugPrint('Failed to preload worker data: $error');
+    }
+  }
+
   void _showForceUpdateDialog(String url) {
     showDialog(
       context: context,
@@ -157,8 +191,16 @@ class _LoginpageState extends State<Loginpage> {
                   backgroundColor: context.palette.green,
                   message: state.response.message,
                 );
-                await getIt<ReportCubit>().fetchReports();
-                AppRole role = AppRole.fromString(state.response.role);
+
+                final AppRole role = AppRole.fromString(state.response.role);
+                if (role == AppRole.citizen) {
+                  await _preloadCitizenData();
+                } else if (role == AppRole.worker) {
+                  await _preloadWorkerData();
+                }
+
+                if (!mounted) return;
+
                 switch (role) {
                   case AppRole.citizen:
                     Navigator.pushNamed(context, Routes.citizenMain);
@@ -432,6 +474,8 @@ class _LoginpageState extends State<Loginpage> {
                             ),
                             SizedBox(height: ScreenUtilsManager.h30),
                             SizedBox(
+                              height: 50.h,
+
                               width: double.infinity,
                               child: StreamBuilder<bool>(
                                 initialData: false,
